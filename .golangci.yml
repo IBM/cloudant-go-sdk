@@ -1,0 +1,74 @@
+linters:
+  disable-all: true
+  enable:
+    # defaults
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - gosimple
+    - structcheck
+    - varcheck
+    - ineffassign
+    - deadcode
+    - typecheck
+
+    # custom
+    - goheader
+    - goimports
+linters-settings:
+  goheader:
+    template-path: config/header-template.txt
+issues:
+  exclude-rules:
+    - path: cloudantv1/cloudant_v1\.go
+      linters:
+        # defaults
+        - govet
+        - errcheck
+        - staticcheck
+        - unused
+        - gosimple
+        - structcheck
+        - varcheck
+        - ineffassign
+        - deadcode
+        - typecheck
+
+        # custom
+        - goheader
+        - goimports
+    - path: cloudantv1/cloudant_v1_suite_test\.go
+      linters:
+        # defaults
+        - govet
+        - errcheck
+        - staticcheck
+        - unused
+        - gosimple
+        - structcheck
+        - varcheck
+        - ineffassign
+        - deadcode
+        - typecheck
+
+        # custom
+        - goheader
+        - goimports
+    - path: cloudantv1/cloudant_v1_test\.go
+      linters:
+        # defaults
+        - govet
+        - errcheck
+        - staticcheck
+        - unused
+        - gosimple
+        - structcheck
+        - varcheck
+        - ineffassign
+        - deadcode
+        - typecheck
+
+        # custom
+        - goheader
+        - goimports
