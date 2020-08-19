@@ -18,7 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
 func main() {
