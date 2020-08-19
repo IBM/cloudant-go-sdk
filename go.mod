@@ -1,4 +1,4 @@
-module github.ibm.com/cloudant/cloudant-go-sdk
+module github.com/IBM/cloudant-go-sdk
 
 go 1.14
 
