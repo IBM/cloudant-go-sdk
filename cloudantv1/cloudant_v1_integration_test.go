@@ -22,7 +22,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	"github.com/IBM/go-sdk-core/v4/core"
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
 const externalConfigFile = "../cloudant.env"
