@@ -23,7 +23,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 	"io"
 	"io/ioutil"
 	"net/http"

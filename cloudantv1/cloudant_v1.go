@@ -27,7 +27,7 @@ import (
 	"fmt"
 	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/go-openapi/strfmt"
-	common "github.ibm.com/cloudant/cloudant-go-sdk/common"
+	common "github.com/IBM/cloudant-go-sdk/common"
 	"io"
 	"reflect"
 	"strings"

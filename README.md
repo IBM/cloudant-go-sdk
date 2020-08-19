@@ -193,7 +193,7 @@ import (
 	"fmt"
 
 	"github.com/IBM/go-sdk-core/v4/core"
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
 func main() {
@@ -276,7 +276,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
 func main() {
@@ -392,7 +392,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
 func main() {
@@ -482,7 +482,7 @@ package main
 import (
 	"fmt"
 
-	"github.ibm.com/cloudant/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
 func main() {
