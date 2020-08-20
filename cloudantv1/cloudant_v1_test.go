@@ -19,11 +19,11 @@ package cloudantv1_test
 import (
 	"bytes"
 	"fmt"
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 	"io"
 	"io/ioutil"
 	"net/http"

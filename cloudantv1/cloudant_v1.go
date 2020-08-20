@@ -25,9 +25,9 @@ package cloudantv1
 import (
 	"encoding/json"
 	"fmt"
+	common "github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/go-openapi/strfmt"
-	common "github.com/IBM/cloudant-go-sdk/common"
 	"io"
 	"reflect"
 	"strings"
