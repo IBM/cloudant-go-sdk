@@ -62,7 +62,7 @@ Go client library to interact with the various [IBM Cloudant APIs](https://cloud
 
 The IBM Cloudant Go SDK allows developers to programmatically interact
 with [Cloudant](https://cloud.ibm.com/apidocs/cloudant) with the help of
-`ibmcloudantv0` package.
+`cloudantv1` package.
 
 ## Features
 The purpose of this Go SDK is to wrap most of the HTTP request APIs provided by Cloudant and
@@ -98,7 +98,7 @@ Use this command to download and install the SDK to allow your Go application to
 use it:
 
 ```terminal
-go get -u github.com/IBM/cloudant-go-sdk/ibmcloudantv0
+go get -u github.com/IBM/cloudant-go-sdk/cloudantv1
 ```
 
 #### Go modules
