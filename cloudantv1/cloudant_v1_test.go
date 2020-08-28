@@ -184,7 +184,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "Variant", "version": "Version"}, "version": "Version"}`)
+					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "Variant", "version": "Version"}, "version": "Version"}`)
 				}))
 			})
 			It(`Invoke GetServerInformation successfully`, func() {
@@ -286,7 +286,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"all_nodes": ["AllNodes"], "cluster_nodes": ["ClusterNodes"]}`)
+					fmt.Fprintf(res, "%s", `{"all_nodes": ["AllNodes"], "cluster_nodes": ["ClusterNodes"]}`)
 				}))
 			})
 			It(`Invoke GetMembershipInformation successfully`, func() {
@@ -395,7 +395,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"uuids": ["Uuids"]}`)
+					fmt.Fprintf(res, "%s", `{"uuids": ["Uuids"]}`)
 				}))
 			})
 			It(`Invoke GetUuids successfully`, func() {
@@ -643,7 +643,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `["OperationResponse"]`)
+					fmt.Fprintf(res, "%s", `["OperationResponse"]`)
 				}))
 			})
 			It(`Invoke GetAllDbs successfully`, func() {
@@ -756,7 +756,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `[{"info": {"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
+					fmt.Fprintf(res, "%s", `[{"info": {"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
 				}))
 			})
 			It(`Invoke PostDbsInfo successfully`, func() {
@@ -861,7 +861,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke DeleteDatabase successfully`, func() {
@@ -973,7 +973,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}`)
+					fmt.Fprintf(res, "%s", `{"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}`)
 				}))
 			})
 			It(`Invoke GetDatabaseInformation successfully`, func() {
@@ -1099,7 +1099,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke PutDatabase successfully`, func() {
@@ -1230,6 +1230,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
@@ -1310,7 +1311,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "id": "ID", "seq": "Seq"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "id": "ID", "seq": "Seq"}]}`)
 				}))
 			})
 			It(`Invoke PostChanges successfully`, func() {
@@ -1331,6 +1332,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
@@ -1367,6 +1369,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
@@ -1457,7 +1460,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostChangesAsStream successfully`, func() {
@@ -1478,6 +1481,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
@@ -1520,6 +1524,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
@@ -1780,15 +1785,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -1801,13 +1806,13 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PostDocumentOptions model
 				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
 				postDocumentOptionsModel.Db = core.StringPtr("testString")
 				postDocumentOptionsModel.Document = documentModel
-				postDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				postDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				postDocumentOptionsModel.Batch = core.StringPtr("ok")
 				postDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1839,7 +1844,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke PostDocument successfully`, func() {
@@ -1868,15 +1873,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -1889,13 +1894,13 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PostDocumentOptions model
 				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
 				postDocumentOptionsModel.Db = core.StringPtr("testString")
 				postDocumentOptionsModel.Document = documentModel
-				postDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				postDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				postDocumentOptionsModel.Batch = core.StringPtr("ok")
 				postDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1926,15 +1931,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -1947,13 +1952,13 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PostDocumentOptions model
 				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
 				postDocumentOptionsModel.Db = core.StringPtr("testString")
 				postDocumentOptionsModel.Document = documentModel
-				postDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				postDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				postDocumentOptionsModel.Batch = core.StringPtr("ok")
 				postDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2042,7 +2047,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully`, func() {
@@ -2142,7 +2147,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostAllDocsAsStream successfully`, func() {
@@ -2246,7 +2251,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postAllDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -2302,8 +2307,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postAllDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully`, func() {
@@ -2410,8 +2415,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postAllDocsQueriesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueriesAsStream successfully`, func() {
@@ -2547,15 +2552,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -2568,6 +2573,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the BulkDocs model
@@ -2579,7 +2585,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postBulkDocsOptionsModel := new(cloudantv1.PostBulkDocsOptions)
 				postBulkDocsOptionsModel.Db = core.StringPtr("testString")
 				postBulkDocsOptionsModel.BulkDocs = bulkDocsModel
-				postBulkDocsOptionsModel.Body = CreateMockReader("This is a mock file.")
 				postBulkDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostBulkDocs(postBulkDocsOptionsModel)
@@ -2605,7 +2610,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `[{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}]`)
+					fmt.Fprintf(res, "%s", `[{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}]`)
 				}))
 			})
 			It(`Invoke PostBulkDocs successfully`, func() {
@@ -2634,15 +2639,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -2655,6 +2660,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the BulkDocs model
@@ -2666,7 +2672,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postBulkDocsOptionsModel := new(cloudantv1.PostBulkDocsOptions)
 				postBulkDocsOptionsModel.Db = core.StringPtr("testString")
 				postBulkDocsOptionsModel.BulkDocs = bulkDocsModel
-				postBulkDocsOptionsModel.Body = CreateMockReader("This is a mock file.")
 				postBulkDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2695,15 +2700,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -2716,6 +2721,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the BulkDocs model
@@ -2727,7 +2733,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postBulkDocsOptionsModel := new(cloudantv1.PostBulkDocsOptions)
 				postBulkDocsOptionsModel.Db = core.StringPtr("testString")
 				postBulkDocsOptionsModel.BulkDocs = bulkDocsModel
-				postBulkDocsOptionsModel.Body = CreateMockReader("This is a mock file.")
 				postBulkDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -2837,7 +2842,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
 				}))
 			})
 			It(`Invoke PostBulkGet successfully`, func() {
@@ -2947,7 +2952,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "multipart/mixed")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `This is a mock binary response.`)
+					fmt.Fprintf(res, "%s", `This is a mock binary response.`)
 				}))
 			})
 			It(`Invoke PostBulkGetAsMixed successfully`, func() {
@@ -3057,7 +3062,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "multipart/related")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `This is a mock binary response.`)
+					fmt.Fprintf(res, "%s", `This is a mock binary response.`)
 				}))
 			})
 			It(`Invoke PostBulkGetAsRelated successfully`, func() {
@@ -3167,7 +3172,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostBulkGetAsStream successfully`, func() {
@@ -3275,7 +3280,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -3324,8 +3329,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke DeleteDocument successfully`, func() {
@@ -3521,7 +3526,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
 				}))
 			})
 			It(`Invoke GetDocument successfully`, func() {
@@ -3654,7 +3659,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "multipart/mixed")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `This is a mock binary response.`)
+					fmt.Fprintf(res, "%s", `This is a mock binary response.`)
 				}))
 			})
 			It(`Invoke GetDocumentAsMixed successfully`, func() {
@@ -3787,7 +3792,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "multipart/related")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `This is a mock binary response.`)
+					fmt.Fprintf(res, "%s", `This is a mock binary response.`)
 				}))
 			})
 			It(`Invoke GetDocumentAsRelated successfully`, func() {
@@ -3920,7 +3925,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke GetDocumentAsStream successfully`, func() {
@@ -4061,15 +4066,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -4082,6 +4087,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PutDocumentOptions model
@@ -4089,7 +4095,6 @@ var _ = Describe(`CloudantV1`, func() {
 				putDocumentOptionsModel.Db = core.StringPtr("testString")
 				putDocumentOptionsModel.DocID = core.StringPtr("testString")
 				putDocumentOptionsModel.Document = documentModel
-				putDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				putDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				putDocumentOptionsModel.IfMatch = core.StringPtr("testString")
 				putDocumentOptionsModel.Batch = core.StringPtr("ok")
@@ -4131,7 +4136,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke PutDocument successfully`, func() {
@@ -4160,15 +4165,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -4181,6 +4186,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PutDocumentOptions model
@@ -4188,7 +4194,6 @@ var _ = Describe(`CloudantV1`, func() {
 				putDocumentOptionsModel.Db = core.StringPtr("testString")
 				putDocumentOptionsModel.DocID = core.StringPtr("testString")
 				putDocumentOptionsModel.Document = documentModel
-				putDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				putDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				putDocumentOptionsModel.IfMatch = core.StringPtr("testString")
 				putDocumentOptionsModel.Batch = core.StringPtr("ok")
@@ -4222,15 +4227,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -4243,6 +4248,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PutDocumentOptions model
@@ -4250,7 +4256,6 @@ var _ = Describe(`CloudantV1`, func() {
 				putDocumentOptionsModel.Db = core.StringPtr("testString")
 				putDocumentOptionsModel.DocID = core.StringPtr("testString")
 				putDocumentOptionsModel.Document = documentModel
-				putDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				putDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				putDocumentOptionsModel.IfMatch = core.StringPtr("testString")
 				putDocumentOptionsModel.Batch = core.StringPtr("ok")
@@ -4469,7 +4474,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -4518,8 +4523,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke DeleteDesignDocument successfully`, func() {
@@ -4715,7 +4720,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "Language", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": {"mapKey": "Inner"}, "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "Language", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": {"mapKey": "Inner"}, "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -4836,17 +4841,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the Analyzer model
-				analyzerModel := new(cloudantv1.Analyzer)
-				analyzerModel.Name = core.StringPtr("classic")
-				analyzerModel.Stopwords = []string{"testString"}
-
-				// Construct an instance of the AnalyzerConfiguration model
-				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
-				analyzerConfigurationModel.Stopwords = []string{"testString"}
-				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -4859,6 +4853,33 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Analyzer model
+				analyzerModel := new(cloudantv1.Analyzer)
+				analyzerModel.Name = core.StringPtr("classic")
+				analyzerModel.Stopwords = []string{"testString"}
+
+				// Construct an instance of the AnalyzerConfiguration model
+				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
+				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
+				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
+
+				// Construct an instance of the SearchIndexDefinition model
+				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
+				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
+				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
@@ -4868,24 +4889,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the GeoIndexDefinition model
 				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
 				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
-
-				// Construct an instance of the SearchIndexDefinition model
-				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
-				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
@@ -4907,6 +4913,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.Attachments["foo"] = *attachmentModel
+				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
+				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
+				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutDesignDocumentOptions model
@@ -4952,7 +4962,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke PutDesignDocument successfully`, func() {
@@ -4969,17 +4979,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the Analyzer model
-				analyzerModel := new(cloudantv1.Analyzer)
-				analyzerModel.Name = core.StringPtr("classic")
-				analyzerModel.Stopwords = []string{"testString"}
-
-				// Construct an instance of the AnalyzerConfiguration model
-				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
-				analyzerConfigurationModel.Stopwords = []string{"testString"}
-				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -4992,6 +4991,33 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Analyzer model
+				analyzerModel := new(cloudantv1.Analyzer)
+				analyzerModel.Name = core.StringPtr("classic")
+				analyzerModel.Stopwords = []string{"testString"}
+
+				// Construct an instance of the AnalyzerConfiguration model
+				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
+				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
+				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
+
+				// Construct an instance of the SearchIndexDefinition model
+				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
+				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
+				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
@@ -5001,24 +5027,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the GeoIndexDefinition model
 				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
 				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
-
-				// Construct an instance of the SearchIndexDefinition model
-				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
-				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
@@ -5040,6 +5051,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.Attachments["foo"] = *attachmentModel
+				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
+				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
+				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutDesignDocumentOptions model
@@ -5067,17 +5082,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the Analyzer model
-				analyzerModel := new(cloudantv1.Analyzer)
-				analyzerModel.Name = core.StringPtr("classic")
-				analyzerModel.Stopwords = []string{"testString"}
-
-				// Construct an instance of the AnalyzerConfiguration model
-				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
-				analyzerConfigurationModel.Stopwords = []string{"testString"}
-				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -5090,6 +5094,33 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Analyzer model
+				analyzerModel := new(cloudantv1.Analyzer)
+				analyzerModel.Name = core.StringPtr("classic")
+				analyzerModel.Stopwords = []string{"testString"}
+
+				// Construct an instance of the AnalyzerConfiguration model
+				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
+				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
+				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
+
+				// Construct an instance of the SearchIndexDefinition model
+				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
+				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
+				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
@@ -5099,24 +5130,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the GeoIndexDefinition model
 				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
 				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
-
-				// Construct an instance of the SearchIndexDefinition model
-				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
-				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
@@ -5138,6 +5154,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.Attachments["foo"] = *attachmentModel
+				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
+				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
+				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutDesignDocumentOptions model
@@ -5223,7 +5243,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully`, func() {
@@ -5355,7 +5375,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully`, func() {
@@ -5457,7 +5477,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -5516,8 +5536,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully`, func() {
@@ -5787,7 +5807,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostView successfully`, func() {
@@ -5905,7 +5925,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostViewAsStream successfully`, func() {
@@ -6027,7 +6047,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postViewQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -6092,8 +6112,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postViewQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
 				}))
 			})
 			It(`Invoke PostViewQueries successfully`, func() {
@@ -6218,8 +6238,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postViewQueriesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostViewQueriesAsStream successfully`, func() {
@@ -6490,7 +6510,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"db_name": "DbName", "doc_count": 0, "doc_del_count": 0, "partition": "Partition", "partitioned_indexes": {"count": 0, "indexes": {"search": 0, "view": 0}, "limit": 0}, "sizes": {"active": 0, "external": 0}}`)
+					fmt.Fprintf(res, "%s", `{"db_name": "DbName", "doc_count": 0, "doc_del_count": 0, "partition": "Partition", "partitioned_indexes": {"count": 0, "indexes": {"search": 0, "view": 0}, "limit": 0}, "sizes": {"active": 0, "external": 0}}`)
 				}))
 			})
 			It(`Invoke GetPartitionInformation successfully`, func() {
@@ -6618,7 +6638,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully`, func() {
@@ -6720,7 +6740,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocsAsStream successfully`, func() {
@@ -6881,7 +6901,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionSearch successfully`, func() {
@@ -6985,7 +7005,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostPartitionSearchAsStream successfully`, func() {
@@ -7156,7 +7176,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionView successfully`, func() {
@@ -7276,7 +7296,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostPartitionViewAsStream successfully`, func() {
@@ -7452,7 +7472,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
 				}))
 			})
 			It(`Invoke PostPartitionFind successfully`, func() {
@@ -7550,7 +7570,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostPartitionFindAsStream successfully`, func() {
@@ -7804,7 +7824,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully`, func() {
@@ -7952,7 +7972,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
 				}))
 			})
 			It(`Invoke PostFind successfully`, func() {
@@ -8050,7 +8070,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostFindAsStream successfully`, func() {
@@ -8192,7 +8212,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully`, func() {
@@ -8281,16 +8301,16 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerModel.Name = core.StringPtr("classic")
 				analyzerModel.Stopwords = []string{"testString"}
 
+				// Construct an instance of the IndexTextOperatorDefaultField model
+				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
+				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
+				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
 				indexFieldModel.Name = core.StringPtr("testString")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
-
-				// Construct an instance of the IndexTextOperatorDefaultField model
-				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
-				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
-				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the IndexDefinition model
 				indexDefinitionModel := new(cloudantv1.IndexDefinition)
@@ -8334,7 +8354,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"id": "ID", "name": "Name", "result": "created"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "result": "created"}`)
 				}))
 			})
 			It(`Invoke PostIndex successfully`, func() {
@@ -8356,16 +8376,16 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerModel.Name = core.StringPtr("classic")
 				analyzerModel.Stopwords = []string{"testString"}
 
+				// Construct an instance of the IndexTextOperatorDefaultField model
+				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
+				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
+				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
 				indexFieldModel.Name = core.StringPtr("testString")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
-
-				// Construct an instance of the IndexTextOperatorDefaultField model
-				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
-				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
-				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the IndexDefinition model
 				indexDefinitionModel := new(cloudantv1.IndexDefinition)
@@ -8405,16 +8425,16 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerModel.Name = core.StringPtr("classic")
 				analyzerModel.Stopwords = []string{"testString"}
 
+				// Construct an instance of the IndexTextOperatorDefaultField model
+				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
+				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
+				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
+
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
 				indexFieldModel.Name = core.StringPtr("testString")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
-
-				// Construct an instance of the IndexTextOperatorDefaultField model
-				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
-				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
-				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
 
 				// Construct an instance of the IndexDefinition model
 				indexDefinitionModel := new(cloudantv1.IndexDefinition)
@@ -8509,7 +8529,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke DeleteIndex successfully`, func() {
@@ -8728,7 +8748,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"tokens": ["Tokens"]}`)
+					fmt.Fprintf(res, "%s", `{"tokens": ["Tokens"]}`)
 				}))
 			})
 			It(`Invoke PostSearchAnalyze successfully`, func() {
@@ -8855,7 +8875,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostSearch successfully`, func() {
@@ -8969,7 +8989,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke PostSearchAsStream successfully`, func() {
@@ -9129,7 +9149,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"name": "Name", "search_index": {"committed_seq": 12, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 10}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 12, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 10}}`)
 				}))
 			})
 			It(`Invoke GetSearchInfo successfully`, func() {
@@ -9440,7 +9460,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"bookmark": "Bookmark", "features": [{"_id": "ID", "_rev": "Rev", "bbox": [4], "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "properties": {"mapKey": "anyValue"}, "type": "Feature"}], "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "id": "ID", "rev": "Rev"}], "type": "FeatureCollection"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "features": [{"_id": "ID", "_rev": "Rev", "bbox": [4], "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "properties": {"mapKey": "anyValue"}, "type": "Feature"}], "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "id": "ID", "rev": "Rev"}], "type": "FeatureCollection"}`)
 				}))
 			})
 			It(`Invoke GetGeo successfully`, func() {
@@ -9587,7 +9607,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"foo": "this is a mock response for JSON streaming"}`)
+					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
 				}))
 			})
 			It(`Invoke GetGeoAsStream successfully`, func() {
@@ -9699,7 +9719,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postGeoCleanupPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
+					res.WriteHeader(202)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -9738,8 +9758,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Path).To(Equal(postGeoCleanupPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke PostGeoCleanup successfully`, func() {
@@ -9853,7 +9873,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"geo_index": {"data_size": 0, "disk_size": 0, "doc_count": 0}}`)
+					fmt.Fprintf(res, "%s", `{"geo_index": {"data_size": 0, "disk_size": 0, "doc_count": 0}}`)
 				}))
 			})
 			It(`Invoke GetGeoIndexInformation successfully`, func() {
@@ -10092,7 +10112,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"last_seq": "LastSeq", "results": [{"account": "Account", "dbname": "Dbname", "seq": "Seq", "type": "created"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"account": "Account", "dbname": "Dbname", "seq": "Seq", "type": "created"}]}`)
 				}))
 			})
 			It(`Invoke GetDbUpdates successfully`, func() {
@@ -10415,14 +10435,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -10435,6 +10447,11 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				documentRevisionStatusModel.Rev = core.StringPtr("testString")
@@ -10446,16 +10463,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
 				replicationDatabaseModel.URL = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -10496,6 +10516,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PostReplicateOptions model
@@ -10526,7 +10547,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"history": [{"doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "end_last_seq": "EndLastSeq", "end_time": "EndTime", "missing_checked": 0, "missing_found": 0, "recorded_seq": "RecordedSeq", "session_id": "SessionID", "start_last_seq": "StartLastSeq", "start_time": "StartTime"}], "ok": true, "replication_id_version": 0, "session_id": "SessionID", "source_last_seq": "SourceLastSeq"}`)
+					fmt.Fprintf(res, "%s", `{"history": [{"doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "end_last_seq": "EndLastSeq", "end_time": "EndTime", "missing_checked": 0, "missing_found": 0, "recorded_seq": "RecordedSeq", "session_id": "SessionID", "start_last_seq": "StartLastSeq", "start_time": "StartTime"}], "ok": true, "replication_id_version": 0, "session_id": "SessionID", "source_last_seq": "SourceLastSeq"}`)
 				}))
 			})
 			It(`Invoke PostReplicate successfully`, func() {
@@ -10543,14 +10564,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -10563,6 +10576,11 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				documentRevisionStatusModel.Rev = core.StringPtr("testString")
@@ -10574,16 +10592,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
 				replicationDatabaseModel.URL = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -10624,6 +10645,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PostReplicateOptions model
@@ -10645,14 +10667,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -10665,6 +10679,11 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				documentRevisionStatusModel.Rev = core.StringPtr("testString")
@@ -10676,16 +10695,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
 				replicationDatabaseModel.URL = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -10726,6 +10748,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PostReplicateOptions model
@@ -10812,7 +10835,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke DeleteReplicationDocument successfully`, func() {
@@ -11005,7 +11028,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": true, "create_target": true, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": {"anyKey": "anyValue"}}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": true, "create_target": true, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": {"anyKey": "anyValue"}}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -11124,14 +11147,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -11144,6 +11159,11 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				documentRevisionStatusModel.Rev = core.StringPtr("testString")
@@ -11155,16 +11175,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
 				replicationDatabaseModel.URL = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -11205,6 +11228,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -11249,7 +11273,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke PutReplicationDocument successfully`, func() {
@@ -11266,14 +11290,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -11286,6 +11302,11 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				documentRevisionStatusModel.Rev = core.StringPtr("testString")
@@ -11297,16 +11318,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
 				replicationDatabaseModel.URL = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -11347,6 +11371,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -11373,14 +11398,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
@@ -11393,6 +11410,11 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				documentRevisionStatusModel.Rev = core.StringPtr("testString")
@@ -11404,16 +11426,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
 				replicationDatabaseModel.URL = core.StringPtr("testString")
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -11454,6 +11479,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -11551,7 +11577,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "docs": [{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "docs": [{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocs successfully`, func() {
@@ -11660,7 +11686,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocument successfully`, func() {
@@ -11785,7 +11811,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJobs successfully`, func() {
@@ -11892,7 +11918,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJob successfully`, func() {
@@ -12103,7 +12129,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true, "info": {"authenticated": "Authenticated", "authentication_db": "AuthenticationDb", "authentication_handlers": ["AuthenticationHandlers"]}, "userCtx": {"db": "Db", "name": "Name", "roles": ["_reader"]}}`)
+					fmt.Fprintf(res, "%s", `{"ok": true, "info": {"authenticated": "Authenticated", "authentication_db": "AuthenticationDb", "authentication_handlers": ["AuthenticationHandlers"]}, "userCtx": {"db": "Db", "name": "Name", "roles": ["_reader"]}}`)
 				}))
 			})
 			It(`Invoke GetSessionInformation successfully`, func() {
@@ -12205,7 +12231,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke DeleteIamSession successfully`, func() {
@@ -12307,7 +12333,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"id": "ID", "ok": true, "scope": "Scope", "type": "Type"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "ok": true, "scope": "Scope", "type": "Type"}`)
 				}))
 			})
 			It(`Invoke GetIamSessionInformation successfully`, func() {
@@ -12410,7 +12436,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke PostIamSession successfully`, func() {
@@ -12615,7 +12641,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"admins": {"names": ["Names"], "roles": ["Roles"]}, "members": {"names": ["Names"], "roles": ["Roles"]}, "cloudant": {"mapKey": ["_reader"]}, "couchdb_auth_only": false}`)
+					fmt.Fprintf(res, "%s", `{"admins": {"names": ["Names"], "roles": ["Roles"]}, "members": {"names": ["Names"], "roles": ["Roles"]}, "cloudant": {"mapKey": ["_reader"]}, "couchdb_auth_only": false}`)
 				}))
 			})
 			It(`Invoke GetSecurity successfully`, func() {
@@ -12736,7 +12762,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke PutSecurity successfully`, func() {
@@ -12865,7 +12891,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"key": "Key", "ok": {"ok": true}, "password": "Password"}`)
+					fmt.Fprintf(res, "%s", `{"ok": true, "key": "Key", "password": "Password"}`)
 				}))
 			})
 			It(`Invoke PostApiKeys successfully`, func() {
@@ -12917,22 +12943,22 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`PutCloudantSecurity(putCloudantSecurityOptions *PutCloudantSecurityOptions) - Operation response error`, func() {
-		putCloudantSecurityPath := "/_api/v2/db/testString/_security"
+	Describe(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) - Operation response error`, func() {
+		putCloudantSecurityConfigurationPath := "/_api/v2/db/testString/_security"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putCloudantSecurityPath))
+					Expect(req.URL.Path).To(Equal(putCloudantSecurityConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke PutCloudantSecurity with error: Operation response processing error`, func() {
+			It(`Invoke PutCloudantSecurityConfiguration with error: Operation response processing error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -12940,13 +12966,21 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the PutCloudantSecurityOptions model
-				putCloudantSecurityOptionsModel := new(cloudantv1.PutCloudantSecurityOptions)
-				putCloudantSecurityOptionsModel.Db = core.StringPtr("testString")
-				putCloudantSecurityOptionsModel.Cloudant = make(map[string][]string)
-				putCloudantSecurityOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SecurityObject model
+				securityObjectModel := new(cloudantv1.SecurityObject)
+				securityObjectModel.Names = []string{"testString"}
+				securityObjectModel.Roles = []string{"testString"}
+
+				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
+				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
+				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
+				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
+				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PutCloudantSecurity(putCloudantSecurityOptionsModel)
+				result, response, operationErr := cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -12957,22 +12991,22 @@ var _ = Describe(`CloudantV1`, func() {
 		})
 	})
 
-	Describe(`PutCloudantSecurity(putCloudantSecurityOptions *PutCloudantSecurityOptions)`, func() {
-		putCloudantSecurityPath := "/_api/v2/db/testString/_security"
+	Describe(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions)`, func() {
+		putCloudantSecurityConfigurationPath := "/_api/v2/db/testString/_security"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putCloudantSecurityPath))
+					Expect(req.URL.Path).To(Equal(putCloudantSecurityConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
-			It(`Invoke PutCloudantSecurity successfully`, func() {
+			It(`Invoke PutCloudantSecurityConfiguration successfully`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -12981,24 +13015,32 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PutCloudantSecurity(nil)
+				result, response, operationErr := cloudantService.PutCloudantSecurityConfiguration(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the PutCloudantSecurityOptions model
-				putCloudantSecurityOptionsModel := new(cloudantv1.PutCloudantSecurityOptions)
-				putCloudantSecurityOptionsModel.Db = core.StringPtr("testString")
-				putCloudantSecurityOptionsModel.Cloudant = make(map[string][]string)
-				putCloudantSecurityOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SecurityObject model
+				securityObjectModel := new(cloudantv1.SecurityObject)
+				securityObjectModel.Names = []string{"testString"}
+				securityObjectModel.Roles = []string{"testString"}
+
+				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
+				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
+				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
+				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
+				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PutCloudantSecurity(putCloudantSecurityOptionsModel)
+				result, response, operationErr = cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 			})
-			It(`Invoke PutCloudantSecurity with error: Operation validation and request error`, func() {
+			It(`Invoke PutCloudantSecurityConfiguration with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -13006,23 +13048,31 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the PutCloudantSecurityOptions model
-				putCloudantSecurityOptionsModel := new(cloudantv1.PutCloudantSecurityOptions)
-				putCloudantSecurityOptionsModel.Db = core.StringPtr("testString")
-				putCloudantSecurityOptionsModel.Cloudant = make(map[string][]string)
-				putCloudantSecurityOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the SecurityObject model
+				securityObjectModel := new(cloudantv1.SecurityObject)
+				securityObjectModel.Names = []string{"testString"}
+				securityObjectModel.Roles = []string{"testString"}
+
+				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
+				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
+				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
+				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
+				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PutCloudantSecurity(putCloudantSecurityOptionsModel)
+				result, response, operationErr := cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the PutCloudantSecurityOptions model with no property values
-				putCloudantSecurityOptionsModelNew := new(cloudantv1.PutCloudantSecurityOptions)
+				// Construct a second instance of the PutCloudantSecurityConfigurationOptions model with no property values
+				putCloudantSecurityConfigurationOptionsModelNew := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.PutCloudantSecurity(putCloudantSecurityOptionsModelNew)
+				result, response, operationErr = cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -13182,7 +13232,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"allow_credentials": true, "enable_cors": true, "origins": ["Origins"]}`)
+					fmt.Fprintf(res, "%s", `{"allow_credentials": true, "enable_cors": true, "origins": ["Origins"]}`)
 				}))
 			})
 			It(`Invoke GetCorsInformation successfully`, func() {
@@ -13287,7 +13337,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"ok": true}`)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
 			It(`Invoke PutCorsConfiguration successfully`, func() {
@@ -13597,7 +13647,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke DeleteAttachment successfully`, func() {
@@ -13691,7 +13741,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "*/*")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `This is a mock binary response.`)
+					fmt.Fprintf(res, "%s", `This is a mock binary response.`)
 				}))
 			})
 			It(`Invoke GetAttachment successfully`, func() {
@@ -13835,7 +13885,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke PutAttachment successfully`, func() {
@@ -14021,7 +14071,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -14064,8 +14114,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke DeleteLocalDocument successfully`, func() {
@@ -14214,7 +14264,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
 				}))
 			})
 			It(`Invoke GetLocalDocument successfully`, func() {
@@ -14328,15 +14378,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -14349,6 +14399,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -14356,7 +14407,6 @@ var _ = Describe(`CloudantV1`, func() {
 				putLocalDocumentOptionsModel.Db = core.StringPtr("testString")
 				putLocalDocumentOptionsModel.DocID = core.StringPtr("testString")
 				putLocalDocumentOptionsModel.Document = documentModel
-				putLocalDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				putLocalDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				putLocalDocumentOptionsModel.Batch = core.StringPtr("ok")
 				putLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14388,7 +14438,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
 			It(`Invoke PutLocalDocument successfully`, func() {
@@ -14417,15 +14467,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -14438,6 +14488,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -14445,7 +14496,6 @@ var _ = Describe(`CloudantV1`, func() {
 				putLocalDocumentOptionsModel.Db = core.StringPtr("testString")
 				putLocalDocumentOptionsModel.DocID = core.StringPtr("testString")
 				putLocalDocumentOptionsModel.Document = documentModel
-				putLocalDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				putLocalDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				putLocalDocumentOptionsModel.Batch = core.StringPtr("ok")
 				putLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14476,15 +14526,15 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				revisionsModel.Ids = []string{"testString"}
 				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -14497,6 +14547,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -14504,7 +14555,6 @@ var _ = Describe(`CloudantV1`, func() {
 				putLocalDocumentOptionsModel.Db = core.StringPtr("testString")
 				putLocalDocumentOptionsModel.DocID = core.StringPtr("testString")
 				putLocalDocumentOptionsModel.Document = documentModel
-				putLocalDocumentOptionsModel.Body = CreateMockReader("This is a mock file.")
 				putLocalDocumentOptionsModel.ContentType = core.StringPtr("application/json")
 				putLocalDocumentOptionsModel.Batch = core.StringPtr("ok")
 				putLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14598,7 +14648,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostLocalDocs successfully`, func() {
@@ -14700,7 +14750,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
@@ -14759,8 +14809,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostLocalDocsQueries successfully`, func() {
@@ -15008,7 +15058,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `{"instance_start_time": "InstanceStartTime", "ok": true}`)
+					fmt.Fprintf(res, "%s", `{"instance_start_time": "InstanceStartTime", "ok": true}`)
 				}))
 			})
 			It(`Invoke PostEnsureFullCommit successfully`, func() {
@@ -15095,7 +15145,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostMissingRevsOptions model
 				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
 				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.MissingRevs = make(map[string][]string)
+				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
 				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
@@ -15121,7 +15171,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"missed_revs": {"mapKey": ["Inner"]}}`)
+					fmt.Fprintf(res, "%s", `{"missing_revs": {"mapKey": ["Inner"]}}`)
 				}))
 			})
 			It(`Invoke PostMissingRevs successfully`, func() {
@@ -15141,7 +15191,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostMissingRevsOptions model
 				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
 				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.MissingRevs = make(map[string][]string)
+				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
 				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -15161,7 +15211,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostMissingRevsOptions model
 				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
 				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.MissingRevs = make(map[string][]string)
+				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
 				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -15210,7 +15260,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostRevsDiffOptions model
 				postRevsDiffOptionsModel := new(cloudantv1.PostRevsDiffOptions)
 				postRevsDiffOptionsModel.Db = core.StringPtr("testString")
-				postRevsDiffOptionsModel.RevsDiffRequest = make(map[string][]string)
+				postRevsDiffOptionsModel.DocumentRevisions = make(map[string][]string)
 				postRevsDiffOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostRevsDiff(postRevsDiffOptionsModel)
@@ -15236,7 +15286,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"mapKey": {"missing": ["Missing"], "possible_ancestors": ["PossibleAncestors"]}}`)
+					fmt.Fprintf(res, "%s", `{"mapKey": {"missing": ["Missing"], "possible_ancestors": ["PossibleAncestors"]}}`)
 				}))
 			})
 			It(`Invoke PostRevsDiff successfully`, func() {
@@ -15256,7 +15306,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostRevsDiffOptions model
 				postRevsDiffOptionsModel := new(cloudantv1.PostRevsDiffOptions)
 				postRevsDiffOptionsModel.Db = core.StringPtr("testString")
-				postRevsDiffOptionsModel.RevsDiffRequest = make(map[string][]string)
+				postRevsDiffOptionsModel.DocumentRevisions = make(map[string][]string)
 				postRevsDiffOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -15276,7 +15326,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostRevsDiffOptions model
 				postRevsDiffOptionsModel := new(cloudantv1.PostRevsDiffOptions)
 				postRevsDiffOptionsModel.Db = core.StringPtr("testString")
-				postRevsDiffOptionsModel.RevsDiffRequest = make(map[string][]string)
+				postRevsDiffOptionsModel.DocumentRevisions = make(map[string][]string)
 				postRevsDiffOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -15350,7 +15400,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"shards": {"mapKey": ["Inner"]}}`)
+					fmt.Fprintf(res, "%s", `{"shards": {"mapKey": ["Inner"]}}`)
 				}))
 			})
 			It(`Invoke GetShardsInformation successfully`, func() {
@@ -15463,7 +15513,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"nodes": ["Nodes"], "range": "Range"}`)
+					fmt.Fprintf(res, "%s", `{"nodes": ["Nodes"], "range": "Range"}`)
 				}))
 			})
 			It(`Invoke GetDocumentShardsInfo successfully`, func() {
@@ -15676,7 +15726,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `[{"changes_done": 0, "database": "Database", "pid": "Pid", "progress": 0, "started_on": 0, "status": "Status", "task": "Task", "total_changes": 0, "type": "Type", "updated_on": 0}]`)
+					fmt.Fprintf(res, "%s", `[{"changes_done": 0, "database": "Database", "pid": "Pid", "progress": 0, "started_on": 0, "status": "Status", "task": "Task", "total_changes": 0, "type": "Type", "updated_on": 0}]`)
 				}))
 			})
 			It(`Invoke GetActiveTasks successfully`, func() {
@@ -15778,7 +15828,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `{"status": "maintenance_mode"}`)
+					fmt.Fprintf(res, "%s", `{"status": "maintenance_mode"}`)
 				}))
 			})
 			It(`Invoke GetUpInformation successfully`, func() {
@@ -16633,14 +16683,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				Expect(documentRevisionStatusModel).ToNot(BeNil())
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
-				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				Expect(revisionsModel).ToNot(BeNil())
@@ -16648,6 +16690,14 @@ var _ = Describe(`CloudantV1`, func() {
 				revisionsModel.Start = core.Int64Ptr(int64(1))
 				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
 				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				Expect(documentRevisionStatusModel).ToNot(BeNil())
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -16661,10 +16711,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
-				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -16673,6 +16721,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
+				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the BulkDocs model
 				bulkDocsModel := new(cloudantv1.BulkDocs)
@@ -16733,6 +16784,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel := cloudantService.NewPostChangesOptions(db)
 				postChangesOptionsModel.SetDb("testString")
 				postChangesOptionsModel.SetDocIds([]string{"testString"})
+				postChangesOptionsModel.SetFields([]string{"testString"})
 				postChangesOptionsModel.SetSelector(make(map[string]interface{}))
 				postChangesOptionsModel.SetLastEventID("testString")
 				postChangesOptionsModel.SetAttEncodingInfo(true)
@@ -16753,6 +16805,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postChangesOptionsModel).ToNot(BeNil())
 				Expect(postChangesOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postChangesOptionsModel.DocIds).To(Equal([]string{"testString"}))
+				Expect(postChangesOptionsModel.Fields).To(Equal([]string{"testString"}))
 				Expect(postChangesOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postChangesOptionsModel.LastEventID).To(Equal(core.StringPtr("testString")))
 				Expect(postChangesOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
@@ -16885,14 +16938,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				Expect(documentRevisionStatusModel).ToNot(BeNil())
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
-				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				Expect(revisionsModel).ToNot(BeNil())
@@ -16900,6 +16945,14 @@ var _ = Describe(`CloudantV1`, func() {
 				revisionsModel.Start = core.Int64Ptr(int64(1))
 				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
 				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				Expect(documentRevisionStatusModel).ToNot(BeNil())
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -16913,10 +16966,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
-				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -16925,6 +16976,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
+				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PostDocumentOptions model
 				db := "testString"
@@ -17049,17 +17103,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(analyzerModel.Name).To(Equal(core.StringPtr("classic")))
 				Expect(analyzerModel.Stopwords).To(Equal([]string{"testString"}))
 
-				// Construct an instance of the IndexField model
-				indexFieldModel := new(cloudantv1.IndexField)
-				Expect(indexFieldModel).ToNot(BeNil())
-				indexFieldModel.Name = core.StringPtr("testString")
-				indexFieldModel.Type = core.StringPtr("boolean")
-				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
-				Expect(indexFieldModel.GetProperty("foo")).To(Equal(core.StringPtr("asc")))
-				Expect(indexFieldModel.GetProperties()).ToNot(BeEmpty())
-				Expect(indexFieldModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(indexFieldModel.Type).To(Equal(core.StringPtr("boolean")))
-
 				// Construct an instance of the IndexTextOperatorDefaultField model
 				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
 				Expect(indexTextOperatorDefaultFieldModel).ToNot(BeNil())
@@ -17067,6 +17110,17 @@ var _ = Describe(`CloudantV1`, func() {
 				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
 				Expect(indexTextOperatorDefaultFieldModel.Analyzer).To(Equal(analyzerModel))
 				Expect(indexTextOperatorDefaultFieldModel.Enabled).To(Equal(core.BoolPtr(true)))
+
+				// Construct an instance of the IndexField model
+				indexFieldModel := new(cloudantv1.IndexField)
+				Expect(indexFieldModel).ToNot(BeNil())
+				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Type = core.StringPtr("boolean")
+				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
+				Expect(indexFieldModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(indexFieldModel.Type).To(Equal(core.StringPtr("boolean")))
+				Expect(indexFieldModel.GetProperties()).ToNot(BeEmpty())
+				Expect(indexFieldModel.GetProperty("foo")).To(Equal(core.StringPtr("asc")))
 
 				// Construct an instance of the IndexDefinition model
 				indexDefinitionModel := new(cloudantv1.IndexDefinition)
@@ -17190,11 +17244,11 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				postMissingRevsOptionsModel := cloudantService.NewPostMissingRevsOptions(db)
 				postMissingRevsOptionsModel.SetDb("testString")
-				postMissingRevsOptionsModel.SetMissingRevs(make(map[string][]string))
+				postMissingRevsOptionsModel.SetDocumentRevisions(make(map[string][]string))
 				postMissingRevsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postMissingRevsOptionsModel).ToNot(BeNil())
 				Expect(postMissingRevsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postMissingRevsOptionsModel.MissingRevs).To(Equal(make(map[string][]string)))
+				Expect(postMissingRevsOptionsModel.DocumentRevisions).To(Equal(make(map[string][]string)))
 				Expect(postMissingRevsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostPartitionAllDocsOptions successfully`, func() {
@@ -17374,18 +17428,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostReplicateOptions successfully`, func() {
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				Expect(replicationDatabaseAuthIamModel).ToNot(BeNil())
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
@@ -17408,6 +17450,14 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				Expect(revisionsModel).ToNot(BeNil())
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
+				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				Expect(documentRevisionStatusModel).ToNot(BeNil())
@@ -17426,6 +17476,18 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationCreateTargetParametersModel.Partitioned).To(Equal(core.BoolPtr(true)))
 				Expect(replicationCreateTargetParametersModel.Q).To(Equal(core.Int64Ptr(int64(1))))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				Expect(replicationDatabaseAuthIamModel).ToNot(BeNil())
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				Expect(replicationDatabaseModel).ToNot(BeNil())
@@ -17435,14 +17497,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDatabaseModel.Auth).To(Equal(replicationDatabaseAuthModel))
 				Expect(replicationDatabaseModel.HeadersVar).To(Equal(make(map[string]string)))
 				Expect(replicationDatabaseModel.URL).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				Expect(revisionsModel).ToNot(BeNil())
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
-				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
-				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -17488,10 +17542,8 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
-				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(replicationDocumentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(replicationDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(replicationDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -17522,6 +17574,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.UserCtx).To(Equal(userContextModel))
 				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(replicationDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PostReplicateOptions model
 				postReplicateOptionsModel := cloudantService.NewPostReplicateOptions()
@@ -17536,11 +17591,11 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				postRevsDiffOptionsModel := cloudantService.NewPostRevsDiffOptions(db)
 				postRevsDiffOptionsModel.SetDb("testString")
-				postRevsDiffOptionsModel.SetRevsDiffRequest(make(map[string][]string))
+				postRevsDiffOptionsModel.SetDocumentRevisions(make(map[string][]string))
 				postRevsDiffOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postRevsDiffOptionsModel).ToNot(BeNil())
 				Expect(postRevsDiffOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postRevsDiffOptionsModel.RevsDiffRequest).To(Equal(make(map[string][]string)))
+				Expect(postRevsDiffOptionsModel.DocumentRevisions).To(Equal(make(map[string][]string)))
 				Expect(postRevsDiffOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostSearchAnalyzeOptions successfully`, func() {
@@ -17750,17 +17805,31 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putAttachmentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(putAttachmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewPutCloudantSecurityOptions successfully`, func() {
-				// Construct an instance of the PutCloudantSecurityOptions model
+			It(`Invoke NewPutCloudantSecurityConfigurationOptions successfully`, func() {
+				// Construct an instance of the SecurityObject model
+				securityObjectModel := new(cloudantv1.SecurityObject)
+				Expect(securityObjectModel).ToNot(BeNil())
+				securityObjectModel.Names = []string{"testString"}
+				securityObjectModel.Roles = []string{"testString"}
+				Expect(securityObjectModel.Names).To(Equal([]string{"testString"}))
+				Expect(securityObjectModel.Roles).To(Equal([]string{"testString"}))
+
+				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
 				db := "testString"
-				putCloudantSecurityOptionsModel := cloudantService.NewPutCloudantSecurityOptions(db)
-				putCloudantSecurityOptionsModel.SetDb("testString")
-				putCloudantSecurityOptionsModel.SetCloudant(make(map[string][]string))
-				putCloudantSecurityOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(putCloudantSecurityOptionsModel).ToNot(BeNil())
-				Expect(putCloudantSecurityOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(putCloudantSecurityOptionsModel.Cloudant).To(Equal(make(map[string][]string)))
-				Expect(putCloudantSecurityOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+				putCloudantSecurityConfigurationOptionsModel := cloudantService.NewPutCloudantSecurityConfigurationOptions(db)
+				putCloudantSecurityConfigurationOptionsModel.SetDb("testString")
+				putCloudantSecurityConfigurationOptionsModel.SetAdmins(securityObjectModel)
+				putCloudantSecurityConfigurationOptionsModel.SetMembers(securityObjectModel)
+				putCloudantSecurityConfigurationOptionsModel.SetCloudant(make(map[string][]string))
+				putCloudantSecurityConfigurationOptionsModel.SetCouchdbAuthOnly(true)
+				putCloudantSecurityConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(putCloudantSecurityConfigurationOptionsModel).ToNot(BeNil())
+				Expect(putCloudantSecurityConfigurationOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(putCloudantSecurityConfigurationOptionsModel.Admins).To(Equal(securityObjectModel))
+				Expect(putCloudantSecurityConfigurationOptionsModel.Members).To(Equal(securityObjectModel))
+				Expect(putCloudantSecurityConfigurationOptionsModel.Cloudant).To(Equal(make(map[string][]string)))
+				Expect(putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly).To(Equal(core.BoolPtr(true)))
+				Expect(putCloudantSecurityConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutCorsConfigurationOptions successfully`, func() {
 				// Construct an instance of the PutCorsConfigurationOptions model
@@ -17790,24 +17859,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putDatabaseOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutDesignDocumentOptions successfully`, func() {
-				// Construct an instance of the Analyzer model
-				analyzerModel := new(cloudantv1.Analyzer)
-				Expect(analyzerModel).ToNot(BeNil())
-				analyzerModel.Name = core.StringPtr("classic")
-				analyzerModel.Stopwords = []string{"testString"}
-				Expect(analyzerModel.Name).To(Equal(core.StringPtr("classic")))
-				Expect(analyzerModel.Stopwords).To(Equal([]string{"testString"}))
-
-				// Construct an instance of the AnalyzerConfiguration model
-				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				Expect(analyzerConfigurationModel).ToNot(BeNil())
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
-				analyzerConfigurationModel.Stopwords = []string{"testString"}
-				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
-				Expect(analyzerConfigurationModel.Name).To(Equal(core.StringPtr("classic")))
-				Expect(analyzerConfigurationModel.Stopwords).To(Equal([]string{"testString"}))
-				Expect(analyzerConfigurationModel.Fields).To(Equal(make(map[string]cloudantv1.Analyzer)))
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
@@ -17830,6 +17881,49 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				Expect(revisionsModel).ToNot(BeNil())
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
+				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				Expect(documentRevisionStatusModel).ToNot(BeNil())
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
+
+				// Construct an instance of the Analyzer model
+				analyzerModel := new(cloudantv1.Analyzer)
+				Expect(analyzerModel).ToNot(BeNil())
+				analyzerModel.Name = core.StringPtr("classic")
+				analyzerModel.Stopwords = []string{"testString"}
+				Expect(analyzerModel.Name).To(Equal(core.StringPtr("classic")))
+				Expect(analyzerModel.Stopwords).To(Equal([]string{"testString"}))
+
+				// Construct an instance of the AnalyzerConfiguration model
+				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
+				Expect(analyzerConfigurationModel).ToNot(BeNil())
+				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
+				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
+				Expect(analyzerConfigurationModel.Name).To(Equal(core.StringPtr("classic")))
+				Expect(analyzerConfigurationModel.Stopwords).To(Equal([]string{"testString"}))
+				Expect(analyzerConfigurationModel.Fields["foo"]).To(Equal(*analyzerModel))
+
+				// Construct an instance of the SearchIndexDefinition model
+				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
+				Expect(searchIndexDefinitionModel).ToNot(BeNil())
+				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
+				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+				Expect(searchIndexDefinitionModel.Analyzer).To(Equal(analyzerConfigurationModel))
+				Expect(searchIndexDefinitionModel.Index).To(Equal(core.StringPtr("testString")))
+
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				Expect(designDocumentOptionsModel).ToNot(BeNil())
@@ -17844,35 +17938,11 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentViewsMapReduceModel.Map).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentViewsMapReduceModel.Reduce).To(Equal(core.StringPtr("testString")))
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				Expect(documentRevisionStatusModel).ToNot(BeNil())
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
-				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
-
 				// Construct an instance of the GeoIndexDefinition model
 				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
 				Expect(geoIndexDefinitionModel).ToNot(BeNil())
 				geoIndexDefinitionModel.Index = core.StringPtr("testString")
 				Expect(geoIndexDefinitionModel.Index).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				Expect(revisionsModel).ToNot(BeNil())
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
-				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
-				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
-
-				// Construct an instance of the SearchIndexDefinition model
-				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
-				Expect(searchIndexDefinitionModel).ToNot(BeNil())
-				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
-				Expect(searchIndexDefinitionModel.Analyzer).To(Equal(analyzerConfigurationModel))
-				Expect(searchIndexDefinitionModel.Index).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
@@ -17895,10 +17965,11 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.Attachments["foo"] = *attachmentModel
+				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
+				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
+				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
-				Expect(designDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(designDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(designDocumentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(designDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(designDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(designDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -17909,13 +17980,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
 				Expect(designDocumentModel.Autoupdate).To(Equal(core.BoolPtr(true)))
 				Expect(designDocumentModel.Filters).To(Equal(make(map[string]string)))
-				Expect(designDocumentModel.Indexes).To(Equal(make(map[string]cloudantv1.SearchIndexDefinition)))
 				Expect(designDocumentModel.Language).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentModel.Options).To(Equal(designDocumentOptionsModel))
 				Expect(designDocumentModel.Updates).To(Equal(make(map[string]string)))
 				Expect(designDocumentModel.ValidateDocUpdate).To(Equal(make(map[string]string)))
-				Expect(designDocumentModel.Views).To(Equal(make(map[string]cloudantv1.DesignDocumentViewsMapReduce)))
-				Expect(designDocumentModel.StIndexes).To(Equal(make(map[string]cloudantv1.GeoIndexDefinition)))
+				Expect(designDocumentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(designDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(designDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
+				Expect(designDocumentModel.Indexes["foo"]).To(Equal(*searchIndexDefinitionModel))
+				Expect(designDocumentModel.Views["foo"]).To(Equal(*designDocumentViewsMapReduceModel))
+				Expect(designDocumentModel.StIndexes["foo"]).To(Equal(*geoIndexDefinitionModel))
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				db := "testString"
@@ -17962,14 +18036,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				Expect(documentRevisionStatusModel).ToNot(BeNil())
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
-				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				Expect(revisionsModel).ToNot(BeNil())
@@ -17977,6 +18043,14 @@ var _ = Describe(`CloudantV1`, func() {
 				revisionsModel.Start = core.Int64Ptr(int64(1))
 				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
 				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				Expect(documentRevisionStatusModel).ToNot(BeNil())
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -17990,10 +18064,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
-				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -18002,6 +18074,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
+				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PutDocumentOptions model
 				db := "testString"
@@ -18052,14 +18127,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
-				// Construct an instance of the DocumentRevisionStatus model
-				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
-				Expect(documentRevisionStatusModel).ToNot(BeNil())
-				documentRevisionStatusModel.Rev = core.StringPtr("testString")
-				documentRevisionStatusModel.Status = core.StringPtr("available")
-				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
-				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
-
 				// Construct an instance of the Revisions model
 				revisionsModel := new(cloudantv1.Revisions)
 				Expect(revisionsModel).ToNot(BeNil())
@@ -18067,6 +18134,14 @@ var _ = Describe(`CloudantV1`, func() {
 				revisionsModel.Start = core.Int64Ptr(int64(1))
 				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
 				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				Expect(documentRevisionStatusModel).ToNot(BeNil())
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
 
 				// Construct an instance of the Document model
 				documentModel := new(cloudantv1.Document)
@@ -18080,10 +18155,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
-				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -18092,6 +18165,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
+				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PutLocalDocumentOptions model
 				db := "testString"
@@ -18114,18 +18190,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putLocalDocumentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutReplicationDocumentOptions successfully`, func() {
-				// Construct an instance of the ReplicationDatabaseAuthIam model
-				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
-				Expect(replicationDatabaseAuthIamModel).ToNot(BeNil())
-				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
-				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the ReplicationDatabaseAuth model
-				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
-				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
-				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
-				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
-
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
@@ -18148,6 +18212,14 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
 
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				Expect(revisionsModel).ToNot(BeNil())
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
+				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
 				// Construct an instance of the DocumentRevisionStatus model
 				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
 				Expect(documentRevisionStatusModel).ToNot(BeNil())
@@ -18166,6 +18238,18 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationCreateTargetParametersModel.Partitioned).To(Equal(core.BoolPtr(true)))
 				Expect(replicationCreateTargetParametersModel.Q).To(Equal(core.Int64Ptr(int64(1))))
 
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				Expect(replicationDatabaseAuthIamModel).ToNot(BeNil())
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
+
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				Expect(replicationDatabaseModel).ToNot(BeNil())
@@ -18175,14 +18259,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDatabaseModel.Auth).To(Equal(replicationDatabaseAuthModel))
 				Expect(replicationDatabaseModel.HeadersVar).To(Equal(make(map[string]string)))
 				Expect(replicationDatabaseModel.URL).To(Equal(core.StringPtr("testString")))
-
-				// Construct an instance of the Revisions model
-				revisionsModel := new(cloudantv1.Revisions)
-				Expect(revisionsModel).ToNot(BeNil())
-				revisionsModel.Ids = []string{"testString"}
-				revisionsModel.Start = core.Int64Ptr(int64(1))
-				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
-				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -18228,10 +18304,8 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
-				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(replicationDocumentModel.Attachments).To(Equal(make(map[string]cloudantv1.Attachment)))
 				Expect(replicationDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(replicationDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -18262,6 +18336,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.UserCtx).To(Equal(userContextModel))
 				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(replicationDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PutReplicationDocumentOptions model
 				docID := "testString"

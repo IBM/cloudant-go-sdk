@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.10.3-18e3fe12-20200803-172650
+ * IBM OpenAPI SDK Code Generator Version: 3.12.0-64fe8d3f-20200820-144050
  */
  
 
@@ -651,6 +651,9 @@ func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) 
 	if postChangesOptions.DocIds != nil {
 		body["doc_ids"] = postChangesOptions.DocIds
 	}
+	if postChangesOptions.Fields != nil {
+		body["fields"] = postChangesOptions.Fields
+	}
 	if postChangesOptions.Selector != nil {
 		body["selector"] = postChangesOptions.Selector
 	}
@@ -761,6 +764,9 @@ func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesO
 	if postChangesOptions.DocIds != nil {
 		body["doc_ids"] = postChangesOptions.DocIds
 	}
+	if postChangesOptions.Fields != nil {
+		body["fields"] = postChangesOptions.Fields
+	}
 	if postChangesOptions.Selector != nil {
 		body["selector"] = postChangesOptions.Selector
 	}
@@ -847,6 +853,10 @@ func (cloudant *CloudantV1) PostDocument(postDocumentOptions *PostDocumentOption
 	err = core.ValidateStruct(postDocumentOptions, "postDocumentOptions")
 	if err != nil {
 		return
+	}
+
+	if postDocumentOptions.Document != nil && postDocumentOptions.ContentType == nil {
+		postDocumentOptions.SetContentType("application/json")
 	}
 
 	pathSegments := []string{""}
@@ -1935,6 +1945,10 @@ func (cloudant *CloudantV1) PutDocument(putDocumentOptions *PutDocumentOptions) 
 	err = core.ValidateStruct(putDocumentOptions, "putDocumentOptions")
 	if err != nil {
 		return
+	}
+
+	if putDocumentOptions.Document != nil && putDocumentOptions.ContentType == nil {
+		putDocumentOptions.SetContentType("application/json")
 	}
 
 	pathSegments := []string{"", ""}
@@ -5719,21 +5733,21 @@ func (cloudant *CloudantV1) PostApiKeys(postApiKeysOptions *PostApiKeysOptions) 
 	return
 }
 
-// PutCloudantSecurity : Modify only Cloudant related database permissions
+// PutCloudantSecurityConfiguration : Modify only Cloudant related database permissions
 // Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
 // the API key from the list of users that have access to the database.
-func (cloudant *CloudantV1) PutCloudantSecurity(putCloudantSecurityOptions *PutCloudantSecurityOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(putCloudantSecurityOptions, "putCloudantSecurityOptions cannot be nil")
+func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(putCloudantSecurityConfigurationOptions, "putCloudantSecurityConfigurationOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(putCloudantSecurityOptions, "putCloudantSecurityOptions")
+	err = core.ValidateStruct(putCloudantSecurityConfigurationOptions, "putCloudantSecurityConfigurationOptions")
 	if err != nil {
 		return
 	}
 
 	pathSegments := []string{"_api/v2/db", "_security"}
-	pathParameters := []string{*putCloudantSecurityOptions.Db}
+	pathParameters := []string{*putCloudantSecurityConfigurationOptions.Db}
 
 	builder := core.NewRequestBuilder(core.PUT)
 	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
@@ -5741,11 +5755,11 @@ func (cloudant *CloudantV1) PutCloudantSecurity(putCloudantSecurityOptions *PutC
 		return
 	}
 
-	for headerName, headerValue := range putCloudantSecurityOptions.Headers {
+	for headerName, headerValue := range putCloudantSecurityConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCloudantSecurity")
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCloudantSecurityConfiguration")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -5753,8 +5767,17 @@ func (cloudant *CloudantV1) PutCloudantSecurity(putCloudantSecurityOptions *PutC
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if putCloudantSecurityOptions.Cloudant != nil {
-		body["cloudant"] = putCloudantSecurityOptions.Cloudant
+	if putCloudantSecurityConfigurationOptions.Admins != nil {
+		body["admins"] = putCloudantSecurityConfigurationOptions.Admins
+	}
+	if putCloudantSecurityConfigurationOptions.Members != nil {
+		body["members"] = putCloudantSecurityConfigurationOptions.Members
+	}
+	if putCloudantSecurityConfigurationOptions.Cloudant != nil {
+		body["cloudant"] = putCloudantSecurityConfigurationOptions.Cloudant
+	}
+	if putCloudantSecurityConfigurationOptions.CouchdbAuthOnly != nil {
+		body["couchdb_auth_only"] = putCloudantSecurityConfigurationOptions.CouchdbAuthOnly
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -6271,6 +6294,10 @@ func (cloudant *CloudantV1) PutLocalDocument(putLocalDocumentOptions *PutLocalDo
 		return
 	}
 
+	if putLocalDocumentOptions.Document != nil && putLocalDocumentOptions.ContentType == nil {
+		putLocalDocumentOptions.SetContentType("application/json")
+	}
+
 	pathSegments := []string{"", "_local"}
 	pathParameters := []string{*putLocalDocumentOptions.Db, *putLocalDocumentOptions.DocID}
 
@@ -6572,8 +6599,8 @@ func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingR
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	if postMissingRevsOptions.MissingRevs != nil {
-		_, err = builder.SetBodyContentJSON(postMissingRevsOptions.MissingRevs)
+	if postMissingRevsOptions.DocumentRevisions != nil {
+		_, err = builder.SetBodyContentJSON(postMissingRevsOptions.DocumentRevisions)
 		if err != nil {
 			return
 		}
@@ -6632,8 +6659,8 @@ func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOption
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	if postRevsDiffOptions.RevsDiffRequest != nil {
-		_, err = builder.SetBodyContentJSON(postRevsDiffOptions.RevsDiffRequest)
+	if postRevsDiffOptions.DocumentRevisions != nil {
+		_, err = builder.SetBodyContentJSON(postRevsDiffOptions.DocumentRevisions)
 		if err != nil {
 			return
 		}
@@ -7254,11 +7281,11 @@ func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interfa
 
 // ApiKeysResult : Schema for api keys.
 type ApiKeysResult struct {
+	// ok.
+	Ok *bool `json:"ok,omitempty"`
+
 	// The generated api key.
 	Key *string `json:"key,omitempty"`
-
-	// Schema for an OK result.
-	Ok *Ok `json:"ok,omitempty"`
 
 	// The password associated with the api key.
 	Password *string `json:"password,omitempty"`
@@ -7268,11 +7295,11 @@ type ApiKeysResult struct {
 // UnmarshalApiKeysResult unmarshals an instance of ApiKeysResult from the specified map of raw messages.
 func UnmarshalApiKeysResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ApiKeysResult)
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "ok", &obj.Ok, UnmarshalOk)
+	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		return
 	}
@@ -8647,7 +8674,7 @@ type DesignDocumentInformation struct {
 	Name *string `json:"name,omitempty"`
 
 	// View index information.
-	ViewIndex *DesignDocumentInformationViewIndex `json:"view_index,omitempty"`
+	ViewIndex *DesignDocumentViewIndex `json:"view_index,omitempty"`
 }
 
 
@@ -8658,7 +8685,7 @@ func UnmarshalDesignDocumentInformation(m map[string]json.RawMessage, result int
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "view_index", &obj.ViewIndex, UnmarshalDesignDocumentInformationViewIndex)
+	err = core.UnmarshalModel(m, "view_index", &obj.ViewIndex, UnmarshalDesignDocumentViewIndex)
 	if err != nil {
 		return
 	}
@@ -8666,8 +8693,26 @@ func UnmarshalDesignDocumentInformation(m map[string]json.RawMessage, result int
 	return
 }
 
-// DesignDocumentInformationViewIndex : View index information.
-type DesignDocumentInformationViewIndex struct {
+// DesignDocumentOptions : Schema for design document options.
+type DesignDocumentOptions struct {
+	// Whether this design document describes partitioned or global indexes.
+	Partitioned *bool `json:"partitioned,omitempty"`
+}
+
+
+// UnmarshalDesignDocumentOptions unmarshals an instance of DesignDocumentOptions from the specified map of raw messages.
+func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DesignDocumentOptions)
+	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DesignDocumentViewIndex : View index information.
+type DesignDocumentViewIndex struct {
 	// Indicates whether a compaction routine is currently running on the view.
 	CompactRunning *bool `json:"compact_running,omitempty"`
 
@@ -8694,9 +8739,9 @@ type DesignDocumentInformationViewIndex struct {
 }
 
 
-// UnmarshalDesignDocumentInformationViewIndex unmarshals an instance of DesignDocumentInformationViewIndex from the specified map of raw messages.
-func UnmarshalDesignDocumentInformationViewIndex(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DesignDocumentInformationViewIndex)
+// UnmarshalDesignDocumentViewIndex unmarshals an instance of DesignDocumentViewIndex from the specified map of raw messages.
+func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DesignDocumentViewIndex)
 	err = core.UnmarshalPrimitive(m, "compact_running", &obj.CompactRunning)
 	if err != nil {
 		return
@@ -8726,24 +8771,6 @@ func UnmarshalDesignDocumentInformationViewIndex(m map[string]json.RawMessage, r
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "waiting_commit", &obj.WaitingCommit)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DesignDocumentOptions : Schema for design document options.
-type DesignDocumentOptions struct {
-	// Whether this design document describes partitioned or global indexes.
-	Partitioned *bool `json:"partitioned,omitempty"`
-}
-
-
-// UnmarshalDesignDocumentOptions unmarshals an instance of DesignDocumentOptions from the specified map of raw messages.
-func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DesignDocumentOptions)
-	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		return
 	}
@@ -11949,17 +11976,17 @@ func UnmarshalMembershipInformation(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// MissingRevsResult : Schema for mapping document IDs to lists of missed revisions.
+// MissingRevsResult : Schema for mapping document IDs to lists of missing revisions.
 type MissingRevsResult struct {
 	// Schema for mapping document IDs to lists of revisions.
-	MissedRevs map[string][]string `json:"missed_revs,omitempty"`
+	MissingRevs map[string][]string `json:"missing_revs,omitempty"`
 }
 
 
 // UnmarshalMissingRevsResult unmarshals an instance of MissingRevsResult from the specified map of raw messages.
 func UnmarshalMissingRevsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(MissingRevsResult)
-	err = core.UnmarshalPrimitive(m, "missed_revs", &obj.MissedRevs)
+	err = core.UnmarshalPrimitive(m, "missing_revs", &obj.MissingRevs)
 	if err != nil {
 		return
 	}
@@ -12452,6 +12479,10 @@ type PostChangesOptions struct {
 	// Schema for a list of document IDs.
 	DocIds []string `json:"doc_ids,omitempty"`
 
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
 	//
@@ -12577,6 +12608,12 @@ func (options *PostChangesOptions) SetDb(db string) *PostChangesOptions {
 // SetDocIds : Allow user to set DocIds
 func (options *PostChangesOptions) SetDocIds(docIds []string) *PostChangesOptions {
 	options.DocIds = docIds
+	return options
+}
+
+// SetFields : Allow user to set Fields
+func (options *PostChangesOptions) SetFields(fields []string) *PostChangesOptions {
+	options.Fields = fields
 	return options
 }
 
@@ -13028,8 +13065,8 @@ type PostExplainOptions struct {
 	// is fetched).
 	ExecutionStats *bool `json:"execution_stats,omitempty"`
 
-	// JSON array that uses the field syntax as described in the following information. Use this parameter to specify which
-	// fields of a document must be returned. If it is omitted, the entire document is returned.
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
 	Fields []string `json:"fields,omitempty"`
 
 	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
@@ -13208,8 +13245,8 @@ type PostFindOptions struct {
 	// is fetched).
 	ExecutionStats *bool `json:"execution_stats,omitempty"`
 
-	// JSON array that uses the field syntax as described in the following information. Use this parameter to specify which
-	// fields of a document must be returned. If it is omitted, the entire document is returned.
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
 	Fields []string `json:"fields,omitempty"`
 
 	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
@@ -13764,7 +13801,7 @@ type PostMissingRevsOptions struct {
 	Db *string `json:"db" validate:"required"`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
-	MissingRevs map[string][]string `json:"missingRevs,omitempty"`
+	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13783,9 +13820,9 @@ func (options *PostMissingRevsOptions) SetDb(db string) *PostMissingRevsOptions 
 	return options
 }
 
-// SetMissingRevs : Allow user to set MissingRevs
-func (options *PostMissingRevsOptions) SetMissingRevs(missingRevs map[string][]string) *PostMissingRevsOptions {
-	options.MissingRevs = missingRevs
+// SetDocumentRevisions : Allow user to set DocumentRevisions
+func (options *PostMissingRevsOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostMissingRevsOptions {
+	options.DocumentRevisions = documentRevisions
 	return options
 }
 
@@ -13972,8 +14009,8 @@ type PostPartitionFindOptions struct {
 	// is fetched).
 	ExecutionStats *bool `json:"execution_stats,omitempty"`
 
-	// JSON array that uses the field syntax as described in the following information. Use this parameter to specify which
-	// fields of a document must be returned. If it is omitted, the entire document is returned.
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
 	Fields []string `json:"fields,omitempty"`
 
 	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
@@ -14598,7 +14635,7 @@ type PostRevsDiffOptions struct {
 	Db *string `json:"db" validate:"required"`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
-	RevsDiffRequest map[string][]string `json:"revsDiffRequest,omitempty"`
+	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -14617,9 +14654,9 @@ func (options *PostRevsDiffOptions) SetDb(db string) *PostRevsDiffOptions {
 	return options
 }
 
-// SetRevsDiffRequest : Allow user to set RevsDiffRequest
-func (options *PostRevsDiffOptions) SetRevsDiffRequest(revsDiffRequest map[string][]string) *PostRevsDiffOptions {
-	options.RevsDiffRequest = revsDiffRequest
+// SetDocumentRevisions : Allow user to set DocumentRevisions
+func (options *PostRevsDiffOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostRevsDiffOptions {
+	options.DocumentRevisions = documentRevisions
 	return options
 }
 
@@ -15334,52 +15371,79 @@ func (options *PutAttachmentOptions) SetHeaders(param map[string]string) *PutAtt
 	return options
 }
 
-// PutCloudantSecurityOptions : The PutCloudantSecurity options.
-type PutCloudantSecurityOptions struct {
+// PutCloudantSecurityConfigurationOptions : The PutCloudantSecurityConfiguration options.
+type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required"`
 
+	// Schema for names and roles to map to a database permission.
+	Admins *SecurityObject `json:"admins,omitempty"`
+
+	// Schema for names and roles to map to a database permission.
+	Members *SecurityObject `json:"members,omitempty"`
+
 	// Database permissions for Cloudant users and/or API keys.
 	Cloudant map[string][]string `json:"cloudant,omitempty"`
+
+	// Manage permissions using the `_users` database only.
+	CouchdbAuthOnly *bool `json:"couchdb_auth_only,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
-// Constants associated with the PutCloudantSecurityOptions.Cloudant property.
+// Constants associated with the PutCloudantSecurityConfigurationOptions.Cloudant property.
 // Database permissions for Cloudant users and/or API keys.
 const (
-	PutCloudantSecurityOptionsCloudantAdminConst = "_admin"
-	PutCloudantSecurityOptionsCloudantDbUpdatesConst = "_db_updates"
-	PutCloudantSecurityOptionsCloudantDesignConst = "_design"
-	PutCloudantSecurityOptionsCloudantReaderConst = "_reader"
-	PutCloudantSecurityOptionsCloudantReplicatorConst = "_replicator"
-	PutCloudantSecurityOptionsCloudantSecurityConst = "_security"
-	PutCloudantSecurityOptionsCloudantShardsConst = "_shards"
-	PutCloudantSecurityOptionsCloudantWriterConst = "_writer"
+	PutCloudantSecurityConfigurationOptionsCloudantAdminConst = "_admin"
+	PutCloudantSecurityConfigurationOptionsCloudantDbUpdatesConst = "_db_updates"
+	PutCloudantSecurityConfigurationOptionsCloudantDesignConst = "_design"
+	PutCloudantSecurityConfigurationOptionsCloudantReaderConst = "_reader"
+	PutCloudantSecurityConfigurationOptionsCloudantReplicatorConst = "_replicator"
+	PutCloudantSecurityConfigurationOptionsCloudantSecurityConst = "_security"
+	PutCloudantSecurityConfigurationOptionsCloudantShardsConst = "_shards"
+	PutCloudantSecurityConfigurationOptionsCloudantWriterConst = "_writer"
 )
 
-// NewPutCloudantSecurityOptions : Instantiate PutCloudantSecurityOptions
-func (*CloudantV1) NewPutCloudantSecurityOptions(db string) *PutCloudantSecurityOptions {
-	return &PutCloudantSecurityOptions{
+// NewPutCloudantSecurityConfigurationOptions : Instantiate PutCloudantSecurityConfigurationOptions
+func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string) *PutCloudantSecurityConfigurationOptions {
+	return &PutCloudantSecurityConfigurationOptions{
 		Db: core.StringPtr(db),
 	}
 }
 
 // SetDb : Allow user to set Db
-func (options *PutCloudantSecurityOptions) SetDb(db string) *PutCloudantSecurityOptions {
+func (options *PutCloudantSecurityConfigurationOptions) SetDb(db string) *PutCloudantSecurityConfigurationOptions {
 	options.Db = core.StringPtr(db)
 	return options
 }
 
+// SetAdmins : Allow user to set Admins
+func (options *PutCloudantSecurityConfigurationOptions) SetAdmins(admins *SecurityObject) *PutCloudantSecurityConfigurationOptions {
+	options.Admins = admins
+	return options
+}
+
+// SetMembers : Allow user to set Members
+func (options *PutCloudantSecurityConfigurationOptions) SetMembers(members *SecurityObject) *PutCloudantSecurityConfigurationOptions {
+	options.Members = members
+	return options
+}
+
 // SetCloudant : Allow user to set Cloudant
-func (options *PutCloudantSecurityOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityOptions {
+func (options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
 	options.Cloudant = cloudant
 	return options
 }
 
+// SetCouchdbAuthOnly : Allow user to set CouchdbAuthOnly
+func (options *PutCloudantSecurityConfigurationOptions) SetCouchdbAuthOnly(couchdbAuthOnly bool) *PutCloudantSecurityConfigurationOptions {
+	options.CouchdbAuthOnly = core.BoolPtr(couchdbAuthOnly)
+	return options
+}
+
 // SetHeaders : Allow user to set Headers
-func (options *PutCloudantSecurityOptions) SetHeaders(param map[string]string) *PutCloudantSecurityOptions {
+func (options *PutCloudantSecurityConfigurationOptions) SetHeaders(param map[string]string) *PutCloudantSecurityConfigurationOptions {
 	options.Headers = param
 	return options
 }
@@ -17837,6 +17901,9 @@ type ViewResultRow struct {
 	// The reason the error occurred (if available).
 	Reason *string `json:"reason,omitempty"`
 
+	// Schema for a document.
+	Doc *Document `json:"doc,omitempty"`
+
 	// Schema for a document ID.
 	ID *string `json:"id,omitempty"`
 
@@ -17860,6 +17927,10 @@ func UnmarshalViewResultRow(m map[string]json.RawMessage, result interface{}) (e
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "doc", &obj.Doc, UnmarshalDocument)
 	if err != nil {
 		return
 	}
