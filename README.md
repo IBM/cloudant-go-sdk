@@ -15,6 +15,9 @@
 
 Go client library to interact with the various [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
 
+Disclaimer: this SDK is being released initially as a **pre-release** version.
+Changes might occur which impact applications that use this SDK.
+
 <details>
 <summary>Table of Contents</summary>
 
