@@ -20,8 +20,9 @@ import (
 )
 
 const (
-	sdkName             = "cloudant-go-sdk"
-	headerNameUserAgent = "User-Agent"
+	sdkName                = "cloudant-go-sdk"
+	headerNameUserAgent    = "User-Agent"
+	headerNameSdkAnalytics = "X-IBMCloud-SDK-Analytics"
 )
 
 //
@@ -44,9 +45,15 @@ const (
 func GetSdkHeaders(serviceName string, serviceVersion string, operationID string) map[string]string {
 	sdkHeaders := make(map[string]string)
 
+	sdkHeaders[headerNameSdkAnalytics] = GetSdkAnalyticsHeader(serviceName, serviceVersion, operationID)
 	sdkHeaders[headerNameUserAgent] = GetUserAgentInfo()
 
 	return sdkHeaders
+}
+
+func GetSdkAnalyticsHeader(serviceName string, serviceVersion string, operationID string) string {
+	return fmt.Sprintf("service_name=%s;service_version=%s;operation_id=%s",
+		serviceName, serviceVersion, operationID)
 }
 
 var userAgent string = fmt.Sprintf("%s/%s %s", sdkName, Version, GetSystemInfo())

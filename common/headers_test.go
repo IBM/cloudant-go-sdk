@@ -40,3 +40,15 @@ func TestGetSdkHeaders(t *testing.T) {
 	assert.True(t, foundIt)
 	t.Logf("user agent: %s\n", headers[headerNameUserAgent])
 }
+
+func TestGetSdkAnalyticsHeader(t *testing.T) {
+	var headers = GetSdkHeaders("myService", "v123", "myOperation")
+	assert.NotNil(t, headers)
+
+	var foundIt bool
+	var headerValue string
+
+	headerValue, foundIt = headers[headerNameSdkAnalytics]
+	assert.True(t, foundIt)
+	assert.Equal(t, "service_name=myService;service_version=v123;operation_id=myOperation", headerValue)
+}
