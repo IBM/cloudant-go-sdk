@@ -136,13 +136,15 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh 'GOROOT=/usr/local/go'
-  sh 'PATH=$PATH:$GOROOT/bin'
-  sh 'GOPATH=/home/jenkins/workspace'
-  sh 'echo $GOROOT'
-  sh 'echo $PATH'
-  sh 'echo $GOPATH'
-  sh 'go test ./...'
+  sh '''
+      export GOROOT=/usr/local/go
+      export PATH=$PATH:$GOROOT/bin
+      export GOPATH=/home/jenkins/workspace
+      echo $GOROOT
+      echo $PATH
+      echo $GOPATH
+      go version
+  '''
 }
 
 void publishStaging() {
