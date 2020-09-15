@@ -136,8 +136,19 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh 'go test ./...'
-  sh 'golangci-lint run'
+  sh '''
+      #!/bin/bash --login
+      echo $HOME
+      ls -a $HOME
+      cat /home/jenkins/.profile
+      echo $PATH
+      ls /usr/local
+      echo $GOROOT
+      echo $GOPATH
+      go version
+      go test ./...
+      golangci-lint run
+  '''
 }
 
 void publishStaging() {
