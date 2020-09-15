@@ -136,19 +136,13 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh '''
-      #!/bin/bash --login
-      echo $HOME
-      ls -a $HOME
-      cat /home/jenkins/.profile
-      echo $PATH
-      ls /usr/local
-      echo $GOROOT
-      echo $GOPATH
-      go version
-      go test ./...
-      golangci-lint run
-  '''
+  sh 'GOROOT=/usr/local/go'
+  sh 'PATH=$PATH:$GOROOT/bin'
+  sh 'GOPATH=/home/jenkins/workspace'
+  sh 'echo $GOROOT'
+  sh 'echo $PATH'
+  sh 'echo $GOPATH'
+  sh 'go test ./...'
 }
 
 void publishStaging() {
