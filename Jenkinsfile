@@ -136,6 +136,8 @@ void applyCustomizations() {
 }
 
 void runTests() {
+  sh 'go test ./...'
+  sh 'golangci-lint run'
 }
 
 void publishStaging() {
