@@ -88,7 +88,7 @@ Reasons why you should consider using Cloudant SDK for Go in your project:
 
 * An [IBM Cloud][ibm-cloud-onboarding] account.
 * An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.12 or above.
+* Go version 1.13 or above.
 
 ## Installation
 
