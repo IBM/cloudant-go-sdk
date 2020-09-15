@@ -2,7 +2,7 @@
 
 pipeline {
   agent {
-    label 'sdks-executor'
+    label 'sdks-test-go-executor'
   }
   options {
     skipDefaultCheckout()
