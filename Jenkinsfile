@@ -136,12 +136,7 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh '''
-      echo $GOROOT
-      echo $PATH
-      echo $GOPATH
-      go version
-  '''
+  sh './scripts/go_test.sh'
 }
 
 void publishStaging() {
