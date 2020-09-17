@@ -2,8 +2,8 @@
 
 set -ev
 
+echo $-
 echo $HOME
 echo $GOROOT
 echo $PATH
 echo $GOPATH
-go version
