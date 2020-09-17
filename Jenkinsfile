@@ -137,9 +137,6 @@ void applyCustomizations() {
 
 void runTests() {
   sh '''
-      export GOROOT=/usr/local/go
-      export PATH=$PATH:$GOROOT/bin
-      export GOPATH=/home/jenkins/workspace
       echo $GOROOT
       echo $PATH
       echo $GOPATH
