@@ -136,15 +136,8 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh 'chmod +x ./scripts/go_test.sh'
-  sh './scripts/go_test.sh'
-  sh '''
-     echo $HOME
-     echo $GOROOT
-     echo $PATH
-     echo $GOPATH
-     more ~/.bash_profile
-  '''
+  sh 'go version'
+  sh 'go test ./...'
 }
 
 void publishStaging() {
