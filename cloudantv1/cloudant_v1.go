@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.12.0-64fe8d3f-20200820-144050
+ * IBM OpenAPI SDK Code Generator Version: 3.12.2-b734cb71-20200916-142547
  */
  
 
@@ -124,11 +124,8 @@ func (cloudant *CloudantV1) GetServerInformation(getServerInformationOptions *Ge
 		return
 	}
 
-	pathSegments := []string{""}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/`, nil)
 	if err != nil {
 		return
 	}
@@ -171,11 +168,8 @@ func (cloudant *CloudantV1) GetMembershipInformation(getMembershipInformationOpt
 		return
 	}
 
-	pathSegments := []string{"_membership"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_membership`, nil)
 	if err != nil {
 		return
 	}
@@ -218,11 +212,8 @@ func (cloudant *CloudantV1) GetUuids(getUuidsOptions *GetUuidsOptions) (result *
 		return
 	}
 
-	pathSegments := []string{"_uuids"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_uuids`, nil)
 	if err != nil {
 		return
 	}
@@ -273,11 +264,12 @@ func (cloudant *CloudantV1) HeadDatabase(headDatabaseOptions *HeadDatabaseOption
 		return
 	}
 
-	pathSegments := []string{""}
-	pathParameters := []string{*headDatabaseOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *headDatabaseOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -308,11 +300,8 @@ func (cloudant *CloudantV1) GetAllDbs(getAllDbsOptions *GetAllDbsOptions) (resul
 		return
 	}
 
-	pathSegments := []string{"_all_dbs"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_all_dbs`, nil)
 	if err != nil {
 		return
 	}
@@ -363,11 +352,8 @@ func (cloudant *CloudantV1) PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) 
 		return
 	}
 
-	pathSegments := []string{"_dbs_info"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_dbs_info`, nil)
 	if err != nil {
 		return
 	}
@@ -425,11 +411,12 @@ func (cloudant *CloudantV1) DeleteDatabase(deleteDatabaseOptions *DeleteDatabase
 		return
 	}
 
-	pathSegments := []string{""}
-	pathParameters := []string{*deleteDatabaseOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *deleteDatabaseOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -474,11 +461,12 @@ func (cloudant *CloudantV1) GetDatabaseInformation(getDatabaseInformationOptions
 		return
 	}
 
-	pathSegments := []string{""}
-	pathParameters := []string{*getDatabaseInformationOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *getDatabaseInformationOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -523,11 +511,12 @@ func (cloudant *CloudantV1) PutDatabase(putDatabaseOptions *PutDatabaseOptions) 
 		return
 	}
 
-	pathSegments := []string{""}
-	pathParameters := []string{*putDatabaseOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *putDatabaseOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -581,11 +570,12 @@ func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_changes"}
-	pathParameters := []string{*postChangesOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postChangesOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -694,11 +684,12 @@ func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesO
 		return
 	}
 
-	pathSegments := []string{"", "_changes"}
-	pathParameters := []string{*postChangesOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postChangesOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -800,11 +791,13 @@ func (cloudant *CloudantV1) HeadDocument(headDocumentOptions *HeadDocumentOption
 		return
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*headDocumentOptions.Db, *headDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *headDocumentOptions.Db,
+		"doc_id": *headDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -859,11 +852,12 @@ func (cloudant *CloudantV1) PostDocument(postDocumentOptions *PostDocumentOption
 		postDocumentOptions.SetContentType("application/json")
 	}
 
-	pathSegments := []string{""}
-	pathParameters := []string{*postDocumentOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postDocumentOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -924,11 +918,12 @@ func (cloudant *CloudantV1) PostAllDocs(postAllDocsOptions *PostAllDocsOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_all_docs"}
-	pathParameters := []string{*postAllDocsOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postAllDocsOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1023,11 +1018,12 @@ func (cloudant *CloudantV1) PostAllDocsAsStream(postAllDocsOptions *PostAllDocsO
 		return
 	}
 
-	pathSegments := []string{"", "_all_docs"}
-	pathParameters := []string{*postAllDocsOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postAllDocsOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1112,11 +1108,12 @@ func (cloudant *CloudantV1) PostAllDocsQueries(postAllDocsQueriesOptions *PostAl
 		return
 	}
 
-	pathSegments := []string{"", "_all_docs/queries"}
-	pathParameters := []string{*postAllDocsQueriesOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postAllDocsQueriesOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1174,11 +1171,12 @@ func (cloudant *CloudantV1) PostAllDocsQueriesAsStream(postAllDocsQueriesOptions
 		return
 	}
 
-	pathSegments := []string{"", "_all_docs/queries"}
-	pathParameters := []string{*postAllDocsQueriesOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postAllDocsQueriesOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1227,11 +1225,12 @@ func (cloudant *CloudantV1) PostBulkDocs(postBulkDocsOptions *PostBulkDocsOption
 		return
 	}
 
-	pathSegments := []string{"", "_bulk_docs"}
-	pathParameters := []string{*postBulkDocsOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postBulkDocsOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1282,11 +1281,12 @@ func (cloudant *CloudantV1) PostBulkGet(postBulkGetOptions *PostBulkGetOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_bulk_get"}
-	pathParameters := []string{*postBulkGetOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postBulkGetOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1355,11 +1355,12 @@ func (cloudant *CloudantV1) PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOp
 		return
 	}
 
-	pathSegments := []string{"", "_bulk_get"}
-	pathParameters := []string{*postBulkGetOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postBulkGetOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1419,11 +1420,12 @@ func (cloudant *CloudantV1) PostBulkGetAsRelated(postBulkGetOptions *PostBulkGet
 		return
 	}
 
-	pathSegments := []string{"", "_bulk_get"}
-	pathParameters := []string{*postBulkGetOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postBulkGetOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1483,11 +1485,12 @@ func (cloudant *CloudantV1) PostBulkGetAsStream(postBulkGetOptions *PostBulkGetO
 		return
 	}
 
-	pathSegments := []string{"", "_bulk_get"}
-	pathParameters := []string{*postBulkGetOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postBulkGetOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1549,11 +1552,13 @@ func (cloudant *CloudantV1) DeleteDocument(deleteDocumentOptions *DeleteDocument
 		return
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*deleteDocumentOptions.Db, *deleteDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *deleteDocumentOptions.Db,
+		"doc_id": *deleteDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1610,11 +1615,13 @@ func (cloudant *CloudantV1) GetDocument(getDocumentOptions *GetDocumentOptions) 
 		return
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *getDocumentOptions.Db,
+		"doc_id": *getDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1701,11 +1708,13 @@ func (cloudant *CloudantV1) GetDocumentAsMixed(getDocumentOptions *GetDocumentOp
 		return
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *getDocumentOptions.Db,
+		"doc_id": *getDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1783,11 +1792,13 @@ func (cloudant *CloudantV1) GetDocumentAsRelated(getDocumentOptions *GetDocument
 		return
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *getDocumentOptions.Db,
+		"doc_id": *getDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1865,11 +1876,13 @@ func (cloudant *CloudantV1) GetDocumentAsStream(getDocumentOptions *GetDocumentO
 		return
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *getDocumentOptions.Db,
+		"doc_id": *getDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -1951,11 +1964,13 @@ func (cloudant *CloudantV1) PutDocument(putDocumentOptions *PutDocumentOptions) 
 		putDocumentOptions.SetContentType("application/json")
 	}
 
-	pathSegments := []string{"", ""}
-	pathParameters := []string{*putDocumentOptions.Db, *putDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *putDocumentOptions.Db,
+		"doc_id": *putDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2026,11 +2041,13 @@ func (cloudant *CloudantV1) HeadDesignDocument(headDesignDocumentOptions *HeadDe
 		return
 	}
 
-	pathSegments := []string{"", "_design"}
-	pathParameters := []string{*headDesignDocumentOptions.Db, *headDesignDocumentOptions.Ddoc}
+	pathParamsMap := map[string]string{
+		"db": *headDesignDocumentOptions.Db,
+		"ddoc": *headDesignDocumentOptions.Ddoc,
+	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2071,11 +2088,13 @@ func (cloudant *CloudantV1) DeleteDesignDocument(deleteDesignDocumentOptions *De
 		return
 	}
 
-	pathSegments := []string{"", "_design"}
-	pathParameters := []string{*deleteDesignDocumentOptions.Db, *deleteDesignDocumentOptions.Ddoc}
+	pathParamsMap := map[string]string{
+		"db": *deleteDesignDocumentOptions.Db,
+		"ddoc": *deleteDesignDocumentOptions.Ddoc,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2132,11 +2151,13 @@ func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesig
 		return
 	}
 
-	pathSegments := []string{"", "_design"}
-	pathParameters := []string{*getDesignDocumentOptions.Db, *getDesignDocumentOptions.Ddoc}
+	pathParamsMap := map[string]string{
+		"db": *getDesignDocumentOptions.Db,
+		"ddoc": *getDesignDocumentOptions.Ddoc,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2222,11 +2243,13 @@ func (cloudant *CloudantV1) PutDesignDocument(putDesignDocumentOptions *PutDesig
 		return
 	}
 
-	pathSegments := []string{"", "_design"}
-	pathParameters := []string{*putDesignDocumentOptions.Db, *putDesignDocumentOptions.Ddoc}
+	pathParamsMap := map[string]string{
+		"db": *putDesignDocumentOptions.Db,
+		"ddoc": *putDesignDocumentOptions.Ddoc,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2294,11 +2317,13 @@ func (cloudant *CloudantV1) GetDesignDocumentInformation(getDesignDocumentInform
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_info"}
-	pathParameters := []string{*getDesignDocumentInformationOptions.Db, *getDesignDocumentInformationOptions.Ddoc}
+	pathParamsMap := map[string]string{
+		"db": *getDesignDocumentInformationOptions.Db,
+		"ddoc": *getDesignDocumentInformationOptions.Ddoc,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_info`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2347,11 +2372,12 @@ func (cloudant *CloudantV1) PostDesignDocs(postDesignDocsOptions *PostDesignDocs
 		return
 	}
 
-	pathSegments := []string{"", "_design_docs"}
-	pathParameters := []string{*postDesignDocsOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postDesignDocsOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2447,11 +2473,12 @@ func (cloudant *CloudantV1) PostDesignDocsQueries(postDesignDocsQueriesOptions *
 		return
 	}
 
-	pathSegments := []string{"", "_design_docs/queries"}
-	pathParameters := []string{*postDesignDocsQueriesOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postDesignDocsQueriesOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2513,11 +2540,14 @@ func (cloudant *CloudantV1) PostView(postViewOptions *PostViewOptions) (result *
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_view"}
-	pathParameters := []string{*postViewOptions.Db, *postViewOptions.Ddoc, *postViewOptions.View}
+	pathParamsMap := map[string]string{
+		"db": *postViewOptions.Db,
+		"ddoc": *postViewOptions.Ddoc,
+		"view": *postViewOptions.View,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2633,11 +2663,14 @@ func (cloudant *CloudantV1) PostViewAsStream(postViewOptions *PostViewOptions) (
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_view"}
-	pathParameters := []string{*postViewOptions.Db, *postViewOptions.Ddoc, *postViewOptions.View}
+	pathParamsMap := map[string]string{
+		"db": *postViewOptions.Db,
+		"ddoc": *postViewOptions.Ddoc,
+		"view": *postViewOptions.View,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2741,11 +2774,14 @@ func (cloudant *CloudantV1) PostViewQueries(postViewQueriesOptions *PostViewQuer
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_view", "queries"}
-	pathParameters := []string{*postViewQueriesOptions.Db, *postViewQueriesOptions.Ddoc, *postViewQueriesOptions.View}
+	pathParamsMap := map[string]string{
+		"db": *postViewQueriesOptions.Db,
+		"ddoc": *postViewQueriesOptions.Ddoc,
+		"view": *postViewQueriesOptions.View,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}/queries`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2801,11 +2837,14 @@ func (cloudant *CloudantV1) PostViewQueriesAsStream(postViewQueriesOptions *Post
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_view", "queries"}
-	pathParameters := []string{*postViewQueriesOptions.Db, *postViewQueriesOptions.Ddoc, *postViewQueriesOptions.View}
+	pathParamsMap := map[string]string{
+		"db": *postViewQueriesOptions.Db,
+		"ddoc": *postViewQueriesOptions.Ddoc,
+		"view": *postViewQueriesOptions.View,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}/queries`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2852,11 +2891,13 @@ func (cloudant *CloudantV1) GetPartitionInformation(getPartitionInformationOptio
 		return
 	}
 
-	pathSegments := []string{"", "_partition"}
-	pathParameters := []string{*getPartitionInformationOptions.Db, *getPartitionInformationOptions.PartitionKey}
+	pathParamsMap := map[string]string{
+		"db": *getPartitionInformationOptions.Db,
+		"partition_key": *getPartitionInformationOptions.PartitionKey,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -2905,11 +2946,13 @@ func (cloudant *CloudantV1) PostPartitionAllDocs(postPartitionAllDocsOptions *Po
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_all_docs"}
-	pathParameters := []string{*postPartitionAllDocsOptions.Db, *postPartitionAllDocsOptions.PartitionKey}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionAllDocsOptions.Db,
+		"partition_key": *postPartitionAllDocsOptions.PartitionKey,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3004,11 +3047,13 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStream(postPartitionAllDocsOpt
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_all_docs"}
-	pathParameters := []string{*postPartitionAllDocsOptions.Db, *postPartitionAllDocsOptions.PartitionKey}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionAllDocsOptions.Db,
+		"partition_key": *postPartitionAllDocsOptions.PartitionKey,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3093,11 +3138,15 @@ func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *Post
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_design", "_search"}
-	pathParameters := []string{*postPartitionSearchOptions.Db, *postPartitionSearchOptions.PartitionKey, *postPartitionSearchOptions.Ddoc, *postPartitionSearchOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionSearchOptions.Db,
+		"partition_key": *postPartitionSearchOptions.PartitionKey,
+		"ddoc": *postPartitionSearchOptions.Ddoc,
+		"index": *postPartitionSearchOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3188,11 +3237,15 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptio
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_design", "_search"}
-	pathParameters := []string{*postPartitionSearchOptions.Db, *postPartitionSearchOptions.PartitionKey, *postPartitionSearchOptions.Ddoc, *postPartitionSearchOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionSearchOptions.Db,
+		"partition_key": *postPartitionSearchOptions.PartitionKey,
+		"ddoc": *postPartitionSearchOptions.Ddoc,
+		"index": *postPartitionSearchOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3275,11 +3328,15 @@ func (cloudant *CloudantV1) PostPartitionView(postPartitionViewOptions *PostPart
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_design", "_view"}
-	pathParameters := []string{*postPartitionViewOptions.Db, *postPartitionViewOptions.PartitionKey, *postPartitionViewOptions.Ddoc, *postPartitionViewOptions.View}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionViewOptions.Db,
+		"partition_key": *postPartitionViewOptions.PartitionKey,
+		"ddoc": *postPartitionViewOptions.Ddoc,
+		"view": *postPartitionViewOptions.View,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3395,11 +3452,15 @@ func (cloudant *CloudantV1) PostPartitionViewAsStream(postPartitionViewOptions *
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_design", "_view"}
-	pathParameters := []string{*postPartitionViewOptions.Db, *postPartitionViewOptions.PartitionKey, *postPartitionViewOptions.Ddoc, *postPartitionViewOptions.View}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionViewOptions.Db,
+		"partition_key": *postPartitionViewOptions.PartitionKey,
+		"ddoc": *postPartitionViewOptions.Ddoc,
+		"view": *postPartitionViewOptions.View,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3504,11 +3565,13 @@ func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPart
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_find"}
-	pathParameters := []string{*postPartitionFindOptions.Db, *postPartitionFindOptions.PartitionKey}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionFindOptions.Db,
+		"partition_key": *postPartitionFindOptions.PartitionKey,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_find`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3595,11 +3658,13 @@ func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *
 		return
 	}
 
-	pathSegments := []string{"", "_partition", "_find"}
-	pathParameters := []string{*postPartitionFindOptions.Db, *postPartitionFindOptions.PartitionKey}
+	pathParamsMap := map[string]string{
+		"db": *postPartitionFindOptions.Db,
+		"partition_key": *postPartitionFindOptions.PartitionKey,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_find`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3677,11 +3742,12 @@ func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_explain"}
-	pathParameters := []string{*postExplainOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postExplainOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_explain`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3771,11 +3837,12 @@ func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *
 		return
 	}
 
-	pathSegments := []string{"", "_find"}
-	pathParameters := []string{*postFindOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postFindOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_find`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3865,11 +3932,12 @@ func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (
 		return
 	}
 
-	pathSegments := []string{"", "_find"}
-	pathParameters := []string{*postFindOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postFindOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_find`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -3951,11 +4019,12 @@ func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *
 		return
 	}
 
-	pathSegments := []string{"", "_index"}
-	pathParameters := []string{*getIndexesInformationOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *getIndexesInformationOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4001,11 +4070,12 @@ func (cloudant *CloudantV1) PostIndex(postIndexOptions *PostIndexOptions) (resul
 		return
 	}
 
-	pathSegments := []string{"", "_index"}
-	pathParameters := []string{*postIndexOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postIndexOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4078,11 +4148,15 @@ func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_index/_design", "", ""}
-	pathParameters := []string{*deleteIndexOptions.Db, *deleteIndexOptions.Ddoc, *deleteIndexOptions.Type, *deleteIndexOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *deleteIndexOptions.Db,
+		"ddoc": *deleteIndexOptions.Ddoc,
+		"type": *deleteIndexOptions.Type,
+		"index": *deleteIndexOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index/_design/{ddoc}/{type}/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4125,11 +4199,8 @@ func (cloudant *CloudantV1) PostSearchAnalyze(postSearchAnalyzeOptions *PostSear
 		return
 	}
 
-	pathSegments := []string{"_search_analyze"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_search_analyze`, nil)
 	if err != nil {
 		return
 	}
@@ -4192,11 +4263,14 @@ func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (re
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_search"}
-	pathParameters := []string{*postSearchOptions.Db, *postSearchOptions.Ddoc, *postSearchOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *postSearchOptions.Db,
+		"ddoc": *postSearchOptions.Ddoc,
+		"index": *postSearchOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4307,11 +4381,14 @@ func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOpti
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_search"}
-	pathParameters := []string{*postSearchOptions.Db, *postSearchOptions.Ddoc, *postSearchOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *postSearchOptions.Db,
+		"ddoc": *postSearchOptions.Ddoc,
+		"index": *postSearchOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4409,11 +4486,14 @@ func (cloudant *CloudantV1) GetSearchInfo(getSearchInfoOptions *GetSearchInfoOpt
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_search_info"}
-	pathParameters := []string{*getSearchInfoOptions.Db, *getSearchInfoOptions.Ddoc, *getSearchInfoOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *getSearchInfoOptions.Db,
+		"ddoc": *getSearchInfoOptions.Ddoc,
+		"index": *getSearchInfoOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search_info/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4459,11 +4539,14 @@ func (cloudant *CloudantV1) GetGeo(getGeoOptions *GetGeoOptions) (result *GeoRes
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_geo"}
-	pathParameters := []string{*getGeoOptions.Db, *getGeoOptions.Ddoc, *getGeoOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *getGeoOptions.Db,
+		"ddoc": *getGeoOptions.Ddoc,
+		"index": *getGeoOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4555,11 +4638,14 @@ func (cloudant *CloudantV1) GetGeoAsStream(getGeoOptions *GetGeoOptions) (result
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_geo"}
-	pathParameters := []string{*getGeoOptions.Db, *getGeoOptions.Ddoc, *getGeoOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *getGeoOptions.Db,
+		"ddoc": *getGeoOptions.Ddoc,
+		"index": *getGeoOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4642,11 +4728,12 @@ func (cloudant *CloudantV1) PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanup
 		return
 	}
 
-	pathSegments := []string{"", "_geo_cleanup"}
-	pathParameters := []string{*postGeoCleanupOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postGeoCleanupOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_geo_cleanup`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4691,11 +4778,14 @@ func (cloudant *CloudantV1) GetGeoIndexInformation(getGeoIndexInformationOptions
 		return
 	}
 
-	pathSegments := []string{"", "_design", "_geo_info"}
-	pathParameters := []string{*getGeoIndexInformationOptions.Db, *getGeoIndexInformationOptions.Ddoc, *getGeoIndexInformationOptions.Index}
+	pathParamsMap := map[string]string{
+		"db": *getGeoIndexInformationOptions.Db,
+		"ddoc": *getGeoIndexInformationOptions.Ddoc,
+		"index": *getGeoIndexInformationOptions.Index,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo_info/{index}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4740,11 +4830,8 @@ func (cloudant *CloudantV1) GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOption
 		return
 	}
 
-	pathSegments := []string{"_db_updates"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_db_updates`, nil)
 	if err != nil {
 		return
 	}
@@ -4803,11 +4890,12 @@ func (cloudant *CloudantV1) HeadReplicationDocument(headReplicationDocumentOptio
 		return
 	}
 
-	pathSegments := []string{"_replicator"}
-	pathParameters := []string{*headReplicationDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"doc_id": *headReplicationDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4847,11 +4935,12 @@ func (cloudant *CloudantV1) HeadSchedulerJob(headSchedulerJobOptions *HeadSchedu
 		return
 	}
 
-	pathSegments := []string{"_scheduler/jobs"}
-	pathParameters := []string{*headSchedulerJobOptions.JobID}
+	pathParamsMap := map[string]string{
+		"job_id": *headSchedulerJobOptions.JobID,
+	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs/{job_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -4883,11 +4972,8 @@ func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOpt
 		return
 	}
 
-	pathSegments := []string{"_replicate"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicate`, nil)
 	if err != nil {
 		return
 	}
@@ -4941,11 +5027,12 @@ func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentO
 		return
 	}
 
-	pathSegments := []string{"_replicator"}
-	pathParameters := []string{*deleteReplicationDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"doc_id": *deleteReplicationDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5002,11 +5089,12 @@ func (cloudant *CloudantV1) GetReplicationDocument(getReplicationDocumentOptions
 		return
 	}
 
-	pathSegments := []string{"_replicator"}
-	pathParameters := []string{*getReplicationDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"doc_id": *getReplicationDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5093,11 +5181,12 @@ func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions
 		return
 	}
 
-	pathSegments := []string{"_replicator"}
-	pathParameters := []string{*putReplicationDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"doc_id": *putReplicationDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5162,11 +5251,8 @@ func (cloudant *CloudantV1) GetSchedulerDocs(getSchedulerDocsOptions *GetSchedul
 		return
 	}
 
-	pathSegments := []string{"_scheduler/docs"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs`, nil)
 	if err != nil {
 		return
 	}
@@ -5223,11 +5309,12 @@ func (cloudant *CloudantV1) GetSchedulerDocument(getSchedulerDocumentOptions *Ge
 		return
 	}
 
-	pathSegments := []string{"_scheduler/docs/_replicator"}
-	pathParameters := []string{*getSchedulerDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"doc_id": *getSchedulerDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5272,11 +5359,8 @@ func (cloudant *CloudantV1) GetSchedulerJobs(getSchedulerJobsOptions *GetSchedul
 		return
 	}
 
-	pathSegments := []string{"_scheduler/jobs"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs`, nil)
 	if err != nil {
 		return
 	}
@@ -5329,11 +5413,12 @@ func (cloudant *CloudantV1) GetSchedulerJob(getSchedulerJobOptions *GetScheduler
 		return
 	}
 
-	pathSegments := []string{"_scheduler/jobs"}
-	pathParameters := []string{*getSchedulerJobOptions.JobID}
+	pathParamsMap := map[string]string{
+		"job_id": *getSchedulerJobOptions.JobID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs/{job_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5375,11 +5460,8 @@ func (cloudant *CloudantV1) GetSessionInformation(getSessionInformationOptions *
 		return
 	}
 
-	pathSegments := []string{"_session"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_session`, nil)
 	if err != nil {
 		return
 	}
@@ -5422,11 +5504,8 @@ func (cloudant *CloudantV1) DeleteIamSession(deleteIamSessionOptions *DeleteIamS
 		return
 	}
 
-	pathSegments := []string{"_iam_session"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_iam_session`, nil)
 	if err != nil {
 		return
 	}
@@ -5468,11 +5547,8 @@ func (cloudant *CloudantV1) GetIamSessionInformation(getIamSessionInformationOpt
 		return
 	}
 
-	pathSegments := []string{"_iam_session"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_iam_session`, nil)
 	if err != nil {
 		return
 	}
@@ -5514,11 +5590,8 @@ func (cloudant *CloudantV1) PostIamSession(postIamSessionOptions *PostIamSession
 		return
 	}
 
-	pathSegments := []string{"_iam_session"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_iam_session`, nil)
 	if err != nil {
 		return
 	}
@@ -5576,11 +5649,12 @@ func (cloudant *CloudantV1) GetSecurity(getSecurityOptions *GetSecurityOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_security"}
-	pathParameters := []string{*getSecurityOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *getSecurityOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_security`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5628,11 +5702,12 @@ func (cloudant *CloudantV1) PutSecurity(putSecurityOptions *PutSecurityOptions) 
 		return
 	}
 
-	pathSegments := []string{"", "_security"}
-	pathParameters := []string{*putSecurityOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *putSecurityOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_security`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5695,11 +5770,8 @@ func (cloudant *CloudantV1) PostApiKeys(postApiKeysOptions *PostApiKeysOptions) 
 		return
 	}
 
-	pathSegments := []string{"_api/v2/api_keys"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/api_keys`, nil)
 	if err != nil {
 		return
 	}
@@ -5746,11 +5818,12 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurity
 		return
 	}
 
-	pathSegments := []string{"_api/v2/db", "_security"}
-	pathParameters := []string{*putCloudantSecurityConfigurationOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *putCloudantSecurityConfigurationOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/db/{db}/_security`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5812,11 +5885,8 @@ func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCor
 		return
 	}
 
-	pathSegments := []string{"_api/v2/user/config/cors"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/config/cors`, nil)
 	if err != nil {
 		return
 	}
@@ -5859,11 +5929,8 @@ func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *Pu
 		return
 	}
 
-	pathSegments := []string{"_api/v2/user/config/cors"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/config/cors`, nil)
 	if err != nil {
 		return
 	}
@@ -5927,11 +5994,14 @@ func (cloudant *CloudantV1) HeadAttachment(headAttachmentOptions *HeadAttachment
 		return
 	}
 
-	pathSegments := []string{"", "", ""}
-	pathParameters := []string{*headAttachmentOptions.Db, *headAttachmentOptions.DocID, *headAttachmentOptions.AttachmentName}
+	pathParamsMap := map[string]string{
+		"db": *headAttachmentOptions.Db,
+		"doc_id": *headAttachmentOptions.DocID,
+		"attachment_name": *headAttachmentOptions.AttachmentName,
+	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -5978,11 +6048,14 @@ func (cloudant *CloudantV1) DeleteAttachment(deleteAttachmentOptions *DeleteAtta
 		return
 	}
 
-	pathSegments := []string{"", "", ""}
-	pathParameters := []string{*deleteAttachmentOptions.Db, *deleteAttachmentOptions.DocID, *deleteAttachmentOptions.AttachmentName}
+	pathParamsMap := map[string]string{
+		"db": *deleteAttachmentOptions.Db,
+		"doc_id": *deleteAttachmentOptions.DocID,
+		"attachment_name": *deleteAttachmentOptions.AttachmentName,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6040,11 +6113,14 @@ func (cloudant *CloudantV1) GetAttachment(getAttachmentOptions *GetAttachmentOpt
 		return
 	}
 
-	pathSegments := []string{"", "", ""}
-	pathParameters := []string{*getAttachmentOptions.Db, *getAttachmentOptions.DocID, *getAttachmentOptions.AttachmentName}
+	pathParamsMap := map[string]string{
+		"db": *getAttachmentOptions.Db,
+		"doc_id": *getAttachmentOptions.DocID,
+		"attachment_name": *getAttachmentOptions.AttachmentName,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6103,11 +6179,14 @@ func (cloudant *CloudantV1) PutAttachment(putAttachmentOptions *PutAttachmentOpt
 		return
 	}
 
-	pathSegments := []string{"", "", ""}
-	pathParameters := []string{*putAttachmentOptions.Db, *putAttachmentOptions.DocID, *putAttachmentOptions.AttachmentName}
+	pathParamsMap := map[string]string{
+		"db": *putAttachmentOptions.Db,
+		"doc_id": *putAttachmentOptions.DocID,
+		"attachment_name": *putAttachmentOptions.AttachmentName,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6169,11 +6248,13 @@ func (cloudant *CloudantV1) DeleteLocalDocument(deleteLocalDocumentOptions *Dele
 		return
 	}
 
-	pathSegments := []string{"", "_local"}
-	pathParameters := []string{*deleteLocalDocumentOptions.Db, *deleteLocalDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *deleteLocalDocumentOptions.Db,
+		"doc_id": *deleteLocalDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6224,11 +6305,13 @@ func (cloudant *CloudantV1) GetLocalDocument(getLocalDocumentOptions *GetLocalDo
 		return
 	}
 
-	pathSegments := []string{"", "_local"}
-	pathParameters := []string{*getLocalDocumentOptions.Db, *getLocalDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *getLocalDocumentOptions.Db,
+		"doc_id": *getLocalDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6298,11 +6381,13 @@ func (cloudant *CloudantV1) PutLocalDocument(putLocalDocumentOptions *PutLocalDo
 		putLocalDocumentOptions.SetContentType("application/json")
 	}
 
-	pathSegments := []string{"", "_local"}
-	pathParameters := []string{*putLocalDocumentOptions.Db, *putLocalDocumentOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *putLocalDocumentOptions.Db,
+		"doc_id": *putLocalDocumentOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6363,11 +6448,12 @@ func (cloudant *CloudantV1) PostLocalDocs(postLocalDocsOptions *PostLocalDocsOpt
 		return
 	}
 
-	pathSegments := []string{"", "_local_docs"}
-	pathParameters := []string{*postLocalDocsOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postLocalDocsOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local_docs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6463,11 +6549,12 @@ func (cloudant *CloudantV1) PostLocalDocsQueries(postLocalDocsQueriesOptions *Po
 		return
 	}
 
-	pathSegments := []string{"", "_local_docs/queries"}
-	pathParameters := []string{*postLocalDocsQueriesOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postLocalDocsQueriesOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6529,11 +6616,12 @@ func (cloudant *CloudantV1) PostEnsureFullCommit(postEnsureFullCommitOptions *Po
 		return
 	}
 
-	pathSegments := []string{"", "_ensure_full_commit"}
-	pathParameters := []string{*postEnsureFullCommitOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postEnsureFullCommitOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_ensure_full_commit`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6579,11 +6667,12 @@ func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingR
 		return
 	}
 
-	pathSegments := []string{"", "_missing_revs"}
-	pathParameters := []string{*postMissingRevsOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postMissingRevsOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_missing_revs`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6639,11 +6728,12 @@ func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOption
 		return
 	}
 
-	pathSegments := []string{"", "_revs_diff"}
-	pathParameters := []string{*postRevsDiffOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *postRevsDiffOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_revs_diff`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6697,11 +6787,12 @@ func (cloudant *CloudantV1) GetShardsInformation(getShardsInformationOptions *Ge
 		return
 	}
 
-	pathSegments := []string{"", "_shards"}
-	pathParameters := []string{*getShardsInformationOptions.Db}
+	pathParamsMap := map[string]string{
+		"db": *getShardsInformationOptions.Db,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_shards`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6748,11 +6839,13 @@ func (cloudant *CloudantV1) GetDocumentShardsInfo(getDocumentShardsInfoOptions *
 		return
 	}
 
-	pathSegments := []string{"", "_shards"}
-	pathParameters := []string{*getDocumentShardsInfoOptions.Db, *getDocumentShardsInfoOptions.DocID}
+	pathParamsMap := map[string]string{
+		"db": *getDocumentShardsInfoOptions.Db,
+		"doc_id": *getDocumentShardsInfoOptions.DocID,
+	}
 
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_shards/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
 	}
@@ -6796,11 +6889,8 @@ func (cloudant *CloudantV1) GetActiveTasks(getActiveTasksOptions *GetActiveTasks
 		return
 	}
 
-	pathSegments := []string{"_active_tasks"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_active_tasks`, nil)
 	if err != nil {
 		return
 	}
@@ -6843,11 +6933,8 @@ func (cloudant *CloudantV1) GetUpInformation(getUpInformationOptions *GetUpInfor
 		return
 	}
 
-	pathSegments := []string{"_up"}
-	pathParameters := []string{}
-
 	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_up`, nil)
 	if err != nil {
 		return
 	}
@@ -7958,13 +8045,13 @@ func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (e
 // DeleteAttachmentOptions : The DeleteAttachment options.
 type DeleteAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required"`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -8041,7 +8128,7 @@ func (options *DeleteAttachmentOptions) SetHeaders(param map[string]string) *Del
 // DeleteDatabaseOptions : The DeleteDatabase options.
 type DeleteDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -8069,11 +8156,11 @@ func (options *DeleteDatabaseOptions) SetHeaders(param map[string]string) *Delet
 // DeleteDesignDocumentOptions : The DeleteDesignDocument options.
 type DeleteDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -8143,10 +8230,10 @@ func (options *DeleteDesignDocumentOptions) SetHeaders(param map[string]string) 
 // DeleteDocumentOptions : The DeleteDocument options.
 type DeleteDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -8234,17 +8321,17 @@ func (options *DeleteIamSessionOptions) SetHeaders(param map[string]string) *Del
 // DeleteIndexOptions : The DeleteIndex options.
 type DeleteIndexOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index type.
-	Type *string `json:"type" validate:"required"`
+	Type *string `json:"type" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required"`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -8301,10 +8388,10 @@ func (options *DeleteIndexOptions) SetHeaders(param map[string]string) *DeleteIn
 // DeleteLocalDocumentOptions : The DeleteLocalDocument options.
 type DeleteLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
@@ -8356,7 +8443,7 @@ func (options *DeleteLocalDocumentOptions) SetHeaders(param map[string]string) *
 // DeleteReplicationDocumentOptions : The DeleteReplicationDocument options.
 type DeleteReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -9800,13 +9887,13 @@ func (options *GetAllDbsOptions) SetHeaders(param map[string]string) *GetAllDbsO
 // GetAttachmentOptions : The GetAttachment options.
 type GetAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required"`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// The type of the response:  or *_/_*.
 	Accept *string `json:"Accept,omitempty"`
@@ -9912,7 +9999,7 @@ func (options *GetCorsInformationOptions) SetHeaders(param map[string]string) *G
 // GetDatabaseInformationOptions : The GetDatabaseInformation options.
 type GetDatabaseInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10008,11 +10095,11 @@ func (options *GetDbUpdatesOptions) SetHeaders(param map[string]string) *GetDbUp
 // GetDesignDocumentInformationOptions : The GetDesignDocumentInformation options.
 type GetDesignDocumentInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10047,11 +10134,11 @@ func (options *GetDesignDocumentInformationOptions) SetHeaders(param map[string]
 // GetDesignDocumentOptions : The GetDesignDocument options.
 type GetDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -10209,10 +10296,10 @@ func (options *GetDesignDocumentOptions) SetHeaders(param map[string]string) *Ge
 // GetDocumentOptions : The GetDocument options.
 type GetDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -10370,10 +10457,10 @@ func (options *GetDocumentOptions) SetHeaders(param map[string]string) *GetDocum
 // GetDocumentShardsInfoOptions : The GetDocumentShardsInfo options.
 type GetDocumentShardsInfoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10408,14 +10495,14 @@ func (options *GetDocumentShardsInfoOptions) SetHeaders(param map[string]string)
 // GetGeoIndexInformationOptions : The GetGeoIndexInformation options.
 type GetGeoIndexInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required"`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10457,14 +10544,14 @@ func (options *GetGeoIndexInformationOptions) SetHeaders(param map[string]string
 // GetGeoOptions : The GetGeo options.
 type GetGeoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required"`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Query parameter to specify a geospatial query bounding box with two latitude,longitude coordinates for the
 	// lower-left and upper-right corners. An example is `-11.05987446,12.28339928,-101.05987446,62.28339928`.
@@ -10702,7 +10789,7 @@ func (options *GetIamSessionInformationOptions) SetHeaders(param map[string]stri
 // GetIndexesInformationOptions : The GetIndexesInformation options.
 type GetIndexesInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10730,10 +10817,10 @@ func (options *GetIndexesInformationOptions) SetHeaders(param map[string]string)
 // GetLocalDocumentOptions : The GetLocalDocument options.
 type GetLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// The type of the response: application/json, multipart/mixed, multipart/related, or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -10842,10 +10929,10 @@ func (options *GetMembershipInformationOptions) SetHeaders(param map[string]stri
 // GetPartitionInformationOptions : The GetPartitionInformation options.
 type GetPartitionInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required"`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10880,7 +10967,7 @@ func (options *GetPartitionInformationOptions) SetHeaders(param map[string]strin
 // GetReplicationDocumentOptions : The GetReplicationDocument options.
 type GetReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -11088,7 +11175,7 @@ func (options *GetSchedulerDocsOptions) SetHeaders(param map[string]string) *Get
 // GetSchedulerDocumentOptions : The GetSchedulerDocument options.
 type GetSchedulerDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11116,7 +11203,7 @@ func (options *GetSchedulerDocumentOptions) SetHeaders(param map[string]string) 
 // GetSchedulerJobOptions : The GetSchedulerJob options.
 type GetSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
-	JobID *string `json:"job_id" validate:"required"`
+	JobID *string `json:"job_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11179,14 +11266,14 @@ func (options *GetSchedulerJobsOptions) SetHeaders(param map[string]string) *Get
 // GetSearchInfoOptions : The GetSearchInfo options.
 type GetSearchInfoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required"`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11228,7 +11315,7 @@ func (options *GetSearchInfoOptions) SetHeaders(param map[string]string) *GetSea
 // GetSecurityOptions : The GetSecurity options.
 type GetSecurityOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11292,7 +11379,7 @@ func (options *GetSessionInformationOptions) SetHeaders(param map[string]string)
 // GetShardsInformationOptions : The GetShardsInformation options.
 type GetShardsInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11364,13 +11451,13 @@ func (options *GetUuidsOptions) SetHeaders(param map[string]string) *GetUuidsOpt
 // HeadAttachmentOptions : The HeadAttachment options.
 type HeadAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required"`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -11439,7 +11526,7 @@ func (options *HeadAttachmentOptions) SetHeaders(param map[string]string) *HeadA
 // HeadDatabaseOptions : The HeadDatabase options.
 type HeadDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11467,11 +11554,11 @@ func (options *HeadDatabaseOptions) SetHeaders(param map[string]string) *HeadDat
 // HeadDesignDocumentOptions : The HeadDesignDocument options.
 type HeadDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -11515,10 +11602,10 @@ func (options *HeadDesignDocumentOptions) SetHeaders(param map[string]string) *H
 // HeadDocumentOptions : The HeadDocument options.
 type HeadDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -11580,7 +11667,7 @@ func (options *HeadDocumentOptions) SetHeaders(param map[string]string) *HeadDoc
 // HeadReplicationDocumentOptions : The HeadReplicationDocument options.
 type HeadReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -11617,7 +11704,7 @@ func (options *HeadReplicationDocumentOptions) SetHeaders(param map[string]strin
 // HeadSchedulerJobOptions : The HeadSchedulerJob options.
 type HeadSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
-	JobID *string `json:"job_id" validate:"required"`
+	JobID *string `json:"job_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12150,7 +12237,7 @@ func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result int
 // PostAllDocsOptions : The PostAllDocs options.
 type PostAllDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -12298,7 +12385,7 @@ func (options *PostAllDocsOptions) SetHeaders(param map[string]string) *PostAllD
 // PostAllDocsQueriesOptions : The PostAllDocsQueries options.
 type PostAllDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
@@ -12354,7 +12441,7 @@ func (options *PostApiKeysOptions) SetHeaders(param map[string]string) *PostApiK
 // PostBulkDocsOptions : The PostBulkDocs options.
 type PostBulkDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postBulkDocs.
 	BulkDocs *BulkDocs `json:"bulkDocs,omitempty"`
@@ -12400,7 +12487,7 @@ func (options *PostBulkDocsOptions) SetHeaders(param map[string]string) *PostBul
 // PostBulkGetOptions : The PostBulkGet options.
 type PostBulkGetOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// List of document items to get in bulk.
 	Docs []BulkGetQueryDocument `json:"docs,omitempty"`
@@ -12474,7 +12561,7 @@ func (options *PostBulkGetOptions) SetHeaders(param map[string]string) *PostBulk
 // PostChangesOptions : The PostChanges options.
 type PostChangesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Schema for a list of document IDs.
 	DocIds []string `json:"doc_ids,omitempty"`
@@ -12748,7 +12835,7 @@ func (options *PostDbsInfoOptions) SetHeaders(param map[string]string) *PostDbsI
 // PostDesignDocsOptions : The PostDesignDocs options.
 type PostDesignDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -12905,7 +12992,7 @@ func (options *PostDesignDocsOptions) SetHeaders(param map[string]string) *PostD
 // PostDesignDocsQueriesOptions : The PostDesignDocsQueries options.
 type PostDesignDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -12952,7 +13039,7 @@ func (options *PostDesignDocsQueriesOptions) SetHeaders(param map[string]string)
 // PostDocumentOptions : The PostDocument options.
 type PostDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -13024,7 +13111,7 @@ func (options *PostDocumentOptions) SetHeaders(param map[string]string) *PostDoc
 // PostEnsureFullCommitOptions : The PostEnsureFullCommit options.
 type PostEnsureFullCommitOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13052,7 +13139,7 @@ func (options *PostEnsureFullCommitOptions) SetHeaders(param map[string]string) 
 // PostExplainOptions : The PostExplain options.
 type PostExplainOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -13232,7 +13319,7 @@ func (options *PostExplainOptions) SetHeaders(param map[string]string) *PostExpl
 // PostFindOptions : The PostFind options.
 type PostFindOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -13412,7 +13499,7 @@ func (options *PostFindOptions) SetHeaders(param map[string]string) *PostFindOpt
 // PostGeoCleanupOptions : The PostGeoCleanup options.
 type PostGeoCleanupOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13466,7 +13553,7 @@ func (options *PostIamSessionOptions) SetHeaders(param map[string]string) *PostI
 // PostIndexOptions : The PostIndex options.
 type PostIndexOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Name of the design document in which the index will be created.
 	Ddoc *string `json:"ddoc,omitempty"`
@@ -13594,7 +13681,7 @@ func (options *PostIndexOptions) SetHeaders(param map[string]string) *PostIndexO
 // PostLocalDocsOptions : The PostLocalDocs options.
 type PostLocalDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -13751,7 +13838,7 @@ func (options *PostLocalDocsOptions) SetHeaders(param map[string]string) *PostLo
 // PostLocalDocsQueriesOptions : The PostLocalDocsQueries options.
 type PostLocalDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -13798,7 +13885,7 @@ func (options *PostLocalDocsQueriesOptions) SetHeaders(param map[string]string) 
 // PostMissingRevsOptions : The PostMissingRevs options.
 type PostMissingRevsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
 	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
@@ -13835,10 +13922,10 @@ func (options *PostMissingRevsOptions) SetHeaders(param map[string]string) *Post
 // PostPartitionAllDocsOptions : The PostPartitionAllDocs options.
 type PostPartitionAllDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required"`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -13993,10 +14080,10 @@ func (options *PostPartitionAllDocsOptions) SetHeaders(param map[string]string) 
 // PostPartitionFindOptions : The PostPartitionFind options.
 type PostPartitionFindOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required"`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -14171,17 +14258,17 @@ func (options *PostPartitionFindOptions) SetHeaders(param map[string]string) *Po
 // PostPartitionSearchOptions : The PostPartitionSearch options.
 type PostPartitionSearchOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required"`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required"`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -14353,17 +14440,17 @@ func (options *PostPartitionSearchOptions) SetHeaders(param map[string]string) *
 // PostPartitionViewOptions : The PostPartitionView options.
 type PostPartitionViewOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required"`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"view" validate:"required"`
+	View *string `json:"view" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -14632,7 +14719,7 @@ func (options *PostReplicateOptions) SetHeaders(param map[string]string) *PostRe
 // PostRevsDiffOptions : The PostRevsDiff options.
 type PostRevsDiffOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
 	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
@@ -14749,14 +14836,14 @@ func (options *PostSearchAnalyzeOptions) SetHeaders(param map[string]string) *Po
 // PostSearchOptions : The PostSearch options.
 type PostSearchOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required"`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -14986,14 +15073,14 @@ func (options *PostSearchOptions) SetHeaders(param map[string]string) *PostSearc
 // PostViewOptions : The PostView options.
 type PostViewOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"view" validate:"required"`
+	View *string `json:"view" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -15229,14 +15316,14 @@ func (options *PostViewOptions) SetHeaders(param map[string]string) *PostViewOpt
 // PostViewQueriesOptions : The PostViewQueries options.
 type PostViewQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"view" validate:"required"`
+	View *string `json:"view" validate:"required,ne="`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular view request.
@@ -15288,13 +15375,13 @@ func (options *PostViewQueriesOptions) SetHeaders(param map[string]string) *Post
 // PutAttachmentOptions : The PutAttachment options.
 type PutAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required"`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// HTTP request body for attachment operations.
 	Attachment io.ReadCloser `json:"attachment" validate:"required"`
@@ -15374,7 +15461,7 @@ func (options *PutAttachmentOptions) SetHeaders(param map[string]string) *PutAtt
 // PutCloudantSecurityConfigurationOptions : The PutCloudantSecurityConfiguration options.
 type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
@@ -15498,7 +15585,7 @@ func (options *PutCorsConfigurationOptions) SetHeaders(param map[string]string) 
 // PutDatabaseOptions : The PutDatabase options.
 type PutDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Query parameter to specify whether to enable database partitions when creating a database.
 	Partitioned *bool `json:"partitioned,omitempty"`
@@ -15545,11 +15632,11 @@ func (options *PutDatabaseOptions) SetHeaders(param map[string]string) *PutDatab
 // PutDesignDocumentOptions : The PutDesignDocument options.
 type PutDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// HTTP request body for DesignDocument operations.
 	DesignDocument *DesignDocument `json:"designDocument,omitempty"`
@@ -15639,10 +15726,10 @@ func (options *PutDesignDocumentOptions) SetHeaders(param map[string]string) *Pu
 // PutDocumentOptions : The PutDocument options.
 type PutDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -15750,10 +15837,10 @@ func (options *PutDocumentOptions) SetHeaders(param map[string]string) *PutDocum
 // PutLocalDocumentOptions : The PutLocalDocument options.
 type PutLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -15832,7 +15919,7 @@ func (options *PutLocalDocumentOptions) SetHeaders(param map[string]string) *Put
 // PutReplicationDocumentOptions : The PutReplicationDocument options.
 type PutReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for replication operations.
 	ReplicationDocument *ReplicationDocument `json:"replicationDocument,omitempty"`
@@ -15915,7 +16002,7 @@ func (options *PutReplicationDocumentOptions) SetHeaders(param map[string]string
 // PutSecurityOptions : The PutSecurity options.
 type PutSecurityOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required"`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
