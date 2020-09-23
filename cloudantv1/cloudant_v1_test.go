@@ -142,7 +142,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getServerInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getServerInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -180,7 +180,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getServerInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getServerInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -244,7 +244,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getMembershipInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -282,7 +282,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getMembershipInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -346,7 +346,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getUuidsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getUuidsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for count query parameter
@@ -388,7 +388,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getUuidsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getUuidsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for count query parameter
@@ -558,7 +558,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(headDatabasePath))
+					Expect(req.URL.EscapedPath()).To(Equal(headDatabasePath))
 					Expect(req.Method).To(Equal("HEAD"))
 					res.WriteHeader(200)
 				}))
@@ -626,7 +626,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getAllDbsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getAllDbsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for descending query parameter
@@ -713,7 +713,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDbsInfoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDbsInfoPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -752,7 +752,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDbsInfoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDbsInfoPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -818,7 +818,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteDatabasePath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDatabasePath))
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -857,7 +857,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteDatabasePath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDatabasePath))
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -930,7 +930,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDatabaseInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDatabaseInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -969,7 +969,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDatabaseInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDatabaseInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -1042,7 +1042,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putDatabasePath))
+					Expect(req.URL.EscapedPath()).To(Equal(putDatabasePath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// TODO: Add check for partitioned query parameter
@@ -1089,7 +1089,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putDatabasePath))
+					Expect(req.URL.EscapedPath()).To(Equal(putDatabasePath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// TODO: Add check for partitioned query parameter
@@ -1172,7 +1172,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postChangesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postChangesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -1268,7 +1268,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postChangesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postChangesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -1417,7 +1417,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postChangesAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postChangesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -1672,7 +1672,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(headDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(headDocumentPath))
 					Expect(req.Method).To(Equal("HEAD"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -1754,7 +1754,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDocumentPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -1806,8 +1806,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
 				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
@@ -1836,7 +1836,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDocumentPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -1894,8 +1894,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
 				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
@@ -1952,8 +1952,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
 				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
@@ -1991,7 +1991,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postAllDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2043,7 +2043,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postAllDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2143,7 +2143,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postAllDocsAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2248,7 +2248,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postAllDocsQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2304,7 +2304,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postAllDocsQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2412,7 +2412,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postAllDocsQueriesAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsQueriesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2525,7 +2525,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -2573,8 +2573,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
 				bulkDocsModel := new(cloudantv1.BulkDocs)
@@ -2606,7 +2606,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -2660,8 +2660,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
 				bulkDocsModel := new(cloudantv1.BulkDocs)
@@ -2721,8 +2721,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
 				bulkDocsModel := new(cloudantv1.BulkDocs)
@@ -2763,7 +2763,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkGetPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// TODO: Add check for attachments query parameter
@@ -2793,9 +2793,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -2826,7 +2826,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkGetPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// TODO: Add check for attachments query parameter
@@ -2862,9 +2862,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -2893,9 +2893,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -2936,7 +2936,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkGetAsMixedPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetAsMixedPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// TODO: Add check for attachments query parameter
@@ -2972,9 +2972,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3003,9 +3003,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3046,7 +3046,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkGetAsRelatedPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetAsRelatedPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// TODO: Add check for attachments query parameter
@@ -3082,9 +3082,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3113,9 +3113,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3156,7 +3156,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postBulkGetAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// TODO: Add check for attachments query parameter
@@ -3192,9 +3192,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3229,9 +3229,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3271,7 +3271,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -3320,7 +3320,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -3407,7 +3407,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -3491,7 +3491,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -3624,7 +3624,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentAsMixedPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentAsMixedPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -3757,7 +3757,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentAsRelatedPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentAsRelatedPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -3890,7 +3890,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentAsStreamPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4028,7 +4028,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -4087,8 +4087,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
 				putDocumentOptionsModel := new(cloudantv1.PutDocumentOptions)
@@ -4121,7 +4121,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -4186,8 +4186,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
 				putDocumentOptionsModel := new(cloudantv1.PutDocumentOptions)
@@ -4248,8 +4248,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
 				putDocumentOptionsModel := new(cloudantv1.PutDocumentOptions)
@@ -4392,7 +4392,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(headDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(headDesignDocumentPath))
 					Expect(req.Method).To(Equal("HEAD"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4465,7 +4465,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDesignDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4514,7 +4514,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDesignDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4601,7 +4601,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDesignDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4685,7 +4685,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDesignDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4817,7 +4817,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putDesignDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -4913,11 +4913,11 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
 				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -4949,7 +4949,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putDesignDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putDesignDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -5051,11 +5051,11 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
 				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -5154,11 +5154,11 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
 				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -5199,7 +5199,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDesignDocumentInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDesignDocumentInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -5239,7 +5239,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDesignDocumentInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDesignDocumentInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -5314,7 +5314,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDesignDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -5369,7 +5369,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDesignDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -5472,7 +5472,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDesignDocsQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -5531,7 +5531,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postDesignDocsQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -5742,7 +5742,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postViewPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postViewPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -5803,7 +5803,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postViewPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postViewPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -5921,7 +5921,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postViewAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postViewAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6044,7 +6044,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postViewQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postViewQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6109,7 +6109,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postViewQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postViewQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6235,7 +6235,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postViewQueriesAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postViewQueriesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6466,7 +6466,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getPartitionInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getPartitionInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6506,7 +6506,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getPartitionInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getPartitionInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6581,7 +6581,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionAllDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionAllDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6634,7 +6634,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionAllDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionAllDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6736,7 +6736,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionAllDocsAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionAllDocsAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6843,7 +6843,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionSearchPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionSearchPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6872,7 +6872,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -6897,7 +6897,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionSearchPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionSearchPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6932,7 +6932,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -6966,7 +6966,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -7001,7 +7001,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionSearchAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionSearchAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7036,7 +7036,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -7076,7 +7076,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -7110,7 +7110,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionViewPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionViewPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7172,7 +7172,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionViewPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionViewPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7292,7 +7292,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionViewAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionViewAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7417,7 +7417,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionFindPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionFindPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7468,7 +7468,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionFindPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionFindPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7566,7 +7566,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postPartitionFindAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionFindAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7769,7 +7769,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postExplainPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postExplainPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7820,7 +7820,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postExplainPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postExplainPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7917,7 +7917,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postFindPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postFindPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7968,7 +7968,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postFindPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postFindPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8066,7 +8066,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postFindAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postFindAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8169,7 +8169,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getIndexesInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getIndexesInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8208,7 +8208,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getIndexesInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getIndexesInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8281,7 +8281,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postIndexPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postIndexPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8350,7 +8350,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postIndexPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postIndexPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8483,7 +8483,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteIndexPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteIndexPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8525,7 +8525,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteIndexPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteIndexPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8704,7 +8704,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postSearchAnalyzePath))
+					Expect(req.URL.EscapedPath()).To(Equal(postSearchAnalyzePath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8744,7 +8744,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postSearchAnalyzePath))
+					Expect(req.URL.EscapedPath()).To(Equal(postSearchAnalyzePath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8812,7 +8812,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postSearchPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postSearchPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8840,7 +8840,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -8871,7 +8871,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postSearchPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postSearchPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8905,7 +8905,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -8944,7 +8944,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -8985,7 +8985,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postSearchAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postSearchAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -9019,7 +9019,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -9064,7 +9064,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
@@ -9104,7 +9104,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSearchInfoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSearchInfoPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -9145,7 +9145,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSearchInfoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSearchInfoPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -9322,7 +9322,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getGeoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getGeoPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
 
@@ -9417,7 +9417,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getGeoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getGeoPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
 
@@ -9564,7 +9564,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getGeoAsStreamPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getGeoAsStreamPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
 
@@ -9716,7 +9716,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postGeoCleanupPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postGeoCleanupPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
@@ -9755,7 +9755,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postGeoCleanupPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postGeoCleanupPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
@@ -9828,7 +9828,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getGeoIndexInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getGeoIndexInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -9869,7 +9869,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getGeoIndexInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getGeoIndexInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -10046,7 +10046,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDbUpdatesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDbUpdatesPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
 
@@ -10098,7 +10098,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDbUpdatesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDbUpdatesPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
 
@@ -10281,7 +10281,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(headReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(headReplicationDocumentPath))
 					Expect(req.Method).To(Equal("HEAD"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -10353,7 +10353,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(headSchedulerJobPath))
+					Expect(req.URL.EscapedPath()).To(Equal(headSchedulerJobPath))
 					Expect(req.Method).To(Equal("HEAD"))
 					res.WriteHeader(200)
 				}))
@@ -10420,7 +10420,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postReplicatePath))
+					Expect(req.URL.EscapedPath()).To(Equal(postReplicatePath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -10516,8 +10516,8 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
 				postReplicateOptionsModel := new(cloudantv1.PostReplicateOptions)
@@ -10543,7 +10543,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postReplicatePath))
+					Expect(req.URL.EscapedPath()).To(Equal(postReplicatePath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -10645,8 +10645,8 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
 				postReplicateOptionsModel := new(cloudantv1.PostReplicateOptions)
@@ -10748,8 +10748,8 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
 				postReplicateOptionsModel := new(cloudantv1.PostReplicateOptions)
@@ -10777,7 +10777,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteReplicationDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -10825,7 +10825,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteReplicationDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -10910,7 +10910,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getReplicationDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -10993,7 +10993,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getReplicationDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -11123,7 +11123,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putReplicationDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -11187,12 +11187,12 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("http://myserver.example:5984/foo-db")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
 				userContextModel.Roles = []string{"_reader"}
 
 				// Construct an instance of the ReplicationDocument model
@@ -11206,30 +11206,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(0))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(0))
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
 				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = make(map[string]interface{})
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
-				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.SourceProxy = core.StringPtr("http://my-source-proxy.example:8888")
 				replicationDocumentModel.Target = replicationDatabaseModel
-				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.TargetProxy = core.StringPtr("http://my-target-proxy.example:8888")
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
 				putReplicationDocumentOptionsModel := new(cloudantv1.PutReplicationDocumentOptions)
@@ -11260,7 +11260,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putReplicationDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putReplicationDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -11330,12 +11330,12 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("http://myserver.example:5984/foo-db")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
 				userContextModel.Roles = []string{"_reader"}
 
 				// Construct an instance of the ReplicationDocument model
@@ -11349,30 +11349,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(0))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(0))
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
 				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = make(map[string]interface{})
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
-				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.SourceProxy = core.StringPtr("http://my-source-proxy.example:8888")
 				replicationDocumentModel.Target = replicationDatabaseModel
-				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.TargetProxy = core.StringPtr("http://my-target-proxy.example:8888")
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
 				putReplicationDocumentOptionsModel := new(cloudantv1.PutReplicationDocumentOptions)
@@ -11438,12 +11438,12 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("http://myserver.example:5984/foo-db")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
 				userContextModel.Roles = []string{"_reader"}
 
 				// Construct an instance of the ReplicationDocument model
@@ -11457,30 +11457,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(0))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(0))
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
 				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = make(map[string]interface{})
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
-				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.SourceProxy = core.StringPtr("http://my-source-proxy.example:8888")
 				replicationDocumentModel.Target = replicationDatabaseModel
-				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.TargetProxy = core.StringPtr("http://my-target-proxy.example:8888")
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
 				putReplicationDocumentOptionsModel := new(cloudantv1.PutReplicationDocumentOptions)
@@ -11520,7 +11520,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for limit query parameter
@@ -11567,7 +11567,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for limit query parameter
@@ -11643,7 +11643,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -11682,7 +11682,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -11755,7 +11755,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerJobsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for limit query parameter
@@ -11801,7 +11801,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerJobsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for limit query parameter
@@ -11875,7 +11875,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerJobPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -11914,7 +11914,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSchedulerJobPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12087,7 +12087,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSessionInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSessionInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12125,7 +12125,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSessionInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSessionInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12189,7 +12189,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteIamSessionPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteIamSessionPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12227,7 +12227,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteIamSessionPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteIamSessionPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12291,7 +12291,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getIamSessionInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getIamSessionInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12329,7 +12329,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getIamSessionInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getIamSessionInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12393,7 +12393,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postIamSessionPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postIamSessionPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12432,7 +12432,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postIamSessionPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postIamSessionPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12598,7 +12598,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSecurityPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSecurityPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12637,7 +12637,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getSecurityPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getSecurityPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12710,7 +12710,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putSecurityPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putSecurityPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12758,7 +12758,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putSecurityPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putSecurityPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12849,7 +12849,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postApiKeysPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postApiKeysPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -12887,7 +12887,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postApiKeysPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postApiKeysPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -12951,7 +12951,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putCloudantSecurityConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCloudantSecurityConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -12999,7 +12999,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putCloudantSecurityConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCloudantSecurityConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -13190,7 +13190,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getCorsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getCorsInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -13228,7 +13228,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getCorsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getCorsInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -13292,7 +13292,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putCorsConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCorsConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -13333,7 +13333,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putCorsConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCorsConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -13504,7 +13504,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(headAttachmentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(headAttachmentPath))
 					Expect(req.Method).To(Equal("HEAD"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -13587,7 +13587,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteAttachmentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteAttachmentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -13637,7 +13637,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteAttachmentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteAttachmentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -13727,7 +13727,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getAttachmentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getAttachmentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -13824,7 +13824,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putAttachmentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putAttachmentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -13875,7 +13875,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putAttachmentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putAttachmentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
@@ -14066,7 +14066,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteLocalDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteLocalDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
@@ -14109,7 +14109,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(deleteLocalDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(deleteLocalDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
@@ -14188,7 +14188,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getLocalDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getLocalDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14247,7 +14247,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getLocalDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getLocalDocumentPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14347,7 +14347,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putLocalDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putLocalDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14399,8 +14399,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
 				putLocalDocumentOptionsModel := new(cloudantv1.PutLocalDocumentOptions)
@@ -14430,7 +14430,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(putLocalDocumentPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putLocalDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14488,8 +14488,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
 				putLocalDocumentOptionsModel := new(cloudantv1.PutLocalDocumentOptions)
@@ -14547,8 +14547,8 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.Attachments["foo"] = *attachmentModel
 				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
 				putLocalDocumentOptionsModel := new(cloudantv1.PutLocalDocumentOptions)
@@ -14587,7 +14587,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postLocalDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postLocalDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14642,7 +14642,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postLocalDocsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postLocalDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14745,7 +14745,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postLocalDocsQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postLocalDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -14804,7 +14804,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postLocalDocsQueriesPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postLocalDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
@@ -15015,7 +15015,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postEnsureFullCommitPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postEnsureFullCommitPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -15054,7 +15054,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postEnsureFullCommitPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postEnsureFullCommitPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -15127,7 +15127,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postMissingRevsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postMissingRevsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15167,7 +15167,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postMissingRevsPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postMissingRevsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15242,7 +15242,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postRevsDiffPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postRevsDiffPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15282,7 +15282,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(postRevsDiffPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postRevsDiffPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15357,7 +15357,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getShardsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getShardsInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15396,7 +15396,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getShardsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getShardsInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15469,7 +15469,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentShardsInfoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentShardsInfoPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15509,7 +15509,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getDocumentShardsInfoPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getDocumentShardsInfoPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15684,7 +15684,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getActiveTasksPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getActiveTasksPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15722,7 +15722,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getActiveTasksPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getActiveTasksPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15786,7 +15786,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getUpInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getUpInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -15824,7 +15824,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.Path).To(Equal(getUpInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getUpInformationPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -16751,13 +16751,13 @@ var _ = Describe(`CloudantV1`, func() {
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				Expect(bulkGetQueryDocumentModel).ToNot(BeNil())
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
 				Expect(bulkGetQueryDocumentModel.AttsSince).To(Equal([]string{"testString"}))
-				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("foo")))
 				Expect(bulkGetQueryDocumentModel.OpenRevs).To(Equal([]string{"testString"}))
-				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")))
 
 				// Construct an instance of the PostBulkGetOptions model
 				db := "testString"
@@ -17344,7 +17344,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.SetHighlightSize(int64(1))
 				postPartitionSearchOptionsModel.SetIncludeDocs(true)
 				postPartitionSearchOptionsModel.SetIncludeFields([]string{"testString"})
-				postPartitionSearchOptionsModel.SetLimit(int64(0))
+				postPartitionSearchOptionsModel.SetLimit(int64(3))
 				postPartitionSearchOptionsModel.SetQuery("testString")
 				postPartitionSearchOptionsModel.SetSort([]string{"testString"})
 				postPartitionSearchOptionsModel.SetStale("ok")
@@ -17362,7 +17362,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionSearchOptionsModel.HighlightSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postPartitionSearchOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionSearchOptionsModel.IncludeFields).To(Equal([]string{"testString"}))
-				Expect(postPartitionSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postPartitionSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Sort).To(Equal([]string{"testString"}))
 				Expect(postPartitionSearchOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
@@ -17626,7 +17626,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.SetHighlightSize(int64(1))
 				postSearchOptionsModel.SetIncludeDocs(true)
 				postSearchOptionsModel.SetIncludeFields([]string{"testString"})
-				postSearchOptionsModel.SetLimit(int64(0))
+				postSearchOptionsModel.SetLimit(int64(3))
 				postSearchOptionsModel.SetQuery("testString")
 				postSearchOptionsModel.SetSort([]string{"testString"})
 				postSearchOptionsModel.SetStale("ok")
@@ -17649,7 +17649,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postSearchOptionsModel.HighlightSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postSearchOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postSearchOptionsModel.IncludeFields).To(Equal([]string{"testString"}))
-				Expect(postSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Sort).To(Equal([]string{"testString"}))
 				Expect(postSearchOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
