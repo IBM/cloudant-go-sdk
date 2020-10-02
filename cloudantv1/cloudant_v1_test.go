@@ -784,7 +784,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 			})
-			It(`Invoke PostDbsInfo with error: Operation request error`, func() {
+			It(`Invoke PostDbsInfo with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -802,6 +802,13 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostDbsInfo(postDbsInfoOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PostDbsInfoOptions model with no property values
+				postDbsInfoOptionsModelNew := new(cloudantv1.PostDbsInfoOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PostDbsInfo(postDbsInfoOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 			})
@@ -5334,7 +5341,6 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostDesignDocsOptions model
 				postDesignDocsOptionsModel := new(cloudantv1.PostDesignDocsOptions)
 				postDesignDocsOptionsModel.Db = core.StringPtr("testString")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Attachments = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Conflicts = core.BoolPtr(true)
@@ -5348,6 +5354,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostDesignDocs(postDesignDocsOptionsModel)
@@ -5395,7 +5402,6 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostDesignDocsOptions model
 				postDesignDocsOptionsModel := new(cloudantv1.PostDesignDocsOptions)
 				postDesignDocsOptionsModel.Db = core.StringPtr("testString")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Attachments = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Conflicts = core.BoolPtr(true)
@@ -5409,6 +5415,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5428,7 +5435,6 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostDesignDocsOptions model
 				postDesignDocsOptionsModel := new(cloudantv1.PostDesignDocsOptions)
 				postDesignDocsOptionsModel.Db = core.StringPtr("testString")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Attachments = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Conflicts = core.BoolPtr(true)
@@ -5442,6 +5448,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -5508,8 +5515,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
 				postDesignDocsQueriesOptionsModel.Db = core.StringPtr("testString")
-				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostDesignDocsQueries(postDesignDocsQueriesOptionsModel)
@@ -5573,8 +5580,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
 				postDesignDocsQueriesOptionsModel.Db = core.StringPtr("testString")
-				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5610,8 +5617,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
 				postDesignDocsQueriesOptionsModel.Db = core.StringPtr("testString")
-				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -6864,6 +6871,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -6873,7 +6881,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
 				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6924,6 +6931,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -6933,7 +6941,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
 				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -6958,6 +6965,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -6967,7 +6975,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
 				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7028,6 +7035,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -7037,7 +7045,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
 				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7068,6 +7075,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -7077,7 +7085,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
 				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -7436,12 +7443,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Fields = []string{"testString"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
@@ -7493,12 +7500,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Fields = []string{"testString"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
@@ -7524,12 +7531,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Fields = []string{"testString"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
@@ -7591,12 +7598,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Fields = []string{"testString"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
@@ -7628,12 +7635,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Fields = []string{"testString"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
@@ -7787,12 +7794,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
+				postExplainOptionsModel.Selector = make(map[string]interface{})
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postExplainOptionsModel.Fields = []string{"testString"}
 				postExplainOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postExplainOptionsModel.Selector = make(map[string]interface{})
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -7844,12 +7851,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
+				postExplainOptionsModel.Selector = make(map[string]interface{})
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postExplainOptionsModel.Fields = []string{"testString"}
 				postExplainOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postExplainOptionsModel.Selector = make(map[string]interface{})
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -7875,12 +7882,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
+				postExplainOptionsModel.Selector = make(map[string]interface{})
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postExplainOptionsModel.Fields = []string{"testString"}
 				postExplainOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postExplainOptionsModel.Selector = make(map[string]interface{})
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -7935,12 +7942,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -7992,12 +7999,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -8023,12 +8030,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -8090,12 +8097,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -8127,12 +8134,12 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
-				postFindOptionsModel.Selector = make(map[string]interface{})
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -8322,9 +8329,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
+				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
-				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
@@ -8397,9 +8404,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
+				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
-				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
@@ -8446,9 +8453,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
+				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
-				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
@@ -8777,7 +8784,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 			})
-			It(`Invoke PostSearchAnalyze with error: Operation request error`, func() {
+			It(`Invoke PostSearchAnalyze with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -8796,6 +8803,13 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostSearchAnalyze(postSearchAnalyzeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PostSearchAnalyzeOptions model with no property values
+				postSearchAnalyzeOptionsModelNew := new(cloudantv1.PostSearchAnalyzeOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PostSearchAnalyze(postSearchAnalyzeOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 			})
@@ -8832,6 +8846,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -8841,7 +8856,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
 				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -8897,6 +8911,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -8906,7 +8921,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
 				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -8936,6 +8950,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -8945,7 +8960,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
 				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -9011,6 +9025,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -9020,7 +9035,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
 				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -9056,6 +9070,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -9065,7 +9080,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
 				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
-				postSearchOptionsModel.Query = core.StringPtr("testString")
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -10659,7 +10673,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 			})
-			It(`Invoke PostReplicate with error: Operation request error`, func() {
+			It(`Invoke PostReplicate with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -10761,6 +10775,13 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostReplicate(postReplicateOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PostReplicateOptions model with no property values
+				postReplicateOptionsModelNew := new(cloudantv1.PostReplicateOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PostReplicate(postReplicateOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 			})
@@ -12181,315 +12202,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`DeleteIamSession(deleteIamSessionOptions *DeleteIamSessionOptions) - Operation response error`, func() {
-		deleteIamSessionPath := "/_iam_session"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteIamSessionPath))
-					Expect(req.Method).To(Equal("DELETE"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke DeleteIamSession with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the DeleteIamSessionOptions model
-				deleteIamSessionOptionsModel := new(cloudantv1.DeleteIamSessionOptions)
-				deleteIamSessionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.DeleteIamSession(deleteIamSessionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-
-	Describe(`DeleteIamSession(deleteIamSessionOptions *DeleteIamSessionOptions)`, func() {
-		deleteIamSessionPath := "/_iam_session"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(deleteIamSessionPath))
-					Expect(req.Method).To(Equal("DELETE"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"ok": true}`)
-				}))
-			})
-			It(`Invoke DeleteIamSession successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.DeleteIamSession(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the DeleteIamSessionOptions model
-				deleteIamSessionOptionsModel := new(cloudantv1.DeleteIamSessionOptions)
-				deleteIamSessionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.DeleteIamSession(deleteIamSessionOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-			})
-			It(`Invoke DeleteIamSession with error: Operation request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the DeleteIamSessionOptions model
-				deleteIamSessionOptionsModel := new(cloudantv1.DeleteIamSessionOptions)
-				deleteIamSessionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.DeleteIamSession(deleteIamSessionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetIamSessionInformation(getIamSessionInformationOptions *GetIamSessionInformationOptions) - Operation response error`, func() {
-		getIamSessionInformationPath := "/_iam_session"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getIamSessionInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke GetIamSessionInformation with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetIamSessionInformationOptions model
-				getIamSessionInformationOptionsModel := new(cloudantv1.GetIamSessionInformationOptions)
-				getIamSessionInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.GetIamSessionInformation(getIamSessionInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-
-	Describe(`GetIamSessionInformation(getIamSessionInformationOptions *GetIamSessionInformationOptions)`, func() {
-		getIamSessionInformationPath := "/_iam_session"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getIamSessionInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "ok": true, "scope": "Scope", "type": "Type"}`)
-				}))
-			})
-			It(`Invoke GetIamSessionInformation successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.GetIamSessionInformation(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the GetIamSessionInformationOptions model
-				getIamSessionInformationOptionsModel := new(cloudantv1.GetIamSessionInformationOptions)
-				getIamSessionInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.GetIamSessionInformation(getIamSessionInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-			})
-			It(`Invoke GetIamSessionInformation with error: Operation request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetIamSessionInformationOptions model
-				getIamSessionInformationOptionsModel := new(cloudantv1.GetIamSessionInformationOptions)
-				getIamSessionInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.GetIamSessionInformation(getIamSessionInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`PostIamSession(postIamSessionOptions *PostIamSessionOptions) - Operation response error`, func() {
-		postIamSessionPath := "/_iam_session"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postIamSessionPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke PostIamSession with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostIamSessionOptions model
-				postIamSessionOptionsModel := new(cloudantv1.PostIamSessionOptions)
-				postIamSessionOptionsModel.AccessToken = core.StringPtr("testString")
-				postIamSessionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PostIamSession(postIamSessionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-
-	Describe(`PostIamSession(postIamSessionOptions *PostIamSessionOptions)`, func() {
-		postIamSessionPath := "/_iam_session"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postIamSessionPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"ok": true}`)
-				}))
-			})
-			It(`Invoke PostIamSession successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PostIamSession(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the PostIamSessionOptions model
-				postIamSessionOptionsModel := new(cloudantv1.PostIamSessionOptions)
-				postIamSessionOptionsModel.AccessToken = core.StringPtr("testString")
-				postIamSessionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PostIamSession(postIamSessionOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-			})
-			It(`Invoke PostIamSession with error: Operation request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostIamSessionOptions model
-				postIamSessionOptionsModel := new(cloudantv1.PostIamSessionOptions)
-				postIamSessionOptionsModel.AccessToken = core.StringPtr("testString")
-				postIamSessionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PostIamSession(postIamSessionOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
 	Describe(`Service constructor tests`, func() {
 		It(`Instantiate service client`, func() {
 			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -12974,9 +12686,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
 				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
 				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
 				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
 				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
-				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
 				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
 				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -13028,9 +12740,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
 				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
 				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
 				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
 				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
-				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
 				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
 				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -13056,9 +12768,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
 				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
 				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
 				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
 				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
-				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
 				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
 				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -13309,9 +13021,9 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
+				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PutCorsConfiguration(putCorsConfigurationOptionsModel)
@@ -13356,9 +13068,9 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
+				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -13367,7 +13079,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 			})
-			It(`Invoke PutCorsConfiguration with error: Operation request error`, func() {
+			It(`Invoke PutCorsConfiguration with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -13377,9 +13089,9 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
+				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -13387,6 +13099,13 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PutCorsConfiguration(putCorsConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PutCorsConfigurationOptions model with no property values
+				putCorsConfigurationOptionsModelNew := new(cloudantv1.PutCorsConfigurationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PutCorsConfiguration(putCorsConfigurationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 			})
@@ -14607,7 +14326,6 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostLocalDocsOptions model
 				postLocalDocsOptionsModel := new(cloudantv1.PostLocalDocsOptions)
 				postLocalDocsOptionsModel.Db = core.StringPtr("testString")
-				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Attachments = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Conflicts = core.BoolPtr(true)
@@ -14621,6 +14339,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.Key = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Keys = []string{"testString"}
 				postLocalDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostLocalDocs(postLocalDocsOptionsModel)
@@ -14668,7 +14387,6 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostLocalDocsOptions model
 				postLocalDocsOptionsModel := new(cloudantv1.PostLocalDocsOptions)
 				postLocalDocsOptionsModel.Db = core.StringPtr("testString")
-				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Attachments = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Conflicts = core.BoolPtr(true)
@@ -14682,6 +14400,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.Key = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Keys = []string{"testString"}
 				postLocalDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -14701,7 +14420,6 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostLocalDocsOptions model
 				postLocalDocsOptionsModel := new(cloudantv1.PostLocalDocsOptions)
 				postLocalDocsOptionsModel.Db = core.StringPtr("testString")
-				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Attachments = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Conflicts = core.BoolPtr(true)
@@ -14715,6 +14433,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.Key = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Keys = []string{"testString"}
 				postLocalDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -14781,8 +14500,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostLocalDocsQueriesOptions model
 				postLocalDocsQueriesOptionsModel := new(cloudantv1.PostLocalDocsQueriesOptions)
 				postLocalDocsQueriesOptionsModel.Db = core.StringPtr("testString")
-				postLocalDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postLocalDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostLocalDocsQueries(postLocalDocsQueriesOptionsModel)
@@ -14846,8 +14565,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostLocalDocsQueriesOptions model
 				postLocalDocsQueriesOptionsModel := new(cloudantv1.PostLocalDocsQueriesOptions)
 				postLocalDocsQueriesOptionsModel.Db = core.StringPtr("testString")
-				postLocalDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postLocalDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -14883,8 +14602,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostLocalDocsQueriesOptions model
 				postLocalDocsQueriesOptionsModel := new(cloudantv1.PostLocalDocsQueriesOptions)
 				postLocalDocsQueriesOptionsModel.Db = core.StringPtr("testString")
-				postLocalDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postLocalDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -15004,118 +14723,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).To(BeNil())
 				Expect(serviceErr).ToNot(BeNil())
 				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`PostEnsureFullCommit(postEnsureFullCommitOptions *PostEnsureFullCommitOptions) - Operation response error`, func() {
-		postEnsureFullCommitPath := "/testString/_ensure_full_commit"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postEnsureFullCommitPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke PostEnsureFullCommit with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostEnsureFullCommitOptions model
-				postEnsureFullCommitOptionsModel := new(cloudantv1.PostEnsureFullCommitOptions)
-				postEnsureFullCommitOptionsModel.Db = core.StringPtr("testString")
-				postEnsureFullCommitOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PostEnsureFullCommit(postEnsureFullCommitOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-
-	Describe(`PostEnsureFullCommit(postEnsureFullCommitOptions *PostEnsureFullCommitOptions)`, func() {
-		postEnsureFullCommitPath := "/testString/_ensure_full_commit"
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postEnsureFullCommitPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"instance_start_time": "InstanceStartTime", "ok": true}`)
-				}))
-			})
-			It(`Invoke PostEnsureFullCommit successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PostEnsureFullCommit(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the PostEnsureFullCommitOptions model
-				postEnsureFullCommitOptionsModel := new(cloudantv1.PostEnsureFullCommitOptions)
-				postEnsureFullCommitOptionsModel.Db = core.StringPtr("testString")
-				postEnsureFullCommitOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PostEnsureFullCommit(postEnsureFullCommitOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-			})
-			It(`Invoke PostEnsureFullCommit with error: Operation validation and request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostEnsureFullCommitOptions model
-				postEnsureFullCommitOptionsModel := new(cloudantv1.PostEnsureFullCommitOptions)
-				postEnsureFullCommitOptionsModel.Db = core.StringPtr("testString")
-				postEnsureFullCommitOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PostEnsureFullCommit(postEnsureFullCommitOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the PostEnsureFullCommitOptions model with no property values
-				postEnsureFullCommitOptionsModelNew := new(cloudantv1.PostEnsureFullCommitOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.PostEnsureFullCommit(postEnsureFullCommitOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
 			})
 		})
 	})
@@ -15886,6 +15493,12 @@ var _ = Describe(`CloudantV1`, func() {
 				URL:           "http://cloudantv1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
+			It(`Invoke NewBulkDocs successfully`, func() {
+				docs := []cloudantv1.Document{}
+				model, err := cloudantService.NewBulkDocs(docs)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewBulkGetQueryDocument successfully`, func() {
 				id := "testString"
 				model, err := cloudantService.NewBulkGetQueryDocument(id)
@@ -15967,13 +15580,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(deleteDocumentOptionsModel.Batch).To(Equal(core.StringPtr("ok")))
 				Expect(deleteDocumentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDocumentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewDeleteIamSessionOptions successfully`, func() {
-				// Construct an instance of the DeleteIamSessionOptions model
-				deleteIamSessionOptionsModel := cloudantService.NewDeleteIamSessionOptions()
-				deleteIamSessionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(deleteIamSessionOptionsModel).ToNot(BeNil())
-				Expect(deleteIamSessionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteIndexOptions successfully`, func() {
 				// Construct an instance of the DeleteIndexOptions model
@@ -16278,13 +15884,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getGeoOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getGeoOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
 				Expect(getGeoOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewGetIamSessionInformationOptions successfully`, func() {
-				// Construct an instance of the GetIamSessionInformationOptions model
-				getIamSessionInformationOptionsModel := cloudantService.NewGetIamSessionInformationOptions()
-				getIamSessionInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getIamSessionInformationOptionsModel).ToNot(BeNil())
-				Expect(getIamSessionInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetIndexesInformationOptions successfully`, func() {
 				// Construct an instance of the GetIndexesInformationOptions model
@@ -16644,7 +16243,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				db := "testString"
-				postAllDocsQueriesOptionsModel := cloudantService.NewPostAllDocsQueriesOptions(db)
+				postAllDocsQueriesOptionsQueries := []cloudantv1.AllDocsQuery{}
+				postAllDocsQueriesOptionsModel := cloudantService.NewPostAllDocsQueriesOptions(db, postAllDocsQueriesOptionsQueries)
 				postAllDocsQueriesOptionsModel.SetDb("testString")
 				postAllDocsQueriesOptionsModel.SetQueries([]cloudantv1.AllDocsQuery{*allDocsQueryModel})
 				postAllDocsQueriesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -16761,7 +16361,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostBulkGetOptions model
 				db := "testString"
-				postBulkGetOptionsModel := cloudantService.NewPostBulkGetOptions(db)
+				postBulkGetOptionsDocs := []cloudantv1.BulkGetQueryDocument{}
+				postBulkGetOptionsModel := cloudantService.NewPostBulkGetOptions(db, postBulkGetOptionsDocs)
 				postBulkGetOptionsModel.SetDb("testString")
 				postBulkGetOptionsModel.SetDocs([]cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel})
 				postBulkGetOptionsModel.SetAttachments(true)
@@ -16826,7 +16427,8 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPostDbsInfoOptions successfully`, func() {
 				// Construct an instance of the PostDbsInfoOptions model
-				postDbsInfoOptionsModel := cloudantService.NewPostDbsInfoOptions()
+				postDbsInfoOptionsKeys := []string{"testString"}
+				postDbsInfoOptionsModel := cloudantService.NewPostDbsInfoOptions(postDbsInfoOptionsKeys)
 				postDbsInfoOptionsModel.SetKeys([]string{"testString"})
 				postDbsInfoOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDbsInfoOptionsModel).ToNot(BeNil())
@@ -16904,15 +16506,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				db := "testString"
-				postDesignDocsQueriesOptionsModel := cloudantService.NewPostDesignDocsQueriesOptions(db)
+				postDesignDocsQueriesOptionsQueries := []cloudantv1.AllDocsQuery{}
+				postDesignDocsQueriesOptionsModel := cloudantService.NewPostDesignDocsQueriesOptions(db, postDesignDocsQueriesOptionsQueries)
 				postDesignDocsQueriesOptionsModel.SetDb("testString")
-				postDesignDocsQueriesOptionsModel.SetAccept("application/json")
 				postDesignDocsQueriesOptionsModel.SetQueries([]cloudantv1.AllDocsQuery{*allDocsQueryModel})
+				postDesignDocsQueriesOptionsModel.SetAccept("application/json")
 				postDesignDocsQueriesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDesignDocsQueriesOptionsModel).ToNot(BeNil())
 				Expect(postDesignDocsQueriesOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postDesignDocsQueriesOptionsModel.Accept).To(Equal(core.StringPtr("application/json")))
 				Expect(postDesignDocsQueriesOptionsModel.Queries).To(Equal([]cloudantv1.AllDocsQuery{*allDocsQueryModel}))
+				Expect(postDesignDocsQueriesOptionsModel.Accept).To(Equal(core.StringPtr("application/json")))
 				Expect(postDesignDocsQueriesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostDocumentOptions successfully`, func() {
@@ -16997,27 +16600,18 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postDocumentOptionsModel.Batch).To(Equal(core.StringPtr("ok")))
 				Expect(postDocumentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewPostEnsureFullCommitOptions successfully`, func() {
-				// Construct an instance of the PostEnsureFullCommitOptions model
-				db := "testString"
-				postEnsureFullCommitOptionsModel := cloudantService.NewPostEnsureFullCommitOptions(db)
-				postEnsureFullCommitOptionsModel.SetDb("testString")
-				postEnsureFullCommitOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(postEnsureFullCommitOptionsModel).ToNot(BeNil())
-				Expect(postEnsureFullCommitOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postEnsureFullCommitOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewPostExplainOptions successfully`, func() {
 				// Construct an instance of the PostExplainOptions model
 				db := "testString"
-				postExplainOptionsModel := cloudantService.NewPostExplainOptions(db)
+				postExplainOptionsSelector := make(map[string]interface{})
+				postExplainOptionsModel := cloudantService.NewPostExplainOptions(db, postExplainOptionsSelector)
 				postExplainOptionsModel.SetDb("testString")
+				postExplainOptionsModel.SetSelector(make(map[string]interface{}))
 				postExplainOptionsModel.SetBookmark("testString")
 				postExplainOptionsModel.SetConflicts(true)
 				postExplainOptionsModel.SetExecutionStats(true)
 				postExplainOptionsModel.SetFields([]string{"testString"})
 				postExplainOptionsModel.SetLimit(int64(0))
-				postExplainOptionsModel.SetSelector(make(map[string]interface{}))
 				postExplainOptionsModel.SetSkip(int64(0))
 				postExplainOptionsModel.SetSort([]map[string]string{make(map[string]string)})
 				postExplainOptionsModel.SetStable(true)
@@ -17027,12 +16621,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postExplainOptionsModel).ToNot(BeNil())
 				Expect(postExplainOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(postExplainOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
 				Expect(postExplainOptionsModel.Fields).To(Equal([]string{"testString"}))
 				Expect(postExplainOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(postExplainOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postExplainOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postExplainOptionsModel.Sort).To(Equal([]map[string]string{make(map[string]string)}))
 				Expect(postExplainOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
@@ -17044,14 +16638,15 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewPostFindOptions successfully`, func() {
 				// Construct an instance of the PostFindOptions model
 				db := "testString"
-				postFindOptionsModel := cloudantService.NewPostFindOptions(db)
+				postFindOptionsSelector := make(map[string]interface{})
+				postFindOptionsModel := cloudantService.NewPostFindOptions(db, postFindOptionsSelector)
 				postFindOptionsModel.SetDb("testString")
+				postFindOptionsModel.SetSelector(make(map[string]interface{}))
 				postFindOptionsModel.SetBookmark("testString")
 				postFindOptionsModel.SetConflicts(true)
 				postFindOptionsModel.SetExecutionStats(true)
 				postFindOptionsModel.SetFields([]string{"testString"})
 				postFindOptionsModel.SetLimit(int64(0))
-				postFindOptionsModel.SetSelector(make(map[string]interface{}))
 				postFindOptionsModel.SetSkip(int64(0))
 				postFindOptionsModel.SetSort([]map[string]string{make(map[string]string)})
 				postFindOptionsModel.SetStable(true)
@@ -17061,12 +16656,12 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postFindOptionsModel).ToNot(BeNil())
 				Expect(postFindOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(postFindOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.Fields).To(Equal([]string{"testString"}))
 				Expect(postFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(postFindOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postFindOptionsModel.Sort).To(Equal([]map[string]string{make(map[string]string)}))
 				Expect(postFindOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
@@ -17084,15 +16679,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postGeoCleanupOptionsModel).ToNot(BeNil())
 				Expect(postGeoCleanupOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postGeoCleanupOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewPostIamSessionOptions successfully`, func() {
-				// Construct an instance of the PostIamSessionOptions model
-				postIamSessionOptionsModel := cloudantService.NewPostIamSessionOptions()
-				postIamSessionOptionsModel.SetAccessToken("testString")
-				postIamSessionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(postIamSessionOptionsModel).ToNot(BeNil())
-				Expect(postIamSessionOptionsModel.AccessToken).To(Equal(core.StringPtr("testString")))
-				Expect(postIamSessionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostIndexOptions successfully`, func() {
 				// Construct an instance of the Analyzer model
@@ -17136,11 +16722,12 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostIndexOptions model
 				db := "testString"
-				postIndexOptionsModel := cloudantService.NewPostIndexOptions(db)
+				var postIndexOptionsIndex *cloudantv1.IndexDefinition = nil
+				postIndexOptionsModel := cloudantService.NewPostIndexOptions(db, postIndexOptionsIndex)
 				postIndexOptionsModel.SetDb("testString")
+				postIndexOptionsModel.SetIndex(indexDefinitionModel)
 				postIndexOptionsModel.SetDdoc("testString")
 				postIndexOptionsModel.SetDef(indexDefinitionModel)
-				postIndexOptionsModel.SetIndex(indexDefinitionModel)
 				postIndexOptionsModel.SetName("testString")
 				postIndexOptionsModel.SetPartialFilterSelector(make(map[string]interface{}))
 				postIndexOptionsModel.SetPartitioned(true)
@@ -17148,9 +16735,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postIndexOptionsModel).ToNot(BeNil())
 				Expect(postIndexOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(postIndexOptionsModel.Index).To(Equal(indexDefinitionModel))
 				Expect(postIndexOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
 				Expect(postIndexOptionsModel.Def).To(Equal(indexDefinitionModel))
-				Expect(postIndexOptionsModel.Index).To(Equal(indexDefinitionModel))
 				Expect(postIndexOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(postIndexOptionsModel.PartialFilterSelector).To(Equal(make(map[string]interface{})))
 				Expect(postIndexOptionsModel.Partitioned).To(Equal(core.BoolPtr(true)))
@@ -17228,21 +16815,23 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostLocalDocsQueriesOptions model
 				db := "testString"
-				postLocalDocsQueriesOptionsModel := cloudantService.NewPostLocalDocsQueriesOptions(db)
+				postLocalDocsQueriesOptionsQueries := []cloudantv1.AllDocsQuery{}
+				postLocalDocsQueriesOptionsModel := cloudantService.NewPostLocalDocsQueriesOptions(db, postLocalDocsQueriesOptionsQueries)
 				postLocalDocsQueriesOptionsModel.SetDb("testString")
-				postLocalDocsQueriesOptionsModel.SetAccept("application/json")
 				postLocalDocsQueriesOptionsModel.SetQueries([]cloudantv1.AllDocsQuery{*allDocsQueryModel})
+				postLocalDocsQueriesOptionsModel.SetAccept("application/json")
 				postLocalDocsQueriesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postLocalDocsQueriesOptionsModel).ToNot(BeNil())
 				Expect(postLocalDocsQueriesOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postLocalDocsQueriesOptionsModel.Accept).To(Equal(core.StringPtr("application/json")))
 				Expect(postLocalDocsQueriesOptionsModel.Queries).To(Equal([]cloudantv1.AllDocsQuery{*allDocsQueryModel}))
+				Expect(postLocalDocsQueriesOptionsModel.Accept).To(Equal(core.StringPtr("application/json")))
 				Expect(postLocalDocsQueriesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostMissingRevsOptions successfully`, func() {
 				// Construct an instance of the PostMissingRevsOptions model
 				db := "testString"
-				postMissingRevsOptionsModel := cloudantService.NewPostMissingRevsOptions(db)
+				documentRevisions := make(map[string][]string)
+				postMissingRevsOptionsModel := cloudantService.NewPostMissingRevsOptions(db, documentRevisions)
 				postMissingRevsOptionsModel.SetDb("testString")
 				postMissingRevsOptionsModel.SetDocumentRevisions(make(map[string][]string))
 				postMissingRevsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -17294,15 +16883,16 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostPartitionFindOptions model
 				db := "testString"
 				partitionKey := "testString"
-				postPartitionFindOptionsModel := cloudantService.NewPostPartitionFindOptions(db, partitionKey)
+				postPartitionFindOptionsSelector := make(map[string]interface{})
+				postPartitionFindOptionsModel := cloudantService.NewPostPartitionFindOptions(db, partitionKey, postPartitionFindOptionsSelector)
 				postPartitionFindOptionsModel.SetDb("testString")
 				postPartitionFindOptionsModel.SetPartitionKey("testString")
+				postPartitionFindOptionsModel.SetSelector(make(map[string]interface{}))
 				postPartitionFindOptionsModel.SetBookmark("testString")
 				postPartitionFindOptionsModel.SetConflicts(true)
 				postPartitionFindOptionsModel.SetExecutionStats(true)
 				postPartitionFindOptionsModel.SetFields([]string{"testString"})
 				postPartitionFindOptionsModel.SetLimit(int64(0))
-				postPartitionFindOptionsModel.SetSelector(make(map[string]interface{}))
 				postPartitionFindOptionsModel.SetSkip(int64(0))
 				postPartitionFindOptionsModel.SetSort([]map[string]string{make(map[string]string)})
 				postPartitionFindOptionsModel.SetStable(true)
@@ -17312,12 +16902,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionFindOptionsModel).ToNot(BeNil())
 				Expect(postPartitionFindOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionFindOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postPartitionFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"testString"}))
 				Expect(postPartitionFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(postPartitionFindOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postPartitionFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionFindOptionsModel.Sort).To(Equal([]map[string]string{make(map[string]string)}))
 				Expect(postPartitionFindOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
@@ -17331,11 +16921,13 @@ var _ = Describe(`CloudantV1`, func() {
 				partitionKey := "testString"
 				ddoc := "testString"
 				index := "testString"
-				postPartitionSearchOptionsModel := cloudantService.NewPostPartitionSearchOptions(db, partitionKey, ddoc, index)
+				postPartitionSearchOptionsQuery := "testString"
+				postPartitionSearchOptionsModel := cloudantService.NewPostPartitionSearchOptions(db, partitionKey, ddoc, index, postPartitionSearchOptionsQuery)
 				postPartitionSearchOptionsModel.SetDb("testString")
 				postPartitionSearchOptionsModel.SetPartitionKey("testString")
 				postPartitionSearchOptionsModel.SetDdoc("testString")
 				postPartitionSearchOptionsModel.SetIndex("testString")
+				postPartitionSearchOptionsModel.SetQuery("testString")
 				postPartitionSearchOptionsModel.SetBookmark("testString")
 				postPartitionSearchOptionsModel.SetHighlightFields([]string{"testString"})
 				postPartitionSearchOptionsModel.SetHighlightNumber(int64(1))
@@ -17345,7 +16937,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.SetIncludeDocs(true)
 				postPartitionSearchOptionsModel.SetIncludeFields([]string{"testString"})
 				postPartitionSearchOptionsModel.SetLimit(int64(3))
-				postPartitionSearchOptionsModel.SetQuery("testString")
 				postPartitionSearchOptionsModel.SetSort([]string{"testString"})
 				postPartitionSearchOptionsModel.SetStale("ok")
 				postPartitionSearchOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -17354,6 +16945,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionSearchOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Index).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.HighlightFields).To(Equal([]string{"testString"}))
 				Expect(postPartitionSearchOptionsModel.HighlightNumber).To(Equal(core.Int64Ptr(int64(1))))
@@ -17363,7 +16955,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionSearchOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionSearchOptionsModel.IncludeFields).To(Equal([]string{"testString"}))
 				Expect(postPartitionSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
-				Expect(postPartitionSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Sort).To(Equal([]string{"testString"}))
 				Expect(postPartitionSearchOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
 				Expect(postPartitionSearchOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -17579,7 +17170,8 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PostReplicateOptions model
-				postReplicateOptionsModel := cloudantService.NewPostReplicateOptions()
+				var replicationDocument *cloudantv1.ReplicationDocument = nil
+				postReplicateOptionsModel := cloudantService.NewPostReplicateOptions(replicationDocument)
 				postReplicateOptionsModel.SetReplicationDocument(replicationDocumentModel)
 				postReplicateOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postReplicateOptionsModel).ToNot(BeNil())
@@ -17589,7 +17181,8 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewPostRevsDiffOptions successfully`, func() {
 				// Construct an instance of the PostRevsDiffOptions model
 				db := "testString"
-				postRevsDiffOptionsModel := cloudantService.NewPostRevsDiffOptions(db)
+				documentRevisions := make(map[string][]string)
+				postRevsDiffOptionsModel := cloudantService.NewPostRevsDiffOptions(db, documentRevisions)
 				postRevsDiffOptionsModel.SetDb("testString")
 				postRevsDiffOptionsModel.SetDocumentRevisions(make(map[string][]string))
 				postRevsDiffOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -17600,7 +17193,9 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPostSearchAnalyzeOptions successfully`, func() {
 				// Construct an instance of the PostSearchAnalyzeOptions model
-				postSearchAnalyzeOptionsModel := cloudantService.NewPostSearchAnalyzeOptions()
+				postSearchAnalyzeOptionsAnalyzer := "arabic"
+				postSearchAnalyzeOptionsText := "testString"
+				postSearchAnalyzeOptionsModel := cloudantService.NewPostSearchAnalyzeOptions(postSearchAnalyzeOptionsAnalyzer, postSearchAnalyzeOptionsText)
 				postSearchAnalyzeOptionsModel.SetAnalyzer("arabic")
 				postSearchAnalyzeOptionsModel.SetText("testString")
 				postSearchAnalyzeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -17614,10 +17209,12 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				ddoc := "testString"
 				index := "testString"
-				postSearchOptionsModel := cloudantService.NewPostSearchOptions(db, ddoc, index)
+				postSearchOptionsQuery := "testString"
+				postSearchOptionsModel := cloudantService.NewPostSearchOptions(db, ddoc, index, postSearchOptionsQuery)
 				postSearchOptionsModel.SetDb("testString")
 				postSearchOptionsModel.SetDdoc("testString")
 				postSearchOptionsModel.SetIndex("testString")
+				postSearchOptionsModel.SetQuery("testString")
 				postSearchOptionsModel.SetBookmark("testString")
 				postSearchOptionsModel.SetHighlightFields([]string{"testString"})
 				postSearchOptionsModel.SetHighlightNumber(int64(1))
@@ -17627,7 +17224,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.SetIncludeDocs(true)
 				postSearchOptionsModel.SetIncludeFields([]string{"testString"})
 				postSearchOptionsModel.SetLimit(int64(3))
-				postSearchOptionsModel.SetQuery("testString")
 				postSearchOptionsModel.SetSort([]string{"testString"})
 				postSearchOptionsModel.SetStale("ok")
 				postSearchOptionsModel.SetCounts([]string{"testString"})
@@ -17641,6 +17237,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postSearchOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Index).To(Equal(core.StringPtr("testString")))
+				Expect(postSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.HighlightFields).To(Equal([]string{"testString"}))
 				Expect(postSearchOptionsModel.HighlightNumber).To(Equal(core.Int64Ptr(int64(1))))
@@ -17650,7 +17247,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postSearchOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postSearchOptionsModel.IncludeFields).To(Equal([]string{"testString"}))
 				Expect(postSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
-				Expect(postSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Sort).To(Equal([]string{"testString"}))
 				Expect(postSearchOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
 				Expect(postSearchOptionsModel.Counts).To(Equal([]string{"testString"}))
@@ -17766,7 +17362,8 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				ddoc := "testString"
 				view := "testString"
-				postViewQueriesOptionsModel := cloudantService.NewPostViewQueriesOptions(db, ddoc, view)
+				postViewQueriesOptionsQueries := []cloudantv1.ViewQuery{}
+				postViewQueriesOptionsModel := cloudantService.NewPostViewQueriesOptions(db, ddoc, view, postViewQueriesOptionsQueries)
 				postViewQueriesOptionsModel.SetDb("testString")
 				postViewQueriesOptionsModel.SetDdoc("testString")
 				postViewQueriesOptionsModel.SetView("testString")
@@ -17816,32 +17413,34 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
 				db := "testString"
-				putCloudantSecurityConfigurationOptionsModel := cloudantService.NewPutCloudantSecurityConfigurationOptions(db)
+				putCloudantSecurityConfigurationOptionsCloudant := make(map[string][]string)
+				putCloudantSecurityConfigurationOptionsModel := cloudantService.NewPutCloudantSecurityConfigurationOptions(db, putCloudantSecurityConfigurationOptionsCloudant)
 				putCloudantSecurityConfigurationOptionsModel.SetDb("testString")
+				putCloudantSecurityConfigurationOptionsModel.SetCloudant(make(map[string][]string))
 				putCloudantSecurityConfigurationOptionsModel.SetAdmins(securityObjectModel)
 				putCloudantSecurityConfigurationOptionsModel.SetMembers(securityObjectModel)
-				putCloudantSecurityConfigurationOptionsModel.SetCloudant(make(map[string][]string))
 				putCloudantSecurityConfigurationOptionsModel.SetCouchdbAuthOnly(true)
 				putCloudantSecurityConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putCloudantSecurityConfigurationOptionsModel).ToNot(BeNil())
 				Expect(putCloudantSecurityConfigurationOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(putCloudantSecurityConfigurationOptionsModel.Cloudant).To(Equal(make(map[string][]string)))
 				Expect(putCloudantSecurityConfigurationOptionsModel.Admins).To(Equal(securityObjectModel))
 				Expect(putCloudantSecurityConfigurationOptionsModel.Members).To(Equal(securityObjectModel))
-				Expect(putCloudantSecurityConfigurationOptionsModel.Cloudant).To(Equal(make(map[string][]string)))
 				Expect(putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly).To(Equal(core.BoolPtr(true)))
 				Expect(putCloudantSecurityConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutCorsConfigurationOptions successfully`, func() {
 				// Construct an instance of the PutCorsConfigurationOptions model
-				putCorsConfigurationOptionsModel := cloudantService.NewPutCorsConfigurationOptions()
+				putCorsConfigurationOptionsOrigins := []string{"testString"}
+				putCorsConfigurationOptionsModel := cloudantService.NewPutCorsConfigurationOptions(putCorsConfigurationOptionsOrigins)
+				putCorsConfigurationOptionsModel.SetOrigins([]string{"testString"})
 				putCorsConfigurationOptionsModel.SetAllowCredentials(true)
 				putCorsConfigurationOptionsModel.SetEnableCors(true)
-				putCorsConfigurationOptionsModel.SetOrigins([]string{"testString"})
 				putCorsConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putCorsConfigurationOptionsModel).ToNot(BeNil())
+				Expect(putCorsConfigurationOptionsModel.Origins).To(Equal([]string{"testString"}))
 				Expect(putCorsConfigurationOptionsModel.AllowCredentials).To(Equal(core.BoolPtr(true)))
 				Expect(putCorsConfigurationOptionsModel.EnableCors).To(Equal(core.BoolPtr(true)))
-				Expect(putCorsConfigurationOptionsModel.Origins).To(Equal([]string{"testString"}))
 				Expect(putCorsConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutDatabaseOptions successfully`, func() {
@@ -17994,7 +17593,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PutDesignDocumentOptions model
 				db := "testString"
 				ddoc := "testString"
-				putDesignDocumentOptionsModel := cloudantService.NewPutDesignDocumentOptions(db, ddoc)
+				var designDocument *cloudantv1.DesignDocument = nil
+				putDesignDocumentOptionsModel := cloudantService.NewPutDesignDocumentOptions(db, ddoc, designDocument)
 				putDesignDocumentOptionsModel.SetDb("testString")
 				putDesignDocumentOptionsModel.SetDdoc("testString")
 				putDesignDocumentOptionsModel.SetDesignDocument(designDocumentModel)
@@ -18342,7 +17942,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutReplicationDocumentOptions model
 				docID := "testString"
-				putReplicationDocumentOptionsModel := cloudantService.NewPutReplicationDocumentOptions(docID)
+				var replicationDocument *cloudantv1.ReplicationDocument = nil
+				putReplicationDocumentOptionsModel := cloudantService.NewPutReplicationDocumentOptions(docID, replicationDocument)
 				putReplicationDocumentOptionsModel.SetDocID("testString")
 				putReplicationDocumentOptionsModel.SetReplicationDocument(replicationDocumentModel)
 				putReplicationDocumentOptionsModel.SetIfMatch("testString")
@@ -18384,6 +17985,18 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putSecurityOptionsModel.Cloudant).To(Equal(make(map[string][]string)))
 				Expect(putSecurityOptionsModel.CouchdbAuthOnly).To(Equal(core.BoolPtr(true)))
 				Expect(putSecurityOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewReplicationDatabaseAuthIam successfully`, func() {
+				apiKey := "testString"
+				model, err := cloudantService.NewReplicationDatabaseAuthIam(apiKey)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewReplicationDocument successfully`, func() {
+				var source *cloudantv1.ReplicationDatabase = nil
+				var target *cloudantv1.ReplicationDatabase = nil
+				_, err := cloudantService.NewReplicationDocument(source, target)
+				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewSearchIndexDefinition successfully`, func() {
 				index := "testString"
