@@ -347,6 +347,10 @@ func (cloudant *CloudantV1) GetAllDbs(getAllDbsOptions *GetAllDbsOptions) (resul
 // multiple `GET /{db}` requests. It returns a list that contains an information object for each database specified in
 // the request.
 func (cloudant *CloudantV1) PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) (result []DbsInfoResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postDbsInfoOptions, "postDbsInfoOptions cannot be nil")
+	if err != nil {
+		return
+	}
 	err = core.ValidateStruct(postDbsInfoOptions, "postDbsInfoOptions")
 	if err != nil {
 		return
@@ -2278,11 +2282,9 @@ func (cloudant *CloudantV1) PutDesignDocument(putDesignDocumentOptions *PutDesig
 		builder.AddQuery("rev", fmt.Sprint(*putDesignDocumentOptions.Rev))
 	}
 
-	if putDesignDocumentOptions.DesignDocument != nil {
-		_, err = builder.SetBodyContentJSON(putDesignDocumentOptions.DesignDocument)
-		if err != nil {
-			return
-		}
+	_, err = builder.SetBodyContentJSON(putDesignDocumentOptions.DesignDocument)
+	if err != nil {
+		return
 	}
 
 	request, err := builder.Build()
@@ -3163,6 +3165,9 @@ func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *Post
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postPartitionSearchOptions.Query != nil {
+		body["query"] = postPartitionSearchOptions.Query
+	}
 	if postPartitionSearchOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionSearchOptions.Bookmark
 	}
@@ -3189,9 +3194,6 @@ func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *Post
 	}
 	if postPartitionSearchOptions.Limit != nil {
 		body["limit"] = postPartitionSearchOptions.Limit
-	}
-	if postPartitionSearchOptions.Query != nil {
-		body["query"] = postPartitionSearchOptions.Query
 	}
 	if postPartitionSearchOptions.Sort != nil {
 		body["sort"] = postPartitionSearchOptions.Sort
@@ -3262,6 +3264,9 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptio
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postPartitionSearchOptions.Query != nil {
+		body["query"] = postPartitionSearchOptions.Query
+	}
 	if postPartitionSearchOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionSearchOptions.Bookmark
 	}
@@ -3288,9 +3293,6 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptio
 	}
 	if postPartitionSearchOptions.Limit != nil {
 		body["limit"] = postPartitionSearchOptions.Limit
-	}
-	if postPartitionSearchOptions.Query != nil {
-		body["query"] = postPartitionSearchOptions.Query
 	}
 	if postPartitionSearchOptions.Sort != nil {
 		body["sort"] = postPartitionSearchOptions.Sort
@@ -3588,6 +3590,9 @@ func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPart
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postPartitionFindOptions.Selector != nil {
+		body["selector"] = postPartitionFindOptions.Selector
+	}
 	if postPartitionFindOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionFindOptions.Bookmark
 	}
@@ -3602,9 +3607,6 @@ func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPart
 	}
 	if postPartitionFindOptions.Limit != nil {
 		body["limit"] = postPartitionFindOptions.Limit
-	}
-	if postPartitionFindOptions.Selector != nil {
-		body["selector"] = postPartitionFindOptions.Selector
 	}
 	if postPartitionFindOptions.Skip != nil {
 		body["skip"] = postPartitionFindOptions.Skip
@@ -3681,6 +3683,9 @@ func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postPartitionFindOptions.Selector != nil {
+		body["selector"] = postPartitionFindOptions.Selector
+	}
 	if postPartitionFindOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionFindOptions.Bookmark
 	}
@@ -3695,9 +3700,6 @@ func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *
 	}
 	if postPartitionFindOptions.Limit != nil {
 		body["limit"] = postPartitionFindOptions.Limit
-	}
-	if postPartitionFindOptions.Selector != nil {
-		body["selector"] = postPartitionFindOptions.Selector
 	}
 	if postPartitionFindOptions.Skip != nil {
 		body["skip"] = postPartitionFindOptions.Skip
@@ -3764,6 +3766,9 @@ func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) 
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postExplainOptions.Selector != nil {
+		body["selector"] = postExplainOptions.Selector
+	}
 	if postExplainOptions.Bookmark != nil {
 		body["bookmark"] = postExplainOptions.Bookmark
 	}
@@ -3778,9 +3783,6 @@ func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) 
 	}
 	if postExplainOptions.Limit != nil {
 		body["limit"] = postExplainOptions.Limit
-	}
-	if postExplainOptions.Selector != nil {
-		body["selector"] = postExplainOptions.Selector
 	}
 	if postExplainOptions.Skip != nil {
 		body["skip"] = postExplainOptions.Skip
@@ -3859,6 +3861,9 @@ func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postFindOptions.Selector != nil {
+		body["selector"] = postFindOptions.Selector
+	}
 	if postFindOptions.Bookmark != nil {
 		body["bookmark"] = postFindOptions.Bookmark
 	}
@@ -3873,9 +3878,6 @@ func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *
 	}
 	if postFindOptions.Limit != nil {
 		body["limit"] = postFindOptions.Limit
-	}
-	if postFindOptions.Selector != nil {
-		body["selector"] = postFindOptions.Selector
 	}
 	if postFindOptions.Skip != nil {
 		body["skip"] = postFindOptions.Skip
@@ -3954,6 +3956,9 @@ func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postFindOptions.Selector != nil {
+		body["selector"] = postFindOptions.Selector
+	}
 	if postFindOptions.Bookmark != nil {
 		body["bookmark"] = postFindOptions.Bookmark
 	}
@@ -3968,9 +3973,6 @@ func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (
 	}
 	if postFindOptions.Limit != nil {
 		body["limit"] = postFindOptions.Limit
-	}
-	if postFindOptions.Selector != nil {
-		body["selector"] = postFindOptions.Selector
 	}
 	if postFindOptions.Skip != nil {
 		body["skip"] = postFindOptions.Skip
@@ -4092,14 +4094,14 @@ func (cloudant *CloudantV1) PostIndex(postIndexOptions *PostIndexOptions) (resul
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postIndexOptions.Index != nil {
+		body["index"] = postIndexOptions.Index
+	}
 	if postIndexOptions.Ddoc != nil {
 		body["ddoc"] = postIndexOptions.Ddoc
 	}
 	if postIndexOptions.Def != nil {
 		body["def"] = postIndexOptions.Def
-	}
-	if postIndexOptions.Index != nil {
-		body["index"] = postIndexOptions.Index
 	}
 	if postIndexOptions.Name != nil {
 		body["name"] = postIndexOptions.Name
@@ -4194,6 +4196,10 @@ func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) 
 // Returns the results of analyzer tokenization of the provided sample text. This endpoint can be used for testing
 // analyzer tokenization.
 func (cloudant *CloudantV1) PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions) (result *SearchAnalyzeResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postSearchAnalyzeOptions, "postSearchAnalyzeOptions cannot be nil")
+	if err != nil {
+		return
+	}
 	err = core.ValidateStruct(postSearchAnalyzeOptions, "postSearchAnalyzeOptions")
 	if err != nil {
 		return
@@ -4287,6 +4293,9 @@ func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (re
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postSearchOptions.Query != nil {
+		body["query"] = postSearchOptions.Query
+	}
 	if postSearchOptions.Bookmark != nil {
 		body["bookmark"] = postSearchOptions.Bookmark
 	}
@@ -4313,9 +4322,6 @@ func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (re
 	}
 	if postSearchOptions.Limit != nil {
 		body["limit"] = postSearchOptions.Limit
-	}
-	if postSearchOptions.Query != nil {
-		body["query"] = postSearchOptions.Query
 	}
 	if postSearchOptions.Sort != nil {
 		body["sort"] = postSearchOptions.Sort
@@ -4405,6 +4411,9 @@ func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOpti
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if postSearchOptions.Query != nil {
+		body["query"] = postSearchOptions.Query
+	}
 	if postSearchOptions.Bookmark != nil {
 		body["bookmark"] = postSearchOptions.Bookmark
 	}
@@ -4431,9 +4440,6 @@ func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOpti
 	}
 	if postSearchOptions.Limit != nil {
 		body["limit"] = postSearchOptions.Limit
-	}
-	if postSearchOptions.Query != nil {
-		body["query"] = postSearchOptions.Query
 	}
 	if postSearchOptions.Sort != nil {
 		body["sort"] = postSearchOptions.Sort
@@ -4967,6 +4973,10 @@ func (cloudant *CloudantV1) HeadSchedulerJob(headSchedulerJobOptions *HeadSchedu
 // PostReplicate : Create or modify a replication operation
 // Requests, configures, or stops a replicate operation.
 func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postReplicateOptions, "postReplicateOptions cannot be nil")
+	if err != nil {
+		return
+	}
 	err = core.ValidateStruct(postReplicateOptions, "postReplicateOptions")
 	if err != nil {
 		return
@@ -4989,11 +4999,9 @@ func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOpt
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	if postReplicateOptions.ReplicationDocument != nil {
-		_, err = builder.SetBodyContentJSON(postReplicateOptions.ReplicationDocument)
-		if err != nil {
-			return
-		}
+	_, err = builder.SetBodyContentJSON(postReplicateOptions.ReplicationDocument)
+	if err != nil {
+		return
 	}
 
 	request, err := builder.Build()
@@ -5215,11 +5223,9 @@ func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions
 		builder.AddQuery("rev", fmt.Sprint(*putReplicationDocumentOptions.Rev))
 	}
 
-	if putReplicationDocumentOptions.ReplicationDocument != nil {
-		_, err = builder.SetBodyContentJSON(putReplicationDocumentOptions.ReplicationDocument)
-		if err != nil {
-			return
-		}
+	_, err = builder.SetBodyContentJSON(putReplicationDocumentOptions.ReplicationDocument)
+	if err != nil {
+		return
 	}
 
 	request, err := builder.Build()
@@ -5495,146 +5501,6 @@ func (cloudant *CloudantV1) GetSessionInformation(getSessionInformationOptions *
 	return
 }
 
-// DeleteIamSession : Delete an IAM cookie session
-// Returns a response that instructs the HTTP client to clear the cookie. The session cookies are stateless and cannot
-// be invalidated; hence, this operation is optional and does not invalidate the cookie on the server.
-func (cloudant *CloudantV1) DeleteIamSession(deleteIamSessionOptions *DeleteIamSessionOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(deleteIamSessionOptions, "deleteIamSessionOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.DELETE)
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_iam_session`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range deleteIamSessionOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteIamSession")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
-// GetIamSessionInformation : Retrieve current IAM cookie session information
-// Retrieves information about an IAM cookie session.
-func (cloudant *CloudantV1) GetIamSessionInformation(getIamSessionInformationOptions *GetIamSessionInformationOptions) (result *IamSessionInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getIamSessionInformationOptions, "getIamSessionInformationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_iam_session`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getIamSessionInformationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetIamSessionInformation")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIamSessionInformation)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
-// PostIamSession : Create a session cookie by using an IAM token
-// Log in by exchanging an IAM token for an IBM Cloudant cookie.
-func (cloudant *CloudantV1) PostIamSession(postIamSessionOptions *PostIamSessionOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(postIamSessionOptions, "postIamSessionOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_iam_session`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range postIamSessionOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostIamSession")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-
-	body := make(map[string]interface{})
-	if postIamSessionOptions.AccessToken != nil {
-		body["access_token"] = postIamSessionOptions.AccessToken
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
 // GetSecurity : Retrieve database permissions information
 // See who has permission to read, write, and manage the database. The credentials you use to log in to the dashboard
 // automatically include `_admin` permissions to all databases you create. Everyone and everything else, including users
@@ -5840,14 +5706,14 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurity
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if putCloudantSecurityConfigurationOptions.Cloudant != nil {
+		body["cloudant"] = putCloudantSecurityConfigurationOptions.Cloudant
+	}
 	if putCloudantSecurityConfigurationOptions.Admins != nil {
 		body["admins"] = putCloudantSecurityConfigurationOptions.Admins
 	}
 	if putCloudantSecurityConfigurationOptions.Members != nil {
 		body["members"] = putCloudantSecurityConfigurationOptions.Members
-	}
-	if putCloudantSecurityConfigurationOptions.Cloudant != nil {
-		body["cloudant"] = putCloudantSecurityConfigurationOptions.Cloudant
 	}
 	if putCloudantSecurityConfigurationOptions.CouchdbAuthOnly != nil {
 		body["couchdb_auth_only"] = putCloudantSecurityConfigurationOptions.CouchdbAuthOnly
@@ -5924,6 +5790,10 @@ func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCor
 // Sets the CORS configuration. The configuration applies to all databases and all account level endpoints in your
 // account.
 func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(putCorsConfigurationOptions, "putCorsConfigurationOptions cannot be nil")
+	if err != nil {
+		return
+	}
 	err = core.ValidateStruct(putCorsConfigurationOptions, "putCorsConfigurationOptions")
 	if err != nil {
 		return
@@ -5947,14 +5817,14 @@ func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *Pu
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
+	if putCorsConfigurationOptions.Origins != nil {
+		body["origins"] = putCorsConfigurationOptions.Origins
+	}
 	if putCorsConfigurationOptions.AllowCredentials != nil {
 		body["allow_credentials"] = putCorsConfigurationOptions.AllowCredentials
 	}
 	if putCorsConfigurationOptions.EnableCors != nil {
 		body["enable_cors"] = putCorsConfigurationOptions.EnableCors
-	}
-	if putCorsConfigurationOptions.Origins != nil {
-		body["origins"] = putCorsConfigurationOptions.Origins
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -6601,60 +6471,6 @@ func (cloudant *CloudantV1) PostLocalDocsQueries(postLocalDocsQueriesOptions *Po
 	return
 }
 
-// PostEnsureFullCommit : Commit any recent changes to the specified database to disk
-// Commits any recent changes to the specified database to disk. You must make a request to this endpoint if you want to
-// ensure that recent changes have been flushed. This function is likely not required, assuming you have the recommended
-// configuration setting, `delayed_commits=false`. This setting requires that changes are written to disk before a 200
-// or similar result is returned.
-func (cloudant *CloudantV1) PostEnsureFullCommit(postEnsureFullCommitOptions *PostEnsureFullCommitOptions) (result *EnsureFullCommitInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postEnsureFullCommitOptions, "postEnsureFullCommitOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(postEnsureFullCommitOptions, "postEnsureFullCommitOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"db": *postEnsureFullCommitOptions.Db,
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_ensure_full_commit`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range postEnsureFullCommitOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostEnsureFullCommit")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnsureFullCommitInformation)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
 // PostMissingRevs : Query which document revisions are missing from the database
 // Given a list of document revisions, returns the document revisions that do not exist in the database.
 func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
@@ -6688,11 +6504,9 @@ func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingR
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	if postMissingRevsOptions.DocumentRevisions != nil {
-		_, err = builder.SetBodyContentJSON(postMissingRevsOptions.DocumentRevisions)
-		if err != nil {
-			return
-		}
+	_, err = builder.SetBodyContentJSON(postMissingRevsOptions.DocumentRevisions)
+	if err != nil {
+		return
 	}
 
 	request, err := builder.Build()
@@ -6749,11 +6563,9 @@ func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOption
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	if postRevsDiffOptions.DocumentRevisions != nil {
-		_, err = builder.SetBodyContentJSON(postRevsDiffOptions.DocumentRevisions)
-		if err != nil {
-			return
-		}
+	_, err = builder.SetBodyContentJSON(postRevsDiffOptions.DocumentRevisions)
+	if err != nil {
+		return
 	}
 
 	request, err := builder.Build()
@@ -7482,12 +7294,21 @@ func UnmarshalAttachment(m map[string]json.RawMessage, result interface{}) (err 
 // BulkDocs : Schema for submitting documents for bulk modifications.
 type BulkDocs struct {
 	// Array of documents.
-	Docs []Document `json:"docs,omitempty"`
+	Docs []Document `json:"docs" validate:"required"`
 
 	// If `false`, prevents the database from assigning them new revision IDs. Default is `true`.
 	NewEdits *bool `json:"new_edits,omitempty"`
 }
 
+
+// NewBulkDocs : Instantiate BulkDocs (Generic Model Constructor)
+func (*CloudantV1) NewBulkDocs(docs []Document) (model *BulkDocs, err error) {
+	model = &BulkDocs{
+		Docs: docs,
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalBulkDocs unmarshals an instance of BulkDocs from the specified map of raw messages.
 func UnmarshalBulkDocs(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8296,24 +8117,6 @@ func (options *DeleteDocumentOptions) SetRev(rev string) *DeleteDocumentOptions 
 
 // SetHeaders : Allow user to set Headers
 func (options *DeleteDocumentOptions) SetHeaders(param map[string]string) *DeleteDocumentOptions {
-	options.Headers = param
-	return options
-}
-
-// DeleteIamSessionOptions : The DeleteIamSession options.
-type DeleteIamSessionOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewDeleteIamSessionOptions : Instantiate DeleteIamSessionOptions
-func (*CloudantV1) NewDeleteIamSessionOptions() *DeleteIamSessionOptions {
-	return &DeleteIamSessionOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *DeleteIamSessionOptions) SetHeaders(param map[string]string) *DeleteIamSessionOptions {
 	options.Headers = param
 	return options
 }
@@ -9226,31 +9029,6 @@ func UnmarshalDocumentShardInfo(m map[string]json.RawMessage, result interface{}
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "range", &obj.Range)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// EnsureFullCommitInformation : Schema for the status of a commit operation.
-type EnsureFullCommitInformation struct {
-	// Timestamp of when the database was opened, expressed in microseconds since the epoch.
-	InstanceStartTime *string `json:"instance_start_time,omitempty"`
-
-	// Operation status.
-	Ok *bool `json:"ok,omitempty"`
-}
-
-
-// UnmarshalEnsureFullCommitInformation unmarshals an instance of EnsureFullCommitInformation from the specified map of raw messages.
-func UnmarshalEnsureFullCommitInformation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(EnsureFullCommitInformation)
-	err = core.UnmarshalPrimitive(m, "instance_start_time", &obj.InstanceStartTime)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
 	if err != nil {
 		return
 	}
@@ -10768,24 +10546,6 @@ func (options *GetGeoOptions) SetHeaders(param map[string]string) *GetGeoOptions
 	return options
 }
 
-// GetIamSessionInformationOptions : The GetIamSessionInformation options.
-type GetIamSessionInformationOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewGetIamSessionInformationOptions : Instantiate GetIamSessionInformationOptions
-func (*CloudantV1) NewGetIamSessionInformationOptions() *GetIamSessionInformationOptions {
-	return &GetIamSessionInformationOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetIamSessionInformationOptions) SetHeaders(param map[string]string) *GetIamSessionInformationOptions {
-	options.Headers = param
-	return options
-}
-
 // GetIndexesInformationOptions : The GetIndexesInformation options.
 type GetIndexesInformationOptions struct {
 	// Path parameter to specify the database name.
@@ -11729,45 +11489,6 @@ func (options *HeadSchedulerJobOptions) SetHeaders(param map[string]string) *Hea
 	return options
 }
 
-// IamSessionInformation : Schema for information about an IAM session.
-type IamSessionInformation struct {
-	// User ID.
-	ID *string `json:"id,omitempty"`
-
-	// Session is ok.
-	Ok *bool `json:"ok,omitempty"`
-
-	// Scope of the session.
-	Scope *string `json:"scope,omitempty"`
-
-	// Type of the session.
-	Type *string `json:"type,omitempty"`
-}
-
-
-// UnmarshalIamSessionInformation unmarshals an instance of IamSessionInformation from the specified map of raw messages.
-func UnmarshalIamSessionInformation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(IamSessionInformation)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "scope", &obj.Scope)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // IndexDefinition : Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties
 // that do not apply to `json` indexes, these are:
 // * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all document
@@ -12389,16 +12110,17 @@ type PostAllDocsQueriesOptions struct {
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
-	Queries []AllDocsQuery `json:"queries,omitempty"`
+	Queries []AllDocsQuery `json:"queries" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostAllDocsQueriesOptions : Instantiate PostAllDocsQueriesOptions
-func (*CloudantV1) NewPostAllDocsQueriesOptions(db string) *PostAllDocsQueriesOptions {
+func (*CloudantV1) NewPostAllDocsQueriesOptions(db string, queries []AllDocsQuery) *PostAllDocsQueriesOptions {
 	return &PostAllDocsQueriesOptions{
 		Db: core.StringPtr(db),
+		Queries: queries,
 	}
 }
 
@@ -12490,7 +12212,7 @@ type PostBulkGetOptions struct {
 	Db *string `json:"db" validate:"required,ne="`
 
 	// List of document items to get in bulk.
-	Docs []BulkGetQueryDocument `json:"docs,omitempty"`
+	Docs []BulkGetQueryDocument `json:"docs" validate:"required"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
@@ -12510,9 +12232,10 @@ type PostBulkGetOptions struct {
 }
 
 // NewPostBulkGetOptions : Instantiate PostBulkGetOptions
-func (*CloudantV1) NewPostBulkGetOptions(db string) *PostBulkGetOptions {
+func (*CloudantV1) NewPostBulkGetOptions(db string, docs []BulkGetQueryDocument) *PostBulkGetOptions {
 	return &PostBulkGetOptions{
 		Db: core.StringPtr(db),
+		Docs: docs,
 	}
 }
 
@@ -12809,15 +12532,17 @@ func (options *PostChangesOptions) SetHeaders(param map[string]string) *PostChan
 // PostDbsInfoOptions : The PostDbsInfo options.
 type PostDbsInfoOptions struct {
 	// A list of database names.
-	Keys []string `json:"keys,omitempty"`
+	Keys []string `json:"keys" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostDbsInfoOptions : Instantiate PostDbsInfoOptions
-func (*CloudantV1) NewPostDbsInfoOptions() *PostDbsInfoOptions {
-	return &PostDbsInfoOptions{}
+func (*CloudantV1) NewPostDbsInfoOptions(keys []string) *PostDbsInfoOptions {
+	return &PostDbsInfoOptions{
+		Keys: keys,
+	}
 }
 
 // SetKeys : Allow user to set Keys
@@ -12994,21 +12719,22 @@ type PostDesignDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// The type of the response: application/json or application/octet-stream.
-	Accept *string `json:"Accept,omitempty"`
-
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
-	Queries []AllDocsQuery `json:"queries,omitempty"`
+	Queries []AllDocsQuery `json:"queries" validate:"required"`
+
+	// The type of the response: application/json or application/octet-stream.
+	Accept *string `json:"Accept,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostDesignDocsQueriesOptions : Instantiate PostDesignDocsQueriesOptions
-func (*CloudantV1) NewPostDesignDocsQueriesOptions(db string) *PostDesignDocsQueriesOptions {
+func (*CloudantV1) NewPostDesignDocsQueriesOptions(db string, queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
 	return &PostDesignDocsQueriesOptions{
 		Db: core.StringPtr(db),
+		Queries: queries,
 	}
 }
 
@@ -13018,15 +12744,15 @@ func (options *PostDesignDocsQueriesOptions) SetDb(db string) *PostDesignDocsQue
 	return options
 }
 
-// SetAccept : Allow user to set Accept
-func (options *PostDesignDocsQueriesOptions) SetAccept(accept string) *PostDesignDocsQueriesOptions {
-	options.Accept = core.StringPtr(accept)
-	return options
-}
-
 // SetQueries : Allow user to set Queries
 func (options *PostDesignDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
 	options.Queries = queries
+	return options
+}
+
+// SetAccept : Allow user to set Accept
+func (options *PostDesignDocsQueriesOptions) SetAccept(accept string) *PostDesignDocsQueriesOptions {
+	options.Accept = core.StringPtr(accept)
 	return options
 }
 
@@ -13108,56 +12834,10 @@ func (options *PostDocumentOptions) SetHeaders(param map[string]string) *PostDoc
 	return options
 }
 
-// PostEnsureFullCommitOptions : The PostEnsureFullCommit options.
-type PostEnsureFullCommitOptions struct {
-	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewPostEnsureFullCommitOptions : Instantiate PostEnsureFullCommitOptions
-func (*CloudantV1) NewPostEnsureFullCommitOptions(db string) *PostEnsureFullCommitOptions {
-	return &PostEnsureFullCommitOptions{
-		Db: core.StringPtr(db),
-	}
-}
-
-// SetDb : Allow user to set Db
-func (options *PostEnsureFullCommitOptions) SetDb(db string) *PostEnsureFullCommitOptions {
-	options.Db = core.StringPtr(db)
-	return options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *PostEnsureFullCommitOptions) SetHeaders(param map[string]string) *PostEnsureFullCommitOptions {
-	options.Headers = param
-	return options
-}
-
 // PostExplainOptions : The PostExplain options.
 type PostExplainOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
-
-	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
-
-	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
-	Conflicts *bool `json:"conflicts,omitempty"`
-
-	// Use this option to find information about the query that was run. This information includes total key lookups, total
-	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
-	// is fetched).
-	ExecutionStats *bool `json:"execution_stats,omitempty"`
-
-	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
-	// it is omitted, the entire document is returned.
-	Fields []string `json:"fields,omitempty"`
-
-	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
-	Limit *int64 `json:"limit,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -13182,7 +12862,25 @@ type PostExplainOptions struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector,omitempty"`
+	Selector map[string]interface{} `json:"selector" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
@@ -13226,15 +12924,22 @@ const (
 )
 
 // NewPostExplainOptions : Instantiate PostExplainOptions
-func (*CloudantV1) NewPostExplainOptions(db string) *PostExplainOptions {
+func (*CloudantV1) NewPostExplainOptions(db string, selector map[string]interface{}) *PostExplainOptions {
 	return &PostExplainOptions{
 		Db: core.StringPtr(db),
+		Selector: selector,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PostExplainOptions) SetDb(db string) *PostExplainOptions {
 	options.Db = core.StringPtr(db)
+	return options
+}
+
+// SetSelector : Allow user to set Selector
+func (options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
+	options.Selector = selector
 	return options
 }
 
@@ -13265,12 +12970,6 @@ func (options *PostExplainOptions) SetFields(fields []string) *PostExplainOption
 // SetLimit : Allow user to set Limit
 func (options *PostExplainOptions) SetLimit(limit int64) *PostExplainOptions {
 	options.Limit = core.Int64Ptr(limit)
-	return options
-}
-
-// SetSelector : Allow user to set Selector
-func (options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
-	options.Selector = selector
 	return options
 }
 
@@ -13321,24 +13020,6 @@ type PostFindOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
-
-	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
-	Conflicts *bool `json:"conflicts,omitempty"`
-
-	// Use this option to find information about the query that was run. This information includes total key lookups, total
-	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
-	// is fetched).
-	ExecutionStats *bool `json:"execution_stats,omitempty"`
-
-	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
-	// it is omitted, the entire document is returned.
-	Fields []string `json:"fields,omitempty"`
-
-	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
-	Limit *int64 `json:"limit,omitempty"`
-
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
 	//
@@ -13362,7 +13043,25 @@ type PostFindOptions struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector,omitempty"`
+	Selector map[string]interface{} `json:"selector" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
@@ -13406,15 +13105,22 @@ const (
 )
 
 // NewPostFindOptions : Instantiate PostFindOptions
-func (*CloudantV1) NewPostFindOptions(db string) *PostFindOptions {
+func (*CloudantV1) NewPostFindOptions(db string, selector map[string]interface{}) *PostFindOptions {
 	return &PostFindOptions{
 		Db: core.StringPtr(db),
+		Selector: selector,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PostFindOptions) SetDb(db string) *PostFindOptions {
 	options.Db = core.StringPtr(db)
+	return options
+}
+
+// SetSelector : Allow user to set Selector
+func (options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
+	options.Selector = selector
 	return options
 }
 
@@ -13445,12 +13151,6 @@ func (options *PostFindOptions) SetFields(fields []string) *PostFindOptions {
 // SetLimit : Allow user to set Limit
 func (options *PostFindOptions) SetLimit(limit int64) *PostFindOptions {
 	options.Limit = core.Int64Ptr(limit)
-	return options
-}
-
-// SetSelector : Allow user to set Selector
-func (options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
-	options.Selector = selector
 	return options
 }
 
@@ -13524,36 +13224,16 @@ func (options *PostGeoCleanupOptions) SetHeaders(param map[string]string) *PostG
 	return options
 }
 
-// PostIamSessionOptions : The PostIamSession options.
-type PostIamSessionOptions struct {
-	// Token obtained from the IAM service.
-	AccessToken *string `json:"access_token,omitempty"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewPostIamSessionOptions : Instantiate PostIamSessionOptions
-func (*CloudantV1) NewPostIamSessionOptions() *PostIamSessionOptions {
-	return &PostIamSessionOptions{}
-}
-
-// SetAccessToken : Allow user to set AccessToken
-func (options *PostIamSessionOptions) SetAccessToken(accessToken string) *PostIamSessionOptions {
-	options.AccessToken = core.StringPtr(accessToken)
-	return options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *PostIamSessionOptions) SetHeaders(param map[string]string) *PostIamSessionOptions {
-	options.Headers = param
-	return options
-}
-
 // PostIndexOptions : The PostIndex options.
 type PostIndexOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
+
+	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
+	// properties that do not apply to `json` indexes, these are:
+	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
+	// document fields and what analyzer to use for that purpose.
+	Index *IndexDefinition `json:"index" validate:"required"`
 
 	// Name of the design document in which the index will be created.
 	Ddoc *string `json:"ddoc,omitempty"`
@@ -13563,12 +13243,6 @@ type PostIndexOptions struct {
 	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
 	// document fields and what analyzer to use for that purpose.
 	Def *IndexDefinition `json:"def,omitempty"`
-
-	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
-	// properties that do not apply to `json` indexes, these are:
-	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-	// document fields and what analyzer to use for that purpose.
-	Index *IndexDefinition `json:"index,omitempty"`
 
 	// name.
 	Name *string `json:"name,omitempty"`
@@ -13618,15 +13292,22 @@ const (
 )
 
 // NewPostIndexOptions : Instantiate PostIndexOptions
-func (*CloudantV1) NewPostIndexOptions(db string) *PostIndexOptions {
+func (*CloudantV1) NewPostIndexOptions(db string, index *IndexDefinition) *PostIndexOptions {
 	return &PostIndexOptions{
 		Db: core.StringPtr(db),
+		Index: index,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PostIndexOptions) SetDb(db string) *PostIndexOptions {
 	options.Db = core.StringPtr(db)
+	return options
+}
+
+// SetIndex : Allow user to set Index
+func (options *PostIndexOptions) SetIndex(index *IndexDefinition) *PostIndexOptions {
+	options.Index = index
 	return options
 }
 
@@ -13639,12 +13320,6 @@ func (options *PostIndexOptions) SetDdoc(ddoc string) *PostIndexOptions {
 // SetDef : Allow user to set Def
 func (options *PostIndexOptions) SetDef(def *IndexDefinition) *PostIndexOptions {
 	options.Def = def
-	return options
-}
-
-// SetIndex : Allow user to set Index
-func (options *PostIndexOptions) SetIndex(index *IndexDefinition) *PostIndexOptions {
-	options.Index = index
 	return options
 }
 
@@ -13840,21 +13515,22 @@ type PostLocalDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// The type of the response: application/json or application/octet-stream.
-	Accept *string `json:"Accept,omitempty"`
-
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
-	Queries []AllDocsQuery `json:"queries,omitempty"`
+	Queries []AllDocsQuery `json:"queries" validate:"required"`
+
+	// The type of the response: application/json or application/octet-stream.
+	Accept *string `json:"Accept,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostLocalDocsQueriesOptions : Instantiate PostLocalDocsQueriesOptions
-func (*CloudantV1) NewPostLocalDocsQueriesOptions(db string) *PostLocalDocsQueriesOptions {
+func (*CloudantV1) NewPostLocalDocsQueriesOptions(db string, queries []AllDocsQuery) *PostLocalDocsQueriesOptions {
 	return &PostLocalDocsQueriesOptions{
 		Db: core.StringPtr(db),
+		Queries: queries,
 	}
 }
 
@@ -13864,15 +13540,15 @@ func (options *PostLocalDocsQueriesOptions) SetDb(db string) *PostLocalDocsQueri
 	return options
 }
 
-// SetAccept : Allow user to set Accept
-func (options *PostLocalDocsQueriesOptions) SetAccept(accept string) *PostLocalDocsQueriesOptions {
-	options.Accept = core.StringPtr(accept)
-	return options
-}
-
 // SetQueries : Allow user to set Queries
 func (options *PostLocalDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostLocalDocsQueriesOptions {
 	options.Queries = queries
+	return options
+}
+
+// SetAccept : Allow user to set Accept
+func (options *PostLocalDocsQueriesOptions) SetAccept(accept string) *PostLocalDocsQueriesOptions {
+	options.Accept = core.StringPtr(accept)
 	return options
 }
 
@@ -13888,16 +13564,17 @@ type PostMissingRevsOptions struct {
 	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
-	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
+	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostMissingRevsOptions : Instantiate PostMissingRevsOptions
-func (*CloudantV1) NewPostMissingRevsOptions(db string) *PostMissingRevsOptions {
+func (*CloudantV1) NewPostMissingRevsOptions(db string, documentRevisions map[string][]string) *PostMissingRevsOptions {
 	return &PostMissingRevsOptions{
 		Db: core.StringPtr(db),
+		DocumentRevisions: documentRevisions,
 	}
 }
 
@@ -14085,24 +13762,6 @@ type PostPartitionFindOptions struct {
 	// Path parameter to specify the database partition key.
 	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
-	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
-
-	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
-	Conflicts *bool `json:"conflicts,omitempty"`
-
-	// Use this option to find information about the query that was run. This information includes total key lookups, total
-	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
-	// is fetched).
-	ExecutionStats *bool `json:"execution_stats,omitempty"`
-
-	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
-	// it is omitted, the entire document is returned.
-	Fields []string `json:"fields,omitempty"`
-
-	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
-	Limit *int64 `json:"limit,omitempty"`
-
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
 	//
@@ -14126,7 +13785,25 @@ type PostPartitionFindOptions struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector,omitempty"`
+	Selector map[string]interface{} `json:"selector" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
@@ -14164,10 +13841,11 @@ const (
 )
 
 // NewPostPartitionFindOptions : Instantiate PostPartitionFindOptions
-func (*CloudantV1) NewPostPartitionFindOptions(db string, partitionKey string) *PostPartitionFindOptions {
+func (*CloudantV1) NewPostPartitionFindOptions(db string, partitionKey string, selector map[string]interface{}) *PostPartitionFindOptions {
 	return &PostPartitionFindOptions{
 		Db: core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
+		Selector: selector,
 	}
 }
 
@@ -14180,6 +13858,12 @@ func (options *PostPartitionFindOptions) SetDb(db string) *PostPartitionFindOpti
 // SetPartitionKey : Allow user to set PartitionKey
 func (options *PostPartitionFindOptions) SetPartitionKey(partitionKey string) *PostPartitionFindOptions {
 	options.PartitionKey = core.StringPtr(partitionKey)
+	return options
+}
+
+// SetSelector : Allow user to set Selector
+func (options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
+	options.Selector = selector
 	return options
 }
 
@@ -14210,12 +13894,6 @@ func (options *PostPartitionFindOptions) SetFields(fields []string) *PostPartiti
 // SetLimit : Allow user to set Limit
 func (options *PostPartitionFindOptions) SetLimit(limit int64) *PostPartitionFindOptions {
 	options.Limit = core.Int64Ptr(limit)
-	return options
-}
-
-// SetSelector : Allow user to set Selector
-func (options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
-	options.Selector = selector
 	return options
 }
 
@@ -14270,6 +13948,9 @@ type PostPartitionSearchOptions struct {
 	// Path parameter to specify the index name.
 	Index *string `json:"index" validate:"required,ne="`
 
+	// The Lucene query to execute.
+	Query *string `json:"query" validate:"required"`
+
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
 
@@ -14300,9 +13981,6 @@ type PostPartitionSearchOptions struct {
 	// Limit the number of the returned documents to the specified number.
 	Limit *int64 `json:"limit,omitempty"`
 
-	// The Lucene query to execute.
-	Query *string `json:"query,omitempty"`
-
 	// Specifies the sort order of the results. In a grouped search (when group_field is used), this parameter specifies
 	// the sort order within a group. The default sort order is relevance.  A JSON string of the form
 	// "fieldname&lt;type&gt;" or "-fieldname&lt;type&gt;" for descending order, where fieldname is the name of a string or
@@ -14326,12 +14004,13 @@ const (
 )
 
 // NewPostPartitionSearchOptions : Instantiate PostPartitionSearchOptions
-func (*CloudantV1) NewPostPartitionSearchOptions(db string, partitionKey string, ddoc string, index string) *PostPartitionSearchOptions {
+func (*CloudantV1) NewPostPartitionSearchOptions(db string, partitionKey string, ddoc string, index string, query string) *PostPartitionSearchOptions {
 	return &PostPartitionSearchOptions{
 		Db: core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
 		Ddoc: core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
+		Query: core.StringPtr(query),
 	}
 }
 
@@ -14356,6 +14035,12 @@ func (options *PostPartitionSearchOptions) SetDdoc(ddoc string) *PostPartitionSe
 // SetIndex : Allow user to set Index
 func (options *PostPartitionSearchOptions) SetIndex(index string) *PostPartitionSearchOptions {
 	options.Index = core.StringPtr(index)
+	return options
+}
+
+// SetQuery : Allow user to set Query
+func (options *PostPartitionSearchOptions) SetQuery(query string) *PostPartitionSearchOptions {
+	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -14410,12 +14095,6 @@ func (options *PostPartitionSearchOptions) SetIncludeFields(includeFields []stri
 // SetLimit : Allow user to set Limit
 func (options *PostPartitionSearchOptions) SetLimit(limit int64) *PostPartitionSearchOptions {
 	options.Limit = core.Int64Ptr(limit)
-	return options
-}
-
-// SetQuery : Allow user to set Query
-func (options *PostPartitionSearchOptions) SetQuery(query string) *PostPartitionSearchOptions {
-	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -14693,15 +14372,17 @@ func (options *PostPartitionViewOptions) SetHeaders(param map[string]string) *Po
 // PostReplicateOptions : The PostReplicate options.
 type PostReplicateOptions struct {
 	// HTTP request body for replication operations.
-	ReplicationDocument *ReplicationDocument `json:"replicationDocument,omitempty"`
+	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostReplicateOptions : Instantiate PostReplicateOptions
-func (*CloudantV1) NewPostReplicateOptions() *PostReplicateOptions {
-	return &PostReplicateOptions{}
+func (*CloudantV1) NewPostReplicateOptions(replicationDocument *ReplicationDocument) *PostReplicateOptions {
+	return &PostReplicateOptions{
+		ReplicationDocument: replicationDocument,
+	}
 }
 
 // SetReplicationDocument : Allow user to set ReplicationDocument
@@ -14722,16 +14403,17 @@ type PostRevsDiffOptions struct {
 	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
-	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
+	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostRevsDiffOptions : Instantiate PostRevsDiffOptions
-func (*CloudantV1) NewPostRevsDiffOptions(db string) *PostRevsDiffOptions {
+func (*CloudantV1) NewPostRevsDiffOptions(db string, documentRevisions map[string][]string) *PostRevsDiffOptions {
 	return &PostRevsDiffOptions{
 		Db: core.StringPtr(db),
+		DocumentRevisions: documentRevisions,
 	}
 }
 
@@ -14756,10 +14438,10 @@ func (options *PostRevsDiffOptions) SetHeaders(param map[string]string) *PostRev
 // PostSearchAnalyzeOptions : The PostSearchAnalyze options.
 type PostSearchAnalyzeOptions struct {
 	// analyzer.
-	Analyzer *string `json:"analyzer,omitempty"`
+	Analyzer *string `json:"analyzer" validate:"required"`
 
 	// text.
-	Text *string `json:"text,omitempty"`
+	Text *string `json:"text" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -14811,8 +14493,11 @@ const (
 )
 
 // NewPostSearchAnalyzeOptions : Instantiate PostSearchAnalyzeOptions
-func (*CloudantV1) NewPostSearchAnalyzeOptions() *PostSearchAnalyzeOptions {
-	return &PostSearchAnalyzeOptions{}
+func (*CloudantV1) NewPostSearchAnalyzeOptions(analyzer string, text string) *PostSearchAnalyzeOptions {
+	return &PostSearchAnalyzeOptions{
+		Analyzer: core.StringPtr(analyzer),
+		Text: core.StringPtr(text),
+	}
 }
 
 // SetAnalyzer : Allow user to set Analyzer
@@ -14845,6 +14530,9 @@ type PostSearchOptions struct {
 	// Path parameter to specify the index name.
 	Index *string `json:"index" validate:"required,ne="`
 
+	// The Lucene query to execute.
+	Query *string `json:"query" validate:"required"`
+
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
 
@@ -14874,9 +14562,6 @@ type PostSearchOptions struct {
 
 	// Limit the number of the returned documents to the specified number.
 	Limit *int64 `json:"limit,omitempty"`
-
-	// The Lucene query to execute.
-	Query *string `json:"query,omitempty"`
 
 	// Specifies the sort order of the results. In a grouped search (when group_field is used), this parameter specifies
 	// the sort order within a group. The default sort order is relevance.  A JSON string of the form
@@ -14930,11 +14615,12 @@ const (
 )
 
 // NewPostSearchOptions : Instantiate PostSearchOptions
-func (*CloudantV1) NewPostSearchOptions(db string, ddoc string, index string) *PostSearchOptions {
+func (*CloudantV1) NewPostSearchOptions(db string, ddoc string, index string, query string) *PostSearchOptions {
 	return &PostSearchOptions{
 		Db: core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
+		Query: core.StringPtr(query),
 	}
 }
 
@@ -14953,6 +14639,12 @@ func (options *PostSearchOptions) SetDdoc(ddoc string) *PostSearchOptions {
 // SetIndex : Allow user to set Index
 func (options *PostSearchOptions) SetIndex(index string) *PostSearchOptions {
 	options.Index = core.StringPtr(index)
+	return options
+}
+
+// SetQuery : Allow user to set Query
+func (options *PostSearchOptions) SetQuery(query string) *PostSearchOptions {
+	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -15007,12 +14699,6 @@ func (options *PostSearchOptions) SetIncludeFields(includeFields []string) *Post
 // SetLimit : Allow user to set Limit
 func (options *PostSearchOptions) SetLimit(limit int64) *PostSearchOptions {
 	options.Limit = core.Int64Ptr(limit)
-	return options
-}
-
-// SetQuery : Allow user to set Query
-func (options *PostSearchOptions) SetQuery(query string) *PostSearchOptions {
-	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -15327,18 +15013,19 @@ type PostViewQueriesOptions struct {
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular view request.
-	Queries []ViewQuery `json:"queries,omitempty"`
+	Queries []ViewQuery `json:"queries" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostViewQueriesOptions : Instantiate PostViewQueriesOptions
-func (*CloudantV1) NewPostViewQueriesOptions(db string, ddoc string, view string) *PostViewQueriesOptions {
+func (*CloudantV1) NewPostViewQueriesOptions(db string, ddoc string, view string, queries []ViewQuery) *PostViewQueriesOptions {
 	return &PostViewQueriesOptions{
 		Db: core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 		View: core.StringPtr(view),
+		Queries: queries,
 	}
 }
 
@@ -15463,14 +15150,14 @@ type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
+	// Database permissions for Cloudant users and/or API keys.
+	Cloudant map[string][]string `json:"cloudant" validate:"required"`
+
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
 
 	// Schema for names and roles to map to a database permission.
 	Members *SecurityObject `json:"members,omitempty"`
-
-	// Database permissions for Cloudant users and/or API keys.
-	Cloudant map[string][]string `json:"cloudant,omitempty"`
 
 	// Manage permissions using the `_users` database only.
 	CouchdbAuthOnly *bool `json:"couchdb_auth_only,omitempty"`
@@ -15493,15 +15180,22 @@ const (
 )
 
 // NewPutCloudantSecurityConfigurationOptions : Instantiate PutCloudantSecurityConfigurationOptions
-func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string) *PutCloudantSecurityConfigurationOptions {
+func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string, cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
 	return &PutCloudantSecurityConfigurationOptions{
 		Db: core.StringPtr(db),
+		Cloudant: cloudant,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PutCloudantSecurityConfigurationOptions) SetDb(db string) *PutCloudantSecurityConfigurationOptions {
 	options.Db = core.StringPtr(db)
+	return options
+}
+
+// SetCloudant : Allow user to set Cloudant
+func (options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
+	options.Cloudant = cloudant
 	return options
 }
 
@@ -15514,12 +15208,6 @@ func (options *PutCloudantSecurityConfigurationOptions) SetAdmins(admins *Securi
 // SetMembers : Allow user to set Members
 func (options *PutCloudantSecurityConfigurationOptions) SetMembers(members *SecurityObject) *PutCloudantSecurityConfigurationOptions {
 	options.Members = members
-	return options
-}
-
-// SetCloudant : Allow user to set Cloudant
-func (options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
-	options.Cloudant = cloudant
 	return options
 }
 
@@ -15537,6 +15225,11 @@ func (options *PutCloudantSecurityConfigurationOptions) SetHeaders(param map[str
 
 // PutCorsConfigurationOptions : The PutCorsConfiguration options.
 type PutCorsConfigurationOptions struct {
+	// An array of strings that contain allowed origin domains. You have to specify the full URL including the protocol. It
+	// is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you have to specify
+	// all subdomains used.
+	Origins []string `json:"origins" validate:"required"`
+
 	// Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
 	// withCredentials = true.
 	AllowCredentials *bool `json:"allow_credentials,omitempty"`
@@ -15544,18 +15237,21 @@ type PutCorsConfigurationOptions struct {
 	// Boolean value to turn CORS on and off.
 	EnableCors *bool `json:"enable_cors,omitempty"`
 
-	// An array of strings that contain allowed origin domains. You have to specify the full URL including the protocol. It
-	// is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you have to specify
-	// all subdomains used.
-	Origins []string `json:"origins,omitempty"`
-
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPutCorsConfigurationOptions : Instantiate PutCorsConfigurationOptions
-func (*CloudantV1) NewPutCorsConfigurationOptions() *PutCorsConfigurationOptions {
-	return &PutCorsConfigurationOptions{}
+func (*CloudantV1) NewPutCorsConfigurationOptions(origins []string) *PutCorsConfigurationOptions {
+	return &PutCorsConfigurationOptions{
+		Origins: origins,
+	}
+}
+
+// SetOrigins : Allow user to set Origins
+func (options *PutCorsConfigurationOptions) SetOrigins(origins []string) *PutCorsConfigurationOptions {
+	options.Origins = origins
+	return options
 }
 
 // SetAllowCredentials : Allow user to set AllowCredentials
@@ -15567,12 +15263,6 @@ func (options *PutCorsConfigurationOptions) SetAllowCredentials(allowCredentials
 // SetEnableCors : Allow user to set EnableCors
 func (options *PutCorsConfigurationOptions) SetEnableCors(enableCors bool) *PutCorsConfigurationOptions {
 	options.EnableCors = core.BoolPtr(enableCors)
-	return options
-}
-
-// SetOrigins : Allow user to set Origins
-func (options *PutCorsConfigurationOptions) SetOrigins(origins []string) *PutCorsConfigurationOptions {
-	options.Origins = origins
 	return options
 }
 
@@ -15639,7 +15329,7 @@ type PutDesignDocumentOptions struct {
 	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// HTTP request body for DesignDocument operations.
-	DesignDocument *DesignDocument `json:"designDocument,omitempty"`
+	DesignDocument *DesignDocument `json:"designDocument" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -15668,10 +15358,11 @@ const (
 )
 
 // NewPutDesignDocumentOptions : Instantiate PutDesignDocumentOptions
-func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string) *PutDesignDocumentOptions {
+func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string, designDocument *DesignDocument) *PutDesignDocumentOptions {
 	return &PutDesignDocumentOptions{
 		Db: core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
+		DesignDocument: designDocument,
 	}
 }
 
@@ -15922,7 +15613,7 @@ type PutReplicationDocumentOptions struct {
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for replication operations.
-	ReplicationDocument *ReplicationDocument `json:"replicationDocument,omitempty"`
+	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -15951,9 +15642,10 @@ const (
 )
 
 // NewPutReplicationDocumentOptions : Instantiate PutReplicationDocumentOptions
-func (*CloudantV1) NewPutReplicationDocumentOptions(docID string) *PutReplicationDocumentOptions {
+func (*CloudantV1) NewPutReplicationDocumentOptions(docID string, replicationDocument *ReplicationDocument) *PutReplicationDocumentOptions {
 	return &PutReplicationDocumentOptions{
 		DocID: core.StringPtr(docID),
+		ReplicationDocument: replicationDocument,
 	}
 }
 
@@ -16161,9 +15853,18 @@ func UnmarshalReplicationDatabaseAuth(m map[string]json.RawMessage, result inter
 // ReplicationDatabaseAuthIam : Schema for an IAM API key for replication database authentication.
 type ReplicationDatabaseAuthIam struct {
 	// IAM API key.
-	ApiKey *string `json:"api_key,omitempty"`
+	ApiKey *string `json:"api_key" validate:"required"`
 }
 
+
+// NewReplicationDatabaseAuthIam : Instantiate ReplicationDatabaseAuthIam (Generic Model Constructor)
+func (*CloudantV1) NewReplicationDatabaseAuthIam(apiKey string) (model *ReplicationDatabaseAuthIam, err error) {
+	model = &ReplicationDatabaseAuthIam{
+		ApiKey: core.StringPtr(apiKey),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalReplicationDatabaseAuthIam unmarshals an instance of ReplicationDatabaseAuthIam from the specified map of raw messages.
 func UnmarshalReplicationDatabaseAuthIam(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -16274,13 +15975,13 @@ type ReplicationDocument struct {
 	SocketOptions *string `json:"socket_options,omitempty"`
 
 	// Schema for a replication source or target database.
-	Source *ReplicationDatabase `json:"source,omitempty"`
+	Source *ReplicationDatabase `json:"source" validate:"required"`
 
 	// Address of a (http or socks5 protocol) proxy server through which replication with the source database should occur.
 	SourceProxy *string `json:"source_proxy,omitempty"`
 
 	// Schema for a replication source or target database.
-	Target *ReplicationDatabase `json:"target,omitempty"`
+	Target *ReplicationDatabase `json:"target" validate:"required"`
 
 	// Address of a (http or socks5 protocol) proxy server through which replication with the target database should occur.
 	TargetProxy *string `json:"target_proxy,omitempty"`
@@ -16304,6 +16005,16 @@ type ReplicationDocument struct {
 	additionalProperties map[string]interface{}
 }
 
+
+// NewReplicationDocument : Instantiate ReplicationDocument (Generic Model Constructor)
+func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *ReplicationDatabase) (model *ReplicationDocument, err error) {
+	model = &ReplicationDocument{
+		Source: source,
+		Target: target,
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // SetProperty allows the user to set an arbitrary property on an instance of ReplicationDocument
 func (o *ReplicationDocument) SetProperty(key string, value interface{}) {
