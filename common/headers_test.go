@@ -16,39 +16,36 @@ package common
 
 import (
 	"strings"
-	"testing"
 
-	"github.com/stretchr/testify/assert"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestGetSystemInfo(t *testing.T) {
-	var sysinfo = GetSystemInfo()
-	assert.NotNil(t, sysinfo)
-	assert.True(t, strings.Contains(sysinfo, "lang="))
-	assert.True(t, strings.Contains(sysinfo, "arch="))
-	assert.True(t, strings.Contains(sysinfo, "os="))
-	assert.True(t, strings.Contains(sysinfo, "go.version="))
-}
+var _ = Describe(`Headers Unit Tests`, func() {
+	It("Successfully load SystemInfo", func() {
+		sysinfo := GetSystemInfo()
+		Expect(sysinfo).ToNot(BeNil())
+		Expect(strings.Contains(sysinfo, "lang=")).To(BeTrue())
+		Expect(strings.Contains(sysinfo, "arch=")).To(BeTrue())
+		Expect(strings.Contains(sysinfo, "os=")).To(BeTrue())
+		Expect(strings.Contains(sysinfo, "go.version=")).To(BeTrue())
+	})
 
-func TestGetSdkHeaders(t *testing.T) {
-	var headers = GetSdkHeaders("myService", "v123", "myOperation")
-	assert.NotNil(t, headers)
+	It("Check SDK User Agent header", func() {
+		var headers = GetSdkHeaders("myService", "v123", "myOperation")
+		Expect(headers).ToNot(BeNil())
 
-	var foundIt bool
+		actUserAgentHeader, foundIt := headers[headerNameUserAgent]
+		Expect(foundIt).To(BeTrue())
+		expUserAgentHeader := sdkName + "/" + Version + " " + GetSystemInfo()
+		Expect(actUserAgentHeader).To(Equal(expUserAgentHeader))
+	})
 
-	_, foundIt = headers[headerNameUserAgent]
-	assert.True(t, foundIt)
-	t.Logf("user agent: %s\n", headers[headerNameUserAgent])
-}
-
-func TestGetSdkAnalyticsHeader(t *testing.T) {
-	var headers = GetSdkHeaders("myService", "v123", "myOperation")
-	assert.NotNil(t, headers)
-
-	var foundIt bool
-	var headerValue string
-
-	headerValue, foundIt = headers[headerNameSdkAnalytics]
-	assert.True(t, foundIt)
-	assert.Equal(t, "service_name=myService;service_version=v123;operation_id=myOperation", headerValue)
-}
+	It("Check SDK Analytics header", func() {
+		var headers = GetSdkHeaders("myService", "v123", "myOperation")
+		Expect(headers).ToNot(BeNil())
+		analyticsHeader, foundIt := headers[headerNameSdkAnalytics]
+		Expect(foundIt).To(BeTrue())
+		Expect(analyticsHeader).To(Equal("service_name=myService;service_version=v123;operation_id=myOperation"))
+	})
+})
