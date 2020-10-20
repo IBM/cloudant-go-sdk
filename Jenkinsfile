@@ -46,7 +46,6 @@ pipeline {
       post {
         always {
           junit (
-            allowEmptyResults: true,
             testResults: '**/junitreports/*.xml'
           )
         }
@@ -136,6 +135,12 @@ void applyCustomizations() {
 }
 
 void runTests() {
+  sh '''
+  for file in ./**/*suite_test.go
+  do
+    go test $(dirname $file)/... -ginkgo.reportFile ./../junitreports/$(dirname $file).xml
+  done
+  '''
 }
 
 void publishStaging() {
