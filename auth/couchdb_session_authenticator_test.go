@@ -43,6 +43,11 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		auth, err = GetAuthenticatorFromEnvironment("service2")
 		Expect(err).To(BeNil())
 		Expect(auth).ToNot(BeNil())
+		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
+
+		auth, err = GetAuthenticatorFromEnvironment("service3")
+		Expect(err).To(BeNil())
+		Expect(auth).ToNot(BeNil())
 		Expect(auth.AuthenticationType()).To(Equal(core.AUTHTYPE_IAM))
 	})
 

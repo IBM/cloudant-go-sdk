@@ -26,7 +26,7 @@ import (
 )
 
 const (
-	AUTHTYPE_COUCHDB_SESSION = "couchdbSession"
+	AUTHTYPE_COUCHDB_SESSION = "COUCHDB_SESSION"
 )
 
 var requestSessionMutex sync.Mutex
@@ -46,7 +46,8 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (authenticator core.A
 	if err != nil {
 		return
 	}
-	if props[core.PROPNAME_AUTH_TYPE] == "COUCHDB_SESSION" {
+	authType, ok := props[core.PROPNAME_AUTH_TYPE]
+	if ok && strings.EqualFold(authType, AUTHTYPE_COUCHDB_SESSION) {
 		authenticator, err = NewCouchDbSessionAuthenticatorFromMap(props)
 		return
 	}
@@ -115,6 +116,7 @@ func (a CouchDbSessionAuthenticator) Validate() error {
 
 // Authenticate adds session authentication cookie to a request.
 func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error {
+
 	cookie, err := a.getCookie()
 	if err != nil {
 		return err
