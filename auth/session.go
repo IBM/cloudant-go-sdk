@@ -49,6 +49,7 @@ func newSession(c *http.Cookie) (*session, error) {
 		expires = time.Unix(ts, 0)
 	}
 
+	// refreshTime is 20% of period between now and the expiration time
 	return &session{
 		cookie:      c,
 		expires:     expires,
