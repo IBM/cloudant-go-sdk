@@ -189,7 +189,6 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			Expect(cookie.Value).To(Equal("fakefake-1"))
 
 			// Move time into the refresh window
-			auth.session.expires = time.Now().Add(30 * time.Minute)
 			auth.session.refreshTime = time.Now().Add(-10 * time.Minute)
 
 			// Run getCookie in three parallel threads, to verify
