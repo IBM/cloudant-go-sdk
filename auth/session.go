@@ -33,7 +33,7 @@ type session struct {
 	refreshTime time.Time
 }
 
-// newSession returns new session object constructerd from AuthSession cookie.
+// newSession returns new session object constructed from AuthSession cookie.
 func newSession(c *http.Cookie) (*session, error) {
 	expires := c.Expires
 
@@ -69,14 +69,16 @@ func (s *session) isValid() bool {
 	return false
 }
 
-// needsRefresh atomically identifies if cookie is near of the expiration
+// needsRefresh atomically identifies if the cookie is near of the expiration time
 func (s *session) needsRefresh() bool {
 	now := time.Now()
 	if now.After(s.refreshTime) {
 		refreshMutex.Lock()
 		defer refreshMutex.Unlock()
 
-		// advance refresh time by one minute from now to avoid race
+		// advance refresh time by one minute to prevent a parallel process
+		// that might be waiting on mutex right now
+		// from starting the second refresh process
 		if now.After(s.refreshTime) {
 			s.refreshTime = time.Now().Add(time.Minute)
 			return true

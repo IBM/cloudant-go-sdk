@@ -42,7 +42,7 @@ var _ = Describe("Session Unit Tests", func() {
 		Expect(s.isValid()).To(BeTrue())
 	})
 
-	It("Create new Session for none-persistent cookie", func() {
+	It("Create new Session for non-persistent cookie", func() {
 		cookie := &http.Cookie{
 			Name:  "AuthSession",
 			Value: makeAuthToken(),

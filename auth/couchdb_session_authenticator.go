@@ -68,6 +68,7 @@ func NewCouchDbSessionAuthenticator(url, username, password string) (*CouchDbSes
 	return authenticator, nil
 }
 
+// NewCouchDbSessionAuthenticatorFromMap constructs a new NewCouchDbSessionAuthenticator instance from a map.
 func NewCouchDbSessionAuthenticatorFromMap(props map[string]string) (*CouchDbSessionAuthenticator, error) {
 	if props == nil {
 		return nil, fmt.Errorf(core.ERRORMSG_PROPS_MAP_NIL)
@@ -127,7 +128,7 @@ func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error 
 }
 
 // getCookie returns an AuthSession cookie to be used in a request.
-// Whenever a new cookie is needed it fetched from the session end-point.
+// A new cookie will be fetched from the session end-point when needed.
 func (a *CouchDbSessionAuthenticator) getCookie() (*http.Cookie, error) {
 	if a.session == nil || !a.session.isValid() {
 		err := a.syncRequestSession()

@@ -148,15 +148,17 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			err = auth.Authenticate(request)
 			Expect(err).To(BeNil())
 
+			// Fetch a cookie from the cache to confirm it's present
+			// and prepare cache state for the next test
 			cookie, err := auth.getCookie()
 			Expect(err).To(BeNil())
 			Expect(cookie).ToNot(BeNil())
-
 			Expect(cookie.Name).To(Equal("AuthSession"))
 			Expect(cookie.Value).To(Equal("fakefake-1"))
 			Expect(cookie.Expires).ToNot(BeNil())
 
-			// Fetch cookie again and verify we got old cookie from cache
+			// Fetch cookie again to verify cache is working as expected,
+			// we are getting old cookie and refresh process's not triggered
 			oldRefresh := auth.session.refreshTime
 			cookie, err = auth.getCookie()
 			Expect(err).To(BeNil())
@@ -188,6 +190,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			err = auth.Authenticate(request)
 			Expect(err).To(BeNil())
 
+			// Test code path in getCookie() when needsRefresh() is false
 			cookie, err := auth.getCookie()
 			Expect(err).To(BeNil())
 			Expect(cookie).ToNot(BeNil())
