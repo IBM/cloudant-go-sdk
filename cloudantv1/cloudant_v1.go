@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.12.2-b734cb71-20200916-142547
+ * IBM OpenAPI SDK Code Generator Version: 3.16.0-36b26b63-20201022-212410
  */
  
 
@@ -23,6 +23,7 @@
 package cloudantv1
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	common "github.com/IBM/cloudant-go-sdk/common"
@@ -114,17 +115,39 @@ func (cloudant *CloudantV1) SetServiceURL(url string) error {
 	return cloudant.Service.SetServiceURL(url)
 }
 
+// GetServiceURL returns the service URL
+func (cloudant *CloudantV1) GetServiceURL() string {
+	return cloudant.Service.GetServiceURL()
+}
+
+// SetEnableGzipCompression sets the service's EnableGzipCompression field
+func (cloudant *CloudantV1) SetEnableGzipCompression(enableGzip bool) {
+	cloudant.Service.SetEnableGzipCompression(enableGzip)
+}
+
+// GetEnableGzipCompression returns the service's EnableGzipCompression field
+func (cloudant *CloudantV1) GetEnableGzipCompression() bool {
+	return cloudant.Service.GetEnableGzipCompression()
+}
+
 // GetServerInformation : Retrieve server instance information
 // When you access the root of an instance, IBM Cloudant returns meta-information about the instance. The response
 // includes a JSON structure that contains information about the server, including a welcome message and the server's
 // version.
 func (cloudant *CloudantV1) GetServerInformation(getServerInformationOptions *GetServerInformationOptions) (result *ServerInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetServerInformationWithContext(context.Background(), getServerInformationOptions)
+}
+
+// GetServerInformationWithContext is an alternate form of the GetServerInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetServerInformationWithContext(ctx context.Context, getServerInformationOptions *GetServerInformationOptions) (result *ServerInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getServerInformationOptions, "getServerInformationOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/`, nil)
 	if err != nil {
 		return
@@ -163,12 +186,19 @@ func (cloudant *CloudantV1) GetServerInformation(getServerInformationOptions *Ge
 // Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
 // node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a cluster.
 func (cloudant *CloudantV1) GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetMembershipInformationWithContext(context.Background(), getMembershipInformationOptions)
+}
+
+// GetMembershipInformationWithContext is an alternate form of the GetMembershipInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Context, getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getMembershipInformationOptions, "getMembershipInformationOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_membership`, nil)
 	if err != nil {
 		return
@@ -207,12 +237,19 @@ func (cloudant *CloudantV1) GetMembershipInformation(getMembershipInformationOpt
 // Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
 // provides a list of UUIDs.
 func (cloudant *CloudantV1) GetUuids(getUuidsOptions *GetUuidsOptions) (result *UuidsResult, response *core.DetailedResponse, err error) {
+	return cloudant.GetUuidsWithContext(context.Background(), getUuidsOptions)
+}
+
+// GetUuidsWithContext is an alternate form of the GetUuids method which supports a Context parameter
+func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOptions *GetUuidsOptions) (result *UuidsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getUuidsOptions, "getUuidsOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_uuids`, nil)
 	if err != nil {
 		return
@@ -255,6 +292,11 @@ func (cloudant *CloudantV1) GetUuids(getUuidsOptions *GetUuidsOptions) (result *
 // Returns the HTTP headers that contain a minimal amount of information about the specified database. Since the
 // response body is empty, using the HEAD method is a lightweight way to check if the database exists or not.
 func (cloudant *CloudantV1) HeadDatabase(headDatabaseOptions *HeadDatabaseOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadDatabaseWithContext(context.Background(), headDatabaseOptions)
+}
+
+// HeadDatabaseWithContext is an alternate form of the HeadDatabase method which supports a Context parameter
+func (cloudant *CloudantV1) HeadDatabaseWithContext(ctx context.Context, headDatabaseOptions *HeadDatabaseOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headDatabaseOptions, "headDatabaseOptions cannot be nil")
 	if err != nil {
 		return
@@ -269,6 +311,8 @@ func (cloudant *CloudantV1) HeadDatabase(headDatabaseOptions *HeadDatabaseOption
 	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
@@ -295,12 +339,19 @@ func (cloudant *CloudantV1) HeadDatabase(headDatabaseOptions *HeadDatabaseOption
 
 // GetAllDbs : Query a list of all database names in the instance
 func (cloudant *CloudantV1) GetAllDbs(getAllDbsOptions *GetAllDbsOptions) (result []string, response *core.DetailedResponse, err error) {
+	return cloudant.GetAllDbsWithContext(context.Background(), getAllDbsOptions)
+}
+
+// GetAllDbsWithContext is an alternate form of the GetAllDbs method which supports a Context parameter
+func (cloudant *CloudantV1) GetAllDbsWithContext(ctx context.Context, getAllDbsOptions *GetAllDbsOptions) (result []string, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getAllDbsOptions, "getAllDbsOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_all_dbs`, nil)
 	if err != nil {
 		return
@@ -347,6 +398,11 @@ func (cloudant *CloudantV1) GetAllDbs(getAllDbsOptions *GetAllDbsOptions) (resul
 // multiple `GET /{db}` requests. It returns a list that contains an information object for each database specified in
 // the request.
 func (cloudant *CloudantV1) PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) (result []DbsInfoResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostDbsInfoWithContext(context.Background(), postDbsInfoOptions)
+}
+
+// PostDbsInfoWithContext is an alternate form of the PostDbsInfo method which supports a Context parameter
+func (cloudant *CloudantV1) PostDbsInfoWithContext(ctx context.Context, postDbsInfoOptions *PostDbsInfoOptions) (result []DbsInfoResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDbsInfoOptions, "postDbsInfoOptions cannot be nil")
 	if err != nil {
 		return
@@ -357,6 +413,8 @@ func (cloudant *CloudantV1) PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_dbs_info`, nil)
 	if err != nil {
 		return
@@ -406,6 +464,11 @@ func (cloudant *CloudantV1) PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) 
 // the server responds with a 400 HTTP status code when the request URL includes a `?rev=` parameter. This response
 // suggests that a user wanted to delete a document but forgot to add the document ID to the URL.
 func (cloudant *CloudantV1) DeleteDatabase(deleteDatabaseOptions *DeleteDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteDatabaseWithContext(context.Background(), deleteDatabaseOptions)
+}
+
+// DeleteDatabaseWithContext is an alternate form of the DeleteDatabase method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, deleteDatabaseOptions *DeleteDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteDatabaseOptions, "deleteDatabaseOptions cannot be nil")
 	if err != nil {
 		return
@@ -420,6 +483,8 @@ func (cloudant *CloudantV1) DeleteDatabase(deleteDatabaseOptions *DeleteDatabase
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
@@ -456,6 +521,11 @@ func (cloudant *CloudantV1) DeleteDatabase(deleteDatabaseOptions *DeleteDatabase
 
 // GetDatabaseInformation : Retrieve information about a database
 func (cloudant *CloudantV1) GetDatabaseInformation(getDatabaseInformationOptions *GetDatabaseInformationOptions) (result *DatabaseInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetDatabaseInformationWithContext(context.Background(), getDatabaseInformationOptions)
+}
+
+// GetDatabaseInformationWithContext is an alternate form of the GetDatabaseInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Context, getDatabaseInformationOptions *GetDatabaseInformationOptions) (result *DatabaseInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDatabaseInformationOptions, "getDatabaseInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -470,6 +540,8 @@ func (cloudant *CloudantV1) GetDatabaseInformation(getDatabaseInformationOptions
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
@@ -506,6 +578,11 @@ func (cloudant *CloudantV1) GetDatabaseInformation(getDatabaseInformationOptions
 
 // PutDatabase : Create a database
 func (cloudant *CloudantV1) PutDatabase(putDatabaseOptions *PutDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PutDatabaseWithContext(context.Background(), putDatabaseOptions)
+}
+
+// PutDatabaseWithContext is an alternate form of the PutDatabase method which supports a Context parameter
+func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatabaseOptions *PutDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putDatabaseOptions, "putDatabaseOptions cannot be nil")
 	if err != nil {
 		return
@@ -520,6 +597,8 @@ func (cloudant *CloudantV1) PutDatabase(putDatabaseOptions *PutDatabaseOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
@@ -565,6 +644,11 @@ func (cloudant *CloudantV1) PutDatabase(putDatabaseOptions *PutDatabaseOptions) 
 // Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
 // query parameter because it allows one to pass more information to the filter.
 func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostChangesWithContext(context.Background(), postChangesOptions)
+}
+
+// PostChangesWithContext is an alternate form of the PostChanges method which supports a Context parameter
+func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
 	if err != nil {
 		return
@@ -579,6 +663,8 @@ func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
 	if err != nil {
 		return
@@ -679,6 +765,11 @@ func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) 
 // Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
 // query parameter because it allows one to pass more information to the filter.
 func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostChangesAsStreamWithContext(context.Background(), postChangesOptions)
+}
+
+// PostChangesAsStreamWithContext is an alternate form of the PostChangesAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
 	if err != nil {
 		return
@@ -693,6 +784,8 @@ func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesO
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
 	if err != nil {
 		return
@@ -786,6 +879,11 @@ func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesO
 // requested document, and the Content-Length specifies the length of the data if the document was requested in full.
 // Add any of the query arguments, then the resulting HTTP headers that correspond to it are returned.
 func (cloudant *CloudantV1) HeadDocument(headDocumentOptions *HeadDocumentOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadDocumentWithContext(context.Background(), headDocumentOptions)
+}
+
+// HeadDocumentWithContext is an alternate form of the HeadDocument method which supports a Context parameter
+func (cloudant *CloudantV1) HeadDocumentWithContext(ctx context.Context, headDocumentOptions *HeadDocumentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headDocumentOptions, "headDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -801,6 +899,8 @@ func (cloudant *CloudantV1) HeadDocument(headDocumentOptions *HeadDocumentOption
 	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -843,6 +943,11 @@ func (cloudant *CloudantV1) HeadDocument(headDocumentOptions *HeadDocumentOption
 // includes the `_local` or `_design` prefix, then this operation is used to create or modify local or design documents
 // respectively.
 func (cloudant *CloudantV1) PostDocument(postDocumentOptions *PostDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostDocumentWithContext(context.Background(), postDocumentOptions)
+}
+
+// PostDocumentWithContext is an alternate form of the PostDocument method which supports a Context parameter
+func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDocumentOptions *PostDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDocumentOptions, "postDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -861,6 +966,8 @@ func (cloudant *CloudantV1) PostDocument(postDocumentOptions *PostDocumentOption
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
 	if err != nil {
 		return
@@ -913,6 +1020,11 @@ func (cloudant *CloudantV1) PostDocument(postDocumentOptions *PostDocumentOption
 // body parameters are specified, results for all documents in the database are returned. Optionally, document content
 // or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostAllDocs(postAllDocsOptions *PostAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostAllDocsWithContext(context.Background(), postAllDocsOptions)
+}
+
+// PostAllDocsWithContext is an alternate form of the PostAllDocs method which supports a Context parameter
+func (cloudant *CloudantV1) PostAllDocsWithContext(ctx context.Context, postAllDocsOptions *PostAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsOptions, "postAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -927,6 +1039,8 @@ func (cloudant *CloudantV1) PostAllDocs(postAllDocsOptions *PostAllDocsOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -1013,6 +1127,11 @@ func (cloudant *CloudantV1) PostAllDocs(postAllDocsOptions *PostAllDocsOptions) 
 // body parameters are specified, results for all documents in the database are returned. Optionally, document content
 // or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostAllDocsAsStream(postAllDocsOptions *PostAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostAllDocsAsStreamWithContext(context.Background(), postAllDocsOptions)
+}
+
+// PostAllDocsAsStreamWithContext is an alternate form of the PostAllDocsAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostAllDocsAsStreamWithContext(ctx context.Context, postAllDocsOptions *PostAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsOptions, "postAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -1027,6 +1146,8 @@ func (cloudant *CloudantV1) PostAllDocsAsStream(postAllDocsOptions *PostAllDocsO
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -1103,6 +1224,11 @@ func (cloudant *CloudantV1) PostAllDocsAsStream(postAllDocsOptions *PostAllDocsO
 // result objects, one for each query, with a structure equivalent to that of a single `_all_docs` request. This enables
 // you to request multiple queries in a single request, in place of multiple `POST /{db}/_all_docs` requests.
 func (cloudant *CloudantV1) PostAllDocsQueries(postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostAllDocsQueriesWithContext(context.Background(), postAllDocsQueriesOptions)
+}
+
+// PostAllDocsQueriesWithContext is an alternate form of the PostAllDocsQueries method which supports a Context parameter
+func (cloudant *CloudantV1) PostAllDocsQueriesWithContext(ctx context.Context, postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsQueriesOptions, "postAllDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -1117,6 +1243,8 @@ func (cloudant *CloudantV1) PostAllDocsQueries(postAllDocsQueriesOptions *PostAl
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
@@ -1166,6 +1294,11 @@ func (cloudant *CloudantV1) PostAllDocsQueries(postAllDocsQueriesOptions *PostAl
 // result objects, one for each query, with a structure equivalent to that of a single `_all_docs` request. This enables
 // you to request multiple queries in a single request, in place of multiple `POST /{db}/_all_docs` requests.
 func (cloudant *CloudantV1) PostAllDocsQueriesAsStream(postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostAllDocsQueriesAsStreamWithContext(context.Background(), postAllDocsQueriesOptions)
+}
+
+// PostAllDocsQueriesAsStreamWithContext is an alternate form of the PostAllDocsQueriesAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostAllDocsQueriesAsStreamWithContext(ctx context.Context, postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsQueriesOptions, "postAllDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -1180,6 +1313,8 @@ func (cloudant *CloudantV1) PostAllDocsQueriesAsStream(postAllDocsQueriesOptions
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
@@ -1220,6 +1355,11 @@ func (cloudant *CloudantV1) PostAllDocsQueriesAsStream(postAllDocsQueriesOptions
 // The basic operation is similar to creating or updating a single document, except that you batch the document
 // structure and information.
 func (cloudant *CloudantV1) PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions) (result []DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostBulkDocsWithContext(context.Background(), postBulkDocsOptions)
+}
+
+// PostBulkDocsWithContext is an alternate form of the PostBulkDocs method which supports a Context parameter
+func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBulkDocsOptions *PostBulkDocsOptions) (result []DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkDocsOptions, "postBulkDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -1234,6 +1374,8 @@ func (cloudant *CloudantV1) PostBulkDocs(postBulkDocsOptions *PostBulkDocsOption
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -1248,6 +1390,7 @@ func (cloudant *CloudantV1) PostBulkDocs(postBulkDocsOptions *PostBulkDocsOption
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
 
 	_, err = builder.SetBodyContent("application/json", postBulkDocsOptions.BulkDocs, nil, postBulkDocsOptions.Body)
 	if err != nil {
@@ -1276,6 +1419,11 @@ func (cloudant *CloudantV1) PostBulkDocs(postBulkDocsOptions *PostBulkDocsOption
 // PostBulkGet : Bulk query revision information for multiple documents
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGet(postBulkGetOptions *PostBulkGetOptions) (result *BulkGetResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostBulkGetWithContext(context.Background(), postBulkGetOptions)
+}
+
+// PostBulkGetWithContext is an alternate form of the PostBulkGet method which supports a Context parameter
+func (cloudant *CloudantV1) PostBulkGetWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result *BulkGetResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1290,6 +1438,8 @@ func (cloudant *CloudantV1) PostBulkGet(postBulkGetOptions *PostBulkGetOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
@@ -1350,6 +1500,11 @@ func (cloudant *CloudantV1) PostBulkGet(postBulkGetOptions *PostBulkGetOptions) 
 // PostBulkGetAsMixed : Bulk query revision information for multiple documents as mixed
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostBulkGetAsMixedWithContext(context.Background(), postBulkGetOptions)
+}
+
+// PostBulkGetAsMixedWithContext is an alternate form of the PostBulkGetAsMixed method which supports a Context parameter
+func (cloudant *CloudantV1) PostBulkGetAsMixedWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1364,6 +1519,8 @@ func (cloudant *CloudantV1) PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOp
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
@@ -1415,6 +1572,11 @@ func (cloudant *CloudantV1) PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOp
 // PostBulkGetAsRelated : Bulk query revision information for multiple documents as related
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGetAsRelated(postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostBulkGetAsRelatedWithContext(context.Background(), postBulkGetOptions)
+}
+
+// PostBulkGetAsRelatedWithContext is an alternate form of the PostBulkGetAsRelated method which supports a Context parameter
+func (cloudant *CloudantV1) PostBulkGetAsRelatedWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1429,6 +1591,8 @@ func (cloudant *CloudantV1) PostBulkGetAsRelated(postBulkGetOptions *PostBulkGet
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
@@ -1480,6 +1644,11 @@ func (cloudant *CloudantV1) PostBulkGetAsRelated(postBulkGetOptions *PostBulkGet
 // PostBulkGetAsStream : Bulk query revision information for multiple documents as stream
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGetAsStream(postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostBulkGetAsStreamWithContext(context.Background(), postBulkGetOptions)
+}
+
+// PostBulkGetAsStreamWithContext is an alternate form of the PostBulkGetAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostBulkGetAsStreamWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1494,6 +1663,8 @@ func (cloudant *CloudantV1) PostBulkGetAsStream(postBulkGetOptions *PostBulkGetO
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
 	if err != nil {
 		return
@@ -1547,6 +1718,11 @@ func (cloudant *CloudantV1) PostBulkGetAsStream(postBulkGetOptions *PostBulkGetO
 // are not returned within requests anymore but stay in the database. You must supply the current (latest) revision,
 // either by using the `rev` parameter or by using the `If-Match` header to specify the revision.
 func (cloudant *CloudantV1) DeleteDocument(deleteDocumentOptions *DeleteDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteDocumentWithContext(context.Background(), deleteDocumentOptions)
+}
+
+// DeleteDocumentWithContext is an alternate form of the DeleteDocument method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, deleteDocumentOptions *DeleteDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteDocumentOptions, "deleteDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1562,6 +1738,8 @@ func (cloudant *CloudantV1) DeleteDocument(deleteDocumentOptions *DeleteDocument
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -1610,6 +1788,11 @@ func (cloudant *CloudantV1) DeleteDocument(deleteDocumentOptions *DeleteDocument
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocument(getDocumentOptions *GetDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
+	return cloudant.GetDocumentWithContext(context.Background(), getDocumentOptions)
+}
+
+// GetDocumentWithContext is an alternate form of the GetDocument method which supports a Context parameter
+func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1625,6 +1808,8 @@ func (cloudant *CloudantV1) GetDocument(getDocumentOptions *GetDocumentOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -1703,6 +1888,11 @@ func (cloudant *CloudantV1) GetDocument(getDocumentOptions *GetDocumentOptions) 
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocumentAsMixed(getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.GetDocumentAsMixedWithContext(context.Background(), getDocumentOptions)
+}
+
+// GetDocumentAsMixedWithContext is an alternate form of the GetDocumentAsMixed method which supports a Context parameter
+func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1718,6 +1908,8 @@ func (cloudant *CloudantV1) GetDocumentAsMixed(getDocumentOptions *GetDocumentOp
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -1787,6 +1979,11 @@ func (cloudant *CloudantV1) GetDocumentAsMixed(getDocumentOptions *GetDocumentOp
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocumentAsRelated(getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.GetDocumentAsRelatedWithContext(context.Background(), getDocumentOptions)
+}
+
+// GetDocumentAsRelatedWithContext is an alternate form of the GetDocumentAsRelated method which supports a Context parameter
+func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1802,6 +1999,8 @@ func (cloudant *CloudantV1) GetDocumentAsRelated(getDocumentOptions *GetDocument
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -1871,6 +2070,11 @@ func (cloudant *CloudantV1) GetDocumentAsRelated(getDocumentOptions *GetDocument
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocumentAsStream(getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.GetDocumentAsStreamWithContext(context.Background(), getDocumentOptions)
+}
+
+// GetDocumentAsStreamWithContext is an alternate form of the GetDocumentAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1886,6 +2090,8 @@ func (cloudant *CloudantV1) GetDocumentAsStream(getDocumentOptions *GetDocumentO
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -1955,6 +2161,11 @@ func (cloudant *CloudantV1) GetDocumentAsStream(getDocumentOptions *GetDocumentO
 // The PUT method creates a new named document, or creates a new revision of the existing document. Unlike the `POST
 // /{db}` request, you must specify the document ID in the request URL.
 func (cloudant *CloudantV1) PutDocument(putDocumentOptions *PutDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PutDocumentWithContext(context.Background(), putDocumentOptions)
+}
+
+// PutDocumentWithContext is an alternate form of the PutDocument method which supports a Context parameter
+func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocumentOptions *PutDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putDocumentOptions, "putDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1974,6 +2185,8 @@ func (cloudant *CloudantV1) PutDocument(putDocumentOptions *PutDocumentOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2036,6 +2249,11 @@ func (cloudant *CloudantV1) PutDocument(putDocumentOptions *PutDocumentOptions) 
 // Content-Length specifies the length of the data. If you add any of the query arguments, then the resulting HTTP
 // headers correspond to what is returned for the equivalent GET request.
 func (cloudant *CloudantV1) HeadDesignDocument(headDesignDocumentOptions *HeadDesignDocumentOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadDesignDocumentWithContext(context.Background(), headDesignDocumentOptions)
+}
+
+// HeadDesignDocumentWithContext is an alternate form of the HeadDesignDocument method which supports a Context parameter
+func (cloudant *CloudantV1) HeadDesignDocumentWithContext(ctx context.Context, headDesignDocumentOptions *HeadDesignDocumentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headDesignDocumentOptions, "headDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2051,6 +2269,8 @@ func (cloudant *CloudantV1) HeadDesignDocument(headDesignDocumentOptions *HeadDe
 	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2083,6 +2303,11 @@ func (cloudant *CloudantV1) HeadDesignDocument(headDesignDocumentOptions *HeadDe
 // this field are not returned with requests but stay in the database. You must supply the current (latest) revision,
 // either by using the `rev` parameter or by using the `If-Match` header to specify the revision.
 func (cloudant *CloudantV1) DeleteDesignDocument(deleteDesignDocumentOptions *DeleteDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteDesignDocumentWithContext(context.Background(), deleteDesignDocumentOptions)
+}
+
+// DeleteDesignDocumentWithContext is an alternate form of the DeleteDesignDocument method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context, deleteDesignDocumentOptions *DeleteDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteDesignDocumentOptions, "deleteDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2098,6 +2323,8 @@ func (cloudant *CloudantV1) DeleteDesignDocument(deleteDesignDocumentOptions *De
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2146,6 +2373,11 @@ func (cloudant *CloudantV1) DeleteDesignDocument(deleteDesignDocumentOptions *De
 // Returns design document with the specified `doc_id` from the specified database. Unless you request a specific
 // revision, the current revision of the design document is always returned.
 func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions) (result *DesignDocument, response *core.DetailedResponse, err error) {
+	return cloudant.GetDesignDocumentWithContext(context.Background(), getDesignDocumentOptions)
+}
+
+// GetDesignDocumentWithContext is an alternate form of the GetDesignDocument method which supports a Context parameter
+func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, getDesignDocumentOptions *GetDesignDocumentOptions) (result *DesignDocument, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDesignDocumentOptions, "getDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2161,6 +2393,8 @@ func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesig
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2238,6 +2472,11 @@ func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesig
 // PutDesignDocument : Create or modify a design document
 // The PUT method creates a new named design document, or creates a new revision of the existing design document.
 func (cloudant *CloudantV1) PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PutDesignDocumentWithContext(context.Background(), putDesignDocumentOptions)
+}
+
+// PutDesignDocumentWithContext is an alternate form of the PutDesignDocument method which supports a Context parameter
+func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, putDesignDocumentOptions *PutDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putDesignDocumentOptions, "putDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2253,6 +2492,8 @@ func (cloudant *CloudantV1) PutDesignDocument(putDesignDocumentOptions *PutDesig
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2310,6 +2551,11 @@ func (cloudant *CloudantV1) PutDesignDocument(putDesignDocumentOptions *PutDesig
 // Retrieves information about the specified design document, including the index, index size, and current status of the
 // design document and associated index information.
 func (cloudant *CloudantV1) GetDesignDocumentInformation(getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions) (result *DesignDocumentInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetDesignDocumentInformationWithContext(context.Background(), getDesignDocumentInformationOptions)
+}
+
+// GetDesignDocumentInformationWithContext is an alternate form of the GetDesignDocumentInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.Context, getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions) (result *DesignDocumentInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDesignDocumentInformationOptions, "getDesignDocumentInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -2325,6 +2571,8 @@ func (cloudant *CloudantV1) GetDesignDocumentInformation(getDesignDocumentInform
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_info`, pathParamsMap)
 	if err != nil {
 		return
@@ -2365,6 +2613,11 @@ func (cloudant *CloudantV1) GetDesignDocumentInformation(getDesignDocumentInform
 // request body parameters are specified, results for all design documents in the database are returned. Optionally, the
 // design document content or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostDesignDocs(postDesignDocsOptions *PostDesignDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostDesignDocsWithContext(context.Background(), postDesignDocsOptions)
+}
+
+// PostDesignDocsWithContext is an alternate form of the PostDesignDocs method which supports a Context parameter
+func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postDesignDocsOptions *PostDesignDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDesignDocsOptions, "postDesignDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -2379,6 +2632,8 @@ func (cloudant *CloudantV1) PostDesignDocs(postDesignDocsOptions *PostDesignDocs
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -2466,6 +2721,11 @@ func (cloudant *CloudantV1) PostDesignDocs(postDesignDocsOptions *PostDesignDocs
 // This operation runs multiple view queries of all design documents in the database. This operation enables you to
 // request numerous queries in a single request, in place of multiple POST `/{db}/_design_docs` requests.
 func (cloudant *CloudantV1) PostDesignDocsQueries(postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostDesignDocsQueriesWithContext(context.Background(), postDesignDocsQueriesOptions)
+}
+
+// PostDesignDocsQueriesWithContext is an alternate form of the PostDesignDocsQueries method which supports a Context parameter
+func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context, postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDesignDocsQueriesOptions, "postDesignDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -2480,6 +2740,8 @@ func (cloudant *CloudantV1) PostDesignDocsQueries(postDesignDocsQueriesOptions *
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
@@ -2533,6 +2795,11 @@ func (cloudant *CloudantV1) PostDesignDocsQueries(postDesignDocsQueriesOptions *
 // `POST` method is that the query is submitted as a JSON object in the request body. This avoids the limitations of
 // passing query options as URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostView(postViewOptions *PostViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostViewWithContext(context.Background(), postViewOptions)
+}
+
+// PostViewWithContext is an alternate form of the PostView method which supports a Context parameter
+func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOptions *PostViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewOptions, "postViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -2549,6 +2816,8 @@ func (cloudant *CloudantV1) PostView(postViewOptions *PostViewOptions) (result *
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2656,6 +2925,11 @@ func (cloudant *CloudantV1) PostView(postViewOptions *PostViewOptions) (result *
 // `POST` method is that the query is submitted as a JSON object in the request body. This avoids the limitations of
 // passing query options as URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostViewAsStream(postViewOptions *PostViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostViewAsStreamWithContext(context.Background(), postViewOptions)
+}
+
+// PostViewAsStreamWithContext is an alternate form of the PostViewAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostViewAsStreamWithContext(ctx context.Context, postViewOptions *PostViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewOptions, "postViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -2672,6 +2946,8 @@ func (cloudant *CloudantV1) PostViewAsStream(postViewOptions *PostViewOptions) (
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2767,6 +3043,11 @@ func (cloudant *CloudantV1) PostViewAsStream(postViewOptions *PostViewOptions) (
 // PostViewQueries : Multi-query a MapReduce view
 // This operation runs multiple specified view queries against the view function from the specified design document.
 func (cloudant *CloudantV1) PostViewQueries(postViewQueriesOptions *PostViewQueriesOptions) (result *ViewQueriesResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostViewQueriesWithContext(context.Background(), postViewQueriesOptions)
+}
+
+// PostViewQueriesWithContext is an alternate form of the PostViewQueries method which supports a Context parameter
+func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, postViewQueriesOptions *PostViewQueriesOptions) (result *ViewQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewQueriesOptions, "postViewQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -2783,6 +3064,8 @@ func (cloudant *CloudantV1) PostViewQueries(postViewQueriesOptions *PostViewQuer
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}/queries`, pathParamsMap)
 	if err != nil {
 		return
@@ -2830,6 +3113,11 @@ func (cloudant *CloudantV1) PostViewQueries(postViewQueriesOptions *PostViewQuer
 // PostViewQueriesAsStream : Multi-query a MapReduce view as stream
 // This operation runs multiple specified view queries against the view function from the specified design document.
 func (cloudant *CloudantV1) PostViewQueriesAsStream(postViewQueriesOptions *PostViewQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostViewQueriesAsStreamWithContext(context.Background(), postViewQueriesOptions)
+}
+
+// PostViewQueriesAsStreamWithContext is an alternate form of the PostViewQueriesAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostViewQueriesAsStreamWithContext(ctx context.Context, postViewQueriesOptions *PostViewQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewQueriesOptions, "postViewQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -2846,6 +3134,8 @@ func (cloudant *CloudantV1) PostViewQueriesAsStream(postViewQueriesOptions *Post
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}/queries`, pathParamsMap)
 	if err != nil {
 		return
@@ -2884,6 +3174,11 @@ func (cloudant *CloudantV1) PostViewQueriesAsStream(postViewQueriesOptions *Post
 // GetPartitionInformation : Retrieve information about a database partition
 // Given a partition key, return the database name, sizes, partition, doc count, and doc delete count.
 func (cloudant *CloudantV1) GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions) (result *PartitionInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetPartitionInformationWithContext(context.Background(), getPartitionInformationOptions)
+}
+
+// GetPartitionInformationWithContext is an alternate form of the GetPartitionInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Context, getPartitionInformationOptions *GetPartitionInformationOptions) (result *PartitionInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getPartitionInformationOptions, "getPartitionInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -2899,6 +3194,8 @@ func (cloudant *CloudantV1) GetPartitionInformation(getPartitionInformationOptio
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}`, pathParamsMap)
 	if err != nil {
 		return
@@ -2939,6 +3236,11 @@ func (cloudant *CloudantV1) GetPartitionInformation(getPartitionInformationOptio
 // parameters are specified, results for all documents in the database partition are returned. Optionally, document
 // content or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostPartitionAllDocs(postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionAllDocsWithContext(context.Background(), postPartitionAllDocsOptions)
+}
+
+// PostPartitionAllDocsWithContext is an alternate form of the PostPartitionAllDocs method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context, postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionAllDocsOptions, "postPartitionAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -2954,6 +3256,8 @@ func (cloudant *CloudantV1) PostPartitionAllDocs(postPartitionAllDocsOptions *Po
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -3040,6 +3344,11 @@ func (cloudant *CloudantV1) PostPartitionAllDocs(postPartitionAllDocsOptions *Po
 // parameters are specified, results for all documents in the database partition are returned. Optionally, document
 // content or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostPartitionAllDocsAsStream(postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionAllDocsAsStreamWithContext(context.Background(), postPartitionAllDocsOptions)
+}
+
+// PostPartitionAllDocsAsStreamWithContext is an alternate form of the PostPartitionAllDocsAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.Context, postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionAllDocsOptions, "postPartitionAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -3055,6 +3364,8 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStream(postPartitionAllDocsOpt
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_all_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -3131,6 +3442,11 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStream(postPartitionAllDocsOpt
 // Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
 // views. The index function decides what data to index and store in the index.
 func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionSearchWithContext(context.Background(), postPartitionSearchOptions)
+}
+
+// PostPartitionSearchWithContext is an alternate form of the PostPartitionSearch method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, postPartitionSearchOptions *PostPartitionSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionSearchOptions, "postPartitionSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -3148,6 +3464,8 @@ func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *Post
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -3230,6 +3548,11 @@ func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *Post
 // Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
 // views. The index function decides what data to index and store in the index.
 func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptions *PostPartitionSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionSearchAsStreamWithContext(context.Background(), postPartitionSearchOptions)
+}
+
+// PostPartitionSearchAsStreamWithContext is an alternate form of the PostPartitionSearchAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.Context, postPartitionSearchOptions *PostPartitionSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionSearchOptions, "postPartitionSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -3247,6 +3570,8 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptio
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -3321,6 +3646,11 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptio
 // results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
 // API.
 func (cloudant *CloudantV1) PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionViewWithContext(context.Background(), postPartitionViewOptions)
+}
+
+// PostPartitionViewWithContext is an alternate form of the PostPartitionView method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, postPartitionViewOptions *PostPartitionViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionViewOptions, "postPartitionViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -3338,6 +3668,8 @@ func (cloudant *CloudantV1) PostPartitionView(postPartitionViewOptions *PostPart
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
@@ -3445,6 +3777,11 @@ func (cloudant *CloudantV1) PostPartitionView(postPartitionViewOptions *PostPart
 // results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
 // API.
 func (cloudant *CloudantV1) PostPartitionViewAsStream(postPartitionViewOptions *PostPartitionViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionViewAsStreamWithContext(context.Background(), postPartitionViewOptions)
+}
+
+// PostPartitionViewAsStreamWithContext is an alternate form of the PostPartitionViewAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Context, postPartitionViewOptions *PostPartitionViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionViewOptions, "postPartitionViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -3462,6 +3799,8 @@ func (cloudant *CloudantV1) PostPartitionViewAsStream(postPartitionViewOptions *
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`, pathParamsMap)
 	if err != nil {
 		return
@@ -3558,6 +3897,11 @@ func (cloudant *CloudantV1) PostPartitionViewAsStream(postPartitionViewOptions *
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionFindWithContext(context.Background(), postPartitionFindOptions)
+}
+
+// PostPartitionFindWithContext is an alternate form of the PostPartitionFind method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, postPartitionFindOptions *PostPartitionFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionFindOptions, "postPartitionFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -3573,6 +3917,8 @@ func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPart
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_find`, pathParamsMap)
 	if err != nil {
 		return
@@ -3651,6 +3997,11 @@ func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPart
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *PostPartitionFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionFindAsStreamWithContext(context.Background(), postPartitionFindOptions)
+}
+
+// PostPartitionFindAsStreamWithContext is an alternate form of the PostPartitionFindAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Context, postPartitionFindOptions *PostPartitionFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionFindOptions, "postPartitionFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -3666,6 +4017,8 @@ func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_find`, pathParamsMap)
 	if err != nil {
 		return
@@ -3735,6 +4088,11 @@ func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *
 // Shows which index is being used by the query. Parameters are the same as the [`_find`
 // endpoint](#query-an-index-by-using-selector-syntax.
 func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostExplainWithContext(context.Background(), postExplainOptions)
+}
+
+// PostExplainWithContext is an alternate form of the PostExplain method which supports a Context parameter
+func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExplainOptions *PostExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postExplainOptions, "postExplainOptions cannot be nil")
 	if err != nil {
 		return
@@ -3749,6 +4107,8 @@ func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_explain`, pathParamsMap)
 	if err != nil {
 		return
@@ -3830,6 +4190,11 @@ func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) 
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostFindWithContext(context.Background(), postFindOptions)
+}
+
+// PostFindWithContext is an alternate form of the PostFind method which supports a Context parameter
+func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOptions *PostFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postFindOptions, "postFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -3844,6 +4209,8 @@ func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_find`, pathParamsMap)
 	if err != nil {
 		return
@@ -3925,6 +4292,11 @@ func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostFindAsStreamWithContext(context.Background(), postFindOptions)
+}
+
+// PostFindAsStreamWithContext is an alternate form of the PostFindAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, postFindOptions *PostFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postFindOptions, "postFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -3939,6 +4311,8 @@ func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_find`, pathParamsMap)
 	if err != nil {
 		return
@@ -4012,6 +4386,11 @@ func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (
 // including the primary index. In addition to the information available through this API, indexes are also stored in
 // the `indexes` property of design documents.
 func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions) (result *IndexesInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetIndexesInformationWithContext(context.Background(), getIndexesInformationOptions)
+}
+
+// GetIndexesInformationWithContext is an alternate form of the GetIndexesInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetIndexesInformationWithContext(ctx context.Context, getIndexesInformationOptions *GetIndexesInformationOptions) (result *IndexesInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getIndexesInformationOptions, "getIndexesInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -4026,6 +4405,8 @@ func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index`, pathParamsMap)
 	if err != nil {
 		return
@@ -4063,6 +4444,11 @@ func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *
 // PostIndex : Create a new index on a database
 // Create a new index on a database.
 func (cloudant *CloudantV1) PostIndex(postIndexOptions *PostIndexOptions) (result *IndexResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostIndexWithContext(context.Background(), postIndexOptions)
+}
+
+// PostIndexWithContext is an alternate form of the PostIndex method which supports a Context parameter
+func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexOptions *PostIndexOptions) (result *IndexResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postIndexOptions, "postIndexOptions cannot be nil")
 	if err != nil {
 		return
@@ -4077,6 +4463,8 @@ func (cloudant *CloudantV1) PostIndex(postIndexOptions *PostIndexOptions) (resul
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index`, pathParamsMap)
 	if err != nil {
 		return
@@ -4141,6 +4529,11 @@ func (cloudant *CloudantV1) PostIndex(postIndexOptions *PostIndexOptions) (resul
 
 // DeleteIndex : Delete an index
 func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteIndexWithContext(context.Background(), deleteIndexOptions)
+}
+
+// DeleteIndexWithContext is an alternate form of the DeleteIndex method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIndexOptions *DeleteIndexOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteIndexOptions, "deleteIndexOptions cannot be nil")
 	if err != nil {
 		return
@@ -4158,6 +4551,8 @@ func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index/_design/{ddoc}/{type}/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4196,6 +4591,11 @@ func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) 
 // Returns the results of analyzer tokenization of the provided sample text. This endpoint can be used for testing
 // analyzer tokenization.
 func (cloudant *CloudantV1) PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions) (result *SearchAnalyzeResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostSearchAnalyzeWithContext(context.Background(), postSearchAnalyzeOptions)
+}
+
+// PostSearchAnalyzeWithContext is an alternate form of the PostSearchAnalyze method which supports a Context parameter
+func (cloudant *CloudantV1) PostSearchAnalyzeWithContext(ctx context.Context, postSearchAnalyzeOptions *PostSearchAnalyzeOptions) (result *SearchAnalyzeResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postSearchAnalyzeOptions, "postSearchAnalyzeOptions cannot be nil")
 	if err != nil {
 		return
@@ -4206,6 +4606,8 @@ func (cloudant *CloudantV1) PostSearchAnalyze(postSearchAnalyzeOptions *PostSear
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_search_analyze`, nil)
 	if err != nil {
 		return
@@ -4260,6 +4662,11 @@ func (cloudant *CloudantV1) PostSearchAnalyze(postSearchAnalyzeOptions *PostSear
 // the query is submitted as a JSON object in the request body. This avoids the limitations of passing query options as
 // URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostSearchWithContext(context.Background(), postSearchOptions)
+}
+
+// PostSearchWithContext is an alternate form of the PostSearch method which supports a Context parameter
+func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearchOptions *PostSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postSearchOptions, "postSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -4276,6 +4683,8 @@ func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (re
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4378,6 +4787,11 @@ func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (re
 // the query is submitted as a JSON object in the request body. This avoids the limitations of passing query options as
 // URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostSearchAsStreamWithContext(context.Background(), postSearchOptions)
+}
+
+// PostSearchAsStreamWithContext is an alternate form of the PostSearchAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, postSearchOptions *PostSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postSearchOptions, "postSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -4394,6 +4808,8 @@ func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOpti
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4483,6 +4899,11 @@ func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOpti
 // GetSearchInfo : Retrieve information about a search index
 // Retrieve search index metadata information, such as the size of the index on disk.
 func (cloudant *CloudantV1) GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions) (result *SearchInfoResult, response *core.DetailedResponse, err error) {
+	return cloudant.GetSearchInfoWithContext(context.Background(), getSearchInfoOptions)
+}
+
+// GetSearchInfoWithContext is an alternate form of the GetSearchInfo method which supports a Context parameter
+func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSearchInfoOptions *GetSearchInfoOptions) (result *SearchInfoResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSearchInfoOptions, "getSearchInfoOptions cannot be nil")
 	if err != nil {
 		return
@@ -4499,6 +4920,8 @@ func (cloudant *CloudantV1) GetSearchInfo(getSearchInfoOptions *GetSearchInfoOpt
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search_info/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4536,6 +4959,11 @@ func (cloudant *CloudantV1) GetSearchInfo(getSearchInfoOptions *GetSearchInfoOpt
 // GetGeo : Query a geospatial index
 // Executes a query against the requested geospatial index from the specified design document.
 func (cloudant *CloudantV1) GetGeo(getGeoOptions *GetGeoOptions) (result *GeoResult, response *core.DetailedResponse, err error) {
+	return cloudant.GetGeoWithContext(context.Background(), getGeoOptions)
+}
+
+// GetGeoWithContext is an alternate form of the GetGeo method which supports a Context parameter
+func (cloudant *CloudantV1) GetGeoWithContext(ctx context.Context, getGeoOptions *GetGeoOptions) (result *GeoResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGeoOptions, "getGeoOptions cannot be nil")
 	if err != nil {
 		return
@@ -4552,6 +4980,8 @@ func (cloudant *CloudantV1) GetGeo(getGeoOptions *GetGeoOptions) (result *GeoRes
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4635,6 +5065,11 @@ func (cloudant *CloudantV1) GetGeo(getGeoOptions *GetGeoOptions) (result *GeoRes
 // GetGeoAsStream : Query a geospatial index as stream
 // Executes a query against the requested geospatial index from the specified design document.
 func (cloudant *CloudantV1) GetGeoAsStream(getGeoOptions *GetGeoOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.GetGeoAsStreamWithContext(context.Background(), getGeoOptions)
+}
+
+// GetGeoAsStreamWithContext is an alternate form of the GetGeoAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) GetGeoAsStreamWithContext(ctx context.Context, getGeoOptions *GetGeoOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGeoOptions, "getGeoOptions cannot be nil")
 	if err != nil {
 		return
@@ -4651,6 +5086,8 @@ func (cloudant *CloudantV1) GetGeoAsStream(getGeoOptions *GetGeoOptions) (result
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4725,6 +5162,11 @@ func (cloudant *CloudantV1) GetGeoAsStream(getGeoOptions *GetGeoOptions) (result
 // PostGeoCleanup : Cleanup old geospatial indexes
 // Cleanup old geospatial indexes from disk that have been superseded by newer index builds.
 func (cloudant *CloudantV1) PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PostGeoCleanupWithContext(context.Background(), postGeoCleanupOptions)
+}
+
+// PostGeoCleanupWithContext is an alternate form of the PostGeoCleanup method which supports a Context parameter
+func (cloudant *CloudantV1) PostGeoCleanupWithContext(ctx context.Context, postGeoCleanupOptions *PostGeoCleanupOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postGeoCleanupOptions, "postGeoCleanupOptions cannot be nil")
 	if err != nil {
 		return
@@ -4739,6 +5181,8 @@ func (cloudant *CloudantV1) PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanup
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_geo_cleanup`, pathParamsMap)
 	if err != nil {
 		return
@@ -4775,6 +5219,11 @@ func (cloudant *CloudantV1) PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanup
 
 // GetGeoIndexInformation : Retrieve information about a geospatial index
 func (cloudant *CloudantV1) GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions) (result *GeoIndexInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetGeoIndexInformationWithContext(context.Background(), getGeoIndexInformationOptions)
+}
+
+// GetGeoIndexInformationWithContext is an alternate form of the GetGeoIndexInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Context, getGeoIndexInformationOptions *GetGeoIndexInformationOptions) (result *GeoIndexInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGeoIndexInformationOptions, "getGeoIndexInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -4791,6 +5240,8 @@ func (cloudant *CloudantV1) GetGeoIndexInformation(getGeoIndexInformationOptions
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo_info/{index}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4831,12 +5282,19 @@ func (cloudant *CloudantV1) GetGeoIndexInformation(getGeoIndexInformationOptions
 // might repeat changes. Polling modes for this method work like polling modes for the changes feed.
 // **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
 func (cloudant *CloudantV1) GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
+	return cloudant.GetDbUpdatesWithContext(context.Background(), getDbUpdatesOptions)
+}
+
+// GetDbUpdatesWithContext is an alternate form of the GetDbUpdates method which supports a Context parameter
+func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getDbUpdatesOptions, "getDbUpdatesOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_db_updates`, nil)
 	if err != nil {
 		return
@@ -4887,6 +5345,11 @@ func (cloudant *CloudantV1) GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOption
 // HeadReplicationDocument : Retrieve the HTTP headers for a replication document
 // Retrieves the HTTP headers for a replication document from the `_replicator` database.
 func (cloudant *CloudantV1) HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadReplicationDocumentWithContext(context.Background(), headReplicationDocumentOptions)
+}
+
+// HeadReplicationDocumentWithContext is an alternate form of the HeadReplicationDocument method which supports a Context parameter
+func (cloudant *CloudantV1) HeadReplicationDocumentWithContext(ctx context.Context, headReplicationDocumentOptions *HeadReplicationDocumentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headReplicationDocumentOptions, "headReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -4901,6 +5364,8 @@ func (cloudant *CloudantV1) HeadReplicationDocument(headReplicationDocumentOptio
 	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4932,6 +5397,11 @@ func (cloudant *CloudantV1) HeadReplicationDocument(headReplicationDocumentOptio
 // Returns the HTTP headers that contain a minimal amount of information about the specified replication task. Only the
 // header information is returned.
 func (cloudant *CloudantV1) HeadSchedulerJob(headSchedulerJobOptions *HeadSchedulerJobOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadSchedulerJobWithContext(context.Background(), headSchedulerJobOptions)
+}
+
+// HeadSchedulerJobWithContext is an alternate form of the HeadSchedulerJob method which supports a Context parameter
+func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, headSchedulerJobOptions *HeadSchedulerJobOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headSchedulerJobOptions, "headSchedulerJobOptions cannot be nil")
 	if err != nil {
 		return
@@ -4946,6 +5416,8 @@ func (cloudant *CloudantV1) HeadSchedulerJob(headSchedulerJobOptions *HeadSchedu
 	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs/{job_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -4973,6 +5445,11 @@ func (cloudant *CloudantV1) HeadSchedulerJob(headSchedulerJobOptions *HeadSchedu
 // PostReplicate : Create or modify a replication operation
 // Requests, configures, or stops a replicate operation.
 func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostReplicateWithContext(context.Background(), postReplicateOptions)
+}
+
+// PostReplicateWithContext is an alternate form of the PostReplicate method which supports a Context parameter
+func (cloudant *CloudantV1) PostReplicateWithContext(ctx context.Context, postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postReplicateOptions, "postReplicateOptions cannot be nil")
 	if err != nil {
 		return
@@ -4983,6 +5460,8 @@ func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOpt
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicate`, nil)
 	if err != nil {
 		return
@@ -5026,6 +5505,11 @@ func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOpt
 // DeleteReplicationDocument : Cancel a replication
 // Cancels a replication by deleting the document that describes it from the `_replicator` database.
 func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteReplicationDocumentWithContext(context.Background(), deleteReplicationDocumentOptions)
+}
+
+// DeleteReplicationDocumentWithContext is an alternate form of the DeleteReplicationDocument method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Context, deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteReplicationDocumentOptions, "deleteReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5040,6 +5524,8 @@ func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentO
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5088,6 +5574,11 @@ func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentO
 // Retrieves a replication document from the `_replicator` database to view the configuration of the replication. The
 // status of the replication is no longer recorded in the document but can be checked via the replication scheduler.
 func (cloudant *CloudantV1) GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions) (result *ReplicationDocument, response *core.DetailedResponse, err error) {
+	return cloudant.GetReplicationDocumentWithContext(context.Background(), getReplicationDocumentOptions)
+}
+
+// GetReplicationDocumentWithContext is an alternate form of the GetReplicationDocument method which supports a Context parameter
+func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Context, getReplicationDocumentOptions *GetReplicationDocumentOptions) (result *ReplicationDocument, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getReplicationDocumentOptions, "getReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5102,6 +5593,8 @@ func (cloudant *CloudantV1) GetReplicationDocument(getReplicationDocumentOptions
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5180,6 +5673,11 @@ func (cloudant *CloudantV1) GetReplicationDocument(getReplicationDocumentOptions
 // Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
 // replication.
 func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PutReplicationDocumentWithContext(context.Background(), putReplicationDocumentOptions)
+}
+
+// PutReplicationDocumentWithContext is an alternate form of the PutReplicationDocument method which supports a Context parameter
+func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Context, putReplicationDocumentOptions *PutReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putReplicationDocumentOptions, "putReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5194,6 +5692,8 @@ func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5252,12 +5752,19 @@ func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions
 // For each document, the endpoint returns the document ID, database, replication ID, source and target, and other
 // information.
 func (cloudant *CloudantV1) GetSchedulerDocs(getSchedulerDocsOptions *GetSchedulerDocsOptions) (result *SchedulerDocsResult, response *core.DetailedResponse, err error) {
+	return cloudant.GetSchedulerDocsWithContext(context.Background(), getSchedulerDocsOptions)
+}
+
+// GetSchedulerDocsWithContext is an alternate form of the GetSchedulerDocs method which supports a Context parameter
+func (cloudant *CloudantV1) GetSchedulerDocsWithContext(ctx context.Context, getSchedulerDocsOptions *GetSchedulerDocsOptions) (result *SchedulerDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSchedulerDocsOptions, "getSchedulerDocsOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs`, nil)
 	if err != nil {
 		return
@@ -5306,6 +5813,11 @@ func (cloudant *CloudantV1) GetSchedulerDocs(getSchedulerDocsOptions *GetSchedul
 // Retrieves information about a replication document from the replicator database. The endpoint returns the document
 // ID, database, replication ID, source and target, and other information.
 func (cloudant *CloudantV1) GetSchedulerDocument(getSchedulerDocumentOptions *GetSchedulerDocumentOptions) (result *SchedulerDocument, response *core.DetailedResponse, err error) {
+	return cloudant.GetSchedulerDocumentWithContext(context.Background(), getSchedulerDocumentOptions)
+}
+
+// GetSchedulerDocumentWithContext is an alternate form of the GetSchedulerDocument method which supports a Context parameter
+func (cloudant *CloudantV1) GetSchedulerDocumentWithContext(ctx context.Context, getSchedulerDocumentOptions *GetSchedulerDocumentOptions) (result *SchedulerDocument, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSchedulerDocumentOptions, "getSchedulerDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5320,6 +5832,8 @@ func (cloudant *CloudantV1) GetSchedulerDocument(getSchedulerDocumentOptions *Ge
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs/_replicator/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5360,12 +5874,19 @@ func (cloudant *CloudantV1) GetSchedulerDocument(getSchedulerDocumentOptions *Ge
 // documents were malformed. Each job description includes source and target information, replication ID, history of
 // recent events, and other information.
 func (cloudant *CloudantV1) GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions) (result *SchedulerJobsResult, response *core.DetailedResponse, err error) {
+	return cloudant.GetSchedulerJobsWithContext(context.Background(), getSchedulerJobsOptions)
+}
+
+// GetSchedulerJobsWithContext is an alternate form of the GetSchedulerJobs method which supports a Context parameter
+func (cloudant *CloudantV1) GetSchedulerJobsWithContext(ctx context.Context, getSchedulerJobsOptions *GetSchedulerJobsOptions) (result *SchedulerJobsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSchedulerJobsOptions, "getSchedulerJobsOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs`, nil)
 	if err != nil {
 		return
@@ -5410,6 +5931,11 @@ func (cloudant *CloudantV1) GetSchedulerJobs(getSchedulerJobsOptions *GetSchedul
 // GetSchedulerJob : Retrieve a replication scheduler job
 // Retrieves the state of a single replication task based on its replication ID.
 func (cloudant *CloudantV1) GetSchedulerJob(getSchedulerJobOptions *GetSchedulerJobOptions) (result *SchedulerJob, response *core.DetailedResponse, err error) {
+	return cloudant.GetSchedulerJobWithContext(context.Background(), getSchedulerJobOptions)
+}
+
+// GetSchedulerJobWithContext is an alternate form of the GetSchedulerJob method which supports a Context parameter
+func (cloudant *CloudantV1) GetSchedulerJobWithContext(ctx context.Context, getSchedulerJobOptions *GetSchedulerJobOptions) (result *SchedulerJob, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSchedulerJobOptions, "getSchedulerJobOptions cannot be nil")
 	if err != nil {
 		return
@@ -5424,6 +5950,8 @@ func (cloudant *CloudantV1) GetSchedulerJob(getSchedulerJobOptions *GetScheduler
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs/{job_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5461,12 +5989,19 @@ func (cloudant *CloudantV1) GetSchedulerJob(getSchedulerJobOptions *GetScheduler
 // GetSessionInformation : Retrieve current session cookie information
 // Retrieves information about the authenticated user's session.
 func (cloudant *CloudantV1) GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions) (result *SessionInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetSessionInformationWithContext(context.Background(), getSessionInformationOptions)
+}
+
+// GetSessionInformationWithContext is an alternate form of the GetSessionInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetSessionInformationWithContext(ctx context.Context, getSessionInformationOptions *GetSessionInformationOptions) (result *SessionInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSessionInformationOptions, "getSessionInformationOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_session`, nil)
 	if err != nil {
 		return
@@ -5506,6 +6041,11 @@ func (cloudant *CloudantV1) GetSessionInformation(getSessionInformationOptions *
 // automatically include `_admin` permissions to all databases you create. Everyone and everything else, including users
 // you share databases with and API keys you create, must be given a permission level explicitly.
 func (cloudant *CloudantV1) GetSecurity(getSecurityOptions *GetSecurityOptions) (result *Security, response *core.DetailedResponse, err error) {
+	return cloudant.GetSecurityWithContext(context.Background(), getSecurityOptions)
+}
+
+// GetSecurityWithContext is an alternate form of the GetSecurity method which supports a Context parameter
+func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecurityOptions *GetSecurityOptions) (result *Security, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecurityOptions, "getSecurityOptions cannot be nil")
 	if err != nil {
 		return
@@ -5520,6 +6060,8 @@ func (cloudant *CloudantV1) GetSecurity(getSecurityOptions *GetSecurityOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_security`, pathParamsMap)
 	if err != nil {
 		return
@@ -5559,6 +6101,11 @@ func (cloudant *CloudantV1) GetSecurity(getSecurityOptions *GetSecurityOptions) 
 // CouchDB related permissions. Be careful: by removing a Cloudant API key, a member or an admin from the list of users
 // that have access permissions, you remove it from the list of users that have access to the database.
 func (cloudant *CloudantV1) PutSecurity(putSecurityOptions *PutSecurityOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PutSecurityWithContext(context.Background(), putSecurityOptions)
+}
+
+// PutSecurityWithContext is an alternate form of the PutSecurity method which supports a Context parameter
+func (cloudant *CloudantV1) PutSecurityWithContext(ctx context.Context, putSecurityOptions *PutSecurityOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putSecurityOptions, "putSecurityOptions cannot be nil")
 	if err != nil {
 		return
@@ -5573,6 +6120,8 @@ func (cloudant *CloudantV1) PutSecurity(putSecurityOptions *PutSecurityOptions) 
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_security`, pathParamsMap)
 	if err != nil {
 		return
@@ -5631,12 +6180,19 @@ func (cloudant *CloudantV1) PutSecurity(putSecurityOptions *PutSecurityOptions) 
 // account for that person or application. An API key is a randomly generated username and password. The key is given
 // the wanted access permissions for a database.
 func (cloudant *CloudantV1) PostApiKeys(postApiKeysOptions *PostApiKeysOptions) (result *ApiKeysResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostApiKeysWithContext(context.Background(), postApiKeysOptions)
+}
+
+// PostApiKeysWithContext is an alternate form of the PostApiKeys method which supports a Context parameter
+func (cloudant *CloudantV1) PostApiKeysWithContext(ctx context.Context, postApiKeysOptions *PostApiKeysOptions) (result *ApiKeysResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(postApiKeysOptions, "postApiKeysOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/api_keys`, nil)
 	if err != nil {
 		return
@@ -5675,6 +6231,11 @@ func (cloudant *CloudantV1) PostApiKeys(postApiKeysOptions *PostApiKeysOptions) 
 // Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
 // the API key from the list of users that have access to the database.
 func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PutCloudantSecurityConfigurationWithContext(context.Background(), putCloudantSecurityConfigurationOptions)
+}
+
+// PutCloudantSecurityConfigurationWithContext is an alternate form of the PutCloudantSecurityConfiguration method which supports a Context parameter
+func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx context.Context, putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putCloudantSecurityConfigurationOptions, "putCloudantSecurityConfigurationOptions cannot be nil")
 	if err != nil {
 		return
@@ -5689,6 +6250,8 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurity
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/db/{db}/_security`, pathParamsMap)
 	if err != nil {
 		return
@@ -5746,12 +6309,19 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurity
 // Lists all Cross-origin resource sharing (CORS) configuration. CORS defines a way in which the browser and the server
 // interact to determine whether or not to allow the request.
 func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) (result *CorsConfiguration, response *core.DetailedResponse, err error) {
+	return cloudant.GetCorsInformationWithContext(context.Background(), getCorsInformationOptions)
+}
+
+// GetCorsInformationWithContext is an alternate form of the GetCorsInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, getCorsInformationOptions *GetCorsInformationOptions) (result *CorsConfiguration, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getCorsInformationOptions, "getCorsInformationOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/config/cors`, nil)
 	if err != nil {
 		return
@@ -5790,6 +6360,11 @@ func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCor
 // Sets the CORS configuration. The configuration applies to all databases and all account level endpoints in your
 // account.
 func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PutCorsConfigurationWithContext(context.Background(), putCorsConfigurationOptions)
+}
+
+// PutCorsConfigurationWithContext is an alternate form of the PutCorsConfiguration method which supports a Context parameter
+func (cloudant *CloudantV1) PutCorsConfigurationWithContext(ctx context.Context, putCorsConfigurationOptions *PutCorsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putCorsConfigurationOptions, "putCorsConfigurationOptions cannot be nil")
 	if err != nil {
 		return
@@ -5800,6 +6375,8 @@ func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *Pu
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/config/cors`, nil)
 	if err != nil {
 		return
@@ -5855,6 +6432,11 @@ func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *Pu
 // supports the same query arguments as the `GET /{db}/{doc_id}/{attachment_name}` method, but only the header
 // information (including attachment size, encoding, and the MD5 hash as an ETag), is returned.
 func (cloudant *CloudantV1) HeadAttachment(headAttachmentOptions *HeadAttachmentOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadAttachmentWithContext(context.Background(), headAttachmentOptions)
+}
+
+// HeadAttachmentWithContext is an alternate form of the HeadAttachment method which supports a Context parameter
+func (cloudant *CloudantV1) HeadAttachmentWithContext(ctx context.Context, headAttachmentOptions *HeadAttachmentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headAttachmentOptions, "headAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5871,6 +6453,8 @@ func (cloudant *CloudantV1) HeadAttachment(headAttachmentOptions *HeadAttachment
 	}
 
 	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5909,6 +6493,11 @@ func (cloudant *CloudantV1) HeadAttachment(headAttachmentOptions *HeadAttachment
 // Deletes the attachment with the filename, `{attachment_name}`, from the specified doc. You must supply the `rev`
 // query parameter or `If-Match` header with the current revision to delete the attachment.
 func (cloudant *CloudantV1) DeleteAttachment(deleteAttachmentOptions *DeleteAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteAttachmentWithContext(context.Background(), deleteAttachmentOptions)
+}
+
+// DeleteAttachmentWithContext is an alternate form of the DeleteAttachment method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, deleteAttachmentOptions *DeleteAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteAttachmentOptions, "deleteAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5925,6 +6514,8 @@ func (cloudant *CloudantV1) DeleteAttachment(deleteAttachmentOptions *DeleteAtta
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
@@ -5974,6 +6565,11 @@ func (cloudant *CloudantV1) DeleteAttachment(deleteAttachmentOptions *DeleteAtta
 // returned, just as if you were accessing a static file. The returned Content-Type header is the same as the content
 // type set when the document attachment was submitted to the database.
 func (cloudant *CloudantV1) GetAttachment(getAttachmentOptions *GetAttachmentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.GetAttachmentWithContext(context.Background(), getAttachmentOptions)
+}
+
+// GetAttachmentWithContext is an alternate form of the GetAttachment method which supports a Context parameter
+func (cloudant *CloudantV1) GetAttachmentWithContext(ctx context.Context, getAttachmentOptions *GetAttachmentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAttachmentOptions, "getAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5990,6 +6586,8 @@ func (cloudant *CloudantV1) GetAttachment(getAttachmentOptions *GetAttachmentOpt
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
@@ -6040,6 +6638,11 @@ func (cloudant *CloudantV1) GetAttachment(getAttachmentOptions *GetAttachmentOpt
 // supply the revision information to add an attachment to the document, this serves as validation to update the
 // existing attachment.
 func (cloudant *CloudantV1) PutAttachment(putAttachmentOptions *PutAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PutAttachmentWithContext(context.Background(), putAttachmentOptions)
+}
+
+// PutAttachmentWithContext is an alternate form of the PutAttachment method which supports a Context parameter
+func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAttachmentOptions *PutAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putAttachmentOptions, "putAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6056,6 +6659,8 @@ func (cloudant *CloudantV1) PutAttachment(putAttachmentOptions *PutAttachmentOpt
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
 	if err != nil {
 		return
@@ -6109,6 +6714,11 @@ func (cloudant *CloudantV1) PutAttachment(putAttachmentOptions *PutAttachmentOpt
 // Deletes the specified local document. The semantics are identical to deleting a standard document in the specified
 // database, except that the document is not replicated.
 func (cloudant *CloudantV1) DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.DeleteLocalDocumentWithContext(context.Background(), deleteLocalDocumentOptions)
+}
+
+// DeleteLocalDocumentWithContext is an alternate form of the DeleteLocalDocument method which supports a Context parameter
+func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, deleteLocalDocumentOptions *DeleteLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteLocalDocumentOptions, "deleteLocalDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6124,6 +6734,8 @@ func (cloudant *CloudantV1) DeleteLocalDocument(deleteLocalDocumentOptions *Dele
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -6166,6 +6778,11 @@ func (cloudant *CloudantV1) DeleteLocalDocument(deleteLocalDocumentOptions *Dele
 // Retrieves the specified local document. The semantics are identical to accessing a standard document in the specified
 // database, except that the document is not replicated.
 func (cloudant *CloudantV1) GetLocalDocument(getLocalDocumentOptions *GetLocalDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
+	return cloudant.GetLocalDocumentWithContext(context.Background(), getLocalDocumentOptions)
+}
+
+// GetLocalDocumentWithContext is an alternate form of the GetLocalDocument method which supports a Context parameter
+func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, getLocalDocumentOptions *GetLocalDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getLocalDocumentOptions, "getLocalDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6181,6 +6798,8 @@ func (cloudant *CloudantV1) GetLocalDocument(getLocalDocumentOptions *GetLocalDo
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -6238,6 +6857,11 @@ func (cloudant *CloudantV1) GetLocalDocument(getLocalDocumentOptions *GetLocalDo
 // Stores the specified local document. The semantics are identical to storing a standard document in the specified
 // database, except that the document is not replicated.
 func (cloudant *CloudantV1) PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	return cloudant.PutLocalDocumentWithContext(context.Background(), putLocalDocumentOptions)
+}
+
+// PutLocalDocumentWithContext is an alternate form of the PutLocalDocument method which supports a Context parameter
+func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, putLocalDocumentOptions *PutLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putLocalDocumentOptions, "putLocalDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6257,6 +6881,8 @@ func (cloudant *CloudantV1) PutLocalDocument(putLocalDocumentOptions *PutLocalDo
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -6309,6 +6935,11 @@ func (cloudant *CloudantV1) PutLocalDocument(putLocalDocumentOptions *PutLocalDo
 // parameters are specified, results for all local documents in the database are returned. Optionally, document content
 // or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostLocalDocs(postLocalDocsOptions *PostLocalDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostLocalDocsWithContext(context.Background(), postLocalDocsOptions)
+}
+
+// PostLocalDocsWithContext is an alternate form of the PostLocalDocs method which supports a Context parameter
+func (cloudant *CloudantV1) PostLocalDocsWithContext(ctx context.Context, postLocalDocsOptions *PostLocalDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postLocalDocsOptions, "postLocalDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -6323,6 +6954,8 @@ func (cloudant *CloudantV1) PostLocalDocs(postLocalDocsOptions *PostLocalDocsOpt
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local_docs`, pathParamsMap)
 	if err != nil {
 		return
@@ -6410,6 +7043,11 @@ func (cloudant *CloudantV1) PostLocalDocs(postLocalDocsOptions *PostLocalDocsOpt
 // Runs multiple view queries of all local documents in this database. This operation enables you to request multiple
 // queries in a single request, in place of multiple `POST /{db}/_local_docs` requests.
 func (cloudant *CloudantV1) PostLocalDocsQueries(postLocalDocsQueriesOptions *PostLocalDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostLocalDocsQueriesWithContext(context.Background(), postLocalDocsQueriesOptions)
+}
+
+// PostLocalDocsQueriesWithContext is an alternate form of the PostLocalDocsQueries method which supports a Context parameter
+func (cloudant *CloudantV1) PostLocalDocsQueriesWithContext(ctx context.Context, postLocalDocsQueriesOptions *PostLocalDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postLocalDocsQueriesOptions, "postLocalDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -6424,6 +7062,8 @@ func (cloudant *CloudantV1) PostLocalDocsQueries(postLocalDocsQueriesOptions *Po
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local_docs/queries`, pathParamsMap)
 	if err != nil {
 		return
@@ -6474,6 +7114,11 @@ func (cloudant *CloudantV1) PostLocalDocsQueries(postLocalDocsQueriesOptions *Po
 // PostMissingRevs : Query which document revisions are missing from the database
 // Given a list of document revisions, returns the document revisions that do not exist in the database.
 func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostMissingRevsWithContext(context.Background(), postMissingRevsOptions)
+}
+
+// PostMissingRevsWithContext is an alternate form of the PostMissingRevs method which supports a Context parameter
+func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postMissingRevsOptions, "postMissingRevsOptions cannot be nil")
 	if err != nil {
 		return
@@ -6488,6 +7133,8 @@ func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingR
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_missing_revs`, pathParamsMap)
 	if err != nil {
 		return
@@ -6533,6 +7180,11 @@ func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingR
 // database, the replicator sends this set to the destination database's `_revs_diff` to find out which of them already
 // exists there. It can then avoid fetching and sending already-known document bodies.
 func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions) (result map[string]RevsDiff, response *core.DetailedResponse, err error) {
+	return cloudant.PostRevsDiffWithContext(context.Background(), postRevsDiffOptions)
+}
+
+// PostRevsDiffWithContext is an alternate form of the PostRevsDiff method which supports a Context parameter
+func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRevsDiffOptions *PostRevsDiffOptions) (result map[string]RevsDiff, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postRevsDiffOptions, "postRevsDiffOptions cannot be nil")
 	if err != nil {
 		return
@@ -6547,6 +7199,8 @@ func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOption
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_revs_diff`, pathParamsMap)
 	if err != nil {
 		return
@@ -6590,6 +7244,11 @@ func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOption
 // GetShardsInformation : Retrieve shard information
 // List each shard range and the corresponding replicas for a specified database.
 func (cloudant *CloudantV1) GetShardsInformation(getShardsInformationOptions *GetShardsInformationOptions) (result *ShardsInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetShardsInformationWithContext(context.Background(), getShardsInformationOptions)
+}
+
+// GetShardsInformationWithContext is an alternate form of the GetShardsInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetShardsInformationWithContext(ctx context.Context, getShardsInformationOptions *GetShardsInformationOptions) (result *ShardsInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getShardsInformationOptions, "getShardsInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -6604,6 +7263,8 @@ func (cloudant *CloudantV1) GetShardsInformation(getShardsInformationOptions *Ge
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_shards`, pathParamsMap)
 	if err != nil {
 		return
@@ -6642,6 +7303,11 @@ func (cloudant *CloudantV1) GetShardsInformation(getShardsInformationOptions *Ge
 // Retrieves information about a specific shard where a particular document is stored, along with information about the
 // nodes where that shard has a replica.
 func (cloudant *CloudantV1) GetDocumentShardsInfo(getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions) (result *DocumentShardInfo, response *core.DetailedResponse, err error) {
+	return cloudant.GetDocumentShardsInfoWithContext(context.Background(), getDocumentShardsInfoOptions)
+}
+
+// GetDocumentShardsInfoWithContext is an alternate form of the GetDocumentShardsInfo method which supports a Context parameter
+func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context, getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions) (result *DocumentShardInfo, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentShardsInfoOptions, "getDocumentShardsInfoOptions cannot be nil")
 	if err != nil {
 		return
@@ -6657,6 +7323,8 @@ func (cloudant *CloudantV1) GetDocumentShardsInfo(getDocumentShardsInfoOptions *
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_shards/{doc_id}`, pathParamsMap)
 	if err != nil {
 		return
@@ -6696,12 +7364,19 @@ func (cloudant *CloudantV1) GetDocumentShardsInfo(getDocumentShardsInfoOptions *
 // currently running tasks, with each task described as a single object. Depending on the operation type, the set of
 // response object fields might be different.
 func (cloudant *CloudantV1) GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions) (result []ActiveTask, response *core.DetailedResponse, err error) {
+	return cloudant.GetActiveTasksWithContext(context.Background(), getActiveTasksOptions)
+}
+
+// GetActiveTasksWithContext is an alternate form of the GetActiveTasks method which supports a Context parameter
+func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getActiveTasksOptions *GetActiveTasksOptions) (result []ActiveTask, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getActiveTasksOptions, "getActiveTasksOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_active_tasks`, nil)
 	if err != nil {
 		return
@@ -6740,12 +7415,19 @@ func (cloudant *CloudantV1) GetActiveTasks(getActiveTasksOptions *GetActiveTasks
 // Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or `nolb`,
 // the endpoint returns a 404 response.
 func (cloudant *CloudantV1) GetUpInformation(getUpInformationOptions *GetUpInformationOptions) (result *UpInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetUpInformationWithContext(context.Background(), getUpInformationOptions)
+}
+
+// GetUpInformationWithContext is an alternate form of the GetUpInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, getUpInformationOptions *GetUpInformationOptions) (result *UpInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getUpInformationOptions, "getUpInformationOptions")
 	if err != nil {
 		return
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
 	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_up`, nil)
 	if err != nil {
 		return
