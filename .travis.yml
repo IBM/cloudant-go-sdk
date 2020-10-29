@@ -27,8 +27,11 @@ install:
 - curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.28.2
 
 script:
-- go test ./...
+- go test ./... -race -coverprofile=coverage.txt -covermode=atomic
 - golangci-lint run
+
+after_sucess:
+- bash <(curl -s https://codecov.io/bash)
 
 # To disable semantic-release, comment these sections.
 #before_deploy:
