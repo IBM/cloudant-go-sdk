@@ -18,7 +18,6 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -34,7 +33,7 @@ func main() {
 	}
 	// 2. Get server information ===========================================
 	serverInformationResult, _, err := examplesClient.GetServerInformation(
-		&cloudantv1.GetServerInformationOptions{},
+		examplesClient.NewGetServerInformationOptions(),
 	)
 	if err != nil {
 		panic(err)
@@ -43,9 +42,9 @@ func main() {
 	// 3. Get database information for "animaldb" ==========================
 	dbName := "animaldb"
 	databaseInformationResult, _, err := examplesClient.GetDatabaseInformation(
-		&cloudantv1.GetDatabaseInformationOptions{
-			Db: &dbName,
-		},
+		examplesClient.NewGetDatabaseInformationOptions(
+			dbName,
+		),
 	)
 	if err != nil {
 		panic(err)
@@ -56,10 +55,10 @@ func main() {
 		*databaseInformationResult.DocCount)
 	// 5. Get zebra document out of the database by document id ============
 	documentAboutZebraResult, _, err := examplesClient.GetDocument(
-		&cloudantv1.GetDocumentOptions{
-			Db:    &dbName,
-			DocID: core.StringPtr("zebra"),
-		},
+		examplesClient.NewGetDocumentOptions(
+			dbName,
+			"zebra",
+		),
 	)
 	if err != nil {
 		panic(err)

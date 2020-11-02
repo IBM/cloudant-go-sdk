@@ -89,7 +89,7 @@ func main() {
 	// 3.6. Save the document in the database
 	postDocumentOption := client.NewPostDocumentOptions(
 		exampleDbName,
-	).SetDocument(&exampleDocument).SetContentType("application/json")
+	).SetDocument(&exampleDocument)
 
 	postDocumentResult, _, err := client.PostDocument(postDocumentOption)
 	if err != nil {

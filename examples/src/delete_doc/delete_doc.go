@@ -36,10 +36,10 @@ func main() {
 
 	// 2.1. Get the document if it previously existed in the database
 	document, getDocumentResponse, err := client.GetDocument(
-		&cloudantv1.GetDocumentOptions{
-			Db:    &exampleDbName,
-			DocID: &exampleDocID,
-		},
+		client.NewGetDocumentOptions(
+			exampleDbName,
+			exampleDocID,
+		),
 	)
 	if err != nil {
 		if getDocumentResponse.StatusCode == 404 {

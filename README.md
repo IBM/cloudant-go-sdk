@@ -211,7 +211,7 @@ func main() {
 	}
 	// 2. Get server information ===========================================
 	serverInformationResult, _, err := examplesClient.GetServerInformation(
-		&cloudantv1.GetServerInformationOptions{},
+		examplesClient.NewGetServerInformationOptions(),
 	)
 	if err != nil {
 		panic(err)
@@ -220,9 +220,9 @@ func main() {
 	// 3. Get database information for "animaldb" ==========================
 	dbName := "animaldb"
 	databaseInformationResult, _, err := examplesClient.GetDatabaseInformation(
-		&cloudantv1.GetDatabaseInformationOptions{
-			Db: &dbName,
-		},
+		examplesClient.NewGetDatabaseInformationOptions(
+			dbName,
+		),
 	)
 	if err != nil {
 		panic(err)
@@ -233,10 +233,10 @@ func main() {
 		*databaseInformationResult.DocCount)
 	// 5. Get zebra document out of the database by document id ============
 	documentAboutZebraResult, _, err := examplesClient.GetDocument(
-		&cloudantv1.GetDocumentOptions{
-			Db:    &dbName,
-			DocID: core.StringPtr("zebra"),
-		},
+		examplesClient.NewGetDocumentOptions(
+			dbName,
+			"zebra",
+		),
 	)
 	if err != nil {
 		panic(err)
@@ -350,7 +350,7 @@ func main() {
 	// 3.6. Save the document in the database
 	postDocumentOption := client.NewPostDocumentOptions(
 		exampleDbName,
-	).SetDocument(&exampleDocument).SetContentType("application/json")
+	).SetDocument(&exampleDocument)
 
 	postDocumentResult, _, err := client.PostDocument(postDocumentOption)
 	if err != nil {
@@ -439,7 +439,7 @@ func main() {
 		// 2.3. Update the document in the database
 		postDocumentOption := client.NewPostDocumentOptions(
 			exampleDbName,
-		).SetDocument(document).SetContentType("application/json")
+		).SetDocument(document)
 
 		postDocumentResult, _, err := client.PostDocument(
 			postDocumentOption,
@@ -504,10 +504,10 @@ func main() {
 
 	// 2.1. Get the document if it previously existed in the database
 	document, getDocumentResponse, err := client.GetDocument(
-		&cloudantv1.GetDocumentOptions{
-			Db:    &exampleDbName,
-			DocID: &exampleDocID,
-		},
+		client.NewGetDocumentOptions(
+			exampleDbName,
+			exampleDocID,
+		),
 	)
 	if err != nil {
 		if getDocumentResponse.StatusCode == 404 {
