@@ -62,7 +62,7 @@ func main() {
 		// 2.3. Update the document in the database
 		postDocumentOption := client.NewPostDocumentOptions(
 			exampleDbName,
-		).SetDocument(document).SetContentType("application/json")
+		).SetDocument(document)
 
 		postDocumentResult, _, err := client.PostDocument(
 			postDocumentOption,
