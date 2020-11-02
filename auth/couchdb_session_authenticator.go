@@ -16,8 +16,11 @@ package auth
 
 import (
 	"bytes"
+	"context"
+	"crypto/tls"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -34,31 +37,43 @@ var requestSessionMutex sync.Mutex
 // CouchDbSessionAuthenticator uses username and password to obtain
 // CouchDB authentication cookie, and adds the cookie to requests.
 type CouchDbSessionAuthenticator struct {
-	URL, Username, Password string
-	Client                  *http.Client
-	session                 *session
+	Username, Password string
+	Client             *http.Client
+	url                string
+	header             http.Header
+	ctx                context.Context
+	disableSSL         bool
+	session            *session
 }
 
 // GetAuthenticatorFromEnvironment instantiates an Authenticator
 // using service properties retrieved from external config sources.
-func GetAuthenticatorFromEnvironment(credentialKey string) (authenticator core.Authenticator, err error) {
+func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, error) {
 	props, err := core.GetServiceProperties(credentialKey)
 	if err != nil {
-		return
+		return nil, err
 	}
 	authType, ok := props[core.PROPNAME_AUTH_TYPE]
 	if ok && strings.EqualFold(authType, AUTHTYPE_COUCHDB_SESSION) {
-		authenticator, err = NewCouchDbSessionAuthenticatorFromMap(props)
-		return
+		authenticator, err := NewCouchDbSessionAuthenticatorFromMap(props)
+		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {
+			authenticator.url = url
+		}
+		if disableSSL, ok := props[core.PROPNAME_SVC_DISABLE_SSL]; ok && disableSSL != "" {
+			boolValue, err := strconv.ParseBool(disableSSL)
+			if err == nil && boolValue {
+				authenticator.disableSSL = true
+			}
+		}
+		return authenticator, err
 	}
 
 	return core.GetAuthenticatorFromEnvironment(credentialKey)
 }
 
 // NewCouchDbSessionAuthenticator constructs a new NewCouchDbSessionAuthenticator instance.
-func NewCouchDbSessionAuthenticator(url, username, password string) (*CouchDbSessionAuthenticator, error) {
+func NewCouchDbSessionAuthenticator(username, password string) (*CouchDbSessionAuthenticator, error) {
 	authenticator := &CouchDbSessionAuthenticator{
-		URL:      url,
 		Username: username,
 		Password: password,
 	}
@@ -73,10 +88,9 @@ func NewCouchDbSessionAuthenticatorFromMap(props map[string]string) (*CouchDbSes
 	if props == nil {
 		return nil, fmt.Errorf(core.ERRORMSG_PROPS_MAP_NIL)
 	}
-	url := props[core.PROPNAME_SVC_URL]
 	username := props[core.PROPNAME_USERNAME]
 	password := props[core.PROPNAME_PASSWORD]
-	return NewCouchDbSessionAuthenticator(url, username, password)
+	return NewCouchDbSessionAuthenticator(username, password)
 }
 
 // AuthenticationType returns the authentication type for this authenticator.
@@ -87,15 +101,6 @@ func (a CouchDbSessionAuthenticator) AuthenticationType() string {
 // Validate the authenticator's configuration.
 // Ensures the service url, username and password are valid and not nil.
 func (a CouchDbSessionAuthenticator) Validate() error {
-	// this is what an empty URL ends up after NewCouchDbSessionAuthenticator
-	if a.URL == "" {
-		return fmt.Errorf(core.ERRORMSG_PROP_MISSING, "URL")
-	}
-
-	if !strings.HasPrefix(a.URL, "http") {
-		return fmt.Errorf(core.ERRORMSG_PROP_INVALID, "URL")
-	}
-
 	if a.Username == "" {
 		return fmt.Errorf(core.ERRORMSG_PROP_MISSING, "Username")
 	}
@@ -117,6 +122,10 @@ func (a CouchDbSessionAuthenticator) Validate() error {
 
 // Authenticate adds session authentication cookie to a request.
 func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error {
+
+	a.url = request.URL.Scheme + "://" + request.URL.Host
+	a.header = request.Header
+	a.ctx = request.Context()
 
 	cookie, err := a.getCookie()
 	if err != nil {
@@ -170,14 +179,22 @@ func (a *CouchDbSessionAuthenticator) syncRequestSession() error {
 // requestSession fetches new AuthSession cookie from session end-point.
 func (a *CouchDbSessionAuthenticator) requestSession() error {
 	builder, err := core.NewRequestBuilder(core.POST).
-		ResolveRequestURL(a.URL, "/_session", nil)
+		ResolveRequestURL(a.url, "/_session", nil)
 	if err != nil {
 		return err
 	}
 
 	builder.AddHeader(core.CONTENT_TYPE, core.DEFAULT_CONTENT_TYPE).
 		AddFormData("name", "", "", a.Username).
-		AddFormData("password", "", "", a.Password)
+		AddFormData("password", "", "", a.Password).
+		WithContext(a.ctx)
+
+	// set all the unique headers from original request's client
+	for key, value := range a.header {
+		if _, ok := builder.Header[key]; !ok {
+			builder.Header[key] = value
+		}
+	}
 
 	req, err := builder.Build()
 	if err != nil {
@@ -189,6 +206,9 @@ func (a *CouchDbSessionAuthenticator) requestSession() error {
 	if a.Client == nil {
 		a.Client = &http.Client{
 			Timeout: time.Second * 30,
+			Transport: &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: a.disableSSL},
+			},
 		}
 	}
 

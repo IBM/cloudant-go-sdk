@@ -15,6 +15,7 @@
 package auth
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -28,6 +29,8 @@ import (
 	. "github.com/onsi/gomega"
 )
 
+type contextKey string
+
 var _ = Describe("Authenticator Unit Tests", func() {
 	It("Create new Authenticator from environment", func() {
 		pwd, err := os.Getwd()
@@ -40,10 +43,20 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		Expect(auth).ToNot(BeNil())
 		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
 
+		sessionAuth, ok := auth.(*CouchDbSessionAuthenticator)
+		Expect(ok).To(BeTrue())
+		Expect(sessionAuth.url).ToNot(BeZero())
+		Expect(sessionAuth.disableSSL).To(BeFalse())
+
 		auth, err = GetAuthenticatorFromEnvironment("service2")
 		Expect(err).To(BeNil())
 		Expect(auth).ToNot(BeNil())
 		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
+
+		sessionAuth, ok = auth.(*CouchDbSessionAuthenticator)
+		Expect(ok).To(BeTrue())
+		Expect(sessionAuth.url).ToNot(BeZero())
+		Expect(sessionAuth.disableSSL).To(BeTrue())
 
 		auth, err = GetAuthenticatorFromEnvironment("service3")
 		Expect(err).To(BeNil())
@@ -52,14 +65,13 @@ var _ = Describe("Authenticator Unit Tests", func() {
 	})
 
 	It("Create new Authenticator programmatically", func() {
-		url, username, password := "http://couch", "user", "pass"
-		auth, err := NewCouchDbSessionAuthenticator(url, username, password)
+		username, password := "user", "pass"
+		auth, err := NewCouchDbSessionAuthenticator(username, password)
 		Expect(err).To(BeNil())
 		Expect(auth).ToNot(BeNil())
 		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
 
 		auth, err = NewCouchDbSessionAuthenticatorFromMap(map[string]string{
-			"URL":      url,
 			"USERNAME": username,
 			"PASSWORD": password,
 		})
@@ -70,22 +82,19 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 	It("Test Authenticator instantiation failures", func() {
 		errortests := []struct {
-			url, user, password string
+			user, password string
 		}{
-			{"", "user", "password"},
-			{"localhost", "user", "password"},
-			{"https://localhost", "", "password"},
-			{"https://localhost", "{invalid-user}", "password"},
-			{"https://localhost", "user", ""},
-			{"https://localhost", "user", "{invalid-password}"},
+			{"", "password"},
+			{"{invalid-user}", "password"},
+			{"user", ""},
+			{"user", "{invalid-password}"},
 		}
 
 		for _, tt := range errortests {
-			_, err := NewCouchDbSessionAuthenticator(tt.url, tt.user, tt.password)
+			_, err := NewCouchDbSessionAuthenticator(tt.user, tt.password)
 			Expect(err).To(HaveOccurred())
 
 			_, err = NewCouchDbSessionAuthenticatorFromMap(map[string]string{
-				"URL":      tt.url,
 				"USERNAME": tt.user,
 				"PASSWORD": tt.password,
 			})
@@ -116,14 +125,18 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			}))
 
 			builder, err := core.NewRequestBuilder(core.GET).
-				ResolveRequestURL("https://localhost", "/db", nil)
+				ResolveRequestURL(server.URL, "/db", nil)
 			Expect(err).To(BeNil())
 
-			request, err = builder.Build()
+			ctx := context.WithValue(context.Background(), contextKey("key"), "abcdefgh")
+			request, err = builder.
+				AddHeader("X-Req-Id", "abcdefgh").
+				WithContext(ctx).
+				Build()
 			Expect(err).To(BeNil())
 			Expect(request).ToNot(BeNil())
 
-			auth, err = NewCouchDbSessionAuthenticator(server.URL, "user", "pass")
+			auth, err = NewCouchDbSessionAuthenticator("user", "pass")
 			Expect(err).To(BeNil())
 			Expect(auth).ToNot(BeNil())
 			Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
@@ -133,11 +146,19 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			server.Close()
 		})
 
+		It("Test setting URL, Headers and Context on Authenticator", func() {
+			err = auth.Authenticate(request)
+			Expect(err).To(BeNil())
+
+			Expect(auth.url).To(Equal(server.URL))
+			Expect(auth.header).To(HaveKeyWithValue("X-Req-Id", []string{"abcdefgh"}))
+			Expect(auth.ctx.Value(contextKey("key"))).To(Equal("abcdefgh"))
+		})
+
 		It("Test setting custom http client on Authenticator", func() {
 			// set http.Client with custom timeout
 			auth.Client = &http.Client{Timeout: time.Second}
 
-			// call to Authenticate sets authenticator's client
 			err = auth.Authenticate(request)
 			Expect(err).To(BeNil())
 
@@ -241,14 +262,14 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		defer server.Close()
 
 		builder, err := core.NewRequestBuilder(core.GET).
-			ResolveRequestURL("https://localhost", "/db", nil)
+			ResolveRequestURL(server.URL, "/db", nil)
 		Expect(err).To(BeNil())
 
 		request, err := builder.Build()
 		Expect(err).To(BeNil())
 		Expect(request).ToNot(BeNil())
 
-		auth, err := NewCouchDbSessionAuthenticator(server.URL, "user", "pass")
+		auth, err := NewCouchDbSessionAuthenticator("user", "pass")
 		Expect(err).To(BeNil())
 		Expect(auth).ToNot(BeNil())
 		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
