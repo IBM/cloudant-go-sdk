@@ -190,7 +190,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "Variant", "version": "Version"}, "version": "Version"}`)
+					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "Variant", "version": "Version"}, "version": "Version", "features_flags": ["FeaturesFlags"]}`)
 				}))
 			})
 			It(`Invoke GetServerInformation successfully`, func() {
@@ -478,6 +478,260 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.GetUuids(getUuidsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) - Operation response error`, func() {
+		getCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getCapacityThroughputInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetCapacityThroughputInformation with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCapacityThroughputInformationOptions model
+				getCapacityThroughputInformationOptionsModel := new(cloudantv1.GetCapacityThroughputInformationOptions)
+				getCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+
+	Describe(`GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions)`, func() {
+		getCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getCapacityThroughputInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
+				}))
+			})
+			It(`Invoke GetCapacityThroughputInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.GetCapacityThroughputInformation(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetCapacityThroughputInformationOptions model
+				getCapacityThroughputInformationOptionsModel := new(cloudantv1.GetCapacityThroughputInformationOptions)
+				getCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr = cloudantService.GetCapacityThroughputInformationWithContext(ctx, getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			It(`Invoke GetCapacityThroughputInformation with error: Operation request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCapacityThroughputInformationOptions model
+				getCapacityThroughputInformationOptionsModel := new(cloudantv1.GetCapacityThroughputInformationOptions)
+				getCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) - Operation response error`, func() {
+		putCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputInformationPath))
+					Expect(req.Method).To(Equal("PUT"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke PutCapacityThroughputInformation with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PutCapacityThroughputInformationOptions model
+				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
+				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+
+	Describe(`PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions)`, func() {
+		putCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputInformationPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
+				}))
+			})
+			It(`Invoke PutCapacityThroughputInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the PutCapacityThroughputInformationOptions model
+				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
+				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr = cloudantService.PutCapacityThroughputInformationWithContext(ctx, putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			It(`Invoke PutCapacityThroughputInformation with error: Operation validation and request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PutCapacityThroughputInformationOptions model
+				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
+				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PutCapacityThroughputInformationOptions model with no property values
+				putCapacityThroughputInformationOptionsModelNew := new(cloudantv1.PutCapacityThroughputInformationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 			})
@@ -1453,7 +1707,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "id": "ID", "seq": "Seq"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "seq": "Seq"}]}`)
 				}))
 			})
 			It(`Invoke PostChanges successfully`, func() {
@@ -2221,13 +2475,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostAllDocs(postAllDocsOptionsModel)
@@ -2300,13 +2554,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2339,13 +2593,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -2428,13 +2682,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2473,13 +2727,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -3139,9 +3393,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3229,9 +3483,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3267,9 +3521,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3367,9 +3621,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3405,9 +3659,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3505,9 +3759,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3543,9 +3797,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3643,9 +3897,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -3687,9 +3941,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -4600,7 +4854,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
@@ -4720,7 +4974,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
@@ -4789,7 +5043,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
@@ -5951,13 +6205,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(true)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -6033,13 +6287,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(true)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -6073,13 +6327,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(true)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -6435,7 +6689,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Descending = core.BoolPtr(true)
 				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -6523,7 +6777,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Descending = core.BoolPtr(true)
 				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -6571,7 +6825,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Descending = core.BoolPtr(true)
 				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -6669,7 +6923,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Descending = core.BoolPtr(true)
 				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -6723,7 +6977,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Descending = core.BoolPtr(true)
 				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -6790,7 +7044,7 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Descending = core.BoolPtr(true)
 				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(true)
 				viewQueryModel.Endkey = core.StringPtr("testString")
@@ -6882,7 +7136,7 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Descending = core.BoolPtr(true)
 				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(true)
 				viewQueryModel.Endkey = core.StringPtr("testString")
@@ -6934,7 +7188,7 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Descending = core.BoolPtr(true)
 				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(true)
 				viewQueryModel.Endkey = core.StringPtr("testString")
@@ -7036,7 +7290,7 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Descending = core.BoolPtr(true)
 				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(true)
 				viewQueryModel.Endkey = core.StringPtr("testString")
@@ -7094,7 +7348,7 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Descending = core.BoolPtr(true)
 				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(true)
 				viewQueryModel.Endkey = core.StringPtr("testString")
@@ -7397,13 +7651,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptionsModel)
@@ -7477,13 +7731,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7517,13 +7771,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -7607,13 +7861,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -7653,13 +7907,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -8040,7 +8294,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -8129,7 +8383,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -8178,7 +8432,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -8277,7 +8531,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -8332,7 +8586,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
 				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
@@ -8983,7 +9237,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -9061,7 +9315,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -9099,7 +9353,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -9187,7 +9441,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -9231,7 +9485,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
 				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -11168,7 +11422,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"geo_index": {"data_size": 0, "disk_size": 0, "doc_count": 0}}`)
+					fmt.Fprintf(res, "%s", `{"geo_index": {"data_size": 0, "disk_size": 0, "doc_count": 0}, "name": "Name"}`)
 				}))
 			})
 			It(`Invoke GetGeoIndexInformation successfully`, func() {
@@ -11419,7 +11673,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"account": "Account", "dbname": "Dbname", "seq": "Seq", "type": "created"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"account": "Account", "db_name": "DbName", "seq": "Seq", "type": "created"}]}`)
 				}))
 			})
 			It(`Invoke GetDbUpdates successfully`, func() {
@@ -12562,7 +12816,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
-				replicationDatabaseModel.URL = core.StringPtr("http://myserver.example:5984/foo-db")
+				replicationDatabaseModel.URL = core.StringPtr("https://examples.cloudant.com/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -12726,7 +12980,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
-				replicationDatabaseModel.URL = core.StringPtr("http://myserver.example:5984/foo-db")
+				replicationDatabaseModel.URL = core.StringPtr("https://examples.cloudant.com/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -12841,7 +13095,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = make(map[string]string)
-				replicationDatabaseModel.URL = core.StringPtr("http://myserver.example:5984/foo-db")
+				replicationDatabaseModel.URL = core.StringPtr("https://examples.cloudant.com/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
@@ -15752,7 +16006,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
@@ -15862,7 +16116,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
@@ -15928,7 +16182,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
@@ -15999,13 +16253,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.Descending = core.BoolPtr(true)
 				postLocalDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postLocalDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postLocalDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postLocalDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postLocalDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postLocalDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Key = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Keys = []string{"testString"}
-				postLocalDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postLocalDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -16081,13 +16335,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.Descending = core.BoolPtr(true)
 				postLocalDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postLocalDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postLocalDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postLocalDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postLocalDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postLocalDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Key = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Keys = []string{"testString"}
-				postLocalDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postLocalDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -16121,13 +16375,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.Descending = core.BoolPtr(true)
 				postLocalDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postLocalDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postLocalDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postLocalDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postLocalDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postLocalDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
 				postLocalDocsOptionsModel.Endkey = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Key = core.StringPtr("testString")
 				postLocalDocsOptionsModel.Keys = []string{"testString"}
-				postLocalDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postLocalDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
 				postLocalDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postLocalDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -17141,7 +17395,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"changes_done": 0, "database": "Database", "pid": "Pid", "progress": 0, "started_on": 0, "status": "Status", "task": "Task", "total_changes": 0, "type": "Type", "updated_on": 0}]`)
+					fmt.Fprintf(res, "%s", `[{"changes_done": 0, "database": "Database", "node": "Node", "pid": "Pid", "progress": 0, "started_on": 0, "status": "Status", "task": "Task", "total_changes": 0, "type": "Type", "updated_on": 0}]`)
 				}))
 			})
 			It(`Invoke GetActiveTasks successfully`, func() {
@@ -17255,7 +17509,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"status": "maintenance_mode"}`)
+					fmt.Fprintf(res, "%s", `{"seeds": {"anyKey": "anyValue"}, "status": "maintenance_mode"}`)
 				}))
 			})
 			It(`Invoke GetUpInformation successfully`, func() {
@@ -17314,11 +17568,385 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) - Operation response error`, func() {
+		getActivityTrackerEventsInformationPath := "/_api/v2/user/activity_tracker/events"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetActivityTrackerEventsInformation with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
+				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
+				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+
+	Describe(`GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions)`, func() {
+		getActivityTrackerEventsInformationPath := "/_api/v2/user/activity_tracker/events"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"types": ["management"]}`)
+				}))
+			})
+			It(`Invoke GetActivityTrackerEventsInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
+				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
+				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr = cloudantService.GetActivityTrackerEventsInformationWithContext(ctx, getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			It(`Invoke GetActivityTrackerEventsInformation with error: Operation request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
+				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
+				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) - Operation response error`, func() {
+		postActivityTrackerEventsConfigurationPath := "/_api/v2/user/activity_tracker/events"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsConfigurationPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke PostActivityTrackerEventsConfiguration with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
+				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
+				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+
+	Describe(`PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions)`, func() {
+		postActivityTrackerEventsConfigurationPath := "/_api/v2/user/activity_tracker/events"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsConfigurationPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"ok": true}`)
+				}))
+			})
+			It(`Invoke PostActivityTrackerEventsConfiguration successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
+				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
+				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr = cloudantService.PostActivityTrackerEventsConfigurationWithContext(ctx, postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			It(`Invoke PostActivityTrackerEventsConfiguration with error: Operation validation and request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
+				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
+				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PostActivityTrackerEventsConfigurationOptions model with no property values
+				postActivityTrackerEventsConfigurationOptionsModelNew := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions) - Operation response error`, func() {
+		getCurrentThroughputInformationPath := "/_api/v2/user/current/throughput"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getCurrentThroughputInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetCurrentThroughputInformation with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCurrentThroughputInformationOptions model
+				getCurrentThroughputInformationOptionsModel := new(cloudantv1.GetCurrentThroughputInformationOptions)
+				getCurrentThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+
+	Describe(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions)`, func() {
+		getCurrentThroughputInformationPath := "/_api/v2/user/current/throughput"
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getCurrentThroughputInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"throughput": {"query": 0, "read": 0, "write": 0}}`)
+				}))
+			})
+			It(`Invoke GetCurrentThroughputInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.GetCurrentThroughputInformation(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetCurrentThroughputInformationOptions model
+				getCurrentThroughputInformationOptionsModel := new(cloudantv1.GetCurrentThroughputInformationOptions)
+				getCurrentThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr = cloudantService.GetCurrentThroughputInformationWithContext(ctx, getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			It(`Invoke GetCurrentThroughputInformation with error: Operation request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCurrentThroughputInformationOptions model
+				getCurrentThroughputInformationOptionsModel := new(cloudantv1.GetCurrentThroughputInformationOptions)
+				getCurrentThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			cloudantService, _ := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 				URL:           "http://cloudantv1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
+			})
+			It(`Invoke NewActivityTrackerEventsConfiguration successfully`, func() {
+				types := []string{"management"}
+				model, err := cloudantService.NewActivityTrackerEventsConfiguration(types)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewBulkDocs successfully`, func() {
 				docs := []cloudantv1.Document{}
@@ -17329,12 +17957,6 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewBulkGetQueryDocument successfully`, func() {
 				id := "testString"
 				model, err := cloudantService.NewBulkGetQueryDocument(id)
-				Expect(model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewCorsConfiguration successfully`, func() {
-				origins := []string{"testString"}
-				model, err := cloudantService.NewCorsConfiguration(origins)
 				Expect(model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -17458,6 +18080,19 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(deleteReplicationDocumentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(deleteReplicationDocumentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDesignDocumentViewsMapReduce successfully`, func() {
+				mapVar := "testString"
+				model, err := cloudantService.NewDesignDocumentViewsMapReduce(mapVar)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewDocumentRevisionStatus successfully`, func() {
+				rev := "testString"
+				status := "available"
+				model, err := cloudantService.NewDocumentRevisionStatus(rev, status)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewGeoIndexDefinition successfully`, func() {
 				index := "testString"
 				model, err := cloudantService.NewGeoIndexDefinition(index)
@@ -17470,6 +18105,13 @@ var _ = Describe(`CloudantV1`, func() {
 				getActiveTasksOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getActiveTasksOptionsModel).ToNot(BeNil())
 				Expect(getActiveTasksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetActivityTrackerEventsInformationOptions successfully`, func() {
+				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
+				getActivityTrackerEventsInformationOptionsModel := cloudantService.NewGetActivityTrackerEventsInformationOptions()
+				getActivityTrackerEventsInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getActivityTrackerEventsInformationOptionsModel).ToNot(BeNil())
+				Expect(getActivityTrackerEventsInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetAllDbsOptions successfully`, func() {
 				// Construct an instance of the GetAllDbsOptions model
@@ -17514,12 +18156,26 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getAttachmentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(getAttachmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewGetCapacityThroughputInformationOptions successfully`, func() {
+				// Construct an instance of the GetCapacityThroughputInformationOptions model
+				getCapacityThroughputInformationOptionsModel := cloudantService.NewGetCapacityThroughputInformationOptions()
+				getCapacityThroughputInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getCapacityThroughputInformationOptionsModel).ToNot(BeNil())
+				Expect(getCapacityThroughputInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetCorsInformationOptions successfully`, func() {
 				// Construct an instance of the GetCorsInformationOptions model
 				getCorsInformationOptionsModel := cloudantService.NewGetCorsInformationOptions()
 				getCorsInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getCorsInformationOptionsModel).ToNot(BeNil())
 				Expect(getCorsInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetCurrentThroughputInformationOptions successfully`, func() {
+				// Construct an instance of the GetCurrentThroughputInformationOptions model
+				getCurrentThroughputInformationOptionsModel := cloudantService.NewGetCurrentThroughputInformationOptions()
+				getCurrentThroughputInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getCurrentThroughputInformationOptionsModel).ToNot(BeNil())
+				Expect(getCurrentThroughputInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetDatabaseInformationOptions successfully`, func() {
 				// Construct an instance of the GetDatabaseInformationOptions model
@@ -18001,6 +18657,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(headSchedulerJobOptionsModel.JobID).To(Equal(core.StringPtr("testString")))
 				Expect(headSchedulerJobOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewPostActivityTrackerEventsConfigurationOptions successfully`, func() {
+				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
+				postActivityTrackerEventsConfigurationOptionsTypes := []string{"management"}
+				postActivityTrackerEventsConfigurationOptionsModel := cloudantService.NewPostActivityTrackerEventsConfigurationOptions(postActivityTrackerEventsConfigurationOptionsTypes)
+				postActivityTrackerEventsConfigurationOptionsModel.SetTypes([]string{"management"})
+				postActivityTrackerEventsConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(postActivityTrackerEventsConfigurationOptionsModel).ToNot(BeNil())
+				Expect(postActivityTrackerEventsConfigurationOptionsModel.Types).To(Equal([]string{"management"}))
+				Expect(postActivityTrackerEventsConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewPostAllDocsOptions successfully`, func() {
 				// Construct an instance of the PostAllDocsOptions model
 				db := "testString"
@@ -18012,13 +18678,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.SetDescending(true)
 				postAllDocsOptionsModel.SetIncludeDocs(true)
 				postAllDocsOptionsModel.SetInclusiveEnd(true)
-				postAllDocsOptionsModel.SetLimit(int64(0))
+				postAllDocsOptionsModel.SetLimit(int64(10))
 				postAllDocsOptionsModel.SetSkip(int64(0))
 				postAllDocsOptionsModel.SetUpdateSeq(true)
 				postAllDocsOptionsModel.SetEndkey("testString")
 				postAllDocsOptionsModel.SetKey("testString")
 				postAllDocsOptionsModel.SetKeys([]string{"testString"})
-				postAllDocsOptionsModel.SetStartkey("testString")
+				postAllDocsOptionsModel.SetStartkey("0007741142412418284")
 				postAllDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postAllDocsOptionsModel).ToNot(BeNil())
 				Expect(postAllDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -18028,13 +18694,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postAllDocsOptionsModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(postAllDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postAllDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postAllDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postAllDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(postAllDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postAllDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postAllDocsOptionsModel.Startkey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostAllDocsQueriesOptions successfully`, func() {
@@ -18178,13 +18844,13 @@ var _ = Describe(`CloudantV1`, func() {
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				Expect(bulkGetQueryDocumentModel).ToNot(BeNil())
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("foo")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
 				Expect(bulkGetQueryDocumentModel.AttsSince).To(Equal([]string{"testString"}))
-				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("foo")))
+				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("small-appliances:1000042")))
 				Expect(bulkGetQueryDocumentModel.OpenRevs).To(Equal([]string{"testString"}))
-				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("4-753875d51501a6b1883a9d62b4d33f91")))
+				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostBulkGetOptions model
 				db := "testString"
@@ -18274,13 +18940,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.SetDescending(true)
 				postDesignDocsOptionsModel.SetIncludeDocs(true)
 				postDesignDocsOptionsModel.SetInclusiveEnd(true)
-				postDesignDocsOptionsModel.SetLimit(int64(0))
+				postDesignDocsOptionsModel.SetLimit(int64(10))
 				postDesignDocsOptionsModel.SetSkip(int64(0))
 				postDesignDocsOptionsModel.SetUpdateSeq(true)
 				postDesignDocsOptionsModel.SetEndkey("testString")
 				postDesignDocsOptionsModel.SetKey("testString")
 				postDesignDocsOptionsModel.SetKeys([]string{"testString"})
-				postDesignDocsOptionsModel.SetStartkey("testString")
+				postDesignDocsOptionsModel.SetStartkey("0007741142412418284")
 				postDesignDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDesignDocsOptionsModel).ToNot(BeNil())
 				Expect(postDesignDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -18291,13 +18957,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postDesignDocsOptionsModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(postDesignDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postDesignDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postDesignDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postDesignDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postDesignDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postDesignDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(postDesignDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postDesignDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postDesignDocsOptionsModel.Startkey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postDesignDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostDesignDocsQueriesOptions successfully`, func() {
@@ -18473,7 +19139,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.SetConflicts(true)
 				postFindOptionsModel.SetExecutionStats(true)
 				postFindOptionsModel.SetFields([]string{"testString"})
-				postFindOptionsModel.SetLimit(int64(0))
+				postFindOptionsModel.SetLimit(int64(3))
 				postFindOptionsModel.SetSkip(int64(0))
 				postFindOptionsModel.SetSort([]map[string]string{make(map[string]string)})
 				postFindOptionsModel.SetStable(true)
@@ -18488,7 +19154,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.Fields).To(Equal([]string{"testString"}))
-				Expect(postFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postFindOptionsModel.Sort).To(Equal([]map[string]string{make(map[string]string)}))
 				Expect(postFindOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
@@ -18583,13 +19249,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postLocalDocsOptionsModel.SetDescending(true)
 				postLocalDocsOptionsModel.SetIncludeDocs(true)
 				postLocalDocsOptionsModel.SetInclusiveEnd(true)
-				postLocalDocsOptionsModel.SetLimit(int64(0))
+				postLocalDocsOptionsModel.SetLimit(int64(10))
 				postLocalDocsOptionsModel.SetSkip(int64(0))
 				postLocalDocsOptionsModel.SetUpdateSeq(true)
 				postLocalDocsOptionsModel.SetEndkey("testString")
 				postLocalDocsOptionsModel.SetKey("testString")
 				postLocalDocsOptionsModel.SetKeys([]string{"testString"})
-				postLocalDocsOptionsModel.SetStartkey("testString")
+				postLocalDocsOptionsModel.SetStartkey("0007741142412418284")
 				postLocalDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postLocalDocsOptionsModel).ToNot(BeNil())
 				Expect(postLocalDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -18600,13 +19266,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postLocalDocsOptionsModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(postLocalDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postLocalDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postLocalDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postLocalDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postLocalDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postLocalDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(postLocalDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
 				Expect(postLocalDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postLocalDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postLocalDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postLocalDocsOptionsModel.Startkey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postLocalDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostLocalDocsQueriesOptions successfully`, func() {
@@ -18680,13 +19346,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.SetDescending(true)
 				postPartitionAllDocsOptionsModel.SetIncludeDocs(true)
 				postPartitionAllDocsOptionsModel.SetInclusiveEnd(true)
-				postPartitionAllDocsOptionsModel.SetLimit(int64(0))
+				postPartitionAllDocsOptionsModel.SetLimit(int64(10))
 				postPartitionAllDocsOptionsModel.SetSkip(int64(0))
 				postPartitionAllDocsOptionsModel.SetUpdateSeq(true)
 				postPartitionAllDocsOptionsModel.SetEndkey("testString")
 				postPartitionAllDocsOptionsModel.SetKey("testString")
 				postPartitionAllDocsOptionsModel.SetKeys([]string{"testString"})
-				postPartitionAllDocsOptionsModel.SetStartkey("testString")
+				postPartitionAllDocsOptionsModel.SetStartkey("0007741142412418284")
 				postPartitionAllDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postPartitionAllDocsOptionsModel).ToNot(BeNil())
 				Expect(postPartitionAllDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -18697,13 +19363,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionAllDocsOptionsModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionAllDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionAllDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postPartitionAllDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionAllDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionAllDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postPartitionAllDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionAllDocsOptionsModel.Startkey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postPartitionAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostPartitionFindOptions successfully`, func() {
@@ -18803,7 +19469,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetDescending(true)
 				postPartitionViewOptionsModel.SetIncludeDocs(true)
 				postPartitionViewOptionsModel.SetInclusiveEnd(true)
-				postPartitionViewOptionsModel.SetLimit(int64(0))
+				postPartitionViewOptionsModel.SetLimit(int64(10))
 				postPartitionViewOptionsModel.SetSkip(int64(0))
 				postPartitionViewOptionsModel.SetUpdateSeq(true)
 				postPartitionViewOptionsModel.SetEndkey(core.StringPtr("testString"))
@@ -18829,7 +19495,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postPartitionViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
@@ -19099,7 +19765,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.SetDescending(true)
 				postViewOptionsModel.SetIncludeDocs(true)
 				postViewOptionsModel.SetInclusiveEnd(true)
-				postViewOptionsModel.SetLimit(int64(0))
+				postViewOptionsModel.SetLimit(int64(10))
 				postViewOptionsModel.SetSkip(int64(0))
 				postViewOptionsModel.SetUpdateSeq(true)
 				postViewOptionsModel.SetEndkey(core.StringPtr("testString"))
@@ -19124,7 +19790,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postViewOptionsModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
@@ -19150,7 +19816,7 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Descending = core.BoolPtr(true)
 				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(true)
 				viewQueryModel.Endkey = core.StringPtr("testString")
@@ -19170,7 +19836,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(viewQueryModel.Descending).To(Equal(core.BoolPtr(true)))
 				Expect(viewQueryModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(viewQueryModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(viewQueryModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(viewQueryModel.Limit).To(Equal(core.Int64Ptr(int64(5))))
 				Expect(viewQueryModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(viewQueryModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(viewQueryModel.Endkey).To(Equal(core.StringPtr("testString")))
@@ -19228,6 +19894,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putAttachmentOptionsModel.IfMatch).To(Equal(core.StringPtr("testString")))
 				Expect(putAttachmentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(putAttachmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewPutCapacityThroughputInformationOptions successfully`, func() {
+				// Construct an instance of the PutCapacityThroughputInformationOptions model
+				putCapacityThroughputInformationOptionsBlocks := int64(0)
+				putCapacityThroughputInformationOptionsModel := cloudantService.NewPutCapacityThroughputInformationOptions(putCapacityThroughputInformationOptionsBlocks)
+				putCapacityThroughputInformationOptionsModel.SetBlocks(int64(0))
+				putCapacityThroughputInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(putCapacityThroughputInformationOptionsModel).ToNot(BeNil())
+				Expect(putCapacityThroughputInformationOptionsModel.Blocks).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(putCapacityThroughputInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutCloudantSecurityConfigurationOptions successfully`, func() {
 				// Construct an instance of the SecurityObject model
@@ -19813,6 +20489,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putSecurityOptionsModel.CouchdbAuthOnly).To(Equal(core.BoolPtr(true)))
 				Expect(putSecurityOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewReplicationDatabase successfully`, func() {
+				url := "testString"
+				model, err := cloudantService.NewReplicationDatabase(url)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewReplicationDatabaseAuthIam successfully`, func() {
 				apiKey := "testString"
 				model, err := cloudantService.NewReplicationDatabaseAuthIam(apiKey)
@@ -19825,9 +20507,23 @@ var _ = Describe(`CloudantV1`, func() {
 				_, err := cloudantService.NewReplicationDocument(source, target)
 				Expect(err).ToNot(BeNil())
 			})
+			It(`Invoke NewRevisions successfully`, func() {
+				ids := []string{"testString"}
+				start := int64(1)
+				model, err := cloudantService.NewRevisions(ids, start)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewSearchIndexDefinition successfully`, func() {
 				index := "testString"
 				model, err := cloudantService.NewSearchIndexDefinition(index)
+				Expect(model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewUserContext successfully`, func() {
+				name := "testString"
+				roles := []string{"_reader"}
+				model, err := cloudantService.NewUserContext(name, roles)
 				Expect(model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})

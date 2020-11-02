@@ -288,6 +288,122 @@ func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOpt
 	return
 }
 
+// GetCapacityThroughputInformation : Retrieve provisioned throughput capacity information
+// View the amount of provisioned throughput capacity allocated to an IBM Cloudant instance and what is the target
+// provisioned throughput capacity.
+func (cloudant *CloudantV1) GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetCapacityThroughputInformationWithContext(context.Background(), getCapacityThroughputInformationOptions)
+}
+
+// GetCapacityThroughputInformationWithContext is an alternate form of the GetCapacityThroughputInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetCapacityThroughputInformationWithContext(ctx context.Context, getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getCapacityThroughputInformationOptions, "getCapacityThroughputInformationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/capacity/throughput`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getCapacityThroughputInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityThroughputInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// PutCapacityThroughputInformation : Update the target provisioned throughput capacity
+// Sets the target provisioned throughput capacity for an IBM Cloudant instance. When target capacity is changed, the
+// current capacity asynchronously changes to meet the target capacity.
+func (cloudant *CloudantV1) PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
+	return cloudant.PutCapacityThroughputInformationWithContext(context.Background(), putCapacityThroughputInformationOptions)
+}
+
+// PutCapacityThroughputInformationWithContext is an alternate form of the PutCapacityThroughputInformation method which supports a Context parameter
+func (cloudant *CloudantV1) PutCapacityThroughputInformationWithContext(ctx context.Context, putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(putCapacityThroughputInformationOptions, "putCapacityThroughputInformationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(putCapacityThroughputInformationOptions, "putCapacityThroughputInformationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.PUT)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/capacity/throughput`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range putCapacityThroughputInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCapacityThroughputInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if putCapacityThroughputInformationOptions.Blocks != nil {
+		body["blocks"] = putCapacityThroughputInformationOptions.Blocks
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // HeadDatabase : Retrieve the HTTP headers for a database
 // Returns the HTTP headers that contain a minimal amount of information about the specified database. Since the
 // response body is empty, using the HEAD method is a lightweight way to check if the database exists or not.
@@ -4086,7 +4202,7 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 
 // PostExplain : Retrieve information about which index is used for a query
 // Shows which index is being used by the query. Parameters are the same as the [`_find`
-// endpoint](#query-an-index-by-using-selector-syntax.
+// endpoint](#query-an-index-by-using-selector-syntax).
 func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
 	return cloudant.PostExplainWithContext(context.Background(), postExplainOptions)
 }
@@ -6308,12 +6424,12 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx cont
 // GetCorsInformation : Retrieve CORS configuration information
 // Lists all Cross-origin resource sharing (CORS) configuration. CORS defines a way in which the browser and the server
 // interact to determine whether or not to allow the request.
-func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) (result *CorsConfiguration, response *core.DetailedResponse, err error) {
+func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) (result *CorsInformation, response *core.DetailedResponse, err error) {
 	return cloudant.GetCorsInformationWithContext(context.Background(), getCorsInformationOptions)
 }
 
 // GetCorsInformationWithContext is an alternate form of the GetCorsInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, getCorsInformationOptions *GetCorsInformationOptions) (result *CorsConfiguration, response *core.DetailedResponse, err error) {
+func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, getCorsInformationOptions *GetCorsInformationOptions) (result *CorsInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getCorsInformationOptions, "getCorsInformationOptions")
 	if err != nil {
 		return
@@ -6347,7 +6463,7 @@ func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, g
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCorsConfiguration)
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCorsInformation)
 	if err != nil {
 		return
 	}
@@ -7462,22 +7578,190 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 
+// GetActivityTrackerEventsInformation : Retrieve Activity Tracker events information
+// Check event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+func (cloudant *CloudantV1) GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) (result *ActivityTrackerEventsConfiguration, response *core.DetailedResponse, err error) {
+	return cloudant.GetActivityTrackerEventsInformationWithContext(context.Background(), getActivityTrackerEventsInformationOptions)
+}
+
+// GetActivityTrackerEventsInformationWithContext is an alternate form of the GetActivityTrackerEventsInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetActivityTrackerEventsInformationWithContext(ctx context.Context, getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) (result *ActivityTrackerEventsConfiguration, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getActivityTrackerEventsInformationOptions, "getActivityTrackerEventsInformationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/activity_tracker/events`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getActivityTrackerEventsInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActivityTrackerEventsInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActivityTrackerEventsConfiguration)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// PostActivityTrackerEventsConfiguration : Modify Activity Tracker events configuration
+// Configure event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+func (cloudant *CloudantV1) PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PostActivityTrackerEventsConfigurationWithContext(context.Background(), postActivityTrackerEventsConfigurationOptions)
+}
+
+// PostActivityTrackerEventsConfigurationWithContext is an alternate form of the PostActivityTrackerEventsConfiguration method which supports a Context parameter
+func (cloudant *CloudantV1) PostActivityTrackerEventsConfigurationWithContext(ctx context.Context, postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postActivityTrackerEventsConfigurationOptions, "postActivityTrackerEventsConfigurationOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postActivityTrackerEventsConfigurationOptions, "postActivityTrackerEventsConfigurationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/activity_tracker/events`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postActivityTrackerEventsConfigurationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostActivityTrackerEventsConfiguration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if postActivityTrackerEventsConfigurationOptions.Types != nil {
+		body["types"] = postActivityTrackerEventsConfigurationOptions.Types
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// GetCurrentThroughputInformation : Retrieve the current provisioned throughput capacity consumption
+// View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current consumption
+// shows the quantities of reads, writes, and global queries conducted against the instance for a given second.
+func (cloudant *CloudantV1) GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions) (result *CurrentThroughputInformation, response *core.DetailedResponse, err error) {
+	return cloudant.GetCurrentThroughputInformationWithContext(context.Background(), getCurrentThroughputInformationOptions)
+}
+
+// GetCurrentThroughputInformationWithContext is an alternate form of the GetCurrentThroughputInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx context.Context, getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions) (result *CurrentThroughputInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getCurrentThroughputInformationOptions, "getCurrentThroughputInformationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/current/throughput`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getCurrentThroughputInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentThroughputInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentThroughputInformation)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // ActiveTask : Schema for information about a running task.
 type ActiveTask struct {
 	// Processed changes.
 	ChangesDone *int64 `json:"changes_done,omitempty"`
 
 	// Source database.
-	Database *string `json:"database,omitempty"`
+	Database *string `json:"database" validate:"required"`
+
+	// Cluster node where the task is running.
+	Node *string `json:"node" validate:"required"`
 
 	// Process ID.
-	Pid *string `json:"pid,omitempty"`
+	Pid *string `json:"pid" validate:"required"`
 
 	// Current percentage progress.
 	Progress *int64 `json:"progress,omitempty"`
 
 	// Schema for a Unix epoch timestamp.
-	StartedOn *int64 `json:"started_on,omitempty"`
+	StartedOn *int64 `json:"started_on" validate:"required"`
 
 	// Task status message.
 	Status *string `json:"status,omitempty"`
@@ -7489,10 +7773,10 @@ type ActiveTask struct {
 	TotalChanges *int64 `json:"total_changes,omitempty"`
 
 	// Operation type.
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type" validate:"required"`
 
 	// Schema for a Unix epoch timestamp.
-	UpdatedOn *int64 `json:"updated_on,omitempty"`
+	UpdatedOn *int64 `json:"updated_on" validate:"required"`
 }
 
 
@@ -7504,6 +7788,10 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "database", &obj.Database)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "node", &obj.Node)
 	if err != nil {
 		return
 	}
@@ -7536,6 +7824,40 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_on", &obj.UpdatedOn)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ActivityTrackerEventsConfiguration : Schema for Activity Tracker events configuration.
+type ActivityTrackerEventsConfiguration struct {
+	// An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+	// "management" is a required element of this array.
+	Types []string `json:"types" validate:"required"`
+}
+
+// Constants associated with the ActivityTrackerEventsConfiguration.Types property.
+const (
+	ActivityTrackerEventsConfigurationTypesDataConst = "data"
+	ActivityTrackerEventsConfigurationTypesManagementConst = "management"
+)
+
+
+// NewActivityTrackerEventsConfiguration : Instantiate ActivityTrackerEventsConfiguration (Generic Model Constructor)
+func (*CloudantV1) NewActivityTrackerEventsConfiguration(types []string) (model *ActivityTrackerEventsConfiguration, err error) {
+	model = &ActivityTrackerEventsConfiguration{
+		Types: types,
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
+
+// UnmarshalActivityTrackerEventsConfiguration unmarshals an instance of ActivityTrackerEventsConfiguration from the specified map of raw messages.
+func UnmarshalActivityTrackerEventsConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ActivityTrackerEventsConfiguration)
+	err = core.UnmarshalPrimitive(m, "types", &obj.Types)
 	if err != nil {
 		return
 	}
@@ -7670,10 +7992,10 @@ func UnmarshalAllDocsQuery(m map[string]json.RawMessage, result interface{}) (er
 // AllDocsResult : Schema for the result of an all documents operation.
 type AllDocsResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows,omitempty"`
+	TotalRows *int64 `json:"total_rows" validate:"required"`
 
 	// List of doc results.
-	Rows []DocsResultRow `json:"rows,omitempty"`
+	Rows []DocsResultRow `json:"rows" validate:"required"`
 
 	// Current update sequence for the database.
 	UpdateSeq *string `json:"update_seq,omitempty"`
@@ -7863,13 +8185,13 @@ func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interfa
 // ApiKeysResult : Schema for api keys.
 type ApiKeysResult struct {
 	// ok.
-	Ok *bool `json:"ok,omitempty"`
+	Ok *bool `json:"ok" validate:"required"`
 
 	// The generated api key.
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key" validate:"required"`
 
 	// The password associated with the api key.
-	Password *string `json:"password,omitempty"`
+	Password *string `json:"password" validate:"required"`
 }
 
 
@@ -8058,7 +8380,7 @@ func UnmarshalBulkGetQueryDocument(m map[string]json.RawMessage, result interfac
 // BulkGetResult : Schema for the results object of a bulk get operation.
 type BulkGetResult struct {
 	// Results.
-	Results []BulkGetResultItem `json:"results,omitempty"`
+	Results []BulkGetResultItem `json:"results" validate:"required"`
 }
 
 
@@ -8101,10 +8423,10 @@ func UnmarshalBulkGetResultDocument(m map[string]json.RawMessage, result interfa
 // BulkGetResultItem : Schema for the document revisions information from a bulk get operation.
 type BulkGetResultItem struct {
 	// Array of document revisions or error information.
-	Docs []BulkGetResultDocument `json:"docs,omitempty"`
+	Docs []BulkGetResultDocument `json:"docs" validate:"required"`
 
 	// Schema for a document ID.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 }
 
 
@@ -8123,10 +8445,71 @@ func UnmarshalBulkGetResultItem(m map[string]json.RawMessage, result interface{}
 	return
 }
 
+// CapacityThroughputInformation : Schema for information about the currently provisioned and target throughput capacity.
+type CapacityThroughputInformation struct {
+	// Detailed information about provisioned throughput capacity.
+	Current *CapacityThroughputInformationCurrent `json:"current" validate:"required"`
+
+	// Detailed information about target throughput capacity.
+	Target *CapacityThroughputInformationTarget `json:"target,omitempty"`
+}
+
+
+// UnmarshalCapacityThroughputInformation unmarshals an instance of CapacityThroughputInformation from the specified map of raw messages.
+func UnmarshalCapacityThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CapacityThroughputInformation)
+	err = core.UnmarshalModel(m, "current", &obj.Current, UnmarshalCapacityThroughputInformationCurrent)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "target", &obj.Target, UnmarshalCapacityThroughputInformationTarget)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CapacityThroughputInformationCurrent : Detailed information about provisioned throughput capacity.
+type CapacityThroughputInformationCurrent struct {
+	// Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
+	Throughput *ThroughputInformation `json:"throughput" validate:"required"`
+}
+
+
+// UnmarshalCapacityThroughputInformationCurrent unmarshals an instance of CapacityThroughputInformationCurrent from the specified map of raw messages.
+func UnmarshalCapacityThroughputInformationCurrent(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CapacityThroughputInformationCurrent)
+	err = core.UnmarshalModel(m, "throughput", &obj.Throughput, UnmarshalThroughputInformation)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CapacityThroughputInformationTarget : Detailed information about target throughput capacity.
+type CapacityThroughputInformationTarget struct {
+	// Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
+	Throughput *ThroughputInformation `json:"throughput" validate:"required"`
+}
+
+
+// UnmarshalCapacityThroughputInformationTarget unmarshals an instance of CapacityThroughputInformationTarget from the specified map of raw messages.
+func UnmarshalCapacityThroughputInformationTarget(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CapacityThroughputInformationTarget)
+	err = core.UnmarshalModel(m, "throughput", &obj.Throughput, UnmarshalThroughputInformation)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // Change : Schema for a document leaf with single field rev.
 type Change struct {
 	// Schema for a document revision identifier.
-	Rev *string `json:"rev,omitempty"`
+	Rev *string `json:"rev" validate:"required"`
 }
 
 
@@ -8144,13 +8527,13 @@ func UnmarshalChange(m map[string]json.RawMessage, result interface{}) (err erro
 // ChangesResult : Schema for normal changes feed result.
 type ChangesResult struct {
 	// last_seq.
-	LastSeq *string `json:"last_seq,omitempty"`
+	LastSeq *string `json:"last_seq" validate:"required"`
 
 	// pending.
-	Pending *int64 `json:"pending,omitempty"`
+	Pending *int64 `json:"pending" validate:"required"`
 
 	// results.
-	Results []ChangesResultItem `json:"results,omitempty"`
+	Results []ChangesResultItem `json:"results" validate:"required"`
 }
 
 
@@ -8176,16 +8559,19 @@ func UnmarshalChangesResult(m map[string]json.RawMessage, result interface{}) (e
 // ChangesResultItem : Schema for an item in the changes results array.
 type ChangesResultItem struct {
 	// List of document's leaves with single field rev.
-	Changes []Change `json:"changes,omitempty"`
+	Changes []Change `json:"changes" validate:"required"`
 
 	// if `true` then the document is deleted.
 	Deleted *bool `json:"deleted,omitempty"`
 
+	// Schema for a document.
+	Doc *Document `json:"doc,omitempty"`
+
 	// Schema for a document ID.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 
 	// Update sequence.
-	Seq *string `json:"seq,omitempty"`
+	Seq *string `json:"seq" validate:"required"`
 }
 
 
@@ -8197,6 +8583,10 @@ func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "doc", &obj.Doc, UnmarshalDocument)
 	if err != nil {
 		return
 	}
@@ -8215,13 +8605,13 @@ func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}
 // ContentInformationSizes : Schema for size information of content.
 type ContentInformationSizes struct {
 	// The active size of the content, in bytes.
-	Active *int64 `json:"active,omitempty"`
+	Active *int64 `json:"active" validate:"required"`
 
 	// The total uncompressed size of the content, in bytes.
-	External *int64 `json:"external,omitempty"`
+	External *int64 `json:"external" validate:"required"`
 
 	// The total size of the content as stored on disk, in bytes.
-	File *int64 `json:"file,omitempty"`
+	File *int64 `json:"file" validate:"required"`
 }
 
 
@@ -8244,14 +8634,14 @@ func UnmarshalContentInformationSizes(m map[string]json.RawMessage, result inter
 	return
 }
 
-// CorsConfiguration : Schema for a CORS configuration.
-type CorsConfiguration struct {
+// CorsInformation : Schema for information about the CORS configuration.
+type CorsInformation struct {
 	// Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
 	// withCredentials = true.
-	AllowCredentials *bool `json:"allow_credentials,omitempty"`
+	AllowCredentials *bool `json:"allow_credentials" validate:"required"`
 
 	// Boolean value to turn CORS on and off.
-	EnableCors *bool `json:"enable_cors,omitempty"`
+	EnableCors *bool `json:"enable_cors" validate:"required"`
 
 	// An array of strings that contain allowed origin domains. You have to specify the full URL including the protocol. It
 	// is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you have to specify
@@ -8260,18 +8650,9 @@ type CorsConfiguration struct {
 }
 
 
-// NewCorsConfiguration : Instantiate CorsConfiguration (Generic Model Constructor)
-func (*CloudantV1) NewCorsConfiguration(origins []string) (model *CorsConfiguration, err error) {
-	model = &CorsConfiguration{
-		Origins: origins,
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
-
-// UnmarshalCorsConfiguration unmarshals an instance of CorsConfiguration from the specified map of raw messages.
-func UnmarshalCorsConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CorsConfiguration)
+// UnmarshalCorsInformation unmarshals an instance of CorsInformation from the specified map of raw messages.
+func UnmarshalCorsInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CorsInformation)
 	err = core.UnmarshalPrimitive(m, "allow_credentials", &obj.AllowCredentials)
 	if err != nil {
 		return
@@ -8288,44 +8669,94 @@ func UnmarshalCorsConfiguration(m map[string]json.RawMessage, result interface{}
 	return
 }
 
+// CurrentThroughputInformation : Schema for information about current consumption of a provisioned throughput capacity.
+type CurrentThroughputInformation struct {
+	// Detailed information about current consumption.
+	Throughput *CurrentThroughputInformationThroughput `json:"throughput" validate:"required"`
+}
+
+
+// UnmarshalCurrentThroughputInformation unmarshals an instance of CurrentThroughputInformation from the specified map of raw messages.
+func UnmarshalCurrentThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CurrentThroughputInformation)
+	err = core.UnmarshalModel(m, "throughput", &obj.Throughput, UnmarshalCurrentThroughputInformationThroughput)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CurrentThroughputInformationThroughput : Detailed information about current consumption.
+type CurrentThroughputInformationThroughput struct {
+	// Number of global queries conducted against the instance for a given second.
+	Query *int64 `json:"query" validate:"required"`
+
+	// Number of reads conducted against the instance for a given second.
+	Read *int64 `json:"read" validate:"required"`
+
+	// Number of writes conducted against the instance for a given second.
+	Write *int64 `json:"write" validate:"required"`
+}
+
+
+// UnmarshalCurrentThroughputInformationThroughput unmarshals an instance of CurrentThroughputInformationThroughput from the specified map of raw messages.
+func UnmarshalCurrentThroughputInformationThroughput(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CurrentThroughputInformationThroughput)
+	err = core.UnmarshalPrimitive(m, "query", &obj.Query)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "read", &obj.Read)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "write", &obj.Write)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // DatabaseInformation : Schema for information about a database.
 type DatabaseInformation struct {
 	// Schema for database cluster information.
-	Cluster *DatabaseInformationCluster `json:"cluster,omitempty"`
+	Cluster *DatabaseInformationCluster `json:"cluster" validate:"required"`
 
 	// An opaque string that describes the committed state of the database.
 	CommittedUpdateSeq *string `json:"committed_update_seq,omitempty"`
 
 	// True if the database compaction routine is operating on this database.
-	CompactRunning *bool `json:"compact_running,omitempty"`
+	CompactRunning *bool `json:"compact_running" validate:"required"`
 
 	// An opaque string that describes the compaction state of the database.
 	CompactedSeq *string `json:"compacted_seq,omitempty"`
 
 	// The name of the database.
-	DbName *string `json:"db_name,omitempty"`
+	DbName *string `json:"db_name" validate:"required"`
 
 	// The version of the physical format used for the data when it is stored on disk.
-	DiskFormatVersion *int64 `json:"disk_format_version,omitempty"`
+	DiskFormatVersion *int64 `json:"disk_format_version" validate:"required"`
 
 	// A count of the documents in the specified database.
-	DocCount *int64 `json:"doc_count,omitempty"`
+	DocCount *int64 `json:"doc_count" validate:"required"`
 
 	// Number of deleted documents.
-	DocDelCount *int64 `json:"doc_del_count,omitempty"`
+	DocDelCount *int64 `json:"doc_del_count" validate:"required"`
 
 	// The engine used for the database.
 	Engine *string `json:"engine,omitempty"`
 
 	// Schema for database properties.
-	Props *DatabaseInformationProps `json:"props,omitempty"`
+	Props *DatabaseInformationProps `json:"props" validate:"required"`
 
 	// Schema for size information of content.
-	Sizes *ContentInformationSizes `json:"sizes,omitempty"`
+	Sizes *ContentInformationSizes `json:"sizes" validate:"required"`
 
 	// An opaque string that describes the state of the database. Do not rely on this string for counting the number of
 	// updates.
-	UpdateSeq *string `json:"update_seq,omitempty"`
+	UpdateSeq *string `json:"update_seq" validate:"required"`
 
 	// The UUID of the database.
 	UUID *string `json:"uuid,omitempty"`
@@ -8394,16 +8825,16 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 // DatabaseInformationCluster : Schema for database cluster information.
 type DatabaseInformationCluster struct {
 	// Schema for the number of replicas of a database in a cluster.
-	N *int64 `json:"n,omitempty"`
+	N *int64 `json:"n" validate:"required"`
 
 	// Schema for the number of shards in a database. Each shard is a partition of the hash value range.
-	Q *int64 `json:"q,omitempty"`
+	Q *int64 `json:"q" validate:"required"`
 
 	// Read quorum. The number of consistent copies of a document that need to be read before a successful reply.
-	R *int64 `json:"r,omitempty"`
+	R *int64 `json:"r" validate:"required"`
 
 	// Write quorum. The number of copies of a document that need to be written before a successful reply.
-	W *int64 `json:"w,omitempty"`
+	W *int64 `json:"w" validate:"required"`
 }
 
 
@@ -8454,13 +8885,13 @@ type DbEvent struct {
 	Account *string `json:"account,omitempty"`
 
 	// Database name.
-	Dbname *string `json:"dbname,omitempty"`
+	DbName *string `json:"db_name" validate:"required"`
 
 	// Sequence number.
-	Seq *string `json:"seq,omitempty"`
+	Seq *string `json:"seq" validate:"required"`
 
 	// A database event.
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type" validate:"required"`
 }
 
 // Constants associated with the DbEvent.Type property.
@@ -8479,7 +8910,7 @@ func UnmarshalDbEvent(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "dbname", &obj.Dbname)
+	err = core.UnmarshalPrimitive(m, "db_name", &obj.DbName)
 	if err != nil {
 		return
 	}
@@ -8498,10 +8929,10 @@ func UnmarshalDbEvent(m map[string]json.RawMessage, result interface{}) (err err
 // DbUpdates : Schema for database updates.
 type DbUpdates struct {
 	// Last sequence number.
-	LastSeq *string `json:"last_seq,omitempty"`
+	LastSeq *string `json:"last_seq" validate:"required"`
 
 	// results.
-	Results []DbEvent `json:"results,omitempty"`
+	Results []DbEvent `json:"results" validate:"required"`
 }
 
 
@@ -8526,7 +8957,7 @@ type DbsInfoResult struct {
 	Info *DatabaseInformation `json:"info,omitempty"`
 
 	// Database name.
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key" validate:"required"`
 }
 
 
@@ -9243,10 +9674,10 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 // DesignDocumentInformation : Schema for information about a design document.
 type DesignDocumentInformation struct {
 	// name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// View index information.
-	ViewIndex *DesignDocumentViewIndex `json:"view_index,omitempty"`
+	ViewIndex *DesignDocumentViewIndex `json:"view_index" validate:"required"`
 }
 
 
@@ -9286,28 +9717,28 @@ func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interfa
 // DesignDocumentViewIndex : View index information.
 type DesignDocumentViewIndex struct {
 	// Indicates whether a compaction routine is currently running on the view.
-	CompactRunning *bool `json:"compact_running,omitempty"`
+	CompactRunning *bool `json:"compact_running" validate:"required"`
 
 	// Language for the defined views.
-	Language *string `json:"language,omitempty"`
+	Language *string `json:"language" validate:"required"`
 
 	// MD5 signature of the views for the design document.
-	Signature *string `json:"signature,omitempty"`
+	Signature *string `json:"signature" validate:"required"`
 
 	// Schema for size information of content.
-	Sizes *ContentInformationSizes `json:"sizes,omitempty"`
+	Sizes *ContentInformationSizes `json:"sizes" validate:"required"`
 
 	// The update sequence of the corresponding database that has been indexed.
-	UpdateSeq *string `json:"update_seq,omitempty"`
+	UpdateSeq *string `json:"update_seq" validate:"required"`
 
 	// Indicates if the view is currently being updated.
-	UpdaterRunning *bool `json:"updater_running,omitempty"`
+	UpdaterRunning *bool `json:"updater_running" validate:"required"`
 
 	// Number of clients waiting on views from this design document.
-	WaitingClients *int64 `json:"waiting_clients,omitempty"`
+	WaitingClients *int64 `json:"waiting_clients" validate:"required"`
 
 	// Indicates if there are outstanding commits to the underlying database that need to processed.
-	WaitingCommit *bool `json:"waiting_commit,omitempty"`
+	WaitingCommit *bool `json:"waiting_commit" validate:"required"`
 }
 
 
@@ -9353,12 +9784,21 @@ func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result inter
 // DesignDocumentViewsMapReduce : Schema for view functions definition.
 type DesignDocumentViewsMapReduce struct {
 	// JavaScript map function as a string.
-	Map *string `json:"map,omitempty"`
+	Map *string `json:"map" validate:"required"`
 
 	// JavaScript reduce function as a string.
 	Reduce *string `json:"reduce,omitempty"`
 }
 
+
+// NewDesignDocumentViewsMapReduce : Instantiate DesignDocumentViewsMapReduce (Generic Model Constructor)
+func (*CloudantV1) NewDesignDocumentViewsMapReduce(mapVar string) (model *DesignDocumentViewsMapReduce, err error) {
+	model = &DesignDocumentViewsMapReduce{
+		Map: core.StringPtr(mapVar),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalDesignDocumentViewsMapReduce unmarshals an instance of DesignDocumentViewsMapReduce from the specified map of raw messages.
 func UnmarshalDesignDocumentViewsMapReduce(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9393,7 +9833,7 @@ type DocsResultRow struct {
 	ID *string `json:"id,omitempty"`
 
 	// Document ID.
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key" validate:"required"`
 
 	// Value of built-in `/_all_docs` style view.
 	Value *DocsResultRowValue `json:"value,omitempty"`
@@ -9438,7 +9878,7 @@ func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (e
 // DocsResultRowValue : Value of built-in `/_all_docs` style view.
 type DocsResultRowValue struct {
 	// Schema for a document revision identifier.
-	Rev *string `json:"rev,omitempty"`
+	Rev *string `json:"rev" validate:"required"`
 }
 
 
@@ -9608,7 +10048,7 @@ func UnmarshalDocument(m map[string]json.RawMessage, result interface{}) (err er
 // DocumentResult : Schema for the result of a document modification.
 type DocumentResult struct {
 	// Schema for a document ID.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev,omitempty"`
@@ -9661,11 +10101,11 @@ func UnmarshalDocumentResult(m map[string]json.RawMessage, result interface{}) (
 // DocumentRevisionStatus : Schema for information about revisions and their status.
 type DocumentRevisionStatus struct {
 	// Schema for a document revision identifier.
-	Rev *string `json:"rev,omitempty"`
+	Rev *string `json:"rev" validate:"required"`
 
 	// Status of the revision. May be one of: - `available`: Revision is available for retrieving with rev query parameter
 	// - `missing`: Revision is not available - `deleted`: Revision belongs to deleted document.
-	Status *string `json:"status,omitempty"`
+	Status *string `json:"status" validate:"required"`
 }
 
 // Constants associated with the DocumentRevisionStatus.Status property.
@@ -9677,6 +10117,16 @@ const (
 	DocumentRevisionStatusStatusMissingConst = "missing"
 )
 
+
+// NewDocumentRevisionStatus : Instantiate DocumentRevisionStatus (Generic Model Constructor)
+func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (model *DocumentRevisionStatus, err error) {
+	model = &DocumentRevisionStatus{
+		Rev: core.StringPtr(rev),
+		Status: core.StringPtr(status),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalDocumentRevisionStatus unmarshals an instance of DocumentRevisionStatus from the specified map of raw messages.
 func UnmarshalDocumentRevisionStatus(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9696,10 +10146,10 @@ func UnmarshalDocumentRevisionStatus(m map[string]json.RawMessage, result interf
 // DocumentShardInfo : Schema for document shard information.
 type DocumentShardInfo struct {
 	// List of nodes serving a replica of the shard.
-	Nodes []string `json:"nodes,omitempty"`
+	Nodes []string `json:"nodes" validate:"required"`
 
 	// The shard range in which the document is stored.
-	Range *string `json:"range,omitempty"`
+	Range *string `json:"range" validate:"required"`
 }
 
 
@@ -9721,19 +10171,19 @@ func UnmarshalDocumentShardInfo(m map[string]json.RawMessage, result interface{}
 // ExecutionStats : Schema for find query execution statistics.
 type ExecutionStats struct {
 	// Time to execute the query.
-	ExecutionTimeMs *float64 `json:"execution_time_ms,omitempty"`
+	ExecutionTimeMs *float64 `json:"execution_time_ms" validate:"required"`
 
 	// Number of results returned.
-	ResultsReturned *int64 `json:"results_returned,omitempty"`
+	ResultsReturned *int64 `json:"results_returned" validate:"required"`
 
 	// Number of documents fetched from the index.
-	TotalDocsExamined *int64 `json:"total_docs_examined,omitempty"`
+	TotalDocsExamined *int64 `json:"total_docs_examined" validate:"required"`
 
 	// Number of rows scanned in the index.
-	TotalKeysExamined *int64 `json:"total_keys_examined,omitempty"`
+	TotalKeysExamined *int64 `json:"total_keys_examined" validate:"required"`
 
 	// Number of documents fetched from the primary index with the specified read quorum.
-	TotalQuorumDocsExamined *int64 `json:"total_quorum_docs_examined,omitempty"`
+	TotalQuorumDocsExamined *int64 `json:"total_quorum_docs_examined" validate:"required"`
 }
 
 
@@ -9767,19 +10217,19 @@ func UnmarshalExecutionStats(m map[string]json.RawMessage, result interface{}) (
 // ExplainResult : Schema for information about the index used for a find query.
 type ExplainResult struct {
 	// dbname.
-	Dbname *string `json:"dbname,omitempty"`
+	Dbname *string `json:"dbname" validate:"required"`
 
 	// fields.
-	Fields []string `json:"fields,omitempty"`
+	Fields []string `json:"fields" validate:"required"`
 
 	// Schema for information about an index.
-	Index *IndexInformation `json:"index,omitempty"`
+	Index *IndexInformation `json:"index" validate:"required"`
 
 	// limit.
-	Limit *int64 `json:"limit,omitempty"`
+	Limit *int64 `json:"limit" validate:"required"`
 
 	// opts.
-	Opts map[string]interface{} `json:"opts,omitempty"`
+	Opts map[string]interface{} `json:"opts" validate:"required"`
 
 	// range.
 	Range *ExplainResultRange `json:"range,omitempty"`
@@ -9807,10 +10257,10 @@ type ExplainResult struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector,omitempty"`
+	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// skip.
-	Skip *int64 `json:"skip,omitempty"`
+	Skip *int64 `json:"skip" validate:"required"`
 }
 
 
@@ -9881,10 +10331,10 @@ func UnmarshalExplainResultRange(m map[string]json.RawMessage, result interface{
 // FindResult : Schema for the result of a query find operation.
 type FindResult struct {
 	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
+	Bookmark *string `json:"bookmark" validate:"required"`
 
 	// Documents matching the selector.
-	Docs []Document `json:"docs,omitempty"`
+	Docs []Document `json:"docs" validate:"required"`
 
 	// Schema for find query execution statistics.
 	ExecutionStats *ExecutionStats `json:"execution_stats,omitempty"`
@@ -9949,7 +10399,10 @@ func UnmarshalGeoIndexDefinition(m map[string]json.RawMessage, result interface{
 // GeoIndexInformation : Schema for information about a geospatial index.
 type GeoIndexInformation struct {
 	// Schema for geospatial index statistics.
-	GeoIndex *GeoIndexStats `json:"geo_index,omitempty"`
+	GeoIndex *GeoIndexStats `json:"geo_index" validate:"required"`
+
+	// The name of the geospatial index design document.
+	Name *string `json:"name" validate:"required"`
 }
 
 
@@ -9960,6 +10413,10 @@ func UnmarshalGeoIndexInformation(m map[string]json.RawMessage, result interface
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -9967,13 +10424,13 @@ func UnmarshalGeoIndexInformation(m map[string]json.RawMessage, result interface
 // GeoIndexStats : Schema for geospatial index statistics.
 type GeoIndexStats struct {
 	// The size of the geospatial index, in bytes.
-	DataSize *int64 `json:"data_size,omitempty"`
+	DataSize *int64 `json:"data_size" validate:"required"`
 
 	// The size of the geospatial index, as stored on disk, in bytes.
-	DiskSize *int64 `json:"disk_size,omitempty"`
+	DiskSize *int64 `json:"disk_size" validate:"required"`
 
 	// Number of documents in the geospatial index.
-	DocCount *int64 `json:"doc_count,omitempty"`
+	DocCount *int64 `json:"doc_count" validate:"required"`
 }
 
 
@@ -10181,13 +10638,13 @@ func UnmarshalGeoJSONGeometryObject(m map[string]json.RawMessage, result interfa
 // format this is a GeoJson FeatureCollection with additional metadata in foreign members.
 type GeoResult struct {
 	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
+	Bookmark *string `json:"bookmark" validate:"required"`
 
 	// The array of GeoJSON Feature Objects matching the geospatial query.
 	Features []GeoJSONFeature `json:"features,omitempty"`
 
 	// The array of rows matching the geospatial query. Present only when using `view` format.
-	Rows []GeoResultRow `json:"rows,omitempty"`
+	Rows []GeoResultRow `json:"rows" validate:"required"`
 
 	// Declaration of the GeoJSON type: FeatureCollection Object.
 	Type *string `json:"type,omitempty"`
@@ -10276,6 +10733,24 @@ func (*CloudantV1) NewGetActiveTasksOptions() *GetActiveTasksOptions {
 
 // SetHeaders : Allow user to set Headers
 func (options *GetActiveTasksOptions) SetHeaders(param map[string]string) *GetActiveTasksOptions {
+	options.Headers = param
+	return options
+}
+
+// GetActivityTrackerEventsInformationOptions : The GetActivityTrackerEventsInformation options.
+type GetActivityTrackerEventsInformationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetActivityTrackerEventsInformationOptions : Instantiate GetActivityTrackerEventsInformationOptions
+func (*CloudantV1) NewGetActivityTrackerEventsInformationOptions() *GetActivityTrackerEventsInformationOptions {
+	return &GetActivityTrackerEventsInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetActivityTrackerEventsInformationOptions) SetHeaders(param map[string]string) *GetActivityTrackerEventsInformationOptions {
 	options.Headers = param
 	return options
 }
@@ -10438,6 +10913,24 @@ func (options *GetAttachmentOptions) SetHeaders(param map[string]string) *GetAtt
 	return options
 }
 
+// GetCapacityThroughputInformationOptions : The GetCapacityThroughputInformation options.
+type GetCapacityThroughputInformationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetCapacityThroughputInformationOptions : Instantiate GetCapacityThroughputInformationOptions
+func (*CloudantV1) NewGetCapacityThroughputInformationOptions() *GetCapacityThroughputInformationOptions {
+	return &GetCapacityThroughputInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetCapacityThroughputInformationOptions) SetHeaders(param map[string]string) *GetCapacityThroughputInformationOptions {
+	options.Headers = param
+	return options
+}
+
 // GetCorsInformationOptions : The GetCorsInformation options.
 type GetCorsInformationOptions struct {
 
@@ -10452,6 +10945,24 @@ func (*CloudantV1) NewGetCorsInformationOptions() *GetCorsInformationOptions {
 
 // SetHeaders : Allow user to set Headers
 func (options *GetCorsInformationOptions) SetHeaders(param map[string]string) *GetCorsInformationOptions {
+	options.Headers = param
+	return options
+}
+
+// GetCurrentThroughputInformationOptions : The GetCurrentThroughputInformation options.
+type GetCurrentThroughputInformationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetCurrentThroughputInformationOptions : Instantiate GetCurrentThroughputInformationOptions
+func (*CloudantV1) NewGetCurrentThroughputInformationOptions() *GetCurrentThroughputInformationOptions {
+	return &GetCurrentThroughputInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetCurrentThroughputInformationOptions) SetHeaders(param map[string]string) *GetCurrentThroughputInformationOptions {
 	options.Headers = param
 	return options
 }
@@ -12304,19 +12815,19 @@ func UnmarshalIndexField(m map[string]json.RawMessage, result interface{}) (err 
 // IndexInformation : Schema for information about an index.
 type IndexInformation struct {
 	// Design document ID.
-	Ddoc *string `json:"ddoc,omitempty"`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
 	// properties that do not apply to `json` indexes, these are:
 	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
 	// document fields and what analyzer to use for that purpose.
-	Def *IndexDefinition `json:"def,omitempty"`
+	Def *IndexDefinition `json:"def" validate:"required"`
 
 	// Index name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// Schema for the type of an index.
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type" validate:"required"`
 }
 
 // Constants associated with the IndexInformation.Type property.
@@ -12354,13 +12865,13 @@ func UnmarshalIndexInformation(m map[string]json.RawMessage, result interface{})
 // IndexResult : Schema for the result of creating an index.
 type IndexResult struct {
 	// Id of the design document the index was created in.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 
 	// Name of the index created.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// Flag to show whether the index was created or one already exists.
-	Result *string `json:"result,omitempty"`
+	Result *string `json:"result" validate:"required"`
 }
 
 // Constants associated with the IndexResult.Result property.
@@ -12419,10 +12930,10 @@ func UnmarshalIndexTextOperatorDefaultField(m map[string]json.RawMessage, result
 // IndexesInformation : Schema for information about the indexes in a database.
 type IndexesInformation struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows,omitempty"`
+	TotalRows *int64 `json:"total_rows" validate:"required"`
 
 	// Indexes.
-	Indexes []IndexInformation `json:"indexes,omitempty"`
+	Indexes []IndexInformation `json:"indexes" validate:"required"`
 }
 
 
@@ -12444,10 +12955,10 @@ func UnmarshalIndexesInformation(m map[string]json.RawMessage, result interface{
 // MembershipInformation : Schema for information about known nodes and cluster membership.
 type MembershipInformation struct {
 	// List of nodes this node knows about, including the ones that are part of the cluster.
-	AllNodes []string `json:"all_nodes,omitempty"`
+	AllNodes []string `json:"all_nodes" validate:"required"`
 
 	// All cluster nodes.
-	ClusterNodes []string `json:"cluster_nodes,omitempty"`
+	ClusterNodes []string `json:"cluster_nodes" validate:"required"`
 }
 
 
@@ -12469,7 +12980,7 @@ func UnmarshalMembershipInformation(m map[string]json.RawMessage, result interfa
 // MissingRevsResult : Schema for mapping document IDs to lists of missing revisions.
 type MissingRevsResult struct {
 	// Schema for mapping document IDs to lists of revisions.
-	MissingRevs map[string][]string `json:"missing_revs,omitempty"`
+	MissingRevs map[string][]string `json:"missing_revs" validate:"required"`
 }
 
 
@@ -12505,22 +13016,22 @@ func UnmarshalOk(m map[string]json.RawMessage, result interface{}) (err error) {
 // PartitionInformation : Schema for information about a database partition.
 type PartitionInformation struct {
 	// The name of the database.
-	DbName *string `json:"db_name,omitempty"`
+	DbName *string `json:"db_name" validate:"required"`
 
 	// A count of the documents in the specified database partition.
-	DocCount *int64 `json:"doc_count,omitempty"`
+	DocCount *int64 `json:"doc_count" validate:"required"`
 
 	// Number of deleted documents.
-	DocDelCount *int64 `json:"doc_del_count,omitempty"`
+	DocDelCount *int64 `json:"doc_del_count" validate:"required"`
 
 	// The name of the partition in the database.
-	Partition *string `json:"partition,omitempty"`
+	Partition *string `json:"partition" validate:"required"`
 
 	// Schema for information about the partition index count and limit in a database.
 	PartitionedIndexes *PartitionInformationIndexes `json:"partitioned_indexes,omitempty"`
 
 	// The size of active and external data, in bytes.
-	Sizes *PartitionInformationSizes `json:"sizes,omitempty"`
+	Sizes *PartitionInformationSizes `json:"sizes" validate:"required"`
 }
 
 
@@ -12635,6 +13146,41 @@ func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result int
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
+}
+
+// PostActivityTrackerEventsConfigurationOptions : The PostActivityTrackerEventsConfiguration options.
+type PostActivityTrackerEventsConfigurationOptions struct {
+	// An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+	// "management" is a required element of this array.
+	Types []string `json:"types" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the PostActivityTrackerEventsConfigurationOptions.Types property.
+const (
+	PostActivityTrackerEventsConfigurationOptionsTypesDataConst = "data"
+	PostActivityTrackerEventsConfigurationOptionsTypesManagementConst = "management"
+)
+
+// NewPostActivityTrackerEventsConfigurationOptions : Instantiate PostActivityTrackerEventsConfigurationOptions
+func (*CloudantV1) NewPostActivityTrackerEventsConfigurationOptions(types []string) *PostActivityTrackerEventsConfigurationOptions {
+	return &PostActivityTrackerEventsConfigurationOptions{
+		Types: types,
+	}
+}
+
+// SetTypes : Allow user to set Types
+func (options *PostActivityTrackerEventsConfigurationOptions) SetTypes(types []string) *PostActivityTrackerEventsConfigurationOptions {
+	options.Types = types
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostActivityTrackerEventsConfigurationOptions) SetHeaders(param map[string]string) *PostActivityTrackerEventsConfigurationOptions {
+	options.Headers = param
+	return options
 }
 
 // PostAllDocsOptions : The PostAllDocs options.
@@ -15827,6 +16373,35 @@ func (options *PutAttachmentOptions) SetHeaders(param map[string]string) *PutAtt
 	return options
 }
 
+// PutCapacityThroughputInformationOptions : The PutCapacityThroughputInformation options.
+type PutCapacityThroughputInformationOptions struct {
+	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
+	// of provisioned throughput capacity.
+	Blocks *int64 `json:"blocks" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewPutCapacityThroughputInformationOptions : Instantiate PutCapacityThroughputInformationOptions
+func (*CloudantV1) NewPutCapacityThroughputInformationOptions(blocks int64) *PutCapacityThroughputInformationOptions {
+	return &PutCapacityThroughputInformationOptions{
+		Blocks: core.Int64Ptr(blocks),
+	}
+}
+
+// SetBlocks : Allow user to set Blocks
+func (options *PutCapacityThroughputInformationOptions) SetBlocks(blocks int64) *PutCapacityThroughputInformationOptions {
+	options.Blocks = core.Int64Ptr(blocks)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PutCapacityThroughputInformationOptions) SetHeaders(param map[string]string) *PutCapacityThroughputInformationOptions {
+	options.Headers = param
+	return options
+}
+
 // PutCloudantSecurityConfigurationOptions : The PutCloudantSecurityConfiguration options.
 type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
@@ -16491,9 +17066,18 @@ type ReplicationDatabase struct {
 	HeadersVar map[string]string `json:"headers,omitempty"`
 
 	// Replication database URL.
-	URL *string `json:"url,omitempty"`
+	URL *string `json:"url" validate:"required"`
 }
 
+
+// NewReplicationDatabase : Instantiate ReplicationDatabase (Generic Model Constructor)
+func (*CloudantV1) NewReplicationDatabase(url string) (model *ReplicationDatabase, err error) {
+	model = &ReplicationDatabase{
+		URL: core.StringPtr(url),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalReplicationDatabase unmarshals an instance of ReplicationDatabase from the specified map of raw messages.
 func UnmarshalReplicationDatabase(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -16995,37 +17579,37 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 // ReplicationHistory : Schema for replication history information.
 type ReplicationHistory struct {
 	// Number of document write failures.
-	DocWriteFailures *int64 `json:"doc_write_failures,omitempty"`
+	DocWriteFailures *int64 `json:"doc_write_failures" validate:"required"`
 
 	// Number of documents read.
-	DocsRead *int64 `json:"docs_read,omitempty"`
+	DocsRead *int64 `json:"docs_read" validate:"required"`
 
 	// Number of documents written to target.
-	DocsWritten *int64 `json:"docs_written,omitempty"`
+	DocsWritten *int64 `json:"docs_written" validate:"required"`
 
 	// Last sequence number in changes stream.
-	EndLastSeq *string `json:"end_last_seq,omitempty"`
+	EndLastSeq *string `json:"end_last_seq" validate:"required"`
 
 	// Date/Time replication operation completed in RFC 2822 format.
-	EndTime *string `json:"end_time,omitempty"`
+	EndTime *string `json:"end_time" validate:"required"`
 
 	// Number of missing documents checked.
-	MissingChecked *int64 `json:"missing_checked,omitempty"`
+	MissingChecked *int64 `json:"missing_checked" validate:"required"`
 
 	// Number of missing documents found.
-	MissingFound *int64 `json:"missing_found,omitempty"`
+	MissingFound *int64 `json:"missing_found" validate:"required"`
 
 	// Last recorded sequence number.
-	RecordedSeq *string `json:"recorded_seq,omitempty"`
+	RecordedSeq *string `json:"recorded_seq" validate:"required"`
 
 	// Session ID for this replication operation.
-	SessionID *string `json:"session_id,omitempty"`
+	SessionID *string `json:"session_id" validate:"required"`
 
 	// First sequence number in changes stream.
-	StartLastSeq *string `json:"start_last_seq,omitempty"`
+	StartLastSeq *string `json:"start_last_seq" validate:"required"`
 
 	// Date/Time replication operation started in RFC 2822 format.
-	StartTime *string `json:"start_time,omitempty"`
+	StartTime *string `json:"start_time" validate:"required"`
 }
 
 
@@ -17083,19 +17667,19 @@ func UnmarshalReplicationHistory(m map[string]json.RawMessage, result interface{
 // ReplicationResult : Schema for a replication result.
 type ReplicationResult struct {
 	// Replication history.
-	History []ReplicationHistory `json:"history,omitempty"`
+	History []ReplicationHistory `json:"history" validate:"required"`
 
 	// Replication status.
-	Ok *bool `json:"ok,omitempty"`
+	Ok *bool `json:"ok" validate:"required"`
 
 	// Replication protocol version.
-	ReplicationIDVersion *int64 `json:"replication_id_version,omitempty"`
+	ReplicationIDVersion *int64 `json:"replication_id_version" validate:"required"`
 
 	// Unique session ID.
-	SessionID *string `json:"session_id,omitempty"`
+	SessionID *string `json:"session_id" validate:"required"`
 
 	// Last sequence number read from source database.
-	SourceLastSeq *string `json:"source_last_seq,omitempty"`
+	SourceLastSeq *string `json:"source_last_seq" validate:"required"`
 }
 
 
@@ -17129,12 +17713,22 @@ func UnmarshalReplicationResult(m map[string]json.RawMessage, result interface{}
 // Revisions : Schema for list of revision information.
 type Revisions struct {
 	// Array of valid revision IDs, in reverse order (latest first).
-	Ids []string `json:"ids,omitempty"`
+	Ids []string `json:"ids" validate:"required"`
 
 	// Prefix number for the latest revision.
-	Start *int64 `json:"start,omitempty"`
+	Start *int64 `json:"start" validate:"required"`
 }
 
+
+// NewRevisions : Instantiate Revisions (Generic Model Constructor)
+func (*CloudantV1) NewRevisions(ids []string, start int64) (model *Revisions, err error) {
+	model = &Revisions{
+		Ids: ids,
+		Start: core.Int64Ptr(start),
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalRevisions unmarshals an instance of Revisions from the specified map of raw messages.
 func UnmarshalRevisions(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -17179,10 +17773,10 @@ func UnmarshalRevsDiff(m map[string]json.RawMessage, result interface{}) (err er
 // SchedulerDocsResult : Schema for a listing of replication scheduler documents.
 type SchedulerDocsResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows,omitempty"`
+	TotalRows *int64 `json:"total_rows" validate:"required"`
 
 	// Array of replication scheduler doc objects.
-	Docs []SchedulerDocument `json:"docs,omitempty"`
+	Docs []SchedulerDocument `json:"docs" validate:"required"`
 }
 
 
@@ -17204,25 +17798,25 @@ func UnmarshalSchedulerDocsResult(m map[string]json.RawMessage, result interface
 // SchedulerDocument : Schema for a replication scheduler document.
 type SchedulerDocument struct {
 	// Database where replication document came from.
-	Database *string `json:"database,omitempty"`
+	Database *string `json:"database" validate:"required"`
 
 	// Replication document ID.
-	DocID *string `json:"doc_id,omitempty"`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Consecutive errors count. Indicates how many times in a row this replication has crashed. Replication will be
 	// retried with an exponential backoff based on this number. As soon as the replication succeeds this count is reset to
 	// 0. To can be used to get an idea why a particular replication is not making progress.
-	ErrorCount *int64 `json:"error_count,omitempty"`
+	ErrorCount *int64 `json:"error_count" validate:"required"`
 
 	// Replication ID, or null if state is completed or failed.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 
 	// Schema for scheduler document information. A JSON object that may contain additional information about the state.
 	// For error states this will contain an error field and string value.
-	Info *SchedulerInfo `json:"info,omitempty"`
+	Info *SchedulerInfo `json:"info" validate:"required"`
 
 	// Timestamp of last state update.
-	LastUpdated *strfmt.DateTime `json:"last_updated,omitempty"`
+	LastUpdated *strfmt.DateTime `json:"last_updated" validate:"required"`
 
 	// Cluster node where the job is running.
 	Node *string `json:"node,omitempty"`
@@ -17234,10 +17828,10 @@ type SchedulerDocument struct {
 	SourceProxy *string `json:"source_proxy,omitempty"`
 
 	// Timestamp of when the replication was started.
-	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
+	StartTime *strfmt.DateTime `json:"start_time" validate:"required"`
 
 	// Schema for replication state.
-	State *string `json:"state,omitempty"`
+	State *string `json:"state" validate:"required"`
 
 	// Replication target.
 	Target *string `json:"target,omitempty"`
@@ -17403,38 +17997,38 @@ func UnmarshalSchedulerInfo(m map[string]json.RawMessage, result interface{}) (e
 // SchedulerJob : Schema for a replication scheduler job.
 type SchedulerJob struct {
 	// Replication document database.
-	Database *string `json:"database,omitempty"`
+	Database *string `json:"database" validate:"required"`
 
 	// Replication document ID.
-	DocID *string `json:"doc_id,omitempty"`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Timestamped history of events as a list of objects.
-	History []SchedulerJobEvent `json:"history,omitempty"`
+	History []SchedulerJobEvent `json:"history" validate:"required"`
 
 	// Schema for a replication job id.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 
 	// Schema for scheduler document information. A JSON object that may contain additional information about the state.
 	// For error states this will contain an error field and string value.
-	Info *SchedulerInfo `json:"info,omitempty"`
+	Info *SchedulerInfo `json:"info" validate:"required"`
 
 	// Cluster node where the job is running.
-	Node *string `json:"node,omitempty"`
+	Node *string `json:"node" validate:"required"`
 
 	// Replication process ID.
-	Pid *string `json:"pid,omitempty"`
+	Pid *string `json:"pid" validate:"required"`
 
 	// Replication source.
-	Source *string `json:"source,omitempty"`
+	Source *string `json:"source" validate:"required"`
 
 	// Timestamp of when the replication was started.
-	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
+	StartTime *strfmt.DateTime `json:"start_time" validate:"required"`
 
 	// Replication target.
-	Target *string `json:"target,omitempty"`
+	Target *string `json:"target" validate:"required"`
 
 	// Name of user running replication.
-	User *string `json:"user,omitempty"`
+	User *string `json:"user" validate:"required"`
 }
 
 
@@ -17492,10 +18086,10 @@ func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (er
 // SchedulerJobEvent : Schema for a replication scheduler job event.
 type SchedulerJobEvent struct {
 	// Timestamp of the event.
-	Timestamp *strfmt.DateTime `json:"timestamp,omitempty"`
+	Timestamp *strfmt.DateTime `json:"timestamp" validate:"required"`
 
 	// Type of the event.
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type" validate:"required"`
 }
 
 
@@ -17517,10 +18111,10 @@ func UnmarshalSchedulerJobEvent(m map[string]json.RawMessage, result interface{}
 // SchedulerJobsResult : Schema for a listing of replication scheduler jobs.
 type SchedulerJobsResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows,omitempty"`
+	TotalRows *int64 `json:"total_rows" validate:"required"`
 
 	// Array of replication job objects.
-	Jobs []SchedulerJob `json:"jobs,omitempty"`
+	Jobs []SchedulerJob `json:"jobs" validate:"required"`
 }
 
 
@@ -17542,7 +18136,7 @@ func UnmarshalSchedulerJobsResult(m map[string]json.RawMessage, result interface
 // SearchAnalyzeResult : Schema for the output of testing search analyzer tokenization.
 type SearchAnalyzeResult struct {
 	// tokens.
-	Tokens []string `json:"tokens,omitempty"`
+	Tokens []string `json:"tokens" validate:"required"`
 }
 
 
@@ -17683,7 +18277,7 @@ func UnmarshalSearchInfoResult(m map[string]json.RawMessage, result interface{})
 // SearchResult : Schema for the result of a query search operation.
 type SearchResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows,omitempty"`
+	TotalRows *int64 `json:"total_rows" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -17744,7 +18338,7 @@ func UnmarshalSearchResult(m map[string]json.RawMessage, result interface{}) (er
 // SearchResultProperties : Schema for the result of a query search operation.
 type SearchResultProperties struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows,omitempty"`
+	TotalRows *int64 `json:"total_rows" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -17801,13 +18395,13 @@ type SearchResultRow struct {
 	Doc *Document `json:"doc,omitempty"`
 
 	// Schema for the fields returned by a query search operation, a map of field name to value.
-	Fields map[string]interface{} `json:"fields,omitempty"`
+	Fields map[string]interface{} `json:"fields" validate:"required"`
 
 	// Returns the context in which a search term was mentioned so that you can display more emphasized results to a user.
 	Highlights map[string][]string `json:"highlights,omitempty"`
 
 	// Schema for a document ID.
-	ID *string `json:"id,omitempty"`
+	ID *string `json:"id" validate:"required"`
 }
 
 
@@ -17914,16 +18508,19 @@ func UnmarshalSecurityObject(m map[string]json.RawMessage, result interface{}) (
 // ServerInformation : Schema for information about the server instance.
 type ServerInformation struct {
 	// Welcome message.
-	Couchdb *string `json:"couchdb,omitempty"`
+	Couchdb *string `json:"couchdb" validate:"required"`
 
 	// List of enabled optional features.
-	Features []string `json:"features,omitempty"`
+	Features []string `json:"features" validate:"required"`
 
 	// Schema for server vendor information.
-	Vendor *ServerVendor `json:"vendor,omitempty"`
+	Vendor *ServerVendor `json:"vendor" validate:"required"`
 
 	// Apache CouchDB version.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version" validate:"required"`
+
+	// List of feature flags.
+	FeaturesFlags []string `json:"features_flags" validate:"required"`
 }
 
 
@@ -17946,6 +18543,10 @@ func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "features_flags", &obj.FeaturesFlags)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -17953,7 +18554,7 @@ func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}
 // ServerVendor : Schema for server vendor information.
 type ServerVendor struct {
 	// Vendor name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// Vendor variant.
 	Variant *string `json:"variant,omitempty"`
@@ -17991,7 +18592,7 @@ type SessionAuthentication struct {
 	AuthenticationDb *string `json:"authentication_db,omitempty"`
 
 	// authentication_handlers.
-	AuthenticationHandlers []string `json:"authentication_handlers,omitempty"`
+	AuthenticationHandlers []string `json:"authentication_handlers" validate:"required"`
 }
 
 
@@ -18017,13 +18618,13 @@ func UnmarshalSessionAuthentication(m map[string]json.RawMessage, result interfa
 // SessionInformation : Schema for information about a session.
 type SessionInformation struct {
 	// ok.
-	Ok *bool `json:"ok,omitempty"`
+	Ok *bool `json:"ok" validate:"required"`
 
 	// Schema for session authentication information.
-	Info *SessionAuthentication `json:"info,omitempty"`
+	Info *SessionAuthentication `json:"info" validate:"required"`
 
 	// Schema for the user context of a session.
-	UserCtx *UserContext `json:"userCtx,omitempty"`
+	UserCtx *UserContext `json:"userCtx" validate:"required"`
 }
 
 
@@ -18050,7 +18651,7 @@ func UnmarshalSessionInformation(m map[string]json.RawMessage, result interface{
 // that shard.
 type ShardsInformation struct {
 	// Mapping of shard hash value range to a list of nodes.
-	Shards map[string][]string `json:"shards,omitempty"`
+	Shards map[string][]string `json:"shards" validate:"required"`
 }
 
 
@@ -18065,10 +18666,53 @@ func UnmarshalShardsInformation(m map[string]json.RawMessage, result interface{}
 	return
 }
 
+// ThroughputInformation : Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
+type ThroughputInformation struct {
+	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
+	// of provisioned throughput capacity.
+	Blocks *int64 `json:"blocks" validate:"required"`
+
+	// Provisioned global queries capacity in operations per second.
+	Query *int64 `json:"query" validate:"required"`
+
+	// Provisioned reads capacity in operations per second.
+	Read *int64 `json:"read" validate:"required"`
+
+	// Provisioned writes capacity in operations per second.
+	Write *int64 `json:"write" validate:"required"`
+}
+
+
+// UnmarshalThroughputInformation unmarshals an instance of ThroughputInformation from the specified map of raw messages.
+func UnmarshalThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ThroughputInformation)
+	err = core.UnmarshalPrimitive(m, "blocks", &obj.Blocks)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "query", &obj.Query)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "read", &obj.Read)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "write", &obj.Write)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // UpInformation : Schema for information about the up state of the server.
 type UpInformation struct {
+	// seeds.
+	Seeds interface{} `json:"seeds" validate:"required"`
+
 	// status.
-	Status *string `json:"status,omitempty"`
+	Status *string `json:"status" validate:"required"`
 }
 
 // Constants associated with the UpInformation.Status property.
@@ -18083,6 +18727,10 @@ const (
 // UnmarshalUpInformation unmarshals an instance of UpInformation from the specified map of raw messages.
 func UnmarshalUpInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UpInformation)
+	err = core.UnmarshalPrimitive(m, "seeds", &obj.Seeds)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
@@ -18097,10 +18745,10 @@ type UserContext struct {
 	Db *string `json:"db,omitempty"`
 
 	// User name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// List of user roles.
-	Roles []string `json:"roles,omitempty"`
+	Roles []string `json:"roles" validate:"required"`
 }
 
 // Constants associated with the UserContext.Roles property.
@@ -18116,6 +18764,16 @@ const (
 	UserContextRolesWriterConst = "_writer"
 )
 
+
+// NewUserContext : Instantiate UserContext (Generic Model Constructor)
+func (*CloudantV1) NewUserContext(name string, roles []string) (model *UserContext, err error) {
+	model = &UserContext{
+		Name: core.StringPtr(name),
+		Roles: roles,
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
 
 // UnmarshalUserContext unmarshals an instance of UserContext from the specified map of raw messages.
 func UnmarshalUserContext(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18139,7 +18797,7 @@ func UnmarshalUserContext(m map[string]json.RawMessage, result interface{}) (err
 // UuidsResult : Schema for a set of uuids generated by the server.
 type UuidsResult struct {
 	// uuids.
-	Uuids []string `json:"uuids,omitempty"`
+	Uuids []string `json:"uuids" validate:"required"`
 }
 
 
@@ -18347,7 +19005,7 @@ type ViewResult struct {
 	UpdateSeq *string `json:"update_seq,omitempty"`
 
 	// rows.
-	Rows []ViewResultRow `json:"rows,omitempty"`
+	Rows []ViewResultRow `json:"rows" validate:"required"`
 }
 
 
@@ -18388,10 +19046,10 @@ type ViewResultRow struct {
 	ID *string `json:"id,omitempty"`
 
 	// Schema for any JSON type.
-	Key interface{} `json:"key,omitempty"`
+	Key interface{} `json:"key" validate:"required"`
 
 	// Schema for any JSON type.
-	Value interface{} `json:"value,omitempty"`
+	Value interface{} `json:"value" validate:"required"`
 }
 
 
