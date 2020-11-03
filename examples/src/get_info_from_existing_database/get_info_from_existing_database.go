@@ -23,7 +23,7 @@ import (
 
 func main() {
 	// 1. Create a Cloudant client with "EXAMPLES" service name ============
-	examplesClient, err := cloudantv1.NewCloudantV1UsingExternalConfig(
+	client, err := cloudantv1.NewCloudantV1UsingExternalConfig(
 		&cloudantv1.CloudantV1Options{
 			ServiceName: "EXAMPLES",
 		},
@@ -32,8 +32,8 @@ func main() {
 		panic(err)
 	}
 	// 2. Get server information ===========================================
-	serverInformationResult, _, err := examplesClient.GetServerInformation(
-		examplesClient.NewGetServerInformationOptions(),
+	serverInformationResult, _, err := client.GetServerInformation(
+		client.NewGetServerInformationOptions(),
 	)
 	if err != nil {
 		panic(err)
@@ -41,8 +41,8 @@ func main() {
 	fmt.Printf("Server Version: %s\n", *serverInformationResult.Version)
 	// 3. Get database information for "animaldb" ==========================
 	dbName := "animaldb"
-	databaseInformationResult, _, err := examplesClient.GetDatabaseInformation(
-		examplesClient.NewGetDatabaseInformationOptions(
+	databaseInformationResult, _, err := client.GetDatabaseInformation(
+		client.NewGetDatabaseInformationOptions(
 			dbName,
 		),
 	)
@@ -54,8 +54,8 @@ func main() {
 		*databaseInformationResult.DbName,
 		*databaseInformationResult.DocCount)
 	// 5. Get zebra document out of the database by document id ============
-	documentAboutZebraResult, _, err := examplesClient.GetDocument(
-		examplesClient.NewGetDocumentOptions(
+	documentAboutZebraResult, _, err := client.GetDocument(
+		client.NewGetDocumentOptions(
 			dbName,
 			"zebra",
 		),
