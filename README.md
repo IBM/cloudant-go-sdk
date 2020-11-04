@@ -195,7 +195,6 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
