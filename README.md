@@ -283,7 +283,7 @@ import (
 )
 
 func main() {
-	// 1. Create a client with `CLOUDANT` default service name =============
+	// 1. Create a client with `IBM_CLOUDANT` default service name =========
 	client, err := cloudantv1.NewCloudantV1UsingExternalConfig(
 		&cloudantv1.CloudantV1Options{},
 	)
