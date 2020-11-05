@@ -544,6 +544,10 @@ The result of the code is the following output.
 You have deleted the document.
 ```
 
+## Error handling
+
+To see sample code, how we suggest to handle errors, please check [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#error-handling)
+
 ## Using the SDK
 
 For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md)
