@@ -546,7 +546,7 @@ You have deleted the document.
 
 ## Error handling
 
-To see sample code, how we suggest to handle errors, please check [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#error-handling)
+For sample code on handling errors, please see [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#error-handling)
 
 ## Using the SDK
 
