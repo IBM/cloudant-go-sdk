@@ -49,6 +49,7 @@ Changes might occur which impact applications that use this SDK.
     + [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
     + [3. Update your previously created document](#3-update-your-previously-created-document)
     + [4. Delete your previously created document](#4-delete-your-previously-created-document)
+- [Error handling](#error-handling)
 - [Using the SDK](#using-the-sdk)
 - [Questions](#questions)
 - [Issues](#issues)
