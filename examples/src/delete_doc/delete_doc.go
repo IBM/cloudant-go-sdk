@@ -32,7 +32,7 @@ func main() {
 
 	// 2. Delete the document ==============================================
 	exampleDbName := "orders"
-	exampleDocID  := "example"
+	exampleDocID := "example"
 
 	// 2.1. Get the document if it previously existed in the database
 	document, getDocumentResponse, err := client.GetDocument(

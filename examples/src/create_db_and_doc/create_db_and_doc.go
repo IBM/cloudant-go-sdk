@@ -51,7 +51,7 @@ func main() {
 
 	// 3. Create a document ================================================
 	// 3.1. Create a document object with "example" id
-	exampleDocID    := "example"
+	exampleDocID := "example"
 	exampleDocument := cloudantv1.Document{
 		ID: &exampleDocID,
 	}

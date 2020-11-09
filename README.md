@@ -1,9 +1,11 @@
 <!--
-  The example codes and outputs below are generated using the `embedmd` go package.
+  The example codes and outputs below are generated using the `embedmd` go
+  package.
 
       https://github.com/campoy/embedmd
 
-  You should regenerate the example codes after making any changes to examples in the test/examples/ folder.
+  You should regenerate the example codes after making any changes to
+  examples in the examples/ folder.
 
       embedmd -w README.md
   -->
@@ -13,7 +15,8 @@
 
 # IBM Cloudant Go SDK Version 0.0.26
 
-Go client library to interact with the various [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
+Go client library to interact with the
+[IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -37,18 +40,20 @@ Changes might occur which impact applications that use this SDK.
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-    + [`go get` command](#go-get-command)
-    + [Go modules](#go-modules)
-    + [`dep` dependency manager](#dep-dependency-manager)
-- [Getting started](#getting-started)
-  * [Authentication](#authentication)
+  * [`go get` command](#go-get-command)
+  * [Go modules](#go-modules)
+  * [`dep` dependency manager](#dep-dependency-manager)
+- [Authentication](#authentication)
+  * [Authenticate with environment variables](#authenticate-with-environment-variables)
     + [IAM authentication](#iam-authentication)
     + [Basic authentication](#basic-authentication)
-  * [Code examples](#code-examples)
-    + [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
-    + [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
-    + [3. Update your previously created document](#3-update-your-previously-created-document)
-    + [4. Delete your previously created document](#4-delete-your-previously-created-document)
+  * [Authenticate with external configuration](#authenticate-with-external-configuration)
+  * [Authenticate programmatically](#authenticate-programmatically)
+- [Code examples](#code-examples)
+  * [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
+  * [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
+  * [3. Update your previously created document](#3-update-your-previously-created-document)
+  * [4. Delete your previously created document](#4-delete-your-previously-created-document)
 - [Error handling](#error-handling)
 - [Using the SDK](#using-the-sdk)
 - [Questions](#questions)
@@ -64,41 +69,49 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The IBM Cloudant Go SDK allows developers to programmatically interact
-with [Cloudant](https://cloud.ibm.com/apidocs/cloudant) with the help of
-`cloudantv1` package.
+The IBM Cloudant Go SDK allows developers to programmatically
+interact with IBM [Cloudant](https://cloud.ibm.com/apidocs/cloudant)
+with the help of the `cloudantv1` package.
 
 ## Features
-The purpose of this Go SDK is to wrap most of the HTTP request APIs provided by Cloudant and
-supply other functions to ease the usage of Cloudant.
-This SDK should make life easier for programmers to do what’s really important for them: develop.
 
-Reasons why you should consider using Cloudant SDK for Go in your project:
+The purpose of this Go SDK is to wrap most of the HTTP request APIs
+provided by Cloudant and supply other functions to ease the usage of Cloudant.
+Moreover, it has limited support for CouchDB as well.
+This SDK should make life easier for programmers to do what’s really important
+for them: develop.
+
+Reasons why you should consider using Cloudant Go SDK in your
+project:
 
 - Supported by IBM Cloudant.
-- Includes all the most popular and latest supported endpoints for applications.
+- Includes all the most popular and latest supported endpoints for
+  applications.
 - Handles the authentication.
-- HTTP2 support for higher performance connections to IBM Cloudant.
 - Familiar user experience of IBM Cloud SDKs.
-- Perform requests synchronously
-- Safe for concurrent use by multiple goroutines
+- HTTP2 support for higher performance connections to IBM Cloudant.
+- Perform requests synchronously.
+- Safe for concurrent use by multiple goroutines.
 - Transparently compresses request and response bodies.
 
 ## Prerequisites
 
 [ibm-cloud-onboarding]: https://cloud.ibm.com/registration
 
-* An [IBM Cloud][ibm-cloud-onboarding] account.
-* An IAM API key to allow the SDK to access your account. Create one [here](https://cloud.ibm.com/iam/apikeys).
-* Go version 1.13 or above.
+- An [IBM Cloud][ibm-cloud-onboarding] account.
+- An IAM API key to allow the SDK to access your account.
+  Create one [here](https://cloud.ibm.com/iam/apikeys).
+- Go version 1.13 or above.
 
 ## Installation
 
 The current version of this SDK: 0.0.26
 
-There are a few different ways to download and install the Cloudant Go SDK project for use by your Go application:
+There are a few different ways to download and install the
+Cloudant Go SDK project for use by your Go application:
 
-#### `go get` command
+### `go get` command
+
 Use this command to download and install the SDK to allow your Go application to
 use it:
 
@@ -106,7 +119,8 @@ use it:
 go get -u github.com/IBM/cloudant-go-sdk/cloudantv1
 ```
 
-#### Go modules
+### Go modules
+
 If your application is using Go modules, you can add a suitable import to your
 Go application, like this:
 
@@ -116,12 +130,14 @@ import (
 )
 ```
 
-then run `go mod tidy` to download and install the new dependency and update your Go application's
-`go.mod` file.
+then run `go mod tidy` to download and install the new
+dependency and update your Go application's `go.mod` file.
 
-#### `dep` dependency manager
-If your application is using the `dep` dependency management tool, you can add a dependency
-to your `Gopkg.toml` file.  Here is an example:
+### `dep` dependency manager
+
+If your application is using the `dep` dependency management
+tool, you can add a dependency to your `Gopkg.toml` file.
+Here is an example:
 
 ```terminal
 [[constraint]]
@@ -132,36 +148,58 @@ to your `Gopkg.toml` file.  Here is an example:
 
 then run `dep ensure`.
 
-## Getting started
+## Authentication
 
-### Authentication
+[service-credentials]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials
+[cloud-IAM-mgmt]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-ibm-cloud-identity-and-access-management-iam-
+[couch-basic-auth]: https://docs.couchdb.org/en/stable/api/server/authn.html#basic-authentication
+[cloudant-basic-auth]: https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-authentication#basic-authentication
 
-This library requires some of your [Cloudant service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials) to authenticate with your account.
+This library requires some of your
+[Cloudant service credentials][service-credentials] to authenticate with your
+account.
+
 1. `IAM`, `BASIC` or `NOAUTH` **authentication type**.
-    1. [*IAM authentication*](#iam-authentication) is highly recommended when your back-end database server is [**Cloudant**](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-ibm-cloud-identity-and-access-management-iam-). This authentication type requires a server-generated `apikey` instead of a user-given password.
-    1. [*Basic* (or legacy) *authentication*](#basic-authentication) is a fallback for both [Cloudant](https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-authentication#basic-authentication) and [Apache CouchDB](https://docs.couchdb.org/en/stable/api/server/authn.html#basic-authentication) back-end database servers. This authentication type requires the good old `username` and `password` credentials.
-    1. *Noauth* authentication does not need any credentials. Note that this authentication type will only work for queries against a database with read access for everyone.
-1. The service `url`
+    1. [*IAM authentication*](#iam-authentication) is highly recommended when your
+    back-end database server is [**Cloudant**][cloud-IAM-mgmt]. This
+    authentication type requires a server-generated `apikey` instead of a
+    user-given password.
+    1. [*Basic* (or legacy) *authentication*](#basic-authentication) is a fallback
+    for both [Cloudant][cloudant-basic-auth] and [Apache CouchDB][couch-basic-auth]
+    back-end database servers. This authentication type requires the good old
+    `username` and `password` credentials.
+    1. *Noauth* authentication does not need any credentials. Note that this
+    authentication type will only work for queries against a database with read
+    access for everyone.
+1. The service `url`.
 
-You have to add these properties as your **environment variables**, because
-some examples that follow assume that these variables are set.
-To learn more about authentication configuration see the related documentation in the
-[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant#authentication?code=go) or in the
-[general SDK usage information](https://github.com/IBM/ibm-cloud-sdk-common#authentication).
+There are several ways to **set** these properties:
+
+1. As [environment variables](#authenticate-with-environment-variables)
+1. The [programmatic approach](#authenticate-programmatically)
+1. With an [external credentials file](#authenticate-with-external-configuration)
+
+### Authenticate with environment variables
 
 #### IAM authentication
 
-For Cloudant *IAM authentication* set the following environmental variables by replacing `<url>` and `<apikey>` with your proper [service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials). There is no need to set `CLOUDANT_AUTH_TYPE` to `IAM` because it is the default.
-```vim
+For Cloudant *IAM authentication* set the following environmental variables by
+replacing `<url>` and `<apikey>` with your proper
+[service credentials][service-credentials]. There is no need to set
+`CLOUDANT_AUTH_TYPE` to `IAM` because it is the default.
+
+```bash
 CLOUDANT_URL=<url>
 CLOUDANT_APIKEY=<apikey>
 ```
 
 #### Basic authentication
 
-For *Basic authentication* set the following environmental variables by replacing `<url>`, `<username>` and `<password>` with your proper [service credentials](https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials).
+For *Basic authentication* set the following environmental variables by
+replacing `<url>`, `<username>` and `<password>` with your proper
+[service credentials][service-credentials].
 
-```vim
+```bash
 CLOUDANT_AUTH_TYPE=BASIC
 CLOUDANT_URL=<url>
 CLOUDANT_USERNAME=<username>
@@ -171,18 +209,37 @@ CLOUDANT_PASSWORD=<password>
 **Note**: We recommend using [IAM](#iam-authentication) for Cloudant and
 [Basic](#basic-authentication) for CouchDB authentication.
 
-### Code examples
+### Authenticate with external configuration
 
-#### 1. Retrieve information from an existing database
+To use an external configuration file, the
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#authentication-with-external-configuration),
+or the
+[general SDK usage information](https://github.com/IBM/ibm-cloud-sdk-common#using-external-configuration)
+will guide you.
 
-This example code gathers some information about an existing database hosted on the https://examples.cloudant.com/ service `url`.
-To do this, you need to extend your environment variables with the *service url*
-and *authentication type* to use `NOAUTH` authentication while reaching the
-`animaldb` database. This step is necessary for the SDK to distinguish the
-`EXAMPLES` custom service name from the default service name which is
-`CLOUDANT`.
+### Authenticate programmatically
 
-```env
+To learn more about how to use programmatic authentication, see the related
+documentation in the
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=python#programmatic-authentication)
+or in the
+[Go SDK Core document about authentication](https://github.com/IBM/go-sdk-core/blob/master/Authentication.md).
+
+## Code examples
+
+The code examples below will follow the
+[authentication with environment variables](#authenticate-with-environment-variables).
+
+### 1. Retrieve information from an existing database
+
+This example code gathers some information about an existing database hosted on
+the https://examples.cloudant.com/ service `url`. To do this, you need to
+extend your environment variables with the *service url* and *authentication
+type* to use `NOAUTH` authentication while reaching the `animaldb` database.
+This step is necessary for the SDK to distinguish the `EXAMPLES` custom service
+name from the default service name which is `CLOUDANT`.
+
+```bash
 EXAMPLES_URL=https://examples.cloudant.com
 EXAMPLES_AUTH_TYPE=NOAUTH
 ```
