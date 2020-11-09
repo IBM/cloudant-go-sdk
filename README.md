@@ -324,10 +324,11 @@ Document count in "animaldb" database is 11.
 }
 ```
 
-#### 2. Create your own database and add a document
+### 2. Create your own database and add a document
 
-Now comes the exciting part of creating your own `orders` database and adding a document
-about *Bob Smith* with your own [IAM](#iam-authentication) or [Basic](#basic-authentication) service credentials.
+Now comes the exciting part of creating your own `orders` database and adding
+a document about *Bob Smith* with your own [IAM](#iam-authentication) or
+[Basic](#basic-authentication) service credentials.
 
 [embedmd]:# (examples/src/create_db_and_doc/create_db_and_doc.go /package main/ $)
 ```go
@@ -370,7 +371,7 @@ func main() {
 
 	// 3. Create a document ================================================
 	// 3.1. Create a document object with "example" id
-	exampleDocID    := "example"
+	exampleDocID := "example"
 	exampleDocument := cloudantv1.Document{
 		ID: &exampleDocID,
 	}
@@ -438,12 +439,13 @@ You have created the document:
 }
 ```
 
-#### 3. Update your previously created document
+### 3. Update your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
-database and the `example` document by [running this previous example
-code](#2-create-your-own-database-and-add-a-document) successfully, otherwise
-you get the `Cannot update document because either "orders" database or "example" document was not found.` message.
+database and the `example` document by
+[running this previous example code](#2-create-your-own-database-and-add-a-document)
+successfully, otherwise you get the `Cannot update document because either "orders"
+database or "example" document was not found.` message.
 
 [embedmd]:# (examples/src/update_doc/update_doc.go /package main/ $)
 ```go
@@ -467,7 +469,7 @@ func main() {
 
 	// 2. Update the document ==============================================
 	exampleDbName := "orders"
-	exampleDocID  := "example"
+	exampleDocID := "example"
 
 	// 2.1. Get the document if it previously existed in the database
 	document, getDocumentResponse, err := client.GetDocument(
@@ -529,12 +531,13 @@ You have updated the document:
 }
 ```
 
-#### 4. Delete your previously created document
+### 4. Delete your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
-database and the `example` document by [running this previous example
-code](#2-create-your-own-database-and-add-a-document) successfully, otherwise
-you get the `Cannot delete document because either "orders" database or "example" document was not found.` message.
+database and the `example` document by
+[running this previous example code](#2-create-your-own-database-and-add-a-document)
+successfully, otherwise you get the `Cannot delete document because either "orders"
+database or "example" document was not found.` message.
 
 [embedmd]:# (examples/src/delete_doc/delete_doc.go /package main/ $)
 ```go
@@ -558,7 +561,7 @@ func main() {
 
 	// 2. Delete the document ==============================================
 	exampleDbName := "orders"
-	exampleDocID  := "example"
+	exampleDocID := "example"
 
 	// 2.1. Get the document if it previously existed in the database
 	document, getDocumentResponse, err := client.GetDocument(
@@ -605,38 +608,48 @@ You have deleted the document.
 
 ## Error handling
 
-For sample code on handling errors, please see [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#error-handling)
+For sample code on handling errors, please see
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#error-handling).
 
 ## Using the SDK
 
-For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md)
+For general SDK usage information, please see
+[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
 
 ## Questions
 
-If you are having difficulties using this SDK or have a question about the IBM Cloud services,
-please ask a question at
+If you are having difficulties using this SDK or have a question about the
+IBM Cloud services, please ask a question on
 [Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-cloud).
 
 ## Issues
+
 If you encounter an issue with the project, you are welcome to submit a
 [bug report](https://github.com/IBM/cloudant-go-sdk/issues).
-Before that, please search for similar issues. It's possible that someone has
-already reported the problem.
+Before that, please search for similar issues. It's possible that someone
+has already reported the problem.
 
 ## Further resources
-* [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go): API examples for Cloudant Go SDK.
-* [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview): The official documentation page for Cloudant.
-* [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/): The official learning center with several useful videos which help you to use Cloudant successfully.
-* [Cloudant blog](https://blog.cloudant.com/): Many useful articles how to
-  optimize Cloudant for common problems.
+
+- [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go):
+  API examples for Cloudant Go SDK.
+- [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview):
+  The official documentation page for Cloudant.
+- [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/):
+  The official learning center with several useful videos which help you to use
+  Cloudant successfully.
+- [Cloudant blog](https://blog.cloudant.com/):
+  Many useful articles how to optimize Cloudant for common problems.
 
 ## Open source @ IBM
-Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
+
+Find more open source projects on the [IBM Github Page](http://ibm.github.io/).
 
 ## Contributing
+
 See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## License
 
-This SDK project is released under the Apache 2.0 license.
+This SDK is released under the Apache 2.0 license.
 The license's full text can be found in [LICENSE](LICENSE).
