@@ -650,8 +650,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputInformationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -1059,8 +1059,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postDbsInfoPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -1646,8 +1646,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postChangesPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -1823,8 +1823,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postChangesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -2271,8 +2271,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postDocumentPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -2506,8 +2506,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -2634,8 +2634,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -2823,8 +2823,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -2959,8 +2959,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postAllDocsQueriesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -3181,8 +3181,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postBulkDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -3429,8 +3429,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -3567,8 +3567,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetAsMixedPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -3705,8 +3705,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetAsRelatedPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -3843,8 +3843,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -4896,8 +4896,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -5777,8 +5777,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putDesignDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -6237,8 +6237,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -6427,8 +6427,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -6727,8 +6727,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postViewPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -6873,8 +6873,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postViewAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -7089,8 +7089,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postViewQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -7243,8 +7243,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postViewQueriesAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -7682,8 +7682,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionAllDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -7812,8 +7812,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionAllDocsAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -8001,8 +8001,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionSearchPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -8133,8 +8133,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionSearchAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -8332,8 +8332,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionViewPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -8480,8 +8480,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionViewAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -8684,8 +8684,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionFindPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -8810,8 +8810,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postPartitionFindAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -9092,8 +9092,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postExplainPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -9268,8 +9268,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postFindPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -9394,8 +9394,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postFindAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -9718,8 +9718,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postIndexPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -10152,8 +10152,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postSearchAnalyzePath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -10314,8 +10314,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postSearchPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -10456,8 +10456,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postSearchAsStreamPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -12116,8 +12116,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postReplicatePath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -12892,8 +12892,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putReplicationDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -14181,8 +14181,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putSecurityPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -14462,8 +14462,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putCloudantSecurityConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -14836,8 +14836,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putCorsConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -15438,8 +15438,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putAttachmentPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -16045,8 +16045,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putLocalDocumentPath))
 					Expect(req.Method).To(Equal("PUT"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -16285,8 +16285,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postLocalDocsPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -16475,8 +16475,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postLocalDocsQueriesPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -16754,8 +16754,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postMissingRevsPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -16897,8 +16897,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postRevsDiffPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
@@ -17732,8 +17732,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsConfigurationPath))
 					Expect(req.Method).To(Equal("POST"))
 
-					// For gzip-disabled operation, verify Content-Encoding is not set.
-					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
 
 					// If there is a body, then make sure we can read it
 					bodyBuf := new(bytes.Buffer)
