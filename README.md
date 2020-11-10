@@ -82,6 +82,7 @@ Reasons why you should consider using Cloudant SDK for Go in your project:
 - Familiar user experience of IBM Cloud SDKs.
 - Perform requests synchronously
 - Safe for concurrent use by multiple goroutines
+- Transparently compresses request and response bodies.
 
 ## Prerequisites
 

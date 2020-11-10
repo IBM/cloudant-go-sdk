@@ -89,6 +89,7 @@ func NewCloudantV1(options *CloudantV1Options) (service *CloudantV1, err error) 
 	serviceOptions := &core.ServiceOptions{
 		URL:           DefaultServiceURL,
 		Authenticator: options.Authenticator,
+		EnableGzipCompression: true,
 	}
 
 	baseService, err := core.NewBaseService(serviceOptions)
