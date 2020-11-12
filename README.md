@@ -13,7 +13,7 @@
 [![Build Status](https://travis-ci.com/IBM/cloudant-go-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-go-sdk)
 <!-- [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) -->
 
-# IBM Cloudant Go SDK Version 0.0.26
+# IBM Cloudant Go SDK Version 0.0.27
 
 Go client library to interact with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
@@ -105,7 +105,7 @@ project:
 
 ## Installation
 
-The current version of this SDK: 0.0.26
+The current version of this SDK: 0.0.27
 
 There are a few different ways to download and install the
 Cloudant Go SDK project for use by your Go application:
@@ -142,7 +142,7 @@ Here is an example:
 ```terminal
 [[constraint]]
   name = "github.com/IBM/cloudant-go-sdk"
-  version = "0.0.26"
+  version = "0.0.27"
 
 ```
 
