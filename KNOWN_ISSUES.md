@@ -72,3 +72,38 @@ consult the Cloudant documentation for further information.
   ```
   json: cannot unmarshal string into Go value of type map[string]json.RawMessage
   ```
+
+### Request bodies containing the `headers` parameter
+
+The `Headers` map is always reserved for the API request headers.
+In order to avoid collision between the request headers and the `headers` parameter
+that is contained by the request body, use the `HeadersVar` as
+the request body `headers` parameter.
+
+E.g. to set the `headers` parameter of your replication
+target database, use the following approach:
+
+```go
+...
+target, _ := cloudant.NewReplicationDatabase(
+	"<your-service-url>" + "/" + "animaldb-target",
+)
+
+target.HeadersVar = make(map[string]string)
+target.HeadersVar["Authorization"] = "Basic <your-base64-encoded-auth-key>"
+)
+...
+```
+The example above represents this JSON body:
+```json
+{
+    ...
+    "target": {
+        "headers": {
+            "Authorization": "Basic <your-base64-encoded-auth-key>"
+        },
+        "url": "<your-service-url>/animaldb-target"
+    },
+    ...
+}
+```
