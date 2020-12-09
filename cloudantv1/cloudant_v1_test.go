@@ -77,6 +77,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -87,6 +93,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -98,6 +110,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -135,6 +153,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`GetServerInformation(getServerInformationOptions *GetServerInformationOptions) - Operation response error`, func() {
 		getServerInformationPath := "/"
 		Context(`Using mock server endpoint`, func() {
@@ -166,6 +194,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetServerInformation(getServerInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -175,8 +210,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetServerInformation(getServerInformationOptions *GetServerInformationOptions)`, func() {
 		getServerInformationPath := "/"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -185,7 +222,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -200,6 +237,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetServerInformation(nil)
@@ -220,9 +258,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetServerInformationWithContext(ctx, getServerInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetServerInformation(getServerInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetServerInformationWithContext(ctx, getServerInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetServerInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -280,6 +336,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -289,8 +352,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
 		getMembershipInformationPath := "/_membership"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -299,7 +364,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -314,6 +379,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetMembershipInformation(nil)
@@ -334,9 +400,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetMembershipInformationWithContext(ctx, getMembershipInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetMembershipInformationWithContext(ctx, getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetMembershipInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -398,6 +482,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetUuids(getUuidsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -407,8 +498,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetUuids(getUuidsOptions *GetUuidsOptions)`, func() {
 		getUuidsPath := "/_uuids"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -420,7 +513,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for count query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -435,6 +528,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetUuids(nil)
@@ -456,9 +550,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetUuidsWithContext(ctx, getUuidsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetUuids(getUuidsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetUuidsWithContext(ctx, getUuidsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetUuids with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -517,6 +629,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -526,8 +645,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions)`, func() {
 		getCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -536,7 +657,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -551,6 +672,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetCapacityThroughputInformation(nil)
@@ -571,9 +693,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetCapacityThroughputInformationWithContext(ctx, getCapacityThroughputInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetCapacityThroughputInformationWithContext(ctx, getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetCapacityThroughputInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -632,6 +772,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -641,8 +788,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions)`, func() {
 		putCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -667,7 +816,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -682,6 +831,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(nil)
@@ -703,9 +853,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutCapacityThroughputInformationWithContext(ctx, putCapacityThroughputInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutCapacityThroughputInformationWithContext(ctx, putCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutCapacityThroughputInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -782,6 +950,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -792,6 +966,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -803,6 +983,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -840,6 +1026,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 
 	Describe(`HeadDatabase(headDatabaseOptions *HeadDatabaseOptions)`, func() {
 		headDatabasePath := "/testString"
@@ -862,6 +1058,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := cloudantService.HeadDatabase(nil)
@@ -874,6 +1071,12 @@ var _ = Describe(`CloudantV1`, func() {
 				headDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
+				response, operationErr = cloudantService.HeadDatabase(headDatabaseOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
 				response, operationErr = cloudantService.HeadDatabase(headDatabaseOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -912,8 +1115,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetAllDbs(getAllDbsOptions *GetAllDbsOptions)`, func() {
 		getAllDbsPath := "/_all_dbs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -935,7 +1140,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["startkey"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -950,6 +1155,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetAllDbs(nil)
@@ -975,9 +1181,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetAllDbsWithContext(ctx, getAllDbsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetAllDbs(getAllDbsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetAllDbsWithContext(ctx, getAllDbsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetAllDbs with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -1041,6 +1265,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostDbsInfo(postDbsInfoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -1050,8 +1281,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions)`, func() {
 		postDbsInfoPath := "/_dbs_info"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1076,7 +1309,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -1091,6 +1324,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostDbsInfo(nil)
@@ -1112,9 +1346,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostDbsInfoWithContext(ctx, postDbsInfoOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostDbsInfo(postDbsInfoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostDbsInfoWithContext(ctx, postDbsInfoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostDbsInfo with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -1181,6 +1433,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteDatabase(deleteDatabaseOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -1190,8 +1449,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteDatabase(deleteDatabaseOptions *DeleteDatabaseOptions)`, func() {
 		deleteDatabasePath := "/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1200,7 +1461,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -1215,6 +1476,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteDatabase(nil)
@@ -1236,9 +1498,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteDatabaseWithContext(ctx, deleteDatabaseOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteDatabase(deleteDatabaseOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteDatabaseWithContext(ctx, deleteDatabaseOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteDatabase with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -1305,6 +1585,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetDatabaseInformation(getDatabaseInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -1314,8 +1601,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDatabaseInformation(getDatabaseInformationOptions *GetDatabaseInformationOptions)`, func() {
 		getDatabaseInformationPath := "/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1324,7 +1613,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -1339,6 +1628,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDatabaseInformation(nil)
@@ -1360,9 +1650,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDatabaseInformationWithContext(ctx, getDatabaseInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDatabaseInformation(getDatabaseInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDatabaseInformationWithContext(ctx, getDatabaseInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDatabaseInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -1437,6 +1745,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutDatabase(putDatabaseOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -1446,8 +1761,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutDatabase(putDatabaseOptions *PutDatabaseOptions)`, func() {
 		putDatabasePath := "/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1462,7 +1779,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for q query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -1477,6 +1794,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutDatabase(nil)
@@ -1500,9 +1818,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutDatabaseWithContext(ctx, putDatabaseOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutDatabase(putDatabaseOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutDatabaseWithContext(ctx, putDatabaseOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutDatabase with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -1628,6 +1964,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostChanges(postChangesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -1637,8 +1980,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostChanges(postChangesOptions *PostChangesOptions)`, func() {
 		postChangesPath := "/testString/_changes"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1702,7 +2047,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -1717,6 +2062,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostChanges(nil)
@@ -1756,9 +2102,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostChangesWithContext(ctx, postChangesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostChanges(postChangesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostChangesWithContext(ctx, postChangesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostChanges with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -1814,8 +2178,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostChangesAsStream(postChangesOptions *PostChangesOptions)`, func() {
 		postChangesAsStreamPath := "/testString/_changes"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -1879,7 +2245,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -1894,6 +2260,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostChangesAsStream(nil)
@@ -1939,9 +2306,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostChangesAsStreamWithContext(ctx, postChangesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostChangesAsStream(postChangesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostChangesAsStreamWithContext(ctx, postChangesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostChangesAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -2036,6 +2421,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -2046,6 +2437,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -2057,6 +2454,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -2094,6 +2497,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 
 	Describe(`HeadDocument(headDocumentOptions *HeadDocumentOptions)`, func() {
 		headDocumentPath := "/testString/testString"
@@ -2123,6 +2536,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := cloudantService.HeadDocument(nil)
@@ -2139,6 +2553,12 @@ var _ = Describe(`CloudantV1`, func() {
 				headDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
+				response, operationErr = cloudantService.HeadDocument(headDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
 				response, operationErr = cloudantService.HeadDocument(headDocumentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -2253,6 +2673,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostDocument(postDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -2262,8 +2689,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostDocument(postDocumentOptions *PostDocumentOptions)`, func() {
 		postDocumentPath := "/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2292,7 +2721,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -2307,6 +2736,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostDocument(nil)
@@ -2367,9 +2797,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostDocumentWithContext(ctx, postDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostDocument(postDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostDocumentWithContext(ctx, postDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -2488,6 +2936,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostAllDocs(postAllDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -2497,8 +2952,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostAllDocs(postAllDocsOptions *PostAllDocsOptions)`, func() {
 		postAllDocsPath := "/testString/_all_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2523,7 +2980,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -2538,6 +2995,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostAllDocs(nil)
@@ -2572,9 +3030,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostAllDocsWithContext(ctx, postAllDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostAllDocs(postAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostAllDocsWithContext(ctx, postAllDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostAllDocs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -2625,8 +3101,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostAllDocsAsStream(postAllDocsOptions *PostAllDocsOptions)`, func() {
 		postAllDocsAsStreamPath := "/testString/_all_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2651,7 +3129,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -2666,6 +3144,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostAllDocsAsStream(nil)
@@ -2706,9 +3185,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostAllDocsAsStreamWithContext(ctx, postAllDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostAllDocsAsStream(postAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostAllDocsAsStreamWithContext(ctx, postAllDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostAllDocsAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -2805,6 +3302,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostAllDocsQueries(postAllDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -2814,8 +3318,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostAllDocsQueries(postAllDocsQueriesOptions *PostAllDocsQueriesOptions)`, func() {
 		postAllDocsQueriesPath := "/testString/_all_docs/queries"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2840,7 +3346,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -2855,6 +3361,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostAllDocsQueries(nil)
@@ -2893,9 +3400,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostAllDocsQueriesWithContext(ctx, postAllDocsQueriesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostAllDocsQueries(postAllDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostAllDocsQueriesWithContext(ctx, postAllDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostAllDocsQueries with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -2950,8 +3475,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostAllDocsQueriesAsStream(postAllDocsQueriesOptions *PostAllDocsQueriesOptions)`, func() {
 		postAllDocsQueriesAsStreamPath := "/testString/_all_docs/queries"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -2976,7 +3503,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -2991,6 +3518,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostAllDocsQueriesAsStream(nil)
@@ -3035,9 +3563,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostAllDocsQueriesAsStreamWithContext(ctx, postAllDocsQueriesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostAllDocsQueriesAsStream(postAllDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostAllDocsQueriesAsStreamWithContext(ctx, postAllDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostAllDocsQueriesAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -3163,6 +3709,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostBulkDocs(postBulkDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -3172,8 +3725,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions)`, func() {
 		postBulkDocsPath := "/testString/_bulk_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3198,7 +3753,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -3213,6 +3768,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostBulkDocs(nil)
@@ -3276,9 +3832,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostBulkDocsWithContext(ctx, postBulkDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostBulkDocs(postBulkDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostBulkDocsWithContext(ctx, postBulkDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostBulkDocs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -3411,6 +3985,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostBulkGet(postBulkGetOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -3420,8 +4001,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostBulkGet(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetPath := "/testString/_bulk_get"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3458,7 +4041,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -3473,6 +4056,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostBulkGet(nil)
@@ -3506,9 +4090,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostBulkGetWithContext(ctx, postBulkGetOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostBulkGet(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostBulkGetWithContext(ctx, postBulkGetOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostBulkGet with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -3558,8 +4160,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetAsMixedPath := "/testString/_bulk_get"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3596,7 +4200,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/mixed")
@@ -3611,6 +4215,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostBulkGetAsMixed(nil)
@@ -3644,9 +4249,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostBulkGetAsMixedWithContext(ctx, postBulkGetOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostBulkGetAsMixed(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostBulkGetAsMixedWithContext(ctx, postBulkGetOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostBulkGetAsMixed with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -3696,8 +4319,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostBulkGetAsRelated(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetAsRelatedPath := "/testString/_bulk_get"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3734,7 +4359,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/related")
@@ -3749,6 +4374,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostBulkGetAsRelated(nil)
@@ -3782,9 +4408,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostBulkGetAsRelatedWithContext(ctx, postBulkGetOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostBulkGetAsRelated(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostBulkGetAsRelatedWithContext(ctx, postBulkGetOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostBulkGetAsRelated with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -3834,8 +4478,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostBulkGetAsStream(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetAsStreamPath := "/testString/_bulk_get"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -3872,7 +4518,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -3887,6 +4533,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostBulkGetAsStream(nil)
@@ -3926,9 +4573,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostBulkGetAsStreamWithContext(ctx, postBulkGetOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostBulkGetAsStream(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostBulkGetAsStreamWithContext(ctx, postBulkGetOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostBulkGetAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -4017,6 +4682,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteDocument(deleteDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -4026,8 +4698,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteDocument(deleteDocumentOptions *DeleteDocumentOptions)`, func() {
 		deleteDocumentPath := "/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4042,7 +4716,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -4057,6 +4731,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteDocument(nil)
@@ -4082,9 +4757,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteDocumentWithContext(ctx, deleteDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteDocument(deleteDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteDocumentWithContext(ctx, deleteDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -4200,6 +4893,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetDocument(getDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -4209,8 +4909,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDocument(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentPath := "/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4250,7 +4952,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -4265,6 +4967,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDocument(nil)
@@ -4300,9 +5003,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDocumentWithContext(ctx, getDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDocument(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDocumentWithContext(ctx, getDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -4354,8 +5075,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDocumentAsMixed(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentAsMixedPath := "/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4395,7 +5118,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/mixed")
@@ -4410,6 +5133,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDocumentAsMixed(nil)
@@ -4445,9 +5169,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDocumentAsMixedWithContext(ctx, getDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDocumentAsMixed(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDocumentAsMixedWithContext(ctx, getDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDocumentAsMixed with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -4499,8 +5241,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDocumentAsRelated(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentAsRelatedPath := "/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4540,7 +5284,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/related")
@@ -4555,6 +5299,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDocumentAsRelated(nil)
@@ -4590,9 +5335,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDocumentAsRelatedWithContext(ctx, getDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDocumentAsRelated(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDocumentAsRelatedWithContext(ctx, getDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDocumentAsRelated with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -4644,8 +5407,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDocumentAsStream(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentAsStreamPath := "/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4685,7 +5450,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -4700,6 +5465,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDocumentAsStream(nil)
@@ -4741,9 +5507,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDocumentAsStreamWithContext(ctx, getDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDocumentAsStream(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDocumentAsStreamWithContext(ctx, getDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDocumentAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -4878,6 +5662,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutDocument(putDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -4887,8 +5678,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutDocument(putDocumentOptions *PutDocumentOptions)`, func() {
 		putDocumentPath := "/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -4924,7 +5717,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -4939,6 +5732,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutDocument(nil)
@@ -5003,9 +5797,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutDocumentWithContext(ctx, putDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutDocument(putDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutDocumentWithContext(ctx, putDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -5125,6 +5937,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -5135,6 +5953,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -5146,6 +5970,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -5183,6 +6013,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 
 	Describe(`HeadDesignDocument(headDesignDocumentOptions *HeadDesignDocumentOptions)`, func() {
 		headDesignDocumentPath := "/testString/_design/testString"
@@ -5207,6 +6047,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := cloudantService.HeadDesignDocument(nil)
@@ -5221,6 +6062,12 @@ var _ = Describe(`CloudantV1`, func() {
 				headDesignDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
+				response, operationErr = cloudantService.HeadDesignDocument(headDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
 				response, operationErr = cloudantService.HeadDesignDocument(headDesignDocumentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -5300,6 +6147,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteDesignDocument(deleteDesignDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -5309,8 +6163,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteDesignDocument(deleteDesignDocumentOptions *DeleteDesignDocumentOptions)`, func() {
 		deleteDesignDocumentPath := "/testString/_design/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -5325,7 +6181,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -5340,6 +6196,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteDesignDocument(nil)
@@ -5365,9 +6222,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteDesignDocumentWithContext(ctx, deleteDesignDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteDesignDocument(deleteDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteDesignDocumentWithContext(ctx, deleteDesignDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteDesignDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -5483,6 +6358,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetDesignDocument(getDesignDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -5492,8 +6374,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions)`, func() {
 		getDesignDocumentPath := "/testString/_design/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -5533,7 +6417,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -5548,6 +6432,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDesignDocument(nil)
@@ -5583,9 +6468,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDesignDocumentWithContext(ctx, getDesignDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDesignDocument(getDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDesignDocumentWithContext(ctx, getDesignDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDesignDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -5759,6 +6662,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutDesignDocument(putDesignDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -5768,8 +6678,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions)`, func() {
 		putDesignDocumentPath := "/testString/_design/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -5803,7 +6715,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -5818,6 +6730,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutDesignDocument(nil)
@@ -5923,9 +6836,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutDesignDocumentWithContext(ctx, putDesignDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutDesignDocument(putDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutDesignDocumentWithContext(ctx, putDesignDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutDesignDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -6077,6 +7008,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetDesignDocumentInformation(getDesignDocumentInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -6086,8 +7024,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDesignDocumentInformation(getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions)`, func() {
 		getDesignDocumentInformationPath := "/testString/_design/testString/_info"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6096,7 +7036,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -6111,6 +7051,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDesignDocumentInformation(nil)
@@ -6133,9 +7074,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDesignDocumentInformationWithContext(ctx, getDesignDocumentInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDesignDocumentInformation(getDesignDocumentInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDesignDocumentInformationWithContext(ctx, getDesignDocumentInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDesignDocumentInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -6219,6 +7178,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostDesignDocs(postDesignDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -6228,8 +7194,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostDesignDocs(postDesignDocsOptions *PostDesignDocsOptions)`, func() {
 		postDesignDocsPath := "/testString/_design_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6256,7 +7224,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -6271,6 +7239,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostDesignDocs(nil)
@@ -6306,9 +7275,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostDesignDocsWithContext(ctx, postDesignDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostDesignDocs(postDesignDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostDesignDocsWithContext(ctx, postDesignDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostDesignDocs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -6409,6 +7396,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostDesignDocsQueries(postDesignDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -6418,8 +7412,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostDesignDocsQueries(postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions)`, func() {
 		postDesignDocsQueriesPath := "/testString/_design_docs/queries"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6446,7 +7442,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -6461,6 +7457,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostDesignDocsQueries(nil)
@@ -6500,9 +7497,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostDesignDocsQueriesWithContext(ctx, postDesignDocsQueriesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostDesignDocsQueries(postDesignDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostDesignDocsQueriesWithContext(ctx, postDesignDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostDesignDocsQueries with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -6597,6 +7612,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -6607,6 +7628,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -6618,6 +7645,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -6653,6 +7686,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).ToNot(BeNil())
 				ClearTestEnvironment(testEnvironment)
 			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`PostView(postViewOptions *PostViewOptions) - Operation response error`, func() {
@@ -6709,6 +7752,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostView(postViewOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -6718,8 +7768,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostView(postViewOptions *PostViewOptions)`, func() {
 		postViewPath := "/testString/_design/testString/_view/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6744,7 +7796,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -6759,6 +7811,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostView(nil)
@@ -6802,9 +7855,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostViewWithContext(ctx, postViewOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostView(postViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostViewWithContext(ctx, postViewOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostView with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -6864,8 +7935,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostViewAsStream(postViewOptions *PostViewOptions)`, func() {
 		postViewAsStreamPath := "/testString/_design/testString/_view/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -6890,7 +7963,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -6905,6 +7978,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostViewAsStream(nil)
@@ -6954,9 +8028,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostViewAsStreamWithContext(ctx, postViewOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostViewAsStream(postViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostViewAsStreamWithContext(ctx, postViewOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostViewAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -7071,6 +8163,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostViewQueries(postViewQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -7080,8 +8179,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostViewQueries(postViewQueriesOptions *PostViewQueriesOptions)`, func() {
 		postViewQueriesPath := "/testString/_design/testString/_view/testString/queries"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -7106,7 +8207,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -7121,6 +8222,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostViewQueries(nil)
@@ -7168,9 +8270,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostViewQueriesWithContext(ctx, postViewQueriesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostViewQueries(postViewQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostViewQueriesWithContext(ctx, postViewQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostViewQueries with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -7234,8 +8354,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostViewQueriesAsStream(postViewQueriesOptions *PostViewQueriesOptions)`, func() {
 		postViewQueriesAsStreamPath := "/testString/_design/testString/_view/testString/queries"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -7260,7 +8382,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -7275,6 +8397,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostViewQueriesAsStream(nil)
@@ -7328,9 +8451,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostViewQueriesAsStreamWithContext(ctx, postViewQueriesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostViewQueriesAsStream(postViewQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostViewQueriesAsStreamWithContext(ctx, postViewQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostViewQueriesAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -7433,6 +8574,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -7443,6 +8590,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -7454,6 +8607,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -7491,6 +8650,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions) - Operation response error`, func() {
 		getPartitionInformationPath := "/testString/_partition/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -7524,6 +8693,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetPartitionInformation(getPartitionInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -7533,8 +8709,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions)`, func() {
 		getPartitionInformationPath := "/testString/_partition/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -7543,7 +8721,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -7558,6 +8736,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetPartitionInformation(nil)
@@ -7580,9 +8759,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetPartitionInformationWithContext(ctx, getPartitionInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetPartitionInformation(getPartitionInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetPartitionInformationWithContext(ctx, getPartitionInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetPartitionInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -7664,6 +8861,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -7673,8 +8877,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionAllDocs(postPartitionAllDocsOptions *PostPartitionAllDocsOptions)`, func() {
 		postPartitionAllDocsPath := "/testString/_partition/testString/_all_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -7699,7 +8905,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -7714,6 +8920,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionAllDocs(nil)
@@ -7749,9 +8956,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionAllDocsWithContext(ctx, postPartitionAllDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionAllDocsWithContext(ctx, postPartitionAllDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionAllDocs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -7803,8 +9028,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionAllDocsAsStream(postPartitionAllDocsOptions *PostPartitionAllDocsOptions)`, func() {
 		postPartitionAllDocsAsStreamPath := "/testString/_partition/testString/_all_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -7829,7 +9056,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -7844,6 +9071,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionAllDocsAsStream(nil)
@@ -7885,9 +9113,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionAllDocsAsStreamWithContext(ctx, postPartitionAllDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionAllDocsAsStream(postPartitionAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionAllDocsAsStreamWithContext(ctx, postPartitionAllDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionAllDocsAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -7983,6 +9229,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostPartitionSearch(postPartitionSearchOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -7992,8 +9245,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions)`, func() {
 		postPartitionSearchPath := "/testString/_partition/testString/_design/testString/_search/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8018,7 +9273,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -8033,6 +9288,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionSearch(nil)
@@ -8069,9 +9325,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionSearchWithContext(ctx, postPartitionSearchOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionSearch(postPartitionSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionSearchWithContext(ctx, postPartitionSearchOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionSearch with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8124,8 +9398,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionSearchAsStream(postPartitionSearchOptions *PostPartitionSearchOptions)`, func() {
 		postPartitionSearchAsStreamPath := "/testString/_partition/testString/_design/testString/_search/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8150,7 +9426,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -8165,6 +9441,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionSearchAsStream(nil)
@@ -8207,9 +9484,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionSearchAsStreamWithContext(ctx, postPartitionSearchOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionSearchAsStream(postPartitionSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionSearchAsStreamWithContext(ctx, postPartitionSearchOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionSearchAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8314,6 +9609,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostPartitionView(postPartitionViewOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -8323,8 +9625,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions)`, func() {
 		postPartitionViewPath := "/testString/_partition/testString/_design/testString/_view/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8349,7 +9653,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -8364,6 +9668,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionView(nil)
@@ -8408,9 +9713,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionViewWithContext(ctx, postPartitionViewOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionView(postPartitionViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionViewWithContext(ctx, postPartitionViewOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionView with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8471,8 +9794,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionViewAsStream(postPartitionViewOptions *PostPartitionViewOptions)`, func() {
 		postPartitionViewAsStreamPath := "/testString/_partition/testString/_design/testString/_view/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8497,7 +9822,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -8512,6 +9837,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionViewAsStream(nil)
@@ -8562,9 +9888,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionViewAsStreamWithContext(ctx, postPartitionViewOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionViewAsStream(postPartitionViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionViewAsStreamWithContext(ctx, postPartitionViewOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionViewAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8666,6 +10010,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostPartitionFind(postPartitionFindOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -8675,8 +10026,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions)`, func() {
 		postPartitionFindPath := "/testString/_partition/testString/_find"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8701,7 +10054,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -8716,6 +10069,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionFind(nil)
@@ -8749,9 +10103,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionFindWithContext(ctx, postPartitionFindOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionFind(postPartitionFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionFindWithContext(ctx, postPartitionFindOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionFind with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8801,8 +10173,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostPartitionFindAsStream(postPartitionFindOptions *PostPartitionFindOptions)`, func() {
 		postPartitionFindAsStreamPath := "/testString/_partition/testString/_find"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -8827,7 +10201,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -8842,6 +10216,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostPartitionFindAsStream(nil)
@@ -8881,9 +10256,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostPartitionFindAsStreamWithContext(ctx, postPartitionFindOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostPartitionFindAsStream(postPartitionFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostPartitionFindAsStreamWithContext(ctx, postPartitionFindOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostPartitionFindAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8972,6 +10365,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -8982,6 +10381,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -8993,6 +10398,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -9028,6 +10439,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).ToNot(BeNil())
 				ClearTestEnvironment(testEnvironment)
 			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`PostExplain(postExplainOptions *PostExplainOptions) - Operation response error`, func() {
@@ -9074,6 +10495,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostExplain(postExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -9083,8 +10511,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostExplain(postExplainOptions *PostExplainOptions)`, func() {
 		postExplainPath := "/testString/_explain"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9109,7 +10539,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -9124,6 +10554,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostExplain(nil)
@@ -9157,9 +10588,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostExplainWithContext(ctx, postExplainOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostExplain(postExplainOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostExplainWithContext(ctx, postExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostExplain with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -9250,6 +10699,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostFind(postFindOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -9259,8 +10715,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostFind(postFindOptions *PostFindOptions)`, func() {
 		postFindPath := "/testString/_find"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9285,7 +10743,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -9300,6 +10758,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostFind(nil)
@@ -9333,9 +10792,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostFindWithContext(ctx, postFindOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostFind(postFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostFindWithContext(ctx, postFindOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostFind with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -9385,8 +10862,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostFindAsStream(postFindOptions *PostFindOptions)`, func() {
 		postFindAsStreamPath := "/testString/_find"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9411,7 +10890,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -9426,6 +10905,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostFindAsStream(nil)
@@ -9465,9 +10945,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostFindAsStreamWithContext(ctx, postFindOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostFindAsStream(postFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostFindAsStreamWithContext(ctx, postFindOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostFindAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -9546,6 +11044,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetIndexesInformation(getIndexesInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -9555,8 +11060,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions)`, func() {
 		getIndexesInformationPath := "/testString/_index"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9565,7 +11072,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -9580,6 +11087,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetIndexesInformation(nil)
@@ -9601,9 +11109,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetIndexesInformationWithContext(ctx, getIndexesInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetIndexesInformation(getIndexesInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetIndexesInformationWithContext(ctx, getIndexesInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetIndexesInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -9700,6 +11226,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostIndex(postIndexOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -9709,8 +11242,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostIndex(postIndexOptions *PostIndexOptions)`, func() {
 		postIndexPath := "/testString/_index"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9735,7 +11270,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -9750,6 +11285,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostIndex(nil)
@@ -9801,9 +11337,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostIndexWithContext(ctx, postIndexOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostIndex(postIndexOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostIndexWithContext(ctx, postIndexOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostIndex with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -9903,6 +11457,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteIndex(deleteIndexOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -9912,8 +11473,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteIndex(deleteIndexOptions *DeleteIndexOptions)`, func() {
 		deleteIndexPath := "/testString/_index/_design/testString/json/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -9922,7 +11485,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -9937,6 +11500,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteIndex(nil)
@@ -9961,9 +11525,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteIndexWithContext(ctx, deleteIndexOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteIndex(deleteIndexOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteIndexWithContext(ctx, deleteIndexOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteIndex with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -10043,6 +11625,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -10053,6 +11641,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -10064,6 +11658,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -10101,6 +11701,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions) - Operation response error`, func() {
 		postSearchAnalyzePath := "/_search_analyze"
 		Context(`Using mock server endpoint`, func() {
@@ -10134,6 +11744,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostSearchAnalyze(postSearchAnalyzeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -10143,8 +11760,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions)`, func() {
 		postSearchAnalyzePath := "/_search_analyze"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -10169,7 +11788,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -10184,6 +11803,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostSearchAnalyze(nil)
@@ -10206,9 +11826,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostSearchAnalyzeWithContext(ctx, postSearchAnalyzeOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostSearchAnalyze(postSearchAnalyzeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostSearchAnalyzeWithContext(ctx, postSearchAnalyzeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostSearchAnalyze with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -10296,6 +11934,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostSearch(postSearchOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -10305,8 +11950,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostSearch(postSearchOptions *PostSearchOptions)`, func() {
 		postSearchPath := "/testString/_design/testString/_search/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -10331,7 +11978,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -10346,6 +11993,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostSearch(nil)
@@ -10387,9 +12035,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostSearchWithContext(ctx, postSearchOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostSearch(postSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostSearchWithContext(ctx, postSearchOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostSearch with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -10447,8 +12113,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostSearchAsStream(postSearchOptions *PostSearchOptions)`, func() {
 		postSearchAsStreamPath := "/testString/_design/testString/_search/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -10473,7 +12141,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -10488,6 +12156,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostSearchAsStream(nil)
@@ -10535,9 +12204,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostSearchAsStreamWithContext(ctx, postSearchOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostSearchAsStream(postSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostSearchAsStreamWithContext(ctx, postSearchOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostSearchAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -10626,6 +12313,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSearchInfo(getSearchInfoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -10635,8 +12329,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions)`, func() {
 		getSearchInfoPath := "/testString/_design/testString/_search_info/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -10645,7 +12341,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -10660,6 +12356,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSearchInfo(nil)
@@ -10683,9 +12380,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSearchInfoWithContext(ctx, getSearchInfoOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSearchInfo(getSearchInfoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSearchInfoWithContext(ctx, getSearchInfoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSearchInfo with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -10764,6 +12479,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -10774,6 +12495,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -10785,6 +12512,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -10820,6 +12553,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).ToNot(BeNil())
 				ClearTestEnvironment(testEnvironment)
 			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetGeo(getGeoOptions *GetGeoOptions) - Operation response error`, func() {
@@ -10910,6 +12653,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetGeo(getGeoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -10919,8 +12669,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetGeo(getGeoOptions *GetGeoOptions)`, func() {
 		getGeoPath := "/testString/_design/testString/_geo/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -10968,7 +12720,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -10983,6 +12735,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetGeo(nil)
@@ -11021,9 +12774,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetGeoWithContext(ctx, getGeoOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetGeo(getGeoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetGeoWithContext(ctx, getGeoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetGeo with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -11078,8 +12849,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetGeoAsStream(getGeoOptions *GetGeoOptions)`, func() {
 		getGeoAsStreamPath := "/testString/_design/testString/_geo/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -11127,7 +12900,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -11142,6 +12915,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetGeoAsStream(nil)
@@ -11186,9 +12960,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetGeoAsStreamWithContext(ctx, getGeoOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetGeoAsStream(getGeoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetGeoAsStreamWithContext(ctx, getGeoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetGeoAsStream with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -11272,6 +13064,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -11281,8 +13080,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions)`, func() {
 		postGeoCleanupPath := "/testString/_geo_cleanup"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -11291,7 +13092,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -11306,6 +13107,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostGeoCleanup(nil)
@@ -11327,9 +13129,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostGeoCleanupWithContext(ctx, postGeoCleanupOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostGeoCleanupWithContext(ctx, postGeoCleanupOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostGeoCleanup with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -11398,6 +13218,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -11407,8 +13234,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions)`, func() {
 		getGeoIndexInformationPath := "/testString/_design/testString/_geo_info/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -11417,7 +13246,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -11432,6 +13261,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetGeoIndexInformation(nil)
@@ -11455,9 +13285,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetGeoIndexInformationWithContext(ctx, getGeoIndexInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetGeoIndexInformationWithContext(ctx, getGeoIndexInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetGeoIndexInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -11536,6 +13384,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -11546,6 +13400,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -11557,6 +13417,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -11592,6 +13458,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).ToNot(BeNil())
 				ClearTestEnvironment(testEnvironment)
 			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions) - Operation response error`, func() {
@@ -11639,6 +13515,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetDbUpdates(getDbUpdatesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -11648,8 +13531,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions)`, func() {
 		getDbUpdatesPath := "/_db_updates"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -11668,7 +13553,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -11683,6 +13568,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDbUpdates(nil)
@@ -11707,9 +13593,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDbUpdatesWithContext(ctx, getDbUpdatesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDbUpdates(getDbUpdatesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDbUpdatesWithContext(ctx, getDbUpdatesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDbUpdates with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -11782,6 +13686,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -11792,6 +13702,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -11803,6 +13719,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -11840,6 +13762,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 
 	Describe(`HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions)`, func() {
 		headReplicationDocumentPath := "/_replicator/testString"
@@ -11864,6 +13796,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := cloudantService.HeadReplicationDocument(nil)
@@ -11877,6 +13810,12 @@ var _ = Describe(`CloudantV1`, func() {
 				headReplicationDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
+				response, operationErr = cloudantService.HeadReplicationDocument(headReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
 				response, operationErr = cloudantService.HeadReplicationDocument(headReplicationDocumentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -11935,6 +13874,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := cloudantService.HeadSchedulerJob(nil)
@@ -11947,6 +13887,12 @@ var _ = Describe(`CloudantV1`, func() {
 				headSchedulerJobOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
+				response, operationErr = cloudantService.HeadSchedulerJob(headSchedulerJobOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
 				response, operationErr = cloudantService.HeadSchedulerJob(headSchedulerJobOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -12098,6 +14044,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostReplicate(postReplicateOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -12107,8 +14060,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostReplicate(postReplicateOptions *PostReplicateOptions)`, func() {
 		postReplicatePath := "/_replicate"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -12133,7 +14088,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -12148,6 +14103,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostReplicate(nil)
@@ -12253,9 +14209,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostReplicateWithContext(ctx, postReplicateOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostReplicate(postReplicateOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostReplicateWithContext(ctx, postReplicateOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostReplicate with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -12415,6 +14389,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteReplicationDocument(deleteReplicationDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -12424,8 +14405,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions)`, func() {
 		deleteReplicationDocumentPath := "/_replicator/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -12440,7 +14423,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -12455,6 +14438,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteReplicationDocument(nil)
@@ -12479,9 +14463,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteReplicationDocumentWithContext(ctx, deleteReplicationDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteReplicationDocument(deleteReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteReplicationDocumentWithContext(ctx, deleteReplicationDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteReplicationDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -12595,6 +14597,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetReplicationDocument(getReplicationDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -12604,8 +14613,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions)`, func() {
 		getReplicationDocumentPath := "/_replicator/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -12645,7 +14656,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -12660,6 +14671,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetReplicationDocument(nil)
@@ -12694,9 +14706,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetReplicationDocumentWithContext(ctx, getReplicationDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetReplicationDocument(getReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetReplicationDocumentWithContext(ctx, getReplicationDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetReplicationDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -12874,6 +14904,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutReplicationDocument(putReplicationDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -12883,8 +14920,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions)`, func() {
 		putReplicationDocumentPath := "/_replicator/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -12918,7 +14957,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -12933,6 +14972,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutReplicationDocument(nil)
@@ -13043,9 +15083,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutReplicationDocumentWithContext(ctx, putReplicationDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutReplicationDocument(putReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutReplicationDocumentWithContext(ctx, putReplicationDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutReplicationDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -13209,6 +15267,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSchedulerDocs(getSchedulerDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -13218,8 +15283,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSchedulerDocs(getSchedulerDocsOptions *GetSchedulerDocsOptions)`, func() {
 		getSchedulerDocsPath := "/_scheduler/docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -13234,7 +15301,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for skip query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -13249,6 +15316,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSchedulerDocs(nil)
@@ -13272,9 +15340,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSchedulerDocsWithContext(ctx, getSchedulerDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSchedulerDocs(getSchedulerDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSchedulerDocsWithContext(ctx, getSchedulerDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSchedulerDocs with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -13336,6 +15422,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSchedulerDocument(getSchedulerDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -13345,8 +15438,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSchedulerDocument(getSchedulerDocumentOptions *GetSchedulerDocumentOptions)`, func() {
 		getSchedulerDocumentPath := "/_scheduler/docs/_replicator/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -13355,7 +15450,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -13370,6 +15465,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSchedulerDocument(nil)
@@ -13391,9 +15487,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSchedulerDocumentWithContext(ctx, getSchedulerDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSchedulerDocument(getSchedulerDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSchedulerDocumentWithContext(ctx, getSchedulerDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSchedulerDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -13467,6 +15581,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSchedulerJobs(getSchedulerJobsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -13476,8 +15597,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions)`, func() {
 		getSchedulerJobsPath := "/_scheduler/jobs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -13492,7 +15615,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for skip query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -13507,6 +15630,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSchedulerJobs(nil)
@@ -13529,9 +15653,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSchedulerJobsWithContext(ctx, getSchedulerJobsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSchedulerJobs(getSchedulerJobsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSchedulerJobsWithContext(ctx, getSchedulerJobsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSchedulerJobs with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -13592,6 +15734,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSchedulerJob(getSchedulerJobOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -13601,8 +15750,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSchedulerJob(getSchedulerJobOptions *GetSchedulerJobOptions)`, func() {
 		getSchedulerJobPath := "/_scheduler/jobs/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -13611,7 +15762,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -13626,6 +15777,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSchedulerJob(nil)
@@ -13647,9 +15799,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSchedulerJobWithContext(ctx, getSchedulerJobOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSchedulerJob(getSchedulerJobOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSchedulerJobWithContext(ctx, getSchedulerJobOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSchedulerJob with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -13726,6 +15896,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -13736,6 +15912,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -13747,6 +15929,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -13784,6 +15972,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions) - Operation response error`, func() {
 		getSessionInformationPath := "/_session"
 		Context(`Using mock server endpoint`, func() {
@@ -13815,6 +16013,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSessionInformation(getSessionInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -13824,8 +16029,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions)`, func() {
 		getSessionInformationPath := "/_session"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -13834,7 +16041,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -13849,6 +16056,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSessionInformation(nil)
@@ -13869,9 +16077,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSessionInformationWithContext(ctx, getSessionInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSessionInformation(getSessionInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSessionInformationWithContext(ctx, getSessionInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSessionInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -13940,6 +16166,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -13950,6 +16182,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -13961,6 +16199,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -13998,6 +16242,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`GetSecurity(getSecurityOptions *GetSecurityOptions) - Operation response error`, func() {
 		getSecurityPath := "/testString/_security"
 		Context(`Using mock server endpoint`, func() {
@@ -14030,6 +16284,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSecurity(getSecurityOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -14039,8 +16300,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetSecurity(getSecurityOptions *GetSecurityOptions)`, func() {
 		getSecurityPath := "/testString/_security"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -14049,7 +16312,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -14064,6 +16327,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetSecurity(nil)
@@ -14085,9 +16349,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetSecurityWithContext(ctx, getSecurityOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetSecurity(getSecurityOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetSecurityWithContext(ctx, getSecurityOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetSecurity with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -14163,6 +16445,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutSecurity(putSecurityOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -14172,8 +16461,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutSecurity(putSecurityOptions *PutSecurityOptions)`, func() {
 		putSecurityPath := "/testString/_security"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -14198,7 +16489,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -14213,6 +16504,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutSecurity(nil)
@@ -14243,9 +16535,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutSecurityWithContext(ctx, putSecurityOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutSecurity(putSecurityOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutSecurityWithContext(ctx, putSecurityOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutSecurity with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -14320,6 +16630,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostApiKeys(postApiKeysOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -14329,8 +16646,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostApiKeys(postApiKeysOptions *PostApiKeysOptions)`, func() {
 		postApiKeysPath := "/_api/v2/api_keys"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -14339,7 +16658,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -14354,6 +16673,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostApiKeys(nil)
@@ -14374,9 +16694,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostApiKeysWithContext(ctx, postApiKeysOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostApiKeys(postApiKeysOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostApiKeysWithContext(ctx, postApiKeysOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostApiKeys with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -14444,6 +16782,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -14453,8 +16798,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions)`, func() {
 		putCloudantSecurityConfigurationPath := "/_api/v2/db/testString/_security"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -14479,7 +16826,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -14494,6 +16841,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutCloudantSecurityConfiguration(nil)
@@ -14524,9 +16872,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutCloudantSecurityConfigurationWithContext(ctx, putCloudantSecurityConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutCloudantSecurityConfigurationWithContext(ctx, putCloudantSecurityConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutCloudantSecurityConfiguration with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -14612,6 +16978,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -14622,6 +16994,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -14633,6 +17011,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -14670,6 +17054,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) - Operation response error`, func() {
 		getCorsInformationPath := "/_api/v2/user/config/cors"
 		Context(`Using mock server endpoint`, func() {
@@ -14701,6 +17095,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetCorsInformation(getCorsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -14710,8 +17111,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions)`, func() {
 		getCorsInformationPath := "/_api/v2/user/config/cors"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -14720,7 +17123,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -14735,6 +17138,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetCorsInformation(nil)
@@ -14755,9 +17159,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetCorsInformationWithContext(ctx, getCorsInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetCorsInformation(getCorsInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetCorsInformationWithContext(ctx, getCorsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetCorsInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -14818,6 +17240,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutCorsConfiguration(putCorsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -14827,8 +17256,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions)`, func() {
 		putCorsConfigurationPath := "/_api/v2/user/config/cors"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -14853,7 +17284,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -14868,6 +17299,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutCorsConfiguration(nil)
@@ -14891,9 +17323,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutCorsConfigurationWithContext(ctx, putCorsConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutCorsConfiguration(putCorsConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutCorsConfigurationWithContext(ctx, putCorsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutCorsConfiguration with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -14972,6 +17422,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -14982,6 +17438,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -14993,6 +17455,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -15030,6 +17498,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 
 	Describe(`HeadAttachment(headAttachmentOptions *HeadAttachmentOptions)`, func() {
 		headAttachmentPath := "/testString/testString/testString"
@@ -15058,6 +17536,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				response, operationErr := cloudantService.HeadAttachment(nil)
@@ -15075,6 +17554,12 @@ var _ = Describe(`CloudantV1`, func() {
 				headAttachmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
+				response, operationErr = cloudantService.HeadAttachment(headAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
 				response, operationErr = cloudantService.HeadAttachment(headAttachmentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
@@ -15158,6 +17643,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteAttachment(deleteAttachmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -15167,8 +17659,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteAttachment(deleteAttachmentOptions *DeleteAttachmentOptions)`, func() {
 		deleteAttachmentPath := "/testString/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -15183,7 +17677,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -15198,6 +17692,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteAttachment(nil)
@@ -15224,9 +17719,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteAttachmentWithContext(ctx, deleteAttachmentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteAttachment(deleteAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteAttachmentWithContext(ctx, deleteAttachmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteAttachment with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -15269,8 +17782,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetAttachment(getAttachmentOptions *GetAttachmentOptions)`, func() {
 		getAttachmentPath := "/testString/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -15289,7 +17804,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "*/*")
@@ -15304,6 +17819,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetAttachment(nil)
@@ -15332,9 +17848,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetAttachmentWithContext(ctx, getAttachmentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetAttachment(getAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetAttachmentWithContext(ctx, getAttachmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetAttachment with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -15420,6 +17954,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutAttachment(putAttachmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -15429,8 +17970,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutAttachment(putAttachmentOptions *PutAttachmentOptions)`, func() {
 		putAttachmentPath := "/testString/testString/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -15461,7 +18004,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -15476,6 +18019,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutAttachment(nil)
@@ -15503,9 +18047,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutAttachmentWithContext(ctx, putAttachmentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutAttachment(putAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutAttachmentWithContext(ctx, putAttachmentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutAttachment with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -15588,6 +18150,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -15598,6 +18166,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -15609,6 +18183,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -15644,6 +18224,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).ToNot(BeNil())
 				ClearTestEnvironment(testEnvironment)
 			})
+		})
+	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions) - Operation response error`, func() {
@@ -15682,6 +18272,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.DeleteLocalDocument(deleteLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -15691,8 +18288,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions)`, func() {
 		deleteLocalDocumentPath := "/testString/_local/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -15703,7 +18302,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -15718,6 +18317,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.DeleteLocalDocument(nil)
@@ -15741,9 +18341,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.DeleteLocalDocumentWithContext(ctx, deleteLocalDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.DeleteLocalDocument(deleteLocalDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.DeleteLocalDocumentWithContext(ctx, deleteLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke DeleteLocalDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -15832,6 +18450,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetLocalDocument(getLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -15841,8 +18466,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetLocalDocument(getLocalDocumentOptions *GetLocalDocumentOptions)`, func() {
 		getLocalDocumentPath := "/testString/_local/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -15864,7 +18491,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for local_seq query parameter
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -15879,6 +18506,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetLocalDocument(nil)
@@ -15907,9 +18535,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetLocalDocumentWithContext(ctx, getLocalDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetLocalDocument(getLocalDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetLocalDocumentWithContext(ctx, getLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetLocalDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -16027,6 +18673,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PutLocalDocument(putLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -16036,8 +18689,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions)`, func() {
 		putLocalDocumentPath := "/testString/_local/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -16066,7 +18721,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -16081,6 +18736,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PutLocalDocument(nil)
@@ -16142,9 +18798,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PutLocalDocumentWithContext(ctx, putLocalDocumentOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PutLocalDocument(putLocalDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PutLocalDocumentWithContext(ctx, putLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PutLocalDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -16267,6 +18941,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostLocalDocs(postLocalDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -16276,8 +18957,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostLocalDocs(postLocalDocsOptions *PostLocalDocsOptions)`, func() {
 		postLocalDocsPath := "/testString/_local_docs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -16304,7 +18987,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -16319,6 +19002,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostLocalDocs(nil)
@@ -16354,9 +19038,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostLocalDocsWithContext(ctx, postLocalDocsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostLocalDocs(postLocalDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostLocalDocsWithContext(ctx, postLocalDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostLocalDocs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -16457,6 +19159,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostLocalDocsQueries(postLocalDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -16466,8 +19175,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostLocalDocsQueries(postLocalDocsQueriesOptions *PostLocalDocsQueriesOptions)`, func() {
 		postLocalDocsQueriesPath := "/testString/_local_docs/queries"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -16494,7 +19205,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"]).ToNot(BeNil())
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -16509,6 +19220,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostLocalDocsQueries(nil)
@@ -16548,9 +19260,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostLocalDocsQueriesWithContext(ctx, postLocalDocsQueriesOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostLocalDocsQueries(postLocalDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostLocalDocsQueriesWithContext(ctx, postLocalDocsQueriesOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostLocalDocsQueries with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -16645,6 +19375,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -16655,6 +19391,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -16666,6 +19408,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -16703,6 +19451,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) - Operation response error`, func() {
 		postMissingRevsPath := "/testString/_missing_revs"
 		Context(`Using mock server endpoint`, func() {
@@ -16736,6 +19494,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -16745,8 +19510,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions)`, func() {
 		postMissingRevsPath := "/testString/_missing_revs"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -16771,7 +19538,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -16786,6 +19553,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostMissingRevs(nil)
@@ -16808,9 +19576,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostMissingRevsWithContext(ctx, postMissingRevsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostMissingRevsWithContext(ctx, postMissingRevsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostMissingRevs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -16879,6 +19665,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostRevsDiff(postRevsDiffOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -16888,8 +19681,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions)`, func() {
 		postRevsDiffPath := "/testString/_revs_diff"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -16914,7 +19709,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -16929,6 +19724,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostRevsDiff(nil)
@@ -16951,9 +19747,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostRevsDiffWithContext(ctx, postRevsDiffOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostRevsDiff(postRevsDiffOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostRevsDiffWithContext(ctx, postRevsDiffOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostRevsDiff with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17021,6 +19835,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetShardsInformation(getShardsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17030,8 +19851,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetShardsInformation(getShardsInformationOptions *GetShardsInformationOptions)`, func() {
 		getShardsInformationPath := "/testString/_shards"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17040,7 +19863,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17055,6 +19878,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetShardsInformation(nil)
@@ -17076,9 +19900,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetShardsInformationWithContext(ctx, getShardsInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetShardsInformation(getShardsInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetShardsInformationWithContext(ctx, getShardsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetShardsInformation with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17146,6 +19988,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetDocumentShardsInfo(getDocumentShardsInfoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17155,8 +20004,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetDocumentShardsInfo(getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions)`, func() {
 		getDocumentShardsInfoPath := "/testString/_shards/testString"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17165,7 +20016,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17180,6 +20031,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetDocumentShardsInfo(nil)
@@ -17202,9 +20054,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetDocumentShardsInfoWithContext(ctx, getDocumentShardsInfoOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetDocumentShardsInfo(getDocumentShardsInfoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetDocumentShardsInfoWithContext(ctx, getDocumentShardsInfoOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetDocumentShardsInfo with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17282,6 +20152,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url from constructor successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -17292,6 +20168,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
@@ -17303,6 +20185,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
 				ClearTestEnvironment(testEnvironment)
+
+				clone := cloudantService.Clone()
+				Expect(clone).ToNot(BeNil())
+				Expect(clone.Service != cloudantService.Service).To(BeTrue())
+				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
+				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
 			})
 		})
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
@@ -17340,6 +20228,16 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Regional endpoint tests`, func() {
+		It(`GetServiceURLForRegion(region string)`, func() {
+			var url string
+			var err error
+			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
+			Expect(url).To(BeEmpty())
+			Expect(err).ToNot(BeNil())
+			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+		})
+	})
 	Describe(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions) - Operation response error`, func() {
 		getActiveTasksPath := "/_active_tasks"
 		Context(`Using mock server endpoint`, func() {
@@ -17371,6 +20269,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetActiveTasks(getActiveTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17380,8 +20285,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions)`, func() {
 		getActiveTasksPath := "/_active_tasks"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17390,7 +20297,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17405,6 +20312,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetActiveTasks(nil)
@@ -17425,9 +20333,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetActiveTasksWithContext(ctx, getActiveTasksOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetActiveTasks(getActiveTasksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetActiveTasksWithContext(ctx, getActiveTasksOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetActiveTasks with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17485,6 +20411,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetUpInformation(getUpInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17494,8 +20427,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
 		getUpInformationPath := "/_up"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17504,7 +20439,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17519,6 +20454,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetUpInformation(nil)
@@ -17539,9 +20475,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetUpInformationWithContext(ctx, getUpInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetUpInformation(getUpInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetUpInformationWithContext(ctx, getUpInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetUpInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17599,6 +20553,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17608,8 +20569,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions)`, func() {
 		getActivityTrackerEventsInformationPath := "/_api/v2/user/activity_tracker/events"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17618,7 +20581,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17633,6 +20596,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(nil)
@@ -17653,9 +20617,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetActivityTrackerEventsInformationWithContext(ctx, getActivityTrackerEventsInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetActivityTrackerEventsInformationWithContext(ctx, getActivityTrackerEventsInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetActivityTrackerEventsInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17714,6 +20696,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17723,8 +20712,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions)`, func() {
 		postActivityTrackerEventsConfigurationPath := "/_api/v2/user/activity_tracker/events"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17749,7 +20740,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17764,6 +20755,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(nil)
@@ -17785,9 +20777,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.PostActivityTrackerEventsConfigurationWithContext(ctx, postActivityTrackerEventsConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.PostActivityTrackerEventsConfigurationWithContext(ctx, postActivityTrackerEventsConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke PostActivityTrackerEventsConfiguration with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -17853,6 +20863,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
 				testServer.Close()
@@ -17862,8 +20879,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 	Describe(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions)`, func() {
 		getCurrentThroughputInformationPath := "/_api/v2/user/current/throughput"
+		var serverSleepTime time.Duration
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
+				serverSleepTime = 0
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
@@ -17872,7 +20891,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
+					time.Sleep(serverSleepTime)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
@@ -17887,6 +20906,7 @@ var _ = Describe(`CloudantV1`, func() {
 				})
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
 
 				// Invoke operation with nil options model (negative test)
 				result, response, operationErr := cloudantService.GetCurrentThroughputInformation(nil)
@@ -17907,9 +20927,27 @@ var _ = Describe(`CloudantV1`, func() {
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
+				serverSleepTime = 100 * time.Millisecond
 				_, _, operationErr = cloudantService.GetCurrentThroughputInformationWithContext(ctx, getCurrentThroughputInformationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr = cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				serverSleepTime = 100 * time.Millisecond
+				_, _, operationErr = cloudantService.GetCurrentThroughputInformationWithContext(ctx, getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+				serverSleepTime = time.Duration(0)
 			})
 			It(`Invoke GetCurrentThroughputInformation with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
