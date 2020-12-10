@@ -37,38 +37,27 @@ var requestSessionMutex sync.Mutex
 // CouchDbSessionAuthenticator uses username and password to obtain
 // CouchDB authentication cookie, and adds the cookie to requests.
 type CouchDbSessionAuthenticator struct {
+	// [Required] The username and password used to access CouchDB session end-point
 	Username, Password string
-	Client             *http.Client
-	url                string
-	header             http.Header
-	ctx                context.Context
-	disableSSL         bool
-	session            *session
-}
 
-// GetAuthenticatorFromEnvironment instantiates an Authenticator
-// using service properties retrieved from external config sources.
-func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, error) {
-	props, err := core.GetServiceProperties(credentialKey)
-	if err != nil {
-		return nil, err
-	}
-	authType, ok := props[core.PROPNAME_AUTH_TYPE]
-	if ok && strings.EqualFold(authType, AUTHTYPE_COUCHDB_SESSION) {
-		authenticator, err := NewCouchDbSessionAuthenticatorFromMap(props)
-		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {
-			authenticator.url = url
-		}
-		if disableSSL, ok := props[core.PROPNAME_SVC_DISABLE_SSL]; ok && disableSSL != "" {
-			boolValue, err := strconv.ParseBool(disableSSL)
-			if err == nil && boolValue {
-				authenticator.disableSSL = true
-			}
-		}
-		return authenticator, err
-	}
+	// [Optional] The http.Client object used to to obtain CouchDB authentication cookie.
+	// If not specified by the user, a suitable default Client will be constructed.
+	Client *http.Client
 
-	return core.GetAuthenticatorFromEnvironment(credentialKey)
+	// CouchDB URL inherited from the service config.
+	url string
+
+	// Client's headers inherited from the service request.
+	header http.Header
+
+	// Context inherited from from the service request.
+	ctx context.Context
+
+	// A flag that indicates whether verification of the server's SSL certificate should be disabled; INherired from the service config
+	disableSSLVerification bool
+
+	// A session instance that stores and manages the authentication cookie.
+	session *session
 }
 
 // NewCouchDbSessionAuthenticator constructs a new NewCouchDbSessionAuthenticator instance.
@@ -91,6 +80,31 @@ func NewCouchDbSessionAuthenticatorFromMap(props map[string]string) (*CouchDbSes
 	username := props[core.PROPNAME_USERNAME]
 	password := props[core.PROPNAME_PASSWORD]
 	return NewCouchDbSessionAuthenticator(username, password)
+}
+
+// GetAuthenticatorFromEnvironment instantiates an Authenticator
+// using service properties retrieved from external config sources.
+func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, error) {
+	props, err := core.GetServiceProperties(credentialKey)
+	if err != nil {
+		return nil, err
+	}
+	authType, ok := props[core.PROPNAME_AUTH_TYPE]
+	if ok && strings.EqualFold(authType, AUTHTYPE_COUCHDB_SESSION) {
+		authenticator, err := NewCouchDbSessionAuthenticatorFromMap(props)
+		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {
+			authenticator.url = url
+		}
+		if disableSSLVerification, ok := props[core.PROPNAME_SVC_DISABLE_SSL]; ok && disableSSLVerification != "" {
+			boolValue, err := strconv.ParseBool(disableSSLVerification)
+			if err == nil && boolValue {
+				authenticator.disableSSLVerification = true
+			}
+		}
+		return authenticator, err
+	}
+
+	return core.GetAuthenticatorFromEnvironment(credentialKey)
 }
 
 // AuthenticationType returns the authentication type for this authenticator.
@@ -176,7 +190,7 @@ func (a *CouchDbSessionAuthenticator) syncRequestSession() error {
 	return err
 }
 
-// requestSession fetches new AuthSession cookie from session end-point.
+// requestSession fetches new AuthSession cookie from the server.
 func (a *CouchDbSessionAuthenticator) requestSession() error {
 	builder, err := core.NewRequestBuilder(core.POST).
 		ResolveRequestURL(a.url, "/_session", nil)
@@ -207,7 +221,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() error {
 		a.Client = &http.Client{
 			Timeout: time.Second * 30,
 			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: a.disableSSL},
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: a.disableSSLVerification},
 			},
 		}
 	}

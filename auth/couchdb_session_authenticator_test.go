@@ -46,7 +46,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		sessionAuth, ok := auth.(*CouchDbSessionAuthenticator)
 		Expect(ok).To(BeTrue())
 		Expect(sessionAuth.url).ToNot(BeZero())
-		Expect(sessionAuth.disableSSL).To(BeFalse())
+		Expect(sessionAuth.disableSSLVerification).To(BeFalse())
 
 		auth, err = GetAuthenticatorFromEnvironment("service2")
 		Expect(err).To(BeNil())
@@ -56,7 +56,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		sessionAuth, ok = auth.(*CouchDbSessionAuthenticator)
 		Expect(ok).To(BeTrue())
 		Expect(sessionAuth.url).ToNot(BeZero())
-		Expect(sessionAuth.disableSSL).To(BeTrue())
+		Expect(sessionAuth.disableSSLVerification).To(BeTrue())
 
 		auth, err = GetAuthenticatorFromEnvironment("service3")
 		Expect(err).To(BeNil())
