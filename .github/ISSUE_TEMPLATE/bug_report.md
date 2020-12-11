@@ -21,10 +21,10 @@ If applicable, add screenshots to help explain your problem.
 
 **Must gather (please complete the following information):**
  - SDK Version [e.g. 1.2.1]
- - Go Version [e.g. 1.12.15]
+ - Go Version [e.g. Go 1.14.13]
  - Name of service that you're trying to use (if applicable)
  - Name of operation that you're trying to invoke (if applicable)
 
 **Additional context**
-Add any other context about the problem here.  
+Add any other context about the problem here.
 Were you able to avoid the problem by changing your application code slightly?

@@ -11,7 +11,7 @@
   -->
 
 [![Build Status](https://travis-ci.com/IBM/cloudant-go-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-go-sdk)
-<!-- [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) -->
+[![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
 
 # IBM Cloudant Go SDK Version 0.0.27
 
@@ -46,19 +46,20 @@ Changes might occur which impact applications that use this SDK.
 - [Authentication](#authentication)
   * [Authenticate with environment variables](#authenticate-with-environment-variables)
     + [IAM authentication](#iam-authentication)
+    + [Session cookie authentication](#session-cookie-authentication)
     + [Basic authentication](#basic-authentication)
   * [Authenticate with external configuration](#authenticate-with-external-configuration)
   * [Authenticate programmatically](#authenticate-programmatically)
-- [Code examples](#code-examples)
-  * [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
-  * [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
-  * [3. Update your previously created document](#3-update-your-previously-created-document)
-  * [4. Delete your previously created document](#4-delete-your-previously-created-document)
-- [Error handling](#error-handling)
 - [Using the SDK](#using-the-sdk)
+  * [Code examples](#code-examples)
+    + [1. Retrieve information from an existing database](#1-retrieve-information-from-an-existing-database)
+    + [2. Create your own database and add a document](#2-create-your-own-database-and-add-a-document)
+    + [3. Update your previously created document](#3-update-your-previously-created-document)
+    + [4. Delete your previously created document](#4-delete-your-previously-created-document)
+  * [Error handling](#error-handling)
+  * [Further resources](#further-resources)
 - [Questions](#questions)
 - [Issues](#issues)
-- [Further resources](#further-resources)
 - [Open source @ IBM](#open-source--ibm)
 - [Contributing](#contributing)
 - [License](#license)
@@ -77,7 +78,6 @@ with the help of the `cloudantv1` package.
 
 The purpose of this Go SDK is to wrap most of the HTTP request APIs
 provided by Cloudant and supply other functions to ease the usage of Cloudant.
-Moreover, it has limited support for CouchDB as well.
 This SDK should make life easier for programmers to do what’s really important
 for them: develop.
 
@@ -85,6 +85,9 @@ Reasons why you should consider using Cloudant Go SDK in your
 project:
 
 - Supported by IBM Cloudant.
+- Service compatibility besides Cloudant _Classic_ with
+  [CouchDB 3.x](https://docs.couchdb.org/en/stable/) and some
+  [Cloudant TXE](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-overview-te)
 - Includes all the most popular and latest supported endpoints for
   applications.
 - Handles the authentication.
@@ -96,11 +99,11 @@ project:
 
 ## Prerequisites
 
-[ibm-cloud-onboarding]: https://cloud.ibm.com/registration
-
-- An [IBM Cloud][ibm-cloud-onboarding] account.
-- An IAM API key to allow the SDK to access your account.
-  Create one [here](https://cloud.ibm.com/iam/apikeys).
+- A
+  [Cloudant](https://cloud.ibm.com/docs/Cloudant/getting-started.html#step-1-connect-to-your-cloudant-nosql-db-service-instance-on-ibm-cloud)
+  service instance or a
+  [CouchDB](https://docs.couchdb.org/en/latest/install/index.html)
+  server.
 - Go version 1.13 or above.
 
 ## Installation
@@ -152,6 +155,8 @@ then run `dep ensure`.
 
 [service-credentials]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-creating-an-ibm-cloudant-instance-on-ibm-cloud#locating-your-service-credentials
 [cloud-IAM-mgmt]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-ibm-cloud-identity-and-access-management-iam-
+[couch-cookie-auth]: https://docs.couchdb.org/en/stable/api/server/authn.html#cookie-authentication
+[cloudant-cookie-auth]: https://cloud.ibm.com/docs/Cloudant?topic=cloudant-authentication#cookie-authentication
 [couch-basic-auth]: https://docs.couchdb.org/en/stable/api/server/authn.html#basic-authentication
 [cloudant-basic-auth]: https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-authentication#basic-authentication
 
@@ -159,11 +164,17 @@ This library requires some of your
 [Cloudant service credentials][service-credentials] to authenticate with your
 account.
 
-1. `IAM`, `BASIC` or `NOAUTH` **authentication type**.
+1. `IAM`, `COUCHDB_SESSION`, `BASIC` or `NOAUTH` **authentication type**.
     1. [*IAM authentication*](#iam-authentication) is highly recommended when your
     back-end database server is [**Cloudant**][cloud-IAM-mgmt]. This
     authentication type requires a server-generated `apikey` instead of a
-    user-given password.
+    user-given password. You can create one
+    [here](https://cloud.ibm.com/iam/apikeys).
+    1. [*Session cookie (`COUCHDB_SESSION`) authentication*](#session-cookie-authentication)
+    is recommended for [Apache CouchDB][couch-cookie-auth] or for
+    [Cloudant][cloudant-cookie-auth] when IAM is unavailable. It exchanges username
+    and password credentials for an `AuthSession` cookie from the `/_session`
+    endpoint.
     1. [*Basic* (or legacy) *authentication*](#basic-authentication) is a fallback
     for both [Cloudant][cloudant-basic-auth] and [Apache CouchDB][couch-basic-auth]
     back-end database servers. This authentication type requires the good old
@@ -193,6 +204,19 @@ CLOUDANT_URL=<url>
 CLOUDANT_APIKEY=<apikey>
 ```
 
+#### Session cookie authentication
+
+For `COUCHDB_SESSION` authentication set the following environmental variables
+by replacing `<url>`, `<username>` and `<password>` with your proper
+[service credentials][service-credentials].
+
+```bash
+CLOUDANT_AUTH_TYPE=COUCHDB_SESSION
+CLOUDANT_URL=<url>
+CLOUDANT_USERNAME=<username>
+CLOUDANT_PASSWORD=<password>
+```
+
 #### Basic authentication
 
 For *Basic authentication* set the following environmental variables by
@@ -207,7 +231,7 @@ CLOUDANT_PASSWORD=<password>
 ```
 
 **Note**: We recommend using [IAM](#iam-authentication) for Cloudant and
-[Basic](#basic-authentication) for CouchDB authentication.
+[Session](#session-cookie-authentication) for CouchDB authentication.
 
 ### Authenticate with external configuration
 
@@ -225,12 +249,17 @@ documentation in the
 or in the
 [Go SDK Core document about authentication](https://github.com/IBM/go-sdk-core/blob/master/Authentication.md).
 
-## Code examples
+## Using the SDK
+
+For general IBM Cloud SDK usage information, please see
+[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
+
+### Code examples
 
 The code examples below will follow the
 [authentication with environment variables](#authenticate-with-environment-variables).
 
-### 1. Retrieve information from an existing database
+#### 1. Retrieve information from an existing database
 
 This example code gathers some information about an existing database hosted on
 the https://examples.cloudant.com/ service `url`. To do this, you need to
@@ -324,11 +353,14 @@ Document count in "animaldb" database is 11.
 }
 ```
 
-### 2. Create your own database and add a document
+#### 2. Create your own database and add a document
 
 Now comes the exciting part of creating your own `orders` database and adding
 a document about *Bob Smith* with your own [IAM](#iam-authentication) or
 [Basic](#basic-authentication) service credentials.
+
+<details>
+<summary>Create code example</summary>
 
 [embedmd]:# (examples/src/create_db_and_doc/create_db_and_doc.go /package main/ $)
 ```go
@@ -425,6 +457,8 @@ func main() {
 }
 ```
 
+
+</details>
 The result of the code is similar to the following output.
 
 [embedmd]:# (examples/output/create_db_and_doc.txt)
@@ -439,13 +473,16 @@ You have created the document:
 }
 ```
 
-### 3. Update your previously created document
+#### 3. Update your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
 database and the `example` document by
 [running this previous example code](#2-create-your-own-database-and-add-a-document)
 successfully, otherwise you get the `Cannot update document because either "orders"
 database or "example" document was not found.` message.
+
+<details>
+<summary>Update code example</summary>
 
 [embedmd]:# (examples/src/update_doc/update_doc.go /package main/ $)
 ```go
@@ -518,6 +555,8 @@ func main() {
 }
 ```
 
+
+</details>
 The result of the code is similar to the following output.
 
 [embedmd]:# (examples/output/update_doc.txt)
@@ -531,13 +570,16 @@ You have updated the document:
 }
 ```
 
-### 4. Delete your previously created document
+#### 4. Delete your previously created document
 
 **Note**: this example code assumes that you have created both the `orders`
 database and the `example` document by
 [running this previous example code](#2-create-your-own-database-and-add-a-document)
 successfully, otherwise you get the `Cannot delete document because either "orders"
 database or "example" document was not found.` message.
+
+<details>
+<summary>Delete code example</summary>
 
 [embedmd]:# (examples/src/delete_doc/delete_doc.go /package main/ $)
 ```go
@@ -599,6 +641,8 @@ func main() {
 }
 ```
 
+
+</details>
 The result of the code is the following output.
 
 [embedmd]:# (examples/output/delete_doc.txt)
@@ -606,15 +650,22 @@ The result of the code is the following output.
 You have deleted the document.
 ```
 
-## Error handling
+### Error handling
 
 For sample code on handling errors, please see
 [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#error-handling).
 
-## Using the SDK
+### Further resources
 
-For general SDK usage information, please see
-[this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md).
+- [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go):
+  API examples for Cloudant Go SDK.
+- [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview):
+  The official documentation page for Cloudant.
+- [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/):
+  The official learning center with several useful videos which help you to use
+  Cloudant successfully.
+- [Cloudant blog](https://blog.cloudant.com/):
+  Many useful articles how to optimize Cloudant for common problems.
 
 ## Questions
 
@@ -628,18 +679,6 @@ If you encounter an issue with the project, you are welcome to submit a
 [bug report](https://github.com/IBM/cloudant-go-sdk/issues).
 Before that, please search for similar issues. It's possible that someone
 has already reported the problem.
-
-## Further resources
-
-- [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go):
-  API examples for Cloudant Go SDK.
-- [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview):
-  The official documentation page for Cloudant.
-- [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/):
-  The official learning center with several useful videos which help you to use
-  Cloudant successfully.
-- [Cloudant blog](https://blog.cloudant.com/):
-  Many useful articles how to optimize Cloudant for common problems.
 
 ## Open source @ IBM
 
