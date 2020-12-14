@@ -1,11 +1,19 @@
-# Copied files:
-
+# Common files:
+.github/CODEOWNERS @IBM/cloudant-sdks
+.github/ISSUE_TEMPLATE/bug_report.md @IBM/cloudant-sdks
+.github/ISSUE_TEMPLATE/feature_request.md @IBM/cloudant-sdks
 .github/dco.yml @IBM/cloudant-sdks
+.github/dependabot.yml @IBM/cloudant-sdks
+.github/pull_request_template.md @IBM/cloudant-sdks
+CODE_OF_CONDUCT.md @IBM/cloudant-sdks
+CONTRIBUTING.md @IBM/cloudant-sdks
+Jenkinsfile @IBM/cloudant-sdks
+KNOWN_ISSUES.md @IBM/cloudant-sdks
+LICENSE @IBM/cloudant-sdks
+README.md @IBM/cloudant-sdks
 scripts/setup_couch.sh @IBM/cloudant-sdks
 scripts/setup_wiremock.sh @IBM/cloudant-sdks
 stubs/mappings.json @IBM/cloudant-sdks
-KNOWN_ISSUES.md @IBM/cloudant-sdks
-Jenkinsfile @IBM/cloudant-sdks
 
 # Generated code files:
 
@@ -13,7 +21,8 @@ cloudantv1/cloudant_v1.go @IBM/cloudant-sdks
 cloudantv1/cloudant_v1_suite_test.go @IBM/cloudant-sdks
 cloudantv1/cloudant_v1_test.go @IBM/cloudant-sdks
 
-# Bump version files except the README.md:
+# Version files:
+
+common/version.go @IBM/cloudant-sdks
 
 .bumpversion.cfg @IBM/cloudant-sdks
-common/version.go @IBM/cloudant-sdks

@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.16.0-36b26b63-20201022-212410
+ * IBM OpenAPI SDK Code Generator Version: 3.21.0-a45d89ef-20201207-220514
  */
  
 
@@ -26,12 +26,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/IBM/cloudant-go-sdk/auth"
 	common "github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/go-openapi/strfmt"
 	"io"
+	"net/http"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
@@ -62,7 +65,7 @@ func NewCloudantV1UsingExternalConfig(options *CloudantV1Options) (cloudant *Clo
 	}
 
 	if options.Authenticator == nil {
-		options.Authenticator, err = core.GetAuthenticatorFromEnvironment(options.ServiceName)
+		options.Authenticator, err = auth.GetAuthenticatorFromEnvironment(options.ServiceName)
 		if err != nil {
 			return
 		}
@@ -111,6 +114,21 @@ func NewCloudantV1(options *CloudantV1Options) (service *CloudantV1, err error) 
 	return
 }
 
+// GetServiceURLForRegion returns the service URL to be used for the specified region
+func GetServiceURLForRegion(region string) (string, error) {
+	return "", fmt.Errorf("service does not support regional URLs")
+}
+
+// Clone makes a copy of "cloudant" suitable for processing requests.
+func (cloudant *CloudantV1) Clone() *CloudantV1 {
+	if core.IsNil(cloudant) {
+		return nil
+	}
+	clone := *cloudant
+	clone.Service = cloudant.Service.Clone()
+	return &clone
+}
+
 // SetServiceURL sets the service URL
 func (cloudant *CloudantV1) SetServiceURL(url string) error {
 	return cloudant.Service.SetServiceURL(url)
@@ -121,6 +139,11 @@ func (cloudant *CloudantV1) GetServiceURL() string {
 	return cloudant.Service.GetServiceURL()
 }
 
+// SetDefaultHeaders sets HTTP headers to be sent in every request
+func (cloudant *CloudantV1) SetDefaultHeaders(headers http.Header) {
+	cloudant.Service.SetDefaultHeaders(headers)
+}
+
 // SetEnableGzipCompression sets the service's EnableGzipCompression field
 func (cloudant *CloudantV1) SetEnableGzipCompression(enableGzip bool) {
 	cloudant.Service.SetEnableGzipCompression(enableGzip)
@@ -129,6 +152,17 @@ func (cloudant *CloudantV1) SetEnableGzipCompression(enableGzip bool) {
 // GetEnableGzipCompression returns the service's EnableGzipCompression field
 func (cloudant *CloudantV1) GetEnableGzipCompression() bool {
 	return cloudant.Service.GetEnableGzipCompression()
+}
+
+// EnableRetries enables automatic retries for requests invoked for this service instance.
+// If either parameter is specified as 0, then a default value is used instead.
+func (cloudant *CloudantV1) EnableRetries(maxRetries int, maxRetryInterval time.Duration) {
+	cloudant.Service.EnableRetries(maxRetries, maxRetryInterval)
+}
+
+// DisableRetries disables automatic retries for requests invoked for this service instance.
+func (cloudant *CloudantV1) DisableRetries() {
+	cloudant.Service.DisableRetries()
 }
 
 // GetServerInformation : Retrieve server instance information
