@@ -187,9 +187,9 @@ account.
 
 There are several ways to **set** these properties:
 
-1. As [environment variables](#authenticate-with-environment-variables)
-1. The [programmatic approach](#authenticate-programmatically)
-1. With an [external credentials file](#authenticate-with-external-configuration)
+1. As [environment variables](#authentication-with-environment-variables)
+1. The [programmatic approach](#programmatic-authentication)
+1. With an [external credentials file](#authentication-with-external-configuration)
 
 ### Authentication with environment variables
 
@@ -261,6 +261,8 @@ The code examples below will follow the
 [authentication with environment variables](#authenticate-with-environment-variables).
 
 #### 1. Retrieve information from an existing database
+
+**Note:** this example code assumes that `animaldb` database does not exist in your account.
 
 This example code gathers some information about an existing database hosted on
 the https://examples.cloudant.com/ service `url`. To do this, you need to
@@ -355,6 +357,8 @@ Document count in "animaldb" database is 11.
 ```
 
 #### 2. Create your own database and add a document
+
+**Note:** this example code assumes that `orders` database does not exist in your account.
 
 Now comes the exciting part of creating your own `orders` database and adding
 a document about *Bob Smith* with your own [IAM](#iam-authentication) or
