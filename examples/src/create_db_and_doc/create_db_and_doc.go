@@ -60,33 +60,7 @@ func main() {
 	exampleDocument.SetProperty("name", "Bob Smith")
 	exampleDocument.SetProperty("joined", "2019-01-24T10:42:99.000Z")
 
-	// 3.3. Set the options to get the document out of the database if it exists
-	getDocumentOptions := client.NewGetDocumentOptions(
-		exampleDbName,
-		exampleDocID,
-	)
-
-	// 3.4. Check the document existence in the database
-	documentInfo, getDocumentResponse, err := client.GetDocument(
-		getDocumentOptions,
-	)
-	if err != nil {
-		if getDocumentResponse.StatusCode == 404 {
-			// Document does not exist in database
-		} else {
-			panic(err)
-		}
-	}
-
-	// 3.5. If it previously existed in the database, set revision of exampleDocument to the latest
-	if documentInfo != nil {
-		exampleDocument.Rev = documentInfo.Rev
-		fmt.Printf("The document revision for \"%s\"  is set to \"%s\".\n",
-			exampleDocID,
-			*documentInfo.Rev)
-	}
-
-	// 3.6. Save the document in the database
+	// 3.3. Save the document in the database
 	postDocumentOption := client.NewPostDocumentOptions(
 		exampleDbName,
 	).SetDocument(&exampleDocument)
@@ -96,10 +70,10 @@ func main() {
 		panic(err)
 	}
 
-	// 3.7. Keep track of the revision number from the `example` document object
+	// 3.4. Keep track of the revision number from the `example` document object
 	exampleDocument.Rev = postDocumentResult.Rev
 
-	// 3.8. Print out the document content
+	// 3.5. Print out the document content
 	exampleDocumentContent, _ := json.MarshalIndent(exampleDocument, "", "  ")
 	fmt.Printf("You have created the document:\n%s\n", string(exampleDocumentContent))
 }
