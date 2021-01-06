@@ -187,9 +187,9 @@ account.
 
 There are several ways to **set** these properties:
 
-1. As [environment variables](#authenticate-with-environment-variables)
-1. The [programmatic approach](#authenticate-programmatically)
-1. With an [external credentials file](#authenticate-with-external-configuration)
+1. As [environment variables](#authentication-with-environment-variables)
+1. The [programmatic approach](#programmatic-authentication)
+1. With an [external credentials file](#authentication-with-external-configuration)
 
 ### Authentication with environment variables
 
@@ -417,33 +417,7 @@ func main() {
 	exampleDocument.SetProperty("name", "Bob Smith")
 	exampleDocument.SetProperty("joined", "2019-01-24T10:42:99.000Z")
 
-	// 3.3. Set the options to get the document out of the database if it exists
-	getDocumentOptions := client.NewGetDocumentOptions(
-		exampleDbName,
-		exampleDocID,
-	)
-
-	// 3.4. Check the document existence in the database
-	documentInfo, getDocumentResponse, err := client.GetDocument(
-		getDocumentOptions,
-	)
-	if err != nil {
-		if getDocumentResponse.StatusCode == 404 {
-			// Document does not exist in database
-		} else {
-			panic(err)
-		}
-	}
-
-	// 3.5. If it previously existed in the database, set revision of exampleDocument to the latest
-	if documentInfo != nil {
-		exampleDocument.Rev = documentInfo.Rev
-		fmt.Printf("The document revision for \"%s\"  is set to \"%s\".\n",
-			exampleDocID,
-			*documentInfo.Rev)
-	}
-
-	// 3.6. Save the document in the database
+	// 3.3. Save the document in the database
 	postDocumentOption := client.NewPostDocumentOptions(
 		exampleDbName,
 	).SetDocument(&exampleDocument)
@@ -453,10 +427,10 @@ func main() {
 		panic(err)
 	}
 
-	// 3.7. Keep track of the revision number from the `example` document object
+	// 3.4. Keep track of the revision number from the `example` document object
 	exampleDocument.Rev = postDocumentResult.Rev
 
-	// 3.8. Print out the document content
+	// 3.5. Print out the document content
 	exampleDocumentContent, _ := json.MarshalIndent(exampleDocument, "", "  ")
 	fmt.Printf("You have created the document:\n%s\n", string(exampleDocumentContent))
 }
@@ -472,7 +446,7 @@ The result of the code is similar to the following output.
 You have created the document:
 {
   "_id": "example",
-  "_rev": "1-2c3b9502ed7c4a41d35c92bcf734869c",
+  "_rev": "1-1b403633540686aa32d013fda9041a5d",
   "joined": "2019-01-24T10:42:99.000Z",
   "name": "Bob Smith"
 }
@@ -569,7 +543,7 @@ The result of the code is similar to the following output.
 You have updated the document:
 {
   "_id": "example",
-  "_rev": "2-6cc06e9484d776322f7e697c03fb23f7",
+  "_rev": "2-4e2178e85cffb32d38ba4e451f6ca376",
   "address": "19 Front Street, Darlington, DL5 1TY",
   "name": "Bob Smith"
 }
