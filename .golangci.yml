@@ -20,7 +20,7 @@ linters-settings:
   goheader:
     values:
       regexp:
-        YEAR: "20\\d\\d(?:, 20\\d\\d)?"
+        YEAR: "20\\d{2}(?:, 20\\d{2})?"
     template-path: config/header-template.txt
 issues:
   exclude-rules:
