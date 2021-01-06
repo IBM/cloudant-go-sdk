@@ -18,6 +18,9 @@ linters:
     - goimports
 linters-settings:
   goheader:
+    values:
+      regexp:
+        YEAR: "20\\d\\d(?:, 20\\d\\d)?"
     template-path: config/header-template.txt
 issues:
   exclude-rules:
