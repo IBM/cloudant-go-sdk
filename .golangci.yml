@@ -20,7 +20,7 @@ linters-settings:
   goheader:
     values:
       regexp:
-        YEAR: "20\\d{2}(?:, 20\\d{2})?"
+        COPYRIGHT: "(© Copyright IBM Corporation 20\\d{2}(?:, 20\\d{2})?\\. All Rights Reserved\\.|\\(C\\) Copyright IBM Corp\\. 20\\d{2}\\.)"
     template-path: config/header-template.txt
 issues:
   exclude-rules:
@@ -39,7 +39,6 @@ issues:
         - typecheck
 
         # custom
-        - goheader
         - goimports
     - path: cloudantv1/cloudant_v1_suite_test\.go
       linters:
@@ -56,7 +55,6 @@ issues:
         - typecheck
 
         # custom
-        - goheader
         - goimports
     - path: cloudantv1/cloudant_v1_test\.go
       linters:
@@ -73,5 +71,4 @@ issues:
         - typecheck
 
         # custom
-        - goheader
         - goimports
