@@ -24,6 +24,7 @@ import (
 	"os"
 	"path"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/IBM/go-sdk-core/v4/core"
@@ -113,14 +114,15 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		)
 
 		BeforeEach(func() {
-			callNumber := 0
+			var callNumber int32
 			server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				callNumber++
+				atomic.AddInt32(&callNumber, 1)
+				n := int(atomic.LoadInt32(&callNumber))
 				cookie := &http.Cookie{
 					Name:  "AuthSession",
-					Value: fmt.Sprintf("fakefake-%d", callNumber),
+					Value: fmt.Sprintf("fakefake-%d", n),
 					Expires: time.Now().
-						Add(24*time.Hour - time.Duration(callNumber)*time.Minute),
+						Add(24*time.Hour - time.Duration(n)*time.Minute),
 				}
 				http.SetCookie(w, cookie)
 				w.WriteHeader(http.StatusOK)
@@ -198,8 +200,9 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			for i := 1; i <= 3; i++ {
 				wg.Add(1)
 				go func() {
+					defer GinkgoRecover()
 					defer wg.Done()
-					cookie, err = auth.getCookie()
+					cookie, err := auth.getCookie()
 					Expect(err).To(BeNil())
 					Expect(cookie.Value).To(Equal("fakefake-2"))
 					Expect(auth.session.refreshTime).ToNot(Equal(oldRefresh))
@@ -214,10 +217,10 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			Expect(err).To(BeNil())
 
 			// Test code path in getCookie() when needsRefresh() is false
-			cookie, err := auth.getCookie()
+			oldCookie, err := auth.getCookie()
 			Expect(err).To(BeNil())
-			Expect(cookie).ToNot(BeNil())
-			Expect(cookie.Value).To(Equal("fakefake-1"))
+			Expect(oldCookie).ToNot(BeNil())
+			Expect(oldCookie.Value).To(Equal("fakefake-1"))
 
 			// Move time into the refresh window
 			auth.session.refreshTime = time.Now().Add(-10 * time.Minute)
@@ -230,11 +233,12 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			for i := 1; i <= 3; i++ {
 				wg.Add(1)
 				go func() {
+					defer GinkgoRecover()
 					defer wg.Done()
-					c, err := auth.getCookie()
+					cookie, err := auth.getCookie()
 					Expect(err).To(BeNil())
-					Expect(c).To(Equal(auth.session.cookie))
-					Expect(auth.session.cookie.Value).To(Equal("fakefake-1"))
+					Expect(cookie).To(Equal(oldCookie))
+					Expect(cookie.Value).To(Equal("fakefake-1"))
 				}()
 			}
 			wg.Wait()
@@ -242,8 +246,10 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			// give refresher goroutine time to finish
 			time.Sleep(1 * time.Second)
 
-			Expect(cookie).ToNot(Equal(auth.session.cookie))
-			Expect(auth.session.cookie.Value).To(Equal("fakefake-2"))
+			newCookie, err := auth.getCookie()
+			Expect(err).To(BeNil())
+			Expect(newCookie).ToNot(Equal(oldCookie))
+			Expect(newCookie.Value).To(Equal("fakefake-2"))
 
 			close(done)
 		}, 3.0)
