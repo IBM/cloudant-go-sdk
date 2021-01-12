@@ -34,8 +34,6 @@ const (
 	AUTHTYPE_COUCHDB_SESSION = "COUCHDB_SESSION"
 )
 
-var requestSessionMutex sync.Mutex
-
 // CouchDbSessionAuthenticator uses username and password to obtain
 // CouchDB authentication cookie, and adds the cookie to requests.
 type CouchDbSessionAuthenticator struct {
@@ -60,6 +58,12 @@ type CouchDbSessionAuthenticator struct {
 
 	// A session instance that stores and manages the authentication cookie.
 	session *session
+
+	// A buffer chanel to hold on refreshed session.
+	refresh chan *session
+
+	// Authenticator mutex used in getCookie() to make it thread-safe to use from concurrent goroutines.
+	mu sync.Mutex
 }
 
 // NewCouchDbSessionAuthenticator constructs a new NewCouchDbSessionAuthenticator instance.
@@ -67,6 +71,7 @@ func NewCouchDbSessionAuthenticator(username, password string) (*CouchDbSessionA
 	authenticator := &CouchDbSessionAuthenticator{
 		Username: username,
 		Password: password,
+		refresh:  make(chan *session, 1),
 	}
 	if err := authenticator.Validate(); err != nil {
 		return nil, err
@@ -110,13 +115,13 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 }
 
 // AuthenticationType returns the authentication type for this authenticator.
-func (a CouchDbSessionAuthenticator) AuthenticationType() string {
+func (a *CouchDbSessionAuthenticator) AuthenticationType() string {
 	return AUTHTYPE_COUCHDB_SESSION
 }
 
 // Validate the authenticator's configuration.
 // Ensures the service url, username and password are valid and not nil.
-func (a CouchDbSessionAuthenticator) Validate() error {
+func (a *CouchDbSessionAuthenticator) Validate() error {
 	if a.Username == "" {
 		return fmt.Errorf(core.ERRORMSG_PROP_MISSING, "Username")
 	}
@@ -155,49 +160,52 @@ func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error 
 // getCookie returns an AuthSession cookie to be used in a request.
 // A new cookie will be fetched from the session end-point when needed.
 func (a *CouchDbSessionAuthenticator) getCookie() (*http.Cookie, error) {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+
+	a.flushRefreshChannel()
+
 	if a.session == nil || !a.session.isValid() {
-		err := a.syncRequestSession()
+		newSession, err := a.requestSession()
 		if err != nil {
 			return nil, err
 		}
+		a.session = newSession
 	} else if a.session.needsRefresh() {
-		ch := make(chan error)
+		// start a background process to refresh the session.
+		// the refreshed session will be passed to a buffered channel
+		// and updated in a next request at flushRefreshChannel() call.
 		go func() {
-			ch <- a.requestSession()
-		}()
-		select {
-		case err := <-ch:
+			// we are intentionally not returning errors to the parent process
+			// to avoid raisng error to a client with still valid session.
+			session, err := a.requestSession()
 			if err != nil {
-				return nil, err
+				return
 			}
-		default:
-		}
+			a.refresh <- session
+		}()
 	}
 
 	return a.session.getCookie(), nil
 }
 
-// syncRequestSession synchronously checks if the current
-// Session cookie in cache is valid. If cookie is not valid
-// or does not exist, it'll fetch it from session end-point.
-func (a *CouchDbSessionAuthenticator) syncRequestSession() error {
-	requestSessionMutex.Lock()
-	defer requestSessionMutex.Unlock()
-
-	if a.session != nil && a.session.isValid() {
-		return nil
+// flushRefreshChannel drains authenticator's refresh channel
+// and updates session var with instance from the channel.
+// This is none-blocking no-op call when channel's empty.
+func (a *CouchDbSessionAuthenticator) flushRefreshChannel() {
+	select {
+	case session := <-a.refresh:
+		a.session = session
+	default:
 	}
-
-	err := a.requestSession()
-	return err
 }
 
 // requestSession fetches new AuthSession cookie from the server.
-func (a *CouchDbSessionAuthenticator) requestSession() error {
+func (a *CouchDbSessionAuthenticator) requestSession() (*session, error) {
 	builder, err := core.NewRequestBuilder(core.POST).
 		ResolveRequestURL(a.url, "/_session", nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	builder.AddHeader(core.CONTENT_TYPE, core.DEFAULT_CONTENT_TYPE).
@@ -214,7 +222,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() error {
 
 	req, err := builder.Build()
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	req.SetBasicAuth(a.Username, a.Password)
@@ -230,7 +238,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() error {
 
 	resp, err := a.Client.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
@@ -243,22 +251,23 @@ func (a *CouchDbSessionAuthenticator) requestSession() error {
 			RawResult:  buff.Bytes(),
 		}
 		err := fmt.Errorf(buff.String())
-		return core.NewAuthenticationError(detailedResponse, err)
+		return nil, core.NewAuthenticationError(detailedResponse, err)
 	}
 
+	var session *session
 	for _, cookie := range resp.Cookies() {
 		if cookie.Name == "AuthSession" {
-			a.session, err = newSession(cookie)
+			session, err = newSession(cookie)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			break
 		}
 	}
 
-	if a.session == nil {
-		return fmt.Errorf("Missing AuthSession coookie in the response")
+	if session == nil {
+		return nil, fmt.Errorf("Missing AuthSession cookie in the response")
 	}
 
-	return nil
+	return session, nil
 }
