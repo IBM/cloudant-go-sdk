@@ -26,13 +26,12 @@ import (
 	"time"
 )
 
-var refreshMutex sync.Mutex
-
 // session represent CouchDB AuthSession token and its expiration period.
 type session struct {
-	cookie      *http.Cookie
-	expires     time.Time
-	refreshTime time.Time
+	cookie       *http.Cookie
+	expires      time.Time
+	refreshTime  time.Time
+	refreshMutex sync.Mutex
 }
 
 // newSession returns new session object constructed from AuthSession cookie.
@@ -75,8 +74,8 @@ func (s *session) isValid() bool {
 func (s *session) needsRefresh() bool {
 	now := time.Now()
 	if now.After(s.refreshTime) {
-		refreshMutex.Lock()
-		defer refreshMutex.Unlock()
+		s.refreshMutex.Lock()
+		defer s.refreshMutex.Unlock()
 
 		// advance refresh time by one minute to prevent a parallel process
 		// that might be waiting on mutex right now
