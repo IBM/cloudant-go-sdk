@@ -13,3 +13,4 @@ vendor/
 *.env
 
 package-lock.json
+junitreports
