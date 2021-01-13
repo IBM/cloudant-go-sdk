@@ -12,6 +12,7 @@
 
 [![Build Status](https://travis-ci.com/IBM/cloudant-go-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-go-sdk)
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
+[![Docs](https://img.shields.io/static/v1?label=godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
 # IBM Cloudant Go SDK Version 0.0.28
 
