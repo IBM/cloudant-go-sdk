@@ -39,7 +39,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0
+// Version: 1.0.0-dev0.0.30
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *core.BaseService
@@ -439,6 +439,305 @@ func (cloudant *CloudantV1) PutCapacityThroughputInformationWithContext(ctx cont
 	return
 }
 
+// GetDbUpdates : Retrieve change events for all databases
+// Lists changes to databases, like a global changes feed. Types of changes include updating the database and creating
+// or deleting a database. Like the changes feed, the feed is not guaranteed to return changes in the correct order and
+// might repeat changes. Polling modes for this method work like polling modes for the changes feed.
+// **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
+func (cloudant *CloudantV1) GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
+	return cloudant.GetDbUpdatesWithContext(context.Background(), getDbUpdatesOptions)
+}
+
+// GetDbUpdatesWithContext is an alternate form of the GetDbUpdates method which supports a Context parameter
+func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getDbUpdatesOptions, "getDbUpdatesOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_db_updates`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getDbUpdatesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDbUpdates")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getDbUpdatesOptions.Feed != nil {
+		builder.AddQuery("feed", fmt.Sprint(*getDbUpdatesOptions.Feed))
+	}
+	if getDbUpdatesOptions.Heartbeat != nil {
+		builder.AddQuery("heartbeat", fmt.Sprint(*getDbUpdatesOptions.Heartbeat))
+	}
+	if getDbUpdatesOptions.Timeout != nil {
+		builder.AddQuery("timeout", fmt.Sprint(*getDbUpdatesOptions.Timeout))
+	}
+	if getDbUpdatesOptions.Since != nil {
+		builder.AddQuery("since", fmt.Sprint(*getDbUpdatesOptions.Since))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDbUpdates)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// PostChanges : Query the database document changes feed
+// Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
+// query parameter because it allows one to pass more information to the filter.
+func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostChangesWithContext(context.Background(), postChangesOptions)
+}
+
+// PostChangesWithContext is an alternate form of the PostChanges method which supports a Context parameter
+func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postChangesOptions, "postChangesOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db": *postChangesOptions.Db,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postChangesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChanges")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+	if postChangesOptions.LastEventID != nil {
+		builder.AddHeader("Last-Event-ID", fmt.Sprint(*postChangesOptions.LastEventID))
+	}
+
+	if postChangesOptions.AttEncodingInfo != nil {
+		builder.AddQuery("att_encoding_info", fmt.Sprint(*postChangesOptions.AttEncodingInfo))
+	}
+	if postChangesOptions.Attachments != nil {
+		builder.AddQuery("attachments", fmt.Sprint(*postChangesOptions.Attachments))
+	}
+	if postChangesOptions.Conflicts != nil {
+		builder.AddQuery("conflicts", fmt.Sprint(*postChangesOptions.Conflicts))
+	}
+	if postChangesOptions.Descending != nil {
+		builder.AddQuery("descending", fmt.Sprint(*postChangesOptions.Descending))
+	}
+	if postChangesOptions.Feed != nil {
+		builder.AddQuery("feed", fmt.Sprint(*postChangesOptions.Feed))
+	}
+	if postChangesOptions.Filter != nil {
+		builder.AddQuery("filter", fmt.Sprint(*postChangesOptions.Filter))
+	}
+	if postChangesOptions.Heartbeat != nil {
+		builder.AddQuery("heartbeat", fmt.Sprint(*postChangesOptions.Heartbeat))
+	}
+	if postChangesOptions.IncludeDocs != nil {
+		builder.AddQuery("include_docs", fmt.Sprint(*postChangesOptions.IncludeDocs))
+	}
+	if postChangesOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*postChangesOptions.Limit))
+	}
+	if postChangesOptions.SeqInterval != nil {
+		builder.AddQuery("seq_interval", fmt.Sprint(*postChangesOptions.SeqInterval))
+	}
+	if postChangesOptions.Since != nil {
+		builder.AddQuery("since", fmt.Sprint(*postChangesOptions.Since))
+	}
+	if postChangesOptions.Style != nil {
+		builder.AddQuery("style", fmt.Sprint(*postChangesOptions.Style))
+	}
+	if postChangesOptions.Timeout != nil {
+		builder.AddQuery("timeout", fmt.Sprint(*postChangesOptions.Timeout))
+	}
+	if postChangesOptions.View != nil {
+		builder.AddQuery("view", fmt.Sprint(*postChangesOptions.View))
+	}
+
+	body := make(map[string]interface{})
+	if postChangesOptions.DocIds != nil {
+		body["doc_ids"] = postChangesOptions.DocIds
+	}
+	if postChangesOptions.Fields != nil {
+		body["fields"] = postChangesOptions.Fields
+	}
+	if postChangesOptions.Selector != nil {
+		body["selector"] = postChangesOptions.Selector
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalChangesResult)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// PostChangesAsStream : Query the database document changes feed as stream
+// Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
+// query parameter because it allows one to pass more information to the filter.
+func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostChangesAsStreamWithContext(context.Background(), postChangesOptions)
+}
+
+// PostChangesAsStreamWithContext is an alternate form of the PostChangesAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postChangesOptions, "postChangesOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db": *postChangesOptions.Db,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postChangesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChangesAsStream")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+	if postChangesOptions.LastEventID != nil {
+		builder.AddHeader("Last-Event-ID", fmt.Sprint(*postChangesOptions.LastEventID))
+	}
+
+	if postChangesOptions.AttEncodingInfo != nil {
+		builder.AddQuery("att_encoding_info", fmt.Sprint(*postChangesOptions.AttEncodingInfo))
+	}
+	if postChangesOptions.Attachments != nil {
+		builder.AddQuery("attachments", fmt.Sprint(*postChangesOptions.Attachments))
+	}
+	if postChangesOptions.Conflicts != nil {
+		builder.AddQuery("conflicts", fmt.Sprint(*postChangesOptions.Conflicts))
+	}
+	if postChangesOptions.Descending != nil {
+		builder.AddQuery("descending", fmt.Sprint(*postChangesOptions.Descending))
+	}
+	if postChangesOptions.Feed != nil {
+		builder.AddQuery("feed", fmt.Sprint(*postChangesOptions.Feed))
+	}
+	if postChangesOptions.Filter != nil {
+		builder.AddQuery("filter", fmt.Sprint(*postChangesOptions.Filter))
+	}
+	if postChangesOptions.Heartbeat != nil {
+		builder.AddQuery("heartbeat", fmt.Sprint(*postChangesOptions.Heartbeat))
+	}
+	if postChangesOptions.IncludeDocs != nil {
+		builder.AddQuery("include_docs", fmt.Sprint(*postChangesOptions.IncludeDocs))
+	}
+	if postChangesOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*postChangesOptions.Limit))
+	}
+	if postChangesOptions.SeqInterval != nil {
+		builder.AddQuery("seq_interval", fmt.Sprint(*postChangesOptions.SeqInterval))
+	}
+	if postChangesOptions.Since != nil {
+		builder.AddQuery("since", fmt.Sprint(*postChangesOptions.Since))
+	}
+	if postChangesOptions.Style != nil {
+		builder.AddQuery("style", fmt.Sprint(*postChangesOptions.Style))
+	}
+	if postChangesOptions.Timeout != nil {
+		builder.AddQuery("timeout", fmt.Sprint(*postChangesOptions.Timeout))
+	}
+	if postChangesOptions.View != nil {
+		builder.AddQuery("view", fmt.Sprint(*postChangesOptions.View))
+	}
+
+	body := make(map[string]interface{})
+	if postChangesOptions.DocIds != nil {
+		body["doc_ids"] = postChangesOptions.DocIds
+	}
+	if postChangesOptions.Fields != nil {
+		body["fields"] = postChangesOptions.Fields
+	}
+	if postChangesOptions.Selector != nil {
+		body["selector"] = postChangesOptions.Selector
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = cloudant.Service.Request(request, &result)
+
+	return
+}
+
 // HeadDatabase : Retrieve the HTTP headers for a database
 // Returns the HTTP headers that contain a minimal amount of information about the specified database. Since the
 // response body is empty, using the HEAD method is a lightweight way to check if the database exists or not.
@@ -787,239 +1086,6 @@ func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatab
 		return
 	}
 	response.Result = result
-
-	return
-}
-
-// PostChanges : Query the database document changes feed
-// Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
-// query parameter because it allows one to pass more information to the filter.
-func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostChangesWithContext(context.Background(), postChangesOptions)
-}
-
-// PostChangesWithContext is an alternate form of the PostChanges method which supports a Context parameter
-func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(postChangesOptions, "postChangesOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"db": *postChangesOptions.Db,
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range postChangesOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChanges")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-	if postChangesOptions.LastEventID != nil {
-		builder.AddHeader("Last-Event-ID", fmt.Sprint(*postChangesOptions.LastEventID))
-	}
-
-	if postChangesOptions.AttEncodingInfo != nil {
-		builder.AddQuery("att_encoding_info", fmt.Sprint(*postChangesOptions.AttEncodingInfo))
-	}
-	if postChangesOptions.Attachments != nil {
-		builder.AddQuery("attachments", fmt.Sprint(*postChangesOptions.Attachments))
-	}
-	if postChangesOptions.Conflicts != nil {
-		builder.AddQuery("conflicts", fmt.Sprint(*postChangesOptions.Conflicts))
-	}
-	if postChangesOptions.Descending != nil {
-		builder.AddQuery("descending", fmt.Sprint(*postChangesOptions.Descending))
-	}
-	if postChangesOptions.Feed != nil {
-		builder.AddQuery("feed", fmt.Sprint(*postChangesOptions.Feed))
-	}
-	if postChangesOptions.Filter != nil {
-		builder.AddQuery("filter", fmt.Sprint(*postChangesOptions.Filter))
-	}
-	if postChangesOptions.Heartbeat != nil {
-		builder.AddQuery("heartbeat", fmt.Sprint(*postChangesOptions.Heartbeat))
-	}
-	if postChangesOptions.IncludeDocs != nil {
-		builder.AddQuery("include_docs", fmt.Sprint(*postChangesOptions.IncludeDocs))
-	}
-	if postChangesOptions.Limit != nil {
-		builder.AddQuery("limit", fmt.Sprint(*postChangesOptions.Limit))
-	}
-	if postChangesOptions.SeqInterval != nil {
-		builder.AddQuery("seq_interval", fmt.Sprint(*postChangesOptions.SeqInterval))
-	}
-	if postChangesOptions.Since != nil {
-		builder.AddQuery("since", fmt.Sprint(*postChangesOptions.Since))
-	}
-	if postChangesOptions.Style != nil {
-		builder.AddQuery("style", fmt.Sprint(*postChangesOptions.Style))
-	}
-	if postChangesOptions.Timeout != nil {
-		builder.AddQuery("timeout", fmt.Sprint(*postChangesOptions.Timeout))
-	}
-	if postChangesOptions.View != nil {
-		builder.AddQuery("view", fmt.Sprint(*postChangesOptions.View))
-	}
-
-	body := make(map[string]interface{})
-	if postChangesOptions.DocIds != nil {
-		body["doc_ids"] = postChangesOptions.DocIds
-	}
-	if postChangesOptions.Fields != nil {
-		body["fields"] = postChangesOptions.Fields
-	}
-	if postChangesOptions.Selector != nil {
-		body["selector"] = postChangesOptions.Selector
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalChangesResult)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
-// PostChangesAsStream : Query the database document changes feed as stream
-// Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
-// query parameter because it allows one to pass more information to the filter.
-func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostChangesAsStreamWithContext(context.Background(), postChangesOptions)
-}
-
-// PostChangesAsStreamWithContext is an alternate form of the PostChangesAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(postChangesOptions, "postChangesOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"db": *postChangesOptions.Db,
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range postChangesOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChangesAsStream")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-	if postChangesOptions.LastEventID != nil {
-		builder.AddHeader("Last-Event-ID", fmt.Sprint(*postChangesOptions.LastEventID))
-	}
-
-	if postChangesOptions.AttEncodingInfo != nil {
-		builder.AddQuery("att_encoding_info", fmt.Sprint(*postChangesOptions.AttEncodingInfo))
-	}
-	if postChangesOptions.Attachments != nil {
-		builder.AddQuery("attachments", fmt.Sprint(*postChangesOptions.Attachments))
-	}
-	if postChangesOptions.Conflicts != nil {
-		builder.AddQuery("conflicts", fmt.Sprint(*postChangesOptions.Conflicts))
-	}
-	if postChangesOptions.Descending != nil {
-		builder.AddQuery("descending", fmt.Sprint(*postChangesOptions.Descending))
-	}
-	if postChangesOptions.Feed != nil {
-		builder.AddQuery("feed", fmt.Sprint(*postChangesOptions.Feed))
-	}
-	if postChangesOptions.Filter != nil {
-		builder.AddQuery("filter", fmt.Sprint(*postChangesOptions.Filter))
-	}
-	if postChangesOptions.Heartbeat != nil {
-		builder.AddQuery("heartbeat", fmt.Sprint(*postChangesOptions.Heartbeat))
-	}
-	if postChangesOptions.IncludeDocs != nil {
-		builder.AddQuery("include_docs", fmt.Sprint(*postChangesOptions.IncludeDocs))
-	}
-	if postChangesOptions.Limit != nil {
-		builder.AddQuery("limit", fmt.Sprint(*postChangesOptions.Limit))
-	}
-	if postChangesOptions.SeqInterval != nil {
-		builder.AddQuery("seq_interval", fmt.Sprint(*postChangesOptions.SeqInterval))
-	}
-	if postChangesOptions.Since != nil {
-		builder.AddQuery("since", fmt.Sprint(*postChangesOptions.Since))
-	}
-	if postChangesOptions.Style != nil {
-		builder.AddQuery("style", fmt.Sprint(*postChangesOptions.Style))
-	}
-	if postChangesOptions.Timeout != nil {
-		builder.AddQuery("timeout", fmt.Sprint(*postChangesOptions.Timeout))
-	}
-	if postChangesOptions.View != nil {
-		builder.AddQuery("view", fmt.Sprint(*postChangesOptions.View))
-	}
-
-	body := make(map[string]interface{})
-	if postChangesOptions.DocIds != nil {
-		body["doc_ids"] = postChangesOptions.DocIds
-	}
-	if postChangesOptions.Fields != nil {
-		body["fields"] = postChangesOptions.Fields
-	}
-	if postChangesOptions.Selector != nil {
-		body["selector"] = postChangesOptions.Selector
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	response, err = cloudant.Service.Request(request, &result)
 
 	return
 }
@@ -5427,74 +5493,10 @@ func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Contex
 	return
 }
 
-// GetDbUpdates : Retrieve change events for all databases
-// Lists changes to databases, like a global changes feed. Types of changes include updating the database and creating
-// or deleting a database. Like the changes feed, the feed is not guaranteed to return changes in the correct order and
-// might repeat changes. Polling modes for this method work like polling modes for the changes feed.
-// **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
-func (cloudant *CloudantV1) GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
-	return cloudant.GetDbUpdatesWithContext(context.Background(), getDbUpdatesOptions)
-}
-
-// GetDbUpdatesWithContext is an alternate form of the GetDbUpdates method which supports a Context parameter
-func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getDbUpdatesOptions, "getDbUpdatesOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_db_updates`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getDbUpdatesOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDbUpdates")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	if getDbUpdatesOptions.Feed != nil {
-		builder.AddQuery("feed", fmt.Sprint(*getDbUpdatesOptions.Feed))
-	}
-	if getDbUpdatesOptions.Heartbeat != nil {
-		builder.AddQuery("heartbeat", fmt.Sprint(*getDbUpdatesOptions.Heartbeat))
-	}
-	if getDbUpdatesOptions.Timeout != nil {
-		builder.AddQuery("timeout", fmt.Sprint(*getDbUpdatesOptions.Timeout))
-	}
-	if getDbUpdatesOptions.Since != nil {
-		builder.AddQuery("since", fmt.Sprint(*getDbUpdatesOptions.Since))
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDbUpdates)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
 // HeadReplicationDocument : Retrieve the HTTP headers for a replication document
-// Retrieves the HTTP headers for a replication document from the `_replicator` database.
+// Retrieves the HTTP headers containing minimal amount of information about the specified replication document from the
+// `_replicator` database.  The method supports the same query arguments as the `GET /_replicator/{doc_id}` method, but
+// only headers like content length and the revision (ETag header) are returned.
 func (cloudant *CloudantV1) HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions) (response *core.DetailedResponse, err error) {
 	return cloudant.HeadReplicationDocumentWithContext(context.Background(), headReplicationDocumentOptions)
 }
@@ -5532,6 +5534,56 @@ func (cloudant *CloudantV1) HeadReplicationDocumentWithContext(ctx context.Conte
 	}
 	if headReplicationDocumentOptions.IfNoneMatch != nil {
 		builder.AddHeader("If-None-Match", fmt.Sprint(*headReplicationDocumentOptions.IfNoneMatch))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = cloudant.Service.Request(request, nil)
+
+	return
+}
+
+// HeadSchedulerDocument : Retrieve HTTP headers for a replication scheduler document
+// Retrieves the HTTP headers containing minimal amount of information about the specified replication scheduler
+// document.  Since the response body is empty, using the HEAD method is a lightweight way to check if the replication
+// scheduler document exists or not.
+func (cloudant *CloudantV1) HeadSchedulerDocument(headSchedulerDocumentOptions *HeadSchedulerDocumentOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadSchedulerDocumentWithContext(context.Background(), headSchedulerDocumentOptions)
+}
+
+// HeadSchedulerDocumentWithContext is an alternate form of the HeadSchedulerDocument method which supports a Context parameter
+func (cloudant *CloudantV1) HeadSchedulerDocumentWithContext(ctx context.Context, headSchedulerDocumentOptions *HeadSchedulerDocumentOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(headSchedulerDocumentOptions, "headSchedulerDocumentOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(headSchedulerDocumentOptions, "headSchedulerDocumentOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"doc_id": *headSchedulerDocumentOptions.DocID,
+	}
+
+	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs/_replicator/{doc_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range headSchedulerDocumentOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadSchedulerDocument")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
 	}
 
 	request, err := builder.Build()
@@ -6861,6 +6913,59 @@ func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAtt
 	return
 }
 
+// HeadLocalDocument : Retrieve HTTP headers for a local document
+// Retrieves the HTTP headers containing minimal amount of information about the specified local document. Since the
+// response body is empty, using the HEAD method is a lightweight way to check if the local document exists or not.
+func (cloudant *CloudantV1) HeadLocalDocument(headLocalDocumentOptions *HeadLocalDocumentOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadLocalDocumentWithContext(context.Background(), headLocalDocumentOptions)
+}
+
+// HeadLocalDocumentWithContext is an alternate form of the HeadLocalDocument method which supports a Context parameter
+func (cloudant *CloudantV1) HeadLocalDocumentWithContext(ctx context.Context, headLocalDocumentOptions *HeadLocalDocumentOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(headLocalDocumentOptions, "headLocalDocumentOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(headLocalDocumentOptions, "headLocalDocumentOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db": *headLocalDocumentOptions.Db,
+		"doc_id": *headLocalDocumentOptions.DocID,
+	}
+
+	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range headLocalDocumentOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadLocalDocument")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	if headLocalDocumentOptions.IfNoneMatch != nil {
+		builder.AddHeader("If-None-Match", fmt.Sprint(*headLocalDocumentOptions.IfNoneMatch))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = cloudant.Service.Request(request, nil)
+
+	return
+}
+
 // DeleteLocalDocument : Delete a local document
 // Deletes the specified local document. The semantics are identical to deleting a standard document in the specified
 // database, except that the document is not replicated.
@@ -7506,6 +7611,46 @@ func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context
 		return
 	}
 	response.Result = result
+
+	return
+}
+
+// HeadUpInformation : Retrieve HTTP headers about whether the server is up
+// Retrieves the HTTP headers about whether the server is up.
+func (cloudant *CloudantV1) HeadUpInformation(headUpInformationOptions *HeadUpInformationOptions) (response *core.DetailedResponse, err error) {
+	return cloudant.HeadUpInformationWithContext(context.Background(), headUpInformationOptions)
+}
+
+// HeadUpInformationWithContext is an alternate form of the HeadUpInformation method which supports a Context parameter
+func (cloudant *CloudantV1) HeadUpInformationWithContext(ctx context.Context, headUpInformationOptions *HeadUpInformationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(headUpInformationOptions, "headUpInformationOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.HEAD)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_up`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range headUpInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadUpInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = cloudant.Service.Request(request, nil)
 
 	return
 }
@@ -12652,6 +12797,53 @@ func (options *HeadDocumentOptions) SetHeaders(param map[string]string) *HeadDoc
 	return options
 }
 
+// HeadLocalDocumentOptions : The HeadLocalDocument options.
+type HeadLocalDocumentOptions struct {
+	// Path parameter to specify the database name.
+	Db *string `validate:"required,ne="`
+
+	// Path parameter to specify the document ID.
+	DocID *string `validate:"required,ne="`
+
+	// Header parameter to specify a double quoted document revision token for cache control.
+	IfNoneMatch *string
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewHeadLocalDocumentOptions : Instantiate HeadLocalDocumentOptions
+func (*CloudantV1) NewHeadLocalDocumentOptions(db string, docID string) *HeadLocalDocumentOptions {
+	return &HeadLocalDocumentOptions{
+		Db: core.StringPtr(db),
+		DocID: core.StringPtr(docID),
+	}
+}
+
+// SetDb : Allow user to set Db
+func (options *HeadLocalDocumentOptions) SetDb(db string) *HeadLocalDocumentOptions {
+	options.Db = core.StringPtr(db)
+	return options
+}
+
+// SetDocID : Allow user to set DocID
+func (options *HeadLocalDocumentOptions) SetDocID(docID string) *HeadLocalDocumentOptions {
+	options.DocID = core.StringPtr(docID)
+	return options
+}
+
+// SetIfNoneMatch : Allow user to set IfNoneMatch
+func (options *HeadLocalDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadLocalDocumentOptions {
+	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *HeadLocalDocumentOptions) SetHeaders(param map[string]string) *HeadLocalDocumentOptions {
+	options.Headers = param
+	return options
+}
+
 // HeadReplicationDocumentOptions : The HeadReplicationDocument options.
 type HeadReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
@@ -12689,6 +12881,34 @@ func (options *HeadReplicationDocumentOptions) SetHeaders(param map[string]strin
 	return options
 }
 
+// HeadSchedulerDocumentOptions : The HeadSchedulerDocument options.
+type HeadSchedulerDocumentOptions struct {
+	// Path parameter to specify the document ID.
+	DocID *string `validate:"required,ne="`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewHeadSchedulerDocumentOptions : Instantiate HeadSchedulerDocumentOptions
+func (*CloudantV1) NewHeadSchedulerDocumentOptions(docID string) *HeadSchedulerDocumentOptions {
+	return &HeadSchedulerDocumentOptions{
+		DocID: core.StringPtr(docID),
+	}
+}
+
+// SetDocID : Allow user to set DocID
+func (options *HeadSchedulerDocumentOptions) SetDocID(docID string) *HeadSchedulerDocumentOptions {
+	options.DocID = core.StringPtr(docID)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *HeadSchedulerDocumentOptions) SetHeaders(param map[string]string) *HeadSchedulerDocumentOptions {
+	options.Headers = param
+	return options
+}
+
 // HeadSchedulerJobOptions : The HeadSchedulerJob options.
 type HeadSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
@@ -12713,6 +12933,24 @@ func (options *HeadSchedulerJobOptions) SetJobID(jobID string) *HeadSchedulerJob
 
 // SetHeaders : Allow user to set Headers
 func (options *HeadSchedulerJobOptions) SetHeaders(param map[string]string) *HeadSchedulerJobOptions {
+	options.Headers = param
+	return options
+}
+
+// HeadUpInformationOptions : The HeadUpInformation options.
+type HeadUpInformationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewHeadUpInformationOptions : Instantiate HeadUpInformationOptions
+func (*CloudantV1) NewHeadUpInformationOptions() *HeadUpInformationOptions {
+	return &HeadUpInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *HeadUpInformationOptions) SetHeaders(param map[string]string) *HeadUpInformationOptions {
 	options.Headers = param
 	return options
 }
@@ -15700,10 +15938,10 @@ func (options *PostRevsDiffOptions) SetHeaders(param map[string]string) *PostRev
 
 // PostSearchAnalyzeOptions : The PostSearchAnalyze options.
 type PostSearchAnalyzeOptions struct {
-	// analyzer.
+	// The analyzer type that is being used at the tokenization.
 	Analyzer *string `validate:"required"`
 
-	// text.
+	// The text to tokenize with the analyzer.
 	Text *string `validate:"required"`
 
 	// Allows users to set headers on API requests
@@ -15711,7 +15949,7 @@ type PostSearchAnalyzeOptions struct {
 }
 
 // Constants associated with the PostSearchAnalyzeOptions.Analyzer property.
-// analyzer.
+// The analyzer type that is being used at the tokenization.
 const (
 	PostSearchAnalyzeOptionsAnalyzerArabicConst = "arabic"
 	PostSearchAnalyzeOptionsAnalyzerArmenianConst = "armenian"
