@@ -21,7 +21,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
-	"github.com/IBM/go-sdk-core/v4/core"
+	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -19252,7 +19252,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "docs": [{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "docs": [{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00.000Z", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00.000Z", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocs successfully with retries`, func() {
@@ -19314,7 +19314,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "docs": [{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "docs": [{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00.000Z", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00.000Z", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocs successfully`, func() {
@@ -19436,7 +19436,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00.000Z", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00.000Z", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocument successfully with retries`, func() {
@@ -19490,7 +19490,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "error_count": 0, "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "last_updated": "2019-01-01T12:00:00.000Z", "node": "Node", "source": "Source", "source_proxy": "SourceProxy", "start_time": "2019-01-01T12:00:00.000Z", "state": "initializing", "target": "Target", "target_proxy": "TargetProxy"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocument successfully`, func() {
@@ -19628,7 +19628,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJobs successfully with retries`, func() {
@@ -19689,7 +19689,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJobs successfully`, func() {
@@ -19809,7 +19809,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJob successfully with retries`, func() {
@@ -19863,7 +19863,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00", "target": "Target", "user": "User"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJob successfully`, func() {

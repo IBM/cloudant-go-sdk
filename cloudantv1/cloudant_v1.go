@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.24.0-fac1d4cc-20210108-162022
+ * IBM OpenAPI SDK Code Generator Version: 3.26.0-4b317b0c-20210127-171701
  */
  
 
@@ -28,7 +28,7 @@ import (
 	"fmt"
 	"github.com/IBM/cloudant-go-sdk/auth"
 	common "github.com/IBM/cloudant-go-sdk/common"
-	"github.com/IBM/go-sdk-core/v4/core"
+	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
 	"io"
 	"net/http"
