@@ -247,7 +247,7 @@ will guide you.
 
 To learn more about how to use programmatic authentication, see the related
 documentation in the
-[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=python#programmatic-authentication)
+[Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go#programmatic-authentication)
 or in the
 [Go SDK Core document](https://github.com/IBM/go-sdk-core/blob/master/Authentication.md) about authentication.
 
