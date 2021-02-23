@@ -107,14 +107,15 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 	Context("with standard test server", func() {
 		var (
-			server  *httptest.Server
-			request *http.Request
-			auth    *CouchDbSessionAuthenticator
-			err     error
+			server     *httptest.Server
+			request    *http.Request
+			auth       *CouchDbSessionAuthenticator
+			err        error
+			callNumber int32
 		)
 
 		BeforeEach(func() {
-			var callNumber int32
+			callNumber = 0
 			server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				atomic.AddInt32(&callNumber, 1)
 				n := int(atomic.LoadInt32(&callNumber))
@@ -232,24 +233,35 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 			for i := 1; i <= 3; i++ {
 				wg.Add(1)
-				go func() {
+				go func(n int) {
 					defer GinkgoRecover()
 					defer wg.Done()
 					cookie, err := auth.getCookie()
-					Expect(err).To(BeNil())
-					Expect(cookie).To(Equal(oldCookie))
-					Expect(cookie.Value).To(Equal("fakefake-1"))
-				}()
+					// make sure that at least first refresh is async
+					// and returns an old still-valid cookie
+					if n == 1 {
+						Expect(err).To(BeNil())
+						Expect(cookie).To(Equal(oldCookie))
+						Expect(cookie.Value).To(Equal("fakefake-1"))
+					}
+				}(i)
 			}
 			wg.Wait()
 
-			// give refresher goroutine time to finish
-			time.Sleep(1 * time.Second)
+			// wait until server counter increased by refresher
+			Eventually(func() int {
+				return int(atomic.LoadInt32(&callNumber))
+			}).Should(Equal(2))
 
 			newCookie, err := auth.getCookie()
 			Expect(err).To(BeNil())
 			Expect(newCookie).ToNot(Equal(oldCookie))
 			Expect(newCookie.Value).To(Equal("fakefake-2"))
+
+			// wait a bit to confirm that we haven't had hits
+			// from some late refresh process
+			time.Sleep(100 * time.Millisecond)
+			Expect(int(atomic.LoadInt32(&callNumber))).To(Equal(2))
 
 			close(done)
 		}, 3.0)
