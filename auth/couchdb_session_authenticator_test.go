@@ -229,39 +229,38 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			// Run getCookie in three parallel threads, to verify
 			// that we are still serving stale cached cookie
 			// and request mutex works and we are querying /_session only once
+			var refresherNumber int32
 			var wg sync.WaitGroup
 
 			for i := 1; i <= 3; i++ {
 				wg.Add(1)
-				go func(n int) {
+				go func() {
 					defer GinkgoRecover()
 					defer wg.Done()
+					atomic.AddInt32(&refresherNumber, 1)
 					cookie, err := auth.getCookie()
 					// make sure that at least first refresh is async
 					// and returns an old still-valid cookie
-					if n == 1 {
+					if int(atomic.LoadInt32(&refresherNumber)) == 1 {
 						Expect(err).To(BeNil())
 						Expect(cookie).To(Equal(oldCookie))
 						Expect(cookie.Value).To(Equal("fakefake-1"))
 					}
-				}(i)
+				}()
 			}
 			wg.Wait()
 
-			// wait until server counter increased by refresher
-			Eventually(func() int {
-				return int(atomic.LoadInt32(&callNumber))
-			}).Should(Equal(2))
-
-			newCookie, err := auth.getCookie()
-			Expect(err).To(BeNil())
-			Expect(newCookie).ToNot(Equal(oldCookie))
-			Expect(newCookie.Value).To(Equal("fakefake-2"))
+			// wait for 1s (default duration) to confirm that eventually
+			// we'll get a new cookie.
+			Eventually(func() (*http.Cookie, error) {
+				return auth.getCookie()
+			}).ShouldNot(Equal(oldCookie))
 
 			// wait a bit to confirm that we haven't had hits
 			// from some late refresh process
-			time.Sleep(100 * time.Millisecond)
-			Expect(int(atomic.LoadInt32(&callNumber))).To(Equal(2))
+			Consistently(func() int {
+				return int(atomic.LoadInt32(&callNumber))
+			}, "100ms", "100ms").Should(Equal(2))
 
 			close(done)
 		}, 3.0)
