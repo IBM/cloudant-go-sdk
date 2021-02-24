@@ -107,14 +107,15 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 	Context("with standard test server", func() {
 		var (
-			server  *httptest.Server
-			request *http.Request
-			auth    *CouchDbSessionAuthenticator
-			err     error
+			server     *httptest.Server
+			request    *http.Request
+			auth       *CouchDbSessionAuthenticator
+			err        error
+			callNumber int32
 		)
 
 		BeforeEach(func() {
-			var callNumber int32
+			callNumber = 0
 			server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				atomic.AddInt32(&callNumber, 1)
 				n := int(atomic.LoadInt32(&callNumber))
@@ -228,6 +229,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			// Run getCookie in three parallel threads, to verify
 			// that we are still serving stale cached cookie
 			// and request mutex works and we are querying /_session only once
+			var refresherNumber int32
 			var wg sync.WaitGroup
 
 			for i := 1; i <= 3; i++ {
@@ -235,21 +237,30 @@ var _ = Describe("Authenticator Unit Tests", func() {
 				go func() {
 					defer GinkgoRecover()
 					defer wg.Done()
+					atomic.AddInt32(&refresherNumber, 1)
 					cookie, err := auth.getCookie()
-					Expect(err).To(BeNil())
-					Expect(cookie).To(Equal(oldCookie))
-					Expect(cookie.Value).To(Equal("fakefake-1"))
+					// make sure that at least first refresh is async
+					// and returns an old still-valid cookie
+					if int(atomic.LoadInt32(&refresherNumber)) == 1 {
+						Expect(err).To(BeNil())
+						Expect(cookie).To(Equal(oldCookie))
+						Expect(cookie.Value).To(Equal("fakefake-1"))
+					}
 				}()
 			}
 			wg.Wait()
 
-			// give refresher goroutine time to finish
-			time.Sleep(1 * time.Second)
+			// wait for 1s (default duration) to confirm that eventually
+			// we'll get a new cookie.
+			Eventually(func() (*http.Cookie, error) {
+				return auth.getCookie()
+			}).ShouldNot(Equal(oldCookie))
 
-			newCookie, err := auth.getCookie()
-			Expect(err).To(BeNil())
-			Expect(newCookie).ToNot(Equal(oldCookie))
-			Expect(newCookie.Value).To(Equal("fakefake-2"))
+			// wait a bit to confirm that we haven't had hits
+			// from some late refresh process
+			Consistently(func() int {
+				return int(atomic.LoadInt32(&callNumber))
+			}, "100ms", "100ms").Should(Equal(2))
 
 			close(done)
 		}, 3.0)
