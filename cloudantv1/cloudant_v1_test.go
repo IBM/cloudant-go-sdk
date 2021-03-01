@@ -509,9 +509,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getUuidsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for count query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -559,9 +557,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getUuidsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for count query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -619,9 +615,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getUuidsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for count query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -1198,15 +1192,9 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getDbUpdatesPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -1258,15 +1246,9 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -1328,15 +1310,9 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -1413,43 +1389,20 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
 					Expect(req.URL.Query()["filter"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for seq_interval query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -1466,7 +1419,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1533,43 +1486,20 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
 					Expect(req.URL.Query()["filter"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for seq_interval query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -1591,7 +1521,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1663,43 +1593,20 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
 					Expect(req.URL.Query()["filter"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for seq_interval query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -1723,7 +1630,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1761,7 +1668,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1831,43 +1738,20 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
 					Expect(req.URL.Query()["filter"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for seq_interval query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -1889,7 +1773,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1961,43 +1845,20 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["Last-Event-Id"]).ToNot(BeNil())
 					Expect(req.Header["Last-Event-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"continuous"}))
-
 					Expect(req.URL.Query()["filter"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for heartbeat query parameter
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for seq_interval query parameter
-
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for timeout query parameter
-
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2021,7 +1882,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -2065,7 +1926,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = make(map[string]interface{})
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -2314,19 +2175,11 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getAllDbsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["endkey"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["startkey"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -2388,19 +2241,11 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getAllDbsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for descending query parameter
-
 					Expect(req.URL.Query()["endkey"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["startkey"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -3046,12 +2891,8 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(putDatabasePath))
 					Expect(req.Method).To(Equal("PUT"))
-
 					// TODO: Add check for partitioned query parameter
-
-
 					// TODO: Add check for q query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -3101,12 +2942,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putDatabasePath))
 					Expect(req.Method).To(Equal("PUT"))
 
-
 					// TODO: Add check for partitioned query parameter
-
-
 					// TODO: Add check for q query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -3166,12 +3003,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(putDatabasePath))
 					Expect(req.Method).To(Equal("PUT"))
 
-
 					// TODO: Add check for partitioned query parameter
-
-
 					// TODO: Add check for q query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -3383,11 +3216,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for latest query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.WriteHeader(200)
 				}))
 			})
@@ -3466,7 +3296,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -3572,7 +3401,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -3688,7 +3516,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -4342,7 +4169,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4427,7 +4254,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4519,7 +4346,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4556,7 +4383,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4644,7 +4471,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4736,7 +4563,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4779,7 +4606,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -5197,18 +5024,10 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(postBulkGetPath))
 					Expect(req.Method).To(Equal("POST"))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -5284,18 +5103,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -5381,18 +5192,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -5510,18 +5313,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -5607,18 +5402,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/mixed")
 					res.WriteHeader(200)
@@ -5736,18 +5523,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -5833,18 +5612,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/related")
 					res.WriteHeader(200)
@@ -5962,18 +5733,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -6059,18 +5822,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for revs query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6179,9 +5934,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -6236,9 +5989,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -6303,9 +6054,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6391,35 +6140,16 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -6483,35 +6213,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -6585,35 +6296,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -6721,35 +6413,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -6823,35 +6496,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/mixed")
 					res.WriteHeader(200)
@@ -6959,35 +6613,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -7061,35 +6696,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "multipart/related")
 					res.WriteHeader(200)
@@ -7197,35 +6813,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -7299,35 +6896,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -7442,12 +7020,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -7559,12 +7133,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -7686,12 +7256,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -8059,9 +7625,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -8116,9 +7680,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -8183,9 +7745,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8271,35 +7831,16 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -8363,35 +7904,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -8465,35 +7987,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -8600,12 +8103,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -8756,12 +8255,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -8922,12 +8417,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -9655,7 +9146,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -9743,7 +9234,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -9838,7 +9329,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -9876,7 +9367,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -10076,7 +9567,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -10166,7 +9657,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -10263,7 +9754,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -10305,7 +9796,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -10398,7 +9889,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -10495,7 +9986,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -10543,7 +10034,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(true)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(true)
 				postViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12459,7 +11950,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12550,7 +12041,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12648,7 +12139,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12691,7 +12182,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12785,7 +12276,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12883,7 +12374,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12932,7 +12423,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
@@ -12991,7 +12482,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13071,7 +12562,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13158,7 +12649,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13190,7 +12681,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13273,7 +12764,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13360,7 +12851,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13398,7 +12889,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13844,7 +13335,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -13924,7 +13415,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -14011,7 +13502,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -14043,7 +13534,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -14126,7 +13617,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -14213,7 +13704,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -14251,7 +13742,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
 				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
@@ -16174,44 +15665,20 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getGeoPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["format"]).To(Equal([]string{"legacy"}))
-
 					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for lat query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for lon query parameter
-
-
 					// TODO: Add check for nearest query parameter
-
-
 					// TODO: Add check for radius query parameter
-
-
 					// TODO: Add check for rangex query parameter
-
-
 					// TODO: Add check for rangey query parameter
-
 					Expect(req.URL.Query()["relation"]).To(Equal([]string{"contains"}))
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -16277,44 +15744,20 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["format"]).To(Equal([]string{"legacy"}))
-
 					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for lat query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for lon query parameter
-
-
 					// TODO: Add check for nearest query parameter
-
-
 					// TODO: Add check for radius query parameter
-
-
 					// TODO: Add check for rangex query parameter
-
-
 					// TODO: Add check for rangey query parameter
-
 					Expect(req.URL.Query()["relation"]).To(Equal([]string{"contains"}))
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -16390,44 +15833,20 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["format"]).To(Equal([]string{"legacy"}))
-
 					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for lat query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for lon query parameter
-
-
 					// TODO: Add check for nearest query parameter
-
-
 					// TODO: Add check for radius query parameter
-
-
 					// TODO: Add check for rangex query parameter
-
-
 					// TODO: Add check for rangey query parameter
-
 					Expect(req.URL.Query()["relation"]).To(Equal([]string{"contains"}))
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -16540,44 +15959,20 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["format"]).To(Equal([]string{"legacy"}))
-
 					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for lat query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for lon query parameter
-
-
 					// TODO: Add check for nearest query parameter
-
-
 					// TODO: Add check for radius query parameter
-
-
 					// TODO: Add check for rangex query parameter
-
-
 					// TODO: Add check for rangey query parameter
-
 					Expect(req.URL.Query()["relation"]).To(Equal([]string{"contains"}))
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -16653,44 +16048,20 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["format"]).To(Equal([]string{"legacy"}))
-
 					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for include_docs query parameter
-
-
 					// TODO: Add check for lat query parameter
-
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for lon query parameter
-
-
 					// TODO: Add check for nearest query parameter
-
-
 					// TODO: Add check for radius query parameter
-
-
 					// TODO: Add check for rangex query parameter
-
-
 					// TODO: Add check for rangey query parameter
-
 					Expect(req.URL.Query()["relation"]).To(Equal([]string{"contains"}))
-
-
 					// TODO: Add check for skip query parameter
-
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -18061,9 +17432,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -18117,9 +17486,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -18183,9 +17550,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -18269,35 +17634,16 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -18360,35 +17706,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -18461,35 +17788,16 @@ var _ = Describe(`CloudantV1`, func() {
 
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for conflicts query parameter
-
-
 					// TODO: Add check for deleted_conflicts query parameter
-
-
 					// TODO: Add check for latest query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
-
 					// TODO: Add check for meta query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
-
 					// TODO: Add check for revs query parameter
-
-
 					// TODO: Add check for revs_info query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -18594,12 +17902,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -18659,7 +17963,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18678,7 +17982,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
@@ -18755,12 +18059,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -18825,7 +18125,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18844,7 +18144,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
@@ -18926,12 +18226,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
-
 					// TODO: Add check for new_edits query parameter
-
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -18998,7 +18294,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -19017,7 +18313,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
@@ -19107,7 +18403,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -19126,7 +18422,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Continuous = core.BoolPtr(true)
 				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = make(map[string]string)
@@ -19185,12 +18481,8 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -19240,12 +18532,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -19305,12 +18593,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerDocsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -19562,12 +18846,8 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobsPath))
 					Expect(req.Method).To(Equal("GET"))
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -19616,12 +18896,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -19680,12 +18956,8 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getSchedulerJobsPath))
 					Expect(req.Method).To(Equal("GET"))
 
-
 					// TODO: Add check for limit query parameter
-
-
 					// TODO: Add check for skip query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -21850,7 +21122,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.WriteHeader(200)
 				}))
 			})
@@ -21931,9 +21202,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -21989,9 +21258,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -22057,9 +21324,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -22156,7 +21421,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Range"]).ToNot(BeNil())
 					Expect(req.Header["Range"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -22230,7 +21494,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Range"]).ToNot(BeNil())
 					Expect(req.Header["Range"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "*/*")
 					res.WriteHeader(200)
@@ -22325,7 +21588,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -22400,7 +21662,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -22485,7 +21746,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["If-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -22777,7 +22037,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteLocalDocumentPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -22828,7 +22087,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -22889,7 +22147,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -22973,15 +22230,9 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -23040,15 +22291,9 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -23117,15 +22362,9 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.Header["If-None-Match"]).ToNot(BeNil())
 					Expect(req.Header["If-None-Match"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
-
 					// TODO: Add check for attachments query parameter
-
-
 					// TODO: Add check for att_encoding_info query parameter
-
-
 					// TODO: Add check for local_seq query parameter
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -23218,7 +22457,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
 					fmt.Fprintf(res, `} this is not valid json {`)
@@ -23325,7 +22563,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -23442,7 +22679,6 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Content-Type"]).ToNot(BeNil())
 					Expect(req.Header["Content-Type"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
-
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
@@ -26394,7 +25630,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 				Expect(allDocsQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
 				Expect(allDocsQueryModel.Attachments).To(Equal(core.BoolPtr(true)))
@@ -26407,7 +25643,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(allDocsQueryModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(allDocsQueryModel.Endkey).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Key).To(Equal(core.StringPtr("testString")))
-				Expect(allDocsQueryModel.Keys).To(Equal([]string{"testString"}))
+				Expect(allDocsQueryModel.Keys).To(Equal([]string{"small-appliances:1000042", "small-appliances:1000043"}))
 				Expect(allDocsQueryModel.Startkey).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -26553,7 +25789,7 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				postChangesOptionsModel := cloudantService.NewPostChangesOptions(db)
 				postChangesOptionsModel.SetDb("testString")
-				postChangesOptionsModel.SetDocIds([]string{"testString"})
+				postChangesOptionsModel.SetDocIds([]string{"0007741142412418284"})
 				postChangesOptionsModel.SetFields([]string{"testString"})
 				postChangesOptionsModel.SetSelector(make(map[string]interface{}))
 				postChangesOptionsModel.SetLastEventID("testString")
@@ -26574,7 +25810,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postChangesOptionsModel).ToNot(BeNil())
 				Expect(postChangesOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postChangesOptionsModel.DocIds).To(Equal([]string{"testString"}))
+				Expect(postChangesOptionsModel.DocIds).To(Equal([]string{"0007741142412418284"}))
 				Expect(postChangesOptionsModel.Fields).To(Equal([]string{"testString"}))
 				Expect(postChangesOptionsModel.Selector).To(Equal(make(map[string]interface{})))
 				Expect(postChangesOptionsModel.LastEventID).To(Equal(core.StringPtr("testString")))
@@ -26657,7 +25893,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
 				allDocsQueryModel.Endkey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.Startkey = core.StringPtr("testString")
 				Expect(allDocsQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
 				Expect(allDocsQueryModel.Attachments).To(Equal(core.BoolPtr(true)))
@@ -26670,7 +25906,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(allDocsQueryModel.UpdateSeq).To(Equal(core.BoolPtr(true)))
 				Expect(allDocsQueryModel.Endkey).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Key).To(Equal(core.StringPtr("testString")))
-				Expect(allDocsQueryModel.Keys).To(Equal([]string{"testString"}))
+				Expect(allDocsQueryModel.Keys).To(Equal([]string{"small-appliances:1000042", "small-appliances:1000043"}))
 				Expect(allDocsQueryModel.Startkey).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -26814,7 +26050,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.SetBookmark("testString")
 				postFindOptionsModel.SetConflicts(true)
 				postFindOptionsModel.SetExecutionStats(true)
-				postFindOptionsModel.SetFields([]string{"testString"})
+				postFindOptionsModel.SetFields([]string{"_id", "type", "name", "email"})
 				postFindOptionsModel.SetLimit(int64(3))
 				postFindOptionsModel.SetSkip(int64(0))
 				postFindOptionsModel.SetSort([]map[string]string{make(map[string]string)})
@@ -26829,7 +26065,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postFindOptionsModel.Fields).To(Equal([]string{"testString"}))
+				Expect(postFindOptionsModel.Fields).To(Equal([]string{"_id", "type", "name", "email"}))
 				Expect(postFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postFindOptionsModel.Sort).To(Equal([]map[string]string{make(map[string]string)}))
@@ -26977,7 +26213,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.SetBookmark("testString")
 				postPartitionFindOptionsModel.SetConflicts(true)
 				postPartitionFindOptionsModel.SetExecutionStats(true)
-				postPartitionFindOptionsModel.SetFields([]string{"testString"})
+				postPartitionFindOptionsModel.SetFields([]string{"productid", "name", "description"})
 				postPartitionFindOptionsModel.SetLimit(int64(0))
 				postPartitionFindOptionsModel.SetSkip(int64(0))
 				postPartitionFindOptionsModel.SetSort([]map[string]string{make(map[string]string)})
@@ -26992,7 +26228,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"testString"}))
+				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"productid", "name", "description"}))
 				Expect(postPartitionFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionFindOptionsModel.Sort).To(Equal([]map[string]string{make(map[string]string)}))
@@ -27070,7 +26306,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetGroup(true)
 				postPartitionViewOptionsModel.SetGroupLevel(int64(1))
 				postPartitionViewOptionsModel.SetKey(core.StringPtr("testString"))
-				postPartitionViewOptionsModel.SetKeys([]interface{}{"testString"})
+				postPartitionViewOptionsModel.SetKeys([]interface{}{"examplekey"})
 				postPartitionViewOptionsModel.SetReduce(true)
 				postPartitionViewOptionsModel.SetStable(true)
 				postPartitionViewOptionsModel.SetStartkey(core.StringPtr("testString"))
@@ -27096,7 +26332,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Group).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postPartitionViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
-				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
+				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"examplekey"}))
 				Expect(postPartitionViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
@@ -27366,7 +26602,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.SetGroup(true)
 				postViewOptionsModel.SetGroupLevel(int64(1))
 				postViewOptionsModel.SetKey(core.StringPtr("testString"))
-				postViewOptionsModel.SetKeys([]interface{}{"testString"})
+				postViewOptionsModel.SetKeys([]interface{}{"examplekey"})
 				postViewOptionsModel.SetReduce(true)
 				postViewOptionsModel.SetStable(true)
 				postViewOptionsModel.SetStartkey(core.StringPtr("testString"))
@@ -27391,7 +26627,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postViewOptionsModel.Group).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
-				Expect(postViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
+				Expect(postViewOptionsModel.Keys).To(Equal([]interface{}{"examplekey"}))
 				Expect(postViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
