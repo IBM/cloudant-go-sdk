@@ -15,9 +15,8 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.26.0-4b317b0c-20210127-171701
+ * IBM OpenAPI SDK Code Generator Version: 3.28.0-55613c9e-20210220-164656
  */
- 
 
 // Package cloudantv1 : Operations and models for the CloudantV1 service
 package cloudantv1
@@ -7777,7 +7776,6 @@ type ActiveTask struct {
 	UpdatedOn *int64 `json:"updated_on" validate:"required"`
 }
 
-
 // UnmarshalActiveTask unmarshals an instance of ActiveTask from the specified map of raw messages.
 func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ActiveTask)
@@ -7842,7 +7840,6 @@ const (
 	ActivityTrackerEventsConfigurationTypesManagementConst = "management"
 )
 
-
 // NewActivityTrackerEventsConfiguration : Instantiate ActivityTrackerEventsConfiguration (Generic Model Constructor)
 func (*CloudantV1) NewActivityTrackerEventsConfiguration(types []string) (model *ActivityTrackerEventsConfiguration, err error) {
 	model = &ActivityTrackerEventsConfiguration{
@@ -7869,7 +7866,6 @@ type AllDocsQueriesResult struct {
 	// regular `/_all_docs` request.
 	Results []AllDocsResult `json:"results" validate:"required"`
 }
-
 
 // UnmarshalAllDocsQueriesResult unmarshals an instance of AllDocsQueriesResult from the specified map of raw messages.
 func UnmarshalAllDocsQueriesResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -7926,7 +7922,6 @@ type AllDocsQuery struct {
 	// Schema for a document ID.
 	Startkey *string `json:"startkey,omitempty"`
 }
-
 
 // UnmarshalAllDocsQuery unmarshals an instance of AllDocsQuery from the specified map of raw messages.
 func UnmarshalAllDocsQuery(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -7998,7 +7993,6 @@ type AllDocsResult struct {
 	// Current update sequence for the database.
 	UpdateSeq *string `json:"update_seq,omitempty"`
 }
-
 
 // UnmarshalAllDocsResult unmarshals an instance of AllDocsResult from the specified map of raw messages.
 func UnmarshalAllDocsResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8080,7 +8074,6 @@ const (
 	AnalyzerNameWhitespaceConst = "whitespace"
 )
 
-
 // UnmarshalAnalyzer unmarshals an instance of Analyzer from the specified map of raw messages.
 func UnmarshalAnalyzer(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Analyzer)
@@ -8160,7 +8153,6 @@ const (
 	AnalyzerConfigurationNameWhitespaceConst = "whitespace"
 )
 
-
 // UnmarshalAnalyzerConfiguration unmarshals an instance of AnalyzerConfiguration from the specified map of raw messages.
 func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyzerConfiguration)
@@ -8191,7 +8183,6 @@ type ApiKeysResult struct {
 	// The password associated with the api key.
 	Password *string `json:"password" validate:"required"`
 }
-
 
 // UnmarshalApiKeysResult unmarshals an instance of ApiKeysResult from the specified map of raw messages.
 func UnmarshalApiKeysResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8249,7 +8240,6 @@ type Attachment struct {
 	Stub *bool `json:"stub,omitempty"`
 }
 
-
 // UnmarshalAttachment unmarshals an instance of Attachment from the specified map of raw messages.
 func UnmarshalAttachment(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Attachment)
@@ -8302,7 +8292,6 @@ type BulkDocs struct {
 	NewEdits *bool `json:"new_edits,omitempty"`
 }
 
-
 // NewBulkDocs : Instantiate BulkDocs (Generic Model Constructor)
 func (*CloudantV1) NewBulkDocs(docs []Document) (model *BulkDocs, err error) {
 	model = &BulkDocs{
@@ -8342,7 +8331,6 @@ type BulkGetQueryDocument struct {
 	Rev *string `json:"rev,omitempty"`
 }
 
-
 // NewBulkGetQueryDocument : Instantiate BulkGetQueryDocument (Generic Model Constructor)
 func (*CloudantV1) NewBulkGetQueryDocument(id string) (model *BulkGetQueryDocument, err error) {
 	model = &BulkGetQueryDocument{
@@ -8381,7 +8369,6 @@ type BulkGetResult struct {
 	Results []BulkGetResultItem `json:"results" validate:"required"`
 }
 
-
 // UnmarshalBulkGetResult unmarshals an instance of BulkGetResult from the specified map of raw messages.
 func UnmarshalBulkGetResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(BulkGetResult)
@@ -8401,7 +8388,6 @@ type BulkGetResultDocument struct {
 	// Schema for a document.
 	Ok *Document `json:"ok,omitempty"`
 }
-
 
 // UnmarshalBulkGetResultDocument unmarshals an instance of BulkGetResultDocument from the specified map of raw messages.
 func UnmarshalBulkGetResultDocument(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8427,7 +8413,6 @@ type BulkGetResultItem struct {
 	ID *string `json:"id" validate:"required"`
 }
 
-
 // UnmarshalBulkGetResultItem unmarshals an instance of BulkGetResultItem from the specified map of raw messages.
 func UnmarshalBulkGetResultItem(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(BulkGetResultItem)
@@ -8452,7 +8437,6 @@ type CapacityThroughputInformation struct {
 	Target *CapacityThroughputInformationTarget `json:"target,omitempty"`
 }
 
-
 // UnmarshalCapacityThroughputInformation unmarshals an instance of CapacityThroughputInformation from the specified map of raw messages.
 func UnmarshalCapacityThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CapacityThroughputInformation)
@@ -8474,7 +8458,6 @@ type CapacityThroughputInformationCurrent struct {
 	Throughput *ThroughputInformation `json:"throughput" validate:"required"`
 }
 
-
 // UnmarshalCapacityThroughputInformationCurrent unmarshals an instance of CapacityThroughputInformationCurrent from the specified map of raw messages.
 func UnmarshalCapacityThroughputInformationCurrent(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CapacityThroughputInformationCurrent)
@@ -8492,7 +8475,6 @@ type CapacityThroughputInformationTarget struct {
 	Throughput *ThroughputInformation `json:"throughput" validate:"required"`
 }
 
-
 // UnmarshalCapacityThroughputInformationTarget unmarshals an instance of CapacityThroughputInformationTarget from the specified map of raw messages.
 func UnmarshalCapacityThroughputInformationTarget(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CapacityThroughputInformationTarget)
@@ -8509,7 +8491,6 @@ type Change struct {
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev" validate:"required"`
 }
-
 
 // UnmarshalChange unmarshals an instance of Change from the specified map of raw messages.
 func UnmarshalChange(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8533,7 +8514,6 @@ type ChangesResult struct {
 	// results.
 	Results []ChangesResultItem `json:"results" validate:"required"`
 }
-
 
 // UnmarshalChangesResult unmarshals an instance of ChangesResult from the specified map of raw messages.
 func UnmarshalChangesResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8571,7 +8551,6 @@ type ChangesResultItem struct {
 	// Update sequence.
 	Seq *string `json:"seq" validate:"required"`
 }
-
 
 // UnmarshalChangesResultItem unmarshals an instance of ChangesResultItem from the specified map of raw messages.
 func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8612,7 +8591,6 @@ type ContentInformationSizes struct {
 	File *int64 `json:"file" validate:"required"`
 }
 
-
 // UnmarshalContentInformationSizes unmarshals an instance of ContentInformationSizes from the specified map of raw messages.
 func UnmarshalContentInformationSizes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ContentInformationSizes)
@@ -8647,7 +8625,6 @@ type CorsInformation struct {
 	Origins []string `json:"origins" validate:"required"`
 }
 
-
 // UnmarshalCorsInformation unmarshals an instance of CorsInformation from the specified map of raw messages.
 func UnmarshalCorsInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CorsInformation)
@@ -8673,7 +8650,6 @@ type CurrentThroughputInformation struct {
 	Throughput *CurrentThroughputInformationThroughput `json:"throughput" validate:"required"`
 }
 
-
 // UnmarshalCurrentThroughputInformation unmarshals an instance of CurrentThroughputInformation from the specified map of raw messages.
 func UnmarshalCurrentThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CurrentThroughputInformation)
@@ -8696,7 +8672,6 @@ type CurrentThroughputInformationThroughput struct {
 	// Number of writes conducted against the instance for a given second.
 	Write *int64 `json:"write" validate:"required"`
 }
-
 
 // UnmarshalCurrentThroughputInformationThroughput unmarshals an instance of CurrentThroughputInformationThroughput from the specified map of raw messages.
 func UnmarshalCurrentThroughputInformationThroughput(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8759,7 +8734,6 @@ type DatabaseInformation struct {
 	// The UUID of the database.
 	UUID *string `json:"uuid,omitempty"`
 }
-
 
 // UnmarshalDatabaseInformation unmarshals an instance of DatabaseInformation from the specified map of raw messages.
 func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8835,7 +8809,6 @@ type DatabaseInformationCluster struct {
 	W *int64 `json:"w" validate:"required"`
 }
 
-
 // UnmarshalDatabaseInformationCluster unmarshals an instance of DatabaseInformationCluster from the specified map of raw messages.
 func UnmarshalDatabaseInformationCluster(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DatabaseInformationCluster)
@@ -8864,7 +8837,6 @@ type DatabaseInformationProps struct {
 	// The value is `true` for a partitioned database.
 	Partitioned *bool `json:"partitioned,omitempty"`
 }
-
 
 // UnmarshalDatabaseInformationProps unmarshals an instance of DatabaseInformationProps from the specified map of raw messages.
 func UnmarshalDatabaseInformationProps(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8900,7 +8872,6 @@ const (
 	DbEventTypeUpdatedConst = "updated"
 )
 
-
 // UnmarshalDbEvent unmarshals an instance of DbEvent from the specified map of raw messages.
 func UnmarshalDbEvent(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DbEvent)
@@ -8933,7 +8904,6 @@ type DbUpdates struct {
 	Results []DbEvent `json:"results" validate:"required"`
 }
 
-
 // UnmarshalDbUpdates unmarshals an instance of DbUpdates from the specified map of raw messages.
 func UnmarshalDbUpdates(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DbUpdates)
@@ -8957,7 +8927,6 @@ type DbsInfoResult struct {
 	// Database name.
 	Key *string `json:"key" validate:"required"`
 }
-
 
 // UnmarshalDbsInfoResult unmarshals an instance of DbsInfoResult from the specified map of raw messages.
 func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9478,7 +9447,6 @@ type DesignDocument struct {
 	additionalProperties map[string]interface{}
 }
 
-
 // SetProperty allows the user to set an arbitrary property on an instance of DesignDocument
 func (o *DesignDocument) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
@@ -9678,7 +9646,6 @@ type DesignDocumentInformation struct {
 	ViewIndex *DesignDocumentViewIndex `json:"view_index" validate:"required"`
 }
 
-
 // UnmarshalDesignDocumentInformation unmarshals an instance of DesignDocumentInformation from the specified map of raw messages.
 func UnmarshalDesignDocumentInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DesignDocumentInformation)
@@ -9699,7 +9666,6 @@ type DesignDocumentOptions struct {
 	// Whether this design document describes partitioned or global indexes.
 	Partitioned *bool `json:"partitioned,omitempty"`
 }
-
 
 // UnmarshalDesignDocumentOptions unmarshals an instance of DesignDocumentOptions from the specified map of raw messages.
 func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9738,7 +9704,6 @@ type DesignDocumentViewIndex struct {
 	// Indicates if there are outstanding commits to the underlying database that need to processed.
 	WaitingCommit *bool `json:"waiting_commit" validate:"required"`
 }
-
 
 // UnmarshalDesignDocumentViewIndex unmarshals an instance of DesignDocumentViewIndex from the specified map of raw messages.
 func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9788,7 +9753,6 @@ type DesignDocumentViewsMapReduce struct {
 	Reduce *string `json:"reduce,omitempty"`
 }
 
-
 // NewDesignDocumentViewsMapReduce : Instantiate DesignDocumentViewsMapReduce (Generic Model Constructor)
 func (*CloudantV1) NewDesignDocumentViewsMapReduce(mapVar string) (model *DesignDocumentViewsMapReduce, err error) {
 	model = &DesignDocumentViewsMapReduce{
@@ -9837,7 +9801,6 @@ type DocsResultRow struct {
 	Value *DocsResultRowValue `json:"value,omitempty"`
 }
 
-
 // UnmarshalDocsResultRow unmarshals an instance of DocsResultRow from the specified map of raw messages.
 func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocsResultRow)
@@ -9878,7 +9841,6 @@ type DocsResultRowValue struct {
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev" validate:"required"`
 }
-
 
 // UnmarshalDocsResultRowValue unmarshals an instance of DocsResultRowValue from the specified map of raw messages.
 func UnmarshalDocsResultRowValue(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9923,7 +9885,6 @@ type Document struct {
 	// Allows users to set arbitrary properties
 	additionalProperties map[string]interface{}
 }
-
 
 // SetProperty allows the user to set an arbitrary property on an instance of Document
 func (o *Document) SetProperty(key string, value interface{}) {
@@ -10064,7 +10025,6 @@ type DocumentResult struct {
 	Reason *string `json:"reason,omitempty"`
 }
 
-
 // UnmarshalDocumentResult unmarshals an instance of DocumentResult from the specified map of raw messages.
 func UnmarshalDocumentResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocumentResult)
@@ -10115,7 +10075,6 @@ const (
 	DocumentRevisionStatusStatusMissingConst = "missing"
 )
 
-
 // NewDocumentRevisionStatus : Instantiate DocumentRevisionStatus (Generic Model Constructor)
 func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (model *DocumentRevisionStatus, err error) {
 	model = &DocumentRevisionStatus{
@@ -10150,7 +10109,6 @@ type DocumentShardInfo struct {
 	Range *string `json:"range" validate:"required"`
 }
 
-
 // UnmarshalDocumentShardInfo unmarshals an instance of DocumentShardInfo from the specified map of raw messages.
 func UnmarshalDocumentShardInfo(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocumentShardInfo)
@@ -10183,7 +10141,6 @@ type ExecutionStats struct {
 	// Number of documents fetched from the primary index with the specified read quorum.
 	TotalQuorumDocsExamined *int64 `json:"total_quorum_docs_examined" validate:"required"`
 }
-
 
 // UnmarshalExecutionStats unmarshals an instance of ExecutionStats from the specified map of raw messages.
 func UnmarshalExecutionStats(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -10261,7 +10218,6 @@ type ExplainResult struct {
 	Skip *int64 `json:"skip" validate:"required"`
 }
 
-
 // UnmarshalExplainResult unmarshals an instance of ExplainResult from the specified map of raw messages.
 func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExplainResult)
@@ -10310,7 +10266,6 @@ type ExplainResultRange struct {
 	StartKey []interface{} `json:"start_key,omitempty"`
 }
 
-
 // UnmarshalExplainResultRange unmarshals an instance of ExplainResultRange from the specified map of raw messages.
 func UnmarshalExplainResultRange(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExplainResultRange)
@@ -10340,7 +10295,6 @@ type FindResult struct {
 	// warning.
 	Warning *string `json:"warning,omitempty"`
 }
-
 
 // UnmarshalFindResult unmarshals an instance of FindResult from the specified map of raw messages.
 func UnmarshalFindResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -10373,7 +10327,6 @@ type GeoIndexDefinition struct {
 	Index *string `json:"index" validate:"required"`
 }
 
-
 // NewGeoIndexDefinition : Instantiate GeoIndexDefinition (Generic Model Constructor)
 func (*CloudantV1) NewGeoIndexDefinition(index string) (model *GeoIndexDefinition, err error) {
 	model = &GeoIndexDefinition{
@@ -10403,7 +10356,6 @@ type GeoIndexInformation struct {
 	Name *string `json:"name" validate:"required"`
 }
 
-
 // UnmarshalGeoIndexInformation unmarshals an instance of GeoIndexInformation from the specified map of raw messages.
 func UnmarshalGeoIndexInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(GeoIndexInformation)
@@ -10430,7 +10382,6 @@ type GeoIndexStats struct {
 	// Number of documents in the geospatial index.
 	DocCount *int64 `json:"doc_count" validate:"required"`
 }
-
 
 // UnmarshalGeoIndexStats unmarshals an instance of GeoIndexStats from the specified map of raw messages.
 func UnmarshalGeoIndexStats(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -10481,7 +10432,6 @@ type GeoJSONFeature struct {
 const (
 	GeoJSONFeatureTypeFeatureConst = "Feature"
 )
-
 
 // SetProperty allows the user to set an arbitrary property on an instance of GeoJSONFeature
 func (o *GeoJSONFeature) SetProperty(key string, value interface{}) {
@@ -10604,7 +10554,6 @@ const (
 	GeoJSONGeometryObjectTypePointConst = "Point"
 	GeoJSONGeometryObjectTypePolygonConst = "Polygon"
 )
-
 func (*GeoJSONGeometryObject) isaGeoJSONGeometryObject() bool {
 	return true
 }
@@ -10654,7 +10603,6 @@ const (
 	GeoResultTypeFeaturecollectionConst = "FeatureCollection"
 )
 
-
 // UnmarshalGeoResult unmarshals an instance of GeoResult from the specified map of raw messages.
 func UnmarshalGeoResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(GeoResult)
@@ -10692,7 +10640,6 @@ type GeoResultRow struct {
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev,omitempty"`
 }
-
 
 // UnmarshalGeoResultRow unmarshals an instance of GeoResultRow from the specified map of raw messages.
 func UnmarshalGeoResultRow(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -12796,7 +12743,6 @@ type IndexDefinition struct {
 	IndexArrayLengths *bool `json:"index_array_lengths,omitempty"`
 }
 
-
 // UnmarshalIndexDefinition unmarshals an instance of IndexDefinition from the specified map of raw messages.
 func UnmarshalIndexDefinition(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexDefinition)
@@ -12839,7 +12785,6 @@ const (
 	IndexFieldTypeNumberConst = "number"
 	IndexFieldTypeStringConst = "string"
 )
-
 
 // SetProperty allows the user to set an arbitrary property on an instance of IndexField
 func (o *IndexField) SetProperty(key string, value *string) {
@@ -12929,7 +12874,6 @@ const (
 	IndexInformationTypeTextConst = "text"
 )
 
-
 // UnmarshalIndexInformation unmarshals an instance of IndexInformation from the specified map of raw messages.
 func UnmarshalIndexInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexInformation)
@@ -12972,7 +12916,6 @@ const (
 	IndexResultResultExistsConst = "exists"
 )
 
-
 // UnmarshalIndexResult unmarshals an instance of IndexResult from the specified map of raw messages.
 func UnmarshalIndexResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexResult)
@@ -13002,7 +12945,6 @@ type IndexTextOperatorDefaultField struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-
 // UnmarshalIndexTextOperatorDefaultField unmarshals an instance of IndexTextOperatorDefaultField from the specified map of raw messages.
 func UnmarshalIndexTextOperatorDefaultField(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexTextOperatorDefaultField)
@@ -13026,7 +12968,6 @@ type IndexesInformation struct {
 	// Indexes.
 	Indexes []IndexInformation `json:"indexes" validate:"required"`
 }
-
 
 // UnmarshalIndexesInformation unmarshals an instance of IndexesInformation from the specified map of raw messages.
 func UnmarshalIndexesInformation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -13052,7 +12993,6 @@ type MembershipInformation struct {
 	ClusterNodes []string `json:"cluster_nodes" validate:"required"`
 }
 
-
 // UnmarshalMembershipInformation unmarshals an instance of MembershipInformation from the specified map of raw messages.
 func UnmarshalMembershipInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(MembershipInformation)
@@ -13074,7 +13014,6 @@ type MissingRevsResult struct {
 	MissingRevs map[string][]string `json:"missing_revs" validate:"required"`
 }
 
-
 // UnmarshalMissingRevsResult unmarshals an instance of MissingRevsResult from the specified map of raw messages.
 func UnmarshalMissingRevsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(MissingRevsResult)
@@ -13091,7 +13030,6 @@ type Ok struct {
 	// ok.
 	Ok *bool `json:"ok,omitempty"`
 }
-
 
 // UnmarshalOk unmarshals an instance of Ok from the specified map of raw messages.
 func UnmarshalOk(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -13124,7 +13062,6 @@ type PartitionInformation struct {
 	// The size of active and external data, in bytes.
 	Sizes *PartitionInformationSizes `json:"sizes" validate:"required"`
 }
-
 
 // UnmarshalPartitionInformation unmarshals an instance of PartitionInformation from the specified map of raw messages.
 func UnmarshalPartitionInformation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -13169,7 +13106,6 @@ type PartitionInformationIndexes struct {
 	Limit *int64 `json:"limit,omitempty"`
 }
 
-
 // UnmarshalPartitionInformationIndexes unmarshals an instance of PartitionInformationIndexes from the specified map of raw messages.
 func UnmarshalPartitionInformationIndexes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionInformationIndexes)
@@ -13198,7 +13134,6 @@ type PartitionInformationIndexesIndexes struct {
 	View *int64 `json:"view,omitempty"`
 }
 
-
 // UnmarshalPartitionInformationIndexesIndexes unmarshals an instance of PartitionInformationIndexesIndexes from the specified map of raw messages.
 func UnmarshalPartitionInformationIndexesIndexes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionInformationIndexesIndexes)
@@ -13222,7 +13157,6 @@ type PartitionInformationSizes struct {
 	// The uncompressed size of database contents in bytes.
 	External *int64 `json:"external,omitempty"`
 }
-
 
 // UnmarshalPartitionInformationSizes unmarshals an instance of PartitionInformationSizes from the specified map of raw messages.
 func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -16923,7 +16857,6 @@ type ReplicationCreateTargetParameters struct {
 	Q *int64 `json:"q,omitempty"`
 }
 
-
 // UnmarshalReplicationCreateTargetParameters unmarshals an instance of ReplicationCreateTargetParameters from the specified map of raw messages.
 func UnmarshalReplicationCreateTargetParameters(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationCreateTargetParameters)
@@ -16954,7 +16887,6 @@ type ReplicationDatabase struct {
 	// Replication database URL.
 	URL *string `json:"url" validate:"required"`
 }
-
 
 // NewReplicationDatabase : Instantiate ReplicationDatabase (Generic Model Constructor)
 func (*CloudantV1) NewReplicationDatabase(url string) (model *ReplicationDatabase, err error) {
@@ -16990,7 +16922,6 @@ type ReplicationDatabaseAuth struct {
 	Iam *ReplicationDatabaseAuthIam `json:"iam,omitempty"`
 }
 
-
 // UnmarshalReplicationDatabaseAuth unmarshals an instance of ReplicationDatabaseAuth from the specified map of raw messages.
 func UnmarshalReplicationDatabaseAuth(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationDatabaseAuth)
@@ -17007,7 +16938,6 @@ type ReplicationDatabaseAuthIam struct {
 	// IAM API key.
 	ApiKey *string `json:"api_key" validate:"required"`
 }
-
 
 // NewReplicationDatabaseAuthIam : Instantiate ReplicationDatabaseAuthIam (Generic Model Constructor)
 func (*CloudantV1) NewReplicationDatabaseAuthIam(apiKey string) (model *ReplicationDatabaseAuthIam, err error) {
@@ -17156,7 +17086,6 @@ type ReplicationDocument struct {
 	// Allows users to set arbitrary properties
 	additionalProperties map[string]interface{}
 }
-
 
 // NewReplicationDocument : Instantiate ReplicationDocument (Generic Model Constructor)
 func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *ReplicationDatabase) (model *ReplicationDocument, err error) {
@@ -17498,7 +17427,6 @@ type ReplicationHistory struct {
 	StartTime *string `json:"start_time" validate:"required"`
 }
 
-
 // UnmarshalReplicationHistory unmarshals an instance of ReplicationHistory from the specified map of raw messages.
 func UnmarshalReplicationHistory(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationHistory)
@@ -17568,7 +17496,6 @@ type ReplicationResult struct {
 	SourceLastSeq *string `json:"source_last_seq" validate:"required"`
 }
 
-
 // UnmarshalReplicationResult unmarshals an instance of ReplicationResult from the specified map of raw messages.
 func UnmarshalReplicationResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationResult)
@@ -17605,7 +17532,6 @@ type Revisions struct {
 	Start *int64 `json:"start" validate:"required"`
 }
 
-
 // NewRevisions : Instantiate Revisions (Generic Model Constructor)
 func (*CloudantV1) NewRevisions(ids []string, start int64) (model *Revisions, err error) {
 	model = &Revisions{
@@ -17640,7 +17566,6 @@ type RevsDiff struct {
 	PossibleAncestors []string `json:"possible_ancestors,omitempty"`
 }
 
-
 // UnmarshalRevsDiff unmarshals an instance of RevsDiff from the specified map of raw messages.
 func UnmarshalRevsDiff(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RevsDiff)
@@ -17664,7 +17589,6 @@ type SchedulerDocsResult struct {
 	// Array of replication scheduler doc objects.
 	Docs []SchedulerDocument `json:"docs" validate:"required"`
 }
-
 
 // UnmarshalSchedulerDocsResult unmarshals an instance of SchedulerDocsResult from the specified map of raw messages.
 func UnmarshalSchedulerDocsResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -17737,7 +17661,6 @@ const (
 	SchedulerDocumentStatePendingConst = "pending"
 	SchedulerDocumentStateRunningConst = "running"
 )
-
 
 // UnmarshalSchedulerDocument unmarshals an instance of SchedulerDocument from the specified map of raw messages.
 func UnmarshalSchedulerDocument(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -17832,7 +17755,6 @@ type SchedulerInfo struct {
 	ThroughSeq *string `json:"through_seq,omitempty"`
 }
 
-
 // UnmarshalSchedulerInfo unmarshals an instance of SchedulerInfo from the specified map of raw messages.
 func UnmarshalSchedulerInfo(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerInfo)
@@ -17917,7 +17839,6 @@ type SchedulerJob struct {
 	User *string `json:"user" validate:"required"`
 }
 
-
 // UnmarshalSchedulerJob unmarshals an instance of SchedulerJob from the specified map of raw messages.
 func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJob)
@@ -17978,7 +17899,6 @@ type SchedulerJobEvent struct {
 	Type *string `json:"type" validate:"required"`
 }
 
-
 // UnmarshalSchedulerJobEvent unmarshals an instance of SchedulerJobEvent from the specified map of raw messages.
 func UnmarshalSchedulerJobEvent(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJobEvent)
@@ -18003,7 +17923,6 @@ type SchedulerJobsResult struct {
 	Jobs []SchedulerJob `json:"jobs" validate:"required"`
 }
 
-
 // UnmarshalSchedulerJobsResult unmarshals an instance of SchedulerJobsResult from the specified map of raw messages.
 func UnmarshalSchedulerJobsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJobsResult)
@@ -18024,7 +17943,6 @@ type SearchAnalyzeResult struct {
 	// tokens.
 	Tokens []string `json:"tokens" validate:"required"`
 }
-
 
 // UnmarshalSearchAnalyzeResult unmarshals an instance of SearchAnalyzeResult from the specified map of raw messages.
 func UnmarshalSearchAnalyzeResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18063,7 +17981,6 @@ type SearchIndexDefinition struct {
 	//       in the search result; otherwise, the value is not returned.
 	Index *string `json:"index" validate:"required"`
 }
-
 
 // NewSearchIndexDefinition : Instantiate SearchIndexDefinition (Generic Model Constructor)
 func (*CloudantV1) NewSearchIndexDefinition(index string) (model *SearchIndexDefinition, err error) {
@@ -18107,7 +18024,6 @@ type SearchIndexInfo struct {
 	PendingSeq *int64 `json:"pending_seq" validate:"required"`
 }
 
-
 // UnmarshalSearchIndexInfo unmarshals an instance of SearchIndexInfo from the specified map of raw messages.
 func UnmarshalSearchIndexInfo(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchIndexInfo)
@@ -18143,7 +18059,6 @@ type SearchInfoResult struct {
 	// Schema for metadata information about a search index.
 	SearchIndex *SearchIndexInfo `json:"search_index" validate:"required"`
 }
-
 
 // UnmarshalSearchInfoResult unmarshals an instance of SearchInfoResult from the specified map of raw messages.
 func UnmarshalSearchInfoResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18184,7 +18099,6 @@ type SearchResult struct {
 	// Array of grouped search matches.
 	Groups []SearchResultProperties `json:"groups,omitempty"`
 }
-
 
 // UnmarshalSearchResult unmarshals an instance of SearchResult from the specified map of raw messages.
 func UnmarshalSearchResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18243,7 +18157,6 @@ type SearchResultProperties struct {
 	Rows []SearchResultRow `json:"rows,omitempty"`
 }
 
-
 // UnmarshalSearchResultProperties unmarshals an instance of SearchResultProperties from the specified map of raw messages.
 func UnmarshalSearchResultProperties(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchResultProperties)
@@ -18289,7 +18202,6 @@ type SearchResultRow struct {
 	// Schema for a document ID.
 	ID *string `json:"id" validate:"required"`
 }
-
 
 // UnmarshalSearchResultRow unmarshals an instance of SearchResultRow from the specified map of raw messages.
 func UnmarshalSearchResultRow(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18342,7 +18254,6 @@ const (
 	SecurityCloudantWriterConst = "_writer"
 )
 
-
 // UnmarshalSecurity unmarshals an instance of Security from the specified map of raw messages.
 func UnmarshalSecurity(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Security)
@@ -18374,7 +18285,6 @@ type SecurityObject struct {
 	// List of roles.
 	Roles []string `json:"roles,omitempty"`
 }
-
 
 // UnmarshalSecurityObject unmarshals an instance of SecurityObject from the specified map of raw messages.
 func UnmarshalSecurityObject(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18408,7 +18318,6 @@ type ServerInformation struct {
 	// List of feature flags.
 	FeaturesFlags []string `json:"features_flags" validate:"required"`
 }
-
 
 // UnmarshalServerInformation unmarshals an instance of ServerInformation from the specified map of raw messages.
 func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18449,7 +18358,6 @@ type ServerVendor struct {
 	Version *string `json:"version,omitempty"`
 }
 
-
 // UnmarshalServerVendor unmarshals an instance of ServerVendor from the specified map of raw messages.
 func UnmarshalServerVendor(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ServerVendor)
@@ -18480,7 +18388,6 @@ type SessionAuthentication struct {
 	// authentication_handlers.
 	AuthenticationHandlers []string `json:"authentication_handlers" validate:"required"`
 }
-
 
 // UnmarshalSessionAuthentication unmarshals an instance of SessionAuthentication from the specified map of raw messages.
 func UnmarshalSessionAuthentication(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18513,7 +18420,6 @@ type SessionInformation struct {
 	UserCtx *UserContext `json:"userCtx" validate:"required"`
 }
 
-
 // UnmarshalSessionInformation unmarshals an instance of SessionInformation from the specified map of raw messages.
 func UnmarshalSessionInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SessionInformation)
@@ -18539,7 +18445,6 @@ type ShardsInformation struct {
 	// Mapping of shard hash value range to a list of nodes.
 	Shards map[string][]string `json:"shards" validate:"required"`
 }
-
 
 // UnmarshalShardsInformation unmarshals an instance of ShardsInformation from the specified map of raw messages.
 func UnmarshalShardsInformation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18567,7 +18472,6 @@ type ThroughputInformation struct {
 	// Provisioned writes capacity in operations per second.
 	Write *int64 `json:"write" validate:"required"`
 }
-
 
 // UnmarshalThroughputInformation unmarshals an instance of ThroughputInformation from the specified map of raw messages.
 func UnmarshalThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18609,7 +18513,6 @@ const (
 	UpInformationStatusOkConst = "ok"
 )
 
-
 // UnmarshalUpInformation unmarshals an instance of UpInformation from the specified map of raw messages.
 func UnmarshalUpInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UpInformation)
@@ -18650,7 +18553,6 @@ const (
 	UserContextRolesWriterConst = "_writer"
 )
 
-
 // NewUserContext : Instantiate UserContext (Generic Model Constructor)
 func (*CloudantV1) NewUserContext(name string, roles []string) (model *UserContext, err error) {
 	model = &UserContext{
@@ -18686,7 +18588,6 @@ type UuidsResult struct {
 	Uuids []string `json:"uuids" validate:"required"`
 }
 
-
 // UnmarshalUuidsResult unmarshals an instance of UuidsResult from the specified map of raw messages.
 func UnmarshalUuidsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UuidsResult)
@@ -18704,7 +18605,6 @@ type ViewQueriesResult struct {
 	// regular view request.
 	Results []ViewResult `json:"results" validate:"required"`
 }
-
 
 // UnmarshalViewQueriesResult unmarshals an instance of ViewQueriesResult from the specified map of raw messages.
 func UnmarshalViewQueriesResult(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18793,7 +18693,6 @@ const (
 	ViewQueryUpdateLazyConst = "lazy"
 	ViewQueryUpdateTrueConst = "true"
 )
-
 
 // UnmarshalViewQuery unmarshals an instance of ViewQuery from the specified map of raw messages.
 func UnmarshalViewQuery(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18894,7 +18793,6 @@ type ViewResult struct {
 	Rows []ViewResultRow `json:"rows" validate:"required"`
 }
 
-
 // UnmarshalViewResult unmarshals an instance of ViewResult from the specified map of raw messages.
 func UnmarshalViewResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ViewResult)
@@ -18937,7 +18835,6 @@ type ViewResultRow struct {
 	// Schema for any JSON type.
 	Value interface{} `json:"value" validate:"required"`
 }
-
 
 // UnmarshalViewResultRow unmarshals an instance of ViewResultRow from the specified map of raw messages.
 func UnmarshalViewResultRow(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18997,7 +18894,6 @@ const (
 	GeoJSONGeometryTypePolygonConst = "Polygon"
 )
 
-
 func (*GeoJSONGeometry) isaGeoJSONGeometryObject() bool {
 	return true
 }
@@ -19038,7 +18934,6 @@ const (
 	GeoJSONGeometryCollectionTypePointConst = "Point"
 	GeoJSONGeometryCollectionTypePolygonConst = "Polygon"
 )
-
 
 func (*GeoJSONGeometryCollection) isaGeoJSONGeometryObject() bool {
 	return true
