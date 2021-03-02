@@ -13137,7 +13137,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully with retries`, func() {
@@ -13219,7 +13219,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully`, func() {
@@ -13835,7 +13835,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully with retries`, func() {
@@ -13889,7 +13889,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": false}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": false, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully`, func() {
@@ -13996,6 +13996,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
+				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -14004,7 +14005,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
-				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14094,6 +14094,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
+				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -14102,7 +14103,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
-				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14199,6 +14199,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
+				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -14207,7 +14208,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
-				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14249,6 +14249,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
+				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -14257,7 +14258,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
 				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
-				postIndexOptionsModel.PartialFilterSelector = make(map[string]interface{})
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -26120,10 +26120,12 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
+				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
 				Expect(indexDefinitionModel.DefaultAnalyzer).To(Equal(analyzerModel))
 				Expect(indexDefinitionModel.DefaultField).To(Equal(indexTextOperatorDefaultFieldModel))
 				Expect(indexDefinitionModel.Fields).To(Equal([]cloudantv1.IndexField{*indexFieldModel}))
 				Expect(indexDefinitionModel.IndexArrayLengths).To(Equal(core.BoolPtr(true)))
+				Expect(indexDefinitionModel.PartialFilterSelector).To(Equal(make(map[string]interface{})))
 
 				// Construct an instance of the PostIndexOptions model
 				db := "testString"
@@ -26134,7 +26136,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.SetDdoc("testString")
 				postIndexOptionsModel.SetDef(indexDefinitionModel)
 				postIndexOptionsModel.SetName("testString")
-				postIndexOptionsModel.SetPartialFilterSelector(make(map[string]interface{}))
 				postIndexOptionsModel.SetPartitioned(true)
 				postIndexOptionsModel.SetType("json")
 				postIndexOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -26144,7 +26145,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postIndexOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
 				Expect(postIndexOptionsModel.Def).To(Equal(indexDefinitionModel))
 				Expect(postIndexOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(postIndexOptionsModel.PartialFilterSelector).To(Equal(make(map[string]interface{})))
 				Expect(postIndexOptionsModel.Partitioned).To(Equal(core.BoolPtr(true)))
 				Expect(postIndexOptionsModel.Type).To(Equal(core.StringPtr("json")))
 				Expect(postIndexOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))

@@ -38,7 +38,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.31
+// Version: 1.0.0-dev0.0.32
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *core.BaseService
@@ -4709,9 +4709,6 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 	}
 	if postIndexOptions.Name != nil {
 		body["name"] = postIndexOptions.Name
-	}
-	if postIndexOptions.PartialFilterSelector != nil {
-		body["partial_filter_selector"] = postIndexOptions.PartialFilterSelector
 	}
 	if postIndexOptions.Partitioned != nil {
 		body["partitioned"] = postIndexOptions.Partitioned
@@ -12741,6 +12738,31 @@ type IndexDefinition struct {
 	// database are complex, or not completely under your control. As a result, it is difficult to estimate the impact of
 	// the extra processing that is needed to determine and store the arrays lengths.
 	IndexArrayLengths *bool `json:"index_array_lengths,omitempty"`
+
+	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
+	// provides an expression to evaluate with the field content or other data.
+	//
+	// The selector object must:
+	//   * Be structured as valid JSON.
+	//   * Contain a valid query expression.
+	//
+	// Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
+	// option if filtering on document attributes only.
+	//
+	// Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
+	// those fields. You can create more complex selector expressions by combining operators.
+	//
+	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
+	//
+	// There are two core types of operators in the selector syntax:
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
+	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
+	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
+	// selector, or an array of selectors.
+	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
+	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
+	// argument.
+	PartialFilterSelector map[string]interface{} `json:"partial_filter_selector,omitempty"`
 }
 
 // UnmarshalIndexDefinition unmarshals an instance of IndexDefinition from the specified map of raw messages.
@@ -12759,6 +12781,10 @@ func UnmarshalIndexDefinition(m map[string]json.RawMessage, result interface{}) 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "index_array_lengths", &obj.IndexArrayLengths)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "partial_filter_selector", &obj.PartialFilterSelector)
 	if err != nil {
 		return
 	}
@@ -14500,31 +14526,6 @@ type PostIndexOptions struct {
 	// name.
 	Name *string
 
-	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
-	// provides an expression to evaluate with the field content or other data.
-	//
-	// The selector object must:
-	//   * Be structured as valid JSON.
-	//   * Contain a valid query expression.
-	//
-	// Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
-	// option if filtering on document attributes only.
-	//
-	// Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
-	// those fields. You can create more complex selector expressions by combining operators.
-	//
-	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
-	//
-	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
-	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
-	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
-	PartialFilterSelector map[string]interface{}
-
 	// The default value is `true` for databases with `partitioned: true` and `false` otherwise. For databases with
 	// `partitioned: false` if this option is specified the value must be `false`.
 	Partitioned *bool
@@ -14579,12 +14580,6 @@ func (options *PostIndexOptions) SetDef(def *IndexDefinition) *PostIndexOptions 
 // SetName : Allow user to set Name
 func (options *PostIndexOptions) SetName(name string) *PostIndexOptions {
 	options.Name = core.StringPtr(name)
-	return options
-}
-
-// SetPartialFilterSelector : Allow user to set PartialFilterSelector
-func (options *PostIndexOptions) SetPartialFilterSelector(partialFilterSelector map[string]interface{}) *PostIndexOptions {
-	options.PartialFilterSelector = partialFilterSelector
 	return options
 }
 
