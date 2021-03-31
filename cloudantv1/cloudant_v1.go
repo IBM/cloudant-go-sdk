@@ -38,7 +38,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.33
+// Version: 1.0.0-dev0.0.34
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *core.BaseService
