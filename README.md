@@ -12,7 +12,7 @@
 
 [![Build Status](https://travis-ci.com/IBM/cloudant-go-sdk.svg?branch=master)](https://travis-ci.com/IBM/cloudant-go-sdk)
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
-[![Docs](https://img.shields.io/static/v1?label=godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
+[![Docs](https://img.shields.io/static/v1?label=Godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
 # IBM Cloudant Go SDK Version 0.0.31
 
@@ -258,7 +258,7 @@ For general IBM Cloud SDK usage information, please see
 
 ### Code examples
 
-The following code examples 
+The following code examples
 [authenticate with the environment variables](#authenticate-with-environment-variables).
 
 #### 1. Retrieve information from an existing database
@@ -266,7 +266,7 @@ The following code examples
 **Note:** This example code assumes that `animaldb` database does not exist in your account.
 
 This example code gathers information about an existing database hosted on
-the https://examples.cloudant.com/ service `url`. To connect, you must 
+the https://examples.cloudant.com/ service `url`. To connect, you must
 extend your environment variables with the *service url* and *authentication
 type* to use `NOAUTH` authentication while you connect to the `animaldb` database.
 This step is necessary for the SDK to distinguish the `EXAMPLES` custom service
@@ -656,7 +656,9 @@ For examples of using byte streams, see the API reference documentation
 ### Further resources
 
 - [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go):
-  API examples for Cloudant Go SDK.
+  API reference including usage examples for Cloudant Go SDK API.
+- [Godoc](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk):
+  Cloudant Go SDK API Documentation.
 - [Cloudant docs](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-overview#overview):
   The official documentation page for Cloudant.
 - [Cloudant Learning Center](https://developer.ibm.com/clouddataservices/docs/compose/cloudant/):
