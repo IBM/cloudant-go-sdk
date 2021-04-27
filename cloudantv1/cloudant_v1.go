@@ -38,7 +38,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.34
+// Version: 1.0.0-dev0.0.35
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *core.BaseService
@@ -323,8 +323,8 @@ func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOpt
 }
 
 // GetCapacityThroughputInformation : Retrieve provisioned throughput capacity information
-// View the amount of provisioned throughput capacity allocated to an IBM Cloudant instance and what is the target
-// provisioned throughput capacity.
+// View the amount of provisioned throughput capacity that is allocated to an IBM Cloudant instance and what is the
+// target provisioned throughput capacity.
 func (cloudant *CloudantV1) GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
 	return cloudant.GetCapacityThroughputInformationWithContext(context.Background(), getCapacityThroughputInformationOptions)
 }
@@ -373,20 +373,20 @@ func (cloudant *CloudantV1) GetCapacityThroughputInformationWithContext(ctx cont
 	return
 }
 
-// PutCapacityThroughputInformation : Update the target provisioned throughput capacity
+// PutCapacityThroughputConfiguration : Update the target provisioned throughput capacity
 // Sets the target provisioned throughput capacity for an IBM Cloudant instance. When target capacity is changed, the
 // current capacity asynchronously changes to meet the target capacity.
-func (cloudant *CloudantV1) PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
-	return cloudant.PutCapacityThroughputInformationWithContext(context.Background(), putCapacityThroughputInformationOptions)
+func (cloudant *CloudantV1) PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
+	return cloudant.PutCapacityThroughputConfigurationWithContext(context.Background(), putCapacityThroughputConfigurationOptions)
 }
 
-// PutCapacityThroughputInformationWithContext is an alternate form of the PutCapacityThroughputInformation method which supports a Context parameter
-func (cloudant *CloudantV1) PutCapacityThroughputInformationWithContext(ctx context.Context, putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(putCapacityThroughputInformationOptions, "putCapacityThroughputInformationOptions cannot be nil")
+// PutCapacityThroughputConfigurationWithContext is an alternate form of the PutCapacityThroughputConfiguration method which supports a Context parameter
+func (cloudant *CloudantV1) PutCapacityThroughputConfigurationWithContext(ctx context.Context, putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(putCapacityThroughputConfigurationOptions, "putCapacityThroughputConfigurationOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(putCapacityThroughputInformationOptions, "putCapacityThroughputInformationOptions")
+	err = core.ValidateStruct(putCapacityThroughputConfigurationOptions, "putCapacityThroughputConfigurationOptions")
 	if err != nil {
 		return
 	}
@@ -399,11 +399,11 @@ func (cloudant *CloudantV1) PutCapacityThroughputInformationWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range putCapacityThroughputInformationOptions.Headers {
+	for headerName, headerValue := range putCapacityThroughputConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCapacityThroughputInformation")
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCapacityThroughputConfiguration")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -411,8 +411,8 @@ func (cloudant *CloudantV1) PutCapacityThroughputInformationWithContext(ctx cont
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if putCapacityThroughputInformationOptions.Blocks != nil {
-		body["blocks"] = putCapacityThroughputInformationOptions.Blocks
+	if putCapacityThroughputConfigurationOptions.Blocks != nil {
+		body["blocks"] = putCapacityThroughputConfigurationOptions.Blocks
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -2050,9 +2050,6 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 	if getDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getDocumentOptions.AttEncodingInfo))
 	}
-	if getDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getDocumentOptions.AttsSince, ","))
-	}
 	if getDocumentOptions.Conflicts != nil {
 		builder.AddQuery("conflicts", fmt.Sprint(*getDocumentOptions.Conflicts))
 	}
@@ -2067,9 +2064,6 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 	}
 	if getDocumentOptions.Meta != nil {
 		builder.AddQuery("meta", fmt.Sprint(*getDocumentOptions.Meta))
-	}
-	if getDocumentOptions.OpenRevs != nil {
-		builder.AddQuery("open_revs", strings.Join(getDocumentOptions.OpenRevs, ","))
 	}
 	if getDocumentOptions.Rev != nil {
 		builder.AddQuery("rev", fmt.Sprint(*getDocumentOptions.Rev))
@@ -2150,9 +2144,6 @@ func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, g
 	if getDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getDocumentOptions.AttEncodingInfo))
 	}
-	if getDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getDocumentOptions.AttsSince, ","))
-	}
 	if getDocumentOptions.Conflicts != nil {
 		builder.AddQuery("conflicts", fmt.Sprint(*getDocumentOptions.Conflicts))
 	}
@@ -2167,9 +2158,6 @@ func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, g
 	}
 	if getDocumentOptions.Meta != nil {
 		builder.AddQuery("meta", fmt.Sprint(*getDocumentOptions.Meta))
-	}
-	if getDocumentOptions.OpenRevs != nil {
-		builder.AddQuery("open_revs", strings.Join(getDocumentOptions.OpenRevs, ","))
 	}
 	if getDocumentOptions.Rev != nil {
 		builder.AddQuery("rev", fmt.Sprint(*getDocumentOptions.Rev))
@@ -2241,9 +2229,6 @@ func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context,
 	if getDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getDocumentOptions.AttEncodingInfo))
 	}
-	if getDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getDocumentOptions.AttsSince, ","))
-	}
 	if getDocumentOptions.Conflicts != nil {
 		builder.AddQuery("conflicts", fmt.Sprint(*getDocumentOptions.Conflicts))
 	}
@@ -2258,9 +2243,6 @@ func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context,
 	}
 	if getDocumentOptions.Meta != nil {
 		builder.AddQuery("meta", fmt.Sprint(*getDocumentOptions.Meta))
-	}
-	if getDocumentOptions.OpenRevs != nil {
-		builder.AddQuery("open_revs", strings.Join(getDocumentOptions.OpenRevs, ","))
 	}
 	if getDocumentOptions.Rev != nil {
 		builder.AddQuery("rev", fmt.Sprint(*getDocumentOptions.Rev))
@@ -2332,9 +2314,6 @@ func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, 
 	if getDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getDocumentOptions.AttEncodingInfo))
 	}
-	if getDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getDocumentOptions.AttsSince, ","))
-	}
 	if getDocumentOptions.Conflicts != nil {
 		builder.AddQuery("conflicts", fmt.Sprint(*getDocumentOptions.Conflicts))
 	}
@@ -2349,9 +2328,6 @@ func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, 
 	}
 	if getDocumentOptions.Meta != nil {
 		builder.AddQuery("meta", fmt.Sprint(*getDocumentOptions.Meta))
-	}
-	if getDocumentOptions.OpenRevs != nil {
-		builder.AddQuery("open_revs", strings.Join(getDocumentOptions.OpenRevs, ","))
 	}
 	if getDocumentOptions.Rev != nil {
 		builder.AddQuery("rev", fmt.Sprint(*getDocumentOptions.Rev))
@@ -2635,9 +2611,6 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 	if getDesignDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getDesignDocumentOptions.AttEncodingInfo))
 	}
-	if getDesignDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getDesignDocumentOptions.AttsSince, ","))
-	}
 	if getDesignDocumentOptions.Conflicts != nil {
 		builder.AddQuery("conflicts", fmt.Sprint(*getDesignDocumentOptions.Conflicts))
 	}
@@ -2652,9 +2625,6 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 	}
 	if getDesignDocumentOptions.Meta != nil {
 		builder.AddQuery("meta", fmt.Sprint(*getDesignDocumentOptions.Meta))
-	}
-	if getDesignDocumentOptions.OpenRevs != nil {
-		builder.AddQuery("open_revs", strings.Join(getDesignDocumentOptions.OpenRevs, ","))
 	}
 	if getDesignDocumentOptions.Rev != nil {
 		builder.AddQuery("rev", fmt.Sprint(*getDesignDocumentOptions.Rev))
@@ -5818,9 +5788,6 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 	if getReplicationDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getReplicationDocumentOptions.AttEncodingInfo))
 	}
-	if getReplicationDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getReplicationDocumentOptions.AttsSince, ","))
-	}
 	if getReplicationDocumentOptions.Conflicts != nil {
 		builder.AddQuery("conflicts", fmt.Sprint(*getReplicationDocumentOptions.Conflicts))
 	}
@@ -5835,9 +5802,6 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 	}
 	if getReplicationDocumentOptions.Meta != nil {
 		builder.AddQuery("meta", fmt.Sprint(*getReplicationDocumentOptions.Meta))
-	}
-	if getReplicationDocumentOptions.OpenRevs != nil {
-		builder.AddQuery("open_revs", strings.Join(getReplicationDocumentOptions.OpenRevs, ","))
 	}
 	if getReplicationDocumentOptions.Rev != nil {
 		builder.AddQuery("rev", fmt.Sprint(*getReplicationDocumentOptions.Rev))
@@ -7079,9 +7043,6 @@ func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, get
 	if getLocalDocumentOptions.AttEncodingInfo != nil {
 		builder.AddQuery("att_encoding_info", fmt.Sprint(*getLocalDocumentOptions.AttEncodingInfo))
 	}
-	if getLocalDocumentOptions.AttsSince != nil {
-		builder.AddQuery("atts_since", strings.Join(getLocalDocumentOptions.AttsSince, ","))
-	}
 	if getLocalDocumentOptions.LocalSeq != nil {
 		builder.AddQuery("local_seq", fmt.Sprint(*getLocalDocumentOptions.LocalSeq))
 	}
@@ -7572,15 +7533,15 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 
-// GetActivityTrackerEventsInformation : Retrieve Activity Tracker events information
-// Check event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
-func (cloudant *CloudantV1) GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) (result *ActivityTrackerEventsConfiguration, response *core.DetailedResponse, err error) {
-	return cloudant.GetActivityTrackerEventsInformationWithContext(context.Background(), getActivityTrackerEventsInformationOptions)
+// GetActivityTrackerEvents : Retrieve Activity Tracker events information
+// Check event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+func (cloudant *CloudantV1) GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions) (result *ActivityTrackerEvents, response *core.DetailedResponse, err error) {
+	return cloudant.GetActivityTrackerEventsWithContext(context.Background(), getActivityTrackerEventsOptions)
 }
 
-// GetActivityTrackerEventsInformationWithContext is an alternate form of the GetActivityTrackerEventsInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetActivityTrackerEventsInformationWithContext(ctx context.Context, getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) (result *ActivityTrackerEventsConfiguration, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getActivityTrackerEventsInformationOptions, "getActivityTrackerEventsInformationOptions")
+// GetActivityTrackerEventsWithContext is an alternate form of the GetActivityTrackerEvents method which supports a Context parameter
+func (cloudant *CloudantV1) GetActivityTrackerEventsWithContext(ctx context.Context, getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions) (result *ActivityTrackerEvents, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getActivityTrackerEventsOptions, "getActivityTrackerEventsOptions")
 	if err != nil {
 		return
 	}
@@ -7593,11 +7554,11 @@ func (cloudant *CloudantV1) GetActivityTrackerEventsInformationWithContext(ctx c
 		return
 	}
 
-	for headerName, headerValue := range getActivityTrackerEventsInformationOptions.Headers {
+	for headerName, headerValue := range getActivityTrackerEventsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActivityTrackerEventsInformation")
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActivityTrackerEvents")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -7613,7 +7574,7 @@ func (cloudant *CloudantV1) GetActivityTrackerEventsInformationWithContext(ctx c
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActivityTrackerEventsConfiguration)
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActivityTrackerEvents)
 	if err != nil {
 		return
 	}
@@ -7622,19 +7583,19 @@ func (cloudant *CloudantV1) GetActivityTrackerEventsInformationWithContext(ctx c
 	return
 }
 
-// PostActivityTrackerEventsConfiguration : Modify Activity Tracker events configuration
-// Configure event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
-func (cloudant *CloudantV1) PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PostActivityTrackerEventsConfigurationWithContext(context.Background(), postActivityTrackerEventsConfigurationOptions)
+// PostActivityTrackerEvents : Modify Activity Tracker events configuration
+// Configure event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+func (cloudant *CloudantV1) PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	return cloudant.PostActivityTrackerEventsWithContext(context.Background(), postActivityTrackerEventsOptions)
 }
 
-// PostActivityTrackerEventsConfigurationWithContext is an alternate form of the PostActivityTrackerEventsConfiguration method which supports a Context parameter
-func (cloudant *CloudantV1) PostActivityTrackerEventsConfigurationWithContext(ctx context.Context, postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postActivityTrackerEventsConfigurationOptions, "postActivityTrackerEventsConfigurationOptions cannot be nil")
+// PostActivityTrackerEventsWithContext is an alternate form of the PostActivityTrackerEvents method which supports a Context parameter
+func (cloudant *CloudantV1) PostActivityTrackerEventsWithContext(ctx context.Context, postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postActivityTrackerEventsOptions, "postActivityTrackerEventsOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(postActivityTrackerEventsConfigurationOptions, "postActivityTrackerEventsConfigurationOptions")
+	err = core.ValidateStruct(postActivityTrackerEventsOptions, "postActivityTrackerEventsOptions")
 	if err != nil {
 		return
 	}
@@ -7647,11 +7608,11 @@ func (cloudant *CloudantV1) PostActivityTrackerEventsConfigurationWithContext(ct
 		return
 	}
 
-	for headerName, headerValue := range postActivityTrackerEventsConfigurationOptions.Headers {
+	for headerName, headerValue := range postActivityTrackerEventsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostActivityTrackerEventsConfiguration")
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostActivityTrackerEvents")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
@@ -7659,8 +7620,8 @@ func (cloudant *CloudantV1) PostActivityTrackerEventsConfigurationWithContext(ct
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postActivityTrackerEventsConfigurationOptions.Types != nil {
-		body["types"] = postActivityTrackerEventsConfigurationOptions.Types
+	if postActivityTrackerEventsOptions.Types != nil {
+		body["types"] = postActivityTrackerEventsOptions.Types
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -7824,31 +7785,31 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 	return
 }
 
-// ActivityTrackerEventsConfiguration : Schema for Activity Tracker events configuration.
-type ActivityTrackerEventsConfiguration struct {
-	// An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+// ActivityTrackerEvents : Schema for Activity Tracker events.
+type ActivityTrackerEvents struct {
+	// An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
 	// "management" is a required element of this array.
 	Types []string `json:"types" validate:"required"`
 }
 
-// Constants associated with the ActivityTrackerEventsConfiguration.Types property.
+// Constants associated with the ActivityTrackerEvents.Types property.
 const (
-	ActivityTrackerEventsConfigurationTypesDataConst = "data"
-	ActivityTrackerEventsConfigurationTypesManagementConst = "management"
+	ActivityTrackerEventsTypesDataConst = "data"
+	ActivityTrackerEventsTypesManagementConst = "management"
 )
 
-// NewActivityTrackerEventsConfiguration : Instantiate ActivityTrackerEventsConfiguration (Generic Model Constructor)
-func (*CloudantV1) NewActivityTrackerEventsConfiguration(types []string) (model *ActivityTrackerEventsConfiguration, err error) {
-	model = &ActivityTrackerEventsConfiguration{
+// NewActivityTrackerEvents : Instantiate ActivityTrackerEvents (Generic Model Constructor)
+func (*CloudantV1) NewActivityTrackerEvents(types []string) (model *ActivityTrackerEvents, err error) {
+	model = &ActivityTrackerEvents{
 		Types: types,
 	}
 	err = core.ValidateStruct(model, "required parameters")
 	return
 }
 
-// UnmarshalActivityTrackerEventsConfiguration unmarshals an instance of ActivityTrackerEventsConfiguration from the specified map of raw messages.
-func UnmarshalActivityTrackerEventsConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ActivityTrackerEventsConfiguration)
+// UnmarshalActivityTrackerEvents unmarshals an instance of ActivityTrackerEvents from the specified map of raw messages.
+func UnmarshalActivityTrackerEvents(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ActivityTrackerEvents)
 	err = core.UnmarshalPrimitive(m, "types", &obj.Types)
 	if err != nil {
 		return
@@ -10679,20 +10640,20 @@ func (options *GetActiveTasksOptions) SetHeaders(param map[string]string) *GetAc
 	return options
 }
 
-// GetActivityTrackerEventsInformationOptions : The GetActivityTrackerEventsInformation options.
-type GetActivityTrackerEventsInformationOptions struct {
+// GetActivityTrackerEventsOptions : The GetActivityTrackerEvents options.
+type GetActivityTrackerEventsOptions struct {
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
-// NewGetActivityTrackerEventsInformationOptions : Instantiate GetActivityTrackerEventsInformationOptions
-func (*CloudantV1) NewGetActivityTrackerEventsInformationOptions() *GetActivityTrackerEventsInformationOptions {
-	return &GetActivityTrackerEventsInformationOptions{}
+// NewGetActivityTrackerEventsOptions : Instantiate GetActivityTrackerEventsOptions
+func (*CloudantV1) NewGetActivityTrackerEventsOptions() *GetActivityTrackerEventsOptions {
+	return &GetActivityTrackerEventsOptions{}
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *GetActivityTrackerEventsInformationOptions) SetHeaders(param map[string]string) *GetActivityTrackerEventsInformationOptions {
+func (options *GetActivityTrackerEventsOptions) SetHeaders(param map[string]string) *GetActivityTrackerEventsOptions {
 	options.Headers = param
 	return options
 }
@@ -11063,10 +11024,6 @@ type GetDesignDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool
 
-	// Query parameter to specify whether to include attachments only since specified revisions. Note this does not include
-	// the attachments for the specified revisions.
-	AttsSince []string
-
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
 	Conflicts *bool
@@ -11084,10 +11041,6 @@ type GetDesignDocumentOptions struct {
 	// Query parameter to specify whether to include document meta information. Acts the same as specifying all of the
 	// conflicts, deleted_conflicts and open_revs query parameters.
 	Meta *bool
-
-	// Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return all leaf
-	// revisions.
-	OpenRevs []string
 
 	// Query parameter to specify a document revision.
 	Rev *string
@@ -11140,12 +11093,6 @@ func (options *GetDesignDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool
 	return options
 }
 
-// SetAttsSince : Allow user to set AttsSince
-func (options *GetDesignDocumentOptions) SetAttsSince(attsSince []string) *GetDesignDocumentOptions {
-	options.AttsSince = attsSince
-	return options
-}
-
 // SetConflicts : Allow user to set Conflicts
 func (options *GetDesignDocumentOptions) SetConflicts(conflicts bool) *GetDesignDocumentOptions {
 	options.Conflicts = core.BoolPtr(conflicts)
@@ -11173,12 +11120,6 @@ func (options *GetDesignDocumentOptions) SetLocalSeq(localSeq bool) *GetDesignDo
 // SetMeta : Allow user to set Meta
 func (options *GetDesignDocumentOptions) SetMeta(meta bool) *GetDesignDocumentOptions {
 	options.Meta = core.BoolPtr(meta)
-	return options
-}
-
-// SetOpenRevs : Allow user to set OpenRevs
-func (options *GetDesignDocumentOptions) SetOpenRevs(openRevs []string) *GetDesignDocumentOptions {
-	options.OpenRevs = openRevs
 	return options
 }
 
@@ -11224,10 +11165,6 @@ type GetDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool
 
-	// Query parameter to specify whether to include attachments only since specified revisions. Note this does not include
-	// the attachments for the specified revisions.
-	AttsSince []string
-
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
 	Conflicts *bool
@@ -11245,10 +11182,6 @@ type GetDocumentOptions struct {
 	// Query parameter to specify whether to include document meta information. Acts the same as specifying all of the
 	// conflicts, deleted_conflicts and open_revs query parameters.
 	Meta *bool
-
-	// Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return all leaf
-	// revisions.
-	OpenRevs []string
 
 	// Query parameter to specify a document revision.
 	Rev *string
@@ -11301,12 +11234,6 @@ func (options *GetDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *Get
 	return options
 }
 
-// SetAttsSince : Allow user to set AttsSince
-func (options *GetDocumentOptions) SetAttsSince(attsSince []string) *GetDocumentOptions {
-	options.AttsSince = attsSince
-	return options
-}
-
 // SetConflicts : Allow user to set Conflicts
 func (options *GetDocumentOptions) SetConflicts(conflicts bool) *GetDocumentOptions {
 	options.Conflicts = core.BoolPtr(conflicts)
@@ -11334,12 +11261,6 @@ func (options *GetDocumentOptions) SetLocalSeq(localSeq bool) *GetDocumentOption
 // SetMeta : Allow user to set Meta
 func (options *GetDocumentOptions) SetMeta(meta bool) *GetDocumentOptions {
 	options.Meta = core.BoolPtr(meta)
-	return options
-}
-
-// SetOpenRevs : Allow user to set OpenRevs
-func (options *GetDocumentOptions) SetOpenRevs(openRevs []string) *GetDocumentOptions {
-	options.OpenRevs = openRevs
 	return options
 }
 
@@ -11730,10 +11651,6 @@ type GetLocalDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool
 
-	// Query parameter to specify whether to include attachments only since specified revisions. Note this does not include
-	// the attachments for the specified revisions.
-	AttsSince []string
-
 	// Query parameter to specify whether to include the last update sequence for the document.
 	LocalSeq *bool
 
@@ -11782,12 +11699,6 @@ func (options *GetLocalDocumentOptions) SetAttachments(attachments bool) *GetLoc
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
 func (options *GetLocalDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetLocalDocumentOptions {
 	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
-}
-
-// SetAttsSince : Allow user to set AttsSince
-func (options *GetLocalDocumentOptions) SetAttsSince(attsSince []string) *GetLocalDocumentOptions {
-	options.AttsSince = attsSince
 	return options
 }
 
@@ -11874,10 +11785,6 @@ type GetReplicationDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool
 
-	// Query parameter to specify whether to include attachments only since specified revisions. Note this does not include
-	// the attachments for the specified revisions.
-	AttsSince []string
-
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
 	Conflicts *bool
@@ -11895,10 +11802,6 @@ type GetReplicationDocumentOptions struct {
 	// Query parameter to specify whether to include document meta information. Acts the same as specifying all of the
 	// conflicts, deleted_conflicts and open_revs query parameters.
 	Meta *bool
-
-	// Query parameter to specify leaf revisions to retrieve. Additionally, it accepts a value of `all` to return all leaf
-	// revisions.
-	OpenRevs []string
 
 	// Query parameter to specify a document revision.
 	Rev *string
@@ -11944,12 +11847,6 @@ func (options *GetReplicationDocumentOptions) SetAttEncodingInfo(attEncodingInfo
 	return options
 }
 
-// SetAttsSince : Allow user to set AttsSince
-func (options *GetReplicationDocumentOptions) SetAttsSince(attsSince []string) *GetReplicationDocumentOptions {
-	options.AttsSince = attsSince
-	return options
-}
-
 // SetConflicts : Allow user to set Conflicts
 func (options *GetReplicationDocumentOptions) SetConflicts(conflicts bool) *GetReplicationDocumentOptions {
 	options.Conflicts = core.BoolPtr(conflicts)
@@ -11977,12 +11874,6 @@ func (options *GetReplicationDocumentOptions) SetLocalSeq(localSeq bool) *GetRep
 // SetMeta : Allow user to set Meta
 func (options *GetReplicationDocumentOptions) SetMeta(meta bool) *GetReplicationDocumentOptions {
 	options.Meta = core.BoolPtr(meta)
-	return options
-}
-
-// SetOpenRevs : Allow user to set OpenRevs
-func (options *GetReplicationDocumentOptions) SetOpenRevs(openRevs []string) *GetReplicationDocumentOptions {
-	options.OpenRevs = openRevs
 	return options
 }
 
@@ -13199,9 +13090,9 @@ func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result int
 	return
 }
 
-// PostActivityTrackerEventsConfigurationOptions : The PostActivityTrackerEventsConfiguration options.
-type PostActivityTrackerEventsConfigurationOptions struct {
-	// An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
+// PostActivityTrackerEventsOptions : The PostActivityTrackerEvents options.
+type PostActivityTrackerEventsOptions struct {
+	// An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
 	// "management" is a required element of this array.
 	Types []string `validate:"required"`
 
@@ -13209,27 +13100,27 @@ type PostActivityTrackerEventsConfigurationOptions struct {
 	Headers map[string]string
 }
 
-// Constants associated with the PostActivityTrackerEventsConfigurationOptions.Types property.
+// Constants associated with the PostActivityTrackerEventsOptions.Types property.
 const (
-	PostActivityTrackerEventsConfigurationOptionsTypesDataConst = "data"
-	PostActivityTrackerEventsConfigurationOptionsTypesManagementConst = "management"
+	PostActivityTrackerEventsOptionsTypesDataConst = "data"
+	PostActivityTrackerEventsOptionsTypesManagementConst = "management"
 )
 
-// NewPostActivityTrackerEventsConfigurationOptions : Instantiate PostActivityTrackerEventsConfigurationOptions
-func (*CloudantV1) NewPostActivityTrackerEventsConfigurationOptions(types []string) *PostActivityTrackerEventsConfigurationOptions {
-	return &PostActivityTrackerEventsConfigurationOptions{
+// NewPostActivityTrackerEventsOptions : Instantiate PostActivityTrackerEventsOptions
+func (*CloudantV1) NewPostActivityTrackerEventsOptions(types []string) *PostActivityTrackerEventsOptions {
+	return &PostActivityTrackerEventsOptions{
 		Types: types,
 	}
 }
 
 // SetTypes : Allow user to set Types
-func (options *PostActivityTrackerEventsConfigurationOptions) SetTypes(types []string) *PostActivityTrackerEventsConfigurationOptions {
+func (options *PostActivityTrackerEventsOptions) SetTypes(types []string) *PostActivityTrackerEventsOptions {
 	options.Types = types
 	return options
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *PostActivityTrackerEventsConfigurationOptions) SetHeaders(param map[string]string) *PostActivityTrackerEventsConfigurationOptions {
+func (options *PostActivityTrackerEventsOptions) SetHeaders(param map[string]string) *PostActivityTrackerEventsOptions {
 	options.Headers = param
 	return options
 }
@@ -16188,8 +16079,8 @@ func (options *PutAttachmentOptions) SetHeaders(param map[string]string) *PutAtt
 	return options
 }
 
-// PutCapacityThroughputInformationOptions : The PutCapacityThroughputInformation options.
-type PutCapacityThroughputInformationOptions struct {
+// PutCapacityThroughputConfigurationOptions : The PutCapacityThroughputConfiguration options.
+type PutCapacityThroughputConfigurationOptions struct {
 	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
 	// of provisioned throughput capacity.
 	Blocks *int64 `validate:"required"`
@@ -16198,21 +16089,21 @@ type PutCapacityThroughputInformationOptions struct {
 	Headers map[string]string
 }
 
-// NewPutCapacityThroughputInformationOptions : Instantiate PutCapacityThroughputInformationOptions
-func (*CloudantV1) NewPutCapacityThroughputInformationOptions(blocks int64) *PutCapacityThroughputInformationOptions {
-	return &PutCapacityThroughputInformationOptions{
+// NewPutCapacityThroughputConfigurationOptions : Instantiate PutCapacityThroughputConfigurationOptions
+func (*CloudantV1) NewPutCapacityThroughputConfigurationOptions(blocks int64) *PutCapacityThroughputConfigurationOptions {
+	return &PutCapacityThroughputConfigurationOptions{
 		Blocks: core.Int64Ptr(blocks),
 	}
 }
 
 // SetBlocks : Allow user to set Blocks
-func (options *PutCapacityThroughputInformationOptions) SetBlocks(blocks int64) *PutCapacityThroughputInformationOptions {
+func (options *PutCapacityThroughputConfigurationOptions) SetBlocks(blocks int64) *PutCapacityThroughputConfigurationOptions {
 	options.Blocks = core.Int64Ptr(blocks)
 	return options
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *PutCapacityThroughputInformationOptions) SetHeaders(param map[string]string) *PutCapacityThroughputInformationOptions {
+func (options *PutCapacityThroughputConfigurationOptions) SetHeaders(param map[string]string) *PutCapacityThroughputConfigurationOptions {
 	options.Headers = param
 	return options
 }
