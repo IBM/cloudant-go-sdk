@@ -842,22 +842,22 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) - Operation response error`, func() {
-		putCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+	Describe(`PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions) - Operation response error`, func() {
+		putCapacityThroughputConfigurationPath := "/_api/v2/user/capacity/throughput"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke PutCapacityThroughputInformation with error: Operation response processing error`, func() {
+			It(`Invoke PutCapacityThroughputConfiguration with error: Operation response processing error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -865,19 +865,19 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the PutCapacityThroughputInformationOptions model
-				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
-				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
-				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
+				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				result, response, operationErr := cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				result, response, operationErr = cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -888,15 +888,15 @@ var _ = Describe(`CloudantV1`, func() {
 		})
 	})
 
-	Describe(`PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions)`, func() {
-		putCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
+	Describe(`PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions)`, func() {
+		putCapacityThroughputConfigurationPath := "/_api/v2/user/capacity/throughput"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
@@ -924,7 +924,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
 				}))
 			})
-			It(`Invoke PutCapacityThroughputInformation successfully with retries`, func() {
+			It(`Invoke PutCapacityThroughputConfiguration successfully with retries`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -933,21 +933,21 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				cloudantService.EnableRetries(0, 0)
 
-				// Construct an instance of the PutCapacityThroughputInformationOptions model
-				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
-				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
-				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
+				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := cloudantService.PutCapacityThroughputInformationWithContext(ctx, putCapacityThroughputInformationOptionsModel)
+				_, _, operationErr := cloudantService.PutCapacityThroughputConfigurationWithContext(ctx, putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				result, response, operationErr := cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -955,7 +955,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = cloudantService.PutCapacityThroughputInformationWithContext(ctx, putCapacityThroughputInformationOptionsModel)
+				_, _, operationErr = cloudantService.PutCapacityThroughputConfigurationWithContext(ctx, putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -969,7 +969,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(putCapacityThroughputConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
 					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
@@ -994,7 +994,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
 				}))
 			})
-			It(`Invoke PutCapacityThroughputInformation successfully`, func() {
+			It(`Invoke PutCapacityThroughputConfiguration successfully`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1003,24 +1003,24 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(nil)
+				result, response, operationErr := cloudantService.PutCapacityThroughputConfiguration(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the PutCapacityThroughputInformationOptions model
-				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
-				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
-				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
+				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				result, response, operationErr = cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke PutCapacityThroughputInformation with error: Operation validation and request error`, func() {
+			It(`Invoke PutCapacityThroughputConfiguration with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -1028,22 +1028,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the PutCapacityThroughputInformationOptions model
-				putCapacityThroughputInformationOptionsModel := new(cloudantv1.PutCapacityThroughputInformationOptions)
-				putCapacityThroughputInformationOptionsModel.Blocks = core.Int64Ptr(int64(0))
-				putCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
+				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModel)
+				result, response, operationErr := cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the PutCapacityThroughputInformationOptions model with no property values
-				putCapacityThroughputInformationOptionsModelNew := new(cloudantv1.PutCapacityThroughputInformationOptions)
+				// Construct a second instance of the PutCapacityThroughputConfigurationOptions model with no property values
+				putCapacityThroughputConfigurationOptionsModelNew := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.PutCapacityThroughputInformation(putCapacityThroughputInformationOptionsModelNew)
+				result, response, operationErr = cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -5044,9 +5044,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5128,9 +5128,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5219,9 +5219,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5251,9 +5251,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5338,9 +5338,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5429,9 +5429,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5461,9 +5461,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5548,9 +5548,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5639,9 +5639,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5671,9 +5671,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5758,9 +5758,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5849,9 +5849,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5887,9 +5887,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6170,13 +6170,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6248,13 +6246,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6333,13 +6329,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6367,13 +6361,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6448,13 +6440,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6533,13 +6523,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6567,13 +6555,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6648,13 +6634,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6733,13 +6717,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6767,13 +6749,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6848,13 +6828,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6933,13 +6911,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -6973,13 +6949,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -7861,13 +7835,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDesignDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDesignDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -7939,13 +7911,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDesignDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDesignDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -8024,13 +7994,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDesignDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDesignDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -8058,13 +8026,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDesignDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.AttsSince = []string{"testString"}
 				getDesignDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getDesignDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getDesignDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getDesignDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -17663,13 +17629,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getReplicationDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.AttsSince = []string{"testString"}
 				getReplicationDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -17740,13 +17704,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getReplicationDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.AttsSince = []string{"testString"}
 				getReplicationDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -17824,13 +17786,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getReplicationDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.AttsSince = []string{"testString"}
 				getReplicationDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -17857,13 +17817,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getReplicationDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.AttsSince = []string{"testString"}
 				getReplicationDocumentOptionsModel.Conflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Latest = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.Meta = core.BoolPtr(true)
-				getReplicationDocumentOptionsModel.OpenRevs = []string{"testString"}
 				getReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
 				getReplicationDocumentOptionsModel.Revs = core.BoolPtr(true)
 				getReplicationDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
@@ -22254,7 +22212,6 @@ var _ = Describe(`CloudantV1`, func() {
 				getLocalDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getLocalDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getLocalDocumentOptionsModel.AttsSince = []string{"testString"}
 				getLocalDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -22320,7 +22277,6 @@ var _ = Describe(`CloudantV1`, func() {
 				getLocalDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getLocalDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getLocalDocumentOptionsModel.AttsSince = []string{"testString"}
 				getLocalDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -22393,7 +22349,6 @@ var _ = Describe(`CloudantV1`, func() {
 				getLocalDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getLocalDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getLocalDocumentOptionsModel.AttsSince = []string{"testString"}
 				getLocalDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -22420,7 +22375,6 @@ var _ = Describe(`CloudantV1`, func() {
 				getLocalDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
 				getLocalDocumentOptionsModel.Attachments = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
-				getLocalDocumentOptionsModel.AttsSince = []string{"testString"}
 				getLocalDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
 				getLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -24269,22 +24223,22 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) - Operation response error`, func() {
-		getActivityTrackerEventsInformationPath := "/_api/v2/user/activity_tracker/events"
+	Describe(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions) - Operation response error`, func() {
+		getActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsPath))
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke GetActivityTrackerEventsInformation with error: Operation response processing error`, func() {
+			It(`Invoke GetActivityTrackerEvents with error: Operation response processing error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24292,18 +24246,18 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
-				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
-				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetActivityTrackerEventsOptions model
+				getActivityTrackerEventsOptionsModel := new(cloudantv1.GetActivityTrackerEventsOptions)
+				getActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				result, response, operationErr := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				result, response, operationErr = cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -24314,15 +24268,15 @@ var _ = Describe(`CloudantV1`, func() {
 		})
 	})
 
-	Describe(`GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions)`, func() {
-		getActivityTrackerEventsInformationPath := "/_api/v2/user/activity_tracker/events"
+	Describe(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions)`, func() {
+		getActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// Sleep a short time to support a timeout test
@@ -24334,7 +24288,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(res, "%s", `{"types": ["management"]}`)
 				}))
 			})
-			It(`Invoke GetActivityTrackerEventsInformation successfully with retries`, func() {
+			It(`Invoke GetActivityTrackerEvents successfully with retries`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24343,20 +24297,20 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				cloudantService.EnableRetries(0, 0)
 
-				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
-				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
-				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetActivityTrackerEventsOptions model
+				getActivityTrackerEventsOptionsModel := new(cloudantv1.GetActivityTrackerEventsOptions)
+				getActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := cloudantService.GetActivityTrackerEventsInformationWithContext(ctx, getActivityTrackerEventsInformationOptionsModel)
+				_, _, operationErr := cloudantService.GetActivityTrackerEventsWithContext(ctx, getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				result, response, operationErr := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -24364,7 +24318,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = cloudantService.GetActivityTrackerEventsInformationWithContext(ctx, getActivityTrackerEventsInformationOptionsModel)
+				_, _, operationErr = cloudantService.GetActivityTrackerEventsWithContext(ctx, getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -24378,7 +24332,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsInformationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(getActivityTrackerEventsPath))
 					Expect(req.Method).To(Equal("GET"))
 
 					// Set mock response
@@ -24387,7 +24341,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(res, "%s", `{"types": ["management"]}`)
 				}))
 			})
-			It(`Invoke GetActivityTrackerEventsInformation successfully`, func() {
+			It(`Invoke GetActivityTrackerEvents successfully`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24396,23 +24350,23 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(nil)
+				result, response, operationErr := cloudantService.GetActivityTrackerEvents(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
-				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
-				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetActivityTrackerEventsOptions model
+				getActivityTrackerEventsOptionsModel := new(cloudantv1.GetActivityTrackerEventsOptions)
+				getActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				result, response, operationErr = cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke GetActivityTrackerEventsInformation with error: Operation request error`, func() {
+			It(`Invoke GetActivityTrackerEvents with error: Operation request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24420,13 +24374,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
-				getActivityTrackerEventsInformationOptionsModel := new(cloudantv1.GetActivityTrackerEventsInformationOptions)
-				getActivityTrackerEventsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the GetActivityTrackerEventsOptions model
+				getActivityTrackerEventsOptionsModel := new(cloudantv1.GetActivityTrackerEventsOptions)
+				getActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptionsModel)
+				result, response, operationErr := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
@@ -24437,22 +24391,22 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) - Operation response error`, func() {
-		postActivityTrackerEventsConfigurationPath := "/_api/v2/user/activity_tracker/events"
+	Describe(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions) - Operation response error`, func() {
+		postActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
 		Context(`Using mock server endpoint`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsPath))
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprintf(res, `} this is not valid json {`)
 				}))
 			})
-			It(`Invoke PostActivityTrackerEventsConfiguration with error: Operation response processing error`, func() {
+			It(`Invoke PostActivityTrackerEvents with error: Operation response processing error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24460,19 +24414,19 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
-				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
-				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
-				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PostActivityTrackerEventsOptions model
+				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
+				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				result, response, operationErr := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
 
 				// Enable retries and test again
 				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				result, response, operationErr = cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).To(BeNil())
@@ -24483,15 +24437,15 @@ var _ = Describe(`CloudantV1`, func() {
 		})
 	})
 
-	Describe(`PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions)`, func() {
-		postActivityTrackerEventsConfigurationPath := "/_api/v2/user/activity_tracker/events"
+	Describe(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions)`, func() {
+		postActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
@@ -24519,7 +24473,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
-			It(`Invoke PostActivityTrackerEventsConfiguration successfully with retries`, func() {
+			It(`Invoke PostActivityTrackerEvents successfully with retries`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24528,21 +24482,21 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 				cloudantService.EnableRetries(0, 0)
 
-				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
-				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
-				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
-				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PostActivityTrackerEventsOptions model
+				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
+				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
 				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc()
-				_, _, operationErr := cloudantService.PostActivityTrackerEventsConfigurationWithContext(ctx, postActivityTrackerEventsConfigurationOptionsModel)
+				_, _, operationErr := cloudantService.PostActivityTrackerEventsWithContext(ctx, postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 
 				// Disable retries and test again
 				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				result, response, operationErr := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
@@ -24550,7 +24504,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Re-test the timeout error with retries disabled
 				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
 				defer cancelFunc2()
-				_, _, operationErr = cloudantService.PostActivityTrackerEventsConfigurationWithContext(ctx, postActivityTrackerEventsConfigurationOptionsModel)
+				_, _, operationErr = cloudantService.PostActivityTrackerEventsWithContext(ctx, postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
 			})
@@ -24564,7 +24518,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsConfigurationPath))
+					Expect(req.URL.EscapedPath()).To(Equal(postActivityTrackerEventsPath))
 					Expect(req.Method).To(Equal("POST"))
 
 					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
@@ -24589,7 +24543,7 @@ var _ = Describe(`CloudantV1`, func() {
 					fmt.Fprintf(res, "%s", `{"ok": true}`)
 				}))
 			})
-			It(`Invoke PostActivityTrackerEventsConfiguration successfully`, func() {
+			It(`Invoke PostActivityTrackerEvents successfully`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24598,24 +24552,24 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(cloudantService).ToNot(BeNil())
 
 				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(nil)
+				result, response, operationErr := cloudantService.PostActivityTrackerEvents(nil)
 				Expect(operationErr).NotTo(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
-				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
-				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
-				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PostActivityTrackerEventsOptions model
+				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
+				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				result, response, operationErr = cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
 			})
-			It(`Invoke PostActivityTrackerEventsConfiguration with error: Operation validation and request error`, func() {
+			It(`Invoke PostActivityTrackerEvents with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
 					Authenticator: &core.NoAuthAuthenticator{},
@@ -24623,22 +24577,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
 
-				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
-				postActivityTrackerEventsConfigurationOptionsModel := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
-				postActivityTrackerEventsConfigurationOptionsModel.Types = []string{"management"}
-				postActivityTrackerEventsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Construct an instance of the PostActivityTrackerEventsOptions model
+				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
+				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
 				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModel)
+				result, response, operationErr := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
-				// Construct a second instance of the PostActivityTrackerEventsConfigurationOptions model with no property values
-				postActivityTrackerEventsConfigurationOptionsModelNew := new(cloudantv1.PostActivityTrackerEventsConfigurationOptions)
+				// Construct a second instance of the PostActivityTrackerEventsOptions model with no property values
+				postActivityTrackerEventsOptionsModelNew := new(cloudantv1.PostActivityTrackerEventsOptions)
 				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptionsModelNew)
+				result, response, operationErr = cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModelNew)
 				Expect(operationErr).ToNot(BeNil())
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
@@ -24822,9 +24776,9 @@ var _ = Describe(`CloudantV1`, func() {
 				URL:           "http://cloudantv1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
-			It(`Invoke NewActivityTrackerEventsConfiguration successfully`, func() {
+			It(`Invoke NewActivityTrackerEvents successfully`, func() {
 				types := []string{"management"}
-				model, err := cloudantService.NewActivityTrackerEventsConfiguration(types)
+				model, err := cloudantService.NewActivityTrackerEvents(types)
 				Expect(model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -24986,12 +24940,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getActiveTasksOptionsModel).ToNot(BeNil())
 				Expect(getActiveTasksOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewGetActivityTrackerEventsInformationOptions successfully`, func() {
-				// Construct an instance of the GetActivityTrackerEventsInformationOptions model
-				getActivityTrackerEventsInformationOptionsModel := cloudantService.NewGetActivityTrackerEventsInformationOptions()
-				getActivityTrackerEventsInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getActivityTrackerEventsInformationOptionsModel).ToNot(BeNil())
-				Expect(getActivityTrackerEventsInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			It(`Invoke NewGetActivityTrackerEventsOptions successfully`, func() {
+				// Construct an instance of the GetActivityTrackerEventsOptions model
+				getActivityTrackerEventsOptionsModel := cloudantService.NewGetActivityTrackerEventsOptions()
+				getActivityTrackerEventsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getActivityTrackerEventsOptionsModel).ToNot(BeNil())
+				Expect(getActivityTrackerEventsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetAllDbsOptions successfully`, func() {
 				// Construct an instance of the GetAllDbsOptions model
@@ -25105,13 +25059,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDesignDocumentOptionsModel.SetIfNoneMatch("testString")
 				getDesignDocumentOptionsModel.SetAttachments(true)
 				getDesignDocumentOptionsModel.SetAttEncodingInfo(true)
-				getDesignDocumentOptionsModel.SetAttsSince([]string{"testString"})
 				getDesignDocumentOptionsModel.SetConflicts(true)
 				getDesignDocumentOptionsModel.SetDeletedConflicts(true)
 				getDesignDocumentOptionsModel.SetLatest(true)
 				getDesignDocumentOptionsModel.SetLocalSeq(true)
 				getDesignDocumentOptionsModel.SetMeta(true)
-				getDesignDocumentOptionsModel.SetOpenRevs([]string{"testString"})
 				getDesignDocumentOptionsModel.SetRev("testString")
 				getDesignDocumentOptionsModel.SetRevs(true)
 				getDesignDocumentOptionsModel.SetRevsInfo(true)
@@ -25122,13 +25074,11 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getDesignDocumentOptionsModel.IfNoneMatch).To(Equal(core.StringPtr("testString")))
 				Expect(getDesignDocumentOptionsModel.Attachments).To(Equal(core.BoolPtr(true)))
 				Expect(getDesignDocumentOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
-				Expect(getDesignDocumentOptionsModel.AttsSince).To(Equal([]string{"testString"}))
 				Expect(getDesignDocumentOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(getDesignDocumentOptionsModel.DeletedConflicts).To(Equal(core.BoolPtr(true)))
 				Expect(getDesignDocumentOptionsModel.Latest).To(Equal(core.BoolPtr(true)))
 				Expect(getDesignDocumentOptionsModel.LocalSeq).To(Equal(core.BoolPtr(true)))
 				Expect(getDesignDocumentOptionsModel.Meta).To(Equal(core.BoolPtr(true)))
-				Expect(getDesignDocumentOptionsModel.OpenRevs).To(Equal([]string{"testString"}))
 				Expect(getDesignDocumentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(getDesignDocumentOptionsModel.Revs).To(Equal(core.BoolPtr(true)))
 				Expect(getDesignDocumentOptionsModel.RevsInfo).To(Equal(core.BoolPtr(true)))
@@ -25144,13 +25094,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getDocumentOptionsModel.SetIfNoneMatch("testString")
 				getDocumentOptionsModel.SetAttachments(true)
 				getDocumentOptionsModel.SetAttEncodingInfo(true)
-				getDocumentOptionsModel.SetAttsSince([]string{"testString"})
 				getDocumentOptionsModel.SetConflicts(true)
 				getDocumentOptionsModel.SetDeletedConflicts(true)
 				getDocumentOptionsModel.SetLatest(true)
 				getDocumentOptionsModel.SetLocalSeq(true)
 				getDocumentOptionsModel.SetMeta(true)
-				getDocumentOptionsModel.SetOpenRevs([]string{"testString"})
 				getDocumentOptionsModel.SetRev("testString")
 				getDocumentOptionsModel.SetRevs(true)
 				getDocumentOptionsModel.SetRevsInfo(true)
@@ -25161,13 +25109,11 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getDocumentOptionsModel.IfNoneMatch).To(Equal(core.StringPtr("testString")))
 				Expect(getDocumentOptionsModel.Attachments).To(Equal(core.BoolPtr(true)))
 				Expect(getDocumentOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
-				Expect(getDocumentOptionsModel.AttsSince).To(Equal([]string{"testString"}))
 				Expect(getDocumentOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(getDocumentOptionsModel.DeletedConflicts).To(Equal(core.BoolPtr(true)))
 				Expect(getDocumentOptionsModel.Latest).To(Equal(core.BoolPtr(true)))
 				Expect(getDocumentOptionsModel.LocalSeq).To(Equal(core.BoolPtr(true)))
 				Expect(getDocumentOptionsModel.Meta).To(Equal(core.BoolPtr(true)))
-				Expect(getDocumentOptionsModel.OpenRevs).To(Equal([]string{"testString"}))
 				Expect(getDocumentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(getDocumentOptionsModel.Revs).To(Equal(core.BoolPtr(true)))
 				Expect(getDocumentOptionsModel.RevsInfo).To(Equal(core.BoolPtr(true)))
@@ -25269,7 +25215,6 @@ var _ = Describe(`CloudantV1`, func() {
 				getLocalDocumentOptionsModel.SetIfNoneMatch("testString")
 				getLocalDocumentOptionsModel.SetAttachments(true)
 				getLocalDocumentOptionsModel.SetAttEncodingInfo(true)
-				getLocalDocumentOptionsModel.SetAttsSince([]string{"testString"})
 				getLocalDocumentOptionsModel.SetLocalSeq(true)
 				getLocalDocumentOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getLocalDocumentOptionsModel).ToNot(BeNil())
@@ -25279,7 +25224,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getLocalDocumentOptionsModel.IfNoneMatch).To(Equal(core.StringPtr("testString")))
 				Expect(getLocalDocumentOptionsModel.Attachments).To(Equal(core.BoolPtr(true)))
 				Expect(getLocalDocumentOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
-				Expect(getLocalDocumentOptionsModel.AttsSince).To(Equal([]string{"testString"}))
 				Expect(getLocalDocumentOptionsModel.LocalSeq).To(Equal(core.BoolPtr(true)))
 				Expect(getLocalDocumentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -25311,13 +25255,11 @@ var _ = Describe(`CloudantV1`, func() {
 				getReplicationDocumentOptionsModel.SetIfNoneMatch("testString")
 				getReplicationDocumentOptionsModel.SetAttachments(true)
 				getReplicationDocumentOptionsModel.SetAttEncodingInfo(true)
-				getReplicationDocumentOptionsModel.SetAttsSince([]string{"testString"})
 				getReplicationDocumentOptionsModel.SetConflicts(true)
 				getReplicationDocumentOptionsModel.SetDeletedConflicts(true)
 				getReplicationDocumentOptionsModel.SetLatest(true)
 				getReplicationDocumentOptionsModel.SetLocalSeq(true)
 				getReplicationDocumentOptionsModel.SetMeta(true)
-				getReplicationDocumentOptionsModel.SetOpenRevs([]string{"testString"})
 				getReplicationDocumentOptionsModel.SetRev("testString")
 				getReplicationDocumentOptionsModel.SetRevs(true)
 				getReplicationDocumentOptionsModel.SetRevsInfo(true)
@@ -25327,13 +25269,11 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getReplicationDocumentOptionsModel.IfNoneMatch).To(Equal(core.StringPtr("testString")))
 				Expect(getReplicationDocumentOptionsModel.Attachments).To(Equal(core.BoolPtr(true)))
 				Expect(getReplicationDocumentOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(true)))
-				Expect(getReplicationDocumentOptionsModel.AttsSince).To(Equal([]string{"testString"}))
 				Expect(getReplicationDocumentOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(getReplicationDocumentOptionsModel.DeletedConflicts).To(Equal(core.BoolPtr(true)))
 				Expect(getReplicationDocumentOptionsModel.Latest).To(Equal(core.BoolPtr(true)))
 				Expect(getReplicationDocumentOptionsModel.LocalSeq).To(Equal(core.BoolPtr(true)))
 				Expect(getReplicationDocumentOptionsModel.Meta).To(Equal(core.BoolPtr(true)))
-				Expect(getReplicationDocumentOptionsModel.OpenRevs).To(Equal([]string{"testString"}))
 				Expect(getReplicationDocumentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(getReplicationDocumentOptionsModel.Revs).To(Equal(core.BoolPtr(true)))
 				Expect(getReplicationDocumentOptionsModel.RevsInfo).To(Equal(core.BoolPtr(true)))
@@ -25569,15 +25509,15 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(headUpInformationOptionsModel).ToNot(BeNil())
 				Expect(headUpInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewPostActivityTrackerEventsConfigurationOptions successfully`, func() {
-				// Construct an instance of the PostActivityTrackerEventsConfigurationOptions model
-				postActivityTrackerEventsConfigurationOptionsTypes := []string{"management"}
-				postActivityTrackerEventsConfigurationOptionsModel := cloudantService.NewPostActivityTrackerEventsConfigurationOptions(postActivityTrackerEventsConfigurationOptionsTypes)
-				postActivityTrackerEventsConfigurationOptionsModel.SetTypes([]string{"management"})
-				postActivityTrackerEventsConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(postActivityTrackerEventsConfigurationOptionsModel).ToNot(BeNil())
-				Expect(postActivityTrackerEventsConfigurationOptionsModel.Types).To(Equal([]string{"management"}))
-				Expect(postActivityTrackerEventsConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			It(`Invoke NewPostActivityTrackerEventsOptions successfully`, func() {
+				// Construct an instance of the PostActivityTrackerEventsOptions model
+				postActivityTrackerEventsOptionsTypes := []string{"management"}
+				postActivityTrackerEventsOptionsModel := cloudantService.NewPostActivityTrackerEventsOptions(postActivityTrackerEventsOptionsTypes)
+				postActivityTrackerEventsOptionsModel.SetTypes([]string{"management"})
+				postActivityTrackerEventsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(postActivityTrackerEventsOptionsModel).ToNot(BeNil())
+				Expect(postActivityTrackerEventsOptionsModel.Types).To(Equal([]string{"management"}))
+				Expect(postActivityTrackerEventsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostAllDocsOptions successfully`, func() {
 				// Construct an instance of the PostAllDocsOptions model
@@ -25756,13 +25696,13 @@ var _ = Describe(`CloudantV1`, func() {
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				Expect(bulkGetQueryDocumentModel).ToNot(BeNil())
 				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("small-appliances:1000042")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
 				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 				Expect(bulkGetQueryDocumentModel.AttsSince).To(Equal([]string{"testString"}))
-				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("small-appliances:1000042")))
+				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("order00067")))
 				Expect(bulkGetQueryDocumentModel.OpenRevs).To(Equal([]string{"testString"}))
-				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("3-917fa2381192822767f010b95b45325b")))
 
 				// Construct an instance of the PostBulkGetOptions model
 				db := "testString"
@@ -26724,15 +26664,15 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(putAttachmentOptionsModel.Rev).To(Equal(core.StringPtr("testString")))
 				Expect(putAttachmentOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewPutCapacityThroughputInformationOptions successfully`, func() {
-				// Construct an instance of the PutCapacityThroughputInformationOptions model
-				putCapacityThroughputInformationOptionsBlocks := int64(0)
-				putCapacityThroughputInformationOptionsModel := cloudantService.NewPutCapacityThroughputInformationOptions(putCapacityThroughputInformationOptionsBlocks)
-				putCapacityThroughputInformationOptionsModel.SetBlocks(int64(0))
-				putCapacityThroughputInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(putCapacityThroughputInformationOptionsModel).ToNot(BeNil())
-				Expect(putCapacityThroughputInformationOptionsModel.Blocks).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(putCapacityThroughputInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			It(`Invoke NewPutCapacityThroughputConfigurationOptions successfully`, func() {
+				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
+				putCapacityThroughputConfigurationOptionsBlocks := int64(0)
+				putCapacityThroughputConfigurationOptionsModel := cloudantService.NewPutCapacityThroughputConfigurationOptions(putCapacityThroughputConfigurationOptionsBlocks)
+				putCapacityThroughputConfigurationOptionsModel.SetBlocks(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(putCapacityThroughputConfigurationOptionsModel).ToNot(BeNil())
+				Expect(putCapacityThroughputConfigurationOptionsModel.Blocks).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(putCapacityThroughputConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutCloudantSecurityConfigurationOptions successfully`, func() {
 				// Construct an instance of the SecurityObject model
