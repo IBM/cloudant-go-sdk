@@ -43,6 +43,15 @@ func main() {
 			exampleDocID,
 		),
 	)
+
+	// Note: for byte response (Output Stream) use:
+	// documentAsStream, getDocumentResponse, err := client.GetDocumentAsStream(
+	// 	client.NewGetDocumentOptions(
+	// 		exampleDbName,
+	// 		exampleDocID,
+	// 	),
+	// )
+
 	if err != nil {
 		if getDocumentResponse.StatusCode == 404 {
 			fmt.Printf("Cannot update document because "+
@@ -65,6 +74,11 @@ func main() {
 		postDocumentOption := client.NewPostDocumentOptions(
 			exampleDbName,
 		).SetDocument(document)
+
+		// Note: for byte request (Input Stream) use:
+		// postDocumentOption := client.NewPostDocumentOptions(
+		// 	exampleDbName,
+		// ).SetBody(inputStream)
 
 		postDocumentResult, _, err := client.PostDocument(
 			postDocumentOption,
