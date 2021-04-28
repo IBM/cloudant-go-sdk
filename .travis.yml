@@ -30,9 +30,6 @@ script:
 - go test ./... -race -coverprofile=coverage.txt -covermode=atomic
 - golangci-lint run
 
-after_sucess:
-- bash <(curl -s https://codecov.io/bash)
-
 # To disable semantic-release, comment these sections.
 #before_deploy:
 #- pip install --user bump2version
