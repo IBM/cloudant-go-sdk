@@ -44,8 +44,8 @@ func main() {
 		),
 	)
 
-	// Note: for byte response (Output Stream) use:
-	// documentAsStream, getDocumentResponse, err := client.GetDocumentAsStream(
+	// Note: for response byte stream use:
+	// documentAsByteStream, getDocumentResponse, err := client.GetDocumentAsStream(
 	// 	client.NewGetDocumentOptions(
 	// 		exampleDbName,
 	// 		exampleDocID,
@@ -75,10 +75,10 @@ func main() {
 			exampleDbName,
 		).SetDocument(document)
 
-		// Note: for byte request (Input Stream) use:
+		// Note: for request byte stream use:
 		// postDocumentOption := client.NewPostDocumentOptions(
 		// 	exampleDbName,
-		// ).SetBody(inputStream)
+		// ).SetBody(documentAsByteStream)
 
 		postDocumentResult, _, err := client.PostDocument(
 			postDocumentOption,
