@@ -490,6 +490,15 @@ func main() {
 			exampleDocID,
 		),
 	)
+
+	// Note: for response byte stream use:
+	// documentAsByteStream, getDocumentResponse, err := client.GetDocumentAsStream(
+	// 	client.NewGetDocumentOptions(
+	// 		exampleDbName,
+	// 		exampleDocID,
+	// 	),
+	// )
+
 	if err != nil {
 		if getDocumentResponse.StatusCode == 404 {
 			fmt.Printf("Cannot update document because "+
@@ -512,6 +521,11 @@ func main() {
 		postDocumentOption := client.NewPostDocumentOptions(
 			exampleDbName,
 		).SetDocument(document)
+
+		// Note: for request byte stream use:
+		// postDocumentOption := client.NewPostDocumentOptions(
+		// 	exampleDbName,
+		// ).SetBody(documentAsByteStream)
 
 		postDocumentResult, _, err := client.PostDocument(
 			postDocumentOption,
@@ -633,13 +647,32 @@ For sample code on handling errors, see
 ### Raw IO
 
 For endpoints that read or write document content it is possible to bypass
-usage of the built-in models and send or receive a bytes response.
-For examples of using byte streams, see the API reference documentation
-("Example request as a stream" section).
+usage of the built-in struct with byte streams. 
 
-- [Bulk modify multiple documents in a database](https://cloud.ibm.com/apidocs/cloudant?code=go#postbulkdocs)
-- [Query a list of all documents in a database](https://cloud.ibm.com/apidocs/cloudant?code=go#postalldocs)
-- [Query the database document changes feed](https://cloud.ibm.com/apidocs/cloudant?code=go#postchanges)
+Depending on the specific SDK operation it may be possible to:
+* accept a user-provided byte stream to send to the server as a request body
+* return a byte stream of the server response body to the user
+
+Request byte stream can be supplied for method options that have a `Body` property.
+For these cases you can pass this byte stream directly to the HTTP request body.
+
+Response byte stream is supported in functions with the suffix of `AsStream`.
+The returned byte stream allows the response body to be consumed
+without triggering JSON unmarshalling that is typically performed by the SDK.
+
+The [update document](#3-update-your-previously-created-document) section
+contains examples for both request and response byte stream cases.
+
+The API reference contains further examples of using byte streams. 
+They are titled "Example request as stream" and are initially collapsed. 
+Expand them to see examples of:
+
+- Byte requests:
+  - [Bulk modify multiple documents in a database](https://cloud.ibm.com/apidocs/cloudant?code=go#postbulkdocs)
+
+- Byte responses:
+  - [Query a list of all documents in a database](https://cloud.ibm.com/apidocs/cloudant?code=go#postalldocs)
+  - [Query the database document changes feed](https://cloud.ibm.com/apidocs/cloudant?code=go#postchanges)
 
 ### Further resources
 
