@@ -177,3 +177,17 @@ The example above represents this JSON body:
     ...
 }
 ```
+
+### Disabling request body compression
+```go
+import (
+    "github.com/ibm/cloudant-go-sdk/cloudantv1"
+)
+client, err := cloudantv1.NewCloudantV1UsingExternalConfig(
+    &cloudantv1.CloudantV1Options{
+        ServiceName: "{your-service-name}",
+    },
+)
+client.SetEnableGzipCompression(false)
+...
+```
