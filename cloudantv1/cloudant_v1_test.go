@@ -20,17 +20,18 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/IBM/cloudant-go-sdk/cloudantv1"
-	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/go-openapi/strfmt"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"time"
+
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/go-sdk-core/v5/core"
+	"github.com/go-openapi/strfmt"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
 var _ = Describe(`CloudantV1`, func() {
@@ -165,7 +166,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`GetServerInformation(getServerInformationOptions *GetServerInformationOptions) - Operation response error`, func() {
 		getServerInformationPath := "/"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -207,7 +208,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetServerInformation(getServerInformationOptions *GetServerInformationOptions)`, func() {
 		getServerInformationPath := "/"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -330,10 +330,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetServerInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetServerInformationOptions model
+				getServerInformationOptionsModel := new(cloudantv1.GetServerInformationOptions)
+				getServerInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetServerInformation(getServerInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) - Operation response error`, func() {
 		getMembershipInformationPath := "/_membership"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -375,7 +408,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
 		getMembershipInformationPath := "/_membership"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -498,10 +530,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetMembershipInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetMembershipInformationOptions model
+				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
+				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetUuids(getUuidsOptions *GetUuidsOptions) - Operation response error`, func() {
 		getUuidsPath := "/_uuids"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -545,7 +610,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetUuids(getUuidsOptions *GetUuidsOptions)`, func() {
 		getUuidsPath := "/_uuids"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -673,10 +737,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetUuids successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetUuidsOptions model
+				getUuidsOptionsModel := new(cloudantv1.GetUuidsOptions)
+				getUuidsOptionsModel.Count = core.Int64Ptr(int64(1))
+				getUuidsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetUuids(getUuidsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) - Operation response error`, func() {
 		getCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -718,7 +816,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions)`, func() {
 		getCapacityThroughputInformationPath := "/_api/v2/user/capacity/throughput"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -841,10 +938,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetCapacityThroughputInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCapacityThroughputInformationOptions model
+				getCapacityThroughputInformationOptionsModel := new(cloudantv1.GetCapacityThroughputInformationOptions)
+				getCapacityThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions) - Operation response error`, func() {
 		putCapacityThroughputConfigurationPath := "/_api/v2/user/capacity/throughput"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -887,7 +1017,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions)`, func() {
 		putCapacityThroughputConfigurationPath := "/_api/v2/user/capacity/throughput"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -1052,138 +1181,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PutCapacityThroughputConfiguration successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
+				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions) - Operation response error`, func() {
 		getDbUpdatesPath := "/_db_updates"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1233,7 +1268,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions)`, func() {
 		getDbUpdatesPath := "/_db_updates"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -1376,10 +1410,47 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDbUpdates successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDbUpdatesOptions model
+				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
+				getDbUpdatesOptionsModel.Feed = core.StringPtr("continuous")
+				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Since = core.StringPtr("testString")
+				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDbUpdates(getDbUpdatesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostChanges(postChangesOptions *PostChangesOptions) - Operation response error`, func() {
 		postChangesPath := "/testString/_changes"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -1456,7 +1527,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostChanges(postChangesOptions *PostChangesOptions)`, func() {
 		postChangesPath := "/testString/_changes"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -1707,8 +1777,59 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostChanges successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostChangesOptions model
+				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
+				postChangesOptionsModel.Db = core.StringPtr("testString")
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
+				postChangesOptionsModel.Fields = []string{"testString"}
+				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
+				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postChangesOptionsModel.Attachments = core.BoolPtr(true)
+				postChangesOptionsModel.Conflicts = core.BoolPtr(true)
+				postChangesOptionsModel.Descending = core.BoolPtr(true)
+				postChangesOptionsModel.Feed = core.StringPtr("continuous")
+				postChangesOptionsModel.Filter = core.StringPtr("testString")
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				postChangesOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
+				postChangesOptionsModel.Since = core.StringPtr("testString")
+				postChangesOptionsModel.Style = core.StringPtr("testString")
+				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(0))
+				postChangesOptionsModel.View = core.StringPtr("testString")
+				postChangesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostChanges(postChangesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostChangesAsStream(postChangesOptions *PostChangesOptions)`, func() {
 		postChangesAsStreamPath := "/testString/_changes"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -1965,136 +2086,64 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostChangesAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the PostChangesOptions model
+				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
+				postChangesOptionsModel.Db = core.StringPtr("testString")
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
+				postChangesOptionsModel.Fields = []string{"testString"}
+				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
+				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postChangesOptionsModel.Attachments = core.BoolPtr(true)
+				postChangesOptionsModel.Conflicts = core.BoolPtr(true)
+				postChangesOptionsModel.Descending = core.BoolPtr(true)
+				postChangesOptionsModel.Feed = core.StringPtr("continuous")
+				postChangesOptionsModel.Filter = core.StringPtr("testString")
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				postChangesOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
+				postChangesOptionsModel.Since = core.StringPtr("testString")
+				postChangesOptionsModel.Style = core.StringPtr("testString")
+				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(0))
+				postChangesOptionsModel.View = core.StringPtr("testString")
+				postChangesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostChangesAsStream(postChangesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadDatabase(headDatabaseOptions *HeadDatabaseOptions)`, func() {
 		headDatabasePath := "/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -2163,7 +2212,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetAllDbs(getAllDbsOptions *GetAllDbsOptions)`, func() {
 		getAllDbsPath := "/_all_dbs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -2311,10 +2359,48 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetAllDbs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetAllDbsOptions model
+				getAllDbsOptionsModel := new(cloudantv1.GetAllDbsOptions)
+				getAllDbsOptionsModel.Descending = core.BoolPtr(true)
+				getAllDbsOptionsModel.Endkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				getAllDbsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				getAllDbsOptionsModel.Startkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetAllDbs(getAllDbsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) - Operation response error`, func() {
 		postDbsInfoPath := "/_dbs_info"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2357,7 +2443,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions)`, func() {
 		postDbsInfoPath := "/_dbs_info"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -2522,10 +2607,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostDbsInfo successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostDbsInfoOptions model
+				postDbsInfoOptionsModel := new(cloudantv1.PostDbsInfoOptions)
+				postDbsInfoOptionsModel.Keys = []string{"testString"}
+				postDbsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostDbsInfo(postDbsInfoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`DeleteDatabase(deleteDatabaseOptions *DeleteDatabaseOptions) - Operation response error`, func() {
 		deleteDatabasePath := "/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2568,7 +2687,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteDatabase(deleteDatabaseOptions *DeleteDatabaseOptions)`, func() {
 		deleteDatabasePath := "/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -2701,10 +2819,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke DeleteDatabase successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDatabaseOptions model
+				deleteDatabaseOptionsModel := new(cloudantv1.DeleteDatabaseOptions)
+				deleteDatabaseOptionsModel.Db = core.StringPtr("testString")
+				deleteDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteDatabase(deleteDatabaseOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetDatabaseInformation(getDatabaseInformationOptions *GetDatabaseInformationOptions) - Operation response error`, func() {
 		getDatabaseInformationPath := "/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2747,7 +2899,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetDatabaseInformation(getDatabaseInformationOptions *GetDatabaseInformationOptions)`, func() {
 		getDatabaseInformationPath := "/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -2880,10 +3031,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDatabaseInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDatabaseInformationOptions model
+				getDatabaseInformationOptionsModel := new(cloudantv1.GetDatabaseInformationOptions)
+				getDatabaseInformationOptionsModel.Db = core.StringPtr("testString")
+				getDatabaseInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDatabaseInformation(getDatabaseInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutDatabase(putDatabaseOptions *PutDatabaseOptions) - Operation response error`, func() {
 		putDatabasePath := "/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -2930,7 +3115,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutDatabase(putDatabaseOptions *PutDatabaseOptions)`, func() {
 		putDatabasePath := "/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -3073,136 +3257,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PutDatabase successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the PutDatabaseOptions model
+				putDatabaseOptionsModel := new(cloudantv1.PutDatabaseOptions)
+				putDatabaseOptionsModel.Db = core.StringPtr("testString")
+				putDatabaseOptionsModel.Partitioned = core.BoolPtr(true)
+				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(1))
+				putDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutDatabase(putDatabaseOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadDocument(headDocumentOptions *HeadDocumentOptions)`, func() {
 		headDocumentPath := "/testString/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -3285,7 +3376,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`PostDocument(postDocumentOptions *PostDocumentOptions) - Operation response error`, func() {
 		postDocumentPath := "/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -3370,7 +3461,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostDocument(postDocumentOptions *PostDocumentOptions)`, func() {
 		postDocumentPath := "/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -3658,10 +3748,83 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PostDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Document model
+				documentModel := new(cloudantv1.Document)
+				documentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				documentModel.Conflicts = []string{"testString"}
+				documentModel.Deleted = core.BoolPtr(true)
+				documentModel.DeletedConflicts = []string{"testString"}
+				documentModel.ID = core.StringPtr("testString")
+				documentModel.LocalSeq = core.StringPtr("testString")
+				documentModel.Rev = core.StringPtr("testString")
+				documentModel.Revisions = revisionsModel
+				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostDocumentOptions model
+				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
+				postDocumentOptionsModel.Db = core.StringPtr("testString")
+				postDocumentOptionsModel.Document = documentModel
+				postDocumentOptionsModel.ContentType = core.StringPtr("application/json")
+				postDocumentOptionsModel.Batch = core.StringPtr("ok")
+				postDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostDocument(postDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostAllDocs(postAllDocsOptions *PostAllDocsOptions) - Operation response error`, func() {
 		postAllDocsPath := "/testString/_all_docs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -3717,7 +3880,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostAllDocs(postAllDocsOptions *PostAllDocsOptions)`, func() {
 		postAllDocsPath := "/testString/_all_docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -3921,8 +4083,54 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostAllDocs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostAllDocsOptions model
+				postAllDocsOptionsModel := new(cloudantv1.PostAllDocsOptions)
+				postAllDocsOptionsModel.Db = core.StringPtr("testString")
+				postAllDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postAllDocsOptionsModel.Attachments = core.BoolPtr(true)
+				postAllDocsOptionsModel.Conflicts = core.BoolPtr(true)
+				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
+				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Key = core.StringPtr("testString")
+				postAllDocsOptionsModel.Keys = []string{"testString"}
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
+				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostAllDocs(postAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostAllDocsAsStream(postAllDocsOptions *PostAllDocsOptions)`, func() {
 		postAllDocsAsStreamPath := "/testString/_all_docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -4132,10 +4340,62 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostAllDocsAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostAllDocsOptions model
+				postAllDocsOptionsModel := new(cloudantv1.PostAllDocsOptions)
+				postAllDocsOptionsModel.Db = core.StringPtr("testString")
+				postAllDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postAllDocsOptionsModel.Attachments = core.BoolPtr(true)
+				postAllDocsOptionsModel.Conflicts = core.BoolPtr(true)
+				postAllDocsOptionsModel.Descending = core.BoolPtr(true)
+				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.Key = core.StringPtr("testString")
+				postAllDocsOptionsModel.Keys = []string{"testString"}
+				postAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
+				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostAllDocsAsStream(postAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostAllDocsQueries(postAllDocsQueriesOptions *PostAllDocsQueriesOptions) - Operation response error`, func() {
 		postAllDocsQueriesPath := "/testString/_all_docs/queries"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -4195,7 +4455,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostAllDocsQueries(postAllDocsQueriesOptions *PostAllDocsQueriesOptions)`, func() {
 		postAllDocsQueriesPath := "/testString/_all_docs/queries"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -4411,8 +4670,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostAllDocsQueries successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the AllDocsQuery model
+				allDocsQueryModel := new(cloudantv1.AllDocsQuery)
+				allDocsQueryModel.AttEncodingInfo = core.BoolPtr(true)
+				allDocsQueryModel.Attachments = core.BoolPtr(true)
+				allDocsQueryModel.Conflicts = core.BoolPtr(true)
+				allDocsQueryModel.Descending = core.BoolPtr(true)
+				allDocsQueryModel.IncludeDocs = core.BoolPtr(true)
+				allDocsQueryModel.InclusiveEnd = core.BoolPtr(true)
+				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
+				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
+				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
+				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.Key = core.StringPtr("testString")
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
+				allDocsQueryModel.Startkey = core.StringPtr("testString")
+
+				// Construct an instance of the PostAllDocsQueriesOptions model
+				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
+				postAllDocsQueriesOptionsModel.Db = core.StringPtr("testString")
+				postAllDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postAllDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostAllDocsQueries(postAllDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostAllDocsQueriesAsStream(postAllDocsQueriesOptions *PostAllDocsQueriesOptions)`, func() {
 		postAllDocsQueriesAsStreamPath := "/testString/_all_docs/queries"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -4634,10 +4943,66 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostAllDocsQueriesAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the AllDocsQuery model
+				allDocsQueryModel := new(cloudantv1.AllDocsQuery)
+				allDocsQueryModel.AttEncodingInfo = core.BoolPtr(true)
+				allDocsQueryModel.Attachments = core.BoolPtr(true)
+				allDocsQueryModel.Conflicts = core.BoolPtr(true)
+				allDocsQueryModel.Descending = core.BoolPtr(true)
+				allDocsQueryModel.IncludeDocs = core.BoolPtr(true)
+				allDocsQueryModel.InclusiveEnd = core.BoolPtr(true)
+				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
+				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
+				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
+				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.Key = core.StringPtr("testString")
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
+				allDocsQueryModel.Startkey = core.StringPtr("testString")
+
+				// Construct an instance of the PostAllDocsQueriesOptions model
+				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
+				postAllDocsQueriesOptionsModel.Db = core.StringPtr("testString")
+				postAllDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postAllDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostAllDocsQueriesAsStream(postAllDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions) - Operation response error`, func() {
 		postBulkDocsPath := "/testString/_bulk_docs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -4722,7 +5087,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions)`, func() {
 		postBulkDocsPath := "/testString/_bulk_docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -5013,10 +5377,86 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PostBulkDocs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Document model
+				documentModel := new(cloudantv1.Document)
+				documentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				documentModel.Conflicts = []string{"testString"}
+				documentModel.Deleted = core.BoolPtr(true)
+				documentModel.DeletedConflicts = []string{"testString"}
+				documentModel.ID = core.StringPtr("testString")
+				documentModel.LocalSeq = core.StringPtr("testString")
+				documentModel.Rev = core.StringPtr("testString")
+				documentModel.Revisions = revisionsModel
+				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the BulkDocs model
+				bulkDocsModel := new(cloudantv1.BulkDocs)
+				bulkDocsModel.Docs = []cloudantv1.Document{*documentModel}
+				bulkDocsModel.NewEdits = core.BoolPtr(true)
+
+				// Construct an instance of the PostBulkDocsOptions model
+				postBulkDocsOptionsModel := new(cloudantv1.PostBulkDocsOptions)
+				postBulkDocsOptionsModel.Db = core.StringPtr("testString")
+				postBulkDocsOptionsModel.BulkDocs = bulkDocsModel
+				postBulkDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostBulkDocs(postBulkDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostBulkGet(postBulkGetOptions *PostBulkGetOptions) - Operation response error`, func() {
 		postBulkGetPath := "/testString/_bulk_get"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -5075,7 +5515,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostBulkGet(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetPath := "/testString/_bulk_get"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -5284,8 +5723,53 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostBulkGet successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the BulkGetQueryDocument model
+				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
+				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
+
+				// Construct an instance of the PostBulkGetOptions model
+				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
+				postBulkGetOptionsModel.Db = core.StringPtr("testString")
+				postBulkGetOptionsModel.Docs = []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel}
+				postBulkGetOptionsModel.Attachments = core.BoolPtr(true)
+				postBulkGetOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postBulkGetOptionsModel.Latest = core.BoolPtr(true)
+				postBulkGetOptionsModel.Revs = core.BoolPtr(true)
+				postBulkGetOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostBulkGet(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetAsMixedPath := "/testString/_bulk_get"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -5494,8 +5978,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostBulkGetAsMixed successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the BulkGetQueryDocument model
+				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
+				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
+
+				// Construct an instance of the PostBulkGetOptions model
+				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
+				postBulkGetOptionsModel.Db = core.StringPtr("testString")
+				postBulkGetOptionsModel.Docs = []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel}
+				postBulkGetOptionsModel.Attachments = core.BoolPtr(true)
+				postBulkGetOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postBulkGetOptionsModel.Latest = core.BoolPtr(true)
+				postBulkGetOptionsModel.Revs = core.BoolPtr(true)
+				postBulkGetOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostBulkGetAsMixed(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostBulkGetAsRelated(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetAsRelatedPath := "/testString/_bulk_get"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -5704,8 +6238,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostBulkGetAsRelated successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the BulkGetQueryDocument model
+				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
+				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
+
+				// Construct an instance of the PostBulkGetOptions model
+				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
+				postBulkGetOptionsModel.Db = core.StringPtr("testString")
+				postBulkGetOptionsModel.Docs = []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel}
+				postBulkGetOptionsModel.Attachments = core.BoolPtr(true)
+				postBulkGetOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postBulkGetOptionsModel.Latest = core.BoolPtr(true)
+				postBulkGetOptionsModel.Revs = core.BoolPtr(true)
+				postBulkGetOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostBulkGetAsRelated(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostBulkGetAsStream(postBulkGetOptions *PostBulkGetOptions)`, func() {
 		postBulkGetAsStreamPath := "/testString/_bulk_get"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -5920,10 +6504,61 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostBulkGetAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the BulkGetQueryDocument model
+				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
+				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
+
+				// Construct an instance of the PostBulkGetOptions model
+				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
+				postBulkGetOptionsModel.Db = core.StringPtr("testString")
+				postBulkGetOptionsModel.Docs = []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel}
+				postBulkGetOptionsModel.Attachments = core.BoolPtr(true)
+				postBulkGetOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postBulkGetOptionsModel.Latest = core.BoolPtr(true)
+				postBulkGetOptionsModel.Revs = core.BoolPtr(true)
+				postBulkGetOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostBulkGetAsStream(postBulkGetOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`DeleteDocument(deleteDocumentOptions *DeleteDocumentOptions) - Operation response error`, func() {
 		deleteDocumentPath := "/testString/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -5974,7 +6609,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteDocument(deleteDocumentOptions *DeleteDocumentOptions)`, func() {
 		deleteDocumentPath := "/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -6127,10 +6761,48 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke DeleteDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDocumentOptions model
+				deleteDocumentOptionsModel := new(cloudantv1.DeleteDocumentOptions)
+				deleteDocumentOptionsModel.Db = core.StringPtr("testString")
+				deleteDocumentOptionsModel.DocID = core.StringPtr("testString")
+				deleteDocumentOptionsModel.IfMatch = core.StringPtr("testString")
+				deleteDocumentOptionsModel.Batch = core.StringPtr("ok")
+				deleteDocumentOptionsModel.Rev = core.StringPtr("testString")
+				deleteDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteDocument(deleteDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetDocument(getDocumentOptions *GetDocumentOptions) - Operation response error`, func() {
 		getDocumentPath := "/testString/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -6197,7 +6869,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetDocument(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentPath := "/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -6390,8 +7061,53 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDocumentOptions model
+				getDocumentOptionsModel := new(cloudantv1.GetDocumentOptions)
+				getDocumentOptionsModel.Db = core.StringPtr("testString")
+				getDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.Latest = core.BoolPtr(true)
+				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getDocumentOptionsModel.Meta = core.BoolPtr(true)
+				getDocumentOptionsModel.Rev = core.StringPtr("testString")
+				getDocumentOptionsModel.Revs = core.BoolPtr(true)
+				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDocument(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetDocumentAsMixed(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentAsMixedPath := "/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -6584,8 +7300,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDocumentAsMixed successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDocumentOptions model
+				getDocumentOptionsModel := new(cloudantv1.GetDocumentOptions)
+				getDocumentOptionsModel.Db = core.StringPtr("testString")
+				getDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.Latest = core.BoolPtr(true)
+				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getDocumentOptionsModel.Meta = core.BoolPtr(true)
+				getDocumentOptionsModel.Rev = core.StringPtr("testString")
+				getDocumentOptionsModel.Revs = core.BoolPtr(true)
+				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDocumentAsMixed(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetDocumentAsRelated(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentAsRelatedPath := "/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -6778,8 +7544,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDocumentAsRelated successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDocumentOptions model
+				getDocumentOptionsModel := new(cloudantv1.GetDocumentOptions)
+				getDocumentOptionsModel.Db = core.StringPtr("testString")
+				getDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.Latest = core.BoolPtr(true)
+				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getDocumentOptionsModel.Meta = core.BoolPtr(true)
+				getDocumentOptionsModel.Rev = core.StringPtr("testString")
+				getDocumentOptionsModel.Revs = core.BoolPtr(true)
+				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDocumentAsRelated(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetDocumentAsStream(getDocumentOptions *GetDocumentOptions)`, func() {
 		getDocumentAsStreamPath := "/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -6978,10 +7794,61 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDocumentAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDocumentOptions model
+				getDocumentOptionsModel := new(cloudantv1.GetDocumentOptions)
+				getDocumentOptionsModel.Db = core.StringPtr("testString")
+				getDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Conflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
+				getDocumentOptionsModel.Latest = core.BoolPtr(true)
+				getDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getDocumentOptionsModel.Meta = core.BoolPtr(true)
+				getDocumentOptionsModel.Rev = core.StringPtr("testString")
+				getDocumentOptionsModel.Revs = core.BoolPtr(true)
+				getDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
+				getDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDocumentAsStream(getDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutDocument(putDocumentOptions *PutDocumentOptions) - Operation response error`, func() {
 		putDocumentPath := "/testString/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -7042,7 +7909,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -7074,7 +7950,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutDocument(putDocumentOptions *PutDocumentOptions)`, func() {
 		putDocumentPath := "/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -7160,7 +8035,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -7285,7 +8169,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -7348,7 +8241,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -7382,136 +8284,93 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PutDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Document model
+				documentModel := new(cloudantv1.Document)
+				documentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				documentModel.Conflicts = []string{"testString"}
+				documentModel.Deleted = core.BoolPtr(true)
+				documentModel.DeletedConflicts = []string{"testString"}
+				documentModel.ID = core.StringPtr("exampleid")
+				documentModel.LocalSeq = core.StringPtr("testString")
+				documentModel.Rev = core.StringPtr("testString")
+				documentModel.Revisions = revisionsModel
+				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
+				documentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PutDocumentOptions model
+				putDocumentOptionsModel := new(cloudantv1.PutDocumentOptions)
+				putDocumentOptionsModel.Db = core.StringPtr("testString")
+				putDocumentOptionsModel.DocID = core.StringPtr("testString")
+				putDocumentOptionsModel.Document = documentModel
+				putDocumentOptionsModel.ContentType = core.StringPtr("application/json")
+				putDocumentOptionsModel.IfMatch = core.StringPtr("testString")
+				putDocumentOptionsModel.Batch = core.StringPtr("ok")
+				putDocumentOptionsModel.NewEdits = core.BoolPtr(true)
+				putDocumentOptionsModel.Rev = core.StringPtr("testString")
+				putDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutDocument(putDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadDesignDocument(headDesignDocumentOptions *HeadDesignDocumentOptions)`, func() {
 		headDesignDocumentPath := "/testString/_design/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -7588,7 +8447,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`DeleteDesignDocument(deleteDesignDocumentOptions *DeleteDesignDocumentOptions) - Operation response error`, func() {
 		deleteDesignDocumentPath := "/testString/_design/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -7639,7 +8498,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteDesignDocument(deleteDesignDocumentOptions *DeleteDesignDocumentOptions)`, func() {
 		deleteDesignDocumentPath := "/testString/_design/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -7792,10 +8650,48 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke DeleteDesignDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDesignDocumentOptions model
+				deleteDesignDocumentOptionsModel := new(cloudantv1.DeleteDesignDocumentOptions)
+				deleteDesignDocumentOptionsModel.Db = core.StringPtr("testString")
+				deleteDesignDocumentOptionsModel.Ddoc = core.StringPtr("testString")
+				deleteDesignDocumentOptionsModel.IfMatch = core.StringPtr("testString")
+				deleteDesignDocumentOptionsModel.Batch = core.StringPtr("ok")
+				deleteDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
+				deleteDesignDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteDesignDocument(deleteDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions) - Operation response error`, func() {
 		getDesignDocumentPath := "/testString/_design/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -7862,7 +8758,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions)`, func() {
 		getDesignDocumentPath := "/testString/_design/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -8055,10 +8950,56 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDesignDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDesignDocumentOptions model
+				getDesignDocumentOptionsModel := new(cloudantv1.GetDesignDocumentOptions)
+				getDesignDocumentOptionsModel.Db = core.StringPtr("testString")
+				getDesignDocumentOptionsModel.Ddoc = core.StringPtr("testString")
+				getDesignDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getDesignDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.Conflicts = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.Latest = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.Meta = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
+				getDesignDocumentOptionsModel.Revs = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
+				getDesignDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDesignDocument(getDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions) - Operation response error`, func() {
 		putDesignDocumentPath := "/testString/_design/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -8156,7 +9097,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -8190,7 +9131,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions)`, func() {
 		putDesignDocumentPath := "/testString/_design/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -8313,7 +9253,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -8477,7 +9417,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -8581,7 +9521,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.ValidateDocUpdate = make(map[string]string)
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -8617,10 +9557,128 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PutDesignDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the Analyzer model
+				analyzerModel := new(cloudantv1.Analyzer)
+				analyzerModel.Name = core.StringPtr("classic")
+				analyzerModel.Stopwords = []string{"testString"}
+
+				// Construct an instance of the AnalyzerConfiguration model
+				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
+				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Fields = make(map[string]cloudantv1.Analyzer)
+				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
+
+				// Construct an instance of the SearchIndexDefinition model
+				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
+				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
+				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+
+				// Construct an instance of the DesignDocumentOptions model
+				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
+				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
+
+				// Construct an instance of the DesignDocumentViewsMapReduce model
+				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
+
+				// Construct an instance of the GeoIndexDefinition model
+				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
+				geoIndexDefinitionModel.Index = core.StringPtr("testString")
+
+				// Construct an instance of the DesignDocument model
+				designDocumentModel := new(cloudantv1.DesignDocument)
+				designDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				designDocumentModel.Conflicts = []string{"testString"}
+				designDocumentModel.Deleted = core.BoolPtr(true)
+				designDocumentModel.DeletedConflicts = []string{"testString"}
+				designDocumentModel.ID = core.StringPtr("testString")
+				designDocumentModel.LocalSeq = core.StringPtr("testString")
+				designDocumentModel.Rev = core.StringPtr("testString")
+				designDocumentModel.Revisions = revisionsModel
+				designDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				designDocumentModel.Autoupdate = core.BoolPtr(true)
+				designDocumentModel.Filters = make(map[string]string)
+				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
+				designDocumentModel.Language = core.StringPtr("testString")
+				designDocumentModel.Options = designDocumentOptionsModel
+				designDocumentModel.Updates = make(map[string]string)
+				designDocumentModel.ValidateDocUpdate = make(map[string]string)
+				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
+				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
+				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.Attachments["foo"] = *attachmentModel
+				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
+				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
+				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
+
+				// Construct an instance of the PutDesignDocumentOptions model
+				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
+				putDesignDocumentOptionsModel.Db = core.StringPtr("testString")
+				putDesignDocumentOptionsModel.Ddoc = core.StringPtr("testString")
+				putDesignDocumentOptionsModel.DesignDocument = designDocumentModel
+				putDesignDocumentOptionsModel.IfMatch = core.StringPtr("testString")
+				putDesignDocumentOptionsModel.Batch = core.StringPtr("ok")
+				putDesignDocumentOptionsModel.NewEdits = core.BoolPtr(true)
+				putDesignDocumentOptionsModel.Rev = core.StringPtr("testString")
+				putDesignDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutDesignDocument(putDesignDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetDesignDocumentInformation(getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions) - Operation response error`, func() {
 		getDesignDocumentInformationPath := "/testString/_design/testString/_info"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -8664,7 +9722,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetDesignDocumentInformation(getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions)`, func() {
 		getDesignDocumentInformationPath := "/testString/_design/testString/_info"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -8800,10 +9857,45 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDesignDocumentInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetDesignDocumentInformationOptions model
+				getDesignDocumentInformationOptionsModel := new(cloudantv1.GetDesignDocumentInformationOptions)
+				getDesignDocumentInformationOptionsModel.Db = core.StringPtr("testString")
+				getDesignDocumentInformationOptionsModel.Ddoc = core.StringPtr("testString")
+				getDesignDocumentInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDesignDocumentInformation(getDesignDocumentInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostDesignDocs(postDesignDocsOptions *PostDesignDocsOptions) - Operation response error`, func() {
 		postDesignDocsPath := "/testString/_design_docs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -8862,7 +9954,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostDesignDocs(postDesignDocsOptions *PostDesignDocsOptions)`, func() {
 		postDesignDocsPath := "/testString/_design_docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -9073,10 +10164,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostDesignDocs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostDesignDocsOptions model
+				postDesignDocsOptionsModel := new(cloudantv1.PostDesignDocsOptions)
+				postDesignDocsOptionsModel.Db = core.StringPtr("testString")
+				postDesignDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postDesignDocsOptionsModel.Attachments = core.BoolPtr(true)
+				postDesignDocsOptionsModel.Conflicts = core.BoolPtr(true)
+				postDesignDocsOptionsModel.Descending = core.BoolPtr(true)
+				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
+				postDesignDocsOptionsModel.Keys = []string{"testString"}
+				postDesignDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
+				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
+				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostDesignDocs(postDesignDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostDesignDocsQueries(postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions) - Operation response error`, func() {
 		postDesignDocsQueriesPath := "/testString/_design_docs/queries"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -9139,7 +10278,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostDesignDocsQueries(postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions)`, func() {
 		postDesignDocsQueriesPath := "/testString/_design_docs/queries"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -9362,138 +10500,62 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostDesignDocsQueries successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the AllDocsQuery model
+				allDocsQueryModel := new(cloudantv1.AllDocsQuery)
+				allDocsQueryModel.AttEncodingInfo = core.BoolPtr(true)
+				allDocsQueryModel.Attachments = core.BoolPtr(true)
+				allDocsQueryModel.Conflicts = core.BoolPtr(true)
+				allDocsQueryModel.Descending = core.BoolPtr(true)
+				allDocsQueryModel.IncludeDocs = core.BoolPtr(true)
+				allDocsQueryModel.InclusiveEnd = core.BoolPtr(true)
+				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
+				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
+				allDocsQueryModel.UpdateSeq = core.BoolPtr(true)
+				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.Key = core.StringPtr("testString")
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
+				allDocsQueryModel.Startkey = core.StringPtr("testString")
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Construct an instance of the PostDesignDocsQueriesOptions model
+				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
+				postDesignDocsQueriesOptionsModel.Db = core.StringPtr("testString")
+				postDesignDocsQueriesOptionsModel.Queries = []cloudantv1.AllDocsQuery{*allDocsQueryModel}
+				postDesignDocsQueriesOptionsModel.Accept = core.StringPtr("application/json")
+				postDesignDocsQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostDesignDocsQueries(postDesignDocsQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
+			AfterEach(func() {
+				testServer.Close()
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`PostView(postViewOptions *PostViewOptions) - Operation response error`, func() {
 		postViewPath := "/testString/_design/testString/_view/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -9558,7 +10620,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostView(postViewOptions *PostViewOptions)`, func() {
 		postViewPath := "/testString/_design/testString/_view/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -9789,8 +10850,63 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostView successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostViewOptions model
+				postViewOptionsModel := new(cloudantv1.PostViewOptions)
+				postViewOptionsModel.Db = core.StringPtr("testString")
+				postViewOptionsModel.Ddoc = core.StringPtr("testString")
+				postViewOptionsModel.View = core.StringPtr("testString")
+				postViewOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postViewOptionsModel.Attachments = core.BoolPtr(true)
+				postViewOptionsModel.Conflicts = core.BoolPtr(true)
+				postViewOptionsModel.Descending = core.BoolPtr(true)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postViewOptionsModel.Endkey = core.StringPtr("testString")
+				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.Group = core.BoolPtr(true)
+				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
+				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
+				postViewOptionsModel.Reduce = core.BoolPtr(true)
+				postViewOptionsModel.Stable = core.BoolPtr(true)
+				postViewOptionsModel.Startkey = core.StringPtr("testString")
+				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.Update = core.StringPtr("true")
+				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostView(postViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostViewAsStream(postViewOptions *PostViewOptions)`, func() {
 		postViewAsStreamPath := "/testString/_design/testString/_view/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -10027,10 +11143,71 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostViewAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostViewOptions model
+				postViewOptionsModel := new(cloudantv1.PostViewOptions)
+				postViewOptionsModel.Db = core.StringPtr("testString")
+				postViewOptionsModel.Ddoc = core.StringPtr("testString")
+				postViewOptionsModel.View = core.StringPtr("testString")
+				postViewOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postViewOptionsModel.Attachments = core.BoolPtr(true)
+				postViewOptionsModel.Conflicts = core.BoolPtr(true)
+				postViewOptionsModel.Descending = core.BoolPtr(true)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postViewOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postViewOptionsModel.Endkey = core.StringPtr("testString")
+				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.Group = core.BoolPtr(true)
+				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
+				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
+				postViewOptionsModel.Reduce = core.BoolPtr(true)
+				postViewOptionsModel.Stable = core.BoolPtr(true)
+				postViewOptionsModel.Startkey = core.StringPtr("testString")
+				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.Update = core.StringPtr("true")
+				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostViewAsStream(postViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostViewQueries(postViewQueriesOptions *PostViewQueriesOptions) - Operation response error`, func() {
 		postViewQueriesPath := "/testString/_design/testString/_view/testString/queries"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -10099,7 +11276,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostViewQueries(postViewQueriesOptions *PostViewQueriesOptions)`, func() {
 		postViewQueriesPath := "/testString/_design/testString/_view/testString/queries"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -10342,8 +11518,67 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostViewQueries successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the ViewQuery model
+				viewQueryModel := new(cloudantv1.ViewQuery)
+				viewQueryModel.AttEncodingInfo = core.BoolPtr(true)
+				viewQueryModel.Attachments = core.BoolPtr(true)
+				viewQueryModel.Conflicts = core.BoolPtr(true)
+				viewQueryModel.Descending = core.BoolPtr(true)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
+				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
+				viewQueryModel.Skip = core.Int64Ptr(int64(0))
+				viewQueryModel.UpdateSeq = core.BoolPtr(true)
+				viewQueryModel.Endkey = core.StringPtr("testString")
+				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.Group = core.BoolPtr(true)
+				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
+				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Keys = []interface{}{"testString"}
+				viewQueryModel.Reduce = core.BoolPtr(true)
+				viewQueryModel.Stable = core.BoolPtr(true)
+				viewQueryModel.Startkey = core.StringPtr("testString")
+				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.Update = core.StringPtr("true")
+
+				// Construct an instance of the PostViewQueriesOptions model
+				postViewQueriesOptionsModel := new(cloudantv1.PostViewQueriesOptions)
+				postViewQueriesOptionsModel.Db = core.StringPtr("testString")
+				postViewQueriesOptionsModel.Ddoc = core.StringPtr("testString")
+				postViewQueriesOptionsModel.View = core.StringPtr("testString")
+				postViewQueriesOptionsModel.Queries = []cloudantv1.ViewQuery{*viewQueryModel}
+				postViewQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostViewQueries(postViewQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostViewQueriesAsStream(postViewQueriesOptions *PostViewQueriesOptions)`, func() {
 		postViewQueriesAsStreamPath := "/testString/_design/testString/_view/testString/queries"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -10592,138 +11827,75 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostViewQueriesAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the ViewQuery model
+				viewQueryModel := new(cloudantv1.ViewQuery)
+				viewQueryModel.AttEncodingInfo = core.BoolPtr(true)
+				viewQueryModel.Attachments = core.BoolPtr(true)
+				viewQueryModel.Conflicts = core.BoolPtr(true)
+				viewQueryModel.Descending = core.BoolPtr(true)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
+				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
+				viewQueryModel.Skip = core.Int64Ptr(int64(0))
+				viewQueryModel.UpdateSeq = core.BoolPtr(true)
+				viewQueryModel.Endkey = core.StringPtr("testString")
+				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.Group = core.BoolPtr(true)
+				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
+				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Keys = []interface{}{"testString"}
+				viewQueryModel.Reduce = core.BoolPtr(true)
+				viewQueryModel.Stable = core.BoolPtr(true)
+				viewQueryModel.Startkey = core.StringPtr("testString")
+				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.Update = core.StringPtr("true")
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Construct an instance of the PostViewQueriesOptions model
+				postViewQueriesOptionsModel := new(cloudantv1.PostViewQueriesOptions)
+				postViewQueriesOptionsModel.Db = core.StringPtr("testString")
+				postViewQueriesOptionsModel.Ddoc = core.StringPtr("testString")
+				postViewQueriesOptionsModel.View = core.StringPtr("testString")
+				postViewQueriesOptionsModel.Queries = []cloudantv1.ViewQuery{*viewQueryModel}
+				postViewQueriesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostViewQueriesAsStream(postViewQueriesOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions) - Operation response error`, func() {
 		getPartitionInformationPath := "/testString/_partition/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -10767,7 +11939,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions)`, func() {
 		getPartitionInformationPath := "/testString/_partition/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -10903,10 +12074,45 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetPartitionInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetPartitionInformationOptions model
+				getPartitionInformationOptionsModel := new(cloudantv1.GetPartitionInformationOptions)
+				getPartitionInformationOptionsModel.Db = core.StringPtr("testString")
+				getPartitionInformationOptionsModel.PartitionKey = core.StringPtr("testString")
+				getPartitionInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetPartitionInformation(getPartitionInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostPartitionAllDocs(postPartitionAllDocsOptions *PostPartitionAllDocsOptions) - Operation response error`, func() {
 		postPartitionAllDocsPath := "/testString/_partition/testString/_all_docs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -10963,7 +12169,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostPartitionAllDocs(postPartitionAllDocsOptions *PostPartitionAllDocsOptions)`, func() {
 		postPartitionAllDocsPath := "/testString/_partition/testString/_all_docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -11170,8 +12375,55 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionAllDocs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionAllDocsOptions model
+				postPartitionAllDocsOptionsModel := new(cloudantv1.PostPartitionAllDocsOptions)
+				postPartitionAllDocsOptionsModel.Db = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Attachments = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
+				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostPartitionAllDocsAsStream(postPartitionAllDocsOptions *PostPartitionAllDocsOptions)`, func() {
 		postPartitionAllDocsAsStreamPath := "/testString/_partition/testString/_all_docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -11384,10 +12636,63 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionAllDocsAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionAllDocsOptions model
+				postPartitionAllDocsOptionsModel := new(cloudantv1.PostPartitionAllDocsOptions)
+				postPartitionAllDocsOptionsModel.Db = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Attachments = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
+				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("0007741142412418284")
+				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionAllDocsAsStream(postPartitionAllDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions) - Operation response error`, func() {
 		postPartitionSearchPath := "/testString/_partition/testString/_design/testString/_search/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -11445,7 +12750,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions)`, func() {
 		postPartitionSearchPath := "/testString/_partition/testString/_design/testString/_search/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -11655,8 +12959,56 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionSearch successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionSearchOptions model
+				postPartitionSearchOptionsModel := new(cloudantv1.PostPartitionSearchOptions)
+				postPartitionSearchOptionsModel.Db = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
+				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
+				postPartitionSearchOptionsModel.HighlightPostTag = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.HighlightPreTag = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
+				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
+				postPartitionSearchOptionsModel.Sort = []string{"testString"}
+				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
+				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionSearch(postPartitionSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostPartitionSearchAsStream(postPartitionSearchOptions *PostPartitionSearchOptions)`, func() {
 		postPartitionSearchAsStreamPath := "/testString/_partition/testString/_design/testString/_search/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -11872,10 +13224,64 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionSearchAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionSearchOptions model
+				postPartitionSearchOptionsModel := new(cloudantv1.PostPartitionSearchOptions)
+				postPartitionSearchOptionsModel.Db = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
+				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
+				postPartitionSearchOptionsModel.HighlightPostTag = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.HighlightPreTag = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
+				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
+				postPartitionSearchOptionsModel.Sort = []string{"testString"}
+				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
+				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionSearchAsStream(postPartitionSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions) - Operation response error`, func() {
 		postPartitionViewPath := "/testString/_partition/testString/_design/testString/_view/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -11941,7 +13347,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions)`, func() {
 		postPartitionViewPath := "/testString/_partition/testString/_design/testString/_view/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -12175,8 +13580,64 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionView successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionViewOptions model
+				postPartitionViewOptionsModel := new(cloudantv1.PostPartitionViewOptions)
+				postPartitionViewOptionsModel.Db = core.StringPtr("testString")
+				postPartitionViewOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Ddoc = core.StringPtr("testString")
+				postPartitionViewOptionsModel.View = core.StringPtr("testString")
+				postPartitionViewOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Attachments = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
+				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
+				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
+				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Update = core.StringPtr("true")
+				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionView(postPartitionViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostPartitionViewAsStream(postPartitionViewOptions *PostPartitionViewOptions)`, func() {
 		postPartitionViewAsStreamPath := "/testString/_partition/testString/_design/testString/_view/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -12416,10 +13877,72 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionViewAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionViewOptions model
+				postPartitionViewOptionsModel := new(cloudantv1.PostPartitionViewOptions)
+				postPartitionViewOptionsModel.Db = core.StringPtr("testString")
+				postPartitionViewOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Ddoc = core.StringPtr("testString")
+				postPartitionViewOptionsModel.View = core.StringPtr("testString")
+				postPartitionViewOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Attachments = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Descending = core.BoolPtr(true)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
+				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Group = core.BoolPtr(true)
+				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
+				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
+				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Update = core.StringPtr("true")
+				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionViewAsStream(postPartitionViewOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions) - Operation response error`, func() {
 		postPartitionFindPath := "/testString/_partition/testString/_find"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -12474,7 +13997,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions)`, func() {
 		postPartitionFindPath := "/testString/_partition/testString/_find"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -12675,8 +14197,53 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionFind successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionFindOptions model
+				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
+				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
+				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
+				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionFindOptionsModel.Update = core.StringPtr("false")
+				postPartitionFindOptionsModel.UseIndex = []string{"testString"}
+				postPartitionFindOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionFind(postPartitionFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostPartitionFindAsStream(postPartitionFindOptions *PostPartitionFindOptions)`, func() {
 		postPartitionFindAsStreamPath := "/testString/_partition/testString/_find"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -12883,138 +14450,61 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionFindAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the PostPartitionFindOptions model
+				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
+				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
+				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
+				postPartitionFindOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionFindOptionsModel.Update = core.StringPtr("false")
+				postPartitionFindOptionsModel.UseIndex = []string{"testString"}
+				postPartitionFindOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionFindAsStream(postPartitionFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
 
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
+			AfterEach(func() {
+				testServer.Close()
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`PostExplain(postExplainOptions *PostExplainOptions) - Operation response error`, func() {
 		postExplainPath := "/testString/_explain"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -13069,7 +14559,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostExplain(postExplainOptions *PostExplainOptions)`, func() {
 		postExplainPath := "/testString/_explain"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -13270,10 +14759,56 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostExplain successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostExplainOptions model
+				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
+				postExplainOptionsModel.Db = core.StringPtr("testString")
+				postExplainOptionsModel.Selector = make(map[string]interface{})
+				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
+				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
+				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postExplainOptionsModel.Fields = []string{"testString"}
+				postExplainOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postExplainOptionsModel.Sort = []map[string]string{make(map[string]string)}
+				postExplainOptionsModel.Stable = core.BoolPtr(true)
+				postExplainOptionsModel.Update = core.StringPtr("false")
+				postExplainOptionsModel.UseIndex = []string{"testString"}
+				postExplainOptionsModel.R = core.Int64Ptr(int64(1))
+				postExplainOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostExplain(postExplainOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostFind(postFindOptions *PostFindOptions) - Operation response error`, func() {
 		postFindPath := "/testString/_find"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -13328,7 +14863,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostFind(postFindOptions *PostFindOptions)`, func() {
 		postFindPath := "/testString/_find"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -13529,8 +15063,53 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostFind successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostFindOptions model
+				postFindOptionsModel := new(cloudantv1.PostFindOptions)
+				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Bookmark = core.StringPtr("testString")
+				postFindOptionsModel.Conflicts = core.BoolPtr(true)
+				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
+				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
+				postFindOptionsModel.Stable = core.BoolPtr(true)
+				postFindOptionsModel.Update = core.StringPtr("false")
+				postFindOptionsModel.UseIndex = []string{"testString"}
+				postFindOptionsModel.R = core.Int64Ptr(int64(1))
+				postFindOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostFind(postFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostFindAsStream(postFindOptions *PostFindOptions)`, func() {
 		postFindAsStreamPath := "/testString/_find"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -13737,10 +15316,61 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostFindAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostFindOptions model
+				postFindOptionsModel := new(cloudantv1.PostFindOptions)
+				postFindOptionsModel.Db = core.StringPtr("testString")
+				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Bookmark = core.StringPtr("testString")
+				postFindOptionsModel.Conflicts = core.BoolPtr(true)
+				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
+				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postFindOptionsModel.Sort = []map[string]string{make(map[string]string)}
+				postFindOptionsModel.Stable = core.BoolPtr(true)
+				postFindOptionsModel.Update = core.StringPtr("false")
+				postFindOptionsModel.UseIndex = []string{"testString"}
+				postFindOptionsModel.R = core.Int64Ptr(int64(1))
+				postFindOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostFindAsStream(postFindOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions) - Operation response error`, func() {
 		getIndexesInformationPath := "/testString/_index"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -13783,7 +15413,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions)`, func() {
 		getIndexesInformationPath := "/testString/_index"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -13916,10 +15545,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetIndexesInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetIndexesInformationOptions model
+				getIndexesInformationOptionsModel := new(cloudantv1.GetIndexesInformationOptions)
+				getIndexesInformationOptionsModel.Db = core.StringPtr("testString")
+				getIndexesInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetIndexesInformation(getIndexesInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostIndex(postIndexOptions *PostIndexOptions) - Operation response error`, func() {
 		postIndexPath := "/testString/_index"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -13992,7 +15655,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostIndex(postIndexOptions *PostIndexOptions)`, func() {
 		postIndexPath := "/testString/_index"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -14247,10 +15909,74 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostIndex successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Analyzer model
+				analyzerModel := new(cloudantv1.Analyzer)
+				analyzerModel.Name = core.StringPtr("classic")
+				analyzerModel.Stopwords = []string{"testString"}
+
+				// Construct an instance of the IndexTextOperatorDefaultField model
+				indexTextOperatorDefaultFieldModel := new(cloudantv1.IndexTextOperatorDefaultField)
+				indexTextOperatorDefaultFieldModel.Analyzer = analyzerModel
+				indexTextOperatorDefaultFieldModel.Enabled = core.BoolPtr(true)
+
+				// Construct an instance of the IndexField model
+				indexFieldModel := new(cloudantv1.IndexField)
+				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Type = core.StringPtr("boolean")
+				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
+
+				// Construct an instance of the IndexDefinition model
+				indexDefinitionModel := new(cloudantv1.IndexDefinition)
+				indexDefinitionModel.DefaultAnalyzer = analyzerModel
+				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
+				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
+				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
+				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+
+				// Construct an instance of the PostIndexOptions model
+				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
+				postIndexOptionsModel.Db = core.StringPtr("testString")
+				postIndexOptionsModel.Index = indexDefinitionModel
+				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
+				postIndexOptionsModel.Def = indexDefinitionModel
+				postIndexOptionsModel.Name = core.StringPtr("testString")
+				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
+				postIndexOptionsModel.Type = core.StringPtr("json")
+				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostIndex(postIndexOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`DeleteIndex(deleteIndexOptions *DeleteIndexOptions) - Operation response error`, func() {
 		deleteIndexPath := "/testString/_index/_design/testString/json/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -14296,7 +16022,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteIndex(deleteIndexOptions *DeleteIndexOptions)`, func() {
 		deleteIndexPath := "/testString/_index/_design/testString/json/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -14438,138 +16163,47 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke DeleteIndex successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the DeleteIndexOptions model
+				deleteIndexOptionsModel := new(cloudantv1.DeleteIndexOptions)
+				deleteIndexOptionsModel.Db = core.StringPtr("testString")
+				deleteIndexOptionsModel.Ddoc = core.StringPtr("testString")
+				deleteIndexOptionsModel.Type = core.StringPtr("json")
+				deleteIndexOptionsModel.Index = core.StringPtr("testString")
+				deleteIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteIndex(deleteIndexOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions) - Operation response error`, func() {
 		postSearchAnalyzePath := "/_search_analyze"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -14613,7 +16247,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions)`, func() {
 		postSearchAnalyzePath := "/_search_analyze"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -14781,10 +16414,45 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostSearchAnalyze successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostSearchAnalyzeOptions model
+				postSearchAnalyzeOptionsModel := new(cloudantv1.PostSearchAnalyzeOptions)
+				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("arabic")
+				postSearchAnalyzeOptionsModel.Text = core.StringPtr("testString")
+				postSearchAnalyzeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostSearchAnalyze(postSearchAnalyzeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostSearch(postSearchOptions *PostSearchOptions) - Operation response error`, func() {
 		postSearchPath := "/testString/_design/testString/_search/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -14847,7 +16515,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostSearch(postSearchOptions *PostSearchOptions)`, func() {
 		postSearchPath := "/testString/_design/testString/_search/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -15072,8 +16739,61 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostSearch successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostSearchOptions model
+				postSearchOptionsModel := new(cloudantv1.PostSearchOptions)
+				postSearchOptionsModel.Db = core.StringPtr("testString")
+				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
+				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
+				postSearchOptionsModel.HighlightFields = []string{"testString"}
+				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
+				postSearchOptionsModel.HighlightPostTag = core.StringPtr("testString")
+				postSearchOptionsModel.HighlightPreTag = core.StringPtr("testString")
+				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
+				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postSearchOptionsModel.IncludeFields = []string{"testString"}
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
+				postSearchOptionsModel.Sort = []string{"testString"}
+				postSearchOptionsModel.Stale = core.StringPtr("ok")
+				postSearchOptionsModel.Counts = []string{"testString"}
+				postSearchOptionsModel.Drilldown = [][]string{[]string{"testString"}}
+				postSearchOptionsModel.GroupField = core.StringPtr("testString")
+				postSearchOptionsModel.GroupLimit = core.Int64Ptr(int64(1))
+				postSearchOptionsModel.GroupSort = []string{"testString"}
+				postSearchOptionsModel.Ranges = make(map[string]map[string]map[string]string)
+				postSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostSearch(postSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostSearchAsStream(postSearchOptions *PostSearchOptions)`, func() {
 		postSearchAsStreamPath := "/testString/_design/testString/_search/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -15304,10 +17024,69 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostSearchAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostSearchOptions model
+				postSearchOptionsModel := new(cloudantv1.PostSearchOptions)
+				postSearchOptionsModel.Db = core.StringPtr("testString")
+				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
+				postSearchOptionsModel.Index = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
+				postSearchOptionsModel.HighlightFields = []string{"testString"}
+				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
+				postSearchOptionsModel.HighlightPostTag = core.StringPtr("testString")
+				postSearchOptionsModel.HighlightPreTag = core.StringPtr("testString")
+				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(1))
+				postSearchOptionsModel.IncludeDocs = core.BoolPtr(true)
+				postSearchOptionsModel.IncludeFields = []string{"testString"}
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
+				postSearchOptionsModel.Sort = []string{"testString"}
+				postSearchOptionsModel.Stale = core.StringPtr("ok")
+				postSearchOptionsModel.Counts = []string{"testString"}
+				postSearchOptionsModel.Drilldown = [][]string{[]string{"testString"}}
+				postSearchOptionsModel.GroupField = core.StringPtr("testString")
+				postSearchOptionsModel.GroupLimit = core.Int64Ptr(int64(1))
+				postSearchOptionsModel.GroupSort = []string{"testString"}
+				postSearchOptionsModel.Ranges = make(map[string]map[string]map[string]string)
+				postSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostSearchAsStream(postSearchOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions) - Operation response error`, func() {
 		getSearchInfoPath := "/testString/_design/testString/_search_info/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -15352,7 +17131,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions)`, func() {
 		getSearchInfoPath := "/testString/_design/testString/_search_info/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -15491,138 +17269,46 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSearchInfo successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the GetSearchInfoOptions model
+				getSearchInfoOptionsModel := new(cloudantv1.GetSearchInfoOptions)
+				getSearchInfoOptionsModel.Db = core.StringPtr("testString")
+				getSearchInfoOptionsModel.Ddoc = core.StringPtr("testString")
+				getSearchInfoOptionsModel.Index = core.StringPtr("testString")
+				getSearchInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSearchInfo(getSearchInfoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetGeo(getGeoOptions *GetGeoOptions) - Operation response error`, func() {
 		getGeoPath := "/testString/_design/testString/_geo/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -15697,7 +17383,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetGeo(getGeoOptions *GetGeoOptions)`, func() {
 		getGeoPath := "/testString/_design/testString/_geo/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -15911,8 +17596,58 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetGeo successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetGeoOptions model
+				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
+				getGeoOptionsModel.Db = core.StringPtr("testString")
+				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
+				getGeoOptionsModel.Index = core.StringPtr("testString")
+				getGeoOptionsModel.Bbox = core.StringPtr("testString")
+				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
+				getGeoOptionsModel.Format = core.StringPtr("legacy")
+				getGeoOptionsModel.G = core.StringPtr("testString")
+				getGeoOptionsModel.IncludeDocs = core.BoolPtr(true)
+				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
+				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
+				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
+				getGeoOptionsModel.Nearest = core.BoolPtr(true)
+				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
+				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
+				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
+				getGeoOptionsModel.Relation = core.StringPtr("contains")
+				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
+				getGeoOptionsModel.Stale = core.StringPtr("ok")
+				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetGeo(getGeoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetGeoAsStream(getGeoOptions *GetGeoOptions)`, func() {
 		getGeoAsStreamPath := "/testString/_design/testString/_geo/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -16132,10 +17867,66 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetGeoAsStream successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetGeoOptions model
+				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
+				getGeoOptionsModel.Db = core.StringPtr("testString")
+				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
+				getGeoOptionsModel.Index = core.StringPtr("testString")
+				getGeoOptionsModel.Bbox = core.StringPtr("testString")
+				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
+				getGeoOptionsModel.Format = core.StringPtr("legacy")
+				getGeoOptionsModel.G = core.StringPtr("testString")
+				getGeoOptionsModel.IncludeDocs = core.BoolPtr(true)
+				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
+				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
+				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
+				getGeoOptionsModel.Nearest = core.BoolPtr(true)
+				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
+				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
+				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
+				getGeoOptionsModel.Relation = core.StringPtr("contains")
+				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
+				getGeoOptionsModel.Stale = core.StringPtr("ok")
+				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetGeoAsStream(getGeoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions) - Operation response error`, func() {
 		postGeoCleanupPath := "/testString/_geo_cleanup"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -16178,7 +17969,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions)`, func() {
 		postGeoCleanupPath := "/testString/_geo_cleanup"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -16311,10 +18101,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke PostGeoCleanup successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostGeoCleanupOptions model
+				postGeoCleanupOptionsModel := new(cloudantv1.PostGeoCleanupOptions)
+				postGeoCleanupOptionsModel.Db = core.StringPtr("testString")
+				postGeoCleanupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions) - Operation response error`, func() {
 		getGeoIndexInformationPath := "/testString/_design/testString/_geo_info/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -16359,7 +18183,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions)`, func() {
 		getGeoIndexInformationPath := "/testString/_design/testString/_geo_info/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -16498,136 +18321,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetGeoIndexInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the GetGeoIndexInformationOptions model
+				getGeoIndexInformationOptionsModel := new(cloudantv1.GetGeoIndexInformationOptions)
+				getGeoIndexInformationOptionsModel.Db = core.StringPtr("testString")
+				getGeoIndexInformationOptionsModel.Ddoc = core.StringPtr("testString")
+				getGeoIndexInformationOptionsModel.Index = core.StringPtr("testString")
+				getGeoIndexInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions)`, func() {
 		headReplicationDocumentPath := "/_replicator/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -16700,7 +18430,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`HeadSchedulerDocument(headSchedulerDocumentOptions *HeadSchedulerDocumentOptions)`, func() {
 		headSchedulerDocumentPath := "/_scheduler/docs/_replicator/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -16769,7 +18498,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`HeadSchedulerJob(headSchedulerJobOptions *HeadSchedulerJobOptions)`, func() {
 		headSchedulerJobPath := "/_scheduler/jobs/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -16840,7 +18568,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`PostReplicate(postReplicateOptions *PostReplicateOptions) - Operation response error`, func() {
 		postReplicatePath := "/_replicate"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -16942,7 +18670,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
@@ -16967,7 +18695,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostReplicate(postReplicateOptions *PostReplicateOptions)`, func() {
 		postReplicatePath := "/_replicate"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -17094,7 +18821,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
@@ -17253,7 +18980,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
@@ -17357,7 +19084,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostReplicateOptions model
@@ -17384,10 +19111,128 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostReplicate successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = make(map[string]string)
+				replicationDatabaseModel.URL = core.StringPtr("testString")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("testString")
+				userContextModel.Roles = []string{"_reader"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(true)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(0))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(0))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"testString"}
+				replicationDocumentModel.Filter = core.StringPtr("testString")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
+				replicationDocumentModel.QueryParams = make(map[string]string)
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
+				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
+				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostReplicateOptions model
+				postReplicateOptionsModel := new(cloudantv1.PostReplicateOptions)
+				postReplicateOptionsModel.ReplicationDocument = replicationDocumentModel
+				postReplicateOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostReplicate(postReplicateOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) - Operation response error`, func() {
 		deleteReplicationDocumentPath := "/_replicator/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -17437,7 +19282,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions)`, func() {
 		deleteReplicationDocumentPath := "/_replicator/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -17587,10 +19431,47 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke DeleteReplicationDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteReplicationDocumentOptions model
+				deleteReplicationDocumentOptionsModel := new(cloudantv1.DeleteReplicationDocumentOptions)
+				deleteReplicationDocumentOptionsModel.DocID = core.StringPtr("testString")
+				deleteReplicationDocumentOptionsModel.IfMatch = core.StringPtr("testString")
+				deleteReplicationDocumentOptionsModel.Batch = core.StringPtr("ok")
+				deleteReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
+				deleteReplicationDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteReplicationDocument(deleteReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions) - Operation response error`, func() {
 		getReplicationDocumentPath := "/_replicator/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -17656,7 +19537,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions)`, func() {
 		getReplicationDocumentPath := "/_replicator/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -17686,7 +19566,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": true, "create_target": true, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": {"anyKey": "anyValue"}}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": true, "create_target": true, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -17763,7 +19643,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": true, "create_target": true, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": {"anyKey": "anyValue"}}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": true, "create_target": true, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -17846,10 +19726,55 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetReplicationDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetReplicationDocumentOptions model
+				getReplicationDocumentOptionsModel := new(cloudantv1.GetReplicationDocumentOptions)
+				getReplicationDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getReplicationDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getReplicationDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.Conflicts = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.DeletedConflicts = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.Latest = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.Meta = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
+				getReplicationDocumentOptionsModel.Revs = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.RevsInfo = core.BoolPtr(true)
+				getReplicationDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetReplicationDocument(getReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions) - Operation response error`, func() {
 		putReplicationDocumentPath := "/_replicator/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -17956,7 +19881,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -17986,7 +19911,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions)`, func() {
 		putReplicationDocumentPath := "/_replicator/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -18118,7 +20042,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -18287,7 +20211,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -18396,7 +20320,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -18428,10 +20352,133 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PutReplicationDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(true)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = make(map[string]string)
+				replicationDatabaseModel.URL = core.StringPtr("https://examples.cloudant.com/animaldb")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"researcher"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.QueryParams = make(map[string]string)
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
+				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("http://my-source-proxy.example:8888")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("http://my-target-proxy.example:8888")
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PutReplicationDocumentOptions model
+				putReplicationDocumentOptionsModel := new(cloudantv1.PutReplicationDocumentOptions)
+				putReplicationDocumentOptionsModel.DocID = core.StringPtr("testString")
+				putReplicationDocumentOptionsModel.ReplicationDocument = replicationDocumentModel
+				putReplicationDocumentOptionsModel.IfMatch = core.StringPtr("testString")
+				putReplicationDocumentOptionsModel.Batch = core.StringPtr("ok")
+				putReplicationDocumentOptionsModel.NewEdits = core.BoolPtr(true)
+				putReplicationDocumentOptionsModel.Rev = core.StringPtr("testString")
+				putReplicationDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutReplicationDocument(putReplicationDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetSchedulerDocs(getSchedulerDocsOptions *GetSchedulerDocsOptions) - Operation response error`, func() {
 		getSchedulerDocsPath := "/_scheduler/docs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -18478,7 +20525,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSchedulerDocs(getSchedulerDocsOptions *GetSchedulerDocsOptions)`, func() {
 		getSchedulerDocsPath := "/_scheduler/docs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -18614,10 +20660,46 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSchedulerDocs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSchedulerDocsOptions model
+				getSchedulerDocsOptionsModel := new(cloudantv1.GetSchedulerDocsOptions)
+				getSchedulerDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				getSchedulerDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				getSchedulerDocsOptionsModel.States = []string{"initializing"}
+				getSchedulerDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSchedulerDocs(getSchedulerDocsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetSchedulerDocument(getSchedulerDocumentOptions *GetSchedulerDocumentOptions) - Operation response error`, func() {
 		getSchedulerDocumentPath := "/_scheduler/docs/_replicator/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -18660,7 +20742,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSchedulerDocument(getSchedulerDocumentOptions *GetSchedulerDocumentOptions)`, func() {
 		getSchedulerDocumentPath := "/_scheduler/docs/_replicator/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -18793,10 +20874,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSchedulerDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSchedulerDocumentOptions model
+				getSchedulerDocumentOptionsModel := new(cloudantv1.GetSchedulerDocumentOptions)
+				getSchedulerDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getSchedulerDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSchedulerDocument(getSchedulerDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions) - Operation response error`, func() {
 		getSchedulerJobsPath := "/_scheduler/jobs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -18842,7 +20957,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions)`, func() {
 		getSchedulerJobsPath := "/_scheduler/jobs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -18975,10 +21089,45 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSchedulerJobs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSchedulerJobsOptions model
+				getSchedulerJobsOptionsModel := new(cloudantv1.GetSchedulerJobsOptions)
+				getSchedulerJobsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				getSchedulerJobsOptionsModel.Skip = core.Int64Ptr(int64(0))
+				getSchedulerJobsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSchedulerJobs(getSchedulerJobsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetSchedulerJob(getSchedulerJobOptions *GetSchedulerJobOptions) - Operation response error`, func() {
 		getSchedulerJobPath := "/_scheduler/jobs/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -19021,7 +21170,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSchedulerJob(getSchedulerJobOptions *GetSchedulerJobOptions)`, func() {
 		getSchedulerJobPath := "/_scheduler/jobs/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -19154,138 +21302,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSchedulerJob successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the GetSchedulerJobOptions model
+				getSchedulerJobOptionsModel := new(cloudantv1.GetSchedulerJobOptions)
+				getSchedulerJobOptionsModel.JobID = core.StringPtr("testString")
+				getSchedulerJobOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSchedulerJob(getSchedulerJobOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions) - Operation response error`, func() {
 		getSessionInformationPath := "/_session"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -19327,7 +21381,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions)`, func() {
 		getSessionInformationPath := "/_session"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -19450,138 +21503,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSessionInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the GetSessionInformationOptions model
+				getSessionInformationOptionsModel := new(cloudantv1.GetSessionInformationOptions)
+				getSessionInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSessionInformation(getSessionInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetSecurity(getSecurityOptions *GetSecurityOptions) - Operation response error`, func() {
 		getSecurityPath := "/testString/_security"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -19624,7 +21582,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetSecurity(getSecurityOptions *GetSecurityOptions)`, func() {
 		getSecurityPath := "/testString/_security"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -19757,10 +21714,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSecurity successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSecurityOptions model
+				getSecurityOptionsModel := new(cloudantv1.GetSecurityOptions)
+				getSecurityOptionsModel.Db = core.StringPtr("testString")
+				getSecurityOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSecurity(getSecurityOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutSecurity(putSecurityOptions *PutSecurityOptions) - Operation response error`, func() {
 		putSecurityPath := "/testString/_security"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -19812,7 +21803,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutSecurity(putSecurityOptions *PutSecurityOptions)`, func() {
 		putSecurityPath := "/testString/_security"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -20004,10 +21994,53 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PutSecurity successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the SecurityObject model
+				securityObjectModel := new(cloudantv1.SecurityObject)
+				securityObjectModel.Names = []string{"testString"}
+				securityObjectModel.Roles = []string{"testString"}
+
+				// Construct an instance of the PutSecurityOptions model
+				putSecurityOptionsModel := new(cloudantv1.PutSecurityOptions)
+				putSecurityOptionsModel.Db = core.StringPtr("testString")
+				putSecurityOptionsModel.Admins = securityObjectModel
+				putSecurityOptionsModel.Members = securityObjectModel
+				putSecurityOptionsModel.Cloudant = make(map[string][]string)
+				putSecurityOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
+				putSecurityOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutSecurity(putSecurityOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostApiKeys(postApiKeysOptions *PostApiKeysOptions) - Operation response error`, func() {
 		postApiKeysPath := "/_api/v2/api_keys"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -20049,7 +22082,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostApiKeys(postApiKeysOptions *PostApiKeysOptions)`, func() {
 		postApiKeysPath := "/_api/v2/api_keys"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -20172,10 +22204,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PostApiKeys successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostApiKeysOptions model
+				postApiKeysOptionsModel := new(cloudantv1.PostApiKeysOptions)
+				postApiKeysOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostApiKeys(postApiKeysOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) - Operation response error`, func() {
 		putCloudantSecurityConfigurationPath := "/_api/v2/db/testString/_security"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -20227,7 +22292,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions)`, func() {
 		putCloudantSecurityConfigurationPath := "/_api/v2/db/testString/_security"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -20419,138 +22483,53 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PutCloudantSecurityConfiguration successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the SecurityObject model
+				securityObjectModel := new(cloudantv1.SecurityObject)
+				securityObjectModel.Names = []string{"testString"}
+				securityObjectModel.Roles = []string{"testString"}
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Construct an instance of the PutCloudantSecurityConfigurationOptions model
+				putCloudantSecurityConfigurationOptionsModel := new(cloudantv1.PutCloudantSecurityConfigurationOptions)
+				putCloudantSecurityConfigurationOptionsModel.Db = core.StringPtr("testString")
+				putCloudantSecurityConfigurationOptionsModel.Cloudant = make(map[string][]string)
+				putCloudantSecurityConfigurationOptionsModel.Admins = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.Members = securityObjectModel
+				putCloudantSecurityConfigurationOptionsModel.CouchdbAuthOnly = core.BoolPtr(true)
+				putCloudantSecurityConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
 
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
+			AfterEach(func() {
+				testServer.Close()
 			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
 		})
 	})
 	Describe(`GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) - Operation response error`, func() {
 		getCorsInformationPath := "/_api/v2/user/config/cors"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -20592,7 +22571,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions)`, func() {
 		getCorsInformationPath := "/_api/v2/user/config/cors"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -20715,10 +22693,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetCorsInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCorsInformationOptions model
+				getCorsInformationOptionsModel := new(cloudantv1.GetCorsInformationOptions)
+				getCorsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetCorsInformation(getCorsInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions) - Operation response error`, func() {
 		putCorsConfigurationPath := "/_api/v2/user/config/cors"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -20763,7 +22774,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions)`, func() {
 		putCorsConfigurationPath := "/_api/v2/user/config/cors"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -20934,136 +22944,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PutCorsConfiguration successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the PutCorsConfigurationOptions model
+				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
+				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
+				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
+				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
+				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutCorsConfiguration(putCorsConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadAttachment(headAttachmentOptions *HeadAttachmentOptions)`, func() {
 		headAttachmentPath := "/testString/testString/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -21149,7 +23066,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`DeleteAttachment(deleteAttachmentOptions *DeleteAttachmentOptions) - Operation response error`, func() {
 		deleteAttachmentPath := "/testString/testString/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -21201,7 +23118,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteAttachment(deleteAttachmentOptions *DeleteAttachmentOptions)`, func() {
 		deleteAttachmentPath := "/testString/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -21357,8 +23273,46 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke DeleteAttachment successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteAttachmentOptions model
+				deleteAttachmentOptionsModel := new(cloudantv1.DeleteAttachmentOptions)
+				deleteAttachmentOptionsModel.Db = core.StringPtr("testString")
+				deleteAttachmentOptionsModel.DocID = core.StringPtr("testString")
+				deleteAttachmentOptionsModel.AttachmentName = core.StringPtr("testString")
+				deleteAttachmentOptionsModel.IfMatch = core.StringPtr("testString")
+				deleteAttachmentOptionsModel.Rev = core.StringPtr("testString")
+				deleteAttachmentOptionsModel.Batch = core.StringPtr("ok")
+				deleteAttachmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteAttachment(deleteAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetAttachment(getAttachmentOptions *GetAttachmentOptions)`, func() {
 		getAttachmentPath := "/testString/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -21530,10 +23484,56 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetAttachment successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetAttachmentOptions model
+				getAttachmentOptionsModel := new(cloudantv1.GetAttachmentOptions)
+				getAttachmentOptionsModel.Db = core.StringPtr("testString")
+				getAttachmentOptionsModel.DocID = core.StringPtr("testString")
+				getAttachmentOptionsModel.AttachmentName = core.StringPtr("testString")
+				getAttachmentOptionsModel.Accept = core.StringPtr("testString")
+				getAttachmentOptionsModel.IfMatch = core.StringPtr("testString")
+				getAttachmentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getAttachmentOptionsModel.Range = core.StringPtr("testString")
+				getAttachmentOptionsModel.Rev = core.StringPtr("testString")
+				getAttachmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetAttachment(getAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+
+				// Verify empty byte buffer.
+				Expect(result).ToNot(BeNil())
+				buffer, operationErr := ioutil.ReadAll(result)
+				Expect(operationErr).To(BeNil())
+				Expect(buffer).ToNot(BeNil())
+				Expect(len(buffer)).To(Equal(0))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutAttachment(putAttachmentOptions *PutAttachmentOptions) - Operation response error`, func() {
 		putAttachmentPath := "/testString/testString/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -21587,7 +23587,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutAttachment(putAttachmentOptions *PutAttachmentOptions)`, func() {
 		putAttachmentPath := "/testString/testString/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -21780,136 +23779,47 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PutAttachment successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the PutAttachmentOptions model
+				putAttachmentOptionsModel := new(cloudantv1.PutAttachmentOptions)
+				putAttachmentOptionsModel.Db = core.StringPtr("testString")
+				putAttachmentOptionsModel.DocID = core.StringPtr("testString")
+				putAttachmentOptionsModel.AttachmentName = core.StringPtr("testString")
+				putAttachmentOptionsModel.Attachment = CreateMockReader("This is a mock file.")
+				putAttachmentOptionsModel.ContentType = core.StringPtr("testString")
+				putAttachmentOptionsModel.IfMatch = core.StringPtr("testString")
+				putAttachmentOptionsModel.Rev = core.StringPtr("testString")
+				putAttachmentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutAttachment(putAttachmentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadLocalDocument(headLocalDocumentOptions *HeadLocalDocumentOptions)`, func() {
 		headLocalDocumentPath := "/testString/_local/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -21986,7 +23896,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions) - Operation response error`, func() {
 		deleteLocalDocumentPath := "/testString/_local/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -22032,7 +23942,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions)`, func() {
 		deleteLocalDocumentPath := "/testString/_local/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -22173,10 +24082,46 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke DeleteLocalDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteLocalDocumentOptions model
+				deleteLocalDocumentOptionsModel := new(cloudantv1.DeleteLocalDocumentOptions)
+				deleteLocalDocumentOptionsModel.Db = core.StringPtr("testString")
+				deleteLocalDocumentOptionsModel.DocID = core.StringPtr("testString")
+				deleteLocalDocumentOptionsModel.Batch = core.StringPtr("ok")
+				deleteLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.DeleteLocalDocument(deleteLocalDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetLocalDocument(getLocalDocumentOptions *GetLocalDocumentOptions) - Operation response error`, func() {
 		getLocalDocumentPath := "/testString/_local/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -22232,7 +24177,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetLocalDocument(getLocalDocumentOptions *GetLocalDocumentOptions)`, func() {
 		getLocalDocumentPath := "/testString/_local/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -22397,10 +24341,50 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetLocalDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetLocalDocumentOptions model
+				getLocalDocumentOptionsModel := new(cloudantv1.GetLocalDocumentOptions)
+				getLocalDocumentOptionsModel.Db = core.StringPtr("testString")
+				getLocalDocumentOptionsModel.DocID = core.StringPtr("testString")
+				getLocalDocumentOptionsModel.Accept = core.StringPtr("application/json")
+				getLocalDocumentOptionsModel.IfNoneMatch = core.StringPtr("testString")
+				getLocalDocumentOptionsModel.Attachments = core.BoolPtr(true)
+				getLocalDocumentOptionsModel.AttEncodingInfo = core.BoolPtr(true)
+				getLocalDocumentOptionsModel.LocalSeq = core.BoolPtr(true)
+				getLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetLocalDocument(getLocalDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions) - Operation response error`, func() {
 		putLocalDocumentPath := "/testString/_local/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -22457,7 +24441,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -22486,7 +24479,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions)`, func() {
 		putLocalDocumentPath := "/testString/_local/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -22568,7 +24560,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -22686,7 +24687,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -22746,7 +24756,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -22777,138 +24796,93 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PutLocalDocument successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
 
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
+				// Construct an instance of the Document model
+				documentModel := new(cloudantv1.Document)
+				documentModel.Attachments = make(map[string]cloudantv1.Attachment)
+				documentModel.Conflicts = []string{"testString"}
+				documentModel.Deleted = core.BoolPtr(true)
+				documentModel.DeletedConflicts = []string{"testString"}
+				documentModel.ID = core.StringPtr("exampleid")
+				documentModel.LocalSeq = core.StringPtr("testString")
+				documentModel.Rev = core.StringPtr("testString")
+				documentModel.Revisions = revisionsModel
+				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				documentModel.SetProperty("brand", core.StringPtr("Foo"))
+				documentModel.SetProperty("colours", core.StringPtr(`["red","green","black","blue"]`))
+				documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+				documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+				documentModel.SetProperty("keywords", core.StringPtr(`["Foo","Scales","Weight","Digital","Kitchen"]`))
+				documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+				documentModel.SetProperty("price", core.StringPtr("14.99"))
+				documentModel.SetProperty("productid", core.StringPtr("1000042"))
+				documentModel.SetProperty("taxonomy", core.StringPtr(`["Home","Kitchen","Small Appliances"]`))
+				documentModel.SetProperty("type", core.StringPtr("product"))
+				documentModel.Attachments["foo"] = *attachmentModel
 
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
+				// Construct an instance of the PutLocalDocumentOptions model
+				putLocalDocumentOptionsModel := new(cloudantv1.PutLocalDocumentOptions)
+				putLocalDocumentOptionsModel.Db = core.StringPtr("testString")
+				putLocalDocumentOptionsModel.DocID = core.StringPtr("testString")
+				putLocalDocumentOptionsModel.Document = documentModel
+				putLocalDocumentOptionsModel.ContentType = core.StringPtr("application/json")
+				putLocalDocumentOptionsModel.Batch = core.StringPtr("ok")
+				putLocalDocumentOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+				// Invoke operation
+				result, response, operationErr := cloudantService.PutLocalDocument(putLocalDocumentOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-		})
-	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
+			AfterEach(func() {
+				testServer.Close()
+			})
 		})
 	})
 	Describe(`PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) - Operation response error`, func() {
 		postMissingRevsPath := "/testString/_missing_revs"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -22952,7 +24926,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions)`, func() {
 		postMissingRevsPath := "/testString/_missing_revs"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -23120,10 +25093,45 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostMissingRevs successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostMissingRevsOptions model
+				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
+				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
+				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
+				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions) - Operation response error`, func() {
 		postRevsDiffPath := "/testString/_revs_diff"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -23167,7 +25175,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions)`, func() {
 		postRevsDiffPath := "/testString/_revs_diff"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -23335,10 +25342,45 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostRevsDiff successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostRevsDiffOptions model
+				postRevsDiffOptionsModel := new(cloudantv1.PostRevsDiffOptions)
+				postRevsDiffOptionsModel.Db = core.StringPtr("testString")
+				postRevsDiffOptionsModel.DocumentRevisions = make(map[string][]string)
+				postRevsDiffOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostRevsDiff(postRevsDiffOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetShardsInformation(getShardsInformationOptions *GetShardsInformationOptions) - Operation response error`, func() {
 		getShardsInformationPath := "/testString/_shards"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -23381,7 +25423,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetShardsInformation(getShardsInformationOptions *GetShardsInformationOptions)`, func() {
 		getShardsInformationPath := "/testString/_shards"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -23514,10 +25555,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetShardsInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetShardsInformationOptions model
+				getShardsInformationOptionsModel := new(cloudantv1.GetShardsInformationOptions)
+				getShardsInformationOptionsModel.Db = core.StringPtr("testString")
+				getShardsInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetShardsInformation(getShardsInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetDocumentShardsInfo(getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions) - Operation response error`, func() {
 		getDocumentShardsInfoPath := "/testString/_shards/testString"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -23561,7 +25636,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetDocumentShardsInfo(getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions)`, func() {
 		getDocumentShardsInfoPath := "/testString/_shards/testString"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -23697,136 +25771,42 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
-	})
-	Describe(`Service constructor tests`, func() {
-		It(`Instantiate service client`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				Authenticator: &core.NoAuthAuthenticator{},
-			})
-			Expect(cloudantService).ToNot(BeNil())
-			Expect(serviceErr).To(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid URL`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-		It(`Instantiate service client with error: Invalid Auth`, func() {
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-				URL: "https://cloudantv1/api",
-				Authenticator: &core.BasicAuthenticator{
-					Username: "",
-					Password: "",
-				},
-			})
-			Expect(cloudantService).To(BeNil())
-			Expect(serviceErr).ToNot(BeNil())
-		})
-	})
-	Describe(`Service constructor tests using external config`, func() {
-		Context(`Using external config, construct service client instances`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "noauth",
-			}
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
 
-			It(`Create service client using external config successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetDocumentShardsInfo successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
 				})
-				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-			It(`Create service client using external config and set url from constructor successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-					URL: "https://testService/api",
-				})
 				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
 
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
+				// Construct an instance of the GetDocumentShardsInfoOptions model
+				getDocumentShardsInfoOptionsModel := new(cloudantv1.GetDocumentShardsInfoOptions)
+				getDocumentShardsInfoOptionsModel.Db = core.StringPtr("testString")
+				getDocumentShardsInfoOptionsModel.DocID = core.StringPtr("testString")
+				getDocumentShardsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetDocumentShardsInfo(getDocumentShardsInfoOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
 			})
-			It(`Create service client using external config and set url programatically successfully`, func() {
-				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
-				err := cloudantService.SetServiceURL("https://testService/api")
-				Expect(err).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService.Service.GetServiceURL()).To(Equal("https://testService/api"))
-				ClearTestEnvironment(testEnvironment)
-
-				clone := cloudantService.Clone()
-				Expect(clone).ToNot(BeNil())
-				Expect(clone.Service != cloudantService.Service).To(BeTrue())
-				Expect(clone.GetServiceURL()).To(Equal(cloudantService.GetServiceURL()))
-				Expect(clone.Service.Options.Authenticator).To(Equal(cloudantService.Service.Options.Authenticator))
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
-				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
-			})
-		})
-		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
-			// Map containing environment variables used in testing.
-			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
-			}
-
-			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				URL: "{BAD_URL_STRING",
-			})
-
-			It(`Instantiate service client with error`, func() {
-				Expect(cloudantService).To(BeNil())
-				Expect(serviceErr).ToNot(BeNil())
-				ClearTestEnvironment(testEnvironment)
+			AfterEach(func() {
+				testServer.Close()
 			})
 		})
 	})
-	Describe(`Regional endpoint tests`, func() {
-		It(`GetServiceURLForRegion(region string)`, func() {
-			var url string
-			var err error
-			url, err = cloudantv1.GetServiceURLForRegion("INVALID_REGION")
-			Expect(url).To(BeEmpty())
-			Expect(err).ToNot(BeNil())
-			fmt.Fprintf(GinkgoWriter, "Expected error: %s\n", err.Error())
-		})
-	})
-
 	Describe(`HeadUpInformation(headUpInformationOptions *HeadUpInformationOptions)`, func() {
 		headUpInformationPath := "/_up"
 		Context(`Using mock server endpoint`, func() {
@@ -23889,7 +25869,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions) - Operation response error`, func() {
 		getActiveTasksPath := "/_active_tasks"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -23931,7 +25911,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions)`, func() {
 		getActiveTasksPath := "/_active_tasks"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -24054,10 +26033,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetActiveTasks successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetActiveTasksOptions model
+				getActiveTasksOptionsModel := new(cloudantv1.GetActiveTasksOptions)
+				getActiveTasksOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetActiveTasks(getActiveTasksOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions) - Operation response error`, func() {
 		getUpInformationPath := "/_up"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -24099,7 +26111,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
 		getUpInformationPath := "/_up"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -24222,10 +26233,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetUpInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetUpInformationOptions model
+				getUpInformationOptionsModel := new(cloudantv1.GetUpInformationOptions)
+				getUpInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetUpInformation(getUpInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions) - Operation response error`, func() {
 		getActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -24267,7 +26311,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions)`, func() {
 		getActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -24390,10 +26433,43 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetActivityTrackerEvents successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetActivityTrackerEventsOptions model
+				getActivityTrackerEventsOptionsModel := new(cloudantv1.GetActivityTrackerEventsOptions)
+				getActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions) - Operation response error`, func() {
 		postActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -24436,7 +26512,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions)`, func() {
 		postActivityTrackerEventsPath := "/_api/v2/user/activity_tracker/events"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -24601,10 +26676,44 @@ var _ = Describe(`CloudantV1`, func() {
 				testServer.Close()
 			})
 		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostActivityTrackerEvents successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostActivityTrackerEventsOptions model
+				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
+				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
 	})
 	Describe(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions) - Operation response error`, func() {
 		getCurrentThroughputInformationPath := "/_api/v2/user/current/throughput"
-		Context(`Using mock server endpoint`, func() {
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 					defer GinkgoRecover()
@@ -24646,7 +26755,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-
 	Describe(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions)`, func() {
 		getCurrentThroughputInformationPath := "/_api/v2/user/current/throughput"
 		Context(`Using mock server endpoint with timeout`, func() {
@@ -24763,6 +26871,39 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).ToNot(BeNil())
 				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
 				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetCurrentThroughputInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetCurrentThroughputInformationOptions model
+				getCurrentThroughputInformationOptionsModel := new(cloudantv1.GetCurrentThroughputInformationOptions)
+				getCurrentThroughputInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
 				Expect(result).To(BeNil())
 			})
 			AfterEach(func() {
@@ -26396,7 +28537,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				Expect(replicationDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(replicationDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -26428,7 +28569,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PostReplicateOptions model
@@ -26840,7 +28981,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
 				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
-				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				Expect(designDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(designDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(designDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -26856,7 +28997,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentModel.Updates).To(Equal(make(map[string]string)))
 				Expect(designDocumentModel.ValidateDocUpdate).To(Equal(make(map[string]string)))
 				Expect(designDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(designDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(designDocumentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 				Expect(designDocumentModel.Indexes["foo"]).To(Equal(*searchIndexDefinitionModel))
 				Expect(designDocumentModel.Views["foo"]).To(Equal(*designDocumentViewsMapReduceModel))
@@ -27177,7 +29318,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
-				replicationDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
+				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				Expect(replicationDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(replicationDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -27209,7 +29350,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -27312,11 +29453,11 @@ var _ = Describe(`CloudantV1`, func() {
 			Expect(mockReader).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockDate() successfully`, func() {
-			mockDate := CreateMockDate()
+			mockDate := CreateMockDate("2019-01-01")
 			Expect(mockDate).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockDateTime() successfully`, func() {
-			mockDateTime := CreateMockDateTime()
+			mockDateTime := CreateMockDateTime("2019-01-01T12:00:00.000Z")
 			Expect(mockDateTime).ToNot(BeNil())
 		})
 	})
@@ -27341,13 +29482,19 @@ func CreateMockReader(mockData string) io.ReadCloser {
 	return ioutil.NopCloser(bytes.NewReader([]byte(mockData)))
 }
 
-func CreateMockDate() *strfmt.Date {
-	d := strfmt.Date(time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+func CreateMockDate(mockData string) *strfmt.Date {
+	d, err := core.ParseDate(mockData)
+	if err != nil {
+		return nil
+	}
 	return &d
 }
 
-func CreateMockDateTime() *strfmt.DateTime {
-	d := strfmt.DateTime(time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+func CreateMockDateTime(mockData string) *strfmt.DateTime {
+	d, err := core.ParseDateTime(mockData)
+	if err != nil {
+		return nil
+	}
 	return &d
 }
 
