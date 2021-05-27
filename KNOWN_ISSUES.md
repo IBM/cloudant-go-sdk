@@ -179,6 +179,7 @@ The example above represents this JSON body:
 ```
 
 ### Disabling request body compression
+
 ```go
 import (
     "github.com/ibm/cloudant-go-sdk/cloudantv1"
