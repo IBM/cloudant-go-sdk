@@ -38,7 +38,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.36
+// Version: 1.0.0-dev0.0.37
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *core.BaseService
@@ -8282,9 +8282,6 @@ type BulkGetQueryDocument struct {
 	// Schema for a document ID.
 	ID *string `json:"id" validate:"required"`
 
-	// Retrieves documents of specified leaf revisions.
-	OpenRevs []string `json:"open_revs,omitempty"`
-
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev,omitempty"`
 }
@@ -8306,10 +8303,6 @@ func UnmarshalBulkGetQueryDocument(m map[string]json.RawMessage, result interfac
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "open_revs", &obj.OpenRevs)
 	if err != nil {
 		return
 	}

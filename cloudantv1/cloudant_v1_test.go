@@ -5043,9 +5043,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5127,9 +5126,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5218,9 +5216,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5250,9 +5247,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5337,9 +5333,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5428,9 +5423,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5460,9 +5454,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5547,9 +5540,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5638,9 +5630,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5670,9 +5661,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5757,9 +5747,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5848,9 +5837,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -5886,9 +5874,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
@@ -25695,13 +25682,11 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				Expect(bulkGetQueryDocumentModel).ToNot(BeNil())
-				bulkGetQueryDocumentModel.AttsSince = []string{"testString"}
+				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
 				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
-				bulkGetQueryDocumentModel.OpenRevs = []string{"testString"}
 				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
-				Expect(bulkGetQueryDocumentModel.AttsSince).To(Equal([]string{"testString"}))
+				Expect(bulkGetQueryDocumentModel.AttsSince).To(Equal([]string{"1-99b02e08da151943c2dcb40090160bb8"}))
 				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("order00067")))
-				Expect(bulkGetQueryDocumentModel.OpenRevs).To(Equal([]string{"testString"}))
 				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("3-917fa2381192822767f010b95b45325b")))
 
 				// Construct an instance of the PostBulkGetOptions model
