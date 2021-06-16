@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.30.0-bd714324-20210406-200538
+ * IBM OpenAPI SDK Code Generator Version: 3.33.0-caf29bd0-20210603-225214
  */
 
 // Package cloudantv1 : Operations and models for the CloudantV1 service
@@ -25,15 +25,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/IBM/cloudant-go-sdk/auth"
-	common "github.com/IBM/cloudant-go-sdk/common"
-	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/go-openapi/strfmt"
 	"io"
 	"net/http"
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/IBM/cloudant-go-sdk/auth"
+	common "github.com/IBM/cloudant-go-sdk/common"
+	"github.com/IBM/go-sdk-core/v5/core"
+	"github.com/go-openapi/strfmt"
 )
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
@@ -207,11 +208,13 @@ func (cloudant *CloudantV1) GetServerInformationWithContext(ctx context.Context,
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalServerInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalServerInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -258,11 +261,13 @@ func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMembershipInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMembershipInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -313,11 +318,13 @@ func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOpt
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUuidsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUuidsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -364,11 +371,13 @@ func (cloudant *CloudantV1) GetCapacityThroughputInformationWithContext(ctx cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -429,11 +438,13 @@ func (cloudant *CloudantV1) PutCapacityThroughputConfigurationWithContext(ctx co
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -495,11 +506,13 @@ func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUp
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDbUpdates)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDbUpdates)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -616,11 +629,13 @@ func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChan
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalChangesResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalChangesResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -899,11 +914,13 @@ func (cloudant *CloudantV1) PostDbsInfoWithContext(ctx context.Context, postDbsI
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDbsInfoResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDbsInfoResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -959,11 +976,13 @@ func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, delet
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1016,11 +1035,13 @@ func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDatabaseInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDatabaseInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1080,11 +1101,13 @@ func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatab
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1221,11 +1244,13 @@ func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDoc
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1328,11 +1353,13 @@ func (cloudant *CloudantV1) PostAllDocsWithContext(ctx context.Context, postAllD
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1496,11 +1523,13 @@ func (cloudant *CloudantV1) PostAllDocsQueriesWithContext(ctx context.Context, p
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsQueriesResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsQueriesResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1623,11 +1652,13 @@ func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBul
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1704,11 +1735,13 @@ func (cloudant *CloudantV1) PostBulkGetWithContext(ctx context.Context, postBulk
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalBulkGetResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalBulkGetResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -1991,11 +2024,13 @@ func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, delet
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2085,11 +2120,13 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocument)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocument)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2425,11 +2462,13 @@ func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocum
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2552,11 +2591,13 @@ func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context,
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2646,11 +2687,13 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDesignDocument)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDesignDocument)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2724,11 +2767,13 @@ func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, pu
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2784,11 +2829,13 @@ func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDesignDocumentInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDesignDocumentInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2894,11 +2941,13 @@ func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postD
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -2966,11 +3015,13 @@ func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsQueriesResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsQueriesResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -3096,11 +3147,13 @@ func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOpt
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalViewResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalViewResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -3287,11 +3340,13 @@ func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, post
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalViewQueriesResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalViewQueriesResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -3407,11 +3462,13 @@ func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Conte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPartitionInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPartitionInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -3515,11 +3572,13 @@ func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context,
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalAllDocsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -3720,11 +3779,13 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -3948,11 +4009,13 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalViewResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalViewResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4170,11 +4233,13 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFindResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFindResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4363,11 +4428,13 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalExplainResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalExplainResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4465,11 +4532,13 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFindResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalFindResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4618,11 +4687,13 @@ func (cloudant *CloudantV1) GetIndexesInformationWithContext(ctx context.Context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIndexesInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIndexesInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4701,11 +4772,13 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIndexResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIndexResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4761,11 +4834,13 @@ func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIn
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4829,11 +4904,13 @@ func (cloudant *CloudantV1) PostSearchAnalyzeWithContext(ctx context.Context, po
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchAnalyzeResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchAnalyzeResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -4954,11 +5031,13 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5130,11 +5209,13 @@ func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSea
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchInfoResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchInfoResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5236,11 +5317,13 @@ func (cloudant *CloudantV1) GetGeoWithContext(ctx context.Context, getGeoOptions
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGeoResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGeoResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5391,11 +5474,13 @@ func (cloudant *CloudantV1) PostGeoCleanupWithContext(ctx context.Context, postG
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5450,11 +5535,13 @@ func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGeoIndexInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalGeoIndexInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5662,11 +5749,13 @@ func (cloudant *CloudantV1) PostReplicateWithContext(ctx context.Context, postRe
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalReplicationResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalReplicationResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5730,11 +5819,13 @@ func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Con
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5823,11 +5914,13 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalReplicationDocument)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalReplicationDocument)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5901,11 +5994,13 @@ func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Contex
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -5963,11 +6058,13 @@ func (cloudant *CloudantV1) GetSchedulerDocsWithContext(ctx context.Context, get
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerDocsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerDocsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6022,11 +6119,13 @@ func (cloudant *CloudantV1) GetSchedulerDocumentWithContext(ctx context.Context,
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerDocument)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerDocument)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6082,11 +6181,13 @@ func (cloudant *CloudantV1) GetSchedulerJobsWithContext(ctx context.Context, get
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerJobsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerJobsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6140,11 +6241,13 @@ func (cloudant *CloudantV1) GetSchedulerJobWithContext(ctx context.Context, getS
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerJob)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSchedulerJob)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6190,11 +6293,13 @@ func (cloudant *CloudantV1) GetSessionInformationWithContext(ctx context.Context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSessionInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSessionInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6250,11 +6355,13 @@ func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecur
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecurity)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSecurity)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6329,11 +6436,13 @@ func (cloudant *CloudantV1) PutSecurityWithContext(ctx context.Context, putSecur
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6381,11 +6490,13 @@ func (cloudant *CloudantV1) PostApiKeysWithContext(ctx context.Context, postApiK
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApiKeysResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalApiKeysResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6459,11 +6570,13 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6510,11 +6623,13 @@ func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, g
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCorsInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCorsInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6581,11 +6696,13 @@ func (cloudant *CloudantV1) PutCorsConfigurationWithContext(ctx context.Context,
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6714,11 +6831,13 @@ func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, del
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6864,11 +6983,13 @@ func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAtt
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -6981,11 +7102,13 @@ func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7057,11 +7180,13 @@ func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, get
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocument)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocument)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7133,11 +7258,13 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7197,11 +7324,13 @@ func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, post
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMissingRevsResult)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMissingRevsResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7263,11 +7392,13 @@ func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRev
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalRevsDiff)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalRevsDiff)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7321,11 +7452,13 @@ func (cloudant *CloudantV1) GetShardsInformationWithContext(ctx context.Context,
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalShardsInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalShardsInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7381,11 +7514,13 @@ func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentShardInfo)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentShardInfo)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7473,11 +7608,13 @@ func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getAc
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActiveTask)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActiveTask)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7524,11 +7661,13 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUpInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUpInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7574,11 +7713,13 @@ func (cloudant *CloudantV1) GetActivityTrackerEventsWithContext(ctx context.Cont
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActivityTrackerEvents)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActivityTrackerEvents)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7638,11 +7779,13 @@ func (cloudant *CloudantV1) PostActivityTrackerEventsWithContext(ctx context.Con
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7689,11 +7832,13 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentThroughputInformation)
-	if err != nil {
-		return
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentThroughputInformation)
+		if err != nil {
+			return
+		}
+		response.Result = result
 	}
-	response.Result = result
 
 	return
 }
@@ -7799,11 +7944,11 @@ const (
 )
 
 // NewActivityTrackerEvents : Instantiate ActivityTrackerEvents (Generic Model Constructor)
-func (*CloudantV1) NewActivityTrackerEvents(types []string) (model *ActivityTrackerEvents, err error) {
-	model = &ActivityTrackerEvents{
+func (*CloudantV1) NewActivityTrackerEvents(types []string) (_model *ActivityTrackerEvents, err error) {
+	_model = &ActivityTrackerEvents{
 		Types: types,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -8251,11 +8396,11 @@ type BulkDocs struct {
 }
 
 // NewBulkDocs : Instantiate BulkDocs (Generic Model Constructor)
-func (*CloudantV1) NewBulkDocs(docs []Document) (model *BulkDocs, err error) {
-	model = &BulkDocs{
+func (*CloudantV1) NewBulkDocs(docs []Document) (_model *BulkDocs, err error) {
+	_model = &BulkDocs{
 		Docs: docs,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -8287,11 +8432,11 @@ type BulkGetQueryDocument struct {
 }
 
 // NewBulkGetQueryDocument : Instantiate BulkGetQueryDocument (Generic Model Constructor)
-func (*CloudantV1) NewBulkGetQueryDocument(id string) (model *BulkGetQueryDocument, err error) {
-	model = &BulkGetQueryDocument{
+func (*CloudantV1) NewBulkGetQueryDocument(id string) (_model *BulkGetQueryDocument, err error) {
+	_model = &BulkGetQueryDocument{
 		ID: core.StringPtr(id),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -8936,39 +9081,39 @@ func (*CloudantV1) NewDeleteAttachmentOptions(db string, docID string, attachmen
 }
 
 // SetDb : Allow user to set Db
-func (options *DeleteAttachmentOptions) SetDb(db string) *DeleteAttachmentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *DeleteAttachmentOptions) SetDb(db string) *DeleteAttachmentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *DeleteAttachmentOptions) SetDocID(docID string) *DeleteAttachmentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *DeleteAttachmentOptions) SetDocID(docID string) *DeleteAttachmentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetAttachmentName : Allow user to set AttachmentName
-func (options *DeleteAttachmentOptions) SetAttachmentName(attachmentName string) *DeleteAttachmentOptions {
-	options.AttachmentName = core.StringPtr(attachmentName)
-	return options
+func (_options *DeleteAttachmentOptions) SetAttachmentName(attachmentName string) *DeleteAttachmentOptions {
+	_options.AttachmentName = core.StringPtr(attachmentName)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *DeleteAttachmentOptions) SetIfMatch(ifMatch string) *DeleteAttachmentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *DeleteAttachmentOptions) SetIfMatch(ifMatch string) *DeleteAttachmentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *DeleteAttachmentOptions) SetRev(rev string) *DeleteAttachmentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *DeleteAttachmentOptions) SetRev(rev string) *DeleteAttachmentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *DeleteAttachmentOptions) SetBatch(batch string) *DeleteAttachmentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *DeleteAttachmentOptions) SetBatch(batch string) *DeleteAttachmentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -8994,9 +9139,9 @@ func (*CloudantV1) NewDeleteDatabaseOptions(db string) *DeleteDatabaseOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *DeleteDatabaseOptions) SetDb(db string) *DeleteDatabaseOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *DeleteDatabaseOptions) SetDb(db string) *DeleteDatabaseOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -9044,33 +9189,33 @@ func (*CloudantV1) NewDeleteDesignDocumentOptions(db string, ddoc string) *Delet
 }
 
 // SetDb : Allow user to set Db
-func (options *DeleteDesignDocumentOptions) SetDb(db string) *DeleteDesignDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *DeleteDesignDocumentOptions) SetDb(db string) *DeleteDesignDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *DeleteDesignDocumentOptions) SetDdoc(ddoc string) *DeleteDesignDocumentOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *DeleteDesignDocumentOptions) SetDdoc(ddoc string) *DeleteDesignDocumentOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *DeleteDesignDocumentOptions) SetIfMatch(ifMatch string) *DeleteDesignDocumentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *DeleteDesignDocumentOptions) SetIfMatch(ifMatch string) *DeleteDesignDocumentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *DeleteDesignDocumentOptions) SetBatch(batch string) *DeleteDesignDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *DeleteDesignDocumentOptions) SetBatch(batch string) *DeleteDesignDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *DeleteDesignDocumentOptions) SetRev(rev string) *DeleteDesignDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *DeleteDesignDocumentOptions) SetRev(rev string) *DeleteDesignDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -9117,33 +9262,33 @@ func (*CloudantV1) NewDeleteDocumentOptions(db string, docID string) *DeleteDocu
 }
 
 // SetDb : Allow user to set Db
-func (options *DeleteDocumentOptions) SetDb(db string) *DeleteDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *DeleteDocumentOptions) SetDb(db string) *DeleteDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *DeleteDocumentOptions) SetDocID(docID string) *DeleteDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *DeleteDocumentOptions) SetDocID(docID string) *DeleteDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *DeleteDocumentOptions) SetIfMatch(ifMatch string) *DeleteDocumentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *DeleteDocumentOptions) SetIfMatch(ifMatch string) *DeleteDocumentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *DeleteDocumentOptions) SetBatch(batch string) *DeleteDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *DeleteDocumentOptions) SetBatch(batch string) *DeleteDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *DeleteDocumentOptions) SetRev(rev string) *DeleteDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *DeleteDocumentOptions) SetRev(rev string) *DeleteDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -9190,27 +9335,27 @@ func (*CloudantV1) NewDeleteIndexOptions(db string, ddoc string, typeVar string,
 }
 
 // SetDb : Allow user to set Db
-func (options *DeleteIndexOptions) SetDb(db string) *DeleteIndexOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *DeleteIndexOptions) SetDb(db string) *DeleteIndexOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *DeleteIndexOptions) SetDdoc(ddoc string) *DeleteIndexOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *DeleteIndexOptions) SetDdoc(ddoc string) *DeleteIndexOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetType : Allow user to set Type
-func (options *DeleteIndexOptions) SetType(typeVar string) *DeleteIndexOptions {
-	options.Type = core.StringPtr(typeVar)
-	return options
+func (_options *DeleteIndexOptions) SetType(typeVar string) *DeleteIndexOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *DeleteIndexOptions) SetIndex(index string) *DeleteIndexOptions {
-	options.Index = core.StringPtr(index)
-	return options
+func (_options *DeleteIndexOptions) SetIndex(index string) *DeleteIndexOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -9251,21 +9396,21 @@ func (*CloudantV1) NewDeleteLocalDocumentOptions(db string, docID string) *Delet
 }
 
 // SetDb : Allow user to set Db
-func (options *DeleteLocalDocumentOptions) SetDb(db string) *DeleteLocalDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *DeleteLocalDocumentOptions) SetDb(db string) *DeleteLocalDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *DeleteLocalDocumentOptions) SetDocID(docID string) *DeleteLocalDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *DeleteLocalDocumentOptions) SetDocID(docID string) *DeleteLocalDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *DeleteLocalDocumentOptions) SetBatch(batch string) *DeleteLocalDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *DeleteLocalDocumentOptions) SetBatch(batch string) *DeleteLocalDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -9308,27 +9453,27 @@ func (*CloudantV1) NewDeleteReplicationDocumentOptions(docID string) *DeleteRepl
 }
 
 // SetDocID : Allow user to set DocID
-func (options *DeleteReplicationDocumentOptions) SetDocID(docID string) *DeleteReplicationDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *DeleteReplicationDocumentOptions) SetDocID(docID string) *DeleteReplicationDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *DeleteReplicationDocumentOptions) SetIfMatch(ifMatch string) *DeleteReplicationDocumentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *DeleteReplicationDocumentOptions) SetIfMatch(ifMatch string) *DeleteReplicationDocumentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *DeleteReplicationDocumentOptions) SetBatch(batch string) *DeleteReplicationDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *DeleteReplicationDocumentOptions) SetBatch(batch string) *DeleteReplicationDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *DeleteReplicationDocumentOptions) SetRev(rev string) *DeleteReplicationDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *DeleteReplicationDocumentOptions) SetRev(rev string) *DeleteReplicationDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -9705,11 +9850,11 @@ type DesignDocumentViewsMapReduce struct {
 }
 
 // NewDesignDocumentViewsMapReduce : Instantiate DesignDocumentViewsMapReduce (Generic Model Constructor)
-func (*CloudantV1) NewDesignDocumentViewsMapReduce(mapVar string) (model *DesignDocumentViewsMapReduce, err error) {
-	model = &DesignDocumentViewsMapReduce{
+func (*CloudantV1) NewDesignDocumentViewsMapReduce(mapVar string) (_model *DesignDocumentViewsMapReduce, err error) {
+	_model = &DesignDocumentViewsMapReduce{
 		Map: core.StringPtr(mapVar),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -10027,12 +10172,12 @@ const (
 )
 
 // NewDocumentRevisionStatus : Instantiate DocumentRevisionStatus (Generic Model Constructor)
-func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (model *DocumentRevisionStatus, err error) {
-	model = &DocumentRevisionStatus{
+func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (_model *DocumentRevisionStatus, err error) {
+	_model = &DocumentRevisionStatus{
 		Rev: core.StringPtr(rev),
 		Status: core.StringPtr(status),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -10279,11 +10424,11 @@ type GeoIndexDefinition struct {
 }
 
 // NewGeoIndexDefinition : Instantiate GeoIndexDefinition (Generic Model Constructor)
-func (*CloudantV1) NewGeoIndexDefinition(index string) (model *GeoIndexDefinition, err error) {
-	model = &GeoIndexDefinition{
+func (*CloudantV1) NewGeoIndexDefinition(index string) (_model *GeoIndexDefinition, err error) {
+	_model = &GeoIndexDefinition{
 		Index: core.StringPtr(index),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -10680,33 +10825,33 @@ func (*CloudantV1) NewGetAllDbsOptions() *GetAllDbsOptions {
 }
 
 // SetDescending : Allow user to set Descending
-func (options *GetAllDbsOptions) SetDescending(descending bool) *GetAllDbsOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *GetAllDbsOptions) SetDescending(descending bool) *GetAllDbsOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetEndkey : Allow user to set Endkey
-func (options *GetAllDbsOptions) SetEndkey(endkey string) *GetAllDbsOptions {
-	options.Endkey = core.StringPtr(endkey)
-	return options
+func (_options *GetAllDbsOptions) SetEndkey(endkey string) *GetAllDbsOptions {
+	_options.Endkey = core.StringPtr(endkey)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *GetAllDbsOptions) SetLimit(limit int64) *GetAllDbsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *GetAllDbsOptions) SetLimit(limit int64) *GetAllDbsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *GetAllDbsOptions) SetSkip(skip int64) *GetAllDbsOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *GetAllDbsOptions) SetSkip(skip int64) *GetAllDbsOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetStartkey : Allow user to set Startkey
-func (options *GetAllDbsOptions) SetStartkey(startkey string) *GetAllDbsOptions {
-	options.Startkey = core.StringPtr(startkey)
-	return options
+func (_options *GetAllDbsOptions) SetStartkey(startkey string) *GetAllDbsOptions {
+	_options.Startkey = core.StringPtr(startkey)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -10756,51 +10901,51 @@ func (*CloudantV1) NewGetAttachmentOptions(db string, docID string, attachmentNa
 }
 
 // SetDb : Allow user to set Db
-func (options *GetAttachmentOptions) SetDb(db string) *GetAttachmentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetAttachmentOptions) SetDb(db string) *GetAttachmentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *GetAttachmentOptions) SetDocID(docID string) *GetAttachmentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *GetAttachmentOptions) SetDocID(docID string) *GetAttachmentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetAttachmentName : Allow user to set AttachmentName
-func (options *GetAttachmentOptions) SetAttachmentName(attachmentName string) *GetAttachmentOptions {
-	options.AttachmentName = core.StringPtr(attachmentName)
-	return options
+func (_options *GetAttachmentOptions) SetAttachmentName(attachmentName string) *GetAttachmentOptions {
+	_options.AttachmentName = core.StringPtr(attachmentName)
+	return _options
 }
 
 // SetAccept : Allow user to set Accept
-func (options *GetAttachmentOptions) SetAccept(accept string) *GetAttachmentOptions {
-	options.Accept = core.StringPtr(accept)
-	return options
+func (_options *GetAttachmentOptions) SetAccept(accept string) *GetAttachmentOptions {
+	_options.Accept = core.StringPtr(accept)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *GetAttachmentOptions) SetIfMatch(ifMatch string) *GetAttachmentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *GetAttachmentOptions) SetIfMatch(ifMatch string) *GetAttachmentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *GetAttachmentOptions) SetIfNoneMatch(ifNoneMatch string) *GetAttachmentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *GetAttachmentOptions) SetIfNoneMatch(ifNoneMatch string) *GetAttachmentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetRange : Allow user to set Range
-func (options *GetAttachmentOptions) SetRange(rangeVar string) *GetAttachmentOptions {
-	options.Range = core.StringPtr(rangeVar)
-	return options
+func (_options *GetAttachmentOptions) SetRange(rangeVar string) *GetAttachmentOptions {
+	_options.Range = core.StringPtr(rangeVar)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *GetAttachmentOptions) SetRev(rev string) *GetAttachmentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *GetAttachmentOptions) SetRev(rev string) *GetAttachmentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -10880,9 +11025,9 @@ func (*CloudantV1) NewGetDatabaseInformationOptions(db string) *GetDatabaseInfor
 }
 
 // SetDb : Allow user to set Db
-func (options *GetDatabaseInformationOptions) SetDb(db string) *GetDatabaseInformationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetDatabaseInformationOptions) SetDb(db string) *GetDatabaseInformationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -10930,27 +11075,27 @@ func (*CloudantV1) NewGetDbUpdatesOptions() *GetDbUpdatesOptions {
 }
 
 // SetFeed : Allow user to set Feed
-func (options *GetDbUpdatesOptions) SetFeed(feed string) *GetDbUpdatesOptions {
-	options.Feed = core.StringPtr(feed)
-	return options
+func (_options *GetDbUpdatesOptions) SetFeed(feed string) *GetDbUpdatesOptions {
+	_options.Feed = core.StringPtr(feed)
+	return _options
 }
 
 // SetHeartbeat : Allow user to set Heartbeat
-func (options *GetDbUpdatesOptions) SetHeartbeat(heartbeat int64) *GetDbUpdatesOptions {
-	options.Heartbeat = core.Int64Ptr(heartbeat)
-	return options
+func (_options *GetDbUpdatesOptions) SetHeartbeat(heartbeat int64) *GetDbUpdatesOptions {
+	_options.Heartbeat = core.Int64Ptr(heartbeat)
+	return _options
 }
 
 // SetTimeout : Allow user to set Timeout
-func (options *GetDbUpdatesOptions) SetTimeout(timeout int64) *GetDbUpdatesOptions {
-	options.Timeout = core.Int64Ptr(timeout)
-	return options
+func (_options *GetDbUpdatesOptions) SetTimeout(timeout int64) *GetDbUpdatesOptions {
+	_options.Timeout = core.Int64Ptr(timeout)
+	return _options
 }
 
 // SetSince : Allow user to set Since
-func (options *GetDbUpdatesOptions) SetSince(since string) *GetDbUpdatesOptions {
-	options.Since = core.StringPtr(since)
-	return options
+func (_options *GetDbUpdatesOptions) SetSince(since string) *GetDbUpdatesOptions {
+	_options.Since = core.StringPtr(since)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -10981,15 +11126,15 @@ func (*CloudantV1) NewGetDesignDocumentInformationOptions(db string, ddoc string
 }
 
 // SetDb : Allow user to set Db
-func (options *GetDesignDocumentInformationOptions) SetDb(db string) *GetDesignDocumentInformationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetDesignDocumentInformationOptions) SetDb(db string) *GetDesignDocumentInformationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *GetDesignDocumentInformationOptions) SetDdoc(ddoc string) *GetDesignDocumentInformationOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *GetDesignDocumentInformationOptions) SetDdoc(ddoc string) *GetDesignDocumentInformationOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11057,81 +11202,81 @@ func (*CloudantV1) NewGetDesignDocumentOptions(db string, ddoc string) *GetDesig
 }
 
 // SetDb : Allow user to set Db
-func (options *GetDesignDocumentOptions) SetDb(db string) *GetDesignDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetDesignDocumentOptions) SetDb(db string) *GetDesignDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *GetDesignDocumentOptions) SetDdoc(ddoc string) *GetDesignDocumentOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *GetDesignDocumentOptions) SetDdoc(ddoc string) *GetDesignDocumentOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *GetDesignDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetDesignDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *GetDesignDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetDesignDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *GetDesignDocumentOptions) SetAttachments(attachments bool) *GetDesignDocumentOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *GetDesignDocumentOptions) SetAttachments(attachments bool) *GetDesignDocumentOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *GetDesignDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetDesignDocumentOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *GetDesignDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetDesignDocumentOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *GetDesignDocumentOptions) SetConflicts(conflicts bool) *GetDesignDocumentOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *GetDesignDocumentOptions) SetConflicts(conflicts bool) *GetDesignDocumentOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDeletedConflicts : Allow user to set DeletedConflicts
-func (options *GetDesignDocumentOptions) SetDeletedConflicts(deletedConflicts bool) *GetDesignDocumentOptions {
-	options.DeletedConflicts = core.BoolPtr(deletedConflicts)
-	return options
+func (_options *GetDesignDocumentOptions) SetDeletedConflicts(deletedConflicts bool) *GetDesignDocumentOptions {
+	_options.DeletedConflicts = core.BoolPtr(deletedConflicts)
+	return _options
 }
 
 // SetLatest : Allow user to set Latest
-func (options *GetDesignDocumentOptions) SetLatest(latest bool) *GetDesignDocumentOptions {
-	options.Latest = core.BoolPtr(latest)
-	return options
+func (_options *GetDesignDocumentOptions) SetLatest(latest bool) *GetDesignDocumentOptions {
+	_options.Latest = core.BoolPtr(latest)
+	return _options
 }
 
 // SetLocalSeq : Allow user to set LocalSeq
-func (options *GetDesignDocumentOptions) SetLocalSeq(localSeq bool) *GetDesignDocumentOptions {
-	options.LocalSeq = core.BoolPtr(localSeq)
-	return options
+func (_options *GetDesignDocumentOptions) SetLocalSeq(localSeq bool) *GetDesignDocumentOptions {
+	_options.LocalSeq = core.BoolPtr(localSeq)
+	return _options
 }
 
 // SetMeta : Allow user to set Meta
-func (options *GetDesignDocumentOptions) SetMeta(meta bool) *GetDesignDocumentOptions {
-	options.Meta = core.BoolPtr(meta)
-	return options
+func (_options *GetDesignDocumentOptions) SetMeta(meta bool) *GetDesignDocumentOptions {
+	_options.Meta = core.BoolPtr(meta)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *GetDesignDocumentOptions) SetRev(rev string) *GetDesignDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *GetDesignDocumentOptions) SetRev(rev string) *GetDesignDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetRevs : Allow user to set Revs
-func (options *GetDesignDocumentOptions) SetRevs(revs bool) *GetDesignDocumentOptions {
-	options.Revs = core.BoolPtr(revs)
-	return options
+func (_options *GetDesignDocumentOptions) SetRevs(revs bool) *GetDesignDocumentOptions {
+	_options.Revs = core.BoolPtr(revs)
+	return _options
 }
 
 // SetRevsInfo : Allow user to set RevsInfo
-func (options *GetDesignDocumentOptions) SetRevsInfo(revsInfo bool) *GetDesignDocumentOptions {
-	options.RevsInfo = core.BoolPtr(revsInfo)
-	return options
+func (_options *GetDesignDocumentOptions) SetRevsInfo(revsInfo bool) *GetDesignDocumentOptions {
+	_options.RevsInfo = core.BoolPtr(revsInfo)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11198,81 +11343,81 @@ func (*CloudantV1) NewGetDocumentOptions(db string, docID string) *GetDocumentOp
 }
 
 // SetDb : Allow user to set Db
-func (options *GetDocumentOptions) SetDb(db string) *GetDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetDocumentOptions) SetDb(db string) *GetDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *GetDocumentOptions) SetDocID(docID string) *GetDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *GetDocumentOptions) SetDocID(docID string) *GetDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *GetDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *GetDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *GetDocumentOptions) SetAttachments(attachments bool) *GetDocumentOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *GetDocumentOptions) SetAttachments(attachments bool) *GetDocumentOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *GetDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetDocumentOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *GetDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetDocumentOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *GetDocumentOptions) SetConflicts(conflicts bool) *GetDocumentOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *GetDocumentOptions) SetConflicts(conflicts bool) *GetDocumentOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDeletedConflicts : Allow user to set DeletedConflicts
-func (options *GetDocumentOptions) SetDeletedConflicts(deletedConflicts bool) *GetDocumentOptions {
-	options.DeletedConflicts = core.BoolPtr(deletedConflicts)
-	return options
+func (_options *GetDocumentOptions) SetDeletedConflicts(deletedConflicts bool) *GetDocumentOptions {
+	_options.DeletedConflicts = core.BoolPtr(deletedConflicts)
+	return _options
 }
 
 // SetLatest : Allow user to set Latest
-func (options *GetDocumentOptions) SetLatest(latest bool) *GetDocumentOptions {
-	options.Latest = core.BoolPtr(latest)
-	return options
+func (_options *GetDocumentOptions) SetLatest(latest bool) *GetDocumentOptions {
+	_options.Latest = core.BoolPtr(latest)
+	return _options
 }
 
 // SetLocalSeq : Allow user to set LocalSeq
-func (options *GetDocumentOptions) SetLocalSeq(localSeq bool) *GetDocumentOptions {
-	options.LocalSeq = core.BoolPtr(localSeq)
-	return options
+func (_options *GetDocumentOptions) SetLocalSeq(localSeq bool) *GetDocumentOptions {
+	_options.LocalSeq = core.BoolPtr(localSeq)
+	return _options
 }
 
 // SetMeta : Allow user to set Meta
-func (options *GetDocumentOptions) SetMeta(meta bool) *GetDocumentOptions {
-	options.Meta = core.BoolPtr(meta)
-	return options
+func (_options *GetDocumentOptions) SetMeta(meta bool) *GetDocumentOptions {
+	_options.Meta = core.BoolPtr(meta)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *GetDocumentOptions) SetRev(rev string) *GetDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *GetDocumentOptions) SetRev(rev string) *GetDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetRevs : Allow user to set Revs
-func (options *GetDocumentOptions) SetRevs(revs bool) *GetDocumentOptions {
-	options.Revs = core.BoolPtr(revs)
-	return options
+func (_options *GetDocumentOptions) SetRevs(revs bool) *GetDocumentOptions {
+	_options.Revs = core.BoolPtr(revs)
+	return _options
 }
 
 // SetRevsInfo : Allow user to set RevsInfo
-func (options *GetDocumentOptions) SetRevsInfo(revsInfo bool) *GetDocumentOptions {
-	options.RevsInfo = core.BoolPtr(revsInfo)
-	return options
+func (_options *GetDocumentOptions) SetRevsInfo(revsInfo bool) *GetDocumentOptions {
+	_options.RevsInfo = core.BoolPtr(revsInfo)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11302,15 +11447,15 @@ func (*CloudantV1) NewGetDocumentShardsInfoOptions(db string, docID string) *Get
 }
 
 // SetDb : Allow user to set Db
-func (options *GetDocumentShardsInfoOptions) SetDb(db string) *GetDocumentShardsInfoOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetDocumentShardsInfoOptions) SetDb(db string) *GetDocumentShardsInfoOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *GetDocumentShardsInfoOptions) SetDocID(docID string) *GetDocumentShardsInfoOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *GetDocumentShardsInfoOptions) SetDocID(docID string) *GetDocumentShardsInfoOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11345,21 +11490,21 @@ func (*CloudantV1) NewGetGeoIndexInformationOptions(db string, ddoc string, inde
 }
 
 // SetDb : Allow user to set Db
-func (options *GetGeoIndexInformationOptions) SetDb(db string) *GetGeoIndexInformationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetGeoIndexInformationOptions) SetDb(db string) *GetGeoIndexInformationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *GetGeoIndexInformationOptions) SetDdoc(ddoc string) *GetGeoIndexInformationOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *GetGeoIndexInformationOptions) SetDdoc(ddoc string) *GetGeoIndexInformationOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *GetGeoIndexInformationOptions) SetIndex(index string) *GetGeoIndexInformationOptions {
-	options.Index = core.StringPtr(index)
-	return options
+func (_options *GetGeoIndexInformationOptions) SetIndex(index string) *GetGeoIndexInformationOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11482,111 +11627,111 @@ func (*CloudantV1) NewGetGeoOptions(db string, ddoc string, index string) *GetGe
 }
 
 // SetDb : Allow user to set Db
-func (options *GetGeoOptions) SetDb(db string) *GetGeoOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetGeoOptions) SetDb(db string) *GetGeoOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *GetGeoOptions) SetDdoc(ddoc string) *GetGeoOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *GetGeoOptions) SetDdoc(ddoc string) *GetGeoOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *GetGeoOptions) SetIndex(index string) *GetGeoOptions {
-	options.Index = core.StringPtr(index)
-	return options
+func (_options *GetGeoOptions) SetIndex(index string) *GetGeoOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
 }
 
 // SetBbox : Allow user to set Bbox
-func (options *GetGeoOptions) SetBbox(bbox string) *GetGeoOptions {
-	options.Bbox = core.StringPtr(bbox)
-	return options
+func (_options *GetGeoOptions) SetBbox(bbox string) *GetGeoOptions {
+	_options.Bbox = core.StringPtr(bbox)
+	return _options
 }
 
 // SetBookmark : Allow user to set Bookmark
-func (options *GetGeoOptions) SetBookmark(bookmark string) *GetGeoOptions {
-	options.Bookmark = core.StringPtr(bookmark)
-	return options
+func (_options *GetGeoOptions) SetBookmark(bookmark string) *GetGeoOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
 }
 
 // SetFormat : Allow user to set Format
-func (options *GetGeoOptions) SetFormat(format string) *GetGeoOptions {
-	options.Format = core.StringPtr(format)
-	return options
+func (_options *GetGeoOptions) SetFormat(format string) *GetGeoOptions {
+	_options.Format = core.StringPtr(format)
+	return _options
 }
 
 // SetG : Allow user to set G
-func (options *GetGeoOptions) SetG(g string) *GetGeoOptions {
-	options.G = core.StringPtr(g)
-	return options
+func (_options *GetGeoOptions) SetG(g string) *GetGeoOptions {
+	_options.G = core.StringPtr(g)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *GetGeoOptions) SetIncludeDocs(includeDocs bool) *GetGeoOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *GetGeoOptions) SetIncludeDocs(includeDocs bool) *GetGeoOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetLat : Allow user to set Lat
-func (options *GetGeoOptions) SetLat(lat float64) *GetGeoOptions {
-	options.Lat = core.Float64Ptr(lat)
-	return options
+func (_options *GetGeoOptions) SetLat(lat float64) *GetGeoOptions {
+	_options.Lat = core.Float64Ptr(lat)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *GetGeoOptions) SetLimit(limit int64) *GetGeoOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *GetGeoOptions) SetLimit(limit int64) *GetGeoOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetLon : Allow user to set Lon
-func (options *GetGeoOptions) SetLon(lon float64) *GetGeoOptions {
-	options.Lon = core.Float64Ptr(lon)
-	return options
+func (_options *GetGeoOptions) SetLon(lon float64) *GetGeoOptions {
+	_options.Lon = core.Float64Ptr(lon)
+	return _options
 }
 
 // SetNearest : Allow user to set Nearest
-func (options *GetGeoOptions) SetNearest(nearest bool) *GetGeoOptions {
-	options.Nearest = core.BoolPtr(nearest)
-	return options
+func (_options *GetGeoOptions) SetNearest(nearest bool) *GetGeoOptions {
+	_options.Nearest = core.BoolPtr(nearest)
+	return _options
 }
 
 // SetRadius : Allow user to set Radius
-func (options *GetGeoOptions) SetRadius(radius float64) *GetGeoOptions {
-	options.Radius = core.Float64Ptr(radius)
-	return options
+func (_options *GetGeoOptions) SetRadius(radius float64) *GetGeoOptions {
+	_options.Radius = core.Float64Ptr(radius)
+	return _options
 }
 
 // SetRangex : Allow user to set Rangex
-func (options *GetGeoOptions) SetRangex(rangex float64) *GetGeoOptions {
-	options.Rangex = core.Float64Ptr(rangex)
-	return options
+func (_options *GetGeoOptions) SetRangex(rangex float64) *GetGeoOptions {
+	_options.Rangex = core.Float64Ptr(rangex)
+	return _options
 }
 
 // SetRangey : Allow user to set Rangey
-func (options *GetGeoOptions) SetRangey(rangey float64) *GetGeoOptions {
-	options.Rangey = core.Float64Ptr(rangey)
-	return options
+func (_options *GetGeoOptions) SetRangey(rangey float64) *GetGeoOptions {
+	_options.Rangey = core.Float64Ptr(rangey)
+	return _options
 }
 
 // SetRelation : Allow user to set Relation
-func (options *GetGeoOptions) SetRelation(relation string) *GetGeoOptions {
-	options.Relation = core.StringPtr(relation)
-	return options
+func (_options *GetGeoOptions) SetRelation(relation string) *GetGeoOptions {
+	_options.Relation = core.StringPtr(relation)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *GetGeoOptions) SetSkip(skip int64) *GetGeoOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *GetGeoOptions) SetSkip(skip int64) *GetGeoOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetStale : Allow user to set Stale
-func (options *GetGeoOptions) SetStale(stale string) *GetGeoOptions {
-	options.Stale = core.StringPtr(stale)
-	return options
+func (_options *GetGeoOptions) SetStale(stale string) *GetGeoOptions {
+	_options.Stale = core.StringPtr(stale)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11612,9 +11757,9 @@ func (*CloudantV1) NewGetIndexesInformationOptions(db string) *GetIndexesInforma
 }
 
 // SetDb : Allow user to set Db
-func (options *GetIndexesInformationOptions) SetDb(db string) *GetIndexesInformationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetIndexesInformationOptions) SetDb(db string) *GetIndexesInformationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11660,45 +11805,45 @@ func (*CloudantV1) NewGetLocalDocumentOptions(db string, docID string) *GetLocal
 }
 
 // SetDb : Allow user to set Db
-func (options *GetLocalDocumentOptions) SetDb(db string) *GetLocalDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetLocalDocumentOptions) SetDb(db string) *GetLocalDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *GetLocalDocumentOptions) SetDocID(docID string) *GetLocalDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *GetLocalDocumentOptions) SetDocID(docID string) *GetLocalDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetAccept : Allow user to set Accept
-func (options *GetLocalDocumentOptions) SetAccept(accept string) *GetLocalDocumentOptions {
-	options.Accept = core.StringPtr(accept)
-	return options
+func (_options *GetLocalDocumentOptions) SetAccept(accept string) *GetLocalDocumentOptions {
+	_options.Accept = core.StringPtr(accept)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *GetLocalDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetLocalDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *GetLocalDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetLocalDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *GetLocalDocumentOptions) SetAttachments(attachments bool) *GetLocalDocumentOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *GetLocalDocumentOptions) SetAttachments(attachments bool) *GetLocalDocumentOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *GetLocalDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetLocalDocumentOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *GetLocalDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetLocalDocumentOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetLocalSeq : Allow user to set LocalSeq
-func (options *GetLocalDocumentOptions) SetLocalSeq(localSeq bool) *GetLocalDocumentOptions {
-	options.LocalSeq = core.BoolPtr(localSeq)
-	return options
+func (_options *GetLocalDocumentOptions) SetLocalSeq(localSeq bool) *GetLocalDocumentOptions {
+	_options.LocalSeq = core.BoolPtr(localSeq)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11746,15 +11891,15 @@ func (*CloudantV1) NewGetPartitionInformationOptions(db string, partitionKey str
 }
 
 // SetDb : Allow user to set Db
-func (options *GetPartitionInformationOptions) SetDb(db string) *GetPartitionInformationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetPartitionInformationOptions) SetDb(db string) *GetPartitionInformationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetPartitionKey : Allow user to set PartitionKey
-func (options *GetPartitionInformationOptions) SetPartitionKey(partitionKey string) *GetPartitionInformationOptions {
-	options.PartitionKey = core.StringPtr(partitionKey)
-	return options
+func (_options *GetPartitionInformationOptions) SetPartitionKey(partitionKey string) *GetPartitionInformationOptions {
+	_options.PartitionKey = core.StringPtr(partitionKey)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11817,75 +11962,75 @@ func (*CloudantV1) NewGetReplicationDocumentOptions(docID string) *GetReplicatio
 }
 
 // SetDocID : Allow user to set DocID
-func (options *GetReplicationDocumentOptions) SetDocID(docID string) *GetReplicationDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *GetReplicationDocumentOptions) SetDocID(docID string) *GetReplicationDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *GetReplicationDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetReplicationDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *GetReplicationDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *GetReplicationDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *GetReplicationDocumentOptions) SetAttachments(attachments bool) *GetReplicationDocumentOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *GetReplicationDocumentOptions) SetAttachments(attachments bool) *GetReplicationDocumentOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *GetReplicationDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetReplicationDocumentOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *GetReplicationDocumentOptions) SetAttEncodingInfo(attEncodingInfo bool) *GetReplicationDocumentOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *GetReplicationDocumentOptions) SetConflicts(conflicts bool) *GetReplicationDocumentOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *GetReplicationDocumentOptions) SetConflicts(conflicts bool) *GetReplicationDocumentOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDeletedConflicts : Allow user to set DeletedConflicts
-func (options *GetReplicationDocumentOptions) SetDeletedConflicts(deletedConflicts bool) *GetReplicationDocumentOptions {
-	options.DeletedConflicts = core.BoolPtr(deletedConflicts)
-	return options
+func (_options *GetReplicationDocumentOptions) SetDeletedConflicts(deletedConflicts bool) *GetReplicationDocumentOptions {
+	_options.DeletedConflicts = core.BoolPtr(deletedConflicts)
+	return _options
 }
 
 // SetLatest : Allow user to set Latest
-func (options *GetReplicationDocumentOptions) SetLatest(latest bool) *GetReplicationDocumentOptions {
-	options.Latest = core.BoolPtr(latest)
-	return options
+func (_options *GetReplicationDocumentOptions) SetLatest(latest bool) *GetReplicationDocumentOptions {
+	_options.Latest = core.BoolPtr(latest)
+	return _options
 }
 
 // SetLocalSeq : Allow user to set LocalSeq
-func (options *GetReplicationDocumentOptions) SetLocalSeq(localSeq bool) *GetReplicationDocumentOptions {
-	options.LocalSeq = core.BoolPtr(localSeq)
-	return options
+func (_options *GetReplicationDocumentOptions) SetLocalSeq(localSeq bool) *GetReplicationDocumentOptions {
+	_options.LocalSeq = core.BoolPtr(localSeq)
+	return _options
 }
 
 // SetMeta : Allow user to set Meta
-func (options *GetReplicationDocumentOptions) SetMeta(meta bool) *GetReplicationDocumentOptions {
-	options.Meta = core.BoolPtr(meta)
-	return options
+func (_options *GetReplicationDocumentOptions) SetMeta(meta bool) *GetReplicationDocumentOptions {
+	_options.Meta = core.BoolPtr(meta)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *GetReplicationDocumentOptions) SetRev(rev string) *GetReplicationDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *GetReplicationDocumentOptions) SetRev(rev string) *GetReplicationDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetRevs : Allow user to set Revs
-func (options *GetReplicationDocumentOptions) SetRevs(revs bool) *GetReplicationDocumentOptions {
-	options.Revs = core.BoolPtr(revs)
-	return options
+func (_options *GetReplicationDocumentOptions) SetRevs(revs bool) *GetReplicationDocumentOptions {
+	_options.Revs = core.BoolPtr(revs)
+	return _options
 }
 
 // SetRevsInfo : Allow user to set RevsInfo
-func (options *GetReplicationDocumentOptions) SetRevsInfo(revsInfo bool) *GetReplicationDocumentOptions {
-	options.RevsInfo = core.BoolPtr(revsInfo)
-	return options
+func (_options *GetReplicationDocumentOptions) SetRevsInfo(revsInfo bool) *GetReplicationDocumentOptions {
+	_options.RevsInfo = core.BoolPtr(revsInfo)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11928,21 +12073,21 @@ func (*CloudantV1) NewGetSchedulerDocsOptions() *GetSchedulerDocsOptions {
 }
 
 // SetLimit : Allow user to set Limit
-func (options *GetSchedulerDocsOptions) SetLimit(limit int64) *GetSchedulerDocsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *GetSchedulerDocsOptions) SetLimit(limit int64) *GetSchedulerDocsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *GetSchedulerDocsOptions) SetSkip(skip int64) *GetSchedulerDocsOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *GetSchedulerDocsOptions) SetSkip(skip int64) *GetSchedulerDocsOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetStates : Allow user to set States
-func (options *GetSchedulerDocsOptions) SetStates(states []string) *GetSchedulerDocsOptions {
-	options.States = states
-	return options
+func (_options *GetSchedulerDocsOptions) SetStates(states []string) *GetSchedulerDocsOptions {
+	_options.States = states
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11968,9 +12113,9 @@ func (*CloudantV1) NewGetSchedulerDocumentOptions(docID string) *GetSchedulerDoc
 }
 
 // SetDocID : Allow user to set DocID
-func (options *GetSchedulerDocumentOptions) SetDocID(docID string) *GetSchedulerDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *GetSchedulerDocumentOptions) SetDocID(docID string) *GetSchedulerDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -11996,9 +12141,9 @@ func (*CloudantV1) NewGetSchedulerJobOptions(jobID string) *GetSchedulerJobOptio
 }
 
 // SetJobID : Allow user to set JobID
-func (options *GetSchedulerJobOptions) SetJobID(jobID string) *GetSchedulerJobOptions {
-	options.JobID = core.StringPtr(jobID)
-	return options
+func (_options *GetSchedulerJobOptions) SetJobID(jobID string) *GetSchedulerJobOptions {
+	_options.JobID = core.StringPtr(jobID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12025,15 +12170,15 @@ func (*CloudantV1) NewGetSchedulerJobsOptions() *GetSchedulerJobsOptions {
 }
 
 // SetLimit : Allow user to set Limit
-func (options *GetSchedulerJobsOptions) SetLimit(limit int64) *GetSchedulerJobsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *GetSchedulerJobsOptions) SetLimit(limit int64) *GetSchedulerJobsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *GetSchedulerJobsOptions) SetSkip(skip int64) *GetSchedulerJobsOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *GetSchedulerJobsOptions) SetSkip(skip int64) *GetSchedulerJobsOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12068,21 +12213,21 @@ func (*CloudantV1) NewGetSearchInfoOptions(db string, ddoc string, index string)
 }
 
 // SetDb : Allow user to set Db
-func (options *GetSearchInfoOptions) SetDb(db string) *GetSearchInfoOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetSearchInfoOptions) SetDb(db string) *GetSearchInfoOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *GetSearchInfoOptions) SetDdoc(ddoc string) *GetSearchInfoOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *GetSearchInfoOptions) SetDdoc(ddoc string) *GetSearchInfoOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *GetSearchInfoOptions) SetIndex(index string) *GetSearchInfoOptions {
-	options.Index = core.StringPtr(index)
-	return options
+func (_options *GetSearchInfoOptions) SetIndex(index string) *GetSearchInfoOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12108,9 +12253,9 @@ func (*CloudantV1) NewGetSecurityOptions(db string) *GetSecurityOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *GetSecurityOptions) SetDb(db string) *GetSecurityOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetSecurityOptions) SetDb(db string) *GetSecurityOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12172,9 +12317,9 @@ func (*CloudantV1) NewGetShardsInformationOptions(db string) *GetShardsInformati
 }
 
 // SetDb : Allow user to set Db
-func (options *GetShardsInformationOptions) SetDb(db string) *GetShardsInformationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *GetShardsInformationOptions) SetDb(db string) *GetShardsInformationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12216,9 +12361,9 @@ func (*CloudantV1) NewGetUuidsOptions() *GetUuidsOptions {
 }
 
 // SetCount : Allow user to set Count
-func (options *GetUuidsOptions) SetCount(count int64) *GetUuidsOptions {
-	options.Count = core.Int64Ptr(count)
-	return options
+func (_options *GetUuidsOptions) SetCount(count int64) *GetUuidsOptions {
+	_options.Count = core.Int64Ptr(count)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12261,39 +12406,39 @@ func (*CloudantV1) NewHeadAttachmentOptions(db string, docID string, attachmentN
 }
 
 // SetDb : Allow user to set Db
-func (options *HeadAttachmentOptions) SetDb(db string) *HeadAttachmentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *HeadAttachmentOptions) SetDb(db string) *HeadAttachmentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *HeadAttachmentOptions) SetDocID(docID string) *HeadAttachmentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *HeadAttachmentOptions) SetDocID(docID string) *HeadAttachmentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetAttachmentName : Allow user to set AttachmentName
-func (options *HeadAttachmentOptions) SetAttachmentName(attachmentName string) *HeadAttachmentOptions {
-	options.AttachmentName = core.StringPtr(attachmentName)
-	return options
+func (_options *HeadAttachmentOptions) SetAttachmentName(attachmentName string) *HeadAttachmentOptions {
+	_options.AttachmentName = core.StringPtr(attachmentName)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *HeadAttachmentOptions) SetIfMatch(ifMatch string) *HeadAttachmentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *HeadAttachmentOptions) SetIfMatch(ifMatch string) *HeadAttachmentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *HeadAttachmentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadAttachmentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *HeadAttachmentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadAttachmentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *HeadAttachmentOptions) SetRev(rev string) *HeadAttachmentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *HeadAttachmentOptions) SetRev(rev string) *HeadAttachmentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12319,9 +12464,9 @@ func (*CloudantV1) NewHeadDatabaseOptions(db string) *HeadDatabaseOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *HeadDatabaseOptions) SetDb(db string) *HeadDatabaseOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *HeadDatabaseOptions) SetDb(db string) *HeadDatabaseOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12355,21 +12500,21 @@ func (*CloudantV1) NewHeadDesignDocumentOptions(db string, ddoc string) *HeadDes
 }
 
 // SetDb : Allow user to set Db
-func (options *HeadDesignDocumentOptions) SetDb(db string) *HeadDesignDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *HeadDesignDocumentOptions) SetDb(db string) *HeadDesignDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *HeadDesignDocumentOptions) SetDdoc(ddoc string) *HeadDesignDocumentOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *HeadDesignDocumentOptions) SetDdoc(ddoc string) *HeadDesignDocumentOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *HeadDesignDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadDesignDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *HeadDesignDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadDesignDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12408,33 +12553,33 @@ func (*CloudantV1) NewHeadDocumentOptions(db string, docID string) *HeadDocument
 }
 
 // SetDb : Allow user to set Db
-func (options *HeadDocumentOptions) SetDb(db string) *HeadDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *HeadDocumentOptions) SetDb(db string) *HeadDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *HeadDocumentOptions) SetDocID(docID string) *HeadDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *HeadDocumentOptions) SetDocID(docID string) *HeadDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *HeadDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *HeadDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetLatest : Allow user to set Latest
-func (options *HeadDocumentOptions) SetLatest(latest bool) *HeadDocumentOptions {
-	options.Latest = core.BoolPtr(latest)
-	return options
+func (_options *HeadDocumentOptions) SetLatest(latest bool) *HeadDocumentOptions {
+	_options.Latest = core.BoolPtr(latest)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *HeadDocumentOptions) SetRev(rev string) *HeadDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *HeadDocumentOptions) SetRev(rev string) *HeadDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12467,21 +12612,21 @@ func (*CloudantV1) NewHeadLocalDocumentOptions(db string, docID string) *HeadLoc
 }
 
 // SetDb : Allow user to set Db
-func (options *HeadLocalDocumentOptions) SetDb(db string) *HeadLocalDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *HeadLocalDocumentOptions) SetDb(db string) *HeadLocalDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *HeadLocalDocumentOptions) SetDocID(docID string) *HeadLocalDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *HeadLocalDocumentOptions) SetDocID(docID string) *HeadLocalDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *HeadLocalDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadLocalDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *HeadLocalDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadLocalDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12510,15 +12655,15 @@ func (*CloudantV1) NewHeadReplicationDocumentOptions(docID string) *HeadReplicat
 }
 
 // SetDocID : Allow user to set DocID
-func (options *HeadReplicationDocumentOptions) SetDocID(docID string) *HeadReplicationDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *HeadReplicationDocumentOptions) SetDocID(docID string) *HeadReplicationDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetIfNoneMatch : Allow user to set IfNoneMatch
-func (options *HeadReplicationDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadReplicationDocumentOptions {
-	options.IfNoneMatch = core.StringPtr(ifNoneMatch)
-	return options
+func (_options *HeadReplicationDocumentOptions) SetIfNoneMatch(ifNoneMatch string) *HeadReplicationDocumentOptions {
+	_options.IfNoneMatch = core.StringPtr(ifNoneMatch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12544,9 +12689,9 @@ func (*CloudantV1) NewHeadSchedulerDocumentOptions(docID string) *HeadSchedulerD
 }
 
 // SetDocID : Allow user to set DocID
-func (options *HeadSchedulerDocumentOptions) SetDocID(docID string) *HeadSchedulerDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *HeadSchedulerDocumentOptions) SetDocID(docID string) *HeadSchedulerDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -12572,9 +12717,9 @@ func (*CloudantV1) NewHeadSchedulerJobOptions(jobID string) *HeadSchedulerJobOpt
 }
 
 // SetJobID : Allow user to set JobID
-func (options *HeadSchedulerJobOptions) SetJobID(jobID string) *HeadSchedulerJobOptions {
-	options.JobID = core.StringPtr(jobID)
-	return options
+func (_options *HeadSchedulerJobOptions) SetJobID(jobID string) *HeadSchedulerJobOptions {
+	_options.JobID = core.StringPtr(jobID)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13107,9 +13252,9 @@ func (*CloudantV1) NewPostActivityTrackerEventsOptions(types []string) *PostActi
 }
 
 // SetTypes : Allow user to set Types
-func (options *PostActivityTrackerEventsOptions) SetTypes(types []string) *PostActivityTrackerEventsOptions {
-	options.Types = types
-	return options
+func (_options *PostActivityTrackerEventsOptions) SetTypes(types []string) *PostActivityTrackerEventsOptions {
+	_options.Types = types
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13177,87 +13322,87 @@ func (*CloudantV1) NewPostAllDocsOptions(db string) *PostAllDocsOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PostAllDocsOptions) SetDb(db string) *PostAllDocsOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostAllDocsOptions) SetDb(db string) *PostAllDocsOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostAllDocsOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostAllDocsOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostAllDocsOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostAllDocsOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostAllDocsOptions) SetAttachments(attachments bool) *PostAllDocsOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostAllDocsOptions) SetAttachments(attachments bool) *PostAllDocsOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostAllDocsOptions) SetConflicts(conflicts bool) *PostAllDocsOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostAllDocsOptions) SetConflicts(conflicts bool) *PostAllDocsOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDescending : Allow user to set Descending
-func (options *PostAllDocsOptions) SetDescending(descending bool) *PostAllDocsOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *PostAllDocsOptions) SetDescending(descending bool) *PostAllDocsOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostAllDocsOptions) SetIncludeDocs(includeDocs bool) *PostAllDocsOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostAllDocsOptions) SetIncludeDocs(includeDocs bool) *PostAllDocsOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetInclusiveEnd : Allow user to set InclusiveEnd
-func (options *PostAllDocsOptions) SetInclusiveEnd(inclusiveEnd bool) *PostAllDocsOptions {
-	options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
-	return options
+func (_options *PostAllDocsOptions) SetInclusiveEnd(inclusiveEnd bool) *PostAllDocsOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostAllDocsOptions) SetLimit(limit int64) *PostAllDocsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostAllDocsOptions) SetLimit(limit int64) *PostAllDocsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostAllDocsOptions) SetSkip(skip int64) *PostAllDocsOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostAllDocsOptions) SetSkip(skip int64) *PostAllDocsOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetUpdateSeq : Allow user to set UpdateSeq
-func (options *PostAllDocsOptions) SetUpdateSeq(updateSeq bool) *PostAllDocsOptions {
-	options.UpdateSeq = core.BoolPtr(updateSeq)
-	return options
+func (_options *PostAllDocsOptions) SetUpdateSeq(updateSeq bool) *PostAllDocsOptions {
+	_options.UpdateSeq = core.BoolPtr(updateSeq)
+	return _options
 }
 
 // SetEndkey : Allow user to set Endkey
-func (options *PostAllDocsOptions) SetEndkey(endkey string) *PostAllDocsOptions {
-	options.Endkey = core.StringPtr(endkey)
-	return options
+func (_options *PostAllDocsOptions) SetEndkey(endkey string) *PostAllDocsOptions {
+	_options.Endkey = core.StringPtr(endkey)
+	return _options
 }
 
 // SetKey : Allow user to set Key
-func (options *PostAllDocsOptions) SetKey(key string) *PostAllDocsOptions {
-	options.Key = core.StringPtr(key)
-	return options
+func (_options *PostAllDocsOptions) SetKey(key string) *PostAllDocsOptions {
+	_options.Key = core.StringPtr(key)
+	return _options
 }
 
 // SetKeys : Allow user to set Keys
-func (options *PostAllDocsOptions) SetKeys(keys []string) *PostAllDocsOptions {
-	options.Keys = keys
-	return options
+func (_options *PostAllDocsOptions) SetKeys(keys []string) *PostAllDocsOptions {
+	_options.Keys = keys
+	return _options
 }
 
 // SetStartkey : Allow user to set Startkey
-func (options *PostAllDocsOptions) SetStartkey(startkey string) *PostAllDocsOptions {
-	options.Startkey = core.StringPtr(startkey)
-	return options
+func (_options *PostAllDocsOptions) SetStartkey(startkey string) *PostAllDocsOptions {
+	_options.Startkey = core.StringPtr(startkey)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13288,15 +13433,15 @@ func (*CloudantV1) NewPostAllDocsQueriesOptions(db string, queries []AllDocsQuer
 }
 
 // SetDb : Allow user to set Db
-func (options *PostAllDocsQueriesOptions) SetDb(db string) *PostAllDocsQueriesOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostAllDocsQueriesOptions) SetDb(db string) *PostAllDocsQueriesOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetQueries : Allow user to set Queries
-func (options *PostAllDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostAllDocsQueriesOptions {
-	options.Queries = queries
-	return options
+func (_options *PostAllDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostAllDocsQueriesOptions {
+	_options.Queries = queries
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13346,21 +13491,21 @@ func (*CloudantV1) NewPostBulkDocsOptions(db string) *PostBulkDocsOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PostBulkDocsOptions) SetDb(db string) *PostBulkDocsOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostBulkDocsOptions) SetDb(db string) *PostBulkDocsOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetBulkDocs : Allow user to set BulkDocs
-func (options *PostBulkDocsOptions) SetBulkDocs(bulkDocs *BulkDocs) *PostBulkDocsOptions {
-	options.BulkDocs = bulkDocs
-	return options
+func (_options *PostBulkDocsOptions) SetBulkDocs(bulkDocs *BulkDocs) *PostBulkDocsOptions {
+	_options.BulkDocs = bulkDocs
+	return _options
 }
 
 // SetBody : Allow user to set Body
-func (options *PostBulkDocsOptions) SetBody(body io.ReadCloser) *PostBulkDocsOptions {
-	options.Body = body
-	return options
+func (_options *PostBulkDocsOptions) SetBody(body io.ReadCloser) *PostBulkDocsOptions {
+	_options.Body = body
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13403,39 +13548,39 @@ func (*CloudantV1) NewPostBulkGetOptions(db string, docs []BulkGetQueryDocument)
 }
 
 // SetDb : Allow user to set Db
-func (options *PostBulkGetOptions) SetDb(db string) *PostBulkGetOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostBulkGetOptions) SetDb(db string) *PostBulkGetOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocs : Allow user to set Docs
-func (options *PostBulkGetOptions) SetDocs(docs []BulkGetQueryDocument) *PostBulkGetOptions {
-	options.Docs = docs
-	return options
+func (_options *PostBulkGetOptions) SetDocs(docs []BulkGetQueryDocument) *PostBulkGetOptions {
+	_options.Docs = docs
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostBulkGetOptions) SetAttachments(attachments bool) *PostBulkGetOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostBulkGetOptions) SetAttachments(attachments bool) *PostBulkGetOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostBulkGetOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostBulkGetOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostBulkGetOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostBulkGetOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetLatest : Allow user to set Latest
-func (options *PostBulkGetOptions) SetLatest(latest bool) *PostBulkGetOptions {
-	options.Latest = core.BoolPtr(latest)
-	return options
+func (_options *PostBulkGetOptions) SetLatest(latest bool) *PostBulkGetOptions {
+	_options.Latest = core.BoolPtr(latest)
+	return _options
 }
 
 // SetRevs : Allow user to set Revs
-func (options *PostBulkGetOptions) SetRevs(revs bool) *PostBulkGetOptions {
-	options.Revs = core.BoolPtr(revs)
-	return options
+func (_options *PostBulkGetOptions) SetRevs(revs bool) *PostBulkGetOptions {
+	_options.Revs = core.BoolPtr(revs)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13573,117 +13718,117 @@ func (*CloudantV1) NewPostChangesOptions(db string) *PostChangesOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PostChangesOptions) SetDb(db string) *PostChangesOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostChangesOptions) SetDb(db string) *PostChangesOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocIds : Allow user to set DocIds
-func (options *PostChangesOptions) SetDocIds(docIds []string) *PostChangesOptions {
-	options.DocIds = docIds
-	return options
+func (_options *PostChangesOptions) SetDocIds(docIds []string) *PostChangesOptions {
+	_options.DocIds = docIds
+	return _options
 }
 
 // SetFields : Allow user to set Fields
-func (options *PostChangesOptions) SetFields(fields []string) *PostChangesOptions {
-	options.Fields = fields
-	return options
+func (_options *PostChangesOptions) SetFields(fields []string) *PostChangesOptions {
+	_options.Fields = fields
+	return _options
 }
 
 // SetSelector : Allow user to set Selector
-func (options *PostChangesOptions) SetSelector(selector map[string]interface{}) *PostChangesOptions {
-	options.Selector = selector
-	return options
+func (_options *PostChangesOptions) SetSelector(selector map[string]interface{}) *PostChangesOptions {
+	_options.Selector = selector
+	return _options
 }
 
 // SetLastEventID : Allow user to set LastEventID
-func (options *PostChangesOptions) SetLastEventID(lastEventID string) *PostChangesOptions {
-	options.LastEventID = core.StringPtr(lastEventID)
-	return options
+func (_options *PostChangesOptions) SetLastEventID(lastEventID string) *PostChangesOptions {
+	_options.LastEventID = core.StringPtr(lastEventID)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostChangesOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostChangesOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostChangesOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostChangesOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostChangesOptions) SetAttachments(attachments bool) *PostChangesOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostChangesOptions) SetAttachments(attachments bool) *PostChangesOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostChangesOptions) SetConflicts(conflicts bool) *PostChangesOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostChangesOptions) SetConflicts(conflicts bool) *PostChangesOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDescending : Allow user to set Descending
-func (options *PostChangesOptions) SetDescending(descending bool) *PostChangesOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *PostChangesOptions) SetDescending(descending bool) *PostChangesOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetFeed : Allow user to set Feed
-func (options *PostChangesOptions) SetFeed(feed string) *PostChangesOptions {
-	options.Feed = core.StringPtr(feed)
-	return options
+func (_options *PostChangesOptions) SetFeed(feed string) *PostChangesOptions {
+	_options.Feed = core.StringPtr(feed)
+	return _options
 }
 
 // SetFilter : Allow user to set Filter
-func (options *PostChangesOptions) SetFilter(filter string) *PostChangesOptions {
-	options.Filter = core.StringPtr(filter)
-	return options
+func (_options *PostChangesOptions) SetFilter(filter string) *PostChangesOptions {
+	_options.Filter = core.StringPtr(filter)
+	return _options
 }
 
 // SetHeartbeat : Allow user to set Heartbeat
-func (options *PostChangesOptions) SetHeartbeat(heartbeat int64) *PostChangesOptions {
-	options.Heartbeat = core.Int64Ptr(heartbeat)
-	return options
+func (_options *PostChangesOptions) SetHeartbeat(heartbeat int64) *PostChangesOptions {
+	_options.Heartbeat = core.Int64Ptr(heartbeat)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostChangesOptions) SetIncludeDocs(includeDocs bool) *PostChangesOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostChangesOptions) SetIncludeDocs(includeDocs bool) *PostChangesOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostChangesOptions) SetLimit(limit int64) *PostChangesOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostChangesOptions) SetLimit(limit int64) *PostChangesOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSeqInterval : Allow user to set SeqInterval
-func (options *PostChangesOptions) SetSeqInterval(seqInterval int64) *PostChangesOptions {
-	options.SeqInterval = core.Int64Ptr(seqInterval)
-	return options
+func (_options *PostChangesOptions) SetSeqInterval(seqInterval int64) *PostChangesOptions {
+	_options.SeqInterval = core.Int64Ptr(seqInterval)
+	return _options
 }
 
 // SetSince : Allow user to set Since
-func (options *PostChangesOptions) SetSince(since string) *PostChangesOptions {
-	options.Since = core.StringPtr(since)
-	return options
+func (_options *PostChangesOptions) SetSince(since string) *PostChangesOptions {
+	_options.Since = core.StringPtr(since)
+	return _options
 }
 
 // SetStyle : Allow user to set Style
-func (options *PostChangesOptions) SetStyle(style string) *PostChangesOptions {
-	options.Style = core.StringPtr(style)
-	return options
+func (_options *PostChangesOptions) SetStyle(style string) *PostChangesOptions {
+	_options.Style = core.StringPtr(style)
+	return _options
 }
 
 // SetTimeout : Allow user to set Timeout
-func (options *PostChangesOptions) SetTimeout(timeout int64) *PostChangesOptions {
-	options.Timeout = core.Int64Ptr(timeout)
-	return options
+func (_options *PostChangesOptions) SetTimeout(timeout int64) *PostChangesOptions {
+	_options.Timeout = core.Int64Ptr(timeout)
+	return _options
 }
 
 // SetView : Allow user to set View
-func (options *PostChangesOptions) SetView(view string) *PostChangesOptions {
-	options.View = core.StringPtr(view)
-	return options
+func (_options *PostChangesOptions) SetView(view string) *PostChangesOptions {
+	_options.View = core.StringPtr(view)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13709,9 +13854,9 @@ func (*CloudantV1) NewPostDbsInfoOptions(keys []string) *PostDbsInfoOptions {
 }
 
 // SetKeys : Allow user to set Keys
-func (options *PostDbsInfoOptions) SetKeys(keys []string) *PostDbsInfoOptions {
-	options.Keys = keys
-	return options
+func (_options *PostDbsInfoOptions) SetKeys(keys []string) *PostDbsInfoOptions {
+	_options.Keys = keys
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13782,93 +13927,93 @@ func (*CloudantV1) NewPostDesignDocsOptions(db string) *PostDesignDocsOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PostDesignDocsOptions) SetDb(db string) *PostDesignDocsOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostDesignDocsOptions) SetDb(db string) *PostDesignDocsOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetAccept : Allow user to set Accept
-func (options *PostDesignDocsOptions) SetAccept(accept string) *PostDesignDocsOptions {
-	options.Accept = core.StringPtr(accept)
-	return options
+func (_options *PostDesignDocsOptions) SetAccept(accept string) *PostDesignDocsOptions {
+	_options.Accept = core.StringPtr(accept)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostDesignDocsOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostDesignDocsOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostDesignDocsOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostDesignDocsOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostDesignDocsOptions) SetAttachments(attachments bool) *PostDesignDocsOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostDesignDocsOptions) SetAttachments(attachments bool) *PostDesignDocsOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostDesignDocsOptions) SetConflicts(conflicts bool) *PostDesignDocsOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostDesignDocsOptions) SetConflicts(conflicts bool) *PostDesignDocsOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDescending : Allow user to set Descending
-func (options *PostDesignDocsOptions) SetDescending(descending bool) *PostDesignDocsOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *PostDesignDocsOptions) SetDescending(descending bool) *PostDesignDocsOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostDesignDocsOptions) SetIncludeDocs(includeDocs bool) *PostDesignDocsOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostDesignDocsOptions) SetIncludeDocs(includeDocs bool) *PostDesignDocsOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetInclusiveEnd : Allow user to set InclusiveEnd
-func (options *PostDesignDocsOptions) SetInclusiveEnd(inclusiveEnd bool) *PostDesignDocsOptions {
-	options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
-	return options
+func (_options *PostDesignDocsOptions) SetInclusiveEnd(inclusiveEnd bool) *PostDesignDocsOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostDesignDocsOptions) SetLimit(limit int64) *PostDesignDocsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostDesignDocsOptions) SetLimit(limit int64) *PostDesignDocsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostDesignDocsOptions) SetSkip(skip int64) *PostDesignDocsOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostDesignDocsOptions) SetSkip(skip int64) *PostDesignDocsOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetUpdateSeq : Allow user to set UpdateSeq
-func (options *PostDesignDocsOptions) SetUpdateSeq(updateSeq bool) *PostDesignDocsOptions {
-	options.UpdateSeq = core.BoolPtr(updateSeq)
-	return options
+func (_options *PostDesignDocsOptions) SetUpdateSeq(updateSeq bool) *PostDesignDocsOptions {
+	_options.UpdateSeq = core.BoolPtr(updateSeq)
+	return _options
 }
 
 // SetEndkey : Allow user to set Endkey
-func (options *PostDesignDocsOptions) SetEndkey(endkey string) *PostDesignDocsOptions {
-	options.Endkey = core.StringPtr(endkey)
-	return options
+func (_options *PostDesignDocsOptions) SetEndkey(endkey string) *PostDesignDocsOptions {
+	_options.Endkey = core.StringPtr(endkey)
+	return _options
 }
 
 // SetKey : Allow user to set Key
-func (options *PostDesignDocsOptions) SetKey(key string) *PostDesignDocsOptions {
-	options.Key = core.StringPtr(key)
-	return options
+func (_options *PostDesignDocsOptions) SetKey(key string) *PostDesignDocsOptions {
+	_options.Key = core.StringPtr(key)
+	return _options
 }
 
 // SetKeys : Allow user to set Keys
-func (options *PostDesignDocsOptions) SetKeys(keys []string) *PostDesignDocsOptions {
-	options.Keys = keys
-	return options
+func (_options *PostDesignDocsOptions) SetKeys(keys []string) *PostDesignDocsOptions {
+	_options.Keys = keys
+	return _options
 }
 
 // SetStartkey : Allow user to set Startkey
-func (options *PostDesignDocsOptions) SetStartkey(startkey string) *PostDesignDocsOptions {
-	options.Startkey = core.StringPtr(startkey)
-	return options
+func (_options *PostDesignDocsOptions) SetStartkey(startkey string) *PostDesignDocsOptions {
+	_options.Startkey = core.StringPtr(startkey)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13902,21 +14047,21 @@ func (*CloudantV1) NewPostDesignDocsQueriesOptions(db string, queries []AllDocsQ
 }
 
 // SetDb : Allow user to set Db
-func (options *PostDesignDocsQueriesOptions) SetDb(db string) *PostDesignDocsQueriesOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostDesignDocsQueriesOptions) SetDb(db string) *PostDesignDocsQueriesOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetQueries : Allow user to set Queries
-func (options *PostDesignDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
-	options.Queries = queries
-	return options
+func (_options *PostDesignDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
+	_options.Queries = queries
+	return _options
 }
 
 // SetAccept : Allow user to set Accept
-func (options *PostDesignDocsQueriesOptions) SetAccept(accept string) *PostDesignDocsQueriesOptions {
-	options.Accept = core.StringPtr(accept)
-	return options
+func (_options *PostDesignDocsQueriesOptions) SetAccept(accept string) *PostDesignDocsQueriesOptions {
+	_options.Accept = core.StringPtr(accept)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -13962,33 +14107,33 @@ func (*CloudantV1) NewPostDocumentOptions(db string) *PostDocumentOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PostDocumentOptions) SetDb(db string) *PostDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostDocumentOptions) SetDb(db string) *PostDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocument : Allow user to set Document
-func (options *PostDocumentOptions) SetDocument(document *Document) *PostDocumentOptions {
-	options.Document = document
-	return options
+func (_options *PostDocumentOptions) SetDocument(document *Document) *PostDocumentOptions {
+	_options.Document = document
+	return _options
 }
 
 // SetBody : Allow user to set Body
-func (options *PostDocumentOptions) SetBody(body io.ReadCloser) *PostDocumentOptions {
-	options.Body = body
-	return options
+func (_options *PostDocumentOptions) SetBody(body io.ReadCloser) *PostDocumentOptions {
+	_options.Body = body
+	return _options
 }
 
 // SetContentType : Allow user to set ContentType
-func (options *PostDocumentOptions) SetContentType(contentType string) *PostDocumentOptions {
-	options.ContentType = core.StringPtr(contentType)
-	return options
+func (_options *PostDocumentOptions) SetContentType(contentType string) *PostDocumentOptions {
+	_options.ContentType = core.StringPtr(contentType)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *PostDocumentOptions) SetBatch(batch string) *PostDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *PostDocumentOptions) SetBatch(batch string) *PostDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14095,81 +14240,81 @@ func (*CloudantV1) NewPostExplainOptions(db string, selector map[string]interfac
 }
 
 // SetDb : Allow user to set Db
-func (options *PostExplainOptions) SetDb(db string) *PostExplainOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostExplainOptions) SetDb(db string) *PostExplainOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetSelector : Allow user to set Selector
-func (options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
-	options.Selector = selector
-	return options
+func (_options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
+	_options.Selector = selector
+	return _options
 }
 
 // SetBookmark : Allow user to set Bookmark
-func (options *PostExplainOptions) SetBookmark(bookmark string) *PostExplainOptions {
-	options.Bookmark = core.StringPtr(bookmark)
-	return options
+func (_options *PostExplainOptions) SetBookmark(bookmark string) *PostExplainOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostExplainOptions) SetConflicts(conflicts bool) *PostExplainOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostExplainOptions) SetConflicts(conflicts bool) *PostExplainOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetExecutionStats : Allow user to set ExecutionStats
-func (options *PostExplainOptions) SetExecutionStats(executionStats bool) *PostExplainOptions {
-	options.ExecutionStats = core.BoolPtr(executionStats)
-	return options
+func (_options *PostExplainOptions) SetExecutionStats(executionStats bool) *PostExplainOptions {
+	_options.ExecutionStats = core.BoolPtr(executionStats)
+	return _options
 }
 
 // SetFields : Allow user to set Fields
-func (options *PostExplainOptions) SetFields(fields []string) *PostExplainOptions {
-	options.Fields = fields
-	return options
+func (_options *PostExplainOptions) SetFields(fields []string) *PostExplainOptions {
+	_options.Fields = fields
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostExplainOptions) SetLimit(limit int64) *PostExplainOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostExplainOptions) SetLimit(limit int64) *PostExplainOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostExplainOptions) SetSkip(skip int64) *PostExplainOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostExplainOptions) SetSkip(skip int64) *PostExplainOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *PostExplainOptions) SetSort(sort []map[string]string) *PostExplainOptions {
-	options.Sort = sort
-	return options
+func (_options *PostExplainOptions) SetSort(sort []map[string]string) *PostExplainOptions {
+	_options.Sort = sort
+	return _options
 }
 
 // SetStable : Allow user to set Stable
-func (options *PostExplainOptions) SetStable(stable bool) *PostExplainOptions {
-	options.Stable = core.BoolPtr(stable)
-	return options
+func (_options *PostExplainOptions) SetStable(stable bool) *PostExplainOptions {
+	_options.Stable = core.BoolPtr(stable)
+	return _options
 }
 
 // SetUpdate : Allow user to set Update
-func (options *PostExplainOptions) SetUpdate(update string) *PostExplainOptions {
-	options.Update = core.StringPtr(update)
-	return options
+func (_options *PostExplainOptions) SetUpdate(update string) *PostExplainOptions {
+	_options.Update = core.StringPtr(update)
+	return _options
 }
 
 // SetUseIndex : Allow user to set UseIndex
-func (options *PostExplainOptions) SetUseIndex(useIndex []string) *PostExplainOptions {
-	options.UseIndex = useIndex
-	return options
+func (_options *PostExplainOptions) SetUseIndex(useIndex []string) *PostExplainOptions {
+	_options.UseIndex = useIndex
+	return _options
 }
 
 // SetR : Allow user to set R
-func (options *PostExplainOptions) SetR(r int64) *PostExplainOptions {
-	options.R = core.Int64Ptr(r)
-	return options
+func (_options *PostExplainOptions) SetR(r int64) *PostExplainOptions {
+	_options.R = core.Int64Ptr(r)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14276,81 +14421,81 @@ func (*CloudantV1) NewPostFindOptions(db string, selector map[string]interface{}
 }
 
 // SetDb : Allow user to set Db
-func (options *PostFindOptions) SetDb(db string) *PostFindOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostFindOptions) SetDb(db string) *PostFindOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetSelector : Allow user to set Selector
-func (options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
-	options.Selector = selector
-	return options
+func (_options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
+	_options.Selector = selector
+	return _options
 }
 
 // SetBookmark : Allow user to set Bookmark
-func (options *PostFindOptions) SetBookmark(bookmark string) *PostFindOptions {
-	options.Bookmark = core.StringPtr(bookmark)
-	return options
+func (_options *PostFindOptions) SetBookmark(bookmark string) *PostFindOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostFindOptions) SetConflicts(conflicts bool) *PostFindOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostFindOptions) SetConflicts(conflicts bool) *PostFindOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetExecutionStats : Allow user to set ExecutionStats
-func (options *PostFindOptions) SetExecutionStats(executionStats bool) *PostFindOptions {
-	options.ExecutionStats = core.BoolPtr(executionStats)
-	return options
+func (_options *PostFindOptions) SetExecutionStats(executionStats bool) *PostFindOptions {
+	_options.ExecutionStats = core.BoolPtr(executionStats)
+	return _options
 }
 
 // SetFields : Allow user to set Fields
-func (options *PostFindOptions) SetFields(fields []string) *PostFindOptions {
-	options.Fields = fields
-	return options
+func (_options *PostFindOptions) SetFields(fields []string) *PostFindOptions {
+	_options.Fields = fields
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostFindOptions) SetLimit(limit int64) *PostFindOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostFindOptions) SetLimit(limit int64) *PostFindOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostFindOptions) SetSkip(skip int64) *PostFindOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostFindOptions) SetSkip(skip int64) *PostFindOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *PostFindOptions) SetSort(sort []map[string]string) *PostFindOptions {
-	options.Sort = sort
-	return options
+func (_options *PostFindOptions) SetSort(sort []map[string]string) *PostFindOptions {
+	_options.Sort = sort
+	return _options
 }
 
 // SetStable : Allow user to set Stable
-func (options *PostFindOptions) SetStable(stable bool) *PostFindOptions {
-	options.Stable = core.BoolPtr(stable)
-	return options
+func (_options *PostFindOptions) SetStable(stable bool) *PostFindOptions {
+	_options.Stable = core.BoolPtr(stable)
+	return _options
 }
 
 // SetUpdate : Allow user to set Update
-func (options *PostFindOptions) SetUpdate(update string) *PostFindOptions {
-	options.Update = core.StringPtr(update)
-	return options
+func (_options *PostFindOptions) SetUpdate(update string) *PostFindOptions {
+	_options.Update = core.StringPtr(update)
+	return _options
 }
 
 // SetUseIndex : Allow user to set UseIndex
-func (options *PostFindOptions) SetUseIndex(useIndex []string) *PostFindOptions {
-	options.UseIndex = useIndex
-	return options
+func (_options *PostFindOptions) SetUseIndex(useIndex []string) *PostFindOptions {
+	_options.UseIndex = useIndex
+	return _options
 }
 
 // SetR : Allow user to set R
-func (options *PostFindOptions) SetR(r int64) *PostFindOptions {
-	options.R = core.Int64Ptr(r)
-	return options
+func (_options *PostFindOptions) SetR(r int64) *PostFindOptions {
+	_options.R = core.Int64Ptr(r)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14376,9 +14521,9 @@ func (*CloudantV1) NewPostGeoCleanupOptions(db string) *PostGeoCleanupOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PostGeoCleanupOptions) SetDb(db string) *PostGeoCleanupOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostGeoCleanupOptions) SetDb(db string) *PostGeoCleanupOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14438,45 +14583,45 @@ func (*CloudantV1) NewPostIndexOptions(db string, index *IndexDefinition) *PostI
 }
 
 // SetDb : Allow user to set Db
-func (options *PostIndexOptions) SetDb(db string) *PostIndexOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostIndexOptions) SetDb(db string) *PostIndexOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *PostIndexOptions) SetIndex(index *IndexDefinition) *PostIndexOptions {
-	options.Index = index
-	return options
+func (_options *PostIndexOptions) SetIndex(index *IndexDefinition) *PostIndexOptions {
+	_options.Index = index
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PostIndexOptions) SetDdoc(ddoc string) *PostIndexOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PostIndexOptions) SetDdoc(ddoc string) *PostIndexOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetDef : Allow user to set Def
-func (options *PostIndexOptions) SetDef(def *IndexDefinition) *PostIndexOptions {
-	options.Def = def
-	return options
+func (_options *PostIndexOptions) SetDef(def *IndexDefinition) *PostIndexOptions {
+	_options.Def = def
+	return _options
 }
 
 // SetName : Allow user to set Name
-func (options *PostIndexOptions) SetName(name string) *PostIndexOptions {
-	options.Name = core.StringPtr(name)
-	return options
+func (_options *PostIndexOptions) SetName(name string) *PostIndexOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
 }
 
 // SetPartitioned : Allow user to set Partitioned
-func (options *PostIndexOptions) SetPartitioned(partitioned bool) *PostIndexOptions {
-	options.Partitioned = core.BoolPtr(partitioned)
-	return options
+func (_options *PostIndexOptions) SetPartitioned(partitioned bool) *PostIndexOptions {
+	_options.Partitioned = core.BoolPtr(partitioned)
+	return _options
 }
 
 // SetType : Allow user to set Type
-func (options *PostIndexOptions) SetType(typeVar string) *PostIndexOptions {
-	options.Type = core.StringPtr(typeVar)
-	return options
+func (_options *PostIndexOptions) SetType(typeVar string) *PostIndexOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14506,15 +14651,15 @@ func (*CloudantV1) NewPostMissingRevsOptions(db string, documentRevisions map[st
 }
 
 // SetDb : Allow user to set Db
-func (options *PostMissingRevsOptions) SetDb(db string) *PostMissingRevsOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostMissingRevsOptions) SetDb(db string) *PostMissingRevsOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocumentRevisions : Allow user to set DocumentRevisions
-func (options *PostMissingRevsOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostMissingRevsOptions {
-	options.DocumentRevisions = documentRevisions
-	return options
+func (_options *PostMissingRevsOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostMissingRevsOptions {
+	_options.DocumentRevisions = documentRevisions
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14586,93 +14731,93 @@ func (*CloudantV1) NewPostPartitionAllDocsOptions(db string, partitionKey string
 }
 
 // SetDb : Allow user to set Db
-func (options *PostPartitionAllDocsOptions) SetDb(db string) *PostPartitionAllDocsOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetDb(db string) *PostPartitionAllDocsOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetPartitionKey : Allow user to set PartitionKey
-func (options *PostPartitionAllDocsOptions) SetPartitionKey(partitionKey string) *PostPartitionAllDocsOptions {
-	options.PartitionKey = core.StringPtr(partitionKey)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetPartitionKey(partitionKey string) *PostPartitionAllDocsOptions {
+	_options.PartitionKey = core.StringPtr(partitionKey)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostPartitionAllDocsOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostPartitionAllDocsOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostPartitionAllDocsOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostPartitionAllDocsOptions) SetAttachments(attachments bool) *PostPartitionAllDocsOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetAttachments(attachments bool) *PostPartitionAllDocsOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostPartitionAllDocsOptions) SetConflicts(conflicts bool) *PostPartitionAllDocsOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetConflicts(conflicts bool) *PostPartitionAllDocsOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDescending : Allow user to set Descending
-func (options *PostPartitionAllDocsOptions) SetDescending(descending bool) *PostPartitionAllDocsOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetDescending(descending bool) *PostPartitionAllDocsOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostPartitionAllDocsOptions) SetIncludeDocs(includeDocs bool) *PostPartitionAllDocsOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetIncludeDocs(includeDocs bool) *PostPartitionAllDocsOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetInclusiveEnd : Allow user to set InclusiveEnd
-func (options *PostPartitionAllDocsOptions) SetInclusiveEnd(inclusiveEnd bool) *PostPartitionAllDocsOptions {
-	options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetInclusiveEnd(inclusiveEnd bool) *PostPartitionAllDocsOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostPartitionAllDocsOptions) SetLimit(limit int64) *PostPartitionAllDocsOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetLimit(limit int64) *PostPartitionAllDocsOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostPartitionAllDocsOptions) SetSkip(skip int64) *PostPartitionAllDocsOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetSkip(skip int64) *PostPartitionAllDocsOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetUpdateSeq : Allow user to set UpdateSeq
-func (options *PostPartitionAllDocsOptions) SetUpdateSeq(updateSeq bool) *PostPartitionAllDocsOptions {
-	options.UpdateSeq = core.BoolPtr(updateSeq)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetUpdateSeq(updateSeq bool) *PostPartitionAllDocsOptions {
+	_options.UpdateSeq = core.BoolPtr(updateSeq)
+	return _options
 }
 
 // SetEndkey : Allow user to set Endkey
-func (options *PostPartitionAllDocsOptions) SetEndkey(endkey string) *PostPartitionAllDocsOptions {
-	options.Endkey = core.StringPtr(endkey)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetEndkey(endkey string) *PostPartitionAllDocsOptions {
+	_options.Endkey = core.StringPtr(endkey)
+	return _options
 }
 
 // SetKey : Allow user to set Key
-func (options *PostPartitionAllDocsOptions) SetKey(key string) *PostPartitionAllDocsOptions {
-	options.Key = core.StringPtr(key)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetKey(key string) *PostPartitionAllDocsOptions {
+	_options.Key = core.StringPtr(key)
+	return _options
 }
 
 // SetKeys : Allow user to set Keys
-func (options *PostPartitionAllDocsOptions) SetKeys(keys []string) *PostPartitionAllDocsOptions {
-	options.Keys = keys
-	return options
+func (_options *PostPartitionAllDocsOptions) SetKeys(keys []string) *PostPartitionAllDocsOptions {
+	_options.Keys = keys
+	return _options
 }
 
 // SetStartkey : Allow user to set Startkey
-func (options *PostPartitionAllDocsOptions) SetStartkey(startkey string) *PostPartitionAllDocsOptions {
-	options.Startkey = core.StringPtr(startkey)
-	return options
+func (_options *PostPartitionAllDocsOptions) SetStartkey(startkey string) *PostPartitionAllDocsOptions {
+	_options.Startkey = core.StringPtr(startkey)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14777,81 +14922,81 @@ func (*CloudantV1) NewPostPartitionFindOptions(db string, partitionKey string, s
 }
 
 // SetDb : Allow user to set Db
-func (options *PostPartitionFindOptions) SetDb(db string) *PostPartitionFindOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostPartitionFindOptions) SetDb(db string) *PostPartitionFindOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetPartitionKey : Allow user to set PartitionKey
-func (options *PostPartitionFindOptions) SetPartitionKey(partitionKey string) *PostPartitionFindOptions {
-	options.PartitionKey = core.StringPtr(partitionKey)
-	return options
+func (_options *PostPartitionFindOptions) SetPartitionKey(partitionKey string) *PostPartitionFindOptions {
+	_options.PartitionKey = core.StringPtr(partitionKey)
+	return _options
 }
 
 // SetSelector : Allow user to set Selector
-func (options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
-	options.Selector = selector
-	return options
+func (_options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
+	_options.Selector = selector
+	return _options
 }
 
 // SetBookmark : Allow user to set Bookmark
-func (options *PostPartitionFindOptions) SetBookmark(bookmark string) *PostPartitionFindOptions {
-	options.Bookmark = core.StringPtr(bookmark)
-	return options
+func (_options *PostPartitionFindOptions) SetBookmark(bookmark string) *PostPartitionFindOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostPartitionFindOptions) SetConflicts(conflicts bool) *PostPartitionFindOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostPartitionFindOptions) SetConflicts(conflicts bool) *PostPartitionFindOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetExecutionStats : Allow user to set ExecutionStats
-func (options *PostPartitionFindOptions) SetExecutionStats(executionStats bool) *PostPartitionFindOptions {
-	options.ExecutionStats = core.BoolPtr(executionStats)
-	return options
+func (_options *PostPartitionFindOptions) SetExecutionStats(executionStats bool) *PostPartitionFindOptions {
+	_options.ExecutionStats = core.BoolPtr(executionStats)
+	return _options
 }
 
 // SetFields : Allow user to set Fields
-func (options *PostPartitionFindOptions) SetFields(fields []string) *PostPartitionFindOptions {
-	options.Fields = fields
-	return options
+func (_options *PostPartitionFindOptions) SetFields(fields []string) *PostPartitionFindOptions {
+	_options.Fields = fields
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostPartitionFindOptions) SetLimit(limit int64) *PostPartitionFindOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostPartitionFindOptions) SetLimit(limit int64) *PostPartitionFindOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostPartitionFindOptions) SetSkip(skip int64) *PostPartitionFindOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostPartitionFindOptions) SetSkip(skip int64) *PostPartitionFindOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *PostPartitionFindOptions) SetSort(sort []map[string]string) *PostPartitionFindOptions {
-	options.Sort = sort
-	return options
+func (_options *PostPartitionFindOptions) SetSort(sort []map[string]string) *PostPartitionFindOptions {
+	_options.Sort = sort
+	return _options
 }
 
 // SetStable : Allow user to set Stable
-func (options *PostPartitionFindOptions) SetStable(stable bool) *PostPartitionFindOptions {
-	options.Stable = core.BoolPtr(stable)
-	return options
+func (_options *PostPartitionFindOptions) SetStable(stable bool) *PostPartitionFindOptions {
+	_options.Stable = core.BoolPtr(stable)
+	return _options
 }
 
 // SetUpdate : Allow user to set Update
-func (options *PostPartitionFindOptions) SetUpdate(update string) *PostPartitionFindOptions {
-	options.Update = core.StringPtr(update)
-	return options
+func (_options *PostPartitionFindOptions) SetUpdate(update string) *PostPartitionFindOptions {
+	_options.Update = core.StringPtr(update)
+	return _options
 }
 
 // SetUseIndex : Allow user to set UseIndex
-func (options *PostPartitionFindOptions) SetUseIndex(useIndex []string) *PostPartitionFindOptions {
-	options.UseIndex = useIndex
-	return options
+func (_options *PostPartitionFindOptions) SetUseIndex(useIndex []string) *PostPartitionFindOptions {
+	_options.UseIndex = useIndex
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -14942,99 +15087,99 @@ func (*CloudantV1) NewPostPartitionSearchOptions(db string, partitionKey string,
 }
 
 // SetDb : Allow user to set Db
-func (options *PostPartitionSearchOptions) SetDb(db string) *PostPartitionSearchOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostPartitionSearchOptions) SetDb(db string) *PostPartitionSearchOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetPartitionKey : Allow user to set PartitionKey
-func (options *PostPartitionSearchOptions) SetPartitionKey(partitionKey string) *PostPartitionSearchOptions {
-	options.PartitionKey = core.StringPtr(partitionKey)
-	return options
+func (_options *PostPartitionSearchOptions) SetPartitionKey(partitionKey string) *PostPartitionSearchOptions {
+	_options.PartitionKey = core.StringPtr(partitionKey)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PostPartitionSearchOptions) SetDdoc(ddoc string) *PostPartitionSearchOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PostPartitionSearchOptions) SetDdoc(ddoc string) *PostPartitionSearchOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *PostPartitionSearchOptions) SetIndex(index string) *PostPartitionSearchOptions {
-	options.Index = core.StringPtr(index)
-	return options
+func (_options *PostPartitionSearchOptions) SetIndex(index string) *PostPartitionSearchOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
 }
 
 // SetQuery : Allow user to set Query
-func (options *PostPartitionSearchOptions) SetQuery(query string) *PostPartitionSearchOptions {
-	options.Query = core.StringPtr(query)
-	return options
+func (_options *PostPartitionSearchOptions) SetQuery(query string) *PostPartitionSearchOptions {
+	_options.Query = core.StringPtr(query)
+	return _options
 }
 
 // SetBookmark : Allow user to set Bookmark
-func (options *PostPartitionSearchOptions) SetBookmark(bookmark string) *PostPartitionSearchOptions {
-	options.Bookmark = core.StringPtr(bookmark)
-	return options
+func (_options *PostPartitionSearchOptions) SetBookmark(bookmark string) *PostPartitionSearchOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
 }
 
 // SetHighlightFields : Allow user to set HighlightFields
-func (options *PostPartitionSearchOptions) SetHighlightFields(highlightFields []string) *PostPartitionSearchOptions {
-	options.HighlightFields = highlightFields
-	return options
+func (_options *PostPartitionSearchOptions) SetHighlightFields(highlightFields []string) *PostPartitionSearchOptions {
+	_options.HighlightFields = highlightFields
+	return _options
 }
 
 // SetHighlightNumber : Allow user to set HighlightNumber
-func (options *PostPartitionSearchOptions) SetHighlightNumber(highlightNumber int64) *PostPartitionSearchOptions {
-	options.HighlightNumber = core.Int64Ptr(highlightNumber)
-	return options
+func (_options *PostPartitionSearchOptions) SetHighlightNumber(highlightNumber int64) *PostPartitionSearchOptions {
+	_options.HighlightNumber = core.Int64Ptr(highlightNumber)
+	return _options
 }
 
 // SetHighlightPostTag : Allow user to set HighlightPostTag
-func (options *PostPartitionSearchOptions) SetHighlightPostTag(highlightPostTag string) *PostPartitionSearchOptions {
-	options.HighlightPostTag = core.StringPtr(highlightPostTag)
-	return options
+func (_options *PostPartitionSearchOptions) SetHighlightPostTag(highlightPostTag string) *PostPartitionSearchOptions {
+	_options.HighlightPostTag = core.StringPtr(highlightPostTag)
+	return _options
 }
 
 // SetHighlightPreTag : Allow user to set HighlightPreTag
-func (options *PostPartitionSearchOptions) SetHighlightPreTag(highlightPreTag string) *PostPartitionSearchOptions {
-	options.HighlightPreTag = core.StringPtr(highlightPreTag)
-	return options
+func (_options *PostPartitionSearchOptions) SetHighlightPreTag(highlightPreTag string) *PostPartitionSearchOptions {
+	_options.HighlightPreTag = core.StringPtr(highlightPreTag)
+	return _options
 }
 
 // SetHighlightSize : Allow user to set HighlightSize
-func (options *PostPartitionSearchOptions) SetHighlightSize(highlightSize int64) *PostPartitionSearchOptions {
-	options.HighlightSize = core.Int64Ptr(highlightSize)
-	return options
+func (_options *PostPartitionSearchOptions) SetHighlightSize(highlightSize int64) *PostPartitionSearchOptions {
+	_options.HighlightSize = core.Int64Ptr(highlightSize)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostPartitionSearchOptions) SetIncludeDocs(includeDocs bool) *PostPartitionSearchOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostPartitionSearchOptions) SetIncludeDocs(includeDocs bool) *PostPartitionSearchOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetIncludeFields : Allow user to set IncludeFields
-func (options *PostPartitionSearchOptions) SetIncludeFields(includeFields []string) *PostPartitionSearchOptions {
-	options.IncludeFields = includeFields
-	return options
+func (_options *PostPartitionSearchOptions) SetIncludeFields(includeFields []string) *PostPartitionSearchOptions {
+	_options.IncludeFields = includeFields
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostPartitionSearchOptions) SetLimit(limit int64) *PostPartitionSearchOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostPartitionSearchOptions) SetLimit(limit int64) *PostPartitionSearchOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *PostPartitionSearchOptions) SetSort(sort []string) *PostPartitionSearchOptions {
-	options.Sort = sort
-	return options
+func (_options *PostPartitionSearchOptions) SetSort(sort []string) *PostPartitionSearchOptions {
+	_options.Sort = sort
+	return _options
 }
 
 // SetStale : Allow user to set Stale
-func (options *PostPartitionSearchOptions) SetStale(stale string) *PostPartitionSearchOptions {
-	options.Stale = core.StringPtr(stale)
-	return options
+func (_options *PostPartitionSearchOptions) SetStale(stale string) *PostPartitionSearchOptions {
+	_options.Stale = core.StringPtr(stale)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15147,147 +15292,147 @@ func (*CloudantV1) NewPostPartitionViewOptions(db string, partitionKey string, d
 }
 
 // SetDb : Allow user to set Db
-func (options *PostPartitionViewOptions) SetDb(db string) *PostPartitionViewOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostPartitionViewOptions) SetDb(db string) *PostPartitionViewOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetPartitionKey : Allow user to set PartitionKey
-func (options *PostPartitionViewOptions) SetPartitionKey(partitionKey string) *PostPartitionViewOptions {
-	options.PartitionKey = core.StringPtr(partitionKey)
-	return options
+func (_options *PostPartitionViewOptions) SetPartitionKey(partitionKey string) *PostPartitionViewOptions {
+	_options.PartitionKey = core.StringPtr(partitionKey)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PostPartitionViewOptions) SetDdoc(ddoc string) *PostPartitionViewOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PostPartitionViewOptions) SetDdoc(ddoc string) *PostPartitionViewOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetView : Allow user to set View
-func (options *PostPartitionViewOptions) SetView(view string) *PostPartitionViewOptions {
-	options.View = core.StringPtr(view)
-	return options
+func (_options *PostPartitionViewOptions) SetView(view string) *PostPartitionViewOptions {
+	_options.View = core.StringPtr(view)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostPartitionViewOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostPartitionViewOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostPartitionViewOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostPartitionViewOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostPartitionViewOptions) SetAttachments(attachments bool) *PostPartitionViewOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostPartitionViewOptions) SetAttachments(attachments bool) *PostPartitionViewOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostPartitionViewOptions) SetConflicts(conflicts bool) *PostPartitionViewOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostPartitionViewOptions) SetConflicts(conflicts bool) *PostPartitionViewOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDescending : Allow user to set Descending
-func (options *PostPartitionViewOptions) SetDescending(descending bool) *PostPartitionViewOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *PostPartitionViewOptions) SetDescending(descending bool) *PostPartitionViewOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostPartitionViewOptions) SetIncludeDocs(includeDocs bool) *PostPartitionViewOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostPartitionViewOptions) SetIncludeDocs(includeDocs bool) *PostPartitionViewOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetInclusiveEnd : Allow user to set InclusiveEnd
-func (options *PostPartitionViewOptions) SetInclusiveEnd(inclusiveEnd bool) *PostPartitionViewOptions {
-	options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
-	return options
+func (_options *PostPartitionViewOptions) SetInclusiveEnd(inclusiveEnd bool) *PostPartitionViewOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostPartitionViewOptions) SetLimit(limit int64) *PostPartitionViewOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostPartitionViewOptions) SetLimit(limit int64) *PostPartitionViewOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostPartitionViewOptions) SetSkip(skip int64) *PostPartitionViewOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostPartitionViewOptions) SetSkip(skip int64) *PostPartitionViewOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetUpdateSeq : Allow user to set UpdateSeq
-func (options *PostPartitionViewOptions) SetUpdateSeq(updateSeq bool) *PostPartitionViewOptions {
-	options.UpdateSeq = core.BoolPtr(updateSeq)
-	return options
+func (_options *PostPartitionViewOptions) SetUpdateSeq(updateSeq bool) *PostPartitionViewOptions {
+	_options.UpdateSeq = core.BoolPtr(updateSeq)
+	return _options
 }
 
 // SetEndkey : Allow user to set Endkey
-func (options *PostPartitionViewOptions) SetEndkey(endkey interface{}) *PostPartitionViewOptions {
-	options.Endkey = endkey
-	return options
+func (_options *PostPartitionViewOptions) SetEndkey(endkey interface{}) *PostPartitionViewOptions {
+	_options.Endkey = endkey
+	return _options
 }
 
 // SetEndkeyDocid : Allow user to set EndkeyDocid
-func (options *PostPartitionViewOptions) SetEndkeyDocid(endkeyDocid string) *PostPartitionViewOptions {
-	options.EndkeyDocid = core.StringPtr(endkeyDocid)
-	return options
+func (_options *PostPartitionViewOptions) SetEndkeyDocid(endkeyDocid string) *PostPartitionViewOptions {
+	_options.EndkeyDocid = core.StringPtr(endkeyDocid)
+	return _options
 }
 
 // SetGroup : Allow user to set Group
-func (options *PostPartitionViewOptions) SetGroup(group bool) *PostPartitionViewOptions {
-	options.Group = core.BoolPtr(group)
-	return options
+func (_options *PostPartitionViewOptions) SetGroup(group bool) *PostPartitionViewOptions {
+	_options.Group = core.BoolPtr(group)
+	return _options
 }
 
 // SetGroupLevel : Allow user to set GroupLevel
-func (options *PostPartitionViewOptions) SetGroupLevel(groupLevel int64) *PostPartitionViewOptions {
-	options.GroupLevel = core.Int64Ptr(groupLevel)
-	return options
+func (_options *PostPartitionViewOptions) SetGroupLevel(groupLevel int64) *PostPartitionViewOptions {
+	_options.GroupLevel = core.Int64Ptr(groupLevel)
+	return _options
 }
 
 // SetKey : Allow user to set Key
-func (options *PostPartitionViewOptions) SetKey(key interface{}) *PostPartitionViewOptions {
-	options.Key = key
-	return options
+func (_options *PostPartitionViewOptions) SetKey(key interface{}) *PostPartitionViewOptions {
+	_options.Key = key
+	return _options
 }
 
 // SetKeys : Allow user to set Keys
-func (options *PostPartitionViewOptions) SetKeys(keys []interface{}) *PostPartitionViewOptions {
-	options.Keys = keys
-	return options
+func (_options *PostPartitionViewOptions) SetKeys(keys []interface{}) *PostPartitionViewOptions {
+	_options.Keys = keys
+	return _options
 }
 
 // SetReduce : Allow user to set Reduce
-func (options *PostPartitionViewOptions) SetReduce(reduce bool) *PostPartitionViewOptions {
-	options.Reduce = core.BoolPtr(reduce)
-	return options
+func (_options *PostPartitionViewOptions) SetReduce(reduce bool) *PostPartitionViewOptions {
+	_options.Reduce = core.BoolPtr(reduce)
+	return _options
 }
 
 // SetStable : Allow user to set Stable
-func (options *PostPartitionViewOptions) SetStable(stable bool) *PostPartitionViewOptions {
-	options.Stable = core.BoolPtr(stable)
-	return options
+func (_options *PostPartitionViewOptions) SetStable(stable bool) *PostPartitionViewOptions {
+	_options.Stable = core.BoolPtr(stable)
+	return _options
 }
 
 // SetStartkey : Allow user to set Startkey
-func (options *PostPartitionViewOptions) SetStartkey(startkey interface{}) *PostPartitionViewOptions {
-	options.Startkey = startkey
-	return options
+func (_options *PostPartitionViewOptions) SetStartkey(startkey interface{}) *PostPartitionViewOptions {
+	_options.Startkey = startkey
+	return _options
 }
 
 // SetStartkeyDocid : Allow user to set StartkeyDocid
-func (options *PostPartitionViewOptions) SetStartkeyDocid(startkeyDocid string) *PostPartitionViewOptions {
-	options.StartkeyDocid = core.StringPtr(startkeyDocid)
-	return options
+func (_options *PostPartitionViewOptions) SetStartkeyDocid(startkeyDocid string) *PostPartitionViewOptions {
+	_options.StartkeyDocid = core.StringPtr(startkeyDocid)
+	return _options
 }
 
 // SetUpdate : Allow user to set Update
-func (options *PostPartitionViewOptions) SetUpdate(update string) *PostPartitionViewOptions {
-	options.Update = core.StringPtr(update)
-	return options
+func (_options *PostPartitionViewOptions) SetUpdate(update string) *PostPartitionViewOptions {
+	_options.Update = core.StringPtr(update)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15313,9 +15458,9 @@ func (*CloudantV1) NewPostReplicateOptions(replicationDocument *ReplicationDocum
 }
 
 // SetReplicationDocument : Allow user to set ReplicationDocument
-func (options *PostReplicateOptions) SetReplicationDocument(replicationDocument *ReplicationDocument) *PostReplicateOptions {
-	options.ReplicationDocument = replicationDocument
-	return options
+func (_options *PostReplicateOptions) SetReplicationDocument(replicationDocument *ReplicationDocument) *PostReplicateOptions {
+	_options.ReplicationDocument = replicationDocument
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15345,15 +15490,15 @@ func (*CloudantV1) NewPostRevsDiffOptions(db string, documentRevisions map[strin
 }
 
 // SetDb : Allow user to set Db
-func (options *PostRevsDiffOptions) SetDb(db string) *PostRevsDiffOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostRevsDiffOptions) SetDb(db string) *PostRevsDiffOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocumentRevisions : Allow user to set DocumentRevisions
-func (options *PostRevsDiffOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostRevsDiffOptions {
-	options.DocumentRevisions = documentRevisions
-	return options
+func (_options *PostRevsDiffOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostRevsDiffOptions {
+	_options.DocumentRevisions = documentRevisions
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15428,15 +15573,15 @@ func (*CloudantV1) NewPostSearchAnalyzeOptions(analyzer string, text string) *Po
 }
 
 // SetAnalyzer : Allow user to set Analyzer
-func (options *PostSearchAnalyzeOptions) SetAnalyzer(analyzer string) *PostSearchAnalyzeOptions {
-	options.Analyzer = core.StringPtr(analyzer)
-	return options
+func (_options *PostSearchAnalyzeOptions) SetAnalyzer(analyzer string) *PostSearchAnalyzeOptions {
+	_options.Analyzer = core.StringPtr(analyzer)
+	return _options
 }
 
 // SetText : Allow user to set Text
-func (options *PostSearchAnalyzeOptions) SetText(text string) *PostSearchAnalyzeOptions {
-	options.Text = core.StringPtr(text)
-	return options
+func (_options *PostSearchAnalyzeOptions) SetText(text string) *PostSearchAnalyzeOptions {
+	_options.Text = core.StringPtr(text)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15552,129 +15697,129 @@ func (*CloudantV1) NewPostSearchOptions(db string, ddoc string, index string, qu
 }
 
 // SetDb : Allow user to set Db
-func (options *PostSearchOptions) SetDb(db string) *PostSearchOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostSearchOptions) SetDb(db string) *PostSearchOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PostSearchOptions) SetDdoc(ddoc string) *PostSearchOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PostSearchOptions) SetDdoc(ddoc string) *PostSearchOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetIndex : Allow user to set Index
-func (options *PostSearchOptions) SetIndex(index string) *PostSearchOptions {
-	options.Index = core.StringPtr(index)
-	return options
+func (_options *PostSearchOptions) SetIndex(index string) *PostSearchOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
 }
 
 // SetQuery : Allow user to set Query
-func (options *PostSearchOptions) SetQuery(query string) *PostSearchOptions {
-	options.Query = core.StringPtr(query)
-	return options
+func (_options *PostSearchOptions) SetQuery(query string) *PostSearchOptions {
+	_options.Query = core.StringPtr(query)
+	return _options
 }
 
 // SetBookmark : Allow user to set Bookmark
-func (options *PostSearchOptions) SetBookmark(bookmark string) *PostSearchOptions {
-	options.Bookmark = core.StringPtr(bookmark)
-	return options
+func (_options *PostSearchOptions) SetBookmark(bookmark string) *PostSearchOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
 }
 
 // SetHighlightFields : Allow user to set HighlightFields
-func (options *PostSearchOptions) SetHighlightFields(highlightFields []string) *PostSearchOptions {
-	options.HighlightFields = highlightFields
-	return options
+func (_options *PostSearchOptions) SetHighlightFields(highlightFields []string) *PostSearchOptions {
+	_options.HighlightFields = highlightFields
+	return _options
 }
 
 // SetHighlightNumber : Allow user to set HighlightNumber
-func (options *PostSearchOptions) SetHighlightNumber(highlightNumber int64) *PostSearchOptions {
-	options.HighlightNumber = core.Int64Ptr(highlightNumber)
-	return options
+func (_options *PostSearchOptions) SetHighlightNumber(highlightNumber int64) *PostSearchOptions {
+	_options.HighlightNumber = core.Int64Ptr(highlightNumber)
+	return _options
 }
 
 // SetHighlightPostTag : Allow user to set HighlightPostTag
-func (options *PostSearchOptions) SetHighlightPostTag(highlightPostTag string) *PostSearchOptions {
-	options.HighlightPostTag = core.StringPtr(highlightPostTag)
-	return options
+func (_options *PostSearchOptions) SetHighlightPostTag(highlightPostTag string) *PostSearchOptions {
+	_options.HighlightPostTag = core.StringPtr(highlightPostTag)
+	return _options
 }
 
 // SetHighlightPreTag : Allow user to set HighlightPreTag
-func (options *PostSearchOptions) SetHighlightPreTag(highlightPreTag string) *PostSearchOptions {
-	options.HighlightPreTag = core.StringPtr(highlightPreTag)
-	return options
+func (_options *PostSearchOptions) SetHighlightPreTag(highlightPreTag string) *PostSearchOptions {
+	_options.HighlightPreTag = core.StringPtr(highlightPreTag)
+	return _options
 }
 
 // SetHighlightSize : Allow user to set HighlightSize
-func (options *PostSearchOptions) SetHighlightSize(highlightSize int64) *PostSearchOptions {
-	options.HighlightSize = core.Int64Ptr(highlightSize)
-	return options
+func (_options *PostSearchOptions) SetHighlightSize(highlightSize int64) *PostSearchOptions {
+	_options.HighlightSize = core.Int64Ptr(highlightSize)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostSearchOptions) SetIncludeDocs(includeDocs bool) *PostSearchOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostSearchOptions) SetIncludeDocs(includeDocs bool) *PostSearchOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetIncludeFields : Allow user to set IncludeFields
-func (options *PostSearchOptions) SetIncludeFields(includeFields []string) *PostSearchOptions {
-	options.IncludeFields = includeFields
-	return options
+func (_options *PostSearchOptions) SetIncludeFields(includeFields []string) *PostSearchOptions {
+	_options.IncludeFields = includeFields
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostSearchOptions) SetLimit(limit int64) *PostSearchOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostSearchOptions) SetLimit(limit int64) *PostSearchOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSort : Allow user to set Sort
-func (options *PostSearchOptions) SetSort(sort []string) *PostSearchOptions {
-	options.Sort = sort
-	return options
+func (_options *PostSearchOptions) SetSort(sort []string) *PostSearchOptions {
+	_options.Sort = sort
+	return _options
 }
 
 // SetStale : Allow user to set Stale
-func (options *PostSearchOptions) SetStale(stale string) *PostSearchOptions {
-	options.Stale = core.StringPtr(stale)
-	return options
+func (_options *PostSearchOptions) SetStale(stale string) *PostSearchOptions {
+	_options.Stale = core.StringPtr(stale)
+	return _options
 }
 
 // SetCounts : Allow user to set Counts
-func (options *PostSearchOptions) SetCounts(counts []string) *PostSearchOptions {
-	options.Counts = counts
-	return options
+func (_options *PostSearchOptions) SetCounts(counts []string) *PostSearchOptions {
+	_options.Counts = counts
+	return _options
 }
 
 // SetDrilldown : Allow user to set Drilldown
-func (options *PostSearchOptions) SetDrilldown(drilldown [][]string) *PostSearchOptions {
-	options.Drilldown = drilldown
-	return options
+func (_options *PostSearchOptions) SetDrilldown(drilldown [][]string) *PostSearchOptions {
+	_options.Drilldown = drilldown
+	return _options
 }
 
 // SetGroupField : Allow user to set GroupField
-func (options *PostSearchOptions) SetGroupField(groupField string) *PostSearchOptions {
-	options.GroupField = core.StringPtr(groupField)
-	return options
+func (_options *PostSearchOptions) SetGroupField(groupField string) *PostSearchOptions {
+	_options.GroupField = core.StringPtr(groupField)
+	return _options
 }
 
 // SetGroupLimit : Allow user to set GroupLimit
-func (options *PostSearchOptions) SetGroupLimit(groupLimit int64) *PostSearchOptions {
-	options.GroupLimit = core.Int64Ptr(groupLimit)
-	return options
+func (_options *PostSearchOptions) SetGroupLimit(groupLimit int64) *PostSearchOptions {
+	_options.GroupLimit = core.Int64Ptr(groupLimit)
+	return _options
 }
 
 // SetGroupSort : Allow user to set GroupSort
-func (options *PostSearchOptions) SetGroupSort(groupSort []string) *PostSearchOptions {
-	options.GroupSort = groupSort
-	return options
+func (_options *PostSearchOptions) SetGroupSort(groupSort []string) *PostSearchOptions {
+	_options.GroupSort = groupSort
+	return _options
 }
 
 // SetRanges : Allow user to set Ranges
-func (options *PostSearchOptions) SetRanges(ranges map[string]map[string]map[string]string) *PostSearchOptions {
-	options.Ranges = ranges
-	return options
+func (_options *PostSearchOptions) SetRanges(ranges map[string]map[string]map[string]string) *PostSearchOptions {
+	_options.Ranges = ranges
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15783,141 +15928,141 @@ func (*CloudantV1) NewPostViewOptions(db string, ddoc string, view string) *Post
 }
 
 // SetDb : Allow user to set Db
-func (options *PostViewOptions) SetDb(db string) *PostViewOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostViewOptions) SetDb(db string) *PostViewOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PostViewOptions) SetDdoc(ddoc string) *PostViewOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PostViewOptions) SetDdoc(ddoc string) *PostViewOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetView : Allow user to set View
-func (options *PostViewOptions) SetView(view string) *PostViewOptions {
-	options.View = core.StringPtr(view)
-	return options
+func (_options *PostViewOptions) SetView(view string) *PostViewOptions {
+	_options.View = core.StringPtr(view)
+	return _options
 }
 
 // SetAttEncodingInfo : Allow user to set AttEncodingInfo
-func (options *PostViewOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostViewOptions {
-	options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
-	return options
+func (_options *PostViewOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostViewOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
 }
 
 // SetAttachments : Allow user to set Attachments
-func (options *PostViewOptions) SetAttachments(attachments bool) *PostViewOptions {
-	options.Attachments = core.BoolPtr(attachments)
-	return options
+func (_options *PostViewOptions) SetAttachments(attachments bool) *PostViewOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
 }
 
 // SetConflicts : Allow user to set Conflicts
-func (options *PostViewOptions) SetConflicts(conflicts bool) *PostViewOptions {
-	options.Conflicts = core.BoolPtr(conflicts)
-	return options
+func (_options *PostViewOptions) SetConflicts(conflicts bool) *PostViewOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
 }
 
 // SetDescending : Allow user to set Descending
-func (options *PostViewOptions) SetDescending(descending bool) *PostViewOptions {
-	options.Descending = core.BoolPtr(descending)
-	return options
+func (_options *PostViewOptions) SetDescending(descending bool) *PostViewOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
 }
 
 // SetIncludeDocs : Allow user to set IncludeDocs
-func (options *PostViewOptions) SetIncludeDocs(includeDocs bool) *PostViewOptions {
-	options.IncludeDocs = core.BoolPtr(includeDocs)
-	return options
+func (_options *PostViewOptions) SetIncludeDocs(includeDocs bool) *PostViewOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
 }
 
 // SetInclusiveEnd : Allow user to set InclusiveEnd
-func (options *PostViewOptions) SetInclusiveEnd(inclusiveEnd bool) *PostViewOptions {
-	options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
-	return options
+func (_options *PostViewOptions) SetInclusiveEnd(inclusiveEnd bool) *PostViewOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
 }
 
 // SetLimit : Allow user to set Limit
-func (options *PostViewOptions) SetLimit(limit int64) *PostViewOptions {
-	options.Limit = core.Int64Ptr(limit)
-	return options
+func (_options *PostViewOptions) SetLimit(limit int64) *PostViewOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
 }
 
 // SetSkip : Allow user to set Skip
-func (options *PostViewOptions) SetSkip(skip int64) *PostViewOptions {
-	options.Skip = core.Int64Ptr(skip)
-	return options
+func (_options *PostViewOptions) SetSkip(skip int64) *PostViewOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
 }
 
 // SetUpdateSeq : Allow user to set UpdateSeq
-func (options *PostViewOptions) SetUpdateSeq(updateSeq bool) *PostViewOptions {
-	options.UpdateSeq = core.BoolPtr(updateSeq)
-	return options
+func (_options *PostViewOptions) SetUpdateSeq(updateSeq bool) *PostViewOptions {
+	_options.UpdateSeq = core.BoolPtr(updateSeq)
+	return _options
 }
 
 // SetEndkey : Allow user to set Endkey
-func (options *PostViewOptions) SetEndkey(endkey interface{}) *PostViewOptions {
-	options.Endkey = endkey
-	return options
+func (_options *PostViewOptions) SetEndkey(endkey interface{}) *PostViewOptions {
+	_options.Endkey = endkey
+	return _options
 }
 
 // SetEndkeyDocid : Allow user to set EndkeyDocid
-func (options *PostViewOptions) SetEndkeyDocid(endkeyDocid string) *PostViewOptions {
-	options.EndkeyDocid = core.StringPtr(endkeyDocid)
-	return options
+func (_options *PostViewOptions) SetEndkeyDocid(endkeyDocid string) *PostViewOptions {
+	_options.EndkeyDocid = core.StringPtr(endkeyDocid)
+	return _options
 }
 
 // SetGroup : Allow user to set Group
-func (options *PostViewOptions) SetGroup(group bool) *PostViewOptions {
-	options.Group = core.BoolPtr(group)
-	return options
+func (_options *PostViewOptions) SetGroup(group bool) *PostViewOptions {
+	_options.Group = core.BoolPtr(group)
+	return _options
 }
 
 // SetGroupLevel : Allow user to set GroupLevel
-func (options *PostViewOptions) SetGroupLevel(groupLevel int64) *PostViewOptions {
-	options.GroupLevel = core.Int64Ptr(groupLevel)
-	return options
+func (_options *PostViewOptions) SetGroupLevel(groupLevel int64) *PostViewOptions {
+	_options.GroupLevel = core.Int64Ptr(groupLevel)
+	return _options
 }
 
 // SetKey : Allow user to set Key
-func (options *PostViewOptions) SetKey(key interface{}) *PostViewOptions {
-	options.Key = key
-	return options
+func (_options *PostViewOptions) SetKey(key interface{}) *PostViewOptions {
+	_options.Key = key
+	return _options
 }
 
 // SetKeys : Allow user to set Keys
-func (options *PostViewOptions) SetKeys(keys []interface{}) *PostViewOptions {
-	options.Keys = keys
-	return options
+func (_options *PostViewOptions) SetKeys(keys []interface{}) *PostViewOptions {
+	_options.Keys = keys
+	return _options
 }
 
 // SetReduce : Allow user to set Reduce
-func (options *PostViewOptions) SetReduce(reduce bool) *PostViewOptions {
-	options.Reduce = core.BoolPtr(reduce)
-	return options
+func (_options *PostViewOptions) SetReduce(reduce bool) *PostViewOptions {
+	_options.Reduce = core.BoolPtr(reduce)
+	return _options
 }
 
 // SetStable : Allow user to set Stable
-func (options *PostViewOptions) SetStable(stable bool) *PostViewOptions {
-	options.Stable = core.BoolPtr(stable)
-	return options
+func (_options *PostViewOptions) SetStable(stable bool) *PostViewOptions {
+	_options.Stable = core.BoolPtr(stable)
+	return _options
 }
 
 // SetStartkey : Allow user to set Startkey
-func (options *PostViewOptions) SetStartkey(startkey interface{}) *PostViewOptions {
-	options.Startkey = startkey
-	return options
+func (_options *PostViewOptions) SetStartkey(startkey interface{}) *PostViewOptions {
+	_options.Startkey = startkey
+	return _options
 }
 
 // SetStartkeyDocid : Allow user to set StartkeyDocid
-func (options *PostViewOptions) SetStartkeyDocid(startkeyDocid string) *PostViewOptions {
-	options.StartkeyDocid = core.StringPtr(startkeyDocid)
-	return options
+func (_options *PostViewOptions) SetStartkeyDocid(startkeyDocid string) *PostViewOptions {
+	_options.StartkeyDocid = core.StringPtr(startkeyDocid)
+	return _options
 }
 
 // SetUpdate : Allow user to set Update
-func (options *PostViewOptions) SetUpdate(update string) *PostViewOptions {
-	options.Update = core.StringPtr(update)
-	return options
+func (_options *PostViewOptions) SetUpdate(update string) *PostViewOptions {
+	_options.Update = core.StringPtr(update)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -15957,27 +16102,27 @@ func (*CloudantV1) NewPostViewQueriesOptions(db string, ddoc string, view string
 }
 
 // SetDb : Allow user to set Db
-func (options *PostViewQueriesOptions) SetDb(db string) *PostViewQueriesOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PostViewQueriesOptions) SetDb(db string) *PostViewQueriesOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PostViewQueriesOptions) SetDdoc(ddoc string) *PostViewQueriesOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PostViewQueriesOptions) SetDdoc(ddoc string) *PostViewQueriesOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetView : Allow user to set View
-func (options *PostViewQueriesOptions) SetView(view string) *PostViewQueriesOptions {
-	options.View = core.StringPtr(view)
-	return options
+func (_options *PostViewQueriesOptions) SetView(view string) *PostViewQueriesOptions {
+	_options.View = core.StringPtr(view)
+	return _options
 }
 
 // SetQueries : Allow user to set Queries
-func (options *PostViewQueriesOptions) SetQueries(queries []ViewQuery) *PostViewQueriesOptions {
-	options.Queries = queries
-	return options
+func (_options *PostViewQueriesOptions) SetQueries(queries []ViewQuery) *PostViewQueriesOptions {
+	_options.Queries = queries
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16025,45 +16170,45 @@ func (*CloudantV1) NewPutAttachmentOptions(db string, docID string, attachmentNa
 }
 
 // SetDb : Allow user to set Db
-func (options *PutAttachmentOptions) SetDb(db string) *PutAttachmentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutAttachmentOptions) SetDb(db string) *PutAttachmentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *PutAttachmentOptions) SetDocID(docID string) *PutAttachmentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *PutAttachmentOptions) SetDocID(docID string) *PutAttachmentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetAttachmentName : Allow user to set AttachmentName
-func (options *PutAttachmentOptions) SetAttachmentName(attachmentName string) *PutAttachmentOptions {
-	options.AttachmentName = core.StringPtr(attachmentName)
-	return options
+func (_options *PutAttachmentOptions) SetAttachmentName(attachmentName string) *PutAttachmentOptions {
+	_options.AttachmentName = core.StringPtr(attachmentName)
+	return _options
 }
 
 // SetAttachment : Allow user to set Attachment
-func (options *PutAttachmentOptions) SetAttachment(attachment io.ReadCloser) *PutAttachmentOptions {
-	options.Attachment = attachment
-	return options
+func (_options *PutAttachmentOptions) SetAttachment(attachment io.ReadCloser) *PutAttachmentOptions {
+	_options.Attachment = attachment
+	return _options
 }
 
 // SetContentType : Allow user to set ContentType
-func (options *PutAttachmentOptions) SetContentType(contentType string) *PutAttachmentOptions {
-	options.ContentType = core.StringPtr(contentType)
-	return options
+func (_options *PutAttachmentOptions) SetContentType(contentType string) *PutAttachmentOptions {
+	_options.ContentType = core.StringPtr(contentType)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *PutAttachmentOptions) SetIfMatch(ifMatch string) *PutAttachmentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *PutAttachmentOptions) SetIfMatch(ifMatch string) *PutAttachmentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *PutAttachmentOptions) SetRev(rev string) *PutAttachmentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *PutAttachmentOptions) SetRev(rev string) *PutAttachmentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16090,9 +16235,9 @@ func (*CloudantV1) NewPutCapacityThroughputConfigurationOptions(blocks int64) *P
 }
 
 // SetBlocks : Allow user to set Blocks
-func (options *PutCapacityThroughputConfigurationOptions) SetBlocks(blocks int64) *PutCapacityThroughputConfigurationOptions {
-	options.Blocks = core.Int64Ptr(blocks)
-	return options
+func (_options *PutCapacityThroughputConfigurationOptions) SetBlocks(blocks int64) *PutCapacityThroughputConfigurationOptions {
+	_options.Blocks = core.Int64Ptr(blocks)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16144,33 +16289,33 @@ func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string, cloudan
 }
 
 // SetDb : Allow user to set Db
-func (options *PutCloudantSecurityConfigurationOptions) SetDb(db string) *PutCloudantSecurityConfigurationOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutCloudantSecurityConfigurationOptions) SetDb(db string) *PutCloudantSecurityConfigurationOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetCloudant : Allow user to set Cloudant
-func (options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
-	options.Cloudant = cloudant
-	return options
+func (_options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
+	_options.Cloudant = cloudant
+	return _options
 }
 
 // SetAdmins : Allow user to set Admins
-func (options *PutCloudantSecurityConfigurationOptions) SetAdmins(admins *SecurityObject) *PutCloudantSecurityConfigurationOptions {
-	options.Admins = admins
-	return options
+func (_options *PutCloudantSecurityConfigurationOptions) SetAdmins(admins *SecurityObject) *PutCloudantSecurityConfigurationOptions {
+	_options.Admins = admins
+	return _options
 }
 
 // SetMembers : Allow user to set Members
-func (options *PutCloudantSecurityConfigurationOptions) SetMembers(members *SecurityObject) *PutCloudantSecurityConfigurationOptions {
-	options.Members = members
-	return options
+func (_options *PutCloudantSecurityConfigurationOptions) SetMembers(members *SecurityObject) *PutCloudantSecurityConfigurationOptions {
+	_options.Members = members
+	return _options
 }
 
 // SetCouchdbAuthOnly : Allow user to set CouchdbAuthOnly
-func (options *PutCloudantSecurityConfigurationOptions) SetCouchdbAuthOnly(couchdbAuthOnly bool) *PutCloudantSecurityConfigurationOptions {
-	options.CouchdbAuthOnly = core.BoolPtr(couchdbAuthOnly)
-	return options
+func (_options *PutCloudantSecurityConfigurationOptions) SetCouchdbAuthOnly(couchdbAuthOnly bool) *PutCloudantSecurityConfigurationOptions {
+	_options.CouchdbAuthOnly = core.BoolPtr(couchdbAuthOnly)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16205,21 +16350,21 @@ func (*CloudantV1) NewPutCorsConfigurationOptions(origins []string) *PutCorsConf
 }
 
 // SetOrigins : Allow user to set Origins
-func (options *PutCorsConfigurationOptions) SetOrigins(origins []string) *PutCorsConfigurationOptions {
-	options.Origins = origins
-	return options
+func (_options *PutCorsConfigurationOptions) SetOrigins(origins []string) *PutCorsConfigurationOptions {
+	_options.Origins = origins
+	return _options
 }
 
 // SetAllowCredentials : Allow user to set AllowCredentials
-func (options *PutCorsConfigurationOptions) SetAllowCredentials(allowCredentials bool) *PutCorsConfigurationOptions {
-	options.AllowCredentials = core.BoolPtr(allowCredentials)
-	return options
+func (_options *PutCorsConfigurationOptions) SetAllowCredentials(allowCredentials bool) *PutCorsConfigurationOptions {
+	_options.AllowCredentials = core.BoolPtr(allowCredentials)
+	return _options
 }
 
 // SetEnableCors : Allow user to set EnableCors
-func (options *PutCorsConfigurationOptions) SetEnableCors(enableCors bool) *PutCorsConfigurationOptions {
-	options.EnableCors = core.BoolPtr(enableCors)
-	return options
+func (_options *PutCorsConfigurationOptions) SetEnableCors(enableCors bool) *PutCorsConfigurationOptions {
+	_options.EnableCors = core.BoolPtr(enableCors)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16252,21 +16397,21 @@ func (*CloudantV1) NewPutDatabaseOptions(db string) *PutDatabaseOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PutDatabaseOptions) SetDb(db string) *PutDatabaseOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutDatabaseOptions) SetDb(db string) *PutDatabaseOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetPartitioned : Allow user to set Partitioned
-func (options *PutDatabaseOptions) SetPartitioned(partitioned bool) *PutDatabaseOptions {
-	options.Partitioned = core.BoolPtr(partitioned)
-	return options
+func (_options *PutDatabaseOptions) SetPartitioned(partitioned bool) *PutDatabaseOptions {
+	_options.Partitioned = core.BoolPtr(partitioned)
+	return _options
 }
 
 // SetQ : Allow user to set Q
-func (options *PutDatabaseOptions) SetQ(q int64) *PutDatabaseOptions {
-	options.Q = core.Int64Ptr(q)
-	return options
+func (_options *PutDatabaseOptions) SetQ(q int64) *PutDatabaseOptions {
+	_options.Q = core.Int64Ptr(q)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16323,45 +16468,45 @@ func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string, designDoc
 }
 
 // SetDb : Allow user to set Db
-func (options *PutDesignDocumentOptions) SetDb(db string) *PutDesignDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutDesignDocumentOptions) SetDb(db string) *PutDesignDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDdoc : Allow user to set Ddoc
-func (options *PutDesignDocumentOptions) SetDdoc(ddoc string) *PutDesignDocumentOptions {
-	options.Ddoc = core.StringPtr(ddoc)
-	return options
+func (_options *PutDesignDocumentOptions) SetDdoc(ddoc string) *PutDesignDocumentOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
 }
 
 // SetDesignDocument : Allow user to set DesignDocument
-func (options *PutDesignDocumentOptions) SetDesignDocument(designDocument *DesignDocument) *PutDesignDocumentOptions {
-	options.DesignDocument = designDocument
-	return options
+func (_options *PutDesignDocumentOptions) SetDesignDocument(designDocument *DesignDocument) *PutDesignDocumentOptions {
+	_options.DesignDocument = designDocument
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *PutDesignDocumentOptions) SetIfMatch(ifMatch string) *PutDesignDocumentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *PutDesignDocumentOptions) SetIfMatch(ifMatch string) *PutDesignDocumentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *PutDesignDocumentOptions) SetBatch(batch string) *PutDesignDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *PutDesignDocumentOptions) SetBatch(batch string) *PutDesignDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetNewEdits : Allow user to set NewEdits
-func (options *PutDesignDocumentOptions) SetNewEdits(newEdits bool) *PutDesignDocumentOptions {
-	options.NewEdits = core.BoolPtr(newEdits)
-	return options
+func (_options *PutDesignDocumentOptions) SetNewEdits(newEdits bool) *PutDesignDocumentOptions {
+	_options.NewEdits = core.BoolPtr(newEdits)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *PutDesignDocumentOptions) SetRev(rev string) *PutDesignDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *PutDesignDocumentOptions) SetRev(rev string) *PutDesignDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16422,57 +16567,57 @@ func (*CloudantV1) NewPutDocumentOptions(db string, docID string) *PutDocumentOp
 }
 
 // SetDb : Allow user to set Db
-func (options *PutDocumentOptions) SetDb(db string) *PutDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutDocumentOptions) SetDb(db string) *PutDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *PutDocumentOptions) SetDocID(docID string) *PutDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *PutDocumentOptions) SetDocID(docID string) *PutDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetDocument : Allow user to set Document
-func (options *PutDocumentOptions) SetDocument(document *Document) *PutDocumentOptions {
-	options.Document = document
-	return options
+func (_options *PutDocumentOptions) SetDocument(document *Document) *PutDocumentOptions {
+	_options.Document = document
+	return _options
 }
 
 // SetBody : Allow user to set Body
-func (options *PutDocumentOptions) SetBody(body io.ReadCloser) *PutDocumentOptions {
-	options.Body = body
-	return options
+func (_options *PutDocumentOptions) SetBody(body io.ReadCloser) *PutDocumentOptions {
+	_options.Body = body
+	return _options
 }
 
 // SetContentType : Allow user to set ContentType
-func (options *PutDocumentOptions) SetContentType(contentType string) *PutDocumentOptions {
-	options.ContentType = core.StringPtr(contentType)
-	return options
+func (_options *PutDocumentOptions) SetContentType(contentType string) *PutDocumentOptions {
+	_options.ContentType = core.StringPtr(contentType)
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *PutDocumentOptions) SetIfMatch(ifMatch string) *PutDocumentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *PutDocumentOptions) SetIfMatch(ifMatch string) *PutDocumentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *PutDocumentOptions) SetBatch(batch string) *PutDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *PutDocumentOptions) SetBatch(batch string) *PutDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetNewEdits : Allow user to set NewEdits
-func (options *PutDocumentOptions) SetNewEdits(newEdits bool) *PutDocumentOptions {
-	options.NewEdits = core.BoolPtr(newEdits)
-	return options
+func (_options *PutDocumentOptions) SetNewEdits(newEdits bool) *PutDocumentOptions {
+	_options.NewEdits = core.BoolPtr(newEdits)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *PutDocumentOptions) SetRev(rev string) *PutDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *PutDocumentOptions) SetRev(rev string) *PutDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16522,39 +16667,39 @@ func (*CloudantV1) NewPutLocalDocumentOptions(db string, docID string) *PutLocal
 }
 
 // SetDb : Allow user to set Db
-func (options *PutLocalDocumentOptions) SetDb(db string) *PutLocalDocumentOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutLocalDocumentOptions) SetDb(db string) *PutLocalDocumentOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetDocID : Allow user to set DocID
-func (options *PutLocalDocumentOptions) SetDocID(docID string) *PutLocalDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *PutLocalDocumentOptions) SetDocID(docID string) *PutLocalDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetDocument : Allow user to set Document
-func (options *PutLocalDocumentOptions) SetDocument(document *Document) *PutLocalDocumentOptions {
-	options.Document = document
-	return options
+func (_options *PutLocalDocumentOptions) SetDocument(document *Document) *PutLocalDocumentOptions {
+	_options.Document = document
+	return _options
 }
 
 // SetBody : Allow user to set Body
-func (options *PutLocalDocumentOptions) SetBody(body io.ReadCloser) *PutLocalDocumentOptions {
-	options.Body = body
-	return options
+func (_options *PutLocalDocumentOptions) SetBody(body io.ReadCloser) *PutLocalDocumentOptions {
+	_options.Body = body
+	return _options
 }
 
 // SetContentType : Allow user to set ContentType
-func (options *PutLocalDocumentOptions) SetContentType(contentType string) *PutLocalDocumentOptions {
-	options.ContentType = core.StringPtr(contentType)
-	return options
+func (_options *PutLocalDocumentOptions) SetContentType(contentType string) *PutLocalDocumentOptions {
+	_options.ContentType = core.StringPtr(contentType)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *PutLocalDocumentOptions) SetBatch(batch string) *PutLocalDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *PutLocalDocumentOptions) SetBatch(batch string) *PutLocalDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16606,39 +16751,39 @@ func (*CloudantV1) NewPutReplicationDocumentOptions(docID string, replicationDoc
 }
 
 // SetDocID : Allow user to set DocID
-func (options *PutReplicationDocumentOptions) SetDocID(docID string) *PutReplicationDocumentOptions {
-	options.DocID = core.StringPtr(docID)
-	return options
+func (_options *PutReplicationDocumentOptions) SetDocID(docID string) *PutReplicationDocumentOptions {
+	_options.DocID = core.StringPtr(docID)
+	return _options
 }
 
 // SetReplicationDocument : Allow user to set ReplicationDocument
-func (options *PutReplicationDocumentOptions) SetReplicationDocument(replicationDocument *ReplicationDocument) *PutReplicationDocumentOptions {
-	options.ReplicationDocument = replicationDocument
-	return options
+func (_options *PutReplicationDocumentOptions) SetReplicationDocument(replicationDocument *ReplicationDocument) *PutReplicationDocumentOptions {
+	_options.ReplicationDocument = replicationDocument
+	return _options
 }
 
 // SetIfMatch : Allow user to set IfMatch
-func (options *PutReplicationDocumentOptions) SetIfMatch(ifMatch string) *PutReplicationDocumentOptions {
-	options.IfMatch = core.StringPtr(ifMatch)
-	return options
+func (_options *PutReplicationDocumentOptions) SetIfMatch(ifMatch string) *PutReplicationDocumentOptions {
+	_options.IfMatch = core.StringPtr(ifMatch)
+	return _options
 }
 
 // SetBatch : Allow user to set Batch
-func (options *PutReplicationDocumentOptions) SetBatch(batch string) *PutReplicationDocumentOptions {
-	options.Batch = core.StringPtr(batch)
-	return options
+func (_options *PutReplicationDocumentOptions) SetBatch(batch string) *PutReplicationDocumentOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
 }
 
 // SetNewEdits : Allow user to set NewEdits
-func (options *PutReplicationDocumentOptions) SetNewEdits(newEdits bool) *PutReplicationDocumentOptions {
-	options.NewEdits = core.BoolPtr(newEdits)
-	return options
+func (_options *PutReplicationDocumentOptions) SetNewEdits(newEdits bool) *PutReplicationDocumentOptions {
+	_options.NewEdits = core.BoolPtr(newEdits)
+	return _options
 }
 
 // SetRev : Allow user to set Rev
-func (options *PutReplicationDocumentOptions) SetRev(rev string) *PutReplicationDocumentOptions {
-	options.Rev = core.StringPtr(rev)
-	return options
+func (_options *PutReplicationDocumentOptions) SetRev(rev string) *PutReplicationDocumentOptions {
+	_options.Rev = core.StringPtr(rev)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16689,33 +16834,33 @@ func (*CloudantV1) NewPutSecurityOptions(db string) *PutSecurityOptions {
 }
 
 // SetDb : Allow user to set Db
-func (options *PutSecurityOptions) SetDb(db string) *PutSecurityOptions {
-	options.Db = core.StringPtr(db)
-	return options
+func (_options *PutSecurityOptions) SetDb(db string) *PutSecurityOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
 }
 
 // SetAdmins : Allow user to set Admins
-func (options *PutSecurityOptions) SetAdmins(admins *SecurityObject) *PutSecurityOptions {
-	options.Admins = admins
-	return options
+func (_options *PutSecurityOptions) SetAdmins(admins *SecurityObject) *PutSecurityOptions {
+	_options.Admins = admins
+	return _options
 }
 
 // SetMembers : Allow user to set Members
-func (options *PutSecurityOptions) SetMembers(members *SecurityObject) *PutSecurityOptions {
-	options.Members = members
-	return options
+func (_options *PutSecurityOptions) SetMembers(members *SecurityObject) *PutSecurityOptions {
+	_options.Members = members
+	return _options
 }
 
 // SetCloudant : Allow user to set Cloudant
-func (options *PutSecurityOptions) SetCloudant(cloudant map[string][]string) *PutSecurityOptions {
-	options.Cloudant = cloudant
-	return options
+func (_options *PutSecurityOptions) SetCloudant(cloudant map[string][]string) *PutSecurityOptions {
+	_options.Cloudant = cloudant
+	return _options
 }
 
 // SetCouchdbAuthOnly : Allow user to set CouchdbAuthOnly
-func (options *PutSecurityOptions) SetCouchdbAuthOnly(couchdbAuthOnly bool) *PutSecurityOptions {
-	options.CouchdbAuthOnly = core.BoolPtr(couchdbAuthOnly)
-	return options
+func (_options *PutSecurityOptions) SetCouchdbAuthOnly(couchdbAuthOnly bool) *PutSecurityOptions {
+	_options.CouchdbAuthOnly = core.BoolPtr(couchdbAuthOnly)
+	return _options
 }
 
 // SetHeaders : Allow user to set Headers
@@ -16768,11 +16913,11 @@ type ReplicationDatabase struct {
 }
 
 // NewReplicationDatabase : Instantiate ReplicationDatabase (Generic Model Constructor)
-func (*CloudantV1) NewReplicationDatabase(url string) (model *ReplicationDatabase, err error) {
-	model = &ReplicationDatabase{
+func (*CloudantV1) NewReplicationDatabase(url string) (_model *ReplicationDatabase, err error) {
+	_model = &ReplicationDatabase{
 		URL: core.StringPtr(url),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -16819,11 +16964,11 @@ type ReplicationDatabaseAuthIam struct {
 }
 
 // NewReplicationDatabaseAuthIam : Instantiate ReplicationDatabaseAuthIam (Generic Model Constructor)
-func (*CloudantV1) NewReplicationDatabaseAuthIam(apiKey string) (model *ReplicationDatabaseAuthIam, err error) {
-	model = &ReplicationDatabaseAuthIam{
+func (*CloudantV1) NewReplicationDatabaseAuthIam(apiKey string) (_model *ReplicationDatabaseAuthIam, err error) {
+	_model = &ReplicationDatabaseAuthIam{
 		ApiKey: core.StringPtr(apiKey),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -16967,12 +17112,12 @@ type ReplicationDocument struct {
 }
 
 // NewReplicationDocument : Instantiate ReplicationDocument (Generic Model Constructor)
-func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *ReplicationDatabase) (model *ReplicationDocument, err error) {
-	model = &ReplicationDocument{
+func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *ReplicationDatabase) (_model *ReplicationDocument, err error) {
+	_model = &ReplicationDocument{
 		Source: source,
 		Target: target,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -17412,12 +17557,12 @@ type Revisions struct {
 }
 
 // NewRevisions : Instantiate Revisions (Generic Model Constructor)
-func (*CloudantV1) NewRevisions(ids []string, start int64) (model *Revisions, err error) {
-	model = &Revisions{
+func (*CloudantV1) NewRevisions(ids []string, start int64) (_model *Revisions, err error) {
+	_model = &Revisions{
 		Ids: ids,
 		Start: core.Int64Ptr(start),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -17862,11 +18007,11 @@ type SearchIndexDefinition struct {
 }
 
 // NewSearchIndexDefinition : Instantiate SearchIndexDefinition (Generic Model Constructor)
-func (*CloudantV1) NewSearchIndexDefinition(index string) (model *SearchIndexDefinition, err error) {
-	model = &SearchIndexDefinition{
+func (*CloudantV1) NewSearchIndexDefinition(index string) (_model *SearchIndexDefinition, err error) {
+	_model = &SearchIndexDefinition{
 		Index: core.StringPtr(index),
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
@@ -18433,12 +18578,12 @@ const (
 )
 
 // NewUserContext : Instantiate UserContext (Generic Model Constructor)
-func (*CloudantV1) NewUserContext(name string, roles []string) (model *UserContext, err error) {
-	model = &UserContext{
+func (*CloudantV1) NewUserContext(name string, roles []string) (_model *UserContext, err error) {
+	_model = &UserContext{
 		Name: core.StringPtr(name),
 		Roles: roles,
 	}
-	err = core.ValidateStruct(model, "required parameters")
+	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
