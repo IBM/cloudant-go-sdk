@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=Godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
-# IBM Cloudant Go SDK Version 0.0.33
+# IBM Cloudant Go SDK Version 0.0.34
 
 IBM Cloudant Go SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
@@ -98,7 +98,7 @@ project:
 
 ## Installation
 
-The current version of this SDK: 0.0.33
+The current version of this SDK: 0.0.34
 
 There are a few different ways to download and install the
 Cloudant Go SDK project for use by your Go application:
@@ -135,7 +135,7 @@ Here is an example:
 ```terminal
 [[constraint]]
   name = "github.com/IBM/cloudant-go-sdk"
-  version = "0.0.33"
+  version = "0.0.34"
 
 ```
 
