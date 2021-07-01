@@ -38,7 +38,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.38
+// Version: 1.0.0-dev0.0.37
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *core.BaseService
@@ -5611,6 +5611,66 @@ func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, hea
 	return
 }
 
+// PostReplicate : Create or modify a replication operation
+// Requests, configures, or stops a replicate operation.
+func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostReplicateWithContext(context.Background(), postReplicateOptions)
+}
+
+// PostReplicateWithContext is an alternate form of the PostReplicate method which supports a Context parameter
+func (cloudant *CloudantV1) PostReplicateWithContext(ctx context.Context, postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postReplicateOptions, "postReplicateOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postReplicateOptions, "postReplicateOptions")
+	if err != nil {
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicate`, nil)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postReplicateOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostReplicate")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	_, err = builder.SetBodyContentJSON(postReplicateOptions.ReplicationDocument)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalReplicationResult)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // DeleteReplicationDocument : Cancel a replication
 // Cancels a replication by deleting the document that describes it from the `_replicator` database.
 func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
@@ -5772,7 +5832,7 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 	return
 }
 
-// PutReplicationDocument : Create or modify a replication using a replication document
+// PutReplicationDocument : Start or update a replication
 // Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
 // replication.
 func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
@@ -15236,6 +15296,34 @@ func (options *PostPartitionViewOptions) SetHeaders(param map[string]string) *Po
 	return options
 }
 
+// PostReplicateOptions : The PostReplicate options.
+type PostReplicateOptions struct {
+	// HTTP request body for replication operations.
+	ReplicationDocument *ReplicationDocument `validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewPostReplicateOptions : Instantiate PostReplicateOptions
+func (*CloudantV1) NewPostReplicateOptions(replicationDocument *ReplicationDocument) *PostReplicateOptions {
+	return &PostReplicateOptions{
+		ReplicationDocument: replicationDocument,
+	}
+}
+
+// SetReplicationDocument : Allow user to set ReplicationDocument
+func (options *PostReplicateOptions) SetReplicationDocument(replicationDocument *ReplicationDocument) *PostReplicateOptions {
+	options.ReplicationDocument = replicationDocument
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostReplicateOptions) SetHeaders(param map[string]string) *PostReplicateOptions {
+	options.Headers = param
+	return options
+}
+
 // PostRevsDiffOptions : The PostRevsDiff options.
 type PostRevsDiffOptions struct {
 	// Path parameter to specify the database name.
@@ -17177,6 +17265,138 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 			return
 		}
 		obj.SetProperty(k, v)
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReplicationHistory : Schema for replication history information.
+type ReplicationHistory struct {
+	// Number of document write failures.
+	DocWriteFailures *int64 `json:"doc_write_failures" validate:"required"`
+
+	// Number of documents read.
+	DocsRead *int64 `json:"docs_read" validate:"required"`
+
+	// Number of documents written to target.
+	DocsWritten *int64 `json:"docs_written" validate:"required"`
+
+	// Last sequence number in changes stream.
+	EndLastSeq *string `json:"end_last_seq" validate:"required"`
+
+	// Date/Time replication operation completed in RFC 2822 format.
+	EndTime *string `json:"end_time" validate:"required"`
+
+	// Number of missing documents checked.
+	MissingChecked *int64 `json:"missing_checked" validate:"required"`
+
+	// Number of missing documents found.
+	MissingFound *int64 `json:"missing_found" validate:"required"`
+
+	// Last recorded sequence number.
+	RecordedSeq *string `json:"recorded_seq" validate:"required"`
+
+	// Session ID for this replication operation.
+	SessionID *string `json:"session_id" validate:"required"`
+
+	// First sequence number in changes stream.
+	StartLastSeq *string `json:"start_last_seq" validate:"required"`
+
+	// Date/Time replication operation started in RFC 2822 format.
+	StartTime *string `json:"start_time" validate:"required"`
+}
+
+// UnmarshalReplicationHistory unmarshals an instance of ReplicationHistory from the specified map of raw messages.
+func UnmarshalReplicationHistory(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReplicationHistory)
+	err = core.UnmarshalPrimitive(m, "doc_write_failures", &obj.DocWriteFailures)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "docs_read", &obj.DocsRead)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "docs_written", &obj.DocsWritten)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "end_last_seq", &obj.EndLastSeq)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "end_time", &obj.EndTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "missing_checked", &obj.MissingChecked)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "missing_found", &obj.MissingFound)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "recorded_seq", &obj.RecordedSeq)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "session_id", &obj.SessionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start_last_seq", &obj.StartLastSeq)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReplicationResult : Schema for a replication result.
+type ReplicationResult struct {
+	// Replication history.
+	History []ReplicationHistory `json:"history" validate:"required"`
+
+	// Replication status.
+	Ok *bool `json:"ok" validate:"required"`
+
+	// Replication protocol version.
+	ReplicationIDVersion *int64 `json:"replication_id_version" validate:"required"`
+
+	// Unique session ID.
+	SessionID *string `json:"session_id" validate:"required"`
+
+	// Last sequence number read from source database.
+	SourceLastSeq *string `json:"source_last_seq" validate:"required"`
+}
+
+// UnmarshalReplicationResult unmarshals an instance of ReplicationResult from the specified map of raw messages.
+func UnmarshalReplicationResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReplicationResult)
+	err = core.UnmarshalModel(m, "history", &obj.History, UnmarshalReplicationHistory)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "replication_id_version", &obj.ReplicationIDVersion)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "session_id", &obj.SessionID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "source_last_seq", &obj.SourceLastSeq)
+	if err != nil {
+		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
