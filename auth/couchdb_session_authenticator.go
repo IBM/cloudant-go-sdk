@@ -208,7 +208,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() (*session, error) {
 		return nil, err
 	}
 
-	builder.AddHeader(core.CONTENT_TYPE, core.DEFAULT_CONTENT_TYPE).
+	builder.AddHeader(core.CONTENT_TYPE, "application/x-www-form-urlencoded").
 		AddFormData("name", "", "", a.Username).
 		AddFormData("password", "", "", a.Password).
 		WithContext(a.ctx)
