@@ -41,7 +41,7 @@ import (
 // Version: 1.0.0-dev0.0.38
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
-	Service *core.BaseService
+	Service *common.BaseService
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
@@ -94,7 +94,7 @@ func NewCloudantV1(options *CloudantV1Options) (service *CloudantV1, err error) 
 		EnableGzipCompression: true,
 	}
 
-	baseService, err := core.NewBaseService(serviceOptions)
+	baseService, err := common.NewBaseService(serviceOptions)
 	if err != nil {
 		return
 	}
