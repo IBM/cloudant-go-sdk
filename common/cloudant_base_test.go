@@ -99,7 +99,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(cloudant).ToNot(BeNil())
 		Expect(err).To(BeNil())
 
-		cloudant.SetServiceURL("https://cloudant.example/some/proxy/path")
+		_ = cloudant.SetServiceURL("https://cloudant.example/some/proxy/path")
 
 		pathParamsMap := map[string]string{
 			"db":     "testDatabase",
