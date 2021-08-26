@@ -104,7 +104,8 @@ func (c *BaseService) Clone() *BaseService {
 func (c *BaseService) Request(req *http.Request, result interface{}) (detailedResponse *core.DetailedResponse, err error) {
 	// Extract the operation ID from the request headers.
 	var operationId string
-	header := req.Header[http.CanonicalHeaderKey("X-IBMCloud-SDK-Analytics")][0]
+	//nolint
+	header := req.Header["X-IBMCloud-SDK-Analytics"][0]
 	for _, element := range strings.Split(header, ";") {
 		if strings.HasPrefix(element, "operation_id") {
 			operationId = strings.Split(element, "=")[1]
