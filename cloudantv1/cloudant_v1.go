@@ -41,7 +41,7 @@ import (
 // Version: 1.0.0-dev0.0.38
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
-	Service *common.BaseService
+	Service *core.BaseService
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
