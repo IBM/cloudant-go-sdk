@@ -7879,7 +7879,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "Language", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": {"mapKey": "Inner"}, "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "Language", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully with retries`, func() {
@@ -7957,7 +7957,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "Language", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": {"mapKey": "Inner"}, "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "Language", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -8140,7 +8140,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Language = core.StringPtr("testString")
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.Updates = make(map[string]string)
-				designDocumentModel.ValidateDocUpdate = make(map[string]string)
+				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
@@ -8297,7 +8297,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Language = core.StringPtr("testString")
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.Updates = make(map[string]string)
-				designDocumentModel.ValidateDocUpdate = make(map[string]string)
+				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
@@ -8461,7 +8461,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Language = core.StringPtr("testString")
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.Updates = make(map[string]string)
-				designDocumentModel.ValidateDocUpdate = make(map[string]string)
+				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
@@ -8565,7 +8565,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Language = core.StringPtr("testString")
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.Updates = make(map[string]string)
-				designDocumentModel.ValidateDocUpdate = make(map[string]string)
+				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", map[string]interface{}{"anyKey": "anyValue"})
@@ -26111,7 +26111,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Language = core.StringPtr("testString")
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.Updates = make(map[string]string)
-				designDocumentModel.ValidateDocUpdate = make(map[string]string)
+				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.Attachments["foo"] = *attachmentModel
@@ -26132,7 +26132,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentModel.Language).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentModel.Options).To(Equal(designDocumentOptionsModel))
 				Expect(designDocumentModel.Updates).To(Equal(make(map[string]string)))
-				Expect(designDocumentModel.ValidateDocUpdate).To(Equal(make(map[string]string)))
+				Expect(designDocumentModel.ValidateDocUpdate).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentModel.GetProperties()).ToNot(BeEmpty())
 				Expect(designDocumentModel.GetProperty("foo")).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(designDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
