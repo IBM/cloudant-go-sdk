@@ -38,7 +38,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.38
+// Version: 1.0.0-dev0.0.39
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *common.BaseService
@@ -9325,8 +9325,30 @@ type DesignDocument struct {
 	// Schema for update function definitions.
 	Updates map[string]string `json:"updates,omitempty"`
 
-	// Schema for validate document update functions definition.
-	ValidateDocUpdate map[string]string `json:"validate_doc_update,omitempty"`
+	// Validate document update function can be used to prevent invalid or unauthorized document update requests from being
+	// stored. Validation functions typically examine the structure of the new document to ensure that required fields are
+	// present and to verify that the requesting user should be allowed to make changes to the document properties. When a
+	// write request is received for a given database, the validation function in each design document in that database is
+	// called in an unspecified order. If any of the validation functions throw an error, the write will not succeed.
+	//
+	// The validation function can abort the pending document write by throwing one of two error objects:
+	//
+	// ```
+	// // user is not authorized to make the change but may re-authenticate throw({ unauthorized: 'Error message here.' });
+	//
+	// // change is not allowed throw({ forbidden: 'Error message here.' });
+	// ```
+	//
+	// The function takes 4 parameters:
+	//
+	//   * `newDoc` - New version of document that will be stored
+	//     from the update request.
+	//   * `oldDoc` - Previous version of document that is already stored.
+	//   * `userCtx` - User Context Object, containing information about the
+	//     user writing the document (if present), see the `UserContext`.
+	//   * `secObj` - Security Object, with lists of database security roles,
+	//     see the `SecurityObject`.
+	ValidateDocUpdate *string `json:"validate_doc_update,omitempty"`
 
 	// Schema for design document views.
 	Views map[string]DesignDocumentViewsMapReduce `json:"views,omitempty"`
