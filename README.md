@@ -34,7 +34,6 @@ to avoid surprises.
 - [Installation](#installation)
   * [`go get` command](#go-get-command)
   * [Go modules](#go-modules)
-  * [`dep` dependency manager](#dep-dependency-manager)
 - [Authentication](#authentication)
   * [Authentication with environment variables](#authentication-with-environment-variables)
     + [IAM authentication](#iam-authentication)
@@ -115,7 +114,7 @@ Use this command to download and install the SDK to allow your Go application to
 use it:
 
 ```terminal
-go get -u github.com/IBM/cloudant-go-sdk/cloudantv1
+go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.0.36
 ```
 
 ### Go modules
@@ -129,23 +128,9 @@ import (
 )
 ```
 
-then run `go mod tidy` to download and install the new
-dependency and update your Go application's `go.mod` file.
-
-### `dep` dependency manager
-
-If your application is using the `dep` dependency management
-tool, you can add a dependency to your `Gopkg.toml` file.
-Here is an example:
-
-```terminal
-[[constraint]]
-  name = "github.com/IBM/cloudant-go-sdk"
-  version = "0.0.36"
-
-```
-
-then run `dep ensure`.
+then run `go mod tidy` to download and install the latest version if
+the dependency is missing. This command will also update your Go
+application's `go.mod` file.
 
 ## Authentication
 
