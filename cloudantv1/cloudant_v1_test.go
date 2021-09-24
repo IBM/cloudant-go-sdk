@@ -2476,7 +2476,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"info": {"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
+					fmt.Fprintf(res, "%s", `[{"error": "Error", "info": {"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
 				}))
 			})
 			It(`Invoke PostDbsInfo successfully with retries`, func() {
@@ -2546,7 +2546,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"info": {"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
+					fmt.Fprintf(res, "%s", `[{"error": "Error", "info": {"cluster": {"n": 1, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
 				}))
 			})
 			It(`Invoke PostDbsInfo successfully`, func() {
@@ -8770,7 +8770,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully with retries`, func() {
@@ -8848,7 +8848,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "updates": {"mapKey": "Inner"}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -9076,7 +9076,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
 				designDocumentModel.Language = core.StringPtr("javascript")
 				designDocumentModel.Options = designDocumentOptionsModel
-				designDocumentModel.Updates = make(map[string]string)
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
@@ -9232,7 +9231,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
 				designDocumentModel.Language = core.StringPtr("javascript")
 				designDocumentModel.Options = designDocumentOptionsModel
-				designDocumentModel.Updates = make(map[string]string)
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
@@ -9396,7 +9394,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
 				designDocumentModel.Language = core.StringPtr("javascript")
 				designDocumentModel.Options = designDocumentOptionsModel
-				designDocumentModel.Updates = make(map[string]string)
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
@@ -9500,7 +9497,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
 				designDocumentModel.Language = core.StringPtr("javascript")
 				designDocumentModel.Options = designDocumentOptionsModel
-				designDocumentModel.Updates = make(map[string]string)
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
@@ -9625,7 +9621,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
 				designDocumentModel.Language = core.StringPtr("javascript")
 				designDocumentModel.Options = designDocumentOptionsModel
-				designDocumentModel.Updates = make(map[string]string)
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
@@ -9722,7 +9717,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully with retries`, func() {
@@ -9777,7 +9772,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully`, func() {
@@ -18885,7 +18880,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -18962,7 +18957,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -19147,12 +19142,18 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
 				// Construct an instance of the ReplicationDatabaseAuthIam model
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
 
 				// Construct an instance of the ReplicationDatabase model
@@ -19308,12 +19309,18 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
 				// Construct an instance of the ReplicationDatabaseAuthIam model
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
 
 				// Construct an instance of the ReplicationDatabase model
@@ -19477,12 +19484,18 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
 				// Construct an instance of the ReplicationDatabaseAuthIam model
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
 
 				// Construct an instance of the ReplicationDatabase model
@@ -19586,12 +19599,18 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
 				// Construct an instance of the ReplicationDatabaseAuthIam model
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
 
 				// Construct an instance of the ReplicationDatabase model
@@ -19716,12 +19735,18 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
 				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
 				// Construct an instance of the ReplicationDatabaseAuthIam model
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
 
 				// Construct an instance of the ReplicationDatabase model
@@ -20295,7 +20320,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"reason": "Reason", "timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJobs successfully with retries`, func() {
@@ -20352,7 +20377,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "jobs": [{"database": "Database", "doc_id": "DocID", "history": [{"reason": "Reason", "timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}]}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJobs successfully`, func() {
@@ -20506,7 +20531,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"reason": "Reason", "timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJob successfully with retries`, func() {
@@ -20560,7 +20585,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}`)
+					fmt.Fprintf(res, "%s", `{"database": "Database", "doc_id": "DocID", "history": [{"reason": "Reason", "timestamp": "2019-01-01T12:00:00.000Z", "type": "Type"}], "id": "ID", "info": {"changes_pending": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "error": "Error", "missing_revisions_found": 0, "revisions_checked": 0, "source_seq": "SourceSeq", "through_seq": "ThroughSeq"}, "node": "Node", "pid": "Pid", "source": "Source", "start_time": "2019-01-01T12:00:00.000Z", "target": "Target", "user": "User"}`)
 				}))
 			})
 			It(`Invoke GetSchedulerJob successfully`, func() {
@@ -24199,255 +24224,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) - Operation response error`, func() {
-		postMissingRevsPath := "/testString/_missing_revs"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postMissingRevsPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke PostMissingRevs with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostMissingRevsOptions model
-				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
-				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
-				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions)`, func() {
-		postMissingRevsPath := "/testString/_missing_revs"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postMissingRevsPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
-					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"missing_revs": {"mapKey": ["Inner"]}}`)
-				}))
-			})
-			It(`Invoke PostMissingRevs successfully with retries`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				cloudantService.EnableRetries(0, 0)
-
-				// Construct an instance of the PostMissingRevsOptions model
-				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
-				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
-				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := cloudantService.PostMissingRevsWithContext(ctx, postMissingRevsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = cloudantService.PostMissingRevsWithContext(ctx, postMissingRevsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postMissingRevsPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
-					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
-
-					// If there is a body, then make sure we can read it
-					bodyBuf := new(bytes.Buffer)
-					if req.Header.Get("Content-Encoding") == "gzip" {
-						body, err := core.NewGzipDecompressionReader(req.Body)
-						Expect(err).To(BeNil())
-						_, err = bodyBuf.ReadFrom(body)
-						Expect(err).To(BeNil())
-					} else {
-						_, err := bodyBuf.ReadFrom(req.Body)
-						Expect(err).To(BeNil())
-					}
-					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"missing_revs": {"mapKey": ["Inner"]}}`)
-				}))
-			})
-			It(`Invoke PostMissingRevs successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PostMissingRevs(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the PostMissingRevsOptions model
-				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
-				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
-				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke PostMissingRevs with error: Operation validation and request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostMissingRevsOptions model
-				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
-				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
-				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the PostMissingRevsOptions model with no property values
-				postMissingRevsOptionsModelNew := new(cloudantv1.PostMissingRevsOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.PostMissingRevs(postMissingRevsOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke PostMissingRevs successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostMissingRevsOptions model
-				postMissingRevsOptionsModel := new(cloudantv1.PostMissingRevsOptions)
-				postMissingRevsOptionsModel.Db = core.StringPtr("testString")
-				postMissingRevsOptionsModel.DocumentRevisions = make(map[string][]string)
-				postMissingRevsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := cloudantService.PostMissingRevs(postMissingRevsOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
 	Describe(`PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions) - Operation response error`, func() {
 		postRevsDiffPath := "/testString/_revs_diff"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -27574,19 +27350,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postIndexOptionsModel.Type).To(Equal(core.StringPtr("json")))
 				Expect(postIndexOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewPostMissingRevsOptions successfully`, func() {
-				// Construct an instance of the PostMissingRevsOptions model
-				db := "testString"
-				documentRevisions := make(map[string][]string)
-				postMissingRevsOptionsModel := cloudantService.NewPostMissingRevsOptions(db, documentRevisions)
-				postMissingRevsOptionsModel.SetDb("testString")
-				postMissingRevsOptionsModel.SetDocumentRevisions(make(map[string][]string))
-				postMissingRevsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(postMissingRevsOptionsModel).ToNot(BeNil())
-				Expect(postMissingRevsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postMissingRevsOptionsModel.DocumentRevisions).To(Equal(make(map[string][]string)))
-				Expect(postMissingRevsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewPostPartitionAllDocsOptions successfully`, func() {
 				// Construct an instance of the PostPartitionAllDocsOptions model
 				db := "testString"
@@ -28157,7 +27920,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Indexes = make(map[string]cloudantv1.SearchIndexDefinition)
 				designDocumentModel.Language = core.StringPtr("javascript")
 				designDocumentModel.Options = designDocumentOptionsModel
-				designDocumentModel.Updates = make(map[string]string)
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
@@ -28178,7 +27940,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentModel.Filters).To(Equal(make(map[string]string)))
 				Expect(designDocumentModel.Language).To(Equal(core.StringPtr("javascript")))
 				Expect(designDocumentModel.Options).To(Equal(designDocumentOptionsModel))
-				Expect(designDocumentModel.Updates).To(Equal(make(map[string]string)))
 				Expect(designDocumentModel.ValidateDocUpdate).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentModel.GetProperties()).ToNot(BeEmpty())
 				Expect(designDocumentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
@@ -28462,6 +28223,14 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationCreateTargetParametersModel.Partitioned).To(Equal(core.BoolPtr(false)))
 				Expect(replicationCreateTargetParametersModel.Q).To(Equal(core.Int64Ptr(int64(1))))
 
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				Expect(replicationDatabaseAuthBasicModel).ToNot(BeNil())
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthBasicModel.Password).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDatabaseAuthBasicModel.Username).To(Equal(core.StringPtr("testString")))
+
 				// Construct an instance of the ReplicationDatabaseAuthIam model
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				Expect(replicationDatabaseAuthIamModel).ToNot(BeNil())
@@ -28471,7 +28240,9 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				Expect(replicationDatabaseAuthModel.Basic).To(Equal(replicationDatabaseAuthBasicModel))
 				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
 
 				// Construct an instance of the ReplicationDatabase model
@@ -28622,6 +28393,13 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewReplicationDatabase successfully`, func() {
 				url := "testString"
 				_model, err := cloudantService.NewReplicationDatabase(url)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewReplicationDatabaseAuthBasic successfully`, func() {
+				password := "testString"
+				username := "testString"
+				_model, err := cloudantService.NewReplicationDatabaseAuthBasic(password, username)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})

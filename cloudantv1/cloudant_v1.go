@@ -39,7 +39,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.39
+// Version: 1.0.0-dev0.0.40
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *common.BaseService
@@ -7207,72 +7207,6 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 	return
 }
 
-// PostMissingRevs : Query which document revisions are missing from the database
-// Given a list of document revisions, returns the document revisions that do not exist in the database.
-func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostMissingRevsWithContext(context.Background(), postMissingRevsOptions)
-}
-
-// PostMissingRevsWithContext is an alternate form of the PostMissingRevs method which supports a Context parameter
-func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postMissingRevsOptions, "postMissingRevsOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(postMissingRevsOptions, "postMissingRevsOptions")
-	if err != nil {
-		return
-	}
-
-	pathParamsMap := map[string]string{
-		"db": *postMissingRevsOptions.Db,
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_missing_revs`, pathParamsMap)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range postMissingRevsOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostMissingRevs")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-
-	_, err = builder.SetBodyContentJSON(postMissingRevsOptions.DocumentRevisions)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMissingRevsResult)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
 // PostRevsDiff : Query the document revisions and possible ancestors missing from the database
 // The replicator is the primary user of this operation. After receiving a set of new revision IDs from the source
 // database, the replicator sends this set to the destination database's `_revs_diff` to find out which of them already
@@ -8955,6 +8889,9 @@ func UnmarshalDbUpdates(m map[string]json.RawMessage, result interface{}) (err e
 
 // DbsInfoResult : Schema for database information keyed by database name.
 type DbsInfoResult struct {
+	// The name of the error.
+	Error *string `json:"error,omitempty"`
+
 	// Schema for information about a database.
 	Info *DatabaseInformation `json:"info,omitempty"`
 
@@ -8965,6 +8902,10 @@ type DbsInfoResult struct {
 // UnmarshalDbsInfoResult unmarshals an instance of DbsInfoResult from the specified map of raw messages.
 func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DbsInfoResult)
+	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "info", &obj.Info, UnmarshalDatabaseInformation)
 	if err != nil {
 		return
@@ -9465,9 +9406,6 @@ type DesignDocument struct {
 	// Schema for design document options.
 	Options *DesignDocumentOptions `json:"options,omitempty"`
 
-	// Schema for update function definitions.
-	Updates map[string]string `json:"updates,omitempty"`
-
 	// Validate document update function can be used to prevent invalid or unauthorized document update requests from being
 	// stored. Validation functions typically examine the structure of the new document to ensure that required fields are
 	// present and to verify that the requesting user should be allowed to make changes to the document properties. When a
@@ -9579,9 +9517,6 @@ func (o *DesignDocument) MarshalJSON() (buffer []byte, err error) {
 	if o.Options != nil {
 		m["options"] = o.Options
 	}
-	if o.Updates != nil {
-		m["updates"] = o.Updates
-	}
 	if o.ValidateDocUpdate != nil {
 		m["validate_doc_update"] = o.ValidateDocUpdate
 	}
@@ -9668,11 +9603,6 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	delete(m, "options")
-	err = core.UnmarshalPrimitive(m, "updates", &obj.Updates)
-	if err != nil {
-		return
-	}
-	delete(m, "updates")
 	err = core.UnmarshalPrimitive(m, "validate_doc_update", &obj.ValidateDocUpdate)
 	if err != nil {
 		return
@@ -9756,9 +9686,6 @@ type DesignDocumentViewIndex struct {
 	// Schema for size information of content.
 	Sizes *ContentInformationSizes `json:"sizes" validate:"required"`
 
-	// The update sequence of the corresponding database that has been indexed.
-	UpdateSeq *string `json:"update_seq" validate:"required"`
-
 	// Indicates if the view is currently being updated.
 	UpdaterRunning *bool `json:"updater_running" validate:"required"`
 
@@ -9785,10 +9712,6 @@ func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result inter
 		return
 	}
 	err = core.UnmarshalModel(m, "sizes", &obj.Sizes, UnmarshalContentInformationSizes)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
 	if err != nil {
 		return
 	}
@@ -13055,23 +12978,6 @@ func UnmarshalMembershipInformation(m map[string]json.RawMessage, result interfa
 	return
 }
 
-// MissingRevsResult : Schema for mapping document IDs to lists of missing revisions.
-type MissingRevsResult struct {
-	// Schema for mapping document IDs to lists of revisions.
-	MissingRevs map[string][]string `json:"missing_revs" validate:"required"`
-}
-
-// UnmarshalMissingRevsResult unmarshals an instance of MissingRevsResult from the specified map of raw messages.
-func UnmarshalMissingRevsResult(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(MissingRevsResult)
-	err = core.UnmarshalPrimitive(m, "missing_revs", &obj.MissingRevs)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // Ok : Schema for an OK result.
 type Ok struct {
 	// ok.
@@ -13640,17 +13546,18 @@ type PostChangesOptions struct {
 	Feed *string `json:"-"`
 
 	// Query parameter to specify a filter function from a design document that will filter the changes stream emitting
-	// only filtered events. Additionally, several built-in filters are available:
-	// - `_design`
-	// - Returns only changes to design documents.
-	// - `_doc_ids`
-	// - Returns changes for documents whit an ID matching one specified in `doc_ids` request body parameter.
-	// - `_selector`
-	// - Returns changes for documents that match the `selector` request body parameter. The selector syntax is the same as
-	// used for `_find`.
-	// - `_view`
-	// - Returns changes for documents that match an existing map function in the view specified by the query parameter
-	// `view`.
+	// only filtered events. For example: `design_doc/filtername`.
+	//
+	// Additionally, some keywords are reserved for built-in filters:
+	//
+	//   * `_design` - Returns only changes to design documents.
+	//   * `_doc_ids` - Returns changes for documents with an ID matching one specified in
+	//       `doc_ids` request body parameter.
+	//   * `_selector` - Returns changes for documents that match the `selector`
+	//       request body parameter. The selector syntax is the same as used for
+	//       `_find`.
+	//   * `_view` - Returns changes for documents that match an existing map
+	//       function in the view specified by the query parameter `view`.
 	Filter *string `json:"-"`
 
 	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
@@ -14618,44 +14525,6 @@ func (_options *PostIndexOptions) SetType(typeVar string) *PostIndexOptions {
 
 // SetHeaders : Allow user to set Headers
 func (options *PostIndexOptions) SetHeaders(param map[string]string) *PostIndexOptions {
-	options.Headers = param
-	return options
-}
-
-// PostMissingRevsOptions : The PostMissingRevs options.
-type PostMissingRevsOptions struct {
-	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
-
-	// HTTP request body for postMissingRevs and postRevsDiff.
-	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewPostMissingRevsOptions : Instantiate PostMissingRevsOptions
-func (*CloudantV1) NewPostMissingRevsOptions(db string, documentRevisions map[string][]string) *PostMissingRevsOptions {
-	return &PostMissingRevsOptions{
-		Db: core.StringPtr(db),
-		DocumentRevisions: documentRevisions,
-	}
-}
-
-// SetDb : Allow user to set Db
-func (_options *PostMissingRevsOptions) SetDb(db string) *PostMissingRevsOptions {
-	_options.Db = core.StringPtr(db)
-	return _options
-}
-
-// SetDocumentRevisions : Allow user to set DocumentRevisions
-func (_options *PostMissingRevsOptions) SetDocumentRevisions(documentRevisions map[string][]string) *PostMissingRevsOptions {
-	_options.DocumentRevisions = documentRevisions
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *PostMissingRevsOptions) SetHeaders(param map[string]string) *PostMissingRevsOptions {
 	options.Headers = param
 	return options
 }
@@ -16906,6 +16775,9 @@ func UnmarshalReplicationDatabase(m map[string]json.RawMessage, result interface
 
 // ReplicationDatabaseAuth : Schema for replication source or target database authentication.
 type ReplicationDatabaseAuth struct {
+	// Schema for basic authentication of replication source or target database.
+	Basic *ReplicationDatabaseAuthBasic `json:"basic,omitempty"`
+
 	// Schema for an IAM API key for replication database authentication.
 	Iam *ReplicationDatabaseAuthIam `json:"iam,omitempty"`
 }
@@ -16913,7 +16785,45 @@ type ReplicationDatabaseAuth struct {
 // UnmarshalReplicationDatabaseAuth unmarshals an instance of ReplicationDatabaseAuth from the specified map of raw messages.
 func UnmarshalReplicationDatabaseAuth(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationDatabaseAuth)
+	err = core.UnmarshalModel(m, "basic", &obj.Basic, UnmarshalReplicationDatabaseAuthBasic)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "iam", &obj.Iam, UnmarshalReplicationDatabaseAuthIam)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReplicationDatabaseAuthBasic : Schema for basic authentication of replication source or target database.
+type ReplicationDatabaseAuthBasic struct {
+	// The password associated with the username.
+	Password *string `json:"password" validate:"required"`
+
+	// The username.
+	Username *string `json:"username" validate:"required"`
+}
+
+// NewReplicationDatabaseAuthBasic : Instantiate ReplicationDatabaseAuthBasic (Generic Model Constructor)
+func (*CloudantV1) NewReplicationDatabaseAuthBasic(password string, username string) (_model *ReplicationDatabaseAuthBasic, err error) {
+	_model = &ReplicationDatabaseAuthBasic{
+		Password: core.StringPtr(password),
+		Username: core.StringPtr(username),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalReplicationDatabaseAuthBasic unmarshals an instance of ReplicationDatabaseAuthBasic from the specified map of raw messages.
+func UnmarshalReplicationDatabaseAuthBasic(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReplicationDatabaseAuthBasic)
+	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
 		return
 	}
@@ -17756,6 +17666,9 @@ func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (er
 
 // SchedulerJobEvent : Schema for a replication scheduler job event.
 type SchedulerJobEvent struct {
+	// Reason for current state of event.
+	Reason *string `json:"reason,omitempty"`
+
 	// Timestamp of the event.
 	Timestamp *strfmt.DateTime `json:"timestamp" validate:"required"`
 
@@ -17766,6 +17679,10 @@ type SchedulerJobEvent struct {
 // UnmarshalSchedulerJobEvent unmarshals an instance of SchedulerJobEvent from the specified map of raw messages.
 func UnmarshalSchedulerJobEvent(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJobEvent)
+	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "timestamp", &obj.Timestamp)
 	if err != nil {
 		return
