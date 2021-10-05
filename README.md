@@ -239,6 +239,8 @@ For fundamental SDK usage information and config options, please see the common 
 No request timeout and no read timeouts are set, but a 30s connect timeout is set by default. Be sure to set a request timeout appropriate to your application usage and environment. 
 The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md) section contains details on how to change the value.
 
+**Note:** System settings may take precedence over configured timeout values.
+
 ### Code examples
 
 The following code examples
