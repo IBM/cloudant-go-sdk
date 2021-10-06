@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.37.1-66e80f2e-20210813-202232
+ * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
  */
 
 // Package cloudantv1 : Operations and models for the CloudantV1 service
@@ -39,7 +39,7 @@ import (
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
 //
-// Version: 1.0.0-dev0.0.40
+// API Version: 1.0.0-dev0.0.40
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *common.BaseService
@@ -8921,23 +8921,23 @@ func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (e
 // DeleteAttachmentOptions : The DeleteAttachment options.
 type DeleteAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"-" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9004,7 +9004,7 @@ func (options *DeleteAttachmentOptions) SetHeaders(param map[string]string) *Del
 // DeleteDatabaseOptions : The DeleteDatabase options.
 type DeleteDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9032,21 +9032,21 @@ func (options *DeleteDatabaseOptions) SetHeaders(param map[string]string) *Delet
 // DeleteDesignDocumentOptions : The DeleteDesignDocument options.
 type DeleteDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9106,20 +9106,20 @@ func (options *DeleteDesignDocumentOptions) SetHeaders(param map[string]string) 
 // DeleteDocumentOptions : The DeleteDocument options.
 type DeleteDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9179,17 +9179,17 @@ func (options *DeleteDocumentOptions) SetHeaders(param map[string]string) *Delet
 // DeleteIndexOptions : The DeleteIndex options.
 type DeleteIndexOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index type.
-	Type *string `json:"-" validate:"required,ne="`
+	Type *string `json:"type" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"-" validate:"required,ne="`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9246,14 +9246,14 @@ func (options *DeleteIndexOptions) SetHeaders(param map[string]string) *DeleteIn
 // DeleteLocalDocumentOptions : The DeleteLocalDocument options.
 type DeleteLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9301,17 +9301,17 @@ func (options *DeleteLocalDocumentOptions) SetHeaders(param map[string]string) *
 // DeleteReplicationDocumentOptions : The DeleteReplicationDocument options.
 type DeleteReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10706,21 +10706,21 @@ func (options *GetActivityTrackerEventsOptions) SetHeaders(param map[string]stri
 // GetAllDbsOptions : The GetAllDbs options.
 type GetAllDbsOptions struct {
 	// Query parameter to specify whether to return the documents in descending by key order.
-	Descending *bool `json:"-"`
+	Descending *bool `json:"descending,omitempty"`
 
 	// Query parameter to specify to stop returning records when the specified key is reached. String representation of any
 	// JSON type that matches the key type emitted by the view function.
-	Endkey *string `json:"-"`
+	Endkey *string `json:"endkey,omitempty"`
 
 	// Query parameter to specify the number of returned documents to limit the result to.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify the number of records before starting to return the results.
-	Skip *int64 `json:"-"`
+	Skip *int64 `json:"skip,omitempty"`
 
 	// Query parameter to specify to start returning records from the specified key. String representation of any JSON type
 	// that matches the key type emitted by the view function.
-	Startkey *string `json:"-"`
+	Startkey *string `json:"startkey,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10770,29 +10770,29 @@ func (options *GetAllDbsOptions) SetHeaders(param map[string]string) *GetAllDbsO
 // GetAttachmentOptions : The GetAttachment options.
 type GetAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"-" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// The type of the response:  or *_/_*.
-	Accept *string `json:"-"`
+	Accept *string `json:"Accept,omitempty"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Header parameter to specify the byte range for a request. This allows the implementation of resumable downloads and
 	// skippable streams. This is available for all attachments inside CouchDB.
-	Range *string `json:"-"`
+	Range *string `json:"Range,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10918,7 +10918,7 @@ func (options *GetCurrentThroughputInformationOptions) SetHeaders(param map[stri
 // GetDatabaseInformationOptions : The GetDatabaseInformation options.
 type GetDatabaseInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -10946,22 +10946,22 @@ func (options *GetDatabaseInformationOptions) SetHeaders(param map[string]string
 // GetDbUpdatesOptions : The GetDbUpdates options.
 type GetDbUpdatesOptions struct {
 	// Query parameter to specify the changes feed type.
-	Feed *string `json:"-"`
+	Feed *string `json:"feed,omitempty"`
 
 	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
 	// applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
 	// indefinitely. May also be `true` to use default value of 60000.
-	Heartbeat *int64 `json:"-"`
+	Heartbeat *int64 `json:"heartbeat,omitempty"`
 
 	// Query parameter to specify the maximum period in milliseconds to wait for a change before the response is sent, even
 	// if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is specified by
 	// `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum timeout to prevent
 	// undetected dead connections.
-	Timeout *int64 `json:"-"`
+	Timeout *int64 `json:"timeout,omitempty"`
 
 	// Query parameter to specify to start the results from the change immediately after the given update sequence. Can be
 	// a valid update sequence or `now` value. Default is `0` i.e. all changes.
-	Since *string `json:"-"`
+	Since *string `json:"since,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11014,11 +11014,11 @@ func (options *GetDbUpdatesOptions) SetHeaders(param map[string]string) *GetDbUp
 // GetDesignDocumentInformationOptions : The GetDesignDocumentInformation options.
 type GetDesignDocumentInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11053,48 +11053,48 @@ func (options *GetDesignDocumentInformationOptions) SetHeaders(param map[string]
 // GetDesignDocumentOptions : The GetDesignDocument options.
 type GetDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
-	Attachments *bool `json:"-"`
+	Attachments *bool `json:"attachments,omitempty"`
 
 	// Query parameter to specify whether to include the encoding information in attachment stubs if the particular
 	// attachment is compressed.
-	AttEncodingInfo *bool `json:"-"`
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
-	Conflicts *bool `json:"-"`
+	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to include a list of deleted conflicted revisions in the `_deleted_conflicts`
 	// property of the returned document.
-	DeletedConflicts *bool `json:"-"`
+	DeletedConflicts *bool `json:"deleted_conflicts,omitempty"`
 
 	// Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was requested.
-	Latest *bool `json:"-"`
+	Latest *bool `json:"latest,omitempty"`
 
 	// Query parameter to specify whether to include the last update sequence for the document.
-	LocalSeq *bool `json:"-"`
+	LocalSeq *bool `json:"local_seq,omitempty"`
 
 	// Query parameter to specify whether to include document meta information. Acts the same as specifying all of the
 	// conflicts, deleted_conflicts and open_revs query parameters.
-	Meta *bool `json:"-"`
+	Meta *bool `json:"meta,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Query parameter to specify whether to include a list of all known document revisions.
-	Revs *bool `json:"-"`
+	Revs *bool `json:"revs,omitempty"`
 
 	// Query parameter to specify whether to includes detailed information for all known document revisions.
-	RevsInfo *bool `json:"-"`
+	RevsInfo *bool `json:"revs_info,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11195,47 +11195,47 @@ func (options *GetDesignDocumentOptions) SetHeaders(param map[string]string) *Ge
 // GetDocumentOptions : The GetDocument options.
 type GetDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
-	Attachments *bool `json:"-"`
+	Attachments *bool `json:"attachments,omitempty"`
 
 	// Query parameter to specify whether to include the encoding information in attachment stubs if the particular
 	// attachment is compressed.
-	AttEncodingInfo *bool `json:"-"`
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
-	Conflicts *bool `json:"-"`
+	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to include a list of deleted conflicted revisions in the `_deleted_conflicts`
 	// property of the returned document.
-	DeletedConflicts *bool `json:"-"`
+	DeletedConflicts *bool `json:"deleted_conflicts,omitempty"`
 
 	// Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was requested.
-	Latest *bool `json:"-"`
+	Latest *bool `json:"latest,omitempty"`
 
 	// Query parameter to specify whether to include the last update sequence for the document.
-	LocalSeq *bool `json:"-"`
+	LocalSeq *bool `json:"local_seq,omitempty"`
 
 	// Query parameter to specify whether to include document meta information. Acts the same as specifying all of the
 	// conflicts, deleted_conflicts and open_revs query parameters.
-	Meta *bool `json:"-"`
+	Meta *bool `json:"meta,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Query parameter to specify whether to include a list of all known document revisions.
-	Revs *bool `json:"-"`
+	Revs *bool `json:"revs,omitempty"`
 
 	// Query parameter to specify whether to includes detailed information for all known document revisions.
-	RevsInfo *bool `json:"-"`
+	RevsInfo *bool `json:"revs_info,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11336,10 +11336,10 @@ func (options *GetDocumentOptions) SetHeaders(param map[string]string) *GetDocum
 // GetDocumentShardsInfoOptions : The GetDocumentShardsInfo options.
 type GetDocumentShardsInfoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11374,14 +11374,14 @@ func (options *GetDocumentShardsInfoOptions) SetHeaders(param map[string]string)
 // GetGeoIndexInformationOptions : The GetGeoIndexInformation options.
 type GetGeoIndexInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"-" validate:"required,ne="`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11423,71 +11423,71 @@ func (options *GetGeoIndexInformationOptions) SetHeaders(param map[string]string
 // GetGeoOptions : The GetGeo options.
 type GetGeoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"-" validate:"required,ne="`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Query parameter to specify a geospatial query bounding box with two latitude,longitude coordinates for the
 	// lower-left and upper-right corners. An example is `-11.05987446,12.28339928,-101.05987446,62.28339928`.
-	Bbox *string `json:"-"`
+	Bbox *string `json:"bbox,omitempty"`
 
 	// Query parameter to specify a bookmark that was received from a previous request. This parameter enables paging
 	// through the results. If there are no more results after the bookmark, you get a response containing no further
 	// results and the same bookmark, confirming the end of the result list.
-	Bookmark *string `json:"-"`
+	Bookmark *string `json:"bookmark,omitempty"`
 
 	// Query parameter that causes the geospatial query output to be returned in the specified format.
-	Format *string `json:"-"`
+	Format *string `json:"format,omitempty"`
 
 	// Query parameter to specify a Well Known Text (WKT) representation of a geospatial query geometry. The valid values
 	// for the WKT parameter include `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, `MultiPolygon`, and
 	// `GeometryCollection`.
-	G *string `json:"-"`
+	G *string `json:"g,omitempty"`
 
 	// Query parameter to specify whether to include the full content of the documents in the response.
-	IncludeDocs *bool `json:"-"`
+	IncludeDocs *bool `json:"include_docs,omitempty"`
 
 	// Query parameter to specify a latitude coordinate for use with radius or ellipse geospatial queries.
-	Lat *float64 `json:"-"`
+	Lat *float64 `json:"lat,omitempty"`
 
 	// Query parameter to specify the number of returned documents to limit the result to.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify a longitude coordinate for use with radius or ellipse geospatial queries.
-	Lon *float64 `json:"-"`
+	Lon *float64 `json:"lon,omitempty"`
 
 	// Query parameter to specify whether to perform a nearest neighbour (NN) search. If provided, the `nearest=true`
 	// search returns all results by sorting their distances to the center of the query geometry. NN search can be used
 	// alone or with any of the supported DE-9IM (Dimensionally Extended nine-Intersection Model) specification geometric
 	// relations documented.
-	Nearest *bool `json:"-"`
+	Nearest *bool `json:"nearest,omitempty"`
 
 	// Query parameter to specify the radius, in meters, to search from a lat,lon coordinate point in a circular geospatial
 	// query.
-	Radius *float64 `json:"-"`
+	Radius *float64 `json:"radius,omitempty"`
 
 	// Query parameter to specify the first radius, in meters, to search from a lat,lon coordinate point in an ellipse
 	// geospatial query.
-	Rangex *float64 `json:"-"`
+	Rangex *float64 `json:"rangex,omitempty"`
 
 	// Query parameter to specify the second radius, in meters, to search from a lat,lon coordinate point in an ellipse
 	// geospatial query.
-	Rangey *float64 `json:"-"`
+	Rangey *float64 `json:"rangey,omitempty"`
 
 	// Query parameter to specify the DE-9IM (Dimensionally Extended nine-Intersection Model)geospatial relationship
 	// between the query geometry and the result documents.
-	Relation *string `json:"-"`
+	Relation *string `json:"relation,omitempty"`
 
 	// Query parameter to specify the number of records before starting to return the results.
-	Skip *int64 `json:"-"`
+	Skip *int64 `json:"skip,omitempty"`
 
 	// Query parameter to specify to not wait for the index to finish building before returning results.
-	Stale *string `json:"-"`
+	Stale *string `json:"stale,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11650,7 +11650,7 @@ func (options *GetGeoOptions) SetHeaders(param map[string]string) *GetGeoOptions
 // GetIndexesInformationOptions : The GetIndexesInformation options.
 type GetIndexesInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11678,26 +11678,26 @@ func (options *GetIndexesInformationOptions) SetHeaders(param map[string]string)
 // GetLocalDocumentOptions : The GetLocalDocument options.
 type GetLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// The type of the response: application/json, multipart/mixed, multipart/related, or application/octet-stream.
-	Accept *string `json:"-"`
+	Accept *string `json:"Accept,omitempty"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
-	Attachments *bool `json:"-"`
+	Attachments *bool `json:"attachments,omitempty"`
 
 	// Query parameter to specify whether to include the encoding information in attachment stubs if the particular
 	// attachment is compressed.
-	AttEncodingInfo *bool `json:"-"`
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
 	// Query parameter to specify whether to include the last update sequence for the document.
-	LocalSeq *bool `json:"-"`
+	LocalSeq *bool `json:"local_seq,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11780,10 +11780,10 @@ func (options *GetMembershipInformationOptions) SetHeaders(param map[string]stri
 // GetPartitionInformationOptions : The GetPartitionInformation options.
 type GetPartitionInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"-" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11818,44 +11818,44 @@ func (options *GetPartitionInformationOptions) SetHeaders(param map[string]strin
 // GetReplicationDocumentOptions : The GetReplicationDocument options.
 type GetReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
-	Attachments *bool `json:"-"`
+	Attachments *bool `json:"attachments,omitempty"`
 
 	// Query parameter to specify whether to include the encoding information in attachment stubs if the particular
 	// attachment is compressed.
-	AttEncodingInfo *bool `json:"-"`
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
-	Conflicts *bool `json:"-"`
+	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to include a list of deleted conflicted revisions in the `_deleted_conflicts`
 	// property of the returned document.
-	DeletedConflicts *bool `json:"-"`
+	DeletedConflicts *bool `json:"deleted_conflicts,omitempty"`
 
 	// Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was requested.
-	Latest *bool `json:"-"`
+	Latest *bool `json:"latest,omitempty"`
 
 	// Query parameter to specify whether to include the last update sequence for the document.
-	LocalSeq *bool `json:"-"`
+	LocalSeq *bool `json:"local_seq,omitempty"`
 
 	// Query parameter to specify whether to include document meta information. Acts the same as specifying all of the
 	// conflicts, deleted_conflicts and open_revs query parameters.
-	Meta *bool `json:"-"`
+	Meta *bool `json:"meta,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Query parameter to specify whether to include a list of all known document revisions.
-	Revs *bool `json:"-"`
+	Revs *bool `json:"revs,omitempty"`
 
 	// Query parameter to specify whether to includes detailed information for all known document revisions.
-	RevsInfo *bool `json:"-"`
+	RevsInfo *bool `json:"revs_info,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11949,14 +11949,14 @@ func (options *GetReplicationDocumentOptions) SetHeaders(param map[string]string
 // GetSchedulerDocsOptions : The GetSchedulerDocs options.
 type GetSchedulerDocsOptions struct {
 	// Query parameter to specify the number of returned documents to limit the result to.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify the number of records before starting to return the results.
-	Skip *int64 `json:"-"`
+	Skip *int64 `json:"skip,omitempty"`
 
 	// Query parameter to include only replication documents in the specified states. String must be a comma-delimited
 	// string.
-	States []string `json:"-"`
+	States []string `json:"states,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12006,7 +12006,7 @@ func (options *GetSchedulerDocsOptions) SetHeaders(param map[string]string) *Get
 // GetSchedulerDocumentOptions : The GetSchedulerDocument options.
 type GetSchedulerDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12034,7 +12034,7 @@ func (options *GetSchedulerDocumentOptions) SetHeaders(param map[string]string) 
 // GetSchedulerJobOptions : The GetSchedulerJob options.
 type GetSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
-	JobID *string `json:"-" validate:"required,ne="`
+	JobID *string `json:"job_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12062,10 +12062,10 @@ func (options *GetSchedulerJobOptions) SetHeaders(param map[string]string) *GetS
 // GetSchedulerJobsOptions : The GetSchedulerJobs options.
 type GetSchedulerJobsOptions struct {
 	// Query parameter to specify the number of returned documents to limit the result to.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify the number of records before starting to return the results.
-	Skip *int64 `json:"-"`
+	Skip *int64 `json:"skip,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12097,14 +12097,14 @@ func (options *GetSchedulerJobsOptions) SetHeaders(param map[string]string) *Get
 // GetSearchInfoOptions : The GetSearchInfo options.
 type GetSearchInfoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"-" validate:"required,ne="`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12146,7 +12146,7 @@ func (options *GetSearchInfoOptions) SetHeaders(param map[string]string) *GetSea
 // GetSecurityOptions : The GetSecurity options.
 type GetSecurityOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12210,7 +12210,7 @@ func (options *GetSessionInformationOptions) SetHeaders(param map[string]string)
 // GetShardsInformationOptions : The GetShardsInformation options.
 type GetShardsInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12256,7 +12256,7 @@ func (options *GetUpInformationOptions) SetHeaders(param map[string]string) *Get
 // GetUuidsOptions : The GetUuids options.
 type GetUuidsOptions struct {
 	// Query parameter to specify the number of UUIDs to return.
-	Count *int64 `json:"-"`
+	Count *int64 `json:"count,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12282,22 +12282,22 @@ func (options *GetUuidsOptions) SetHeaders(param map[string]string) *GetUuidsOpt
 // HeadAttachmentOptions : The HeadAttachment options.
 type HeadAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"-" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12357,7 +12357,7 @@ func (options *HeadAttachmentOptions) SetHeaders(param map[string]string) *HeadA
 // HeadDatabaseOptions : The HeadDatabase options.
 type HeadDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12385,14 +12385,14 @@ func (options *HeadDatabaseOptions) SetHeaders(param map[string]string) *HeadDat
 // HeadDesignDocumentOptions : The HeadDesignDocument options.
 type HeadDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12433,19 +12433,19 @@ func (options *HeadDesignDocumentOptions) SetHeaders(param map[string]string) *H
 // HeadDocumentOptions : The HeadDocument options.
 type HeadDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was requested.
-	Latest *bool `json:"-"`
+	Latest *bool `json:"latest,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12498,13 +12498,13 @@ func (options *HeadDocumentOptions) SetHeaders(param map[string]string) *HeadDoc
 // HeadLocalDocumentOptions : The HeadLocalDocument options.
 type HeadLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12545,10 +12545,10 @@ func (options *HeadLocalDocumentOptions) SetHeaders(param map[string]string) *He
 // HeadReplicationDocumentOptions : The HeadReplicationDocument options.
 type HeadReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
-	IfNoneMatch *string `json:"-"`
+	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12582,7 +12582,7 @@ func (options *HeadReplicationDocumentOptions) SetHeaders(param map[string]strin
 // HeadSchedulerDocumentOptions : The HeadSchedulerDocument options.
 type HeadSchedulerDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12610,7 +12610,7 @@ func (options *HeadSchedulerDocumentOptions) SetHeaders(param map[string]string)
 // HeadSchedulerJobOptions : The HeadSchedulerJob options.
 type HeadSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
-	JobID *string `json:"-" validate:"required,ne="`
+	JobID *string `json:"job_id" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13164,7 +13164,7 @@ func (options *PostActivityTrackerEventsOptions) SetHeaders(param map[string]str
 // PostAllDocsOptions : The PostAllDocs options.
 type PostAllDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -13312,7 +13312,7 @@ func (options *PostAllDocsOptions) SetHeaders(param map[string]string) *PostAllD
 // PostAllDocsQueriesOptions : The PostAllDocsQueries options.
 type PostAllDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
@@ -13369,7 +13369,7 @@ func (options *PostApiKeysOptions) SetHeaders(param map[string]string) *PostApiK
 // PostBulkDocsOptions : The PostBulkDocs options.
 type PostBulkDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postBulkDocs.
 	BulkDocs *BulkDocs `json:"bulkDocs,omitempty"`
@@ -13415,23 +13415,23 @@ func (options *PostBulkDocsOptions) SetHeaders(param map[string]string) *PostBul
 // PostBulkGetOptions : The PostBulkGet options.
 type PostBulkGetOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// List of document items to get in bulk.
 	Docs []BulkGetQueryDocument `json:"docs" validate:"required"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
-	Attachments *bool `json:"-"`
+	Attachments *bool `json:"attachments,omitempty"`
 
 	// Query parameter to specify whether to include the encoding information in attachment stubs if the particular
 	// attachment is compressed.
-	AttEncodingInfo *bool `json:"-"`
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
 	// Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was requested.
-	Latest *bool `json:"-"`
+	Latest *bool `json:"latest,omitempty"`
 
 	// Query parameter to specify whether to include a list of all known document revisions.
-	Revs *bool `json:"-"`
+	Revs *bool `json:"revs,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13490,7 +13490,7 @@ func (options *PostBulkGetOptions) SetHeaders(param map[string]string) *PostBulk
 // PostChangesOptions : The PostChanges options.
 type PostChangesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Schema for a list of document IDs.
 	DocIds []string `json:"doc_ids,omitempty"`
@@ -13526,24 +13526,24 @@ type PostChangesOptions struct {
 
 	// Header parameter to specify the ID of the last events received by the server on a previous connection. Overrides
 	// `since` query parameter.
-	LastEventID *string `json:"-"`
+	LastEventID *string `json:"Last-Event-ID,omitempty"`
 
 	// Query parameter to specify whether to include the encoding information in attachment stubs if the particular
 	// attachment is compressed.
-	AttEncodingInfo *bool `json:"-"`
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
-	Attachments *bool `json:"-"`
+	Attachments *bool `json:"attachments,omitempty"`
 
 	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
 	// returned document. Ignored if `include_docs` isn't `true`.
-	Conflicts *bool `json:"-"`
+	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to return the documents in descending by key order.
-	Descending *bool `json:"-"`
+	Descending *bool `json:"descending,omitempty"`
 
 	// Query parameter to specify the changes feed type.
-	Feed *string `json:"-"`
+	Feed *string `json:"feed,omitempty"`
 
 	// Query parameter to specify a filter function from a design document that will filter the changes stream emitting
 	// only filtered events. For example: `design_doc/filtername`.
@@ -13558,43 +13558,43 @@ type PostChangesOptions struct {
 	//       `_find`.
 	//   * `_view` - Returns changes for documents that match an existing map
 	//       function in the view specified by the query parameter `view`.
-	Filter *string `json:"-"`
+	Filter *string `json:"filter,omitempty"`
 
 	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
 	// applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
 	// indefinitely. May also be `true` to use default value of 60000.
-	Heartbeat *int64 `json:"-"`
+	Heartbeat *int64 `json:"heartbeat,omitempty"`
 
 	// Query parameter to specify whether to include the full content of the documents in the response.
-	IncludeDocs *bool `json:"-"`
+	IncludeDocs *bool `json:"include_docs,omitempty"`
 
 	// Query parameter to specify the number of returned documents to limit the result to.
-	Limit *int64 `json:"-"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify that the update seq should only be calculated with every Nth result returned. When
 	// fetching changes in a batch, setting <code>seq_interval=&lt;batch size&gt;</code>, where &lt;batch size&gt; is the
 	// number of results requested per batch, load can be reduced on the source database as computing the seq value across
 	// many shards (especially in highly-sharded databases) is expensive.
-	SeqInterval *int64 `json:"-"`
+	SeqInterval *int64 `json:"seq_interval,omitempty"`
 
 	// Query parameter to specify to start the results from the change immediately after the given update sequence. Can be
 	// a valid update sequence or `now` value. Default is `0` i.e. all changes.
-	Since *string `json:"-"`
+	Since *string `json:"since,omitempty"`
 
 	// Query parameter to specify how many revisions are returned in the changes array. The default, `main_only`, will only
 	// return the current "winning" revision; all_docs will return all leaf revisions (including conflicts and deleted
 	// former conflicts).
-	Style *string `json:"-"`
+	Style *string `json:"style,omitempty"`
 
 	// Query parameter to specify the maximum period in milliseconds to wait for a change before the response is sent, even
 	// if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is specified by
 	// `httpd/changes_timeout` configuration option. Note that `60000` value is also the default maximum timeout to prevent
 	// undetected dead connections.
-	Timeout *int64 `json:"-"`
+	Timeout *int64 `json:"timeout,omitempty"`
 
 	// Query parameter to specify a view function as a filter. Documents pass the filter if the view's map function emits
 	// at least one record for them.
-	View *string `json:"-"`
+	View *string `json:"view,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13767,10 +13767,10 @@ func (options *PostDbsInfoOptions) SetHeaders(param map[string]string) *PostDbsI
 // PostDesignDocsOptions : The PostDesignDocs options.
 type PostDesignDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// The type of the response: application/json or application/octet-stream.
-	Accept *string `json:"-"`
+	Accept *string `json:"Accept,omitempty"`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -13924,14 +13924,14 @@ func (options *PostDesignDocsOptions) SetHeaders(param map[string]string) *PostD
 // PostDesignDocsQueriesOptions : The PostDesignDocsQueries options.
 type PostDesignDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
 	Queries []AllDocsQuery `json:"queries" validate:"required"`
 
 	// The type of the response: application/json or application/octet-stream.
-	Accept *string `json:"-"`
+	Accept *string `json:"Accept,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -13972,7 +13972,7 @@ func (options *PostDesignDocsQueriesOptions) SetHeaders(param map[string]string)
 // PostDocumentOptions : The PostDocument options.
 type PostDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -13981,11 +13981,11 @@ type PostDocumentOptions struct {
 	Body io.ReadCloser `json:"body,omitempty"`
 
 	// The type of the input.
-	ContentType *string `json:"-"`
+	ContentType *string `json:"Content-Type,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -14044,7 +14044,7 @@ func (options *PostDocumentOptions) SetHeaders(param map[string]string) *PostDoc
 // PostExplainOptions : The PostExplain options.
 type PostExplainOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -14225,7 +14225,7 @@ func (options *PostExplainOptions) SetHeaders(param map[string]string) *PostExpl
 // PostFindOptions : The PostFind options.
 type PostFindOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -14406,7 +14406,7 @@ func (options *PostFindOptions) SetHeaders(param map[string]string) *PostFindOpt
 // PostGeoCleanupOptions : The PostGeoCleanup options.
 type PostGeoCleanupOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -14434,7 +14434,7 @@ func (options *PostGeoCleanupOptions) SetHeaders(param map[string]string) *PostG
 // PostIndexOptions : The PostIndex options.
 type PostIndexOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
 	// properties that do not apply to `json` indexes, these are:
@@ -14532,10 +14532,10 @@ func (options *PostIndexOptions) SetHeaders(param map[string]string) *PostIndexO
 // PostPartitionAllDocsOptions : The PostPartitionAllDocs options.
 type PostPartitionAllDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"-" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -14690,10 +14690,10 @@ func (options *PostPartitionAllDocsOptions) SetHeaders(param map[string]string) 
 // PostPartitionFindOptions : The PostPartitionFind options.
 type PostPartitionFindOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"-" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -14869,17 +14869,17 @@ func (options *PostPartitionFindOptions) SetHeaders(param map[string]string) *Po
 // PostPartitionSearchOptions : The PostPartitionSearch options.
 type PostPartitionSearchOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"-" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"-" validate:"required,ne="`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// The Lucene query to execute.
 	Query *string `json:"query" validate:"required"`
@@ -15052,17 +15052,17 @@ func (options *PostPartitionSearchOptions) SetHeaders(param map[string]string) *
 // PostPartitionViewOptions : The PostPartitionView options.
 type PostPartitionViewOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"-" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"-" validate:"required,ne="`
+	View *string `json:"view" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -15305,7 +15305,7 @@ func (options *PostPartitionViewOptions) SetHeaders(param map[string]string) *Po
 // PostRevsDiffOptions : The PostRevsDiff options.
 type PostRevsDiffOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
 	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
@@ -15426,14 +15426,14 @@ func (options *PostSearchAnalyzeOptions) SetHeaders(param map[string]string) *Po
 // PostSearchOptions : The PostSearch options.
 type PostSearchOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"-" validate:"required,ne="`
+	Index *string `json:"index" validate:"required,ne="`
 
 	// The Lucene query to execute.
 	Query *string `json:"query" validate:"required"`
@@ -15664,14 +15664,14 @@ func (options *PostSearchOptions) SetHeaders(param map[string]string) *PostSearc
 // PostViewOptions : The PostView options.
 type PostViewOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"-" validate:"required,ne="`
+	View *string `json:"view" validate:"required,ne="`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -15907,14 +15907,14 @@ func (options *PostViewOptions) SetHeaders(param map[string]string) *PostViewOpt
 // PostViewQueriesOptions : The PostViewQueries options.
 type PostViewQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"-" validate:"required,ne="`
+	View *string `json:"view" validate:"required,ne="`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular view request.
@@ -15967,25 +15967,25 @@ func (options *PostViewQueriesOptions) SetHeaders(param map[string]string) *Post
 // PutAttachmentOptions : The PutAttachment options.
 type PutAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"-" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
 	// HTTP request body for attachment operations.
 	Attachment io.ReadCloser `json:"attachment" validate:"required"`
 
 	// Content-Type of the attachment.
-	ContentType *string `json:"-" validate:"required"`
+	ContentType *string `json:"Content-Type" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -16082,7 +16082,7 @@ func (options *PutCapacityThroughputConfigurationOptions) SetHeaders(param map[s
 // PutCloudantSecurityConfigurationOptions : The PutCloudantSecurityConfiguration options.
 type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Database permissions for Cloudant users and/or API keys.
 	Cloudant map[string][]string `json:"cloudant" validate:"required"`
@@ -16209,14 +16209,14 @@ func (options *PutCorsConfigurationOptions) SetHeaders(param map[string]string) 
 // PutDatabaseOptions : The PutDatabase options.
 type PutDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Query parameter to specify whether to enable database partitions when creating a database.
-	Partitioned *bool `json:"-"`
+	Partitioned *bool `json:"partitioned,omitempty"`
 
 	// The number of shards in the database. Each shard is a partition of the hash value range. Default is 8, unless
 	// overridden in the `cluster config`.
-	Q *int64 `json:"-"`
+	Q *int64 `json:"q,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -16256,29 +16256,29 @@ func (options *PutDatabaseOptions) SetHeaders(param map[string]string) *PutDatab
 // PutDesignDocumentOptions : The PutDesignDocument options.
 type PutDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"-" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// HTTP request body for DesignDocument operations.
 	DesignDocument *DesignDocument `json:"designDocument" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a well-formed
 	// _rev must be included in the document. False is used by the replicator to insert documents into the target database
 	// even if that leads to the creation of conflicts.
-	NewEdits *bool `json:"-"`
+	NewEdits *bool `json:"new_edits,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -16351,10 +16351,10 @@ func (options *PutDesignDocumentOptions) SetHeaders(param map[string]string) *Pu
 // PutDocumentOptions : The PutDocument options.
 type PutDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -16363,22 +16363,22 @@ type PutDocumentOptions struct {
 	Body io.ReadCloser `json:"body,omitempty"`
 
 	// The type of the input.
-	ContentType *string `json:"-"`
+	ContentType *string `json:"Content-Type,omitempty"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a well-formed
 	// _rev must be included in the document. False is used by the replicator to insert documents into the target database
 	// even if that leads to the creation of conflicts.
-	NewEdits *bool `json:"-"`
+	NewEdits *bool `json:"new_edits,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -16462,10 +16462,10 @@ func (options *PutDocumentOptions) SetHeaders(param map[string]string) *PutDocum
 // PutLocalDocumentOptions : The PutLocalDocument options.
 type PutLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -16474,11 +16474,11 @@ type PutLocalDocumentOptions struct {
 	Body io.ReadCloser `json:"body,omitempty"`
 
 	// The type of the input.
-	ContentType *string `json:"-"`
+	ContentType *string `json:"Content-Type,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -16544,25 +16544,25 @@ func (options *PutLocalDocumentOptions) SetHeaders(param map[string]string) *Put
 // PutReplicationDocumentOptions : The PutReplicationDocument options.
 type PutReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"-" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for replication operations.
 	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
-	IfMatch *string `json:"-"`
+	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
-	Batch *string `json:"-"`
+	Batch *string `json:"batch,omitempty"`
 
 	// Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a well-formed
 	// _rev must be included in the document. False is used by the replicator to insert documents into the target database
 	// even if that leads to the creation of conflicts.
-	NewEdits *bool `json:"-"`
+	NewEdits *bool `json:"new_edits,omitempty"`
 
 	// Query parameter to specify a document revision.
-	Rev *string `json:"-"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -16628,7 +16628,7 @@ func (options *PutReplicationDocumentOptions) SetHeaders(param map[string]string
 // PutSecurityOptions : The PutSecurity options.
 type PutSecurityOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"-" validate:"required,ne="`
+	Db *string `json:"db" validate:"required,ne="`
 
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
