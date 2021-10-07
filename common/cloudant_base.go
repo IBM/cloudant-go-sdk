@@ -21,6 +21,7 @@ import (
 	"net/http"
 	neturl "net/url"
 	"strings"
+	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
 )
@@ -93,6 +94,9 @@ func NewBaseService(opts *core.ServiceOptions) (*BaseService, error) {
 	if err != nil {
 		return &BaseService{}, err
 	}
+	client := core.DefaultHTTPClient()
+	client.Timeout = 6 * time.Minute
+	baseService.SetHTTPClient(client)
 	return &BaseService{0, baseService}, nil
 }
 
