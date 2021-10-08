@@ -17,11 +17,7 @@
 package auth
 
 import (
-	"bytes"
-	"encoding/base64"
-	"fmt"
 	"net/http"
-	"strconv"
 	"sync"
 	"time"
 )
@@ -37,17 +33,9 @@ type session struct {
 // newSession returns new session object constructed from AuthSession cookie.
 func newSession(c *http.Cookie) (*session, error) {
 	expires := c.Expires
-
-	// is CouchDB uses allow_persistent_cookie = false
-	// failback to AuthSession token's expiration
 	if expires.IsZero() {
-		valueRaw, _ := base64.StdEncoding.DecodeString(c.Value)
-		parts := bytes.Split(valueRaw, []byte(":"))
-		ts, err := strconv.ParseInt(string(parts[1]), 16, 64)
-		if err != nil {
-			return nil, fmt.Errorf("Invalid format for AuthSession: %s", err)
-		}
-		expires = time.Unix(ts, 0)
+		// RFC6265 - Set the cookie's expiry-time to the latest representable date.
+		expires = time.Date(9999, 12, 31, 23, 59, 59, 0, time.UTC)
 	}
 
 	// refreshTime is 20% of period between now and the expiration time
