@@ -331,36 +331,6 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		Expect(err.Error()).To(HavePrefix("Missing AuthSession cookie"))
 	})
 
-	It("Test invalid format for AuthSession", func() {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			cookie := &http.Cookie{
-				Name: "AuthSession",
-				// "fake:fake" in base64
-				Value: "ZmFrZTpmYWtlCg==",
-			}
-			http.SetCookie(w, cookie)
-			w.WriteHeader(http.StatusOK)
-		}))
-		defer server.Close()
-
-		builder, err := core.NewRequestBuilder(core.GET).
-			ResolveRequestURL(server.URL, "/db", nil)
-		Expect(err).To(BeNil())
-
-		request, err := builder.Build()
-		Expect(err).To(BeNil())
-		Expect(request).ToNot(BeNil())
-
-		auth, err := NewCouchDbSessionAuthenticator("user", "pass")
-		Expect(err).To(BeNil())
-		Expect(auth).ToNot(BeNil())
-		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
-
-		err = auth.Authenticate(request)
-		Expect(err).To(HaveOccurred())
-		Expect(err.Error()).To(HavePrefix("Invalid format for AuthSession"))
-	})
-
 	It("Test requestSession fails when auth URL is invalid", func() {
 		auth := &CouchDbSessionAuthenticator{}
 		_, err := auth.requestSession()
