@@ -56,8 +56,7 @@ var _ = Describe("Session Unit Tests", func() {
 		Expect(s).ToNot(BeNil())
 		Expect(s.getCookie()).To(Equal(cookie))
 		Expect(s.expires).ToNot(BeZero())
-		// non-persistent cookie expiration set to end of time, can't add time to it
-		Expect(s.refreshTime).To(BeTemporally("==", s.expires))
+		Expect(s.refreshTime).To(BeTemporally("<", s.expires))
 		Expect(s.isValid()).To(BeTrue())
 	})
 

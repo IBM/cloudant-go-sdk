@@ -22,6 +22,9 @@ import (
 	"time"
 )
 
+// endOfTime is the time when session (non-persistent) cookies expire.
+var endOfTime = time.Now().AddDate(0, 0, 14)
+
 // session represent CouchDB AuthSession token and its expiration period.
 type session struct {
 	cookie       *http.Cookie
@@ -34,8 +37,7 @@ type session struct {
 func newSession(c *http.Cookie) (*session, error) {
 	expires := c.Expires
 	if expires.IsZero() {
-		// RFC6265 - Set the cookie's expiry-time to the latest representable date.
-		expires = time.Date(9999, 12, 31, 23, 59, 59, 0, time.UTC)
+		expires = endOfTime
 	}
 
 	// refreshTime is 20% of period between now and the expiration time
