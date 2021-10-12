@@ -20,9 +20,11 @@ import (
 	"fmt"
 	"net/http"
 	neturl "net/url"
+	"strconv"
 	"strings"
 	"time"
 
+	"github.com/IBM/cloudant-go-sdk/auth"
 	"github.com/IBM/go-sdk-core/v5/core"
 )
 
@@ -162,4 +164,29 @@ func (c *BaseService) SetServiceURL(url string) error {
 		}
 	}
 	return err
+}
+
+// GetAuthenticatorFromEnvironment instantiates an Authenticator
+// using service properties retrieved from external config sources.
+func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, error) {
+	props, err := core.GetServiceProperties(credentialKey)
+	if err != nil {
+		return nil, err
+	}
+	authType, ok := props[core.PROPNAME_AUTH_TYPE]
+	if ok && strings.EqualFold(authType, auth.AUTHTYPE_COUCHDB_SESSION) {
+		authenticator, err := auth.NewCouchDbSessionAuthenticatorFromMap(props)
+		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {
+			authenticator.URL = url
+		}
+		if disableSSLVerification, ok := props[core.PROPNAME_SVC_DISABLE_SSL]; ok && disableSSLVerification != "" {
+			boolValue, err := strconv.ParseBool(disableSSLVerification)
+			if err == nil && boolValue {
+				authenticator.DisableSSLVerification = true
+			}
+		}
+		return authenticator, err
+	}
+
+	return core.GetAuthenticatorFromEnvironment(credentialKey)
 }

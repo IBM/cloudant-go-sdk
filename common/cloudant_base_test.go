@@ -17,6 +17,10 @@
 package common
 
 import (
+	"os"
+	"path"
+
+	"github.com/IBM/cloudant-go-sdk/auth"
 	"github.com/IBM/go-sdk-core/v5/core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -125,5 +129,37 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(response).To(BeNil())
 		Expect(err).ToNot(BeNil())
 		Expect(err.Error()).To(ContainSubstring("_testDocument"))
+	})
+
+	It("Create new Authenticator from environment", func() {
+		pwd, err := os.Getwd()
+		Expect(err).To(BeNil())
+		credentialFilePath := path.Join(pwd, "../auth/testdata/my-credentials.env")
+		os.Setenv("IBM_CREDENTIALS_FILE", credentialFilePath)
+
+		authenticator, err := GetAuthenticatorFromEnvironment("service1")
+		Expect(err).To(BeNil())
+		Expect(authenticator).ToNot(BeNil())
+		Expect(authenticator.AuthenticationType()).To(Equal(auth.AUTHTYPE_COUCHDB_SESSION))
+
+		sessionAuth, ok := authenticator.(*auth.CouchDbSessionAuthenticator)
+		Expect(ok).To(BeTrue())
+		Expect(sessionAuth.URL).ToNot(BeZero())
+		Expect(sessionAuth.DisableSSLVerification).To(BeFalse())
+
+		authenticator, err = GetAuthenticatorFromEnvironment("service2")
+		Expect(err).To(BeNil())
+		Expect(authenticator).ToNot(BeNil())
+		Expect(authenticator.AuthenticationType()).To(Equal(auth.AUTHTYPE_COUCHDB_SESSION))
+
+		sessionAuth, ok = authenticator.(*auth.CouchDbSessionAuthenticator)
+		Expect(ok).To(BeTrue())
+		Expect(sessionAuth.URL).ToNot(BeZero())
+		Expect(sessionAuth.DisableSSLVerification).To(BeTrue())
+
+		authenticator, err = GetAuthenticatorFromEnvironment("service3")
+		Expect(err).To(BeNil())
+		Expect(authenticator).ToNot(BeNil())
+		Expect(authenticator.AuthenticationType()).To(Equal(core.AUTHTYPE_IAM))
 	})
 })
