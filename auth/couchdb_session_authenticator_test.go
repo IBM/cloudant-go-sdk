@@ -48,8 +48,8 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 		sessionAuth, ok := auth.(*CouchDbSessionAuthenticator)
 		Expect(ok).To(BeTrue())
-		Expect(sessionAuth.url).ToNot(BeZero())
-		Expect(sessionAuth.disableSSLVerification).To(BeFalse())
+		Expect(sessionAuth.URL).ToNot(BeZero())
+		Expect(sessionAuth.DisableSSLVerification).To(BeFalse())
 
 		auth, err = GetAuthenticatorFromEnvironment("service2")
 		Expect(err).To(BeNil())
@@ -58,8 +58,8 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 		sessionAuth, ok = auth.(*CouchDbSessionAuthenticator)
 		Expect(ok).To(BeTrue())
-		Expect(sessionAuth.url).ToNot(BeZero())
-		Expect(sessionAuth.disableSSLVerification).To(BeTrue())
+		Expect(sessionAuth.URL).ToNot(BeZero())
+		Expect(sessionAuth.DisableSSLVerification).To(BeTrue())
 
 		auth, err = GetAuthenticatorFromEnvironment("service3")
 		Expect(err).To(BeNil())
@@ -155,7 +155,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 			err = auth.Authenticate(request)
 			Expect(err).To(BeNil())
 
-			Expect(auth.url).To(Equal(server.URL))
+			Expect(auth.URL).To(Equal(server.URL))
 			Expect(auth.header).To(HaveKeyWithValue("X-Req-Id", []string{"abcdefgh"}))
 			Expect(auth.ctx.Value(contextKey("key"))).To(Equal("abcdefgh"))
 		})
@@ -340,7 +340,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 	It("Test requestSession fails when server's down", func() {
 		auth := &CouchDbSessionAuthenticator{}
-		auth.url = "http://localhost"
+		auth.URL = "http://localhost"
 		_, err := auth.requestSession()
 		Expect(err).To(HaveOccurred())
 		Expect(err.Error()).Should(HaveSuffix("connection refused"))

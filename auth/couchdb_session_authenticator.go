@@ -45,7 +45,7 @@ type CouchDbSessionAuthenticator struct {
 	Client *http.Client
 
 	// CouchDB URL inherited from the service config.
-	url string
+	URL string
 
 	// Client's headers inherited from the service request.
 	header http.Header
@@ -54,7 +54,7 @@ type CouchDbSessionAuthenticator struct {
 	ctx context.Context
 
 	// A flag that indicates whether verification of the server's SSL certificate should be disabled; INherired from the service config
-	disableSSLVerification bool
+	DisableSSLVerification bool
 
 	// A session instance that stores and manages the authentication cookie.
 	session *session
@@ -100,12 +100,12 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 	if ok && strings.EqualFold(authType, AUTHTYPE_COUCHDB_SESSION) {
 		authenticator, err := NewCouchDbSessionAuthenticatorFromMap(props)
 		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {
-			authenticator.url = url
+			authenticator.URL = url
 		}
 		if disableSSLVerification, ok := props[core.PROPNAME_SVC_DISABLE_SSL]; ok && disableSSLVerification != "" {
 			boolValue, err := strconv.ParseBool(disableSSLVerification)
 			if err == nil && boolValue {
-				authenticator.disableSSLVerification = true
+				authenticator.DisableSSLVerification = true
 			}
 		}
 		return authenticator, err
@@ -144,7 +144,7 @@ func (a *CouchDbSessionAuthenticator) Validate() error {
 // Authenticate adds session authentication cookie to a request.
 func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error {
 
-	a.url = request.URL.Scheme + "://" + request.URL.Host
+	a.URL = request.URL.Scheme + "://" + request.URL.Host
 	a.header = request.Header
 	a.ctx = request.Context()
 
@@ -203,7 +203,7 @@ func (a *CouchDbSessionAuthenticator) flushRefreshChannel() {
 // requestSession fetches new AuthSession cookie from the server.
 func (a *CouchDbSessionAuthenticator) requestSession() (*session, error) {
 	builder, err := core.NewRequestBuilder(core.POST).
-		ResolveRequestURL(a.url, "/_session", nil)
+		ResolveRequestURL(a.URL, "/_session", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -231,7 +231,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() (*session, error) {
 		a.Client = &http.Client{
 			Timeout: time.Second * 30,
 			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: a.disableSSLVerification},
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: a.DisableSSLVerification},
 			},
 		}
 	}
