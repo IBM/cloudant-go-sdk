@@ -22,8 +22,6 @@ import (
 	"crypto/tls"
 	"fmt"
 	"net/http"
-	"strconv"
-	"strings"
 	"sync"
 	"time"
 
@@ -87,31 +85,6 @@ func NewCouchDbSessionAuthenticatorFromMap(props map[string]string) (*CouchDbSes
 	username := props[core.PROPNAME_USERNAME]
 	password := props[core.PROPNAME_PASSWORD]
 	return NewCouchDbSessionAuthenticator(username, password)
-}
-
-// GetAuthenticatorFromEnvironment instantiates an Authenticator
-// using service properties retrieved from external config sources.
-func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, error) {
-	props, err := core.GetServiceProperties(credentialKey)
-	if err != nil {
-		return nil, err
-	}
-	authType, ok := props[core.PROPNAME_AUTH_TYPE]
-	if ok && strings.EqualFold(authType, AUTHTYPE_COUCHDB_SESSION) {
-		authenticator, err := NewCouchDbSessionAuthenticatorFromMap(props)
-		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {
-			authenticator.URL = url
-		}
-		if disableSSLVerification, ok := props[core.PROPNAME_SVC_DISABLE_SSL]; ok && disableSSLVerification != "" {
-			boolValue, err := strconv.ParseBool(disableSSLVerification)
-			if err == nil && boolValue {
-				authenticator.DisableSSLVerification = true
-			}
-		}
-		return authenticator, err
-	}
-
-	return core.GetAuthenticatorFromEnvironment(credentialKey)
 }
 
 // AuthenticationType returns the authentication type for this authenticator.

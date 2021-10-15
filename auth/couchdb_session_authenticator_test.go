@@ -21,8 +21,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
-	"os"
-	"path"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -35,38 +33,6 @@ import (
 type contextKey string
 
 var _ = Describe("Authenticator Unit Tests", func() {
-	It("Create new Authenticator from environment", func() {
-		pwd, err := os.Getwd()
-		Expect(err).To(BeNil())
-		credentialFilePath := path.Join(pwd, "/testdata/my-credentials.env")
-		os.Setenv("IBM_CREDENTIALS_FILE", credentialFilePath)
-
-		auth, err := GetAuthenticatorFromEnvironment("service1")
-		Expect(err).To(BeNil())
-		Expect(auth).ToNot(BeNil())
-		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
-
-		sessionAuth, ok := auth.(*CouchDbSessionAuthenticator)
-		Expect(ok).To(BeTrue())
-		Expect(sessionAuth.URL).ToNot(BeZero())
-		Expect(sessionAuth.DisableSSLVerification).To(BeFalse())
-
-		auth, err = GetAuthenticatorFromEnvironment("service2")
-		Expect(err).To(BeNil())
-		Expect(auth).ToNot(BeNil())
-		Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
-
-		sessionAuth, ok = auth.(*CouchDbSessionAuthenticator)
-		Expect(ok).To(BeTrue())
-		Expect(sessionAuth.URL).ToNot(BeZero())
-		Expect(sessionAuth.DisableSSLVerification).To(BeTrue())
-
-		auth, err = GetAuthenticatorFromEnvironment("service3")
-		Expect(err).To(BeNil())
-		Expect(auth).ToNot(BeNil())
-		Expect(auth.AuthenticationType()).To(Equal(core.AUTHTYPE_IAM))
-	})
-
 	It("Create new Authenticator programmatically", func() {
 		username, password := "user", "pass"
 		auth, err := NewCouchDbSessionAuthenticator(username, password)

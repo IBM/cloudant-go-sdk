@@ -134,7 +134,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 	It("Create new Authenticator from environment", func() {
 		pwd, err := os.Getwd()
 		Expect(err).To(BeNil())
-		credentialFilePath := path.Join(pwd, "../auth/testdata/my-credentials.env")
+		credentialFilePath := path.Join(pwd, "/testdata/my-credentials.env")
 		os.Setenv("IBM_CREDENTIALS_FILE", credentialFilePath)
 
 		authenticator, err := GetAuthenticatorFromEnvironment("service1")
