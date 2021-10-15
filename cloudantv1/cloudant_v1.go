@@ -31,7 +31,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/IBM/cloudant-go-sdk/auth"
 	common "github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
@@ -65,7 +64,7 @@ func NewCloudantV1UsingExternalConfig(options *CloudantV1Options) (cloudant *Clo
 	}
 
 	if options.Authenticator == nil {
-		options.Authenticator, err = auth.GetAuthenticatorFromEnvironment(options.ServiceName)
+		options.Authenticator, err = common.GetAuthenticatorFromEnvironment(options.ServiceName)
 		if err != nil {
 			return
 		}
