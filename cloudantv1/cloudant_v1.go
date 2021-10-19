@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*
- * IBM OpenAPI SDK Code Generator Version: 3.40.0-910cf8c2-20211006-154754
- */
-
 // Package cloudantv1 : Operations and models for the CloudantV1 service
 package cloudantv1
 
@@ -37,8 +33,6 @@ import (
 )
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
-//
-// API Version: 1.0.0-dev0.0.40
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
 	Service *common.BaseService
