@@ -62,6 +62,7 @@ pipeline {
       steps {
         bumpVersion(true)
         publishStaging()
+        publishArtifactoryBuildInfo()
       }
     }
     stage('Run Gauge tests') {
@@ -123,6 +124,13 @@ def commitHash
 def bumpVersion
 def customizeVersion
 def prefixSdkVersion
+// Default no-op, may be overridden
+def customizePublishingInfo = {}
+def publishArtifactoryBuildInfo
+def artifactUrl = ''
+def moduleId = ''
+def buildName = ''
+def buildType = ''
 
 void defaultInit() {
   // Default to using bump2version
@@ -148,6 +156,37 @@ void defaultInit() {
   customizeVersion = { semverFormatVersion ->
     semverFormatVersion
   }
+
+  publishArtifactoryBuildInfo = {
+    // create custom build name e.g. SDKs::cloudant-node-sdk::generated-branch
+    buildName = "${env.JOB_NAME}".replaceAll('/', '::')
+    buildType = 'GENERIC' // default, may be overridden
+    customizePublishingInfo()
+    withEnv(["LIB_NAME=${libName}",
+      "TYPE=${buildType}",
+      "ARTIFACT_URL=${artifactUrl}",
+      "MODULE_ID=${moduleId}",
+      "BUILD_NAME=${buildName}"]) {
+      withCredentials([usernamePassword(credentialsId: 'artifactory', passwordVariable: 'ARTIFACTORY_APIKEY', usernameVariable: 'ARTIFACTORY_USER')]) {
+        // create base build info
+        rtBuildInfo (
+          buildName: "${env.BUILD_NAME}",
+          buildNumber: "${env.BUILD_NUMBER}",
+          includeEnvPatterns: ['BRANCH_NAME'],
+          maxDays: 90,
+          deleteBuildArtifacts: true,
+          asyncBuildRetention: true
+        )
+        rtPublishBuildInfo (
+          buildName: "${env.BUILD_NAME}",
+          buildNumber: "${env.BUILD_NUMBER}",
+          serverId: 'taas-artifactory-upload'
+        )
+        // put build info on module/artifacts then overwrite and publish artifactory build
+        sh './scripts/publish_buildinfo.sh'
+      }
+    }
+  }
 }
 
 String getNewVersion(isDevRelease, version) {
@@ -171,6 +210,8 @@ String getNewVersion(isDevRelease, version) {
 // + other customizations
 void applyCustomizations() {
   libName = 'go'
+  // Override with a no-op as publishing is curently a no-op for Go
+  publishArtifactoryBuildInfo = {}
 }
 
 void runTests() {
