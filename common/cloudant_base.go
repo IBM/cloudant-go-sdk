@@ -174,6 +174,11 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 		return nil, err
 	}
 	authType, ok := props[core.PROPNAME_AUTH_TYPE]
+	if !ok {
+		// this property is not a member of core's constants
+		authType, ok = props["AUTHTYPE"]
+	}
+
 	if ok && strings.EqualFold(authType, auth.AUTHTYPE_COUCHDB_SESSION) {
 		authenticator, err := auth.NewCouchDbSessionAuthenticatorFromMap(props)
 		if url, ok := props[core.PROPNAME_SVC_URL]; ok && url != "" {

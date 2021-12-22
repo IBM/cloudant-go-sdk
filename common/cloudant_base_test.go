@@ -161,5 +161,10 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(err).To(BeNil())
 		Expect(authenticator).ToNot(BeNil())
 		Expect(authenticator.AuthenticationType()).To(Equal(core.AUTHTYPE_IAM))
+
+		authenticator, err = GetAuthenticatorFromEnvironment("service4")
+		Expect(err).To(BeNil())
+		Expect(authenticator).ToNot(BeNil())
+		Expect(authenticator.AuthenticationType()).To(Equal(core.AUTHTYPE_IAM))
 	})
 })
