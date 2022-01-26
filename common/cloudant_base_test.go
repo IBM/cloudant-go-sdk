@@ -177,7 +177,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(err).To(BeNil())
 
 		builder := core.NewRequestBuilder(core.GET)
-		_, err = builder.ResolveRequestURL(cloudant.Options.URL, "/db", map[string]string{})
+		_, err = builder.ResolveRequestURL(cloudant.Options.URL, "/db", nil)
 		Expect(err).To(BeNil())
 		Expect(builder.URL.String()).To(Equal("https://cloudant.example/db"))
 	})
