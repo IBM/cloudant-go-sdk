@@ -167,4 +167,18 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(authenticator).ToNot(BeNil())
 		Expect(authenticator.AuthenticationType()).To(Equal(core.AUTHTYPE_IAM))
 	})
+
+	It("Validates URL trailing slash is stripped", func() {
+		cloudant, err := NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example/",
+			Authenticator: &core.NoAuthAuthenticator{},
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+
+		builder := core.NewRequestBuilder(core.GET)
+		_, err = builder.ResolveRequestURL(cloudant.Options.URL, "/db", nil)
+		Expect(err).To(BeNil())
+		Expect(builder.URL.String()).To(Equal("https://cloudant.example/db"))
+	})
 })
