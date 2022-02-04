@@ -176,7 +176,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetServerInformation with error: Operation response processing error`, func() {
@@ -376,7 +376,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetMembershipInformation with error: Operation response processing error`, func() {
@@ -577,7 +577,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for count query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetUuids with error: Operation response processing error`, func() {
@@ -784,7 +784,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetCapacityThroughputInformation with error: Operation response processing error`, func() {
@@ -984,7 +984,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutCapacityThroughputConfiguration with error: Operation response processing error`, func() {
@@ -1232,7 +1232,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetDbUpdates with error: Operation response processing error`, func() {
@@ -1476,7 +1476,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostChanges with error: Operation response processing error`, func() {
@@ -2410,7 +2410,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostDbsInfo with error: Operation response processing error`, func() {
@@ -2654,7 +2654,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteDatabase with error: Operation response processing error`, func() {
@@ -2866,7 +2866,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetDatabaseInformation with error: Operation response processing error`, func() {
@@ -3080,7 +3080,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for q query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutDatabase with error: Operation response processing error`, func() {
@@ -3389,7 +3389,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostDocument with error: Operation response processing error`, func() {
@@ -3834,7 +3834,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostAllDocs with error: Operation response processing error`, func() {
@@ -4405,7 +4405,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries with error: Operation response processing error`, func() {
@@ -5012,7 +5012,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostBulkDocs with error: Operation response processing error`, func() {
@@ -5470,7 +5470,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostBulkGet with error: Operation response processing error`, func() {
@@ -6555,7 +6555,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteDocument with error: Operation response processing error`, func() {
@@ -6807,7 +6807,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetDocument with error: Operation response processing error`, func() {
@@ -7848,7 +7848,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutDocument with error: Operation response processing error`, func() {
@@ -8444,7 +8444,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteDesignDocument with error: Operation response processing error`, func() {
@@ -8696,7 +8696,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetDesignDocument with error: Operation response processing error`, func() {
@@ -8997,7 +8997,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutDesignDocument with error: Operation response processing error`, func() {
@@ -9666,7 +9666,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation with error: Operation response processing error`, func() {
@@ -9885,7 +9885,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostDesignDocs with error: Operation response processing error`, func() {
@@ -10205,7 +10205,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries with error: Operation response processing error`, func() {
@@ -10543,7 +10543,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostView with error: Operation response processing error`, func() {
@@ -11195,7 +11195,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostViewQueries with error: Operation response processing error`, func() {
@@ -11883,7 +11883,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetPartitionInformation with error: Operation response processing error`, func() {
@@ -12100,7 +12100,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs with error: Operation response processing error`, func() {
@@ -12680,7 +12680,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostPartitionSearch with error: Operation response processing error`, func() {
@@ -13269,7 +13269,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostPartitionView with error: Operation response processing error`, func() {
@@ -13930,7 +13930,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostPartitionFind with error: Operation response processing error`, func() {
@@ -14492,7 +14492,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostExplain with error: Operation response processing error`, func() {
@@ -14796,7 +14796,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostFind with error: Operation response processing error`, func() {
@@ -15358,7 +15358,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation with error: Operation response processing error`, func() {
@@ -15570,7 +15570,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostIndex with error: Operation response processing error`, func() {
@@ -15964,7 +15964,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteIndex with error: Operation response processing error`, func() {
@@ -16191,7 +16191,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostSearchAnalyze with error: Operation response processing error`, func() {
@@ -16440,7 +16440,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostSearch with error: Operation response processing error`, func() {
@@ -17074,7 +17074,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSearchInfo with error: Operation response processing error`, func() {
@@ -17311,7 +17311,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetGeo with error: Operation response processing error`, func() {
@@ -17914,7 +17914,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostGeoCleanup with error: Operation response processing error`, func() {
@@ -18126,7 +18126,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetGeoIndexInformation with error: Operation response processing error`, func() {
@@ -18560,7 +18560,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteReplicationDocument with error: Operation response processing error`, func() {
@@ -18807,7 +18807,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for revs_info query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument with error: Operation response processing error`, func() {
@@ -19103,7 +19103,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutReplicationDocument with error: Operation response processing error`, func() {
@@ -19834,7 +19834,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for skip query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocs with error: Operation response processing error`, func() {
@@ -20053,7 +20053,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSchedulerDocument with error: Operation response processing error`, func() {
@@ -20267,7 +20267,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for skip query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSchedulerJobs with error: Operation response processing error`, func() {
@@ -20481,7 +20481,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSchedulerJob with error: Operation response processing error`, func() {
@@ -20693,7 +20693,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSessionInformation with error: Operation response processing error`, func() {
@@ -20893,7 +20893,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetSecurity with error: Operation response processing error`, func() {
@@ -21105,7 +21105,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutSecurity with error: Operation response processing error`, func() {
@@ -21394,7 +21394,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostApiKeys with error: Operation response processing error`, func() {
@@ -21594,7 +21594,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutCloudantSecurityConfiguration with error: Operation response processing error`, func() {
@@ -21883,7 +21883,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetCorsInformation with error: Operation response processing error`, func() {
@@ -22083,7 +22083,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("PUT"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutCorsConfiguration with error: Operation response processing error`, func() {
@@ -22424,7 +22424,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteAttachment with error: Operation response processing error`, func() {
@@ -22892,7 +22892,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutAttachment with error: Operation response processing error`, func() {
@@ -23251,7 +23251,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke DeleteLocalDocument with error: Operation response processing error`, func() {
@@ -23482,7 +23482,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for local_seq query parameter
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetLocalDocument with error: Operation response processing error`, func() {
@@ -23741,7 +23741,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PutLocalDocument with error: Operation response processing error`, func() {
@@ -24236,7 +24236,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostRevsDiff with error: Operation response processing error`, func() {
@@ -24485,7 +24485,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetShardsInformation with error: Operation response processing error`, func() {
@@ -24697,7 +24697,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetDocumentShardsInfo with error: Operation response processing error`, func() {
@@ -24974,7 +24974,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetActiveTasks with error: Operation response processing error`, func() {
@@ -25174,7 +25174,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetUpInformation with error: Operation response processing error`, func() {
@@ -25374,7 +25374,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetActivityTrackerEvents with error: Operation response processing error`, func() {
@@ -25574,7 +25574,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("POST"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke PostActivityTrackerEvents with error: Operation response processing error`, func() {
@@ -25818,7 +25818,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, `} this is not valid json {`)
+					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
 			It(`Invoke GetCurrentThroughputInformation with error: Operation response processing error`, func() {
