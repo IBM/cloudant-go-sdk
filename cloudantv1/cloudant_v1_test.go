@@ -3095,7 +3095,7 @@ var _ = Describe(`CloudantV1`, func() {
 				putDatabaseOptionsModel := new(cloudantv1.PutDatabaseOptions)
 				putDatabaseOptionsModel.Db = core.StringPtr("testString")
 				putDatabaseOptionsModel.Partitioned = core.BoolPtr(false)
-				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(1))
+				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(26))
 				putDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PutDatabase(putDatabaseOptionsModel)
@@ -3150,7 +3150,7 @@ var _ = Describe(`CloudantV1`, func() {
 				putDatabaseOptionsModel := new(cloudantv1.PutDatabaseOptions)
 				putDatabaseOptionsModel.Db = core.StringPtr("testString")
 				putDatabaseOptionsModel.Partitioned = core.BoolPtr(false)
-				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(1))
+				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(26))
 				putDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3213,7 +3213,7 @@ var _ = Describe(`CloudantV1`, func() {
 				putDatabaseOptionsModel := new(cloudantv1.PutDatabaseOptions)
 				putDatabaseOptionsModel.Db = core.StringPtr("testString")
 				putDatabaseOptionsModel.Partitioned = core.BoolPtr(false)
-				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(1))
+				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(26))
 				putDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3235,7 +3235,7 @@ var _ = Describe(`CloudantV1`, func() {
 				putDatabaseOptionsModel := new(cloudantv1.PutDatabaseOptions)
 				putDatabaseOptionsModel.Db = core.StringPtr("testString")
 				putDatabaseOptionsModel.Partitioned = core.BoolPtr(false)
-				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(1))
+				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(26))
 				putDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -3278,7 +3278,7 @@ var _ = Describe(`CloudantV1`, func() {
 				putDatabaseOptionsModel := new(cloudantv1.PutDatabaseOptions)
 				putDatabaseOptionsModel.Db = core.StringPtr("testString")
 				putDatabaseOptionsModel.Partitioned = core.BoolPtr(false)
-				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(1))
+				putDatabaseOptionsModel.Q = core.Int64Ptr(int64(26))
 				putDatabaseOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -19140,7 +19140,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -19307,7 +19307,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -19482,7 +19482,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -19597,7 +19597,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -19733,7 +19733,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -27809,12 +27809,12 @@ var _ = Describe(`CloudantV1`, func() {
 				putDatabaseOptionsModel := cloudantService.NewPutDatabaseOptions(db)
 				putDatabaseOptionsModel.SetDb("testString")
 				putDatabaseOptionsModel.SetPartitioned(false)
-				putDatabaseOptionsModel.SetQ(int64(1))
+				putDatabaseOptionsModel.SetQ(int64(26))
 				putDatabaseOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putDatabaseOptionsModel).ToNot(BeNil())
 				Expect(putDatabaseOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(putDatabaseOptionsModel.Partitioned).To(Equal(core.BoolPtr(false)))
-				Expect(putDatabaseOptionsModel.Q).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(putDatabaseOptionsModel.Q).To(Equal(core.Int64Ptr(int64(26))))
 				Expect(putDatabaseOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutDesignDocumentOptions successfully`, func() {
@@ -28218,10 +28218,10 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationCreateTargetParametersModel).ToNot(BeNil())
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(1))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
 				Expect(replicationCreateTargetParametersModel.N).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationCreateTargetParametersModel.Partitioned).To(Equal(core.BoolPtr(false)))
-				Expect(replicationCreateTargetParametersModel.Q).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(replicationCreateTargetParametersModel.Q).To(Equal(core.Int64Ptr(int64(26))))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)

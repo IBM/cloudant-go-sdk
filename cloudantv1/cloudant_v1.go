@@ -6301,6 +6301,12 @@ func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecur
 // Modify who has permission to read, write, or manage a database. This endpoint can be used to modify both Cloudant and
 // CouchDB related permissions. Be careful: by removing a Cloudant API key, a member or an admin from the list of users
 // that have access permissions, you remove it from the list of users that have access to the database.
+//
+// ### Note about nobody role
+//
+// The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to
+// read data from a database, but did not identify itself, the task can continue only if the `nobody` user has the role
+// `_reader`.
 func (cloudant *CloudantV1) PutSecurity(putSecurityOptions *PutSecurityOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	return cloudant.PutSecurityWithContext(context.Background(), putSecurityOptions)
 }
@@ -6435,6 +6441,12 @@ func (cloudant *CloudantV1) PostApiKeysWithContext(ctx context.Context, postApiK
 // PutCloudantSecurityConfiguration : Modify only Cloudant related database permissions
 // Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
 // the API key from the list of users that have access to the database.
+//
+// ### Note about nobody role
+//
+// The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to
+// read data from a database, but did not identify itself, the task can continue only if the `nobody` user has the role
+// `_reader`.
 func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	return cloudant.PutCloudantSecurityConfigurationWithContext(context.Background(), putCloudantSecurityConfigurationOptions)
 }
@@ -12697,7 +12709,12 @@ type IndexDefinition struct {
 	// within a document for use with the `$text` operator.
 	DefaultField *IndexTextOperatorDefaultField `json:"default_field,omitempty"`
 
-	// List of fields to index.
+	// List of field objects to index.  Nested fields are also allowed, e.g. `person.name`.
+	//
+	// For "json" type indexes each object is a mapping of field name to sort direction (asc or desc).
+	//
+	// For "text" type indexes each object has a `name` property of the field name and a `type` property of the field type
+	// (string, number, or boolean).
 	Fields []IndexField `json:"fields,omitempty"`
 
 	// Whether to scan every document for arrays and store the length for each array found. Set the index_array_lengths
@@ -14124,7 +14141,13 @@ type PostExplainOptions struct {
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
 
-	// JSON array of sort syntax elements to determine the sort order of the results.
+	// The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The first
+	// field name and direction pair is the topmost level of sort. The second pair, if provided, is the next level of sort.
+	// The field can be any field, using dotted notation if desired for sub-document fields.
+	//
+	// For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+	//
+	// When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
 	Sort []map[string]string `json:"sort,omitempty"`
 
 	// Whether or not the view results should be returned from a "stable" set of shards.
@@ -14305,7 +14328,13 @@ type PostFindOptions struct {
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
 
-	// JSON array of sort syntax elements to determine the sort order of the results.
+	// The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The first
+	// field name and direction pair is the topmost level of sort. The second pair, if provided, is the next level of sort.
+	// The field can be any field, using dotted notation if desired for sub-document fields.
+	//
+	// For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+	//
+	// When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
 	Sort []map[string]string `json:"sort,omitempty"`
 
 	// Whether or not the view results should be returned from a "stable" set of shards.
@@ -14773,7 +14802,13 @@ type PostPartitionFindOptions struct {
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
 
-	// JSON array of sort syntax elements to determine the sort order of the results.
+	// The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The first
+	// field name and direction pair is the topmost level of sort. The second pair, if provided, is the next level of sort.
+	// The field can be any field, using dotted notation if desired for sub-document fields.
+	//
+	// For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+	//
+	// When sorting with multiple fields they must use the same sort direction, either all ascending or all descending.
 	Sort []map[string]string `json:"sort,omitempty"`
 
 	// Whether or not the view results should be returned from a "stable" set of shards.
@@ -16246,8 +16281,8 @@ type PutDatabaseOptions struct {
 	// Query parameter to specify whether to enable database partitions when creating a database.
 	Partitioned *bool `json:"partitioned,omitempty"`
 
-	// The number of shards in the database. Each shard is a partition of the hash value range. Default is 8, unless
-	// overridden in the `cluster config`.
+	// The number of shards in the database. Each shard is a partition of the hash value range. Its value is set by the
+	// service. For more information about modifying database configuration, contact IBM Cloudant support.
 	Q *int64 `json:"q,omitempty"`
 
 	// Allows users to set headers on API requests
