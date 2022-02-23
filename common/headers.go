@@ -58,15 +58,13 @@ func GetSdkAnalyticsHeader(serviceName string, serviceVersion string, operationI
 		serviceName, serviceVersion, operationID)
 }
 
-var userAgent string = fmt.Sprintf("%s/%s %s", sdkName, Version, GetSystemInfo())
+var userAgent string = fmt.Sprintf("%s/%s(%s)", sdkName, Version, GetSystemInfo())
 
 func GetUserAgentInfo() string {
 	return userAgent
 }
 
-var systemInfo = fmt.Sprintf(
-	"(lang=go; arch=%s; os=%s; go.version=%s)",
-	runtime.GOARCH, runtime.GOOS, runtime.Version())
+var systemInfo = fmt.Sprintf("%s;%s", runtime.Version(), runtime.GOOS)
 
 func GetSystemInfo() string {
 	return systemInfo

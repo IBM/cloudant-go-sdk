@@ -17,6 +17,7 @@
 package common
 
 import (
+	"runtime"
 	"strings"
 
 	. "github.com/onsi/ginkgo"
@@ -27,10 +28,8 @@ var _ = Describe(`Headers Unit Tests`, func() {
 	It("Successfully load SystemInfo", func() {
 		sysinfo := GetSystemInfo()
 		Expect(sysinfo).ToNot(BeNil())
-		Expect(strings.Contains(sysinfo, "lang=")).To(BeTrue())
-		Expect(strings.Contains(sysinfo, "arch=")).To(BeTrue())
-		Expect(strings.Contains(sysinfo, "os=")).To(BeTrue())
-		Expect(strings.Contains(sysinfo, "go.version=")).To(BeTrue())
+		Expect(strings.Contains(sysinfo, runtime.Version())).To(BeTrue())
+		Expect(strings.Contains(sysinfo, runtime.GOOS)).To(BeTrue())
 	})
 
 	It("Check SDK User Agent header", func() {
@@ -39,7 +38,7 @@ var _ = Describe(`Headers Unit Tests`, func() {
 
 		actUserAgentHeader, foundIt := headers[headerNameUserAgent]
 		Expect(foundIt).To(BeTrue())
-		expUserAgentHeader := sdkName + "/" + Version + " " + GetSystemInfo()
+		expUserAgentHeader := sdkName + "/" + Version + "(" + GetSystemInfo() + ")"
 		Expect(actUserAgentHeader).To(Equal(expUserAgentHeader))
 	})
 
