@@ -17,31 +17,11 @@
 package common
 
 import (
-	"runtime"
-	"strings"
-
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 var _ = Describe(`Headers Unit Tests`, func() {
-	It("Successfully load SystemInfo", func() {
-		sysinfo := GetSystemInfo()
-		Expect(sysinfo).ToNot(BeNil())
-		Expect(strings.Contains(sysinfo, runtime.Version())).To(BeTrue())
-		Expect(strings.Contains(sysinfo, runtime.GOOS)).To(BeTrue())
-	})
-
-	It("Check SDK User Agent header", func() {
-		var headers = GetSdkHeaders("myService", "v123", "myOperation")
-		Expect(headers).ToNot(BeNil())
-
-		actUserAgentHeader, foundIt := headers[headerNameUserAgent]
-		Expect(foundIt).To(BeTrue())
-		expUserAgentHeader := sdkName + "/" + Version + "(" + GetSystemInfo() + ")"
-		Expect(actUserAgentHeader).To(Equal(expUserAgentHeader))
-	})
-
 	It("Check SDK Analytics header", func() {
 		var headers = GetSdkHeaders("myService", "v123", "myOperation")
 		Expect(headers).ToNot(BeNil())

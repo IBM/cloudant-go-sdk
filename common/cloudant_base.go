@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"net/http"
 	neturl "net/url"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -99,6 +100,10 @@ func NewBaseService(opts *core.ServiceOptions) (*BaseService, error) {
 	client := core.DefaultHTTPClient()
 	client.Timeout = 6 * time.Minute
 	baseService.SetHTTPClient(client)
+
+	// Set a default value for the User-Agent http header.
+	baseService.SetUserAgent(buildUserAgent())
+
 	return &BaseService{0, baseService}, nil
 }
 
@@ -194,4 +199,14 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 	}
 
 	return core.GetAuthenticatorFromEnvironment(credentialKey)
+}
+
+// buildUserAgent builds the user agent string.
+func buildUserAgent() string {
+	return fmt.Sprintf("cloudant-go-sdk/%s(%s)", Version, getSystemInfo())
+}
+
+// getSystemInfo returns the system information.
+func getSystemInfo() string {
+	return fmt.Sprintf("%s;%s", runtime.Version(), runtime.GOOS)
 }

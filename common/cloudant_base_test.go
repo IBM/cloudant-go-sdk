@@ -19,6 +19,7 @@ package common
 import (
 	"os"
 	"path"
+	"runtime"
 
 	"github.com/IBM/cloudant-go-sdk/auth"
 	"github.com/IBM/go-sdk-core/v5/core"
@@ -180,5 +181,20 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		_, err = builder.ResolveRequestURL(cloudant.Options.URL, "/db", nil)
 		Expect(err).To(BeNil())
 		Expect(builder.URL.String()).To(Equal("https://cloudant.example/db"))
+	})
+
+	It("Validates User-Agent is set", func() {
+		cloudant, err := NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: &core.NoAuthAuthenticator{},
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+
+		Expect(cloudant.UserAgent).ToNot(BeNil())
+		Expect(cloudant.UserAgent).To(MatchRegexp("\\w+\\/[0-9.]+\\(.+\\)"))
+		Expect(cloudant.UserAgent).To(HavePrefix("cloudant-go-sdk"))
+		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.Version()))
+		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOOS))
 	})
 })
