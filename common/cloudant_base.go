@@ -208,5 +208,5 @@ func buildUserAgent() string {
 
 // getSystemInfo returns the system information.
 func getSystemInfo() string {
-	return fmt.Sprintf("%s;%s", runtime.Version(), runtime.GOOS)
+	return fmt.Sprintf("%.8s;%.3s", runtime.Version()[2:], runtime.GOOS)
 }
