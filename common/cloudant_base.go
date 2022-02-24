@@ -203,10 +203,14 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 
 // buildUserAgent builds the user agent string.
 func buildUserAgent() string {
-	return fmt.Sprintf("cloudant-go-sdk/%s(%s)", Version, getSystemInfo())
+	return fmt.Sprintf("cloudant-go-sdk/%s (%s)", Version, getSystemInfo())
 }
 
 // getSystemInfo returns the system information.
 func getSystemInfo() string {
-	return fmt.Sprintf("%.8s;%.3s", runtime.Version()[2:], runtime.GOOS)
+	return fmt.Sprintf("go.version=%s; os.name=%s os.arch=%s lang=go",
+		runtime.Version(),
+		runtime.GOOS,
+		runtime.GOARCH,
+	)
 }

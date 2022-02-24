@@ -192,9 +192,10 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(err).To(BeNil())
 
 		Expect(cloudant.UserAgent).ToNot(BeNil())
-		Expect(cloudant.UserAgent).To(MatchRegexp("\\w+\\/[0-9.]+\\(.+\\)"))
+		Expect(cloudant.UserAgent).To(MatchRegexp("\\w+\\/[0-9.]+\\s\\(.+\\)"))
 		Expect(cloudant.UserAgent).To(HavePrefix("cloudant-go-sdk"))
-		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.Version()[2:]))
-		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOOS[:3]))
+		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.Version()))
+		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOOS))
+		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOARCH))
 	})
 })
