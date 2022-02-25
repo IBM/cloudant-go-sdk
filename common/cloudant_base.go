@@ -208,7 +208,7 @@ func buildUserAgent() string {
 
 // getSystemInfo returns the system information.
 func getSystemInfo() string {
-	return fmt.Sprintf("go.version=%s; os.name=%s os.arch=%s lang=go",
+	return fmt.Sprintf("go.version=%s; os.name=%s os.arch=%s lang=go;",
 		runtime.Version(),
 		runtime.GOOS,
 		runtime.GOARCH,
