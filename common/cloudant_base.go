@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2021. All Rights Reserved.
+ * © Copyright IBM Corporation 2021, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"net/http"
 	neturl "net/url"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -99,6 +100,10 @@ func NewBaseService(opts *core.ServiceOptions) (*BaseService, error) {
 	client := core.DefaultHTTPClient()
 	client.Timeout = 6 * time.Minute
 	baseService.SetHTTPClient(client)
+
+	// Set a default value for the User-Agent http header.
+	baseService.SetUserAgent(buildUserAgent())
+
 	return &BaseService{0, baseService}, nil
 }
 
@@ -194,4 +199,18 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 	}
 
 	return core.GetAuthenticatorFromEnvironment(credentialKey)
+}
+
+// buildUserAgent builds the user agent string.
+func buildUserAgent() string {
+	return fmt.Sprintf("cloudant-go-sdk/%s (%s)", Version, getSystemInfo())
+}
+
+// getSystemInfo returns the system information.
+func getSystemInfo() string {
+	return fmt.Sprintf("go.version=%s; os.name=%s os.arch=%s lang=go",
+		runtime.Version(),
+		runtime.GOOS,
+		runtime.GOARCH,
+	)
 }

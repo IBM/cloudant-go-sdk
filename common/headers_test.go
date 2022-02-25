@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,32 +17,11 @@
 package common
 
 import (
-	"strings"
-
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 var _ = Describe(`Headers Unit Tests`, func() {
-	It("Successfully load SystemInfo", func() {
-		sysinfo := GetSystemInfo()
-		Expect(sysinfo).ToNot(BeNil())
-		Expect(strings.Contains(sysinfo, "lang=")).To(BeTrue())
-		Expect(strings.Contains(sysinfo, "arch=")).To(BeTrue())
-		Expect(strings.Contains(sysinfo, "os=")).To(BeTrue())
-		Expect(strings.Contains(sysinfo, "go.version=")).To(BeTrue())
-	})
-
-	It("Check SDK User Agent header", func() {
-		var headers = GetSdkHeaders("myService", "v123", "myOperation")
-		Expect(headers).ToNot(BeNil())
-
-		actUserAgentHeader, foundIt := headers[headerNameUserAgent]
-		Expect(foundIt).To(BeTrue())
-		expUserAgentHeader := sdkName + "/" + Version + " " + GetSystemInfo()
-		Expect(actUserAgentHeader).To(Equal(expUserAgentHeader))
-	})
-
 	It("Check SDK Analytics header", func() {
 		var headers = GetSdkHeaders("myService", "v123", "myOperation")
 		Expect(headers).ToNot(BeNil())
