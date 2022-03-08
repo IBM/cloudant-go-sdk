@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,8 @@ func main() {
 		deleteDocumentResult, _, err := client.DeleteDocument(
 			client.NewDeleteDocumentOptions(
 				exampleDbName,
-				*document.ID,
-			).SetRev(*document.Rev),
+				*document.ID, // docID is required for DELETE
+			).SetRev(*document.Rev), // Rev is required for DELETE
 		)
 		if err != nil {
 			panic(err)

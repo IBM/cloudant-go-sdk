@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,30 +52,48 @@ func main() {
 	}
 
 	// 3. Create a document ================================================
-	// 3.1. Create a document object with "example" id
+	// Create a document object with "example" id
 	exampleDocID := "example"
+	// Setting ID for the document is optional when "PostDocument" function
+	// is used for CREATE.
+	// When ID is not provided the server will generate one for your document.
 	exampleDocument := cloudantv1.Document{
 		ID: &exampleDocID,
 	}
 
-	// 3.2. Add "name" and "joined" fields to the document
+	// Add "name" and "joined" fields to the document
 	exampleDocument.SetProperty("name", "Bob Smith")
-	exampleDocument.SetProperty("joined", "2019-01-24T10:42:99.000Z")
+	exampleDocument.SetProperty("joined", "2019-01-24T10:42:59.000Z")
 
-	// 3.3. Save the document in the database
-	postDocumentOption := client.NewPostDocumentOptions(
+	// Save the document in the database with "PostDocument" function
+	createDocumentOptions := client.NewPostDocumentOptions(
 		exampleDbName,
 	).SetDocument(&exampleDocument)
 
-	postDocumentResult, _, err := client.PostDocument(postDocumentOption)
+	createDocumentResponse, _, err := client.PostDocument(createDocumentOptions)
+
+	// =====================================================================
+	// Note: saving the document can also be done with the "PutDocument"
+	// function. In this case docID is required for a CREATE operation:
+	/*
+		createDocumentOptions := client.NewPutDocumentOptions(
+			exampleDbName,
+			exampleDocID,
+		).SetDocument(&exampleDocument)
+
+		createDocumentResponse, _, err := client.PutDocument(createDocumentOptions)
+	*/
+	// =====================================================================
+
 	if err != nil {
 		panic(err)
 	}
 
-	// 3.4. Keep track of the revision number from the `example` document object
-	exampleDocument.Rev = postDocumentResult.Rev
+	// Keeping track of the revision number of the document object
+	// is necessary for further UPDATE/DELETE operations:
+	exampleDocument.Rev = createDocumentResponse.Rev
 
-	// 3.5. Print out the document content
+	// Print out the document content
 	exampleDocumentContent, _ := json.MarshalIndent(exampleDocument, "", "  ")
 	fmt.Printf("You have created the document:\n%s\n", string(exampleDocumentContent))
 }
