@@ -400,30 +400,48 @@ func main() {
 	}
 
 	// 3. Create a document ================================================
-	// 3.1. Create a document object with "example" id
+	// Create a document object with "example" id
 	exampleDocID := "example"
+	// Setting ID for the document is optional when "PostDocument" function
+	// is used for CREATE.
+	// When ID is not provided the server will generate one for your document.
 	exampleDocument := cloudantv1.Document{
 		ID: &exampleDocID,
 	}
 
-	// 3.2. Add "name" and "joined" fields to the document
+	// Add "name" and "joined" fields to the document
 	exampleDocument.SetProperty("name", "Bob Smith")
-	exampleDocument.SetProperty("joined", "2019-01-24T10:42:99.000Z")
+	exampleDocument.SetProperty("joined", "2019-01-24T10:42:59.000Z")
 
-	// 3.3. Save the document in the database
-	postDocumentOption := client.NewPostDocumentOptions(
+	// Save the document in the database with "PostDocument" function
+	createDocumentOptions := client.NewPostDocumentOptions(
 		exampleDbName,
 	).SetDocument(&exampleDocument)
 
-	postDocumentResult, _, err := client.PostDocument(postDocumentOption)
+	createDocumentResponse, _, err := client.PostDocument(createDocumentOptions)
+
+	// =====================================================================
+	// Note: saving the document can also be done with the "PutDocument"
+	// function. In this case docID is required for a CREATE operation:
+	/*
+		createDocumentOptions := client.NewPutDocumentOptions(
+			exampleDbName,
+			exampleDocID,
+		).SetDocument(&exampleDocument)
+
+		createDocumentResponse, _, err := client.PutDocument(createDocumentOptions)
+	*/
+	// =====================================================================
+
 	if err != nil {
 		panic(err)
 	}
 
-	// 3.4. Keep track of the revision number from the `example` document object
-	exampleDocument.Rev = postDocumentResult.Rev
+	// Keeping track of the revision number of the document object
+	// is necessary for further UPDATE/DELETE operations:
+	exampleDocument.Rev = createDocumentResponse.Rev
 
-	// 3.5. Print out the document content
+	// Print out the document content
 	exampleDocumentContent, _ := json.MarshalIndent(exampleDocument, "", "  ")
 	fmt.Printf("You have created the document:\n%s\n", string(exampleDocumentContent))
 }
@@ -480,7 +498,7 @@ func main() {
 	exampleDbName := "orders"
 	exampleDocID := "example"
 
-	// 2.1. Get the document if it previously existed in the database
+	// Get the document if it previously existed in the database
 	document, getDocumentResponse, err := client.GetDocument(
 		client.NewGetDocumentOptions(
 			exampleDbName,
@@ -488,13 +506,17 @@ func main() {
 		),
 	)
 
+	// =====================================================================
 	// Note: for response byte stream use:
-	// documentAsByteStream, getDocumentResponse, err := client.GetDocumentAsStream(
-	// 	client.NewGetDocumentOptions(
-	// 		exampleDbName,
-	// 		exampleDocID,
-	// 	),
-	// )
+	/*
+		documentAsByteStream, getDocumentResponse, err := client.GetDocumentAsStream(
+			client.NewGetDocumentOptions(
+				exampleDbName,
+				exampleDocID,
+			),
+		)
+	*/
+	// =====================================================================
 
 	if err != nil {
 		if getDocumentResponse.StatusCode == 404 {
@@ -508,33 +530,57 @@ func main() {
 	}
 
 	if document != nil {
-		// 2.2. Make some modifiction in the document content
-		// 2.2.1. Add Bob Smith's address to the document
+		// Make some modification in the document content
+		// Add Bob Smith's address to the document
 		document.SetProperty("address", "19 Front Street, Darlington, DL5 1TY")
-		// 2.2.2. Remove the joined property from document object
+		// Remove the joined property from document object
 		delete(document.GetProperties(), "joined")
 
-		// 2.3. Update the document in the database
-		postDocumentOption := client.NewPostDocumentOptions(
+		// Update the document in the database
+		updateDocumentOptions := client.NewPostDocumentOptions(
 			exampleDbName,
 		).SetDocument(document)
 
+		// =================================================================
 		// Note: for request byte stream use:
-		// postDocumentOption := client.NewPostDocumentOptions(
-		// 	exampleDbName,
-		// ).SetBody(documentAsByteStream)
+		/*
+			postDocumentOption := client.NewPostDocumentOptions(
+				exampleDbName,
+			).SetBody(documentAsByteStream)
+		*/
+		// =================================================================
 
-		postDocumentResult, _, err := client.PostDocument(
-			postDocumentOption,
+		updateDocumentResponse, _, err := client.PostDocument(
+			updateDocumentOptions,
 		)
+
+		// =================================================================
+		// Note: updating the document can also be done with the "PutDocument"
+		// function. DocID and Rev are required for an UPDATE operation
+		// but Rev can be provided in the document object too:
+		/*
+			updateDocumentOptions := client.NewPutDocumentOptions(
+				exampleDbName,
+				core.StringNilMapper(document.ID), // docID is a required parameter
+			).SetDocument(document) // Rev in the document object CAN replace below SetRev
+
+			updateDocumentOptions.SetRev(core.StringNilMapper(document.Rev))
+
+			updateDocumentResponse, _, err := client.PutDocument(
+				updateDocumentOptions,
+			)
+		*/
+		// =================================================================
+
 		if err != nil {
 			panic(err)
 		}
 
-		// 2.4. Keep track the revision number of the document object
-		document.Rev = postDocumentResult.Rev
+		// Keeping track of the latest revision number of the document object
+		// is necessary for further UPDATE/DELETE operations:
+		document.Rev = updateDocumentResponse.Rev
 
-		// 2.5. Print out the new document content
+		// Print out the new document content
 		documentContent, _ := json.MarshalIndent(document, "", "  ")
 		fmt.Printf("You have updated the document:\n%s\n", string(documentContent))
 	}
@@ -613,8 +659,8 @@ func main() {
 		deleteDocumentResult, _, err := client.DeleteDocument(
 			client.NewDeleteDocumentOptions(
 				exampleDbName,
-				*document.ID,
-			).SetRev(*document.Rev),
+				*document.ID, // docID is required for DELETE
+			).SetRev(*document.Rev), // Rev is required for DELETE
 		)
 		if err != nil {
 			panic(err)
