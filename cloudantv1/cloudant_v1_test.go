@@ -1289,7 +1289,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"account": "Account", "db_name": "DbName", "seq": "Seq", "type": "created"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"db_name": "DbName", "seq": "Seq", "type": "created"}]}`)
 				}))
 			})
 			It(`Invoke GetDbUpdates successfully with retries`, func() {
@@ -1350,7 +1350,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"account": "Account", "db_name": "DbName", "seq": "Seq", "type": "created"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "results": [{"db_name": "DbName", "seq": "Seq", "type": "created"}]}`)
 				}))
 			})
 			It(`Invoke GetDbUpdates successfully`, func() {
@@ -2224,10 +2224,10 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for descending query parameter
-					Expect(req.URL.Query()["endkey"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["end_key"]).To(Equal([]string{"testString"}))
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["startkey"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["start_key"]).To(Equal([]string{"testString"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -2249,10 +2249,10 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetAllDbsOptions model
 				getAllDbsOptionsModel := new(cloudantv1.GetAllDbsOptions)
 				getAllDbsOptionsModel.Descending = core.BoolPtr(false)
-				getAllDbsOptionsModel.Endkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.EndKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getAllDbsOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getAllDbsOptionsModel.Startkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.StartKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2290,10 +2290,10 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					// TODO: Add check for descending query parameter
-					Expect(req.URL.Query()["endkey"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["end_key"]).To(Equal([]string{"testString"}))
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["startkey"]).To(Equal([]string{"testString"}))
+					Expect(req.URL.Query()["start_key"]).To(Equal([]string{"testString"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2317,10 +2317,10 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetAllDbsOptions model
 				getAllDbsOptionsModel := new(cloudantv1.GetAllDbsOptions)
 				getAllDbsOptionsModel.Descending = core.BoolPtr(false)
-				getAllDbsOptionsModel.Endkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.EndKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getAllDbsOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getAllDbsOptionsModel.Startkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.StartKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2341,10 +2341,10 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetAllDbsOptions model
 				getAllDbsOptionsModel := new(cloudantv1.GetAllDbsOptions)
 				getAllDbsOptionsModel.Descending = core.BoolPtr(false)
-				getAllDbsOptionsModel.Endkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.EndKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getAllDbsOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getAllDbsOptionsModel.Startkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.StartKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -2379,10 +2379,10 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetAllDbsOptions model
 				getAllDbsOptionsModel := new(cloudantv1.GetAllDbsOptions)
 				getAllDbsOptionsModel.Descending = core.BoolPtr(false)
-				getAllDbsOptionsModel.Endkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.EndKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getAllDbsOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getAllDbsOptionsModel.Startkey = core.StringPtr("testString")
+				getAllDbsOptionsModel.StartKey = core.StringPtr("testString")
 				getAllDbsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3857,10 +3857,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostAllDocs(postAllDocsOptionsModel)
@@ -3937,10 +3937,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4025,10 +4025,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4058,10 +4058,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -4112,10 +4112,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4188,10 +4188,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4276,10 +4276,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4315,10 +4315,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -4369,10 +4369,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4427,10 +4427,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4511,10 +4511,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4603,10 +4603,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4640,10 +4640,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4698,10 +4698,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4778,10 +4778,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4870,10 +4870,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4913,10 +4913,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -4971,10 +4971,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				postAllDocsQueriesOptionsModel := new(cloudantv1.PostAllDocsQueriesOptions)
@@ -9672,7 +9672,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully with retries`, func() {
@@ -9727,7 +9727,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully`, func() {
@@ -9863,10 +9863,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -9946,10 +9946,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10037,10 +10037,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10071,10 +10071,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -10126,10 +10126,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postDesignDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10182,10 +10182,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
@@ -10269,10 +10269,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
@@ -10364,10 +10364,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
@@ -10402,10 +10402,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
@@ -10461,10 +10461,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				postDesignDocsQueriesOptionsModel := new(cloudantv1.PostDesignDocsQueriesOptions)
@@ -10523,16 +10523,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -10612,16 +10612,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10709,16 +10709,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10751,16 +10751,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -10814,16 +10814,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10899,16 +10899,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10996,16 +10996,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -11044,16 +11044,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -11107,16 +11107,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.Endkey = core.StringPtr("testString")
-				postViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = core.StringPtr("testString")
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.Startkey = core.StringPtr("testString")
-				postViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -11172,16 +11172,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11265,16 +11265,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11366,16 +11366,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11412,16 +11412,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11479,16 +11479,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11568,16 +11568,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11669,16 +11669,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11721,16 +11721,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -11788,16 +11788,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
 				// Construct an instance of the PostViewQueriesOptions model
@@ -12079,10 +12079,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptionsModel)
@@ -12160,10 +12160,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -12249,10 +12249,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -12283,10 +12283,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -12338,10 +12338,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -12415,10 +12415,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -12504,10 +12504,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -12544,10 +12544,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -12599,10 +12599,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionAllDocsOptionsModel.Endkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.Startkey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -13250,16 +13250,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -13340,16 +13340,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -13438,16 +13438,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -13481,16 +13481,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -13545,16 +13545,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -13631,16 +13631,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -13729,16 +13729,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -13778,16 +13778,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -13842,16 +13842,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Endkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.EndkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
-				postPartitionViewOptionsModel.Startkey = core.StringPtr("testString")
-				postPartitionViewOptionsModel.StartkeyDocid = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -17081,7 +17081,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 12, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 10}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 12, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 10, "signature": "Signature"}}`)
 				}))
 			})
 			It(`Invoke GetSearchInfo successfully with retries`, func() {
@@ -17137,7 +17137,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 12, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 10}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 12, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 10, "signature": "Signature"}}`)
 				}))
 			})
 			It(`Invoke GetSearchInfo successfully`, func() {
@@ -26097,17 +26097,17 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetAllDbsOptions model
 				getAllDbsOptionsModel := cloudantService.NewGetAllDbsOptions()
 				getAllDbsOptionsModel.SetDescending(false)
-				getAllDbsOptionsModel.SetEndkey("testString")
+				getAllDbsOptionsModel.SetEndKey("testString")
 				getAllDbsOptionsModel.SetLimit(int64(0))
 				getAllDbsOptionsModel.SetSkip(int64(0))
-				getAllDbsOptionsModel.SetStartkey("testString")
+				getAllDbsOptionsModel.SetStartKey("testString")
 				getAllDbsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getAllDbsOptionsModel).ToNot(BeNil())
 				Expect(getAllDbsOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
-				Expect(getAllDbsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
+				Expect(getAllDbsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(getAllDbsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getAllDbsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(getAllDbsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(getAllDbsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
 				Expect(getAllDbsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetAttachmentOptions successfully`, func() {
@@ -26679,10 +26679,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.SetLimit(int64(0))
 				postAllDocsOptionsModel.SetSkip(int64(0))
 				postAllDocsOptionsModel.SetUpdateSeq(false)
-				postAllDocsOptionsModel.SetEndkey("testString")
+				postAllDocsOptionsModel.SetEndKey("testString")
 				postAllDocsOptionsModel.SetKey("testString")
 				postAllDocsOptionsModel.SetKeys([]string{"testString"})
-				postAllDocsOptionsModel.SetStartkey("testString")
+				postAllDocsOptionsModel.SetStartKey("testString")
 				postAllDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postAllDocsOptionsModel).ToNot(BeNil())
 				Expect(postAllDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -26695,10 +26695,10 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postAllDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postAllDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postAllDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
+				Expect(postAllDocsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postAllDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostAllDocsQueriesOptions successfully`, func() {
@@ -26714,10 +26714,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 				Expect(allDocsQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.Attachments).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.Conflicts).To(Equal(core.BoolPtr(false)))
@@ -26727,10 +26727,10 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(allDocsQueryModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(allDocsQueryModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(allDocsQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(allDocsQueryModel.Endkey).To(Equal(core.StringPtr("testString")))
+				Expect(allDocsQueryModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Keys).To(Equal([]string{"testString"}))
-				Expect(allDocsQueryModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(allDocsQueryModel.StartKey).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
 				db := "testString"
@@ -26948,10 +26948,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.SetLimit(int64(0))
 				postDesignDocsOptionsModel.SetSkip(int64(0))
 				postDesignDocsOptionsModel.SetUpdateSeq(false)
-				postDesignDocsOptionsModel.SetEndkey("testString")
+				postDesignDocsOptionsModel.SetEndKey("testString")
 				postDesignDocsOptionsModel.SetKey("testString")
 				postDesignDocsOptionsModel.SetKeys([]string{"testString"})
-				postDesignDocsOptionsModel.SetStartkey("testString")
+				postDesignDocsOptionsModel.SetStartKey("testString")
 				postDesignDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDesignDocsOptionsModel).ToNot(BeNil())
 				Expect(postDesignDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -26965,10 +26965,10 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postDesignDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postDesignDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postDesignDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postDesignDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
+				Expect(postDesignDocsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postDesignDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postDesignDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostDesignDocsQueriesOptions successfully`, func() {
@@ -26984,10 +26984,10 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.Limit = core.Int64Ptr(int64(0))
 				allDocsQueryModel.Skip = core.Int64Ptr(int64(0))
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
-				allDocsQueryModel.Endkey = core.StringPtr("testString")
+				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
 				allDocsQueryModel.Keys = []string{"testString"}
-				allDocsQueryModel.Startkey = core.StringPtr("testString")
+				allDocsQueryModel.StartKey = core.StringPtr("testString")
 				Expect(allDocsQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.Attachments).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.Conflicts).To(Equal(core.BoolPtr(false)))
@@ -26997,10 +26997,10 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(allDocsQueryModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(allDocsQueryModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(allDocsQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(allDocsQueryModel.Endkey).To(Equal(core.StringPtr("testString")))
+				Expect(allDocsQueryModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Keys).To(Equal([]string{"testString"}))
-				Expect(allDocsQueryModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(allDocsQueryModel.StartKey).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
 				db := "testString"
@@ -27276,10 +27276,10 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.SetLimit(int64(0))
 				postPartitionAllDocsOptionsModel.SetSkip(int64(0))
 				postPartitionAllDocsOptionsModel.SetUpdateSeq(false)
-				postPartitionAllDocsOptionsModel.SetEndkey("testString")
+				postPartitionAllDocsOptionsModel.SetEndKey("testString")
 				postPartitionAllDocsOptionsModel.SetKey("testString")
 				postPartitionAllDocsOptionsModel.SetKeys([]string{"testString"})
-				postPartitionAllDocsOptionsModel.SetStartkey("testString")
+				postPartitionAllDocsOptionsModel.SetStartKey("testString")
 				postPartitionAllDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postPartitionAllDocsOptionsModel).ToNot(BeNil())
 				Expect(postPartitionAllDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -27293,10 +27293,10 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionAllDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionAllDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postPartitionAllDocsOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionAllDocsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postPartitionAllDocsOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostPartitionFindOptions successfully`, func() {
@@ -27399,16 +27399,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetLimit(int64(0))
 				postPartitionViewOptionsModel.SetSkip(int64(0))
 				postPartitionViewOptionsModel.SetUpdateSeq(false)
-				postPartitionViewOptionsModel.SetEndkey(core.StringPtr("testString"))
-				postPartitionViewOptionsModel.SetEndkeyDocid("testString")
+				postPartitionViewOptionsModel.SetEndKey(core.StringPtr("testString"))
+				postPartitionViewOptionsModel.SetEndKeyDocID("testString")
 				postPartitionViewOptionsModel.SetGroup(false)
 				postPartitionViewOptionsModel.SetGroupLevel(int64(1))
 				postPartitionViewOptionsModel.SetKey(core.StringPtr("testString"))
 				postPartitionViewOptionsModel.SetKeys([]interface{}{"testString"})
 				postPartitionViewOptionsModel.SetReduce(true)
 				postPartitionViewOptionsModel.SetStable(false)
-				postPartitionViewOptionsModel.SetStartkey(core.StringPtr("testString"))
-				postPartitionViewOptionsModel.SetStartkeyDocid("testString")
+				postPartitionViewOptionsModel.SetStartKey(core.StringPtr("testString"))
+				postPartitionViewOptionsModel.SetStartKeyDocID("testString")
 				postPartitionViewOptionsModel.SetUpdate("true")
 				postPartitionViewOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postPartitionViewOptionsModel).ToNot(BeNil())
@@ -27425,16 +27425,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postPartitionViewOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
-				Expect(postPartitionViewOptionsModel.EndkeyDocid).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.EndKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postPartitionViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(postPartitionViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.Stable).To(Equal(core.BoolPtr(false)))
-				Expect(postPartitionViewOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
-				Expect(postPartitionViewOptionsModel.StartkeyDocid).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Update).To(Equal(core.StringPtr("true")))
 				Expect(postPartitionViewOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -27535,16 +27535,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.SetLimit(int64(0))
 				postViewOptionsModel.SetSkip(int64(0))
 				postViewOptionsModel.SetUpdateSeq(false)
-				postViewOptionsModel.SetEndkey(core.StringPtr("testString"))
-				postViewOptionsModel.SetEndkeyDocid("testString")
+				postViewOptionsModel.SetEndKey(core.StringPtr("testString"))
+				postViewOptionsModel.SetEndKeyDocID("testString")
 				postViewOptionsModel.SetGroup(false)
 				postViewOptionsModel.SetGroupLevel(int64(1))
 				postViewOptionsModel.SetKey(core.StringPtr("testString"))
 				postViewOptionsModel.SetKeys([]interface{}{"testString"})
 				postViewOptionsModel.SetReduce(true)
 				postViewOptionsModel.SetStable(false)
-				postViewOptionsModel.SetStartkey(core.StringPtr("testString"))
-				postViewOptionsModel.SetStartkeyDocid("testString")
+				postViewOptionsModel.SetStartKey(core.StringPtr("testString"))
+				postViewOptionsModel.SetStartKeyDocID("testString")
 				postViewOptionsModel.SetUpdate("true")
 				postViewOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postViewOptionsModel).ToNot(BeNil())
@@ -27560,16 +27560,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postViewOptionsModel.Endkey).To(Equal(core.StringPtr("testString")))
-				Expect(postViewOptionsModel.EndkeyDocid).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.EndKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postViewOptionsModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(postViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.Stable).To(Equal(core.BoolPtr(false)))
-				Expect(postViewOptionsModel.Startkey).To(Equal(core.StringPtr("testString")))
-				Expect(postViewOptionsModel.StartkeyDocid).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postViewOptionsModel.Update).To(Equal(core.StringPtr("true")))
 				Expect(postViewOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -27586,16 +27586,16 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.Endkey = core.StringPtr("testString")
-				viewQueryModel.EndkeyDocid = core.StringPtr("testString")
+				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
 				viewQueryModel.Key = core.StringPtr("testString")
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.Startkey = core.StringPtr("testString")
-				viewQueryModel.StartkeyDocid = core.StringPtr("testString")
+				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 				Expect(viewQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(viewQueryModel.Attachments).To(Equal(core.BoolPtr(false)))
@@ -27606,16 +27606,16 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(viewQueryModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(viewQueryModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(viewQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(viewQueryModel.Endkey).To(Equal(core.StringPtr("testString")))
-				Expect(viewQueryModel.EndkeyDocid).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.EndKey).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.EndKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(viewQueryModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(viewQueryModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(viewQueryModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(viewQueryModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(viewQueryModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(viewQueryModel.Stable).To(Equal(core.BoolPtr(false)))
-				Expect(viewQueryModel.Startkey).To(Equal(core.StringPtr("testString")))
-				Expect(viewQueryModel.StartkeyDocid).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(viewQueryModel.Update).To(Equal(core.StringPtr("true")))
 
 				// Construct an instance of the PostViewQueriesOptions model
