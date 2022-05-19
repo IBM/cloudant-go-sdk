@@ -232,11 +232,11 @@ or in the
 
 ## Using the SDK
 
-For fundamental SDK usage information and config options, please see the common [IBM Cloud SDK](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md) documentation. 
+For fundamental SDK usage information and config options, please see the common [IBM Cloud SDK](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md) documentation.
 
 ### Request timeout configuration
 
-A 6m request timeout, which includes a 30s connect timeout, is set by default. Note that this also affects changes feed requests, regardless of a timeout set on `PostChangesOptions`. Be sure to set a request timeout appropriate to your application usage and environment. 
+A 6m request timeout, which includes a 30s connect timeout, is set by default. Note that this also affects changes feed requests, regardless of a timeout set on `PostChangesOptions`. Be sure to set a request timeout appropriate to your application usage and environment.
 The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common/blob/master/README.md) section contains details on how to change the value.
 
 **Note:** System settings may take precedence over configured timeout values.
@@ -272,7 +272,7 @@ EXAMPLES_AUTH_TYPE=NOAUTH
 
 Once the environment variables are set, you can try out the code examples.
 
-[embedmd]:# (examples/src/get_info_from_existing_database/get_info_from_existing_database.go /package main/ $)
+[embedmd]:# (test/examples/src/get_info_from_existing_database/get_info_from_existing_database.go /package main/ $)
 ```go
 package main
 
@@ -333,7 +333,7 @@ func main() {
 
 When you run the code, you see a result similar to the following output.
 
-[embedmd]:# (examples/output/get_info_from_existing_database.txt)
+[embedmd]:# (test/examples/output/get_info_from_existing_database.txt)
 ```txt
 Server Version: 2.1.1
 Document count in "animaldb" database is 11.
@@ -360,7 +360,7 @@ Now comes the exciting part, you create your own `orders` database and add a doc
 <details>
 <summary>Create code example</summary>
 
-[embedmd]:# (examples/src/create_db_and_doc/create_db_and_doc.go /package main/ $)
+[embedmd]:# (test/examples/src/create_db_and_doc/create_db_and_doc.go /package main/ $)
 ```go
 package main
 
@@ -451,7 +451,7 @@ func main() {
 </details>
 When you run the code, you see a result similar to the following output.
 
-[embedmd]:# (examples/output/create_db_and_doc.txt)
+[embedmd]:# (test/examples/output/create_db_and_doc.txt)
 ```txt
 "orders" database created.
 You have created the document:
@@ -474,7 +474,7 @@ database or 'example' document was not found."
 <details>
 <summary>Update code example</summary>
 
-[embedmd]:# (examples/src/update_doc/update_doc.go /package main/ $)
+[embedmd]:# (test/examples/src/update_doc/update_doc.go /package main/ $)
 ```go
 package main
 
@@ -591,7 +591,7 @@ func main() {
 </details>
 When you run the code, you see a result similar to the following output.
 
-[embedmd]:# (examples/output/update_doc.txt)
+[embedmd]:# (test/examples/output/update_doc.txt)
 ```txt
 You have updated the document:
 {
@@ -613,7 +613,7 @@ database or 'example' document was not found."
 <details>
 <summary>Delete code example</summary>
 
-[embedmd]:# (examples/src/delete_doc/delete_doc.go /package main/ $)
+[embedmd]:# (test/examples/src/delete_doc/delete_doc.go /package main/ $)
 ```go
 package main
 
@@ -677,7 +677,7 @@ func main() {
 </details>
 When you run the code, you see the following output.
 
-[embedmd]:# (examples/output/delete_doc.txt)
+[embedmd]:# (test/examples/output/delete_doc.txt)
 ```txt
 You have deleted the document.
 ```
@@ -690,7 +690,7 @@ For sample code on handling errors, see
 ### Raw IO
 
 For endpoints that read or write document content it is possible to bypass
-usage of the built-in struct with byte streams. 
+usage of the built-in struct with byte streams.
 
 Depending on the specific SDK operation it may be possible to:
 * accept a user-provided byte stream to send to the server as a request body
@@ -706,8 +706,8 @@ without triggering JSON unmarshalling that is typically performed by the SDK.
 The [update document](#3-update-your-previously-created-document) section
 contains examples for both request and response byte stream cases.
 
-The API reference contains further examples of using byte streams. 
-They are titled "Example request as stream" and are initially collapsed. 
+The API reference contains further examples of using byte streams.
+They are titled "Example request as stream" and are initially collapsed.
 Expand them to see examples of:
 
 - Byte requests:
