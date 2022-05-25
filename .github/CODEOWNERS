@@ -26,4 +26,8 @@ cloudantv1/cloudant_v1_test.go @IBM/cloudant-sdks
 
 common/version.go @IBM/cloudant-sdks
 
+# Examples files:
+
+/examples/ @IBM/cloudant-sdks
+
 .bumpversion.cfg @IBM/cloudant-sdks
