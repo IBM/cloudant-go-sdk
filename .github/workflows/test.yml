@@ -1,0 +1,29 @@
+name: test
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+env:
+  GO111MODULE: on
+jobs:
+  test:
+    strategy:
+      matrix:
+        go: ['1.17', '1.18']
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Go ${{ matrix.go }}
+      uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go }}
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Run tests
+      run: go test ./auth/... ./common/... ./cloudantv1/... -race -coverprofile=coverage.txt -covermode=atomic
+    - name: Lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: v1.45.1
