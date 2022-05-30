@@ -3,7 +3,7 @@ module github.com/IBM/cloudant-go-sdk
 go 1.17
 
 require (
-	github.com/IBM/go-sdk-core/v5 v5.10.0
+	github.com/IBM/go-sdk-core/v5 v5.10.1
 	github.com/go-openapi/strfmt v0.21.2
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.19.0
@@ -17,7 +17,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
-	github.com/hashicorp/go-retryablehttp v0.7.0 // indirect
+	github.com/hashicorp/go-retryablehttp v0.7.1 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
 	github.com/nxadm/tail v1.4.8 // indirect
