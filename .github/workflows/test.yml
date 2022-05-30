@@ -1,13 +1,5 @@
 name: test
-on:
-  push:
-    branches:
-    - master
-  pull_request:
-    branches:
-    - master
-env:
-  GO111MODULE: on
+on: [push, pull_request]
 jobs:
   test:
     strategy:
@@ -19,11 +11,11 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: ${{ matrix.go }}
+        check-latest: false
+        cache: true
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Run tests
       run: go test ./auth/... ./common/... ./cloudantv1/... -race -coverprofile=coverage.txt -covermode=atomic
-    - name: Lint
+    - name: Run lint
       uses: golangci/golangci-lint-action@v3
-      with:
-        version: v1.45.1
