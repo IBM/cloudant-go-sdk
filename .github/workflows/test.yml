@@ -1,0 +1,21 @@
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        go: ['1.17', '1.18']
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install Go ${{ matrix.go }}
+      uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go }}
+        check-latest: false
+        cache: true
+    - name: Run tests
+      run: go test ./auth/... ./common/... ./cloudantv1/... -race -coverprofile=coverage.txt -covermode=atomic
+    - name: Run lint
+      uses: golangci/golangci-lint-action@v3
