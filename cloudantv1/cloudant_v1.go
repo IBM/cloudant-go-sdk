@@ -7901,8 +7901,8 @@ type AllDocsQuery struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -11153,8 +11153,8 @@ type GetDesignDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
-	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-	// returned document. Ignored if `include_docs` isn't `true`.
+	// Query parameter to specify whether to include a list of conflicted revisions in each returned document. Active only
+	// when `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to include a list of deleted conflicted revisions in the `_deleted_conflicts`
@@ -11294,8 +11294,8 @@ type GetDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
-	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-	// returned document. Ignored if `include_docs` isn't `true`.
+	// Query parameter to specify whether to include a list of conflicted revisions in each returned document. Active only
+	// when `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to include a list of deleted conflicted revisions in the `_deleted_conflicts`
@@ -11914,8 +11914,8 @@ type GetReplicationDocumentOptions struct {
 	// attachment is compressed.
 	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
 
-	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-	// returned document. Ignored if `include_docs` isn't `true`.
+	// Query parameter to specify whether to include a list of conflicted revisions in each returned document. Active only
+	// when `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to include a list of deleted conflicted revisions in the `_deleted_conflicts`
@@ -13267,8 +13267,8 @@ type PostAllDocsOptions struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -13634,8 +13634,8 @@ type PostChangesOptions struct {
 	// Query parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Query parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the
-	// returned document. Ignored if `include_docs` isn't `true`.
+	// Query parameter to specify whether to include a list of conflicted revisions in each returned document. Active only
+	// when `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Query parameter to specify whether to return the documents in descending by key order.
@@ -13878,8 +13878,8 @@ type PostDesignDocsOptions struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -14669,8 +14669,8 @@ type PostPartitionAllDocsOptions struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -15209,8 +15209,8 @@ type PostPartitionViewOptions struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -15238,25 +15238,33 @@ type PostPartitionViewOptions struct {
 	// Schema for a document ID.
 	EndKeyDocID *string `json:"end_key_doc_id,omitempty"`
 
-	// Parameter to specify whether to group the results using the reduce function to a group rather than a single row.
-	// Implies reduce is true and the maximum group_level.
+	// Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the view.
+	// If the view emits key in JSON array format, then it is possible to reduce groups further based on the number of
+	// array elements with the `group_level` parameter.
 	Group *bool `json:"group,omitempty"`
 
-	// Parameter to specify the group level to be used. Implies group is true.
+	// Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays. Implies
+	// group is `true`. Group level groups the reduced results by the specified number of array elements. If unset, results
+	// are grouped by the entire array key, returning a reduced value for each complete key.
 	GroupLevel *int64 `json:"group_level,omitempty"`
 
 	// Schema for any JSON type.
 	Key interface{} `json:"key,omitempty"`
 
-	// Parameter to specify to return only documents that match the specified keys. String representation of a JSON array
-	// containing elements that match the key type emitted by the view function.
+	// Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys that match
+	// the key type emitted by the view function.
 	Keys []interface{} `json:"keys,omitempty"`
 
 	// Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce function
 	// is defined.
 	Reduce *bool `json:"reduce,omitempty"`
 
-	// Parameter to specify whether view results should be returned from a stable set of shards.
+	// Query parameter to specify whether use the same replica of  the index on each request. The default value `false`
+	// contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true` when used in
+	// conjunction with `update=false`  may improve consistency at the expense of increased latency and decreased
+	// throughput if the selected replica is not the fastest of the available  replicas.
+	//
+	// **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
 	Stable *bool `json:"stable,omitempty"`
 
 	// Schema for any JSON type.
@@ -15266,6 +15274,10 @@ type PostPartitionViewOptions struct {
 	StartKeyDocID *string `json:"start_key_doc_id,omitempty"`
 
 	// Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+	//
+	// * `true` - Return results after the view is updated.
+	// * `false` - Return results without updating the view.
+	// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 	Update *string `json:"update,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -15274,6 +15286,10 @@ type PostPartitionViewOptions struct {
 
 // Constants associated with the PostPartitionViewOptions.Update property.
 // Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+//
+// * `true` - Return results after the view is updated.
+// * `false` - Return results without updating the view.
+// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 const (
 	PostPartitionViewOptionsUpdateFalseConst = "false"
 	PostPartitionViewOptionsUpdateLazyConst = "lazy"
@@ -15818,8 +15834,8 @@ type PostViewOptions struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -15847,25 +15863,33 @@ type PostViewOptions struct {
 	// Schema for a document ID.
 	EndKeyDocID *string `json:"end_key_doc_id,omitempty"`
 
-	// Parameter to specify whether to group the results using the reduce function to a group rather than a single row.
-	// Implies reduce is true and the maximum group_level.
+	// Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the view.
+	// If the view emits key in JSON array format, then it is possible to reduce groups further based on the number of
+	// array elements with the `group_level` parameter.
 	Group *bool `json:"group,omitempty"`
 
-	// Parameter to specify the group level to be used. Implies group is true.
+	// Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays. Implies
+	// group is `true`. Group level groups the reduced results by the specified number of array elements. If unset, results
+	// are grouped by the entire array key, returning a reduced value for each complete key.
 	GroupLevel *int64 `json:"group_level,omitempty"`
 
 	// Schema for any JSON type.
 	Key interface{} `json:"key,omitempty"`
 
-	// Parameter to specify to return only documents that match the specified keys. String representation of a JSON array
-	// containing elements that match the key type emitted by the view function.
+	// Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys that match
+	// the key type emitted by the view function.
 	Keys []interface{} `json:"keys,omitempty"`
 
 	// Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce function
 	// is defined.
 	Reduce *bool `json:"reduce,omitempty"`
 
-	// Parameter to specify whether view results should be returned from a stable set of shards.
+	// Query parameter to specify whether use the same replica of  the index on each request. The default value `false`
+	// contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true` when used in
+	// conjunction with `update=false`  may improve consistency at the expense of increased latency and decreased
+	// throughput if the selected replica is not the fastest of the available  replicas.
+	//
+	// **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
 	Stable *bool `json:"stable,omitempty"`
 
 	// Schema for any JSON type.
@@ -15875,6 +15899,10 @@ type PostViewOptions struct {
 	StartKeyDocID *string `json:"start_key_doc_id,omitempty"`
 
 	// Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+	//
+	// * `true` - Return results after the view is updated.
+	// * `false` - Return results without updating the view.
+	// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 	Update *string `json:"update,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -15883,6 +15911,10 @@ type PostViewOptions struct {
 
 // Constants associated with the PostViewOptions.Update property.
 // Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+//
+// * `true` - Return results after the view is updated.
+// * `false` - Return results without updating the view.
+// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 const (
 	PostViewOptionsUpdateFalseConst = "false"
 	PostViewOptionsUpdateLazyConst = "lazy"
@@ -18557,8 +18589,8 @@ type ViewQuery struct {
 	// Parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
 
-	// Parameter to specify whether to include a list of conflicted revisions in the `_conflicts` property of the returned
-	// document. Ignored if `include_docs` isn't `true`.
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. Active only when
+	// `include_docs` is `true`.
 	Conflicts *bool `json:"conflicts,omitempty"`
 
 	// Parameter to specify whether to return the documents in descending by key order.
@@ -18586,25 +18618,33 @@ type ViewQuery struct {
 	// Schema for a document ID.
 	EndKeyDocID *string `json:"end_key_doc_id,omitempty"`
 
-	// Parameter to specify whether to group the results using the reduce function to a group rather than a single row.
-	// Implies reduce is true and the maximum group_level.
+	// Parameter to specify whether to group reduced results by key. Valid only if a reduce function defined in the view.
+	// If the view emits key in JSON array format, then it is possible to reduce groups further based on the number of
+	// array elements with the `group_level` parameter.
 	Group *bool `json:"group,omitempty"`
 
-	// Parameter to specify the group level to be used. Implies group is true.
+	// Parameter to specify a group level to be used. Only applicable if the view uses keys that are JSON arrays. Implies
+	// group is `true`. Group level groups the reduced results by the specified number of array elements. If unset, results
+	// are grouped by the entire array key, returning a reduced value for each complete key.
 	GroupLevel *int64 `json:"group_level,omitempty"`
 
 	// Schema for any JSON type.
 	Key interface{} `json:"key,omitempty"`
 
-	// Parameter to specify to return only documents that match the specified keys. String representation of a JSON array
-	// containing elements that match the key type emitted by the view function.
+	// Parameter to specify returning only documents that match any of the specified keys. A JSON array of keys that match
+	// the key type emitted by the view function.
 	Keys []interface{} `json:"keys,omitempty"`
 
 	// Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce function
 	// is defined.
 	Reduce *bool `json:"reduce,omitempty"`
 
-	// Parameter to specify whether view results should be returned from a stable set of shards.
+	// Query parameter to specify whether use the same replica of  the index on each request. The default value `false`
+	// contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true` when used in
+	// conjunction with `update=false`  may improve consistency at the expense of increased latency and decreased
+	// throughput if the selected replica is not the fastest of the available  replicas.
+	//
+	// **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
 	Stable *bool `json:"stable,omitempty"`
 
 	// Schema for any JSON type.
@@ -18614,11 +18654,19 @@ type ViewQuery struct {
 	StartKeyDocID *string `json:"start_key_doc_id,omitempty"`
 
 	// Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+	//
+	// * `true` - Return results after the view is updated.
+	// * `false` - Return results without updating the view.
+	// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 	Update *string `json:"update,omitempty"`
 }
 
 // Constants associated with the ViewQuery.Update property.
 // Parameter to specify whether or not the view in question should be updated prior to responding to the user.
+//
+// * `true` - Return results after the view is updated.
+// * `false` - Return results without updating the view.
+// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 const (
 	ViewQueryUpdateFalseConst = "false"
 	ViewQueryUpdateLazyConst = "lazy"

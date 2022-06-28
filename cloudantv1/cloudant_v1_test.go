@@ -18514,7 +18514,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
@@ -18571,7 +18571,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
@@ -18632,7 +18632,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
@@ -18706,7 +18706,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Set success status code with no respoonse body
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 				}))
 			})
 			It(`Invoke DeleteReplicationDocument successfully`, func() {
@@ -22378,7 +22378,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["rev"]).To(Equal([]string{"testString"}))
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
 				}))
 			})
@@ -22437,7 +22437,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
@@ -22500,7 +22500,7 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
 				}))
 			})
@@ -22578,7 +22578,7 @@ var _ = Describe(`CloudantV1`, func() {
 					defer GinkgoRecover()
 
 					// Set success status code with no respoonse body
-					res.WriteHeader(201)
+					res.WriteHeader(200)
 				}))
 			})
 			It(`Invoke DeleteAttachment successfully`, func() {
