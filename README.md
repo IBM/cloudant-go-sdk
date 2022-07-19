@@ -4,6 +4,8 @@
 
 # IBM Cloudant Go SDK Version 0.1.4
 
+Trigger an automatic pull request.
+
 IBM Cloudant Go SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
 
