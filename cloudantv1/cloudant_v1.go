@@ -83,8 +83,8 @@ func NewCloudantV1UsingExternalConfig(options *CloudantV1Options) (cloudant *Clo
 // NewCloudantV1 : constructs an instance of CloudantV1 with passed in options.
 func NewCloudantV1(options *CloudantV1Options) (service *CloudantV1, err error) {
 	serviceOptions := &core.ServiceOptions{
-		URL:           DefaultServiceURL,
-		Authenticator: options.Authenticator,
+		URL:                   DefaultServiceURL,
+		Authenticator:         options.Authenticator,
 		EnableGzipCompression: true,
 	}
 
@@ -1138,7 +1138,7 @@ func (cloudant *CloudantV1) HeadDocumentWithContext(ctx context.Context, headDoc
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *headDocumentOptions.Db,
+		"db":     *headDocumentOptions.Db,
 		"doc_id": *headDocumentOptions.DocID,
 	}
 
@@ -1990,7 +1990,7 @@ func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, delet
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *deleteDocumentOptions.Db,
+		"db":     *deleteDocumentOptions.Db,
 		"doc_id": *deleteDocumentOptions.DocID,
 	}
 
@@ -2062,7 +2062,7 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
+		"db":     *getDocumentOptions.Db,
 		"doc_id": *getDocumentOptions.DocID,
 	}
 
@@ -2158,7 +2158,7 @@ func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, g
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
+		"db":     *getDocumentOptions.Db,
 		"doc_id": *getDocumentOptions.DocID,
 	}
 
@@ -2243,7 +2243,7 @@ func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context,
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
+		"db":     *getDocumentOptions.Db,
 		"doc_id": *getDocumentOptions.DocID,
 	}
 
@@ -2328,7 +2328,7 @@ func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, 
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
+		"db":     *getDocumentOptions.Db,
 		"doc_id": *getDocumentOptions.DocID,
 	}
 
@@ -2420,7 +2420,7 @@ func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocum
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *putDocumentOptions.Db,
+		"db":     *putDocumentOptions.Db,
 		"doc_id": *putDocumentOptions.DocID,
 	}
 
@@ -2506,7 +2506,7 @@ func (cloudant *CloudantV1) HeadDesignDocumentWithContext(ctx context.Context, h
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *headDesignDocumentOptions.Db,
+		"db":   *headDesignDocumentOptions.Db,
 		"ddoc": *headDesignDocumentOptions.Ddoc,
 	}
 
@@ -2560,7 +2560,7 @@ func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context,
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *deleteDesignDocumentOptions.Db,
+		"db":   *deleteDesignDocumentOptions.Db,
 		"ddoc": *deleteDesignDocumentOptions.Ddoc,
 	}
 
@@ -2632,7 +2632,7 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDesignDocumentOptions.Db,
+		"db":   *getDesignDocumentOptions.Db,
 		"ddoc": *getDesignDocumentOptions.Ddoc,
 	}
 
@@ -2727,7 +2727,7 @@ func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, pu
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *putDesignDocumentOptions.Db,
+		"db":   *putDesignDocumentOptions.Db,
 		"ddoc": *putDesignDocumentOptions.Ddoc,
 	}
 
@@ -2808,7 +2808,7 @@ func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDesignDocumentInformationOptions.Db,
+		"db":   *getDesignDocumentInformationOptions.Db,
 		"ddoc": *getDesignDocumentInformationOptions.Ddoc,
 	}
 
@@ -3058,7 +3058,7 @@ func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOpt
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postViewOptions.Db,
+		"db":   *postViewOptions.Db,
 		"ddoc": *postViewOptions.Ddoc,
 		"view": *postViewOptions.View,
 	}
@@ -3190,7 +3190,7 @@ func (cloudant *CloudantV1) PostViewAsStreamWithContext(ctx context.Context, pos
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postViewOptions.Db,
+		"db":   *postViewOptions.Db,
 		"ddoc": *postViewOptions.Ddoc,
 		"view": *postViewOptions.View,
 	}
@@ -3308,7 +3308,7 @@ func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, post
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postViewQueriesOptions.Db,
+		"db":   *postViewQueriesOptions.Db,
 		"ddoc": *postViewQueriesOptions.Ddoc,
 		"view": *postViewQueriesOptions.View,
 	}
@@ -3380,7 +3380,7 @@ func (cloudant *CloudantV1) PostViewQueriesAsStreamWithContext(ctx context.Conte
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postViewQueriesOptions.Db,
+		"db":   *postViewQueriesOptions.Db,
 		"ddoc": *postViewQueriesOptions.Ddoc,
 		"view": *postViewQueriesOptions.View,
 	}
@@ -3441,7 +3441,7 @@ func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Conte
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getPartitionInformationOptions.Db,
+		"db":            *getPartitionInformationOptions.Db,
 		"partition_key": *getPartitionInformationOptions.PartitionKey,
 	}
 
@@ -3505,7 +3505,7 @@ func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context,
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionAllDocsOptions.Db,
+		"db":            *postPartitionAllDocsOptions.Db,
 		"partition_key": *postPartitionAllDocsOptions.PartitionKey,
 	}
 
@@ -3615,7 +3615,7 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionAllDocsOptions.Db,
+		"db":            *postPartitionAllDocsOptions.Db,
 		"partition_key": *postPartitionAllDocsOptions.PartitionKey,
 	}
 
@@ -3713,10 +3713,10 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionSearchOptions.Db,
+		"db":            *postPartitionSearchOptions.Db,
 		"partition_key": *postPartitionSearchOptions.PartitionKey,
-		"ddoc": *postPartitionSearchOptions.Ddoc,
-		"index": *postPartitionSearchOptions.Index,
+		"ddoc":          *postPartitionSearchOptions.Ddoc,
+		"index":         *postPartitionSearchOptions.Index,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -3821,10 +3821,10 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionSearchOptions.Db,
+		"db":            *postPartitionSearchOptions.Db,
 		"partition_key": *postPartitionSearchOptions.PartitionKey,
-		"ddoc": *postPartitionSearchOptions.Ddoc,
-		"index": *postPartitionSearchOptions.Index,
+		"ddoc":          *postPartitionSearchOptions.Ddoc,
+		"index":         *postPartitionSearchOptions.Index,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -3919,10 +3919,10 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionViewOptions.Db,
+		"db":            *postPartitionViewOptions.Db,
 		"partition_key": *postPartitionViewOptions.PartitionKey,
-		"ddoc": *postPartitionViewOptions.Ddoc,
-		"view": *postPartitionViewOptions.View,
+		"ddoc":          *postPartitionViewOptions.Ddoc,
+		"view":          *postPartitionViewOptions.View,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -4052,10 +4052,10 @@ func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Con
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionViewOptions.Db,
+		"db":            *postPartitionViewOptions.Db,
 		"partition_key": *postPartitionViewOptions.PartitionKey,
-		"ddoc": *postPartitionViewOptions.Ddoc,
-		"view": *postPartitionViewOptions.View,
+		"ddoc":          *postPartitionViewOptions.Ddoc,
+		"view":          *postPartitionViewOptions.View,
 	}
 
 	builder := core.NewRequestBuilder(core.POST)
@@ -4176,7 +4176,7 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionFindOptions.Db,
+		"db":            *postPartitionFindOptions.Db,
 		"partition_key": *postPartitionFindOptions.PartitionKey,
 	}
 
@@ -4282,7 +4282,7 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postPartitionFindOptions.Db,
+		"db":            *postPartitionFindOptions.Db,
 		"partition_key": *postPartitionFindOptions.PartitionKey,
 	}
 
@@ -4827,9 +4827,9 @@ func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIn
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *deleteIndexOptions.Db,
-		"ddoc": *deleteIndexOptions.Ddoc,
-		"type": *deleteIndexOptions.Type,
+		"db":    *deleteIndexOptions.Db,
+		"ddoc":  *deleteIndexOptions.Ddoc,
+		"type":  *deleteIndexOptions.Type,
 		"index": *deleteIndexOptions.Index,
 	}
 
@@ -4964,8 +4964,8 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postSearchOptions.Db,
-		"ddoc": *postSearchOptions.Ddoc,
+		"db":    *postSearchOptions.Db,
+		"ddoc":  *postSearchOptions.Ddoc,
 		"index": *postSearchOptions.Index,
 	}
 
@@ -5091,8 +5091,8 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *postSearchOptions.Db,
-		"ddoc": *postSearchOptions.Ddoc,
+		"db":    *postSearchOptions.Db,
+		"ddoc":  *postSearchOptions.Ddoc,
 		"index": *postSearchOptions.Index,
 	}
 
@@ -5203,8 +5203,8 @@ func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSea
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getSearchInfoOptions.Db,
-		"ddoc": *getSearchInfoOptions.Ddoc,
+		"db":    *getSearchInfoOptions.Db,
+		"ddoc":  *getSearchInfoOptions.Ddoc,
 		"index": *getSearchInfoOptions.Index,
 	}
 
@@ -5265,8 +5265,8 @@ func (cloudant *CloudantV1) GetGeoWithContext(ctx context.Context, getGeoOptions
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getGeoOptions.Db,
-		"ddoc": *getGeoOptions.Ddoc,
+		"db":    *getGeoOptions.Db,
+		"ddoc":  *getGeoOptions.Ddoc,
 		"index": *getGeoOptions.Index,
 	}
 
@@ -5373,8 +5373,8 @@ func (cloudant *CloudantV1) GetGeoAsStreamWithContext(ctx context.Context, getGe
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getGeoOptions.Db,
-		"ddoc": *getGeoOptions.Ddoc,
+		"db":    *getGeoOptions.Db,
+		"ddoc":  *getGeoOptions.Ddoc,
 		"index": *getGeoOptions.Index,
 	}
 
@@ -5529,8 +5529,8 @@ func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Contex
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getGeoIndexInformationOptions.Db,
-		"ddoc": *getGeoIndexInformationOptions.Ddoc,
+		"db":    *getGeoIndexInformationOptions.Db,
+		"ddoc":  *getGeoIndexInformationOptions.Ddoc,
 		"index": *getGeoIndexInformationOptions.Index,
 	}
 
@@ -6704,8 +6704,8 @@ func (cloudant *CloudantV1) HeadAttachmentWithContext(ctx context.Context, headA
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *headAttachmentOptions.Db,
-		"doc_id": *headAttachmentOptions.DocID,
+		"db":              *headAttachmentOptions.Db,
+		"doc_id":          *headAttachmentOptions.DocID,
 		"attachment_name": *headAttachmentOptions.AttachmentName,
 	}
 
@@ -6765,8 +6765,8 @@ func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, del
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *deleteAttachmentOptions.Db,
-		"doc_id": *deleteAttachmentOptions.DocID,
+		"db":              *deleteAttachmentOptions.Db,
+		"doc_id":          *deleteAttachmentOptions.DocID,
 		"attachment_name": *deleteAttachmentOptions.AttachmentName,
 	}
 
@@ -6839,8 +6839,8 @@ func (cloudant *CloudantV1) GetAttachmentWithContext(ctx context.Context, getAtt
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getAttachmentOptions.Db,
-		"doc_id": *getAttachmentOptions.DocID,
+		"db":              *getAttachmentOptions.Db,
+		"doc_id":          *getAttachmentOptions.DocID,
 		"attachment_name": *getAttachmentOptions.AttachmentName,
 	}
 
@@ -6912,8 +6912,8 @@ func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAtt
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *putAttachmentOptions.Db,
-		"doc_id": *putAttachmentOptions.DocID,
+		"db":              *putAttachmentOptions.Db,
+		"doc_id":          *putAttachmentOptions.DocID,
 		"attachment_name": *putAttachmentOptions.AttachmentName,
 	}
 
@@ -6990,7 +6990,7 @@ func (cloudant *CloudantV1) HeadLocalDocumentWithContext(ctx context.Context, he
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *headLocalDocumentOptions.Db,
+		"db":     *headLocalDocumentOptions.Db,
 		"doc_id": *headLocalDocumentOptions.DocID,
 	}
 
@@ -7043,7 +7043,7 @@ func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, 
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *deleteLocalDocumentOptions.Db,
+		"db":     *deleteLocalDocumentOptions.Db,
 		"doc_id": *deleteLocalDocumentOptions.DocID,
 	}
 
@@ -7109,7 +7109,7 @@ func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, get
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getLocalDocumentOptions.Db,
+		"db":     *getLocalDocumentOptions.Db,
 		"doc_id": *getLocalDocumentOptions.DocID,
 	}
 
@@ -7191,7 +7191,7 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *putLocalDocumentOptions.Db,
+		"db":     *putLocalDocumentOptions.Db,
 		"doc_id": *putLocalDocumentOptions.DocID,
 	}
 
@@ -7393,7 +7393,7 @@ func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context
 	}
 
 	pathParamsMap := map[string]string{
-		"db": *getDocumentShardsInfoOptions.Db,
+		"db":     *getDocumentShardsInfoOptions.Db,
 		"doc_id": *getDocumentShardsInfoOptions.DocID,
 	}
 
@@ -7850,7 +7850,7 @@ type ActivityTrackerEvents struct {
 
 // Constants associated with the ActivityTrackerEvents.Types property.
 const (
-	ActivityTrackerEventsTypesDataConst = "data"
+	ActivityTrackerEventsTypesDataConst       = "data"
 	ActivityTrackerEventsTypesManagementConst = "management"
 )
 
@@ -8045,46 +8045,46 @@ type Analyzer struct {
 // * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
 // index default_field the default is `standard`.
 const (
-	AnalyzerNameArabicConst = "arabic"
-	AnalyzerNameArmenianConst = "armenian"
-	AnalyzerNameBasqueConst = "basque"
-	AnalyzerNameBrazilianConst = "brazilian"
-	AnalyzerNameBulgarianConst = "bulgarian"
-	AnalyzerNameCatalanConst = "catalan"
-	AnalyzerNameChineseConst = "chinese"
-	AnalyzerNameCjkConst = "cjk"
-	AnalyzerNameClassicConst = "classic"
-	AnalyzerNameCzechConst = "czech"
-	AnalyzerNameDanishConst = "danish"
-	AnalyzerNameDutchConst = "dutch"
-	AnalyzerNameEmailConst = "email"
-	AnalyzerNameEnglishConst = "english"
-	AnalyzerNameFinnishConst = "finnish"
-	AnalyzerNameFrenchConst = "french"
-	AnalyzerNameGalicianConst = "galician"
-	AnalyzerNameGermanConst = "german"
-	AnalyzerNameGreekConst = "greek"
-	AnalyzerNameHindiConst = "hindi"
-	AnalyzerNameHungarianConst = "hungarian"
+	AnalyzerNameArabicConst     = "arabic"
+	AnalyzerNameArmenianConst   = "armenian"
+	AnalyzerNameBasqueConst     = "basque"
+	AnalyzerNameBrazilianConst  = "brazilian"
+	AnalyzerNameBulgarianConst  = "bulgarian"
+	AnalyzerNameCatalanConst    = "catalan"
+	AnalyzerNameChineseConst    = "chinese"
+	AnalyzerNameCjkConst        = "cjk"
+	AnalyzerNameClassicConst    = "classic"
+	AnalyzerNameCzechConst      = "czech"
+	AnalyzerNameDanishConst     = "danish"
+	AnalyzerNameDutchConst      = "dutch"
+	AnalyzerNameEmailConst      = "email"
+	AnalyzerNameEnglishConst    = "english"
+	AnalyzerNameFinnishConst    = "finnish"
+	AnalyzerNameFrenchConst     = "french"
+	AnalyzerNameGalicianConst   = "galician"
+	AnalyzerNameGermanConst     = "german"
+	AnalyzerNameGreekConst      = "greek"
+	AnalyzerNameHindiConst      = "hindi"
+	AnalyzerNameHungarianConst  = "hungarian"
 	AnalyzerNameIndonesianConst = "indonesian"
-	AnalyzerNameIrishConst = "irish"
-	AnalyzerNameItalianConst = "italian"
-	AnalyzerNameJapaneseConst = "japanese"
-	AnalyzerNameKeywordConst = "keyword"
-	AnalyzerNameLatvianConst = "latvian"
-	AnalyzerNameNorwegianConst = "norwegian"
-	AnalyzerNamePerfieldConst = "perfield"
-	AnalyzerNamePersianConst = "persian"
-	AnalyzerNamePolishConst = "polish"
+	AnalyzerNameIrishConst      = "irish"
+	AnalyzerNameItalianConst    = "italian"
+	AnalyzerNameJapaneseConst   = "japanese"
+	AnalyzerNameKeywordConst    = "keyword"
+	AnalyzerNameLatvianConst    = "latvian"
+	AnalyzerNameNorwegianConst  = "norwegian"
+	AnalyzerNamePerfieldConst   = "perfield"
+	AnalyzerNamePersianConst    = "persian"
+	AnalyzerNamePolishConst     = "polish"
 	AnalyzerNamePortugueseConst = "portuguese"
-	AnalyzerNameRomanianConst = "romanian"
-	AnalyzerNameRussianConst = "russian"
-	AnalyzerNameSimpleConst = "simple"
-	AnalyzerNameSpanishConst = "spanish"
-	AnalyzerNameStandardConst = "standard"
-	AnalyzerNameSwedishConst = "swedish"
-	AnalyzerNameThaiConst = "thai"
-	AnalyzerNameTurkishConst = "turkish"
+	AnalyzerNameRomanianConst   = "romanian"
+	AnalyzerNameRussianConst    = "russian"
+	AnalyzerNameSimpleConst     = "simple"
+	AnalyzerNameSpanishConst    = "spanish"
+	AnalyzerNameStandardConst   = "standard"
+	AnalyzerNameSwedishConst    = "swedish"
+	AnalyzerNameThaiConst       = "thai"
+	AnalyzerNameTurkishConst    = "turkish"
 	AnalyzerNameWhitespaceConst = "whitespace"
 )
 
@@ -8124,46 +8124,46 @@ type AnalyzerConfiguration struct {
 // * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
 // index default_field the default is `standard`.
 const (
-	AnalyzerConfigurationNameArabicConst = "arabic"
-	AnalyzerConfigurationNameArmenianConst = "armenian"
-	AnalyzerConfigurationNameBasqueConst = "basque"
-	AnalyzerConfigurationNameBrazilianConst = "brazilian"
-	AnalyzerConfigurationNameBulgarianConst = "bulgarian"
-	AnalyzerConfigurationNameCatalanConst = "catalan"
-	AnalyzerConfigurationNameChineseConst = "chinese"
-	AnalyzerConfigurationNameCjkConst = "cjk"
-	AnalyzerConfigurationNameClassicConst = "classic"
-	AnalyzerConfigurationNameCzechConst = "czech"
-	AnalyzerConfigurationNameDanishConst = "danish"
-	AnalyzerConfigurationNameDutchConst = "dutch"
-	AnalyzerConfigurationNameEmailConst = "email"
-	AnalyzerConfigurationNameEnglishConst = "english"
-	AnalyzerConfigurationNameFinnishConst = "finnish"
-	AnalyzerConfigurationNameFrenchConst = "french"
-	AnalyzerConfigurationNameGalicianConst = "galician"
-	AnalyzerConfigurationNameGermanConst = "german"
-	AnalyzerConfigurationNameGreekConst = "greek"
-	AnalyzerConfigurationNameHindiConst = "hindi"
-	AnalyzerConfigurationNameHungarianConst = "hungarian"
+	AnalyzerConfigurationNameArabicConst     = "arabic"
+	AnalyzerConfigurationNameArmenianConst   = "armenian"
+	AnalyzerConfigurationNameBasqueConst     = "basque"
+	AnalyzerConfigurationNameBrazilianConst  = "brazilian"
+	AnalyzerConfigurationNameBulgarianConst  = "bulgarian"
+	AnalyzerConfigurationNameCatalanConst    = "catalan"
+	AnalyzerConfigurationNameChineseConst    = "chinese"
+	AnalyzerConfigurationNameCjkConst        = "cjk"
+	AnalyzerConfigurationNameClassicConst    = "classic"
+	AnalyzerConfigurationNameCzechConst      = "czech"
+	AnalyzerConfigurationNameDanishConst     = "danish"
+	AnalyzerConfigurationNameDutchConst      = "dutch"
+	AnalyzerConfigurationNameEmailConst      = "email"
+	AnalyzerConfigurationNameEnglishConst    = "english"
+	AnalyzerConfigurationNameFinnishConst    = "finnish"
+	AnalyzerConfigurationNameFrenchConst     = "french"
+	AnalyzerConfigurationNameGalicianConst   = "galician"
+	AnalyzerConfigurationNameGermanConst     = "german"
+	AnalyzerConfigurationNameGreekConst      = "greek"
+	AnalyzerConfigurationNameHindiConst      = "hindi"
+	AnalyzerConfigurationNameHungarianConst  = "hungarian"
 	AnalyzerConfigurationNameIndonesianConst = "indonesian"
-	AnalyzerConfigurationNameIrishConst = "irish"
-	AnalyzerConfigurationNameItalianConst = "italian"
-	AnalyzerConfigurationNameJapaneseConst = "japanese"
-	AnalyzerConfigurationNameKeywordConst = "keyword"
-	AnalyzerConfigurationNameLatvianConst = "latvian"
-	AnalyzerConfigurationNameNorwegianConst = "norwegian"
-	AnalyzerConfigurationNamePerfieldConst = "perfield"
-	AnalyzerConfigurationNamePersianConst = "persian"
-	AnalyzerConfigurationNamePolishConst = "polish"
+	AnalyzerConfigurationNameIrishConst      = "irish"
+	AnalyzerConfigurationNameItalianConst    = "italian"
+	AnalyzerConfigurationNameJapaneseConst   = "japanese"
+	AnalyzerConfigurationNameKeywordConst    = "keyword"
+	AnalyzerConfigurationNameLatvianConst    = "latvian"
+	AnalyzerConfigurationNameNorwegianConst  = "norwegian"
+	AnalyzerConfigurationNamePerfieldConst   = "perfield"
+	AnalyzerConfigurationNamePersianConst    = "persian"
+	AnalyzerConfigurationNamePolishConst     = "polish"
 	AnalyzerConfigurationNamePortugueseConst = "portuguese"
-	AnalyzerConfigurationNameRomanianConst = "romanian"
-	AnalyzerConfigurationNameRussianConst = "russian"
-	AnalyzerConfigurationNameSimpleConst = "simple"
-	AnalyzerConfigurationNameSpanishConst = "spanish"
-	AnalyzerConfigurationNameStandardConst = "standard"
-	AnalyzerConfigurationNameSwedishConst = "swedish"
-	AnalyzerConfigurationNameThaiConst = "thai"
-	AnalyzerConfigurationNameTurkishConst = "turkish"
+	AnalyzerConfigurationNameRomanianConst   = "romanian"
+	AnalyzerConfigurationNameRussianConst    = "russian"
+	AnalyzerConfigurationNameSimpleConst     = "simple"
+	AnalyzerConfigurationNameSpanishConst    = "spanish"
+	AnalyzerConfigurationNameStandardConst   = "standard"
+	AnalyzerConfigurationNameSwedishConst    = "swedish"
+	AnalyzerConfigurationNameThaiConst       = "thai"
+	AnalyzerConfigurationNameTurkishConst    = "turkish"
 	AnalyzerConfigurationNameWhitespaceConst = "whitespace"
 )
 
@@ -8985,8 +8985,8 @@ const (
 // NewDeleteAttachmentOptions : Instantiate DeleteAttachmentOptions
 func (*CloudantV1) NewDeleteAttachmentOptions(db string, docID string, attachmentName string) *DeleteAttachmentOptions {
 	return &DeleteAttachmentOptions{
-		Db: core.StringPtr(db),
-		DocID: core.StringPtr(docID),
+		Db:             core.StringPtr(db),
+		DocID:          core.StringPtr(docID),
 		AttachmentName: core.StringPtr(attachmentName),
 	}
 }
@@ -9094,7 +9094,7 @@ const (
 // NewDeleteDesignDocumentOptions : Instantiate DeleteDesignDocumentOptions
 func (*CloudantV1) NewDeleteDesignDocumentOptions(db string, ddoc string) *DeleteDesignDocumentOptions {
 	return &DeleteDesignDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:   core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 	}
 }
@@ -9167,7 +9167,7 @@ const (
 // NewDeleteDocumentOptions : Instantiate DeleteDocumentOptions
 func (*CloudantV1) NewDeleteDocumentOptions(db string, docID string) *DeleteDocumentOptions {
 	return &DeleteDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -9230,17 +9230,17 @@ type DeleteIndexOptions struct {
 // Constants associated with the DeleteIndexOptions.Type property.
 // Path parameter to specify the index type.
 const (
-	DeleteIndexOptionsTypeJSONConst = "json"
+	DeleteIndexOptionsTypeJSONConst    = "json"
 	DeleteIndexOptionsTypeSpecialConst = "special"
-	DeleteIndexOptionsTypeTextConst = "text"
+	DeleteIndexOptionsTypeTextConst    = "text"
 )
 
 // NewDeleteIndexOptions : Instantiate DeleteIndexOptions
 func (*CloudantV1) NewDeleteIndexOptions(db string, ddoc string, typeVar string, index string) *DeleteIndexOptions {
 	return &DeleteIndexOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
-		Type: core.StringPtr(typeVar),
+		Db:    core.StringPtr(db),
+		Ddoc:  core.StringPtr(ddoc),
+		Type:  core.StringPtr(typeVar),
 		Index: core.StringPtr(index),
 	}
 }
@@ -9301,7 +9301,7 @@ const (
 // NewDeleteLocalDocumentOptions : Instantiate DeleteLocalDocumentOptions
 func (*CloudantV1) NewDeleteLocalDocumentOptions(db string, docID string) *DeleteLocalDocumentOptions {
 	return &DeleteLocalDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -10145,14 +10145,14 @@ type DocumentRevisionStatus struct {
 // `missing`: Revision is not available - `deleted`: Revision belongs to deleted document.
 const (
 	DocumentRevisionStatusStatusAvailableConst = "available"
-	DocumentRevisionStatusStatusDeletedConst = "deleted"
-	DocumentRevisionStatusStatusMissingConst = "missing"
+	DocumentRevisionStatusStatusDeletedConst   = "deleted"
+	DocumentRevisionStatusStatusMissingConst   = "missing"
 )
 
 // NewDocumentRevisionStatus : Instantiate DocumentRevisionStatus (Generic Model Constructor)
 func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (_model *DocumentRevisionStatus, err error) {
 	_model = &DocumentRevisionStatus{
-		Rev: core.StringPtr(rev),
+		Rev:    core.StringPtr(rev),
 		Status: core.StringPtr(status),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -10634,13 +10634,14 @@ type GeoJSONGeometryObject struct {
 // The type of GeoJSON Geometry.
 const (
 	GeoJSONGeometryObjectTypeGeometrycollectionConst = "GeometryCollection"
-	GeoJSONGeometryObjectTypeLinestringConst = "LineString"
-	GeoJSONGeometryObjectTypeMultilinestringConst = "MultiLineString"
-	GeoJSONGeometryObjectTypeMultipointConst = "MultiPoint"
-	GeoJSONGeometryObjectTypeMultipolygonConst = "MultiPolygon"
-	GeoJSONGeometryObjectTypePointConst = "Point"
-	GeoJSONGeometryObjectTypePolygonConst = "Polygon"
+	GeoJSONGeometryObjectTypeLinestringConst         = "LineString"
+	GeoJSONGeometryObjectTypeMultilinestringConst    = "MultiLineString"
+	GeoJSONGeometryObjectTypeMultipointConst         = "MultiPoint"
+	GeoJSONGeometryObjectTypeMultipolygonConst       = "MultiPolygon"
+	GeoJSONGeometryObjectTypePointConst              = "Point"
+	GeoJSONGeometryObjectTypePolygonConst            = "Polygon"
 )
+
 func (*GeoJSONGeometryObject) isaGeoJSONGeometryObject() bool {
 	return true
 }
@@ -10885,8 +10886,8 @@ type GetAttachmentOptions struct {
 // NewGetAttachmentOptions : Instantiate GetAttachmentOptions
 func (*CloudantV1) NewGetAttachmentOptions(db string, docID string, attachmentName string) *GetAttachmentOptions {
 	return &GetAttachmentOptions{
-		Db: core.StringPtr(db),
-		DocID: core.StringPtr(docID),
+		Db:             core.StringPtr(db),
+		DocID:          core.StringPtr(docID),
 		AttachmentName: core.StringPtr(attachmentName),
 	}
 }
@@ -11054,10 +11055,10 @@ type GetDbUpdatesOptions struct {
 // Constants associated with the GetDbUpdatesOptions.Feed property.
 // Query parameter to specify the changes feed type.
 const (
-	GetDbUpdatesOptionsFeedContinuousConst = "continuous"
+	GetDbUpdatesOptionsFeedContinuousConst  = "continuous"
 	GetDbUpdatesOptionsFeedEventsourceConst = "eventsource"
-	GetDbUpdatesOptionsFeedLongpollConst = "longpoll"
-	GetDbUpdatesOptionsFeedNormalConst = "normal"
+	GetDbUpdatesOptionsFeedLongpollConst    = "longpoll"
+	GetDbUpdatesOptionsFeedNormalConst      = "normal"
 )
 
 // NewGetDbUpdatesOptions : Instantiate GetDbUpdatesOptions
@@ -11111,7 +11112,7 @@ type GetDesignDocumentInformationOptions struct {
 // NewGetDesignDocumentInformationOptions : Instantiate GetDesignDocumentInformationOptions
 func (*CloudantV1) NewGetDesignDocumentInformationOptions(db string, ddoc string) *GetDesignDocumentInformationOptions {
 	return &GetDesignDocumentInformationOptions{
-		Db: core.StringPtr(db),
+		Db:   core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 	}
 }
@@ -11187,7 +11188,7 @@ type GetDesignDocumentOptions struct {
 // NewGetDesignDocumentOptions : Instantiate GetDesignDocumentOptions
 func (*CloudantV1) NewGetDesignDocumentOptions(db string, ddoc string) *GetDesignDocumentOptions {
 	return &GetDesignDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:   core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 	}
 }
@@ -11328,7 +11329,7 @@ type GetDocumentOptions struct {
 // NewGetDocumentOptions : Instantiate GetDocumentOptions
 func (*CloudantV1) NewGetDocumentOptions(db string, docID string) *GetDocumentOptions {
 	return &GetDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -11432,7 +11433,7 @@ type GetDocumentShardsInfoOptions struct {
 // NewGetDocumentShardsInfoOptions : Instantiate GetDocumentShardsInfoOptions
 func (*CloudantV1) NewGetDocumentShardsInfoOptions(db string, docID string) *GetDocumentShardsInfoOptions {
 	return &GetDocumentShardsInfoOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -11474,8 +11475,8 @@ type GetGeoIndexInformationOptions struct {
 // NewGetGeoIndexInformationOptions : Instantiate GetGeoIndexInformationOptions
 func (*CloudantV1) NewGetGeoIndexInformationOptions(db string, ddoc string, index string) *GetGeoIndexInformationOptions {
 	return &GetGeoIndexInformationOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
+		Db:    core.StringPtr(db),
+		Ddoc:  core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
 	}
 }
@@ -11581,25 +11582,25 @@ type GetGeoOptions struct {
 // Query parameter that causes the geospatial query output to be returned in the specified format.
 const (
 	GetGeoOptionsFormatApplicationVndGeoJSONConst = "application/vnd.geo+json"
-	GetGeoOptionsFormatGeojsonConst = "geojson"
-	GetGeoOptionsFormatLegacyConst = "legacy"
-	GetGeoOptionsFormatViewConst = "view"
+	GetGeoOptionsFormatGeojsonConst               = "geojson"
+	GetGeoOptionsFormatLegacyConst                = "legacy"
+	GetGeoOptionsFormatViewConst                  = "view"
 )
 
 // Constants associated with the GetGeoOptions.Relation property.
 // Query parameter to specify the DE-9IM (Dimensionally Extended nine-Intersection Model)geospatial relationship between
 // the query geometry and the result documents.
 const (
-	GetGeoOptionsRelationContainsConst = "contains"
+	GetGeoOptionsRelationContainsConst         = "contains"
 	GetGeoOptionsRelationContainsProperlyConst = "contains_properly"
-	GetGeoOptionsRelationCoveredByConst = "covered_by"
-	GetGeoOptionsRelationCoversConst = "covers"
-	GetGeoOptionsRelationCrossesConst = "crosses"
-	GetGeoOptionsRelationDisjointConst = "disjoint"
-	GetGeoOptionsRelationIntersectsConst = "intersects"
-	GetGeoOptionsRelationOverlapsConst = "overlaps"
-	GetGeoOptionsRelationTouchesConst = "touches"
-	GetGeoOptionsRelationWithinConst = "within"
+	GetGeoOptionsRelationCoveredByConst        = "covered_by"
+	GetGeoOptionsRelationCoversConst           = "covers"
+	GetGeoOptionsRelationCrossesConst          = "crosses"
+	GetGeoOptionsRelationDisjointConst         = "disjoint"
+	GetGeoOptionsRelationIntersectsConst       = "intersects"
+	GetGeoOptionsRelationOverlapsConst         = "overlaps"
+	GetGeoOptionsRelationTouchesConst          = "touches"
+	GetGeoOptionsRelationWithinConst           = "within"
 )
 
 // Constants associated with the GetGeoOptions.Stale property.
@@ -11611,8 +11612,8 @@ const (
 // NewGetGeoOptions : Instantiate GetGeoOptions
 func (*CloudantV1) NewGetGeoOptions(db string, ddoc string, index string) *GetGeoOptions {
 	return &GetGeoOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
+		Db:    core.StringPtr(db),
+		Ddoc:  core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
 	}
 }
@@ -11790,7 +11791,7 @@ type GetLocalDocumentOptions struct {
 // NewGetLocalDocumentOptions : Instantiate GetLocalDocumentOptions
 func (*CloudantV1) NewGetLocalDocumentOptions(db string, docID string) *GetLocalDocumentOptions {
 	return &GetLocalDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -11876,7 +11877,7 @@ type GetPartitionInformationOptions struct {
 // NewGetPartitionInformationOptions : Instantiate GetPartitionInformationOptions
 func (*CloudantV1) NewGetPartitionInformationOptions(db string, partitionKey string) *GetPartitionInformationOptions {
 	return &GetPartitionInformationOptions{
-		Db: core.StringPtr(db),
+		Db:           core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
 	}
 }
@@ -12049,13 +12050,13 @@ type GetSchedulerDocsOptions struct {
 // Constants associated with the GetSchedulerDocsOptions.States property.
 // Schema for replication state.
 const (
-	GetSchedulerDocsOptionsStatesCompletedConst = "completed"
-	GetSchedulerDocsOptionsStatesCrashingConst = "crashing"
-	GetSchedulerDocsOptionsStatesErrorConst = "error"
-	GetSchedulerDocsOptionsStatesFailedConst = "failed"
+	GetSchedulerDocsOptionsStatesCompletedConst    = "completed"
+	GetSchedulerDocsOptionsStatesCrashingConst     = "crashing"
+	GetSchedulerDocsOptionsStatesErrorConst        = "error"
+	GetSchedulerDocsOptionsStatesFailedConst       = "failed"
 	GetSchedulerDocsOptionsStatesInitializingConst = "initializing"
-	GetSchedulerDocsOptionsStatesPendingConst = "pending"
-	GetSchedulerDocsOptionsStatesRunningConst = "running"
+	GetSchedulerDocsOptionsStatesPendingConst      = "pending"
+	GetSchedulerDocsOptionsStatesRunningConst      = "running"
 )
 
 // NewGetSchedulerDocsOptions : Instantiate GetSchedulerDocsOptions
@@ -12197,8 +12198,8 @@ type GetSearchInfoOptions struct {
 // NewGetSearchInfoOptions : Instantiate GetSearchInfoOptions
 func (*CloudantV1) NewGetSearchInfoOptions(db string, ddoc string, index string) *GetSearchInfoOptions {
 	return &GetSearchInfoOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
+		Db:    core.StringPtr(db),
+		Ddoc:  core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
 	}
 }
@@ -12390,8 +12391,8 @@ type HeadAttachmentOptions struct {
 // NewHeadAttachmentOptions : Instantiate HeadAttachmentOptions
 func (*CloudantV1) NewHeadAttachmentOptions(db string, docID string, attachmentName string) *HeadAttachmentOptions {
 	return &HeadAttachmentOptions{
-		Db: core.StringPtr(db),
-		DocID: core.StringPtr(docID),
+		Db:             core.StringPtr(db),
+		DocID:          core.StringPtr(docID),
 		AttachmentName: core.StringPtr(attachmentName),
 	}
 }
@@ -12485,7 +12486,7 @@ type HeadDesignDocumentOptions struct {
 // NewHeadDesignDocumentOptions : Instantiate HeadDesignDocumentOptions
 func (*CloudantV1) NewHeadDesignDocumentOptions(db string, ddoc string) *HeadDesignDocumentOptions {
 	return &HeadDesignDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:   core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 	}
 }
@@ -12538,7 +12539,7 @@ type HeadDocumentOptions struct {
 // NewHeadDocumentOptions : Instantiate HeadDocumentOptions
 func (*CloudantV1) NewHeadDocumentOptions(db string, docID string) *HeadDocumentOptions {
 	return &HeadDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -12597,7 +12598,7 @@ type HeadLocalDocumentOptions struct {
 // NewHeadLocalDocumentOptions : Instantiate HeadLocalDocumentOptions
 func (*CloudantV1) NewHeadLocalDocumentOptions(db string, docID string) *HeadLocalDocumentOptions {
 	return &HeadLocalDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -12838,8 +12839,8 @@ type IndexField struct {
 // The type of the named field.
 const (
 	IndexFieldTypeBooleanConst = "boolean"
-	IndexFieldTypeNumberConst = "number"
-	IndexFieldTypeStringConst = "string"
+	IndexFieldTypeNumberConst  = "number"
+	IndexFieldTypeStringConst  = "string"
 )
 
 // SetProperty allows the user to set an arbitrary property on an instance of IndexField
@@ -12933,9 +12934,9 @@ type IndexInformation struct {
 // Constants associated with the IndexInformation.Type property.
 // Schema for the type of an index.
 const (
-	IndexInformationTypeJSONConst = "json"
+	IndexInformationTypeJSONConst    = "json"
 	IndexInformationTypeSpecialConst = "special"
-	IndexInformationTypeTextConst = "text"
+	IndexInformationTypeTextConst    = "text"
 )
 
 // UnmarshalIndexInformation unmarshals an instance of IndexInformation from the specified map of raw messages.
@@ -12977,7 +12978,7 @@ type IndexResult struct {
 // Flag to show whether the index was created or one already exists.
 const (
 	IndexResultResultCreatedConst = "created"
-	IndexResultResultExistsConst = "exists"
+	IndexResultResultExistsConst  = "exists"
 )
 
 // UnmarshalIndexResult unmarshals an instance of IndexResult from the specified map of raw messages.
@@ -13232,7 +13233,7 @@ type PostActivityTrackerEventsOptions struct {
 
 // Constants associated with the PostActivityTrackerEventsOptions.Types property.
 const (
-	PostActivityTrackerEventsOptionsTypesDataConst = "data"
+	PostActivityTrackerEventsOptionsTypesDataConst       = "data"
 	PostActivityTrackerEventsOptionsTypesManagementConst = "management"
 )
 
@@ -13419,7 +13420,7 @@ type PostAllDocsQueriesOptions struct {
 // NewPostAllDocsQueriesOptions : Instantiate PostAllDocsQueriesOptions
 func (*CloudantV1) NewPostAllDocsQueriesOptions(db string, queries []AllDocsQuery) *PostAllDocsQueriesOptions {
 	return &PostAllDocsQueriesOptions{
-		Db: core.StringPtr(db),
+		Db:      core.StringPtr(db),
 		Queries: queries,
 	}
 }
@@ -13534,7 +13535,7 @@ type PostBulkGetOptions struct {
 // NewPostBulkGetOptions : Instantiate PostBulkGetOptions
 func (*CloudantV1) NewPostBulkGetOptions(db string, docs []BulkGetQueryDocument) *PostBulkGetOptions {
 	return &PostBulkGetOptions{
-		Db: core.StringPtr(db),
+		Db:   core.StringPtr(db),
 		Docs: docs,
 	}
 }
@@ -13702,10 +13703,10 @@ type PostChangesOptions struct {
 // Constants associated with the PostChangesOptions.Feed property.
 // Query parameter to specify the changes feed type.
 const (
-	PostChangesOptionsFeedContinuousConst = "continuous"
+	PostChangesOptionsFeedContinuousConst  = "continuous"
 	PostChangesOptionsFeedEventsourceConst = "eventsource"
-	PostChangesOptionsFeedLongpollConst = "longpoll"
-	PostChangesOptionsFeedNormalConst = "normal"
+	PostChangesOptionsFeedLongpollConst    = "longpoll"
+	PostChangesOptionsFeedNormalConst      = "normal"
 )
 
 // NewPostChangesOptions : Instantiate PostChangesOptions
@@ -14039,7 +14040,7 @@ type PostDesignDocsQueriesOptions struct {
 // NewPostDesignDocsQueriesOptions : Instantiate PostDesignDocsQueriesOptions
 func (*CloudantV1) NewPostDesignDocsQueriesOptions(db string, queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
 	return &PostDesignDocsQueriesOptions{
-		Db: core.StringPtr(db),
+		Db:      core.StringPtr(db),
 		Queries: queries,
 	}
 }
@@ -14230,7 +14231,7 @@ type PostExplainOptions struct {
 // Constants associated with the PostExplainOptions.Sort property.
 // Schema for a mapping of field name to sort direction.
 const (
-	PostExplainOptionsSortAscConst = "asc"
+	PostExplainOptionsSortAscConst  = "asc"
 	PostExplainOptionsSortDescConst = "desc"
 )
 
@@ -14238,14 +14239,14 @@ const (
 // Whether to update the index prior to returning the result.
 const (
 	PostExplainOptionsUpdateFalseConst = "false"
-	PostExplainOptionsUpdateLazyConst = "lazy"
-	PostExplainOptionsUpdateTrueConst = "true"
+	PostExplainOptionsUpdateLazyConst  = "lazy"
+	PostExplainOptionsUpdateTrueConst  = "true"
 )
 
 // NewPostExplainOptions : Instantiate PostExplainOptions
 func (*CloudantV1) NewPostExplainOptions(db string, selector map[string]interface{}) *PostExplainOptions {
 	return &PostExplainOptions{
-		Db: core.StringPtr(db),
+		Db:       core.StringPtr(db),
 		Selector: selector,
 	}
 }
@@ -14424,7 +14425,7 @@ type PostFindOptions struct {
 // Constants associated with the PostFindOptions.Sort property.
 // Schema for a mapping of field name to sort direction.
 const (
-	PostFindOptionsSortAscConst = "asc"
+	PostFindOptionsSortAscConst  = "asc"
 	PostFindOptionsSortDescConst = "desc"
 )
 
@@ -14432,14 +14433,14 @@ const (
 // Whether to update the index prior to returning the result.
 const (
 	PostFindOptionsUpdateFalseConst = "false"
-	PostFindOptionsUpdateLazyConst = "lazy"
-	PostFindOptionsUpdateTrueConst = "true"
+	PostFindOptionsUpdateLazyConst  = "lazy"
+	PostFindOptionsUpdateTrueConst  = "true"
 )
 
 // NewPostFindOptions : Instantiate PostFindOptions
 func (*CloudantV1) NewPostFindOptions(db string, selector map[string]interface{}) *PostFindOptions {
 	return &PostFindOptions{
-		Db: core.StringPtr(db),
+		Db:       core.StringPtr(db),
 		Selector: selector,
 	}
 }
@@ -14593,15 +14594,15 @@ type PostIndexOptions struct {
 // Constants associated with the PostIndexOptions.Type property.
 // Schema for the type of an index.
 const (
-	PostIndexOptionsTypeJSONConst = "json"
+	PostIndexOptionsTypeJSONConst    = "json"
 	PostIndexOptionsTypeSpecialConst = "special"
-	PostIndexOptionsTypeTextConst = "text"
+	PostIndexOptionsTypeTextConst    = "text"
 )
 
 // NewPostIndexOptions : Instantiate PostIndexOptions
 func (*CloudantV1) NewPostIndexOptions(db string, index *IndexDefinition) *PostIndexOptions {
 	return &PostIndexOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		Index: index,
 	}
 }
@@ -14711,7 +14712,7 @@ type PostPartitionAllDocsOptions struct {
 // NewPostPartitionAllDocsOptions : Instantiate PostPartitionAllDocsOptions
 func (*CloudantV1) NewPostPartitionAllDocsOptions(db string, partitionKey string) *PostPartitionAllDocsOptions {
 	return &PostPartitionAllDocsOptions{
-		Db: core.StringPtr(db),
+		Db:           core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
 	}
 }
@@ -14899,7 +14900,7 @@ type PostPartitionFindOptions struct {
 // Constants associated with the PostPartitionFindOptions.Sort property.
 // Schema for a mapping of field name to sort direction.
 const (
-	PostPartitionFindOptionsSortAscConst = "asc"
+	PostPartitionFindOptionsSortAscConst  = "asc"
 	PostPartitionFindOptionsSortDescConst = "desc"
 )
 
@@ -14907,16 +14908,16 @@ const (
 // Whether to update the index prior to returning the result.
 const (
 	PostPartitionFindOptionsUpdateFalseConst = "false"
-	PostPartitionFindOptionsUpdateLazyConst = "lazy"
-	PostPartitionFindOptionsUpdateTrueConst = "true"
+	PostPartitionFindOptionsUpdateLazyConst  = "lazy"
+	PostPartitionFindOptionsUpdateTrueConst  = "true"
 )
 
 // NewPostPartitionFindOptions : Instantiate PostPartitionFindOptions
 func (*CloudantV1) NewPostPartitionFindOptions(db string, partitionKey string, selector map[string]interface{}) *PostPartitionFindOptions {
 	return &PostPartitionFindOptions{
-		Db: core.StringPtr(db),
+		Db:           core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
-		Selector: selector,
+		Selector:     selector,
 	}
 }
 
@@ -15077,11 +15078,11 @@ const (
 // NewPostPartitionSearchOptions : Instantiate PostPartitionSearchOptions
 func (*CloudantV1) NewPostPartitionSearchOptions(db string, partitionKey string, ddoc string, index string, query string) *PostPartitionSearchOptions {
 	return &PostPartitionSearchOptions{
-		Db: core.StringPtr(db),
+		Db:           core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
-		Ddoc: core.StringPtr(ddoc),
-		Index: core.StringPtr(index),
-		Query: core.StringPtr(query),
+		Ddoc:         core.StringPtr(ddoc),
+		Index:        core.StringPtr(index),
+		Query:        core.StringPtr(query),
 	}
 }
 
@@ -15292,17 +15293,17 @@ type PostPartitionViewOptions struct {
 // * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 const (
 	PostPartitionViewOptionsUpdateFalseConst = "false"
-	PostPartitionViewOptionsUpdateLazyConst = "lazy"
-	PostPartitionViewOptionsUpdateTrueConst = "true"
+	PostPartitionViewOptionsUpdateLazyConst  = "lazy"
+	PostPartitionViewOptionsUpdateTrueConst  = "true"
 )
 
 // NewPostPartitionViewOptions : Instantiate PostPartitionViewOptions
 func (*CloudantV1) NewPostPartitionViewOptions(db string, partitionKey string, ddoc string, view string) *PostPartitionViewOptions {
 	return &PostPartitionViewOptions{
-		Db: core.StringPtr(db),
+		Db:           core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
-		Ddoc: core.StringPtr(ddoc),
-		View: core.StringPtr(view),
+		Ddoc:         core.StringPtr(ddoc),
+		View:         core.StringPtr(view),
 	}
 }
 
@@ -15471,7 +15472,7 @@ type PostRevsDiffOptions struct {
 // NewPostRevsDiffOptions : Instantiate PostRevsDiffOptions
 func (*CloudantV1) NewPostRevsDiffOptions(db string, documentRevisions map[string][]string) *PostRevsDiffOptions {
 	return &PostRevsDiffOptions{
-		Db: core.StringPtr(db),
+		Db:                core.StringPtr(db),
 		DocumentRevisions: documentRevisions,
 	}
 }
@@ -15509,45 +15510,45 @@ type PostSearchAnalyzeOptions struct {
 // Constants associated with the PostSearchAnalyzeOptions.Analyzer property.
 // The analyzer type that is being used at the tokenization.
 const (
-	PostSearchAnalyzeOptionsAnalyzerArabicConst = "arabic"
-	PostSearchAnalyzeOptionsAnalyzerArmenianConst = "armenian"
-	PostSearchAnalyzeOptionsAnalyzerBasqueConst = "basque"
-	PostSearchAnalyzeOptionsAnalyzerBrazilianConst = "brazilian"
-	PostSearchAnalyzeOptionsAnalyzerBulgarianConst = "bulgarian"
-	PostSearchAnalyzeOptionsAnalyzerCatalanConst = "catalan"
-	PostSearchAnalyzeOptionsAnalyzerChineseConst = "chinese"
-	PostSearchAnalyzeOptionsAnalyzerCjkConst = "cjk"
-	PostSearchAnalyzeOptionsAnalyzerClassicConst = "classic"
-	PostSearchAnalyzeOptionsAnalyzerCzechConst = "czech"
-	PostSearchAnalyzeOptionsAnalyzerDanishConst = "danish"
-	PostSearchAnalyzeOptionsAnalyzerDutchConst = "dutch"
-	PostSearchAnalyzeOptionsAnalyzerEmailConst = "email"
-	PostSearchAnalyzeOptionsAnalyzerEnglishConst = "english"
-	PostSearchAnalyzeOptionsAnalyzerFinnishConst = "finnish"
-	PostSearchAnalyzeOptionsAnalyzerFrenchConst = "french"
-	PostSearchAnalyzeOptionsAnalyzerGalicianConst = "galician"
-	PostSearchAnalyzeOptionsAnalyzerGermanConst = "german"
-	PostSearchAnalyzeOptionsAnalyzerGreekConst = "greek"
-	PostSearchAnalyzeOptionsAnalyzerHindiConst = "hindi"
-	PostSearchAnalyzeOptionsAnalyzerHungarianConst = "hungarian"
+	PostSearchAnalyzeOptionsAnalyzerArabicConst     = "arabic"
+	PostSearchAnalyzeOptionsAnalyzerArmenianConst   = "armenian"
+	PostSearchAnalyzeOptionsAnalyzerBasqueConst     = "basque"
+	PostSearchAnalyzeOptionsAnalyzerBrazilianConst  = "brazilian"
+	PostSearchAnalyzeOptionsAnalyzerBulgarianConst  = "bulgarian"
+	PostSearchAnalyzeOptionsAnalyzerCatalanConst    = "catalan"
+	PostSearchAnalyzeOptionsAnalyzerChineseConst    = "chinese"
+	PostSearchAnalyzeOptionsAnalyzerCjkConst        = "cjk"
+	PostSearchAnalyzeOptionsAnalyzerClassicConst    = "classic"
+	PostSearchAnalyzeOptionsAnalyzerCzechConst      = "czech"
+	PostSearchAnalyzeOptionsAnalyzerDanishConst     = "danish"
+	PostSearchAnalyzeOptionsAnalyzerDutchConst      = "dutch"
+	PostSearchAnalyzeOptionsAnalyzerEmailConst      = "email"
+	PostSearchAnalyzeOptionsAnalyzerEnglishConst    = "english"
+	PostSearchAnalyzeOptionsAnalyzerFinnishConst    = "finnish"
+	PostSearchAnalyzeOptionsAnalyzerFrenchConst     = "french"
+	PostSearchAnalyzeOptionsAnalyzerGalicianConst   = "galician"
+	PostSearchAnalyzeOptionsAnalyzerGermanConst     = "german"
+	PostSearchAnalyzeOptionsAnalyzerGreekConst      = "greek"
+	PostSearchAnalyzeOptionsAnalyzerHindiConst      = "hindi"
+	PostSearchAnalyzeOptionsAnalyzerHungarianConst  = "hungarian"
 	PostSearchAnalyzeOptionsAnalyzerIndonesianConst = "indonesian"
-	PostSearchAnalyzeOptionsAnalyzerIrishConst = "irish"
-	PostSearchAnalyzeOptionsAnalyzerItalianConst = "italian"
-	PostSearchAnalyzeOptionsAnalyzerJapaneseConst = "japanese"
-	PostSearchAnalyzeOptionsAnalyzerKeywordConst = "keyword"
-	PostSearchAnalyzeOptionsAnalyzerLatvianConst = "latvian"
-	PostSearchAnalyzeOptionsAnalyzerNorwegianConst = "norwegian"
-	PostSearchAnalyzeOptionsAnalyzerPersianConst = "persian"
-	PostSearchAnalyzeOptionsAnalyzerPolishConst = "polish"
+	PostSearchAnalyzeOptionsAnalyzerIrishConst      = "irish"
+	PostSearchAnalyzeOptionsAnalyzerItalianConst    = "italian"
+	PostSearchAnalyzeOptionsAnalyzerJapaneseConst   = "japanese"
+	PostSearchAnalyzeOptionsAnalyzerKeywordConst    = "keyword"
+	PostSearchAnalyzeOptionsAnalyzerLatvianConst    = "latvian"
+	PostSearchAnalyzeOptionsAnalyzerNorwegianConst  = "norwegian"
+	PostSearchAnalyzeOptionsAnalyzerPersianConst    = "persian"
+	PostSearchAnalyzeOptionsAnalyzerPolishConst     = "polish"
 	PostSearchAnalyzeOptionsAnalyzerPortugueseConst = "portuguese"
-	PostSearchAnalyzeOptionsAnalyzerRomanianConst = "romanian"
-	PostSearchAnalyzeOptionsAnalyzerRussianConst = "russian"
-	PostSearchAnalyzeOptionsAnalyzerSimpleConst = "simple"
-	PostSearchAnalyzeOptionsAnalyzerSpanishConst = "spanish"
-	PostSearchAnalyzeOptionsAnalyzerStandardConst = "standard"
-	PostSearchAnalyzeOptionsAnalyzerSwedishConst = "swedish"
-	PostSearchAnalyzeOptionsAnalyzerThaiConst = "thai"
-	PostSearchAnalyzeOptionsAnalyzerTurkishConst = "turkish"
+	PostSearchAnalyzeOptionsAnalyzerRomanianConst   = "romanian"
+	PostSearchAnalyzeOptionsAnalyzerRussianConst    = "russian"
+	PostSearchAnalyzeOptionsAnalyzerSimpleConst     = "simple"
+	PostSearchAnalyzeOptionsAnalyzerSpanishConst    = "spanish"
+	PostSearchAnalyzeOptionsAnalyzerStandardConst   = "standard"
+	PostSearchAnalyzeOptionsAnalyzerSwedishConst    = "swedish"
+	PostSearchAnalyzeOptionsAnalyzerThaiConst       = "thai"
+	PostSearchAnalyzeOptionsAnalyzerTurkishConst    = "turkish"
 	PostSearchAnalyzeOptionsAnalyzerWhitespaceConst = "whitespace"
 )
 
@@ -15555,7 +15556,7 @@ const (
 func (*CloudantV1) NewPostSearchAnalyzeOptions(analyzer string, text string) *PostSearchAnalyzeOptions {
 	return &PostSearchAnalyzeOptions{
 		Analyzer: core.StringPtr(analyzer),
-		Text: core.StringPtr(text),
+		Text:     core.StringPtr(text),
 	}
 }
 
@@ -15676,8 +15677,8 @@ const (
 // NewPostSearchOptions : Instantiate PostSearchOptions
 func (*CloudantV1) NewPostSearchOptions(db string, ddoc string, index string, query string) *PostSearchOptions {
 	return &PostSearchOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
+		Db:    core.StringPtr(db),
+		Ddoc:  core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
 		Query: core.StringPtr(query),
 	}
@@ -15917,14 +15918,14 @@ type PostViewOptions struct {
 // * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 const (
 	PostViewOptionsUpdateFalseConst = "false"
-	PostViewOptionsUpdateLazyConst = "lazy"
-	PostViewOptionsUpdateTrueConst = "true"
+	PostViewOptionsUpdateLazyConst  = "lazy"
+	PostViewOptionsUpdateTrueConst  = "true"
 )
 
 // NewPostViewOptions : Instantiate PostViewOptions
 func (*CloudantV1) NewPostViewOptions(db string, ddoc string, view string) *PostViewOptions {
 	return &PostViewOptions{
-		Db: core.StringPtr(db),
+		Db:   core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 		View: core.StringPtr(view),
 	}
@@ -16097,9 +16098,9 @@ type PostViewQueriesOptions struct {
 // NewPostViewQueriesOptions : Instantiate PostViewQueriesOptions
 func (*CloudantV1) NewPostViewQueriesOptions(db string, ddoc string, view string, queries []ViewQuery) *PostViewQueriesOptions {
 	return &PostViewQueriesOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
-		View: core.StringPtr(view),
+		Db:      core.StringPtr(db),
+		Ddoc:    core.StringPtr(ddoc),
+		View:    core.StringPtr(view),
 		Queries: queries,
 	}
 }
@@ -16164,11 +16165,11 @@ type PutAttachmentOptions struct {
 // NewPutAttachmentOptions : Instantiate PutAttachmentOptions
 func (*CloudantV1) NewPutAttachmentOptions(db string, docID string, attachmentName string, attachment io.ReadCloser, contentType string) *PutAttachmentOptions {
 	return &PutAttachmentOptions{
-		Db: core.StringPtr(db),
-		DocID: core.StringPtr(docID),
+		Db:             core.StringPtr(db),
+		DocID:          core.StringPtr(docID),
 		AttachmentName: core.StringPtr(attachmentName),
-		Attachment: attachment,
-		ContentType: core.StringPtr(contentType),
+		Attachment:     attachment,
+		ContentType:    core.StringPtr(contentType),
 	}
 }
 
@@ -16273,20 +16274,20 @@ type PutCloudantSecurityConfigurationOptions struct {
 // Constants associated with the PutCloudantSecurityConfigurationOptions.Cloudant property.
 // Database permissions for Cloudant users and/or API keys.
 const (
-	PutCloudantSecurityConfigurationOptionsCloudantAdminConst = "_admin"
-	PutCloudantSecurityConfigurationOptionsCloudantDbUpdatesConst = "_db_updates"
-	PutCloudantSecurityConfigurationOptionsCloudantDesignConst = "_design"
-	PutCloudantSecurityConfigurationOptionsCloudantReaderConst = "_reader"
+	PutCloudantSecurityConfigurationOptionsCloudantAdminConst      = "_admin"
+	PutCloudantSecurityConfigurationOptionsCloudantDbUpdatesConst  = "_db_updates"
+	PutCloudantSecurityConfigurationOptionsCloudantDesignConst     = "_design"
+	PutCloudantSecurityConfigurationOptionsCloudantReaderConst     = "_reader"
 	PutCloudantSecurityConfigurationOptionsCloudantReplicatorConst = "_replicator"
-	PutCloudantSecurityConfigurationOptionsCloudantSecurityConst = "_security"
-	PutCloudantSecurityConfigurationOptionsCloudantShardsConst = "_shards"
-	PutCloudantSecurityConfigurationOptionsCloudantWriterConst = "_writer"
+	PutCloudantSecurityConfigurationOptionsCloudantSecurityConst   = "_security"
+	PutCloudantSecurityConfigurationOptionsCloudantShardsConst     = "_shards"
+	PutCloudantSecurityConfigurationOptionsCloudantWriterConst     = "_writer"
 )
 
 // NewPutCloudantSecurityConfigurationOptions : Instantiate PutCloudantSecurityConfigurationOptions
 func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string, cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
 	return &PutCloudantSecurityConfigurationOptions{
-		Db: core.StringPtr(db),
+		Db:       core.StringPtr(db),
 		Cloudant: cloudant,
 	}
 }
@@ -16464,8 +16465,8 @@ const (
 // NewPutDesignDocumentOptions : Instantiate PutDesignDocumentOptions
 func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string, designDocument *DesignDocument) *PutDesignDocumentOptions {
 	return &PutDesignDocumentOptions{
-		Db: core.StringPtr(db),
-		Ddoc: core.StringPtr(ddoc),
+		Db:             core.StringPtr(db),
+		Ddoc:           core.StringPtr(ddoc),
 		DesignDocument: designDocument,
 	}
 }
@@ -16564,7 +16565,7 @@ const (
 // NewPutDocumentOptions : Instantiate PutDocumentOptions
 func (*CloudantV1) NewPutDocumentOptions(db string, docID string) *PutDocumentOptions {
 	return &PutDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -16664,7 +16665,7 @@ const (
 // NewPutLocalDocumentOptions : Instantiate PutLocalDocumentOptions
 func (*CloudantV1) NewPutLocalDocumentOptions(db string, docID string) *PutLocalDocumentOptions {
 	return &PutLocalDocumentOptions{
-		Db: core.StringPtr(db),
+		Db:    core.StringPtr(db),
 		DocID: core.StringPtr(docID),
 	}
 }
@@ -16748,7 +16749,7 @@ const (
 // NewPutReplicationDocumentOptions : Instantiate PutReplicationDocumentOptions
 func (*CloudantV1) NewPutReplicationDocumentOptions(docID string, replicationDocument *ReplicationDocument) *PutReplicationDocumentOptions {
 	return &PutReplicationDocumentOptions{
-		DocID: core.StringPtr(docID),
+		DocID:               core.StringPtr(docID),
 		ReplicationDocument: replicationDocument,
 	}
 }
@@ -16819,14 +16820,14 @@ type PutSecurityOptions struct {
 // Constants associated with the PutSecurityOptions.Cloudant property.
 // Database permissions for Cloudant users and/or API keys.
 const (
-	PutSecurityOptionsCloudantAdminConst = "_admin"
-	PutSecurityOptionsCloudantDbUpdatesConst = "_db_updates"
-	PutSecurityOptionsCloudantDesignConst = "_design"
-	PutSecurityOptionsCloudantReaderConst = "_reader"
+	PutSecurityOptionsCloudantAdminConst      = "_admin"
+	PutSecurityOptionsCloudantDbUpdatesConst  = "_db_updates"
+	PutSecurityOptionsCloudantDesignConst     = "_design"
+	PutSecurityOptionsCloudantReaderConst     = "_reader"
 	PutSecurityOptionsCloudantReplicatorConst = "_replicator"
-	PutSecurityOptionsCloudantSecurityConst = "_security"
-	PutSecurityOptionsCloudantShardsConst = "_shards"
-	PutSecurityOptionsCloudantWriterConst = "_writer"
+	PutSecurityOptionsCloudantSecurityConst   = "_security"
+	PutSecurityOptionsCloudantShardsConst     = "_shards"
+	PutSecurityOptionsCloudantWriterConst     = "_writer"
 )
 
 // NewPutSecurityOptions : Instantiate PutSecurityOptions
@@ -17484,7 +17485,7 @@ type Revisions struct {
 // NewRevisions : Instantiate Revisions (Generic Model Constructor)
 func (*CloudantV1) NewRevisions(ids []string, start int64) (_model *Revisions, err error) {
 	_model = &Revisions{
-		Ids: ids,
+		Ids:   ids,
 		Start: core.Int64Ptr(start),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -17602,13 +17603,13 @@ type SchedulerDocument struct {
 // Constants associated with the SchedulerDocument.State property.
 // Schema for replication state.
 const (
-	SchedulerDocumentStateCompletedConst = "completed"
-	SchedulerDocumentStateCrashingConst = "crashing"
-	SchedulerDocumentStateErrorConst = "error"
-	SchedulerDocumentStateFailedConst = "failed"
+	SchedulerDocumentStateCompletedConst    = "completed"
+	SchedulerDocumentStateCrashingConst     = "crashing"
+	SchedulerDocumentStateErrorConst        = "error"
+	SchedulerDocumentStateFailedConst       = "failed"
 	SchedulerDocumentStateInitializingConst = "initializing"
-	SchedulerDocumentStatePendingConst = "pending"
-	SchedulerDocumentStateRunningConst = "running"
+	SchedulerDocumentStatePendingConst      = "pending"
+	SchedulerDocumentStateRunningConst      = "running"
 )
 
 // UnmarshalSchedulerDocument unmarshals an instance of SchedulerDocument from the specified map of raw messages.
@@ -18207,14 +18208,14 @@ type Security struct {
 // Constants associated with the Security.Cloudant property.
 // Database permissions for Cloudant users and/or API keys.
 const (
-	SecurityCloudantAdminConst = "_admin"
-	SecurityCloudantDbUpdatesConst = "_db_updates"
-	SecurityCloudantDesignConst = "_design"
-	SecurityCloudantReaderConst = "_reader"
+	SecurityCloudantAdminConst      = "_admin"
+	SecurityCloudantDbUpdatesConst  = "_db_updates"
+	SecurityCloudantDesignConst     = "_design"
+	SecurityCloudantReaderConst     = "_reader"
 	SecurityCloudantReplicatorConst = "_replicator"
-	SecurityCloudantSecurityConst = "_security"
-	SecurityCloudantShardsConst = "_shards"
-	SecurityCloudantWriterConst = "_writer"
+	SecurityCloudantSecurityConst   = "_security"
+	SecurityCloudantShardsConst     = "_shards"
+	SecurityCloudantWriterConst     = "_writer"
 )
 
 // UnmarshalSecurity unmarshals an instance of Security from the specified map of raw messages.
@@ -18472,8 +18473,8 @@ type UpInformation struct {
 // status.
 const (
 	UpInformationStatusMaintenanceModeConst = "maintenance_mode"
-	UpInformationStatusNolbConst = "nolb"
-	UpInformationStatusOkConst = "ok"
+	UpInformationStatusNolbConst            = "nolb"
+	UpInformationStatusOkConst              = "ok"
 )
 
 // UnmarshalUpInformation unmarshals an instance of UpInformation from the specified map of raw messages.
@@ -18506,20 +18507,20 @@ type UserContext struct {
 // Constants associated with the UserContext.Roles property.
 // Schema for a security role.
 const (
-	UserContextRolesAdminConst = "_admin"
-	UserContextRolesDbUpdatesConst = "_db_updates"
-	UserContextRolesDesignConst = "_design"
-	UserContextRolesReaderConst = "_reader"
+	UserContextRolesAdminConst      = "_admin"
+	UserContextRolesDbUpdatesConst  = "_db_updates"
+	UserContextRolesDesignConst     = "_design"
+	UserContextRolesReaderConst     = "_reader"
 	UserContextRolesReplicatorConst = "_replicator"
-	UserContextRolesSecurityConst = "_security"
-	UserContextRolesShardsConst = "_shards"
-	UserContextRolesWriterConst = "_writer"
+	UserContextRolesSecurityConst   = "_security"
+	UserContextRolesShardsConst     = "_shards"
+	UserContextRolesWriterConst     = "_writer"
 )
 
 // NewUserContext : Instantiate UserContext (Generic Model Constructor)
 func (*CloudantV1) NewUserContext(name string, roles []string) (_model *UserContext, err error) {
 	_model = &UserContext{
-		Name: core.StringPtr(name),
+		Name:  core.StringPtr(name),
 		Roles: roles,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -18669,8 +18670,8 @@ type ViewQuery struct {
 // * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 const (
 	ViewQueryUpdateFalseConst = "false"
-	ViewQueryUpdateLazyConst = "lazy"
-	ViewQueryUpdateTrueConst = "true"
+	ViewQueryUpdateLazyConst  = "lazy"
+	ViewQueryUpdateTrueConst  = "true"
 )
 
 // UnmarshalViewQuery unmarshals an instance of ViewQuery from the specified map of raw messages.
@@ -18865,12 +18866,12 @@ type GeoJSONGeometry struct {
 // The type of GeoJSON Geometry.
 const (
 	GeoJSONGeometryTypeGeometrycollectionConst = "GeometryCollection"
-	GeoJSONGeometryTypeLinestringConst = "LineString"
-	GeoJSONGeometryTypeMultilinestringConst = "MultiLineString"
-	GeoJSONGeometryTypeMultipointConst = "MultiPoint"
-	GeoJSONGeometryTypeMultipolygonConst = "MultiPolygon"
-	GeoJSONGeometryTypePointConst = "Point"
-	GeoJSONGeometryTypePolygonConst = "Polygon"
+	GeoJSONGeometryTypeLinestringConst         = "LineString"
+	GeoJSONGeometryTypeMultilinestringConst    = "MultiLineString"
+	GeoJSONGeometryTypeMultipointConst         = "MultiPoint"
+	GeoJSONGeometryTypeMultipolygonConst       = "MultiPolygon"
+	GeoJSONGeometryTypePointConst              = "Point"
+	GeoJSONGeometryTypePolygonConst            = "Polygon"
 )
 
 func (*GeoJSONGeometry) isaGeoJSONGeometryObject() bool {
@@ -18906,12 +18907,12 @@ type GeoJSONGeometryCollection struct {
 // The type of GeoJSON Geometry.
 const (
 	GeoJSONGeometryCollectionTypeGeometrycollectionConst = "GeometryCollection"
-	GeoJSONGeometryCollectionTypeLinestringConst = "LineString"
-	GeoJSONGeometryCollectionTypeMultilinestringConst = "MultiLineString"
-	GeoJSONGeometryCollectionTypeMultipointConst = "MultiPoint"
-	GeoJSONGeometryCollectionTypeMultipolygonConst = "MultiPolygon"
-	GeoJSONGeometryCollectionTypePointConst = "Point"
-	GeoJSONGeometryCollectionTypePolygonConst = "Polygon"
+	GeoJSONGeometryCollectionTypeLinestringConst         = "LineString"
+	GeoJSONGeometryCollectionTypeMultilinestringConst    = "MultiLineString"
+	GeoJSONGeometryCollectionTypeMultipointConst         = "MultiPoint"
+	GeoJSONGeometryCollectionTypeMultipolygonConst       = "MultiPolygon"
+	GeoJSONGeometryCollectionTypePointConst              = "Point"
+	GeoJSONGeometryCollectionTypePolygonConst            = "Polygon"
 )
 
 func (*GeoJSONGeometryCollection) isaGeoJSONGeometryObject() bool {

@@ -67,14 +67,13 @@ var _ = Describe(`CloudantV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
+				"CLOUDANT_URL":       "https://cloudantv1/api",
 				"CLOUDANT_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{})
 				Expect(cloudantService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -103,8 +102,7 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-				})
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{})
 				err := cloudantService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(cloudantService).ToNot(BeNil())
@@ -122,13 +120,12 @@ var _ = Describe(`CloudantV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"CLOUDANT_URL": "https://cloudantv1/api",
+				"CLOUDANT_URL":       "https://cloudantv1/api",
 				"CLOUDANT_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{
-			})
+			cloudantService, serviceErr := cloudantv1.NewCloudantV1UsingExternalConfig(&cloudantv1.CloudantV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(cloudantService).To(BeNil())
@@ -139,7 +136,7 @@ var _ = Describe(`CloudantV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"CLOUDANT_AUTH_TYPE":   "NOAuth",
+				"CLOUDANT_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -2130,7 +2127,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostChangesAsStream(postChangesOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -4380,7 +4376,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -4986,7 +4981,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostAllDocsQueriesAsStream(postAllDocsQueriesOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -6008,7 +6002,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -6263,7 +6256,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostBulkGetAsRelated(postBulkGetOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -6525,7 +6517,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostBulkGetAsStream(postBulkGetOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -7322,7 +7313,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -7565,7 +7555,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.GetDocumentAsRelated(getDocumentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -7815,7 +7804,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.GetDocumentAsStream(getDocumentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -11125,7 +11113,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -11812,7 +11799,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostViewQueriesAsStream(postViewQueriesOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -12610,7 +12596,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -13198,7 +13183,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostPartitionSearchAsStream(postPartitionSearchOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -13860,7 +13844,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -14421,7 +14404,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostPartitionFindAsStream(postPartitionFindOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -15287,7 +15269,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.PostFindAsStream(postFindOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -17004,7 +16985,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
-
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
 				buffer, operationErr := ioutil.ReadAll(result)
@@ -17843,7 +17823,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.GetGeoAsStream(getGeoOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
@@ -22816,7 +22795,6 @@ var _ = Describe(`CloudantV1`, func() {
 				result, response, operationErr := cloudantService.GetAttachment(getAttachmentOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
-
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
