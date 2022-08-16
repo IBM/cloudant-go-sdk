@@ -2,14 +2,14 @@
 // This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
 // section: code
 source, err := service.NewReplicationDatabase(
-  "https://examples.cloudant.com/animaldb",
+  "<your-source-service-url>/animaldb",
 )
 if err != nil {
   panic(err)
 }
 
 target, err := service.NewReplicationDatabase(
-  "<your-service-url>" + "/" + "animaldb-target",
+  "<your-target-service-url>" + "/" + "animaldb-target",
 )
 if err != nil {
   panic(err)
