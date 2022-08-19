@@ -8713,7 +8713,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully with retries`, func() {
@@ -8791,7 +8791,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}, "st_indexes": {"mapKey": {"index": "Index"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -8999,10 +8999,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the GeoIndexDefinition model
-				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
-				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
 				designDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
@@ -9021,12 +9017,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -9154,10 +9148,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the GeoIndexDefinition model
-				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
-				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
 				designDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
@@ -9176,12 +9166,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -9317,10 +9305,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the GeoIndexDefinition model
-				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
-				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
 				designDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
@@ -9339,12 +9323,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -9420,10 +9402,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the GeoIndexDefinition model
-				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
-				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
 				designDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
@@ -9442,12 +9420,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -9544,10 +9520,6 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
-				// Construct an instance of the GeoIndexDefinition model
-				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
-				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
 				designDocumentModel.Attachments = make(map[string]cloudantv1.Attachment)
@@ -9566,12 +9538,10 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				putDesignDocumentOptionsModel := new(cloudantv1.PutDesignDocumentOptions)
@@ -17219,1057 +17189,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`GetGeo(getGeoOptions *GetGeoOptions) - Operation response error`, func() {
-		getGeoPath := "/testString/_design/testString/_geo/testString"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoPath))
-					Expect(req.Method).To(Equal("GET"))
-					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["format"]).To(Equal([]string{"view"}))
-					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-					// TODO: Add check for include_docs query parameter
-					// TODO: Add check for lat query parameter
-					// TODO: Add check for limit query parameter
-					// TODO: Add check for lon query parameter
-					// TODO: Add check for nearest query parameter
-					// TODO: Add check for radius query parameter
-					// TODO: Add check for rangex query parameter
-					// TODO: Add check for rangey query parameter
-					Expect(req.URL.Query()["relation"]).To(Equal([]string{"intersects"}))
-					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke GetGeo with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.GetGeo(getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.GetGeo(getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetGeo(getGeoOptions *GetGeoOptions)`, func() {
-		getGeoPath := "/testString/_design/testString/_geo/testString"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["format"]).To(Equal([]string{"view"}))
-					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-					// TODO: Add check for include_docs query parameter
-					// TODO: Add check for lat query parameter
-					// TODO: Add check for limit query parameter
-					// TODO: Add check for lon query parameter
-					// TODO: Add check for nearest query parameter
-					// TODO: Add check for radius query parameter
-					// TODO: Add check for rangex query parameter
-					// TODO: Add check for rangey query parameter
-					Expect(req.URL.Query()["relation"]).To(Equal([]string{"intersects"}))
-					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "features": [{"_id": "ID", "_rev": "Rev", "bbox": [4], "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "properties": {"mapKey": "anyValue"}, "type": "Feature"}], "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "id": "ID", "rev": "Rev"}], "type": "FeatureCollection"}`)
-				}))
-			})
-			It(`Invoke GetGeo successfully with retries`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				cloudantService.EnableRetries(0, 0)
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := cloudantService.GetGeoWithContext(ctx, getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.GetGeo(getGeoOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = cloudantService.GetGeoWithContext(ctx, getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["format"]).To(Equal([]string{"view"}))
-					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-					// TODO: Add check for include_docs query parameter
-					// TODO: Add check for lat query parameter
-					// TODO: Add check for limit query parameter
-					// TODO: Add check for lon query parameter
-					// TODO: Add check for nearest query parameter
-					// TODO: Add check for radius query parameter
-					// TODO: Add check for rangex query parameter
-					// TODO: Add check for rangey query parameter
-					Expect(req.URL.Query()["relation"]).To(Equal([]string{"intersects"}))
-					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "features": [{"_id": "ID", "_rev": "Rev", "bbox": [4], "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "properties": {"mapKey": "anyValue"}, "type": "Feature"}], "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "geometry": {"type": "Point", "coordinates": ["anyValue"]}, "id": "ID", "rev": "Rev"}], "type": "FeatureCollection"}`)
-				}))
-			})
-			It(`Invoke GetGeo successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.GetGeo(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.GetGeo(getGeoOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke GetGeo with error: Operation validation and request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.GetGeo(getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the GetGeoOptions model with no property values
-				getGeoOptionsModelNew := new(cloudantv1.GetGeoOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.GetGeo(getGeoOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke GetGeo successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := cloudantService.GetGeo(getGeoOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetGeoAsStream(getGeoOptions *GetGeoOptions)`, func() {
-		getGeoAsStreamPath := "/testString/_design/testString/_geo/testString"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoAsStreamPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["format"]).To(Equal([]string{"view"}))
-					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-					// TODO: Add check for include_docs query parameter
-					// TODO: Add check for lat query parameter
-					// TODO: Add check for limit query parameter
-					// TODO: Add check for lon query parameter
-					// TODO: Add check for nearest query parameter
-					// TODO: Add check for radius query parameter
-					// TODO: Add check for rangex query parameter
-					// TODO: Add check for rangey query parameter
-					Expect(req.URL.Query()["relation"]).To(Equal([]string{"intersects"}))
-					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
-				}))
-			})
-			It(`Invoke GetGeoAsStream successfully with retries`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				cloudantService.EnableRetries(0, 0)
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := cloudantService.GetGeoAsStreamWithContext(ctx, getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.GetGeoAsStream(getGeoOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = cloudantService.GetGeoAsStreamWithContext(ctx, getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoAsStreamPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					Expect(req.URL.Query()["bbox"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["bookmark"]).To(Equal([]string{"testString"}))
-					Expect(req.URL.Query()["format"]).To(Equal([]string{"view"}))
-					Expect(req.URL.Query()["g"]).To(Equal([]string{"testString"}))
-					// TODO: Add check for include_docs query parameter
-					// TODO: Add check for lat query parameter
-					// TODO: Add check for limit query parameter
-					// TODO: Add check for lon query parameter
-					// TODO: Add check for nearest query parameter
-					// TODO: Add check for radius query parameter
-					// TODO: Add check for rangex query parameter
-					// TODO: Add check for rangey query parameter
-					Expect(req.URL.Query()["relation"]).To(Equal([]string{"intersects"}))
-					// TODO: Add check for skip query parameter
-					Expect(req.URL.Query()["stale"]).To(Equal([]string{"ok"}))
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"foo": "this is a mock response for JSON streaming"}`)
-				}))
-			})
-			It(`Invoke GetGeoAsStream successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.GetGeoAsStream(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.GetGeoAsStream(getGeoOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
-				Expect(operationErr).To(BeNil())
-				Expect(buffer).ToNot(BeNil())
-				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
-
-			})
-			It(`Invoke GetGeoAsStream with error: Operation validation and request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.GetGeoAsStream(getGeoOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the GetGeoOptions model with no property values
-				getGeoOptionsModelNew := new(cloudantv1.GetGeoOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.GetGeoAsStream(getGeoOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke GetGeoAsStream successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoOptions model
-				getGeoOptionsModel := new(cloudantv1.GetGeoOptions)
-				getGeoOptionsModel.Db = core.StringPtr("testString")
-				getGeoOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoOptionsModel.Index = core.StringPtr("testString")
-				getGeoOptionsModel.Bbox = core.StringPtr("testString")
-				getGeoOptionsModel.Bookmark = core.StringPtr("testString")
-				getGeoOptionsModel.Format = core.StringPtr("view")
-				getGeoOptionsModel.G = core.StringPtr("testString")
-				getGeoOptionsModel.IncludeDocs = core.BoolPtr(false)
-				getGeoOptionsModel.Lat = core.Float64Ptr(float64(-90))
-				getGeoOptionsModel.Limit = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Lon = core.Float64Ptr(float64(-180))
-				getGeoOptionsModel.Nearest = core.BoolPtr(false)
-				getGeoOptionsModel.Radius = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangex = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Rangey = core.Float64Ptr(float64(0))
-				getGeoOptionsModel.Relation = core.StringPtr("intersects")
-				getGeoOptionsModel.Skip = core.Int64Ptr(int64(0))
-				getGeoOptionsModel.Stale = core.StringPtr("ok")
-				getGeoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := cloudantService.GetGeoAsStream(getGeoOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify empty byte buffer.
-				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
-				Expect(operationErr).To(BeNil())
-				Expect(buffer).ToNot(BeNil())
-				Expect(len(buffer)).To(Equal(0))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions) - Operation response error`, func() {
-		postGeoCleanupPath := "/testString/_geo_cleanup"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postGeoCleanupPath))
-					Expect(req.Method).To(Equal("POST"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(202)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke PostGeoCleanup with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostGeoCleanupOptions model
-				postGeoCleanupOptionsModel := new(cloudantv1.PostGeoCleanupOptions)
-				postGeoCleanupOptionsModel.Db = core.StringPtr("testString")
-				postGeoCleanupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions)`, func() {
-		postGeoCleanupPath := "/testString/_geo_cleanup"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postGeoCleanupPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"ok": true}`)
-				}))
-			})
-			It(`Invoke PostGeoCleanup successfully with retries`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				cloudantService.EnableRetries(0, 0)
-
-				// Construct an instance of the PostGeoCleanupOptions model
-				postGeoCleanupOptionsModel := new(cloudantv1.PostGeoCleanupOptions)
-				postGeoCleanupOptionsModel.Db = core.StringPtr("testString")
-				postGeoCleanupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := cloudantService.PostGeoCleanupWithContext(ctx, postGeoCleanupOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = cloudantService.PostGeoCleanupWithContext(ctx, postGeoCleanupOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(postGeoCleanupPath))
-					Expect(req.Method).To(Equal("POST"))
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"ok": true}`)
-				}))
-			})
-			It(`Invoke PostGeoCleanup successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.PostGeoCleanup(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the PostGeoCleanupOptions model
-				postGeoCleanupOptionsModel := new(cloudantv1.PostGeoCleanupOptions)
-				postGeoCleanupOptionsModel.Db = core.StringPtr("testString")
-				postGeoCleanupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke PostGeoCleanup with error: Operation validation and request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostGeoCleanupOptions model
-				postGeoCleanupOptionsModel := new(cloudantv1.PostGeoCleanupOptions)
-				postGeoCleanupOptionsModel.Db = core.StringPtr("testString")
-				postGeoCleanupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the PostGeoCleanupOptions model with no property values
-				postGeoCleanupOptionsModelNew := new(cloudantv1.PostGeoCleanupOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.PostGeoCleanup(postGeoCleanupOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(202)
-				}))
-			})
-			It(`Invoke PostGeoCleanup successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the PostGeoCleanupOptions model
-				postGeoCleanupOptionsModel := new(cloudantv1.PostGeoCleanupOptions)
-				postGeoCleanupOptionsModel.Db = core.StringPtr("testString")
-				postGeoCleanupOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := cloudantService.PostGeoCleanup(postGeoCleanupOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions) - Operation response error`, func() {
-		getGeoIndexInformationPath := "/testString/_design/testString/_geo_info/testString"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoIndexInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke GetGeoIndexInformation with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoIndexInformationOptions model
-				getGeoIndexInformationOptionsModel := new(cloudantv1.GetGeoIndexInformationOptions)
-				getGeoIndexInformationOptionsModel.Db = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Index = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions)`, func() {
-		getGeoIndexInformationPath := "/testString/_design/testString/_geo_info/testString"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoIndexInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"geo_index": {"data_size": 0, "disk_size": 0, "doc_count": 0}, "name": "Name"}`)
-				}))
-			})
-			It(`Invoke GetGeoIndexInformation successfully with retries`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				cloudantService.EnableRetries(0, 0)
-
-				// Construct an instance of the GetGeoIndexInformationOptions model
-				getGeoIndexInformationOptionsModel := new(cloudantv1.GetGeoIndexInformationOptions)
-				getGeoIndexInformationOptionsModel.Db = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Index = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := cloudantService.GetGeoIndexInformationWithContext(ctx, getGeoIndexInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = cloudantService.GetGeoIndexInformationWithContext(ctx, getGeoIndexInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getGeoIndexInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"geo_index": {"data_size": 0, "disk_size": 0, "doc_count": 0}, "name": "Name"}`)
-				}))
-			})
-			It(`Invoke GetGeoIndexInformation successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.GetGeoIndexInformation(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the GetGeoIndexInformationOptions model
-				getGeoIndexInformationOptionsModel := new(cloudantv1.GetGeoIndexInformationOptions)
-				getGeoIndexInformationOptionsModel.Db = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Index = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke GetGeoIndexInformation with error: Operation validation and request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoIndexInformationOptions model
-				getGeoIndexInformationOptionsModel := new(cloudantv1.GetGeoIndexInformationOptions)
-				getGeoIndexInformationOptionsModel.Db = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Index = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-				// Construct a second instance of the GetGeoIndexInformationOptions model with no property values
-				getGeoIndexInformationOptionsModelNew := new(cloudantv1.GetGeoIndexInformationOptions)
-				// Invoke operation with invalid model (negative test)
-				result, response, operationErr = cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModelNew)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke GetGeoIndexInformation successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetGeoIndexInformationOptions model
-				getGeoIndexInformationOptionsModel := new(cloudantv1.GetGeoIndexInformationOptions)
-				getGeoIndexInformationOptionsModel.Db = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Ddoc = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Index = core.StringPtr("testString")
-				getGeoIndexInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := cloudantService.GetGeoIndexInformation(getGeoIndexInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
 	Describe(`HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions)`, func() {
 		headReplicationDocumentPath := "/_replicator/testString"
 		Context(`Using mock server endpoint`, func() {
@@ -18814,7 +17733,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -18891,7 +17810,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -19133,6 +18052,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
@@ -19300,6 +18220,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
@@ -19475,6 +18396,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
@@ -19590,6 +18512,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
@@ -19726,6 +18649,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
@@ -26051,12 +24975,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
-			It(`Invoke NewGeoIndexDefinition successfully`, func() {
-				index := "testString"
-				_model, err := cloudantService.NewGeoIndexDefinition(index)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
 			It(`Invoke NewGetActiveTasksOptions successfully`, func() {
 				// Construct an instance of the GetActiveTasksOptions model
 				getActiveTasksOptionsModel := cloudantService.NewGetActiveTasksOptions()
@@ -26255,68 +25173,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getDocumentShardsInfoOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(getDocumentShardsInfoOptionsModel.DocID).To(Equal(core.StringPtr("testString")))
 				Expect(getDocumentShardsInfoOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewGetGeoIndexInformationOptions successfully`, func() {
-				// Construct an instance of the GetGeoIndexInformationOptions model
-				db := "testString"
-				ddoc := "testString"
-				index := "testString"
-				getGeoIndexInformationOptionsModel := cloudantService.NewGetGeoIndexInformationOptions(db, ddoc, index)
-				getGeoIndexInformationOptionsModel.SetDb("testString")
-				getGeoIndexInformationOptionsModel.SetDdoc("testString")
-				getGeoIndexInformationOptionsModel.SetIndex("testString")
-				getGeoIndexInformationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getGeoIndexInformationOptionsModel).ToNot(BeNil())
-				Expect(getGeoIndexInformationOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoIndexInformationOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoIndexInformationOptionsModel.Index).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoIndexInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewGetGeoOptions successfully`, func() {
-				// Construct an instance of the GetGeoOptions model
-				db := "testString"
-				ddoc := "testString"
-				index := "testString"
-				getGeoOptionsModel := cloudantService.NewGetGeoOptions(db, ddoc, index)
-				getGeoOptionsModel.SetDb("testString")
-				getGeoOptionsModel.SetDdoc("testString")
-				getGeoOptionsModel.SetIndex("testString")
-				getGeoOptionsModel.SetBbox("testString")
-				getGeoOptionsModel.SetBookmark("testString")
-				getGeoOptionsModel.SetFormat("view")
-				getGeoOptionsModel.SetG("testString")
-				getGeoOptionsModel.SetIncludeDocs(false)
-				getGeoOptionsModel.SetLat(float64(-90))
-				getGeoOptionsModel.SetLimit(int64(0))
-				getGeoOptionsModel.SetLon(float64(-180))
-				getGeoOptionsModel.SetNearest(false)
-				getGeoOptionsModel.SetRadius(float64(0))
-				getGeoOptionsModel.SetRangex(float64(0))
-				getGeoOptionsModel.SetRangey(float64(0))
-				getGeoOptionsModel.SetRelation("intersects")
-				getGeoOptionsModel.SetSkip(int64(0))
-				getGeoOptionsModel.SetStale("ok")
-				getGeoOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(getGeoOptionsModel).ToNot(BeNil())
-				Expect(getGeoOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoOptionsModel.Index).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoOptionsModel.Bbox).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoOptionsModel.Format).To(Equal(core.StringPtr("view")))
-				Expect(getGeoOptionsModel.G).To(Equal(core.StringPtr("testString")))
-				Expect(getGeoOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
-				Expect(getGeoOptionsModel.Lat).To(Equal(core.Float64Ptr(float64(-90))))
-				Expect(getGeoOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(getGeoOptionsModel.Lon).To(Equal(core.Float64Ptr(float64(-180))))
-				Expect(getGeoOptionsModel.Nearest).To(Equal(core.BoolPtr(false)))
-				Expect(getGeoOptionsModel.Radius).To(Equal(core.Float64Ptr(float64(0))))
-				Expect(getGeoOptionsModel.Rangex).To(Equal(core.Float64Ptr(float64(0))))
-				Expect(getGeoOptionsModel.Rangey).To(Equal(core.Float64Ptr(float64(0))))
-				Expect(getGeoOptionsModel.Relation).To(Equal(core.StringPtr("intersects")))
-				Expect(getGeoOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(getGeoOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
-				Expect(getGeoOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetIndexesInformationOptions successfully`, func() {
 				// Construct an instance of the GetIndexesInformationOptions model
@@ -27155,16 +26011,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postFindOptionsModel.R).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postFindOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewPostGeoCleanupOptions successfully`, func() {
-				// Construct an instance of the PostGeoCleanupOptions model
-				db := "testString"
-				postGeoCleanupOptionsModel := cloudantService.NewPostGeoCleanupOptions(db)
-				postGeoCleanupOptionsModel.SetDb("testString")
-				postGeoCleanupOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
-				Expect(postGeoCleanupOptionsModel).ToNot(BeNil())
-				Expect(postGeoCleanupOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postGeoCleanupOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
 			It(`Invoke NewPostIndexOptions successfully`, func() {
 				// Construct an instance of the Analyzer model
 				analyzerModel := new(cloudantv1.Analyzer)
@@ -27785,12 +26631,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentViewsMapReduceModel.Map).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentViewsMapReduceModel.Reduce).To(Equal(core.StringPtr("testString")))
 
-				// Construct an instance of the GeoIndexDefinition model
-				geoIndexDefinitionModel := new(cloudantv1.GeoIndexDefinition)
-				Expect(geoIndexDefinitionModel).ToNot(BeNil())
-				geoIndexDefinitionModel.Index = core.StringPtr("testString")
-				Expect(geoIndexDefinitionModel.Index).To(Equal(core.StringPtr("testString")))
-
 				// Construct an instance of the DesignDocument model
 				designDocumentModel := new(cloudantv1.DesignDocument)
 				Expect(designDocumentModel).ToNot(BeNil())
@@ -27810,11 +26650,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = make(map[string]cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentModel.StIndexes = make(map[string]cloudantv1.GeoIndexDefinition)
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.StIndexes["foo"] = *geoIndexDefinitionModel
 				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 				Expect(designDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(designDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
@@ -27843,7 +26681,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
 				Expect(designDocumentModel.Indexes["foo"]).To(Equal(*searchIndexDefinitionModel))
 				Expect(designDocumentModel.Views["foo"]).To(Equal(*designDocumentViewsMapReduceModel))
-				Expect(designDocumentModel.StIndexes["foo"]).To(Equal(*geoIndexDefinitionModel))
 
 				// Construct an instance of the PutDesignDocumentOptions model
 				db := "testString"
@@ -28185,6 +27022,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(1))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(1))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
@@ -28217,6 +27055,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.TargetProxy).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.UseCheckpoints).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.UserCtx).To(Equal(userContextModel))
+				Expect(replicationDocumentModel.WinningRevsOnly).To(Equal(core.BoolPtr(false)))
 				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
