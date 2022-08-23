@@ -24,11 +24,9 @@ import (
 )
 
 func main() {
-	// 1. Create a Cloudant client with "EXAMPLES" service name ============
+	// 1. Create a client with `CLOUDANT` default service name ============
 	client, err := cloudantv1.NewCloudantV1UsingExternalConfig(
-		&cloudantv1.CloudantV1Options{
-			ServiceName: "EXAMPLES",
-		},
+		&cloudantv1.CloudantV1Options{},
 	)
 	if err != nil {
 		panic(err)
@@ -41,8 +39,8 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Server Version: %s\n", *serverInformationResult.Version)
-	// 3. Get database information for "animaldb" ==========================
-	dbName := "animaldb"
+	// 3. Get database information for "orders" ==========================
+	dbName := "orders"
 	databaseInformationResult, _, err := client.GetDatabaseInformation(
 		client.NewGetDatabaseInformationOptions(
 			dbName,
@@ -55,17 +53,17 @@ func main() {
 	fmt.Printf("Document count in \"%s\" database is %d.\n",
 		*databaseInformationResult.DbName,
 		*databaseInformationResult.DocCount)
-	// 5. Get zebra document out of the database by document id ============
-	documentAboutZebraResult, _, err := client.GetDocument(
+	// 5. Get "example" document out of the database by document id ============
+	documentExampleResult, _, err := client.GetDocument(
 		client.NewGetDocumentOptions(
 			dbName,
-			"zebra",
+			"example",
 		),
 	)
 	if err != nil {
 		panic(err)
 	}
 	// 6. Print out the Document content ===================================
-	aboutZebraBuffer, _ := json.MarshalIndent(documentAboutZebraResult, "", "  ")
-	fmt.Println(string(aboutZebraBuffer))
+	exampleBuffer, _ := json.MarshalIndent(documentExampleResult, "", "  ")
+	fmt.Println(string(exampleBuffer))
 }
