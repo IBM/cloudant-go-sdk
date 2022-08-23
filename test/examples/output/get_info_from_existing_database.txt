@@ -3,6 +3,6 @@ Document count in "orders" database is 1.
 {
   "_id": "example",
   "_rev": "1-1b403633540686aa32d013fda9041a5d",
-  "joined": "2019-01-24T10:42:99.000Z",
-  "name": "Bob Smith"
+  "name": "Bob Smith",
+  "joined": "2019-01-24T10:42:99.000Z"
 }
