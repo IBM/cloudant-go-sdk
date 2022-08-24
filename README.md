@@ -286,11 +286,9 @@ import (
 )
 
 func main() {
-	// 1. Create a Cloudant client with "EXAMPLES" service name ============
+	// 1. Create a client with `CLOUDANT` default service name ============
 	client, err := cloudantv1.NewCloudantV1UsingExternalConfig(
-		&cloudantv1.CloudantV1Options{
-			ServiceName: "EXAMPLES",
-		},
+		&cloudantv1.CloudantV1Options{},
 	)
 	if err != nil {
 		panic(err)
@@ -303,8 +301,8 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Server Version: %s\n", *serverInformationResult.Version)
-	// 3. Get database information for "animaldb" ==========================
-	dbName := "animaldb"
+	// 3. Get database information for "orders" ==========================
+	dbName := "orders"
 	databaseInformationResult, _, err := client.GetDatabaseInformation(
 		client.NewGetDatabaseInformationOptions(
 			dbName,
@@ -317,19 +315,19 @@ func main() {
 	fmt.Printf("Document count in \"%s\" database is %d.\n",
 		*databaseInformationResult.DbName,
 		*databaseInformationResult.DocCount)
-	// 5. Get zebra document out of the database by document id ============
-	documentAboutZebraResult, _, err := client.GetDocument(
+	// 5. Get "example" document out of the database by document id ============
+	documentExampleResult, _, err := client.GetDocument(
 		client.NewGetDocumentOptions(
 			dbName,
-			"zebra",
+			"example",
 		),
 	)
 	if err != nil {
 		panic(err)
 	}
 	// 6. Print out the Document content ===================================
-	aboutZebraBuffer, _ := json.MarshalIndent(documentAboutZebraResult, "", "  ")
-	fmt.Println(string(aboutZebraBuffer))
+	exampleBuffer, _ := json.MarshalIndent(documentExampleResult, "", "  ")
+	fmt.Println(string(exampleBuffer))
 }
 ```
 
@@ -338,17 +336,12 @@ When you run the code, you see a result similar to the following output.
 [embedmd]:# (test/examples/output/get_info_from_existing_database.txt)
 ```txt
 Server Version: 2.1.1
-Document count in "animaldb" database is 11.
+Document count in "orders" database is 1.
 {
-  "_id": "zebra",
-  "_rev": "3-750dac460a6cc41e6999f8943b8e603e",
-  "class": "mammal",
-  "diet": "herbivore",
-  "max_length": 2.5,
-  "max_weight": 387,
-  "min_length": 2,
-  "min_weight": 175,
-  "wiki_page": "http://en.wikipedia.org/wiki/Plains_zebra"
+  "_id": "example",
+  "_rev": "1-1b403633540686aa32d013fda9041a5d",
+  "name": "Bob Smith",
+  "joined": "2019-01-24T10:42:99.000Z"
 }
 ```
 
