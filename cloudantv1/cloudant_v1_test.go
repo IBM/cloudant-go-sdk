@@ -21,7 +21,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -1489,7 +1488,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -1590,7 +1589,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -1699,7 +1698,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -1737,7 +1736,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -1796,7 +1795,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -1893,7 +1892,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -2002,7 +2001,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -2027,7 +2026,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -2046,7 +2045,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -2105,7 +2104,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Db = core.StringPtr("testString")
 				postChangesOptionsModel.DocIds = []string{"testString"}
 				postChangesOptionsModel.Fields = []string{"testString"}
-				postChangesOptionsModel.Selector = make(map[string]interface{})
+				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
 				postChangesOptionsModel.AttEncodingInfo = core.BoolPtr(false)
 				postChangesOptionsModel.Attachments = core.BoolPtr(false)
@@ -2130,7 +2129,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -4285,7 +4284,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -4378,7 +4377,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -4883,7 +4882,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -4984,7 +4983,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -6004,7 +6003,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -6259,7 +6258,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -6431,7 +6430,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -6520,7 +6519,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -7315,7 +7314,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -7558,7 +7557,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -7716,7 +7715,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -7807,7 +7806,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -10974,7 +10973,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -11085,7 +11084,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -11653,7 +11652,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -11772,7 +11771,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -12473,7 +12472,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -12568,7 +12567,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -12671,7 +12670,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionSearch successfully with retries`, func() {
@@ -12756,7 +12755,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionSearch successfully`, func() {
@@ -13059,7 +13058,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -13156,7 +13155,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -13703,7 +13702,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -13816,7 +13815,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -13853,7 +13852,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -13932,7 +13931,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14019,7 +14018,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14051,7 +14050,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14104,7 +14103,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14179,7 +14178,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14266,7 +14265,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14286,7 +14285,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -14304,7 +14303,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14357,7 +14356,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel := new(cloudantv1.PostPartitionFindOptions)
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
-				postPartitionFindOptionsModel.Selector = make(map[string]interface{})
+				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14377,7 +14376,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -14413,7 +14412,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
-				postExplainOptionsModel.Selector = make(map[string]interface{})
+				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14477,7 +14476,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"anyKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"anyKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully with retries`, func() {
@@ -14492,7 +14491,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
-				postExplainOptionsModel.Selector = make(map[string]interface{})
+				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14559,7 +14558,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"mapKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"mapKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 0, "opts": {"anyKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"anyKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully`, func() {
@@ -14579,7 +14578,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
-				postExplainOptionsModel.Selector = make(map[string]interface{})
+				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14611,7 +14610,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
-				postExplainOptionsModel.Selector = make(map[string]interface{})
+				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14664,7 +14663,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostExplainOptions model
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
-				postExplainOptionsModel.Selector = make(map[string]interface{})
+				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14717,7 +14716,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14796,7 +14795,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14883,7 +14882,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14915,7 +14914,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14968,7 +14967,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15043,7 +15042,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15130,7 +15129,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15151,7 +15150,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -15168,7 +15167,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15221,7 +15220,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostFindOptions model
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
-				postFindOptionsModel.Selector = make(map[string]interface{})
+				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15242,7 +15241,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -15314,7 +15313,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully with retries`, func() {
@@ -15368,7 +15367,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"mapKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully`, func() {
@@ -15509,7 +15508,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
-				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+				indexDefinitionModel.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -15606,7 +15605,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
-				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+				indexDefinitionModel.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -15711,7 +15710,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
-				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+				indexDefinitionModel.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -15761,7 +15760,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
-				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+				indexDefinitionModel.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -15832,7 +15831,7 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
-				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+				indexDefinitionModel.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
 
 				// Construct an instance of the PostIndexOptions model
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
@@ -16432,7 +16431,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostSearch successfully with retries`, func() {
@@ -16522,7 +16521,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"mapKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostSearch successfully`, func() {
@@ -16850,7 +16849,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 				// Verify streamed JSON response.
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(string(buffer)).To(Equal(`{"foo": "this is a mock response for JSON streaming"}`))
@@ -16957,7 +16956,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -17733,7 +17732,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -17810,7 +17809,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"mapKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -18043,7 +18042,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
 				replicationDocumentModel.QueryParams = make(map[string]string)
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
-				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
 				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
 				replicationDocumentModel.Source = replicationDatabaseModel
@@ -18211,7 +18210,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
 				replicationDocumentModel.QueryParams = make(map[string]string)
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
-				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
 				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
 				replicationDocumentModel.Source = replicationDatabaseModel
@@ -18387,7 +18386,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
 				replicationDocumentModel.QueryParams = make(map[string]string)
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
-				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
 				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
 				replicationDocumentModel.Source = replicationDatabaseModel
@@ -18503,7 +18502,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
 				replicationDocumentModel.QueryParams = make(map[string]string)
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
-				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
 				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
 				replicationDocumentModel.Source = replicationDatabaseModel
@@ -18640,7 +18639,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
 				replicationDocumentModel.QueryParams = make(map[string]string)
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
-				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
 				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
 				replicationDocumentModel.Source = replicationDatabaseModel
@@ -21722,7 +21721,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Verify empty byte buffer.
 				Expect(result).ToNot(BeNil())
-				buffer, operationErr := ioutil.ReadAll(result)
+				buffer, operationErr := io.ReadAll(result)
 				Expect(operationErr).To(BeNil())
 				Expect(buffer).ToNot(BeNil())
 				Expect(len(buffer)).To(Equal(0))
@@ -25718,7 +25717,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.SetDb("testString")
 				postChangesOptionsModel.SetDocIds([]string{"testString"})
 				postChangesOptionsModel.SetFields([]string{"testString"})
-				postChangesOptionsModel.SetSelector(make(map[string]interface{}))
+				postChangesOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
 				postChangesOptionsModel.SetLastEventID("testString")
 				postChangesOptionsModel.SetAttEncodingInfo(false)
 				postChangesOptionsModel.SetAttachments(false)
@@ -25739,7 +25738,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postChangesOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postChangesOptionsModel.DocIds).To(Equal([]string{"testString"}))
 				Expect(postChangesOptionsModel.Fields).To(Equal([]string{"testString"}))
-				Expect(postChangesOptionsModel.Selector).To(Equal(make(map[string]interface{})))
+				Expect(postChangesOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(postChangesOptionsModel.LastEventID).To(Equal(core.StringPtr("testString")))
 				Expect(postChangesOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(postChangesOptionsModel.Attachments).To(Equal(core.BoolPtr(false)))
@@ -25944,10 +25943,10 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewPostExplainOptions successfully`, func() {
 				// Construct an instance of the PostExplainOptions model
 				db := "testString"
-				postExplainOptionsSelector := make(map[string]interface{})
+				postExplainOptionsSelector := map[string]interface{}{"anyKey": "anyValue"}
 				postExplainOptionsModel := cloudantService.NewPostExplainOptions(db, postExplainOptionsSelector)
 				postExplainOptionsModel.SetDb("testString")
-				postExplainOptionsModel.SetSelector(make(map[string]interface{}))
+				postExplainOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
 				postExplainOptionsModel.SetBookmark("testString")
 				postExplainOptionsModel.SetConflicts(true)
 				postExplainOptionsModel.SetExecutionStats(true)
@@ -25962,7 +25961,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postExplainOptionsModel).ToNot(BeNil())
 				Expect(postExplainOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postExplainOptionsModel.Selector).To(Equal(make(map[string]interface{})))
+				Expect(postExplainOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(postExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
@@ -25979,10 +25978,10 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewPostFindOptions successfully`, func() {
 				// Construct an instance of the PostFindOptions model
 				db := "testString"
-				postFindOptionsSelector := make(map[string]interface{})
+				postFindOptionsSelector := map[string]interface{}{"anyKey": "anyValue"}
 				postFindOptionsModel := cloudantService.NewPostFindOptions(db, postFindOptionsSelector)
 				postFindOptionsModel.SetDb("testString")
-				postFindOptionsModel.SetSelector(make(map[string]interface{}))
+				postFindOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
 				postFindOptionsModel.SetBookmark("testString")
 				postFindOptionsModel.SetConflicts(true)
 				postFindOptionsModel.SetExecutionStats(true)
@@ -25997,7 +25996,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postFindOptionsModel).ToNot(BeNil())
 				Expect(postFindOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postFindOptionsModel.Selector).To(Equal(make(map[string]interface{})))
+				Expect(postFindOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(postFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
@@ -26055,12 +26054,12 @@ var _ = Describe(`CloudantV1`, func() {
 				indexDefinitionModel.DefaultField = indexTextOperatorDefaultFieldModel
 				indexDefinitionModel.Fields = []cloudantv1.IndexField{*indexFieldModel}
 				indexDefinitionModel.IndexArrayLengths = core.BoolPtr(true)
-				indexDefinitionModel.PartialFilterSelector = make(map[string]interface{})
+				indexDefinitionModel.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
 				Expect(indexDefinitionModel.DefaultAnalyzer).To(Equal(analyzerModel))
 				Expect(indexDefinitionModel.DefaultField).To(Equal(indexTextOperatorDefaultFieldModel))
 				Expect(indexDefinitionModel.Fields).To(Equal([]cloudantv1.IndexField{*indexFieldModel}))
 				Expect(indexDefinitionModel.IndexArrayLengths).To(Equal(core.BoolPtr(true)))
-				Expect(indexDefinitionModel.PartialFilterSelector).To(Equal(make(map[string]interface{})))
+				Expect(indexDefinitionModel.PartialFilterSelector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 
 				// Construct an instance of the PostIndexOptions model
 				db := "testString"
@@ -26127,11 +26126,11 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostPartitionFindOptions model
 				db := "testString"
 				partitionKey := "testString"
-				postPartitionFindOptionsSelector := make(map[string]interface{})
+				postPartitionFindOptionsSelector := map[string]interface{}{"anyKey": "anyValue"}
 				postPartitionFindOptionsModel := cloudantService.NewPostPartitionFindOptions(db, partitionKey, postPartitionFindOptionsSelector)
 				postPartitionFindOptionsModel.SetDb("testString")
 				postPartitionFindOptionsModel.SetPartitionKey("testString")
-				postPartitionFindOptionsModel.SetSelector(make(map[string]interface{}))
+				postPartitionFindOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
 				postPartitionFindOptionsModel.SetBookmark("testString")
 				postPartitionFindOptionsModel.SetConflicts(true)
 				postPartitionFindOptionsModel.SetExecutionStats(true)
@@ -26146,7 +26145,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionFindOptionsModel).ToNot(BeNil())
 				Expect(postPartitionFindOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
-				Expect(postPartitionFindOptionsModel.Selector).To(Equal(make(map[string]interface{})))
+				Expect(postPartitionFindOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(postPartitionFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
@@ -27013,7 +27012,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(1))
 				replicationDocumentModel.QueryParams = make(map[string]string)
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(0))
-				replicationDocumentModel.Selector = make(map[string]interface{})
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
 				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
 				replicationDocumentModel.Source = replicationDatabaseModel
@@ -27046,7 +27045,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.HTTPConnections).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(replicationDocumentModel.QueryParams).To(Equal(make(map[string]string)))
 				Expect(replicationDocumentModel.RetriesPerRequest).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(replicationDocumentModel.Selector).To(Equal(make(map[string]interface{})))
+				Expect(replicationDocumentModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(replicationDocumentModel.SinceSeq).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.SocketOptions).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.Source).To(Equal(replicationDatabaseModel))
@@ -27204,7 +27203,7 @@ func CreateMockUUID(mockData string) *strfmt.UUID {
 }
 
 func CreateMockReader(mockData string) io.ReadCloser {
-	return ioutil.NopCloser(bytes.NewReader([]byte(mockData)))
+	return io.NopCloser(bytes.NewReader([]byte(mockData)))
 }
 
 func CreateMockDate(mockData string) *strfmt.Date {

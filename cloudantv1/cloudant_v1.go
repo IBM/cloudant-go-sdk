@@ -17481,7 +17481,7 @@ func UnmarshalThroughputInformation(m map[string]json.RawMessage, result interfa
 // UpInformation : Schema for information about the up state of the server.
 type UpInformation struct {
 	// seeds.
-	Seeds interface{} `json:"seeds" validate:"required"`
+	Seeds map[string]interface{} `json:"seeds" validate:"required"`
 
 	// status.
 	Status *string `json:"status" validate:"required"`
