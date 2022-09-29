@@ -11179,7 +11179,7 @@ func (options *GetSchedulerJobOptions) SetHeaders(param map[string]string) *GetS
 
 // GetSchedulerJobsOptions : The GetSchedulerJobs options.
 type GetSchedulerJobsOptions struct {
-	// Query parameter to specify the number of returned documents to limit the result to.
+	// Query parameter to specify the number of returned jobs to limit the result to.
 	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify the number of records before starting to return the results.
