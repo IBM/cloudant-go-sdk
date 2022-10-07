@@ -6,7 +6,7 @@ require (
 	github.com/IBM/go-sdk-core/v5 v5.10.2
 	github.com/go-openapi/strfmt v0.21.3
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.20.2
+	github.com/onsi/gomega v1.21.1
 )
 
 require (
