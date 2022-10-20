@@ -46,6 +46,9 @@ var docIdRule = validationRule{
 	operationIds: []string{
 		"DeleteDocument",
 		"GetDocument",
+		"GetDocumentAsMixed",
+		"GetDocumentAsRelated",
+		"GetDocumentAsStream",
 		"HeadDocument",
 		"PutDocument",
 		"DeleteAttachment",
