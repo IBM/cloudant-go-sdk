@@ -62,6 +62,40 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(err.Error()).To(ContainSubstring("_testDocument"))
 	})
 
+	It("Validates a doc ID with GetDocumentAsStream", func() {
+		cloudant, err := NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: &core.NoAuthAuthenticator{},
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+
+		pathParamsMap := map[string]string{
+			"db":     "testDatabase",
+			"doc_id": "_testDocument",
+		}
+
+		builder := core.NewRequestBuilder(core.GET)
+		_, err = builder.ResolveRequestURL(cloudant.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+		if err != nil {
+			return
+		}
+
+		sdkHeaders := GetSdkHeaders("cloudant", "V1", "GetDocumentAsStream")
+		for headerName, headerValue := range sdkHeaders {
+			builder.AddHeader(headerName, headerValue)
+		}
+
+		request, err := builder.Build()
+		Expect(request).ToNot(BeNil())
+		Expect(err).To(BeNil())
+
+		response, err := cloudant.Request(request, nil)
+		Expect(response).To(BeNil())
+		Expect(err).ToNot(BeNil())
+		Expect(err.Error()).To(ContainSubstring("_testDocument"))
+	})
+
 	It("Validates a doc ID at long service path", func() {
 		cloudant, err := NewBaseService(&core.ServiceOptions{
 			URL:           "https://cloudant.example/some/proxy/path",
