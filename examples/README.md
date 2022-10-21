@@ -258,18 +258,6 @@
 
 - [Example request](./putDesignDocument/example_request.go)
 
-## getGeo
-
-### get `/{db}/_design/{ddoc}/_geo/{index}`
-
-- [Example request](./getGeo/example_request.go)
-
-## getGeoIndexInformation
-
-### get `/{db}/_design/{ddoc}/_geo_info/{index}`
-
-- [Example request](./getGeoIndexInformation/example_request.go)
-
 ## getDesignDocumentInformation
 
 ### get `/{db}/_design/{ddoc}/_info`
@@ -324,12 +312,6 @@
 
 - [Example request for "json" index type](./postFind/example_request_for_json_index_type.go)
 - [Example request for "text" index type](./postFind/example_request_for_text_index_type.go)
-
-## postGeoCleanup
-
-### post `/{db}/_geo_cleanup`
-
-- [Example request](./postGeoCleanup/example_request.go)
 
 ## getIndexesInformation
 

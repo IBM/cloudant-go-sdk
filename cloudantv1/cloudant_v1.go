@@ -518,7 +518,7 @@ func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUp
 //
 // Before using the changes feed we recommend reading the
 // [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
-// appropriate use cases.".
+// appropriate use cases.
 func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
 	return cloudant.PostChangesWithContext(context.Background(), postChangesOptions)
 }
@@ -647,7 +647,7 @@ func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChan
 //
 // Before using the changes feed we recommend reading the
 // [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
-// appropriate use cases.".
+// appropriate use cases.
 func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	return cloudant.PostChangesAsStreamWithContext(context.Background(), postChangesOptions)
 }
@@ -9567,6 +9567,9 @@ func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (e
 
 // DocsResultRowValue : Value of built-in `/_all_docs` style view.
 type DocsResultRowValue struct {
+	// If `true` then the document is deleted. Not present for undeleted documents.
+	Deleted *bool `json:"deleted,omitempty"`
+
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev" validate:"required"`
 }
@@ -9574,6 +9577,10 @@ type DocsResultRowValue struct {
 // UnmarshalDocsResultRowValue unmarshals an instance of DocsResultRowValue from the specified map of raw messages.
 func UnmarshalDocsResultRowValue(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocsResultRowValue)
+	err = core.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "rev", &obj.Rev)
 	if err != nil {
 		return
@@ -16147,6 +16154,10 @@ type ReplicationDocument struct {
 	// Address of a (http or socks5 protocol) proxy server through which replication with the target database should occur.
 	TargetProxy *string `json:"target_proxy,omitempty"`
 
+	// Specify whether to use _bulk_get for fetching documents from the source. If unset, the server configured default
+	// will be used.
+	UseBulkGet *bool `json:"use_bulk_get,omitempty"`
+
 	// Specify if checkpoints should be saved during replication. Using checkpoints means a replication can be efficiently
 	// resumed.
 	UseCheckpoints *bool `json:"use_checkpoints,omitempty"`
@@ -16295,6 +16306,9 @@ func (o *ReplicationDocument) MarshalJSON() (buffer []byte, err error) {
 	}
 	if o.TargetProxy != nil {
 		m["target_proxy"] = o.TargetProxy
+	}
+	if o.UseBulkGet != nil {
+		m["use_bulk_get"] = o.UseBulkGet
 	}
 	if o.UseCheckpoints != nil {
 		m["use_checkpoints"] = o.UseCheckpoints
@@ -16453,6 +16467,11 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "target_proxy")
+	err = core.UnmarshalPrimitive(m, "use_bulk_get", &obj.UseBulkGet)
+	if err != nil {
+		return
+	}
+	delete(m, "use_bulk_get")
 	err = core.UnmarshalPrimitive(m, "use_checkpoints", &obj.UseCheckpoints)
 	if err != nil {
 		return

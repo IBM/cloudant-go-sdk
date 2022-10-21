@@ -3908,7 +3908,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully with retries`, func() {
@@ -3991,7 +3991,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully`, func() {
@@ -4482,7 +4482,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully with retries`, func() {
@@ -4569,7 +4569,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully`, func() {
@@ -9879,7 +9879,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully with retries`, func() {
@@ -9965,7 +9965,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully`, func() {
@@ -10203,7 +10203,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully with retries`, func() {
@@ -10293,7 +10293,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully`, func() {
@@ -12090,7 +12090,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully with retries`, func() {
@@ -12174,7 +12174,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully`, func() {
@@ -17732,7 +17732,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -17809,7 +17809,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 0, "connection_timeout": 0, "continuous": false, "create_target": false, "create_target_params": {"n": 1, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 1, "query_params": {"mapKey": "Inner"}, "retries_per_request": 0, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 1, "worker_processes": 1}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -18049,6 +18049,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
@@ -18217,6 +18218,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
@@ -18393,6 +18395,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
@@ -18509,6 +18512,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
@@ -18646,6 +18650,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
@@ -27019,6 +27024,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
 				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
@@ -27052,6 +27058,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.SourceProxy).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.Target).To(Equal(replicationDatabaseModel))
 				Expect(replicationDocumentModel.TargetProxy).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.UseBulkGet).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.UseCheckpoints).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.UserCtx).To(Equal(userContextModel))
 				Expect(replicationDocumentModel.WinningRevsOnly).To(Equal(core.BoolPtr(false)))
