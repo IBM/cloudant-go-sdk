@@ -105,12 +105,12 @@ project:
 
 The current version of this SDK: 0.2.1
 
-There are a few different ways to download and install the
+There are a few different ways to download and add the
 Cloudant Go SDK project for use by your Go application:
 
 ### `go get` command
 
-Use this command to download and install the SDK to allow your Go application to
+Use this command to download and add the SDK to allow your Go application to
 use it:
 
 ```terminal
