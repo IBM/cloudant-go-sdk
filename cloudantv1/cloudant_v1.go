@@ -1203,8 +1203,12 @@ func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDoc
 	if err != nil {
 		return
 	}
+	if core.IsNil(postDocumentOptions.Document) && core.IsNil(postDocumentOptions.Body) {
+		err = fmt.Errorf("one of [postDocumentOptions.Document, postDocumentOptions.Body] must be specified")
+		return
+	}
 
-	if postDocumentOptions.Document != nil && postDocumentOptions.ContentType == nil {
+	if !core.IsNil(postDocumentOptions.Document) && core.IsNil(postDocumentOptions.ContentType) {
 		postDocumentOptions.SetContentType("application/json")
 	}
 
@@ -1619,6 +1623,10 @@ func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBul
 	}
 	err = core.ValidateStruct(postBulkDocsOptions, "postBulkDocsOptions")
 	if err != nil {
+		return
+	}
+	if core.IsNil(postBulkDocsOptions.BulkDocs) && core.IsNil(postBulkDocsOptions.Body) {
+		err = fmt.Errorf("one of [postBulkDocsOptions.BulkDocs, postBulkDocsOptions.Body] must be specified")
 		return
 	}
 
@@ -2414,8 +2422,12 @@ func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocum
 	if err != nil {
 		return
 	}
+	if core.IsNil(putDocumentOptions.Document) && core.IsNil(putDocumentOptions.Body) {
+		err = fmt.Errorf("one of [putDocumentOptions.Document, putDocumentOptions.Body] must be specified")
+		return
+	}
 
-	if putDocumentOptions.Document != nil && putDocumentOptions.ContentType == nil {
+	if !core.IsNil(putDocumentOptions.Document) && core.IsNil(putDocumentOptions.ContentType) {
 		putDocumentOptions.SetContentType("application/json")
 	}
 
@@ -6859,8 +6871,12 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 	if err != nil {
 		return
 	}
+	if core.IsNil(putLocalDocumentOptions.Document) && core.IsNil(putLocalDocumentOptions.Body) {
+		err = fmt.Errorf("one of [putLocalDocumentOptions.Document, putLocalDocumentOptions.Body] must be specified")
+		return
+	}
 
-	if putLocalDocumentOptions.Document != nil && putLocalDocumentOptions.ContentType == nil {
+	if !core.IsNil(putLocalDocumentOptions.Document) && core.IsNil(putLocalDocumentOptions.ContentType) {
 		putLocalDocumentOptions.SetContentType("application/json")
 	}
 

@@ -3672,6 +3672,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(result).ToNot(BeNil())
 
 			})
+			It(`Invoke PostDocument with error: Param validation error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostDocumentOptions model
+				postDocumentOptionsModel := new(cloudantv1.PostDocumentOptions)
+				// Invoke operation with invalid options model (negative test)
+				result, response, operationErr := cloudantService.PostDocument(postDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
 			It(`Invoke PostDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
 					URL:           testServer.URL,
@@ -5295,6 +5311,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
+			})
+			It(`Invoke PostBulkDocs with error: Param validation error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostBulkDocsOptions model
+				postBulkDocsOptionsModel := new(cloudantv1.PostBulkDocsOptions)
+				// Invoke operation with invalid options model (negative test)
+				result, response, operationErr := cloudantService.PostBulkDocs(postBulkDocsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 			})
 			It(`Invoke PostBulkDocs with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -8142,6 +8174,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
+			})
+			It(`Invoke PutDocument with error: Param validation error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PutDocumentOptions model
+				putDocumentOptionsModel := new(cloudantv1.PutDocumentOptions)
+				// Invoke operation with invalid options model (negative test)
+				result, response, operationErr := cloudantService.PutDocument(putDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 			})
 			It(`Invoke PutDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
@@ -22892,6 +22940,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(response).ToNot(BeNil())
 				Expect(result).ToNot(BeNil())
 
+			})
+			It(`Invoke PutLocalDocument with error: Param validation error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PutLocalDocumentOptions model
+				putLocalDocumentOptionsModel := new(cloudantv1.PutLocalDocumentOptions)
+				// Invoke operation with invalid options model (negative test)
+				result, response, operationErr := cloudantService.PutLocalDocument(putLocalDocumentOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
 			})
 			It(`Invoke PutLocalDocument with error: Operation validation and request error`, func() {
 				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
