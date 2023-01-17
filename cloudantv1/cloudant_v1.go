@@ -162,6 +162,8 @@ func (cloudant *CloudantV1) DisableRetries() {
 // When you access the root of an instance, IBM Cloudant returns meta-information about the instance. The response
 // includes a JSON structure that contains information about the server, including a welcome message and the server's
 // version.
+//
+// **Tip:**  The authentication for this endpoint is only enforced when using IAM.
 func (cloudant *CloudantV1) GetServerInformation(getServerInformationOptions *GetServerInformationOptions) (result *ServerInformation, response *core.DetailedResponse, err error) {
 	return cloudant.GetServerInformationWithContext(context.Background(), getServerInformationOptions)
 }
@@ -268,6 +270,8 @@ func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Cont
 // GetUuids : Retrieve one or more UUIDs
 // Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
 // provides a list of UUIDs.
+//
+// **Tip:**  The authentication for this endpoint is only enforced when using IAM.
 func (cloudant *CloudantV1) GetUuids(getUuidsOptions *GetUuidsOptions) (result *UuidsResult, response *core.DetailedResponse, err error) {
 	return cloudant.GetUuidsWithContext(context.Background(), getUuidsOptions)
 }
@@ -7223,6 +7227,8 @@ func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getAc
 // GetUpInformation : Retrieve information about whether the server is up
 // Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or `nolb`,
 // the endpoint returns a 404 response.
+//
+// **Tip:**  The authentication for this endpoint is only enforced when using IAM.
 func (cloudant *CloudantV1) GetUpInformation(getUpInformationOptions *GetUpInformationOptions) (result *UpInformation, response *core.DetailedResponse, err error) {
 	return cloudant.GetUpInformationWithContext(context.Background(), getUpInformationOptions)
 }
