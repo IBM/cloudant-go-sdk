@@ -295,7 +295,7 @@ void runTests() {
   sh '''
   for file in ./**/*suite_test.go
   do
-    go test $(dirname $file)/... -ginkgo.reportFile ./../junitreports/$(dirname $file).xml
+    go test $(dirname $file)/... -ginkgo.reportFile ./../junitreports/$(dirname $file).xml -tags=integration
   done
   '''
 }

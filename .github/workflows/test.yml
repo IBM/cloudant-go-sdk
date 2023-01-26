@@ -4,12 +4,21 @@ on:
     branches: ['main']
   pull_request:
     branches-ignore: ['gh-pages']
+env:
+  WIREMOCK_URL: http://127.0.0.1:8080
+  WIREMOCK_PORT: 8080
 jobs:
   test:
     strategy:
       matrix:
         go: ['1.18', '1.19']
     runs-on: ubuntu-latest
+    services:
+      wiremock:
+        image: wiremock/wiremock
+        options: --name wiremock
+        ports:
+        - 8080:8080
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -21,7 +30,10 @@ jobs:
         go-version: ${{ matrix.go }}
         check-latest: false
         cache: true
+    - name: Setup Wiremock
+      shell: bash
+      run: ${GITHUB_WORKSPACE}/scripts/setup_wiremock.sh
     - name: Run tests
-      run: go test ./auth/... ./common/... ./cloudantv1/... -race -coverprofile=coverage.txt -covermode=atomic
+      run: go test ./auth/... ./common/... ./cloudantv1/... -race -coverprofile=coverage.txt -covermode=atomic -tags=integration
     - name: Run lint
       uses: golangci/golangci-lint-action@v3
