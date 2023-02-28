@@ -13258,7 +13258,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13348,7 +13347,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13446,7 +13444,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13489,7 +13486,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13553,7 +13549,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13639,7 +13634,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13737,7 +13731,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13786,7 +13779,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -13850,7 +13842,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Stable = core.BoolPtr(false)
 				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
@@ -23903,7 +23894,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"changes_done": 0, "database": "Database", "node": "Node", "pid": "Pid", "progress": 0, "started_on": 0, "status": "Status", "task": "Task", "total_changes": 0, "type": "Type", "updated_on": 0}]`)
+					fmt.Fprintf(res, "%s", `[{"bulk_get_attempts": 0, "bulk_get_docs": 0, "changes_done": 0, "changes_pending": 0, "checkpoint_interval": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "continuous": false, "database": "Database", "design_document": "DesignDocument", "doc_id": "DocID", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "index": "Index", "indexer_pid": "IndexerPid", "missing_revisions_found": 0, "node": "Node", "phase": "docid_sort", "pid": "Pid", "process_status": "exiting", "progress": 0, "replication_id": "ReplicationID", "retry": false, "revisions_checked": 0, "source": "Source", "source_seq": "SourceSeq", "started_on": 0, "target": "Target", "through_seq": "ThroughSeq", "total_changes": 0, "type": "database_compaction", "updated_on": 0, "user": "User", "view": 0}]`)
 				}))
 			})
 			It(`Invoke GetActiveTasks successfully with retries`, func() {
@@ -23956,7 +23947,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"changes_done": 0, "database": "Database", "node": "Node", "pid": "Pid", "progress": 0, "started_on": 0, "status": "Status", "task": "Task", "total_changes": 0, "type": "Type", "updated_on": 0}]`)
+					fmt.Fprintf(res, "%s", `[{"bulk_get_attempts": 0, "bulk_get_docs": 0, "changes_done": 0, "changes_pending": 0, "checkpoint_interval": 0, "checkpointed_source_seq": "CheckpointedSourceSeq", "continuous": false, "database": "Database", "design_document": "DesignDocument", "doc_id": "DocID", "doc_write_failures": 0, "docs_read": 0, "docs_written": 0, "index": "Index", "indexer_pid": "IndexerPid", "missing_revisions_found": 0, "node": "Node", "phase": "docid_sort", "pid": "Pid", "process_status": "exiting", "progress": 0, "replication_id": "ReplicationID", "retry": false, "revisions_checked": 0, "source": "Source", "source_seq": "SourceSeq", "started_on": 0, "target": "Target", "through_seq": "ThroughSeq", "total_changes": 0, "type": "database_compaction", "updated_on": 0, "user": "User", "view": 0}]`)
 				}))
 			})
 			It(`Invoke GetActiveTasks successfully`, func() {
@@ -26298,7 +26289,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetKey(core.StringPtr("testString"))
 				postPartitionViewOptionsModel.SetKeys([]interface{}{"testString"})
 				postPartitionViewOptionsModel.SetReduce(true)
-				postPartitionViewOptionsModel.SetStable(false)
 				postPartitionViewOptionsModel.SetStartKey(core.StringPtr("testString"))
 				postPartitionViewOptionsModel.SetStartKeyDocID("testString")
 				postPartitionViewOptionsModel.SetUpdate("true")
@@ -26324,7 +26314,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(postPartitionViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionViewOptionsModel.Stable).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Update).To(Equal(core.StringPtr("true")))
