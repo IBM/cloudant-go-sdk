@@ -4009,9 +4009,6 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 	if postPartitionViewOptions.Reduce != nil {
 		body["reduce"] = postPartitionViewOptions.Reduce
 	}
-	if postPartitionViewOptions.Stable != nil {
-		body["stable"] = postPartitionViewOptions.Stable
-	}
 	if postPartitionViewOptions.StartKey != nil {
 		body["start_key"] = postPartitionViewOptions.StartKey
 	}
@@ -4141,9 +4138,6 @@ func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Con
 	}
 	if postPartitionViewOptions.Reduce != nil {
 		body["reduce"] = postPartitionViewOptions.Reduce
-	}
-	if postPartitionViewOptions.Stable != nil {
-		body["stable"] = postPartitionViewOptions.Stable
 	}
 	if postPartitionViewOptions.StartKey != nil {
 		body["start_key"] = postPartitionViewOptions.StartKey
@@ -7452,31 +7446,99 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 
 // ActiveTask : Schema for information about a running task.
 type ActiveTask struct {
-	// Processed changes.
+	// The total count of attempted doc revisions fetched with `_bulk_get`. Available for `replication` type tasks.
+	BulkGetAttempts *int64 `json:"bulk_get_attempts,omitempty"`
+
+	// The total count of successful docs fetched with `_bulk_get`. Available for `replication` type tasks.
+	BulkGetDocs *int64 `json:"bulk_get_docs,omitempty"`
+
+	// Processed changes. Available for `database_compaction`, `indexer`, `search_indexer`, `view_compaction` type tasks.
 	ChangesDone *int64 `json:"changes_done,omitempty"`
+
+	// The count of changes not yet replicated. Available for `replication` type tasks.
+	ChangesPending *int64 `json:"changes_pending,omitempty"`
+
+	// Specifies the checkpoint interval in ms. Available for `replication` type tasks.
+	CheckpointInterval *int64 `json:"checkpoint_interval,omitempty"`
+
+	// The source sequence id which was last successfully replicated. Available for `replication` type tasks.
+	CheckpointedSourceSeq *string `json:"checkpointed_source_seq,omitempty"`
+
+	// The replication configured to be continuous. Available for `replication` type tasks.
+	Continuous *bool `json:"continuous,omitempty"`
 
 	// Source database.
 	Database *string `json:"database" validate:"required"`
 
+	// The design document that belongs to this task. Available for `indexer`, `search_indexer`, `view_compaction` type
+	// tasks.
+	DesignDocument *string `json:"design_document,omitempty"`
+
+	// Replication document ID. Available for `replication` type tasks.
+	DocID *string `json:"doc_id,omitempty"`
+
+	// Number of document write failures. Available for `replication` type tasks.
+	DocWriteFailures *int64 `json:"doc_write_failures,omitempty"`
+
+	// Number of documents read. Available for `replication` type tasks.
+	DocsRead *int64 `json:"docs_read,omitempty"`
+
+	// Number of documents written to target. Available for `replication` type tasks.
+	DocsWritten *int64 `json:"docs_written,omitempty"`
+
+	// The search index that belongs to this task. Available for `search_indexer` type tasks.
+	Index *string `json:"index,omitempty"`
+
+	// Indexer process ID. Available for `indexer` type tasks.
+	IndexerPid *string `json:"indexer_pid,omitempty"`
+
+	// The count of docs which have been read from the source. Available for `replication` type tasks.
+	MissingRevisionsFound *int64 `json:"missing_revisions_found,omitempty"`
+
 	// Cluster node where the task is running.
 	Node *string `json:"node" validate:"required"`
+
+	// The phase the active task is in. `docid_sort`, `docid_copy`, `document_copy` phases are available for
+	// `database_compaction`, while `ids` and `view` phases are available for `view_compaction` type tasks.
+	Phase *string `json:"phase,omitempty"`
 
 	// Process ID.
 	Pid *string `json:"pid" validate:"required"`
 
-	// Current percentage progress.
+	// Process status.
+	ProcessStatus *string `json:"process_status,omitempty"`
+
+	// Current percentage progress. Available for `database_compaction`, `indexer`, `search_indexer`, `view_compaction`
+	// type tasks.
 	Progress *int64 `json:"progress,omitempty"`
+
+	// Replication ID. Available for `replication` type tasks.
+	ReplicationID *string `json:"replication_id,omitempty"`
+
+	// Indicates whether a compaction retry is currently running on the database. Available for `database_compaction` type
+	// tasks.
+	Retry *bool `json:"retry,omitempty"`
+
+	// The count of revisions which have been checked since this replication began. Available for `replication` type tasks.
+	RevisionsChecked *int64 `json:"revisions_checked,omitempty"`
+
+	// Replication source. Available for `replication` type tasks.
+	Source *string `json:"source,omitempty"`
+
+	// The last sequence number obtained from the source database changes feed. Available for `replication` type tasks.
+	SourceSeq *string `json:"source_seq,omitempty"`
 
 	// Schema for a Unix epoch timestamp.
 	StartedOn *int64 `json:"started_on" validate:"required"`
 
-	// Task status message.
-	Status *string `json:"status,omitempty"`
+	// Replication target. Available for `replication` type tasks.
+	Target *string `json:"target,omitempty"`
 
-	// Task name.
-	Task *string `json:"task,omitempty"`
+	// The last sequence number processed by the replicator. Available for `replication` type tasks.
+	ThroughSeq *string `json:"through_seq,omitempty"`
 
-	// Total changes to process.
+	// Total changes to process. Available for `database_compaction`, `indexer`, `search_indexer`, `view_compaction` type
+	// tasks.
 	TotalChanges *int64 `json:"total_changes,omitempty"`
 
 	// Operation type.
@@ -7484,12 +7546,74 @@ type ActiveTask struct {
 
 	// Schema for a Unix epoch timestamp.
 	UpdatedOn *int64 `json:"updated_on" validate:"required"`
+
+	// Name of user running replication or owning the indexer. Available for `indexer`, `replication` type tasks.
+	User *string `json:"user,omitempty"`
+
+	// Number of view indexes. Available for `view_compaction` type tasks.
+	View *int64 `json:"view,omitempty"`
 }
+
+// Constants associated with the ActiveTask.Phase property.
+// The phase the active task is in. `docid_sort`, `docid_copy`, `document_copy` phases are available for
+// `database_compaction`, while `ids` and `view` phases are available for `view_compaction` type tasks.
+const (
+	ActiveTaskPhaseDocidCopyConst    = "docid_copy"
+	ActiveTaskPhaseDocidSortConst    = "docid_sort"
+	ActiveTaskPhaseDocumentCopyConst = "document_copy"
+	ActiveTaskPhaseIdsConst          = "ids"
+	ActiveTaskPhaseViewConst         = "view"
+)
+
+// Constants associated with the ActiveTask.ProcessStatus property.
+// Process status.
+const (
+	ActiveTaskProcessStatusExitingConst           = "exiting"
+	ActiveTaskProcessStatusGarbageCollectingConst = "garbage_collecting"
+	ActiveTaskProcessStatusRunnableConst          = "runnable"
+	ActiveTaskProcessStatusRunningConst           = "running"
+	ActiveTaskProcessStatusSuspendedConst         = "suspended"
+	ActiveTaskProcessStatusWaitingConst           = "waiting"
+)
+
+// Constants associated with the ActiveTask.Type property.
+// Operation type.
+const (
+	ActiveTaskTypeDatabaseCompactionConst = "database_compaction"
+	ActiveTaskTypeIndexerConst            = "indexer"
+	ActiveTaskTypeReplicationConst        = "replication"
+	ActiveTaskTypeSearchIndexerConst      = "search_indexer"
+	ActiveTaskTypeViewCompactionConst     = "view_compaction"
+)
 
 // UnmarshalActiveTask unmarshals an instance of ActiveTask from the specified map of raw messages.
 func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ActiveTask)
+	err = core.UnmarshalPrimitive(m, "bulk_get_attempts", &obj.BulkGetAttempts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "bulk_get_docs", &obj.BulkGetDocs)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "changes_done", &obj.ChangesDone)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "changes_pending", &obj.ChangesPending)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "checkpoint_interval", &obj.CheckpointInterval)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "checkpointed_source_seq", &obj.CheckpointedSourceSeq)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "continuous", &obj.Continuous)
 	if err != nil {
 		return
 	}
@@ -7497,7 +7621,43 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "design_document", &obj.DesignDocument)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "doc_write_failures", &obj.DocWriteFailures)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "docs_read", &obj.DocsRead)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "docs_written", &obj.DocsWritten)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "index", &obj.Index)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "indexer_pid", &obj.IndexerPid)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "missing_revisions_found", &obj.MissingRevisionsFound)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "node", &obj.Node)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "phase", &obj.Phase)
 	if err != nil {
 		return
 	}
@@ -7505,7 +7665,31 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "process_status", &obj.ProcessStatus)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "progress", &obj.Progress)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "replication_id", &obj.ReplicationID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "retry", &obj.Retry)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "revisions_checked", &obj.RevisionsChecked)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "source", &obj.Source)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "source_seq", &obj.SourceSeq)
 	if err != nil {
 		return
 	}
@@ -7513,11 +7697,11 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	err = core.UnmarshalPrimitive(m, "target", &obj.Target)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "task", &obj.Task)
+	err = core.UnmarshalPrimitive(m, "through_seq", &obj.ThroughSeq)
 	if err != nil {
 		return
 	}
@@ -7530,6 +7714,14 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_on", &obj.UpdatedOn)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "user", &obj.User)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "view", &obj.View)
 	if err != nil {
 		return
 	}
@@ -14294,14 +14486,6 @@ type PostPartitionViewOptions struct {
 	// is defined.
 	Reduce *bool `json:"reduce,omitempty"`
 
-	// Query parameter to specify whether use the same replica of  the index on each request. The default value `false`
-	// contacts all  replicas and returns the result from the first, fastest, responder. Setting it to `true` when used in
-	// conjunction with `update=false`  may improve consistency at the expense of increased latency and decreased
-	// throughput if the selected replica is not the fastest of the available  replicas.
-	//
-	// **Note:** In general setting `true` is discouraged and is strictly not recommended when using `update=true`.
-	Stable *bool `json:"stable,omitempty"`
-
 	// Schema for any JSON type.
 	StartKey interface{} `json:"start_key,omitempty"`
 
@@ -14458,12 +14642,6 @@ func (_options *PostPartitionViewOptions) SetKeys(keys []interface{}) *PostParti
 // SetReduce : Allow user to set Reduce
 func (_options *PostPartitionViewOptions) SetReduce(reduce bool) *PostPartitionViewOptions {
 	_options.Reduce = core.BoolPtr(reduce)
-	return _options
-}
-
-// SetStable : Allow user to set Stable
-func (_options *PostPartitionViewOptions) SetStable(stable bool) *PostPartitionViewOptions {
-	_options.Stable = core.BoolPtr(stable)
 	return _options
 }
 
