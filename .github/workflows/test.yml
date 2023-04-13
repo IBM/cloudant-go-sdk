@@ -35,3 +35,5 @@ jobs:
       run: ${GITHUB_WORKSPACE}/scripts/setup_wiremock.sh
     - name: Run tests
       run: go test ./auth/... ./common/... ./cloudantv1/... -race -coverprofile=coverage.txt -covermode=atomic -tags=integration
+    - name: Run lint
+      uses: golangci/golangci-lint-action@v3
