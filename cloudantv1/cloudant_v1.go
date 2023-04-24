@@ -9641,6 +9641,9 @@ type DesignDocumentViewIndex struct {
 	// Indicates if the view is currently being updated.
 	UpdaterRunning *bool `json:"updater_running" validate:"required"`
 
+	// Schema for an ability to tell if view is up-to-date without querying it.
+	UpdatesPending *UpdatesPending `json:"updates_pending" validate:"required"`
+
 	// Number of clients waiting on views from this design document.
 	WaitingClients *int64 `json:"waiting_clients" validate:"required"`
 
@@ -9672,6 +9675,10 @@ func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result inter
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updater_running", &obj.UpdaterRunning)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "updates_pending", &obj.UpdatesPending, UnmarshalUpdatesPending)
 	if err != nil {
 		return
 	}
@@ -17722,6 +17729,38 @@ func UnmarshalUpInformation(m map[string]json.RawMessage, result interface{}) (e
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdatesPending : Schema for an ability to tell if view is up-to-date without querying it.
+type UpdatesPending struct {
+	// Sum of shard copies with the least amount of work to do.
+	Minimum *int64 `json:"minimum" validate:"required"`
+
+	// Sum of unique shards. This value is zero when at least one copy of every shard range is up-to-date and the view is
+	// able to answer a query without index building delays.
+	Preferred *int64 `json:"preferred" validate:"required"`
+
+	// Sum of all shard copies.
+	Total *int64 `json:"total" validate:"required"`
+}
+
+// UnmarshalUpdatesPending unmarshals an instance of UpdatesPending from the specified map of raw messages.
+func UnmarshalUpdatesPending(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdatesPending)
+	err = core.UnmarshalPrimitive(m, "minimum", &obj.Minimum)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "preferred", &obj.Preferred)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "total", &obj.Total)
 	if err != nil {
 		return
 	}

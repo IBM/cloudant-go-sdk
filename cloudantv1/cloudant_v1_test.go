@@ -9677,7 +9677,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "updates_pending": {"minimum": 7, "preferred": 9, "total": 5}, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully with retries`, func() {
@@ -9732,7 +9732,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 6, "external": 8, "file": 4}, "updater_running": true, "updates_pending": {"minimum": 7, "preferred": 9, "total": 5}, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully`, func() {
