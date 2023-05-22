@@ -173,8 +173,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions)`, func() {
 			getDbUpdatesOptions := &cloudantv1.GetDbUpdatesOptions{
 				Feed:      core.StringPtr("normal"),
-				Heartbeat: core.Int64Ptr(int64(0)),
-				Timeout:   core.Int64Ptr(int64(0)),
+				Heartbeat: core.Int64Ptr(int64(60000)),
+				Timeout:   core.Int64Ptr(int64(60000)),
 				Since:     core.StringPtr("0"),
 			}
 
@@ -202,13 +202,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				Feed:            core.StringPtr("normal"),
 				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(0)),
+				Heartbeat:       core.Int64Ptr(int64(60000)),
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
 				Since:           core.StringPtr("0"),
 				Style:           core.StringPtr("main_only"),
-				Timeout:         core.Int64Ptr(int64(0)),
+				Timeout:         core.Int64Ptr(int64(60000)),
 				View:            core.StringPtr("testString"),
 			}
 
@@ -236,13 +236,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				Feed:            core.StringPtr("normal"),
 				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(0)),
+				Heartbeat:       core.Int64Ptr(int64(60000)),
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
 				Since:           core.StringPtr("0"),
 				Style:           core.StringPtr("main_only"),
-				Timeout:         core.Int64Ptr(int64(0)),
+				Timeout:         core.Int64Ptr(int64(60000)),
 				View:            core.StringPtr("testString"),
 			}
 
@@ -1345,7 +1345,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightNumber:  core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
 				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(1)),
+				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
 				Limit:            core.Int64Ptr(int64(0)),
@@ -1376,7 +1376,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightNumber:  core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
 				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(1)),
+				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
 				Limit:            core.Int64Ptr(int64(0)),
@@ -1480,7 +1480,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
 				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(0)),
+				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{make(map[string]string)},
 				Stable:         core.BoolPtr(true),
@@ -1508,7 +1508,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
 				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(0)),
+				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{make(map[string]string)},
 				Stable:         core.BoolPtr(true),
@@ -1535,7 +1535,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
 				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(0)),
+				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{make(map[string]string)},
 				Stable:         core.BoolPtr(true),
@@ -1563,7 +1563,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
 				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(0)),
+				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{make(map[string]string)},
 				Stable:         core.BoolPtr(true),
@@ -1591,7 +1591,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
 				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(0)),
+				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{make(map[string]string)},
 				Stable:         core.BoolPtr(true),
@@ -1701,7 +1701,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightNumber:  core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
 				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(1)),
+				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
 				Limit:            core.Int64Ptr(int64(0)),
@@ -1737,7 +1737,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightNumber:  core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
 				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(1)),
+				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
 				Limit:            core.Int64Ptr(int64(0)),
@@ -1877,7 +1877,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			replicationCreateTargetParametersModel := &cloudantv1.ReplicationCreateTargetParameters{
-				N:           core.Int64Ptr(int64(1)),
+				N:           core.Int64Ptr(int64(3)),
 				Partitioned: core.BoolPtr(false),
 				Q:           core.Int64Ptr(int64(26)),
 			}
@@ -1919,16 +1919,16 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Revisions:          revisionsModel,
 				RevsInfo:           []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 				Cancel:             core.BoolPtr(true),
-				CheckpointInterval: core.Int64Ptr(int64(0)),
-				ConnectionTimeout:  core.Int64Ptr(int64(0)),
+				CheckpointInterval: core.Int64Ptr(int64(30000)),
+				ConnectionTimeout:  core.Int64Ptr(int64(30000)),
 				Continuous:         core.BoolPtr(false),
 				CreateTarget:       core.BoolPtr(false),
 				CreateTargetParams: replicationCreateTargetParametersModel,
 				DocIds:             []string{"testString"},
 				Filter:             core.StringPtr("testString"),
-				HTTPConnections:    core.Int64Ptr(int64(1)),
+				HTTPConnections:    core.Int64Ptr(int64(20)),
 				QueryParams:        make(map[string]string),
-				RetriesPerRequest:  core.Int64Ptr(int64(0)),
+				RetriesPerRequest:  core.Int64Ptr(int64(5)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
 				SinceSeq:           core.StringPtr("testString"),
 				SocketOptions:      core.StringPtr("testString"),
@@ -1940,8 +1940,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				UseCheckpoints:     core.BoolPtr(true),
 				UserCtx:            userContextModel,
 				WinningRevsOnly:    core.BoolPtr(false),
-				WorkerBatchSize:    core.Int64Ptr(int64(1)),
-				WorkerProcesses:    core.Int64Ptr(int64(1)),
+				WorkerBatchSize:    core.Int64Ptr(int64(500)),
+				WorkerProcesses:    core.Int64Ptr(int64(4)),
 			}
 			replicationDocumentModel.Attachments["foo"] = *attachmentModel
 			replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
@@ -2002,7 +2002,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions)`, func() {
 			getSchedulerJobsOptions := &cloudantv1.GetSchedulerJobsOptions{
-				Limit: core.Int64Ptr(int64(0)),
+				Limit: core.Int64Ptr(int64(25)),
 				Skip:  core.Int64Ptr(int64(0)),
 			}
 
