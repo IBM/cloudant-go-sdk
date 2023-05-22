@@ -10136,22 +10136,25 @@ func UnmarshalExecutionStats(m map[string]json.RawMessage, result interface{}) (
 
 // ExplainResult : Schema for information about the index used for a find query.
 type ExplainResult struct {
-	// dbname.
+	// When `true`, the query is answered using the index only and no documents are fetched.
+	Covered *bool `json:"covered" validate:"required"`
+
+	// Name of database.
 	Dbname *string `json:"dbname" validate:"required"`
 
-	// fields.
+	// Fields to be returned by the query.
 	Fields []string `json:"fields" validate:"required"`
 
 	// Schema for information about an index.
 	Index *IndexInformation `json:"index" validate:"required"`
 
-	// limit.
+	// The used maximum number of results returned.
 	Limit *int64 `json:"limit" validate:"required"`
 
-	// opts.
+	// Query options used.
 	Opts map[string]interface{} `json:"opts" validate:"required"`
 
-	// range.
+	// Range parameters passed to the underlying view.
 	Range *ExplainResultRange `json:"range,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -10184,13 +10187,17 @@ type ExplainResult struct {
 	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
-	// skip.
+	// Skip parameter used.
 	Skip *int64 `json:"skip" validate:"required"`
 }
 
 // UnmarshalExplainResult unmarshals an instance of ExplainResult from the specified map of raw messages.
 func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExplainResult)
+	err = core.UnmarshalPrimitive(m, "covered", &obj.Covered)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "dbname", &obj.Dbname)
 	if err != nil {
 		return
@@ -10227,12 +10234,12 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 	return
 }
 
-// ExplainResultRange : range.
+// ExplainResultRange : Range parameters passed to the underlying view.
 type ExplainResultRange struct {
-	// end_key.
+	// End key parameter passed to the underlying view.
 	EndKey []interface{} `json:"end_key,omitempty"`
 
-	// start_key.
+	// Start key parameter passed to the underlying view.
 	StartKey []interface{} `json:"start_key,omitempty"`
 }
 
