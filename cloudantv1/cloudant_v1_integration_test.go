@@ -43,10 +43,10 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 	const externalConfigFile = "../cloudant_v1.env"
 
 	var (
-		err             error
+		err          error
 		cloudantService *cloudantv1.CloudantV1
-		serviceURL      string
-		config          map[string]string
+		serviceURL   string
+		config       map[string]string
 	)
 
 	var shouldSkipTest = func() {
@@ -97,7 +97,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetServerInformation(getServerInformationOptions *GetServerInformationOptions)`, func() {
-			getServerInformationOptions := &cloudantv1.GetServerInformationOptions{}
+			getServerInformationOptions := &cloudantv1.GetServerInformationOptions{
+			}
 
 			serverInformation, response, err := cloudantService.GetServerInformation(getServerInformationOptions)
 			Expect(err).To(BeNil())
@@ -111,7 +112,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
-			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
+			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{
+			}
 
 			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
 			Expect(err).To(BeNil())
@@ -120,19 +122,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetUuids - Retrieve one or more UUIDs`, func() {
+	Describe(`GetUUIDs - Retrieve one or more UUIDs`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`GetUuids(getUuidsOptions *GetUuidsOptions)`, func() {
-			getUuidsOptions := &cloudantv1.GetUuidsOptions{
+		It(`GetUUIDs(getUUIDsOptions *GetUUIDsOptions)`, func() {
+			getUuiDsOptions := &cloudantv1.GetUUIDsOptions{
 				Count: core.Int64Ptr(int64(1)),
 			}
 
-			uuidsResult, response, err := cloudantService.GetUuids(getUuidsOptions)
+			uuiDsResult, response, err := cloudantService.GetUUIDs(getUuiDsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(uuidsResult).ToNot(BeNil())
+			Expect(uuiDsResult).ToNot(BeNil())
 		})
 	})
 
@@ -141,7 +143,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions)`, func() {
-			getCapacityThroughputInformationOptions := &cloudantv1.GetCapacityThroughputInformationOptions{}
+			getCapacityThroughputInformationOptions := &cloudantv1.GetCapacityThroughputInformationOptions{
+			}
 
 			capacityThroughputInformation, response, err := cloudantService.GetCapacityThroughputInformation(getCapacityThroughputInformationOptions)
 			Expect(err).To(BeNil())
@@ -172,10 +175,10 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions)`, func() {
 			getDbUpdatesOptions := &cloudantv1.GetDbUpdatesOptions{
-				Feed:      core.StringPtr("normal"),
+				Feed: core.StringPtr("normal"),
 				Heartbeat: core.Int64Ptr(int64(60000)),
-				Timeout:   core.Int64Ptr(int64(60000)),
-				Since:     core.StringPtr("0"),
+				Timeout: core.Int64Ptr(int64(60000)),
+				Since: core.StringPtr("0"),
 			}
 
 			dbUpdates, response, err := cloudantService.GetDbUpdates(getDbUpdatesOptions)
@@ -191,25 +194,25 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostChanges(postChangesOptions *PostChangesOptions)`, func() {
 			postChangesOptions := &cloudantv1.PostChangesOptions{
-				Db:              core.StringPtr("testString"),
-				DocIds:          []string{"testString"},
-				Fields:          []string{"testString"},
-				Selector:        map[string]interface{}{"anyKey": "anyValue"},
-				LastEventID:     core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocIds: []string{"testString"},
+				Fields: []string{"testString"},
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				LastEventID: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				Feed:            core.StringPtr("normal"),
-				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(60000)),
-				IncludeDocs:     core.BoolPtr(false),
-				Limit:           core.Int64Ptr(int64(0)),
-				SeqInterval:     core.Int64Ptr(int64(1)),
-				Since:           core.StringPtr("0"),
-				Style:           core.StringPtr("main_only"),
-				Timeout:         core.Int64Ptr(int64(60000)),
-				View:            core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				Feed: core.StringPtr("normal"),
+				Filter: core.StringPtr("testString"),
+				Heartbeat: core.Int64Ptr(int64(60000)),
+				IncludeDocs: core.BoolPtr(false),
+				Limit: core.Int64Ptr(int64(0)),
+				SeqInterval: core.Int64Ptr(int64(1)),
+				Since: core.StringPtr("0"),
+				Style: core.StringPtr("main_only"),
+				Timeout: core.Int64Ptr(int64(60000)),
+				View: core.StringPtr("testString"),
 			}
 
 			changesResult, response, err := cloudantService.PostChanges(postChangesOptions)
@@ -225,25 +228,25 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostChangesAsStream(postChangesOptions *PostChangesOptions)`, func() {
 			postChangesOptions := &cloudantv1.PostChangesOptions{
-				Db:              core.StringPtr("testString"),
-				DocIds:          []string{"testString"},
-				Fields:          []string{"testString"},
-				Selector:        map[string]interface{}{"anyKey": "anyValue"},
-				LastEventID:     core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocIds: []string{"testString"},
+				Fields: []string{"testString"},
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				LastEventID: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				Feed:            core.StringPtr("normal"),
-				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(60000)),
-				IncludeDocs:     core.BoolPtr(false),
-				Limit:           core.Int64Ptr(int64(0)),
-				SeqInterval:     core.Int64Ptr(int64(1)),
-				Since:           core.StringPtr("0"),
-				Style:           core.StringPtr("main_only"),
-				Timeout:         core.Int64Ptr(int64(60000)),
-				View:            core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				Feed: core.StringPtr("normal"),
+				Filter: core.StringPtr("testString"),
+				Heartbeat: core.Int64Ptr(int64(60000)),
+				IncludeDocs: core.BoolPtr(false),
+				Limit: core.Int64Ptr(int64(0)),
+				SeqInterval: core.Int64Ptr(int64(1)),
+				Since: core.StringPtr("0"),
+				Style: core.StringPtr("main_only"),
+				Timeout: core.Int64Ptr(int64(60000)),
+				View: core.StringPtr("testString"),
 			}
 
 			result, response, err := cloudantService.PostChangesAsStream(postChangesOptions)
@@ -275,10 +278,10 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`GetAllDbs(getAllDbsOptions *GetAllDbsOptions)`, func() {
 			getAllDbsOptions := &cloudantv1.GetAllDbsOptions{
 				Descending: core.BoolPtr(false),
-				EndKey:     core.StringPtr("testString"),
-				Limit:      core.Int64Ptr(int64(0)),
-				Skip:       core.Int64Ptr(int64(0)),
-				StartKey:   core.StringPtr("testString"),
+				EndKey: core.StringPtr("testString"),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				StartKey: core.StringPtr("testString"),
 			}
 
 			result, response, err := cloudantService.GetAllDbs(getAllDbsOptions)
@@ -326,9 +329,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutDatabase(putDatabaseOptions *PutDatabaseOptions)`, func() {
 			putDatabaseOptions := &cloudantv1.PutDatabaseOptions{
-				Db:          core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				Partitioned: core.BoolPtr(false),
-				Q:           core.Int64Ptr(int64(26)),
+				Q: core.Int64Ptr(int64(26)),
 			}
 
 			ok, response, err := cloudantService.PutDatabase(putDatabaseOptions)
@@ -344,11 +347,11 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`HeadDocument(headDocumentOptions *HeadDocumentOptions)`, func() {
 			headDocumentOptions := &cloudantv1.HeadDocumentOptions{
-				Db:          core.StringPtr("testString"),
-				DocID:       core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				IfNoneMatch: core.StringPtr("testString"),
-				Latest:      core.BoolPtr(false),
-				Rev:         core.StringPtr("testString"),
+				Latest: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
 			}
 
 			response, err := cloudantService.HeadDocument(headDocumentOptions)
@@ -363,46 +366,46 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostDocument(postDocumentOptions *PostDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
-				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
-				Digest:        core.StringPtr("testString"),
+				ContentType: core.StringPtr("testString"),
+				Data: CreateMockByteArray("This is a mock byte array value."),
+				Digest: core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
-				Encoding:      core.StringPtr("testString"),
-				Follows:       core.BoolPtr(true),
-				Length:        core.Int64Ptr(int64(0)),
-				Revpos:        core.Int64Ptr(int64(1)),
-				Stub:          core.BoolPtr(true),
+				Encoding: core.StringPtr("testString"),
+				Follows: core.BoolPtr(true),
+				Length: core.Int64Ptr(int64(0)),
+				Revpos: core.Int64Ptr(int64(1)),
+				Stub: core.BoolPtr(true),
 			}
 
 			revisionsModel := &cloudantv1.Revisions{
-				Ids:   []string{"testString"},
+				Ids: []string{"testString"},
 				Start: core.Int64Ptr(int64(1)),
 			}
 
 			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
-				Rev:    core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 				Status: core.StringPtr("available"),
 			}
 
 			documentModel := &cloudantv1.Document{
-				Attachments:      make(map[string]cloudantv1.Attachment),
-				Conflicts:        []string{"testString"},
-				Deleted:          core.BoolPtr(true),
+				Attachments: map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts: []string{"testString"},
+				Deleted: core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
-				LocalSeq:         core.StringPtr("testString"),
-				Rev:              core.StringPtr("testString"),
-				Revisions:        revisionsModel,
-				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				ID: core.StringPtr("testString"),
+				LocalSeq: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Revisions: revisionsModel,
+				RevsInfo: []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
 			documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 			postDocumentOptions := &cloudantv1.PostDocumentOptions{
-				Db:          core.StringPtr("testString"),
-				Document:    documentModel,
+				Db: core.StringPtr("testString"),
+				Document: documentModel,
 				ContentType: core.StringPtr("application/json"),
-				Batch:       core.StringPtr("ok"),
+				Batch: core.StringPtr("ok"),
 			}
 
 			documentResult, response, err := cloudantService.PostDocument(postDocumentOptions)
@@ -418,20 +421,20 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostAllDocs(postAllDocsOptions *PostAllDocsOptions)`, func() {
 			postAllDocsOptions := &cloudantv1.PostAllDocsOptions{
-				Db:              core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			allDocsResult, response, err := cloudantService.PostAllDocs(postAllDocsOptions)
@@ -447,20 +450,20 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostAllDocsAsStream(postAllDocsOptions *PostAllDocsOptions)`, func() {
 			postAllDocsOptions := &cloudantv1.PostAllDocsOptions{
-				Db:              core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			result, response, err := cloudantService.PostAllDocsAsStream(postAllDocsOptions)
@@ -477,22 +480,22 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostAllDocsQueries(postAllDocsQueriesOptions *PostAllDocsQueriesOptions)`, func() {
 			allDocsQueryModel := &cloudantv1.AllDocsQuery{
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			postAllDocsQueriesOptions := &cloudantv1.PostAllDocsQueriesOptions{
-				Db:      core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				Queries: []cloudantv1.AllDocsQuery{*allDocsQueryModel},
 			}
 
@@ -510,22 +513,22 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostAllDocsQueriesAsStream(postAllDocsQueriesOptions *PostAllDocsQueriesOptions)`, func() {
 			allDocsQueryModel := &cloudantv1.AllDocsQuery{
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			postAllDocsQueriesOptions := &cloudantv1.PostAllDocsQueriesOptions{
-				Db:      core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				Queries: []cloudantv1.AllDocsQuery{*allDocsQueryModel},
 			}
 
@@ -542,48 +545,48 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
-				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
-				Digest:        core.StringPtr("testString"),
+				ContentType: core.StringPtr("testString"),
+				Data: CreateMockByteArray("This is a mock byte array value."),
+				Digest: core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
-				Encoding:      core.StringPtr("testString"),
-				Follows:       core.BoolPtr(true),
-				Length:        core.Int64Ptr(int64(0)),
-				Revpos:        core.Int64Ptr(int64(1)),
-				Stub:          core.BoolPtr(true),
+				Encoding: core.StringPtr("testString"),
+				Follows: core.BoolPtr(true),
+				Length: core.Int64Ptr(int64(0)),
+				Revpos: core.Int64Ptr(int64(1)),
+				Stub: core.BoolPtr(true),
 			}
 
 			revisionsModel := &cloudantv1.Revisions{
-				Ids:   []string{"testString"},
+				Ids: []string{"testString"},
 				Start: core.Int64Ptr(int64(1)),
 			}
 
 			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
-				Rev:    core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 				Status: core.StringPtr("available"),
 			}
 
 			documentModel := &cloudantv1.Document{
-				Attachments:      make(map[string]cloudantv1.Attachment),
-				Conflicts:        []string{"testString"},
-				Deleted:          core.BoolPtr(true),
+				Attachments: map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts: []string{"testString"},
+				Deleted: core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
-				LocalSeq:         core.StringPtr("testString"),
-				Rev:              core.StringPtr("testString"),
-				Revisions:        revisionsModel,
-				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				ID: core.StringPtr("testString"),
+				LocalSeq: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Revisions: revisionsModel,
+				RevsInfo: []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
 			documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 			bulkDocsModel := &cloudantv1.BulkDocs{
-				Docs:     []cloudantv1.Document{*documentModel},
+				Docs: []cloudantv1.Document{*documentModel},
 				NewEdits: core.BoolPtr(true),
 			}
 
 			postBulkDocsOptions := &cloudantv1.PostBulkDocsOptions{
-				Db:       core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				BulkDocs: bulkDocsModel,
 			}
 
@@ -601,17 +604,17 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGet(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
-				Db:              core.StringPtr("testString"),
-				Docs:            []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
-				Attachments:     core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				Docs: []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
+				Attachments: core.BoolPtr(false),
 				AttEncodingInfo: core.BoolPtr(false),
-				Latest:          core.BoolPtr(false),
-				Revs:            core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				Revs: core.BoolPtr(false),
 			}
 
 			bulkGetResult, response, err := cloudantService.PostBulkGet(postBulkGetOptions)
@@ -628,17 +631,17 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
-				Db:              core.StringPtr("testString"),
-				Docs:            []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
-				Attachments:     core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				Docs: []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
+				Attachments: core.BoolPtr(false),
 				AttEncodingInfo: core.BoolPtr(false),
-				Latest:          core.BoolPtr(false),
-				Revs:            core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				Revs: core.BoolPtr(false),
 			}
 
 			result, response, err := cloudantService.PostBulkGetAsMixed(postBulkGetOptions)
@@ -655,17 +658,17 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGetAsRelated(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
-				Db:              core.StringPtr("testString"),
-				Docs:            []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
-				Attachments:     core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				Docs: []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
+				Attachments: core.BoolPtr(false),
 				AttEncodingInfo: core.BoolPtr(false),
-				Latest:          core.BoolPtr(false),
-				Revs:            core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				Revs: core.BoolPtr(false),
 			}
 
 			result, response, err := cloudantService.PostBulkGetAsRelated(postBulkGetOptions)
@@ -682,17 +685,17 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGetAsStream(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
-				Db:              core.StringPtr("testString"),
-				Docs:            []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
-				Attachments:     core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				Docs: []cloudantv1.BulkGetQueryDocument{*bulkGetQueryDocumentModel},
+				Attachments: core.BoolPtr(false),
 				AttEncodingInfo: core.BoolPtr(false),
-				Latest:          core.BoolPtr(false),
-				Revs:            core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				Revs: core.BoolPtr(false),
 			}
 
 			result, response, err := cloudantService.PostBulkGetAsStream(postBulkGetOptions)
@@ -708,19 +711,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDocument(getDocumentOptions *GetDocumentOptions)`, func() {
 			getDocumentOptions := &cloudantv1.GetDocumentOptions{
-				Db:               core.StringPtr("testString"),
-				DocID:            core.StringPtr("testString"),
-				IfNoneMatch:      core.StringPtr("testString"),
-				Attachments:      core.BoolPtr(false),
-				AttEncodingInfo:  core.BoolPtr(false),
-				Conflicts:        core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				AttEncodingInfo: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
 				DeletedConflicts: core.BoolPtr(false),
-				Latest:           core.BoolPtr(false),
-				LocalSeq:         core.BoolPtr(false),
-				Meta:             core.BoolPtr(false),
-				Rev:              core.StringPtr("testString"),
-				Revs:             core.BoolPtr(false),
-				RevsInfo:         core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
+				Meta: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
+				Revs: core.BoolPtr(false),
+				RevsInfo: core.BoolPtr(false),
 			}
 
 			document, response, err := cloudantService.GetDocument(getDocumentOptions)
@@ -736,19 +739,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDocumentAsMixed(getDocumentOptions *GetDocumentOptions)`, func() {
 			getDocumentOptions := &cloudantv1.GetDocumentOptions{
-				Db:               core.StringPtr("testString"),
-				DocID:            core.StringPtr("testString"),
-				IfNoneMatch:      core.StringPtr("testString"),
-				Attachments:      core.BoolPtr(false),
-				AttEncodingInfo:  core.BoolPtr(false),
-				Conflicts:        core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				AttEncodingInfo: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
 				DeletedConflicts: core.BoolPtr(false),
-				Latest:           core.BoolPtr(false),
-				LocalSeq:         core.BoolPtr(false),
-				Meta:             core.BoolPtr(false),
-				Rev:              core.StringPtr("testString"),
-				Revs:             core.BoolPtr(false),
-				RevsInfo:         core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
+				Meta: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
+				Revs: core.BoolPtr(false),
+				RevsInfo: core.BoolPtr(false),
 			}
 
 			result, response, err := cloudantService.GetDocumentAsMixed(getDocumentOptions)
@@ -764,19 +767,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDocumentAsRelated(getDocumentOptions *GetDocumentOptions)`, func() {
 			getDocumentOptions := &cloudantv1.GetDocumentOptions{
-				Db:               core.StringPtr("testString"),
-				DocID:            core.StringPtr("testString"),
-				IfNoneMatch:      core.StringPtr("testString"),
-				Attachments:      core.BoolPtr(false),
-				AttEncodingInfo:  core.BoolPtr(false),
-				Conflicts:        core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				AttEncodingInfo: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
 				DeletedConflicts: core.BoolPtr(false),
-				Latest:           core.BoolPtr(false),
-				LocalSeq:         core.BoolPtr(false),
-				Meta:             core.BoolPtr(false),
-				Rev:              core.StringPtr("testString"),
-				Revs:             core.BoolPtr(false),
-				RevsInfo:         core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
+				Meta: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
+				Revs: core.BoolPtr(false),
+				RevsInfo: core.BoolPtr(false),
 			}
 
 			result, response, err := cloudantService.GetDocumentAsRelated(getDocumentOptions)
@@ -792,19 +795,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDocumentAsStream(getDocumentOptions *GetDocumentOptions)`, func() {
 			getDocumentOptions := &cloudantv1.GetDocumentOptions{
-				Db:               core.StringPtr("testString"),
-				DocID:            core.StringPtr("testString"),
-				IfNoneMatch:      core.StringPtr("testString"),
-				Attachments:      core.BoolPtr(false),
-				AttEncodingInfo:  core.BoolPtr(false),
-				Conflicts:        core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				AttEncodingInfo: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
 				DeletedConflicts: core.BoolPtr(false),
-				Latest:           core.BoolPtr(false),
-				LocalSeq:         core.BoolPtr(false),
-				Meta:             core.BoolPtr(false),
-				Rev:              core.StringPtr("testString"),
-				Revs:             core.BoolPtr(false),
-				RevsInfo:         core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
+				Meta: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
+				Revs: core.BoolPtr(false),
+				RevsInfo: core.BoolPtr(false),
 			}
 
 			result, response, err := cloudantService.GetDocumentAsStream(getDocumentOptions)
@@ -820,50 +823,50 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutDocument(putDocumentOptions *PutDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
-				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
-				Digest:        core.StringPtr("testString"),
+				ContentType: core.StringPtr("testString"),
+				Data: CreateMockByteArray("This is a mock byte array value."),
+				Digest: core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
-				Encoding:      core.StringPtr("testString"),
-				Follows:       core.BoolPtr(true),
-				Length:        core.Int64Ptr(int64(0)),
-				Revpos:        core.Int64Ptr(int64(1)),
-				Stub:          core.BoolPtr(true),
+				Encoding: core.StringPtr("testString"),
+				Follows: core.BoolPtr(true),
+				Length: core.Int64Ptr(int64(0)),
+				Revpos: core.Int64Ptr(int64(1)),
+				Stub: core.BoolPtr(true),
 			}
 
 			revisionsModel := &cloudantv1.Revisions{
-				Ids:   []string{"testString"},
+				Ids: []string{"testString"},
 				Start: core.Int64Ptr(int64(1)),
 			}
 
 			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
-				Rev:    core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 				Status: core.StringPtr("available"),
 			}
 
 			documentModel := &cloudantv1.Document{
-				Attachments:      make(map[string]cloudantv1.Attachment),
-				Conflicts:        []string{"testString"},
-				Deleted:          core.BoolPtr(true),
+				Attachments: map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts: []string{"testString"},
+				Deleted: core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
-				LocalSeq:         core.StringPtr("testString"),
-				Rev:              core.StringPtr("testString"),
-				Revisions:        revisionsModel,
-				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				ID: core.StringPtr("testString"),
+				LocalSeq: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Revisions: revisionsModel,
+				RevsInfo: []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
 			documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 			putDocumentOptions := &cloudantv1.PutDocumentOptions{
-				Db:          core.StringPtr("testString"),
-				DocID:       core.StringPtr("testString"),
-				Document:    documentModel,
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				Document: documentModel,
 				ContentType: core.StringPtr("application/json"),
-				IfMatch:     core.StringPtr("testString"),
-				Batch:       core.StringPtr("ok"),
-				NewEdits:    core.BoolPtr(false),
-				Rev:         core.StringPtr("testString"),
+				IfMatch: core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
+				NewEdits: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.PutDocument(putDocumentOptions)
@@ -879,8 +882,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`HeadDesignDocument(headDesignDocumentOptions *HeadDesignDocumentOptions)`, func() {
 			headDesignDocumentOptions := &cloudantv1.HeadDesignDocumentOptions{
-				Db:          core.StringPtr("testString"),
-				Ddoc:        core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
 				IfNoneMatch: core.StringPtr("testString"),
 			}
 
@@ -896,19 +899,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions)`, func() {
 			getDesignDocumentOptions := &cloudantv1.GetDesignDocumentOptions{
-				Db:               core.StringPtr("testString"),
-				Ddoc:             core.StringPtr("testString"),
-				IfNoneMatch:      core.StringPtr("testString"),
-				Attachments:      core.BoolPtr(false),
-				AttEncodingInfo:  core.BoolPtr(false),
-				Conflicts:        core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				AttEncodingInfo: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
 				DeletedConflicts: core.BoolPtr(false),
-				Latest:           core.BoolPtr(false),
-				LocalSeq:         core.BoolPtr(false),
-				Meta:             core.BoolPtr(false),
-				Rev:              core.StringPtr("testString"),
-				Revs:             core.BoolPtr(false),
-				RevsInfo:         core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
+				Meta: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
+				Revs: core.BoolPtr(false),
+				RevsInfo: core.BoolPtr(false),
 			}
 
 			designDocument, response, err := cloudantService.GetDesignDocument(getDesignDocumentOptions)
@@ -924,42 +927,42 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
-				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
-				Digest:        core.StringPtr("testString"),
+				ContentType: core.StringPtr("testString"),
+				Data: CreateMockByteArray("This is a mock byte array value."),
+				Digest: core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
-				Encoding:      core.StringPtr("testString"),
-				Follows:       core.BoolPtr(true),
-				Length:        core.Int64Ptr(int64(0)),
-				Revpos:        core.Int64Ptr(int64(1)),
-				Stub:          core.BoolPtr(true),
+				Encoding: core.StringPtr("testString"),
+				Follows: core.BoolPtr(true),
+				Length: core.Int64Ptr(int64(0)),
+				Revpos: core.Int64Ptr(int64(1)),
+				Stub: core.BoolPtr(true),
 			}
 
 			revisionsModel := &cloudantv1.Revisions{
-				Ids:   []string{"testString"},
+				Ids: []string{"testString"},
 				Start: core.Int64Ptr(int64(1)),
 			}
 
 			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
-				Rev:    core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 				Status: core.StringPtr("available"),
 			}
 
 			analyzerModel := &cloudantv1.Analyzer{
-				Name:      core.StringPtr("classic"),
+				Name: core.StringPtr("classic"),
 				Stopwords: []string{"testString"},
 			}
 
 			analyzerConfigurationModel := &cloudantv1.AnalyzerConfiguration{
-				Name:      core.StringPtr("classic"),
+				Name: core.StringPtr("classic"),
 				Stopwords: []string{"testString"},
-				Fields:    make(map[string]cloudantv1.Analyzer),
+				Fields: map[string]cloudantv1.Analyzer{"key1": *analyzerModel},
 			}
 			analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 
 			searchIndexDefinitionModel := &cloudantv1.SearchIndexDefinition{
 				Analyzer: analyzerConfigurationModel,
-				Index:    core.StringPtr("testString"),
+				Index: core.StringPtr("testString"),
 			}
 
 			designDocumentOptionsModel := &cloudantv1.DesignDocumentOptions{
@@ -967,27 +970,27 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			designDocumentViewsMapReduceModel := &cloudantv1.DesignDocumentViewsMapReduce{
-				Map:    core.StringPtr("testString"),
+				Map: core.StringPtr("testString"),
 				Reduce: core.StringPtr("testString"),
 			}
 
 			designDocumentModel := &cloudantv1.DesignDocument{
-				Attachments:       make(map[string]cloudantv1.Attachment),
-				Conflicts:         []string{"testString"},
-				Deleted:           core.BoolPtr(true),
-				DeletedConflicts:  []string{"testString"},
-				ID:                core.StringPtr("testString"),
-				LocalSeq:          core.StringPtr("testString"),
-				Rev:               core.StringPtr("testString"),
-				Revisions:         revisionsModel,
-				RevsInfo:          []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
-				Autoupdate:        core.BoolPtr(true),
-				Filters:           make(map[string]string),
-				Indexes:           make(map[string]cloudantv1.SearchIndexDefinition),
-				Language:          core.StringPtr("javascript"),
-				Options:           designDocumentOptionsModel,
+				Attachments: map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts: []string{"testString"},
+				Deleted: core.BoolPtr(true),
+				DeletedConflicts: []string{"testString"},
+				ID: core.StringPtr("testString"),
+				LocalSeq: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Revisions: revisionsModel,
+				RevsInfo: []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				Autoupdate: core.BoolPtr(true),
+				Filters: map[string]string{"key1": "testString"},
+				Indexes: map[string]cloudantv1.SearchIndexDefinition{"key1": *searchIndexDefinitionModel},
+				Language: core.StringPtr("javascript"),
+				Options: designDocumentOptionsModel,
 				ValidateDocUpdate: core.StringPtr("testString"),
-				Views:             make(map[string]cloudantv1.DesignDocumentViewsMapReduce),
+				Views: map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel},
 			}
 			designDocumentModel.Attachments["foo"] = *attachmentModel
 			designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
@@ -995,13 +998,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 
 			putDesignDocumentOptions := &cloudantv1.PutDesignDocumentOptions{
-				Db:             core.StringPtr("testString"),
-				Ddoc:           core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
 				DesignDocument: designDocumentModel,
-				IfMatch:        core.StringPtr("testString"),
-				Batch:          core.StringPtr("ok"),
-				NewEdits:       core.BoolPtr(false),
-				Rev:            core.StringPtr("testString"),
+				IfMatch: core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
+				NewEdits: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.PutDesignDocument(putDesignDocumentOptions)
@@ -1017,7 +1020,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDesignDocumentInformation(getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions)`, func() {
 			getDesignDocumentInformationOptions := &cloudantv1.GetDesignDocumentInformationOptions{
-				Db:   core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				Ddoc: core.StringPtr("testString"),
 			}
 
@@ -1034,21 +1037,21 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostDesignDocs(postDesignDocsOptions *PostDesignDocsOptions)`, func() {
 			postDesignDocsOptions := &cloudantv1.PostDesignDocsOptions{
-				Db:              core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
-				Accept:          core.StringPtr("application/json"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
+				Accept: core.StringPtr("application/json"),
 			}
 
 			allDocsResult, response, err := cloudantService.PostDesignDocs(postDesignDocsOptions)
@@ -1065,24 +1068,24 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostDesignDocsQueries(postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions)`, func() {
 			allDocsQueryModel := &cloudantv1.AllDocsQuery{
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			postDesignDocsQueriesOptions := &cloudantv1.PostDesignDocsQueriesOptions{
-				Db:      core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				Queries: []cloudantv1.AllDocsQuery{*allDocsQueryModel},
-				Accept:  core.StringPtr("application/json"),
+				Accept: core.StringPtr("application/json"),
 			}
 
 			allDocsQueriesResult, response, err := cloudantService.PostDesignDocsQueries(postDesignDocsQueriesOptions)
@@ -1098,29 +1101,29 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostView(postViewOptions *PostViewOptions)`, func() {
 			postViewOptions := &cloudantv1.PostViewOptions{
-				Db:              core.StringPtr("testString"),
-				Ddoc:            core.StringPtr("testString"),
-				View:            core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				View: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				EndKeyDocID:     core.StringPtr("testString"),
-				Group:           core.BoolPtr(false),
-				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
-				Keys:            []interface{}{"testString"},
-				Reduce:          core.BoolPtr(true),
-				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
-				StartKeyDocID:   core.StringPtr("testString"),
-				Update:          core.StringPtr("true"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				EndKeyDocID: core.StringPtr("testString"),
+				Group: core.BoolPtr(false),
+				GroupLevel: core.Int64Ptr(int64(1)),
+				Key: core.StringPtr("testString"),
+				Keys: []interface{}{"testString"},
+				Reduce: core.BoolPtr(true),
+				Stable: core.BoolPtr(false),
+				StartKey: core.StringPtr("testString"),
+				StartKeyDocID: core.StringPtr("testString"),
+				Update: core.StringPtr("true"),
 			}
 
 			viewResult, response, err := cloudantService.PostView(postViewOptions)
@@ -1136,29 +1139,29 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostViewAsStream(postViewOptions *PostViewOptions)`, func() {
 			postViewOptions := &cloudantv1.PostViewOptions{
-				Db:              core.StringPtr("testString"),
-				Ddoc:            core.StringPtr("testString"),
-				View:            core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				View: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				EndKeyDocID:     core.StringPtr("testString"),
-				Group:           core.BoolPtr(false),
-				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
-				Keys:            []interface{}{"testString"},
-				Reduce:          core.BoolPtr(true),
-				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
-				StartKeyDocID:   core.StringPtr("testString"),
-				Update:          core.StringPtr("true"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				EndKeyDocID: core.StringPtr("testString"),
+				Group: core.BoolPtr(false),
+				GroupLevel: core.Int64Ptr(int64(1)),
+				Key: core.StringPtr("testString"),
+				Keys: []interface{}{"testString"},
+				Reduce: core.BoolPtr(true),
+				Stable: core.BoolPtr(false),
+				StartKey: core.StringPtr("testString"),
+				StartKeyDocID: core.StringPtr("testString"),
+				Update: core.StringPtr("true"),
 			}
 
 			result, response, err := cloudantService.PostViewAsStream(postViewOptions)
@@ -1175,31 +1178,31 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostViewQueries(postViewQueriesOptions *PostViewQueriesOptions)`, func() {
 			viewQueryModel := &cloudantv1.ViewQuery{
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				EndKeyDocID:     core.StringPtr("testString"),
-				Group:           core.BoolPtr(false),
-				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
-				Keys:            []interface{}{"testString"},
-				Reduce:          core.BoolPtr(true),
-				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
-				StartKeyDocID:   core.StringPtr("testString"),
-				Update:          core.StringPtr("true"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				EndKeyDocID: core.StringPtr("testString"),
+				Group: core.BoolPtr(false),
+				GroupLevel: core.Int64Ptr(int64(1)),
+				Key: core.StringPtr("testString"),
+				Keys: []interface{}{"testString"},
+				Reduce: core.BoolPtr(true),
+				Stable: core.BoolPtr(false),
+				StartKey: core.StringPtr("testString"),
+				StartKeyDocID: core.StringPtr("testString"),
+				Update: core.StringPtr("true"),
 			}
 
 			postViewQueriesOptions := &cloudantv1.PostViewQueriesOptions{
-				Db:      core.StringPtr("testString"),
-				Ddoc:    core.StringPtr("testString"),
-				View:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				View: core.StringPtr("testString"),
 				Queries: []cloudantv1.ViewQuery{*viewQueryModel},
 			}
 
@@ -1217,31 +1220,31 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostViewQueriesAsStream(postViewQueriesOptions *PostViewQueriesOptions)`, func() {
 			viewQueryModel := &cloudantv1.ViewQuery{
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				EndKeyDocID:     core.StringPtr("testString"),
-				Group:           core.BoolPtr(false),
-				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
-				Keys:            []interface{}{"testString"},
-				Reduce:          core.BoolPtr(true),
-				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
-				StartKeyDocID:   core.StringPtr("testString"),
-				Update:          core.StringPtr("true"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				EndKeyDocID: core.StringPtr("testString"),
+				Group: core.BoolPtr(false),
+				GroupLevel: core.Int64Ptr(int64(1)),
+				Key: core.StringPtr("testString"),
+				Keys: []interface{}{"testString"},
+				Reduce: core.BoolPtr(true),
+				Stable: core.BoolPtr(false),
+				StartKey: core.StringPtr("testString"),
+				StartKeyDocID: core.StringPtr("testString"),
+				Update: core.StringPtr("true"),
 			}
 
 			postViewQueriesOptions := &cloudantv1.PostViewQueriesOptions{
-				Db:      core.StringPtr("testString"),
-				Ddoc:    core.StringPtr("testString"),
-				View:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				View: core.StringPtr("testString"),
 				Queries: []cloudantv1.ViewQuery{*viewQueryModel},
 			}
 
@@ -1258,7 +1261,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions)`, func() {
 			getPartitionInformationOptions := &cloudantv1.GetPartitionInformationOptions{
-				Db:           core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				PartitionKey: core.StringPtr("testString"),
 			}
 
@@ -1275,21 +1278,21 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionAllDocs(postPartitionAllDocsOptions *PostPartitionAllDocsOptions)`, func() {
 			postPartitionAllDocsOptions := &cloudantv1.PostPartitionAllDocsOptions{
-				Db:              core.StringPtr("testString"),
-				PartitionKey:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			allDocsResult, response, err := cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptions)
@@ -1305,21 +1308,21 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionAllDocsAsStream(postPartitionAllDocsOptions *PostPartitionAllDocsOptions)`, func() {
 			postPartitionAllDocsOptions := &cloudantv1.PostPartitionAllDocsOptions{
-				Db:              core.StringPtr("testString"),
-				PartitionKey:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				Key: core.StringPtr("testString"),
+				Keys: []string{"testString"},
+				StartKey: core.StringPtr("testString"),
 			}
 
 			result, response, err := cloudantService.PostPartitionAllDocsAsStream(postPartitionAllDocsOptions)
@@ -1335,22 +1338,22 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions)`, func() {
 			postPartitionSearchOptions := &cloudantv1.PostPartitionSearchOptions{
-				Db:               core.StringPtr("testString"),
-				PartitionKey:     core.StringPtr("testString"),
-				Ddoc:             core.StringPtr("testString"),
-				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
-				Bookmark:         core.StringPtr("testString"),
-				HighlightFields:  []string{"testString"},
-				HighlightNumber:  core.Int64Ptr(int64(1)),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				Index: core.StringPtr("testString"),
+				Query: core.StringPtr("testString"),
+				Bookmark: core.StringPtr("testString"),
+				HighlightFields: []string{"testString"},
+				HighlightNumber: core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
-				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(100)),
-				IncludeDocs:      core.BoolPtr(false),
-				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
-				Sort:             []string{"testString"},
-				Stale:            core.StringPtr("ok"),
+				HighlightPreTag: core.StringPtr("<em>"),
+				HighlightSize: core.Int64Ptr(int64(100)),
+				IncludeDocs: core.BoolPtr(false),
+				IncludeFields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(0)),
+				Sort: []string{"testString"},
+				Stale: core.StringPtr("ok"),
 			}
 
 			searchResult, response, err := cloudantService.PostPartitionSearch(postPartitionSearchOptions)
@@ -1366,22 +1369,22 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionSearchAsStream(postPartitionSearchOptions *PostPartitionSearchOptions)`, func() {
 			postPartitionSearchOptions := &cloudantv1.PostPartitionSearchOptions{
-				Db:               core.StringPtr("testString"),
-				PartitionKey:     core.StringPtr("testString"),
-				Ddoc:             core.StringPtr("testString"),
-				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
-				Bookmark:         core.StringPtr("testString"),
-				HighlightFields:  []string{"testString"},
-				HighlightNumber:  core.Int64Ptr(int64(1)),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				Index: core.StringPtr("testString"),
+				Query: core.StringPtr("testString"),
+				Bookmark: core.StringPtr("testString"),
+				HighlightFields: []string{"testString"},
+				HighlightNumber: core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
-				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(100)),
-				IncludeDocs:      core.BoolPtr(false),
-				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
-				Sort:             []string{"testString"},
-				Stale:            core.StringPtr("ok"),
+				HighlightPreTag: core.StringPtr("<em>"),
+				HighlightSize: core.Int64Ptr(int64(100)),
+				IncludeDocs: core.BoolPtr(false),
+				IncludeFields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(0)),
+				Sort: []string{"testString"},
+				Stale: core.StringPtr("ok"),
 			}
 
 			result, response, err := cloudantService.PostPartitionSearchAsStream(postPartitionSearchOptions)
@@ -1397,29 +1400,29 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions)`, func() {
 			postPartitionViewOptions := &cloudantv1.PostPartitionViewOptions{
-				Db:              core.StringPtr("testString"),
-				PartitionKey:    core.StringPtr("testString"),
-				Ddoc:            core.StringPtr("testString"),
-				View:            core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				View: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				EndKeyDocID:     core.StringPtr("testString"),
-				Group:           core.BoolPtr(false),
-				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
-				Keys:            []interface{}{"testString"},
-				Reduce:          core.BoolPtr(true),
-				StartKey:        core.StringPtr("testString"),
-				StartKeyDocID:   core.StringPtr("testString"),
-				Update:          core.StringPtr("true"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				EndKeyDocID: core.StringPtr("testString"),
+				Group: core.BoolPtr(false),
+				GroupLevel: core.Int64Ptr(int64(1)),
+				Key: core.StringPtr("testString"),
+				Keys: []interface{}{"testString"},
+				Reduce: core.BoolPtr(true),
+				StartKey: core.StringPtr("testString"),
+				StartKeyDocID: core.StringPtr("testString"),
+				Update: core.StringPtr("true"),
 			}
 
 			viewResult, response, err := cloudantService.PostPartitionView(postPartitionViewOptions)
@@ -1435,29 +1438,29 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionViewAsStream(postPartitionViewOptions *PostPartitionViewOptions)`, func() {
 			postPartitionViewOptions := &cloudantv1.PostPartitionViewOptions{
-				Db:              core.StringPtr("testString"),
-				PartitionKey:    core.StringPtr("testString"),
-				Ddoc:            core.StringPtr("testString"),
-				View:            core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				View: core.StringPtr("testString"),
 				AttEncodingInfo: core.BoolPtr(false),
-				Attachments:     core.BoolPtr(false),
-				Conflicts:       core.BoolPtr(false),
-				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
-				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
-				Skip:            core.Int64Ptr(int64(0)),
-				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
-				EndKeyDocID:     core.StringPtr("testString"),
-				Group:           core.BoolPtr(false),
-				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
-				Keys:            []interface{}{"testString"},
-				Reduce:          core.BoolPtr(true),
-				StartKey:        core.StringPtr("testString"),
-				StartKeyDocID:   core.StringPtr("testString"),
-				Update:          core.StringPtr("true"),
+				Attachments: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
+				Descending: core.BoolPtr(false),
+				IncludeDocs: core.BoolPtr(false),
+				InclusiveEnd: core.BoolPtr(true),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
+				UpdateSeq: core.BoolPtr(false),
+				EndKey: core.StringPtr("testString"),
+				EndKeyDocID: core.StringPtr("testString"),
+				Group: core.BoolPtr(false),
+				GroupLevel: core.Int64Ptr(int64(1)),
+				Key: core.StringPtr("testString"),
+				Keys: []interface{}{"testString"},
+				Reduce: core.BoolPtr(true),
+				StartKey: core.StringPtr("testString"),
+				StartKeyDocID: core.StringPtr("testString"),
+				Update: core.StringPtr("true"),
 			}
 
 			result, response, err := cloudantService.PostPartitionViewAsStream(postPartitionViewOptions)
@@ -1473,19 +1476,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions)`, func() {
 			postPartitionFindOptions := &cloudantv1.PostPartitionFindOptions{
-				Db:             core.StringPtr("testString"),
-				PartitionKey:   core.StringPtr("testString"),
-				Selector:       map[string]interface{}{"anyKey": "anyValue"},
-				Bookmark:       core.StringPtr("testString"),
-				Conflicts:      core.BoolPtr(true),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark: core.StringPtr("testString"),
+				Conflicts: core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
-				Skip:           core.Int64Ptr(int64(0)),
-				Sort:           []map[string]string{make(map[string]string)},
-				Stable:         core.BoolPtr(true),
-				Update:         core.StringPtr("true"),
-				UseIndex:       []string{"testString"},
+				Fields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(25)),
+				Skip: core.Int64Ptr(int64(0)),
+				Sort: []map[string]string{map[string]string{"key1": "asc"}},
+				Stable: core.BoolPtr(true),
+				Update: core.StringPtr("true"),
+				UseIndex: []string{"testString"},
 			}
 
 			findResult, response, err := cloudantService.PostPartitionFind(postPartitionFindOptions)
@@ -1501,19 +1504,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostPartitionFindAsStream(postPartitionFindOptions *PostPartitionFindOptions)`, func() {
 			postPartitionFindOptions := &cloudantv1.PostPartitionFindOptions{
-				Db:             core.StringPtr("testString"),
-				PartitionKey:   core.StringPtr("testString"),
-				Selector:       map[string]interface{}{"anyKey": "anyValue"},
-				Bookmark:       core.StringPtr("testString"),
-				Conflicts:      core.BoolPtr(true),
+				Db: core.StringPtr("testString"),
+				PartitionKey: core.StringPtr("testString"),
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark: core.StringPtr("testString"),
+				Conflicts: core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
-				Skip:           core.Int64Ptr(int64(0)),
-				Sort:           []map[string]string{make(map[string]string)},
-				Stable:         core.BoolPtr(true),
-				Update:         core.StringPtr("true"),
-				UseIndex:       []string{"testString"},
+				Fields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(25)),
+				Skip: core.Int64Ptr(int64(0)),
+				Sort: []map[string]string{map[string]string{"key1": "asc"}},
+				Stable: core.BoolPtr(true),
+				Update: core.StringPtr("true"),
+				UseIndex: []string{"testString"},
 			}
 
 			result, response, err := cloudantService.PostPartitionFindAsStream(postPartitionFindOptions)
@@ -1529,19 +1532,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostExplain(postExplainOptions *PostExplainOptions)`, func() {
 			postExplainOptions := &cloudantv1.PostExplainOptions{
-				Db:             core.StringPtr("testString"),
-				Selector:       map[string]interface{}{"anyKey": "anyValue"},
-				Bookmark:       core.StringPtr("testString"),
-				Conflicts:      core.BoolPtr(true),
+				Db: core.StringPtr("testString"),
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark: core.StringPtr("testString"),
+				Conflicts: core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
-				Skip:           core.Int64Ptr(int64(0)),
-				Sort:           []map[string]string{make(map[string]string)},
-				Stable:         core.BoolPtr(true),
-				Update:         core.StringPtr("true"),
-				UseIndex:       []string{"testString"},
-				R:              core.Int64Ptr(int64(1)),
+				Fields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(25)),
+				Skip: core.Int64Ptr(int64(0)),
+				Sort: []map[string]string{map[string]string{"key1": "asc"}},
+				Stable: core.BoolPtr(true),
+				Update: core.StringPtr("true"),
+				UseIndex: []string{"testString"},
+				R: core.Int64Ptr(int64(1)),
 			}
 
 			explainResult, response, err := cloudantService.PostExplain(postExplainOptions)
@@ -1557,19 +1560,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostFind(postFindOptions *PostFindOptions)`, func() {
 			postFindOptions := &cloudantv1.PostFindOptions{
-				Db:             core.StringPtr("testString"),
-				Selector:       map[string]interface{}{"anyKey": "anyValue"},
-				Bookmark:       core.StringPtr("testString"),
-				Conflicts:      core.BoolPtr(true),
+				Db: core.StringPtr("testString"),
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark: core.StringPtr("testString"),
+				Conflicts: core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
-				Skip:           core.Int64Ptr(int64(0)),
-				Sort:           []map[string]string{make(map[string]string)},
-				Stable:         core.BoolPtr(true),
-				Update:         core.StringPtr("true"),
-				UseIndex:       []string{"testString"},
-				R:              core.Int64Ptr(int64(1)),
+				Fields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(25)),
+				Skip: core.Int64Ptr(int64(0)),
+				Sort: []map[string]string{map[string]string{"key1": "asc"}},
+				Stable: core.BoolPtr(true),
+				Update: core.StringPtr("true"),
+				UseIndex: []string{"testString"},
+				R: core.Int64Ptr(int64(1)),
 			}
 
 			findResult, response, err := cloudantService.PostFind(postFindOptions)
@@ -1585,19 +1588,19 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostFindAsStream(postFindOptions *PostFindOptions)`, func() {
 			postFindOptions := &cloudantv1.PostFindOptions{
-				Db:             core.StringPtr("testString"),
-				Selector:       map[string]interface{}{"anyKey": "anyValue"},
-				Bookmark:       core.StringPtr("testString"),
-				Conflicts:      core.BoolPtr(true),
+				Db: core.StringPtr("testString"),
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark: core.StringPtr("testString"),
+				Conflicts: core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
-				Skip:           core.Int64Ptr(int64(0)),
-				Sort:           []map[string]string{make(map[string]string)},
-				Stable:         core.BoolPtr(true),
-				Update:         core.StringPtr("true"),
-				UseIndex:       []string{"testString"},
-				R:              core.Int64Ptr(int64(1)),
+				Fields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(25)),
+				Skip: core.Int64Ptr(int64(0)),
+				Sort: []map[string]string{map[string]string{"key1": "asc"}},
+				Stable: core.BoolPtr(true),
+				Update: core.StringPtr("true"),
+				UseIndex: []string{"testString"},
+				R: core.Int64Ptr(int64(1)),
 			}
 
 			result, response, err := cloudantService.PostFindAsStream(postFindOptions)
@@ -1629,13 +1632,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostIndex(postIndexOptions *PostIndexOptions)`, func() {
 			analyzerModel := &cloudantv1.Analyzer{
-				Name:      core.StringPtr("classic"),
+				Name: core.StringPtr("classic"),
 				Stopwords: []string{"testString"},
 			}
 
 			indexTextOperatorDefaultFieldModel := &cloudantv1.IndexTextOperatorDefaultField{
 				Analyzer: analyzerModel,
-				Enabled:  core.BoolPtr(true),
+				Enabled: core.BoolPtr(true),
 			}
 
 			indexFieldModel := &cloudantv1.IndexField{
@@ -1645,21 +1648,21 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
 
 			indexDefinitionModel := &cloudantv1.IndexDefinition{
-				DefaultAnalyzer:       analyzerModel,
-				DefaultField:          indexTextOperatorDefaultFieldModel,
-				Fields:                []cloudantv1.IndexField{*indexFieldModel},
-				IndexArrayLengths:     core.BoolPtr(true),
+				DefaultAnalyzer: analyzerModel,
+				DefaultField: indexTextOperatorDefaultFieldModel,
+				Fields: []cloudantv1.IndexField{*indexFieldModel},
+				IndexArrayLengths: core.BoolPtr(true),
 				PartialFilterSelector: map[string]interface{}{"anyKey": "anyValue"},
 			}
 
 			postIndexOptions := &cloudantv1.PostIndexOptions{
-				Db:          core.StringPtr("testString"),
-				Index:       indexDefinitionModel,
-				Ddoc:        core.StringPtr("testString"),
-				Def:         indexDefinitionModel,
-				Name:        core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Index: indexDefinitionModel,
+				Ddoc: core.StringPtr("testString"),
+				Def: indexDefinitionModel,
+				Name: core.StringPtr("testString"),
 				Partitioned: core.BoolPtr(true),
-				Type:        core.StringPtr("json"),
+				Type: core.StringPtr("json"),
 			}
 
 			indexResult, response, err := cloudantService.PostIndex(postIndexOptions)
@@ -1676,7 +1679,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions)`, func() {
 			postSearchAnalyzeOptions := &cloudantv1.PostSearchAnalyzeOptions{
 				Analyzer: core.StringPtr("arabic"),
-				Text:     core.StringPtr("testString"),
+				Text: core.StringPtr("testString"),
 			}
 
 			searchAnalyzeResult, response, err := cloudantService.PostSearchAnalyze(postSearchAnalyzeOptions)
@@ -1692,27 +1695,27 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostSearch(postSearchOptions *PostSearchOptions)`, func() {
 			postSearchOptions := &cloudantv1.PostSearchOptions{
-				Db:               core.StringPtr("testString"),
-				Ddoc:             core.StringPtr("testString"),
-				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
-				Bookmark:         core.StringPtr("testString"),
-				HighlightFields:  []string{"testString"},
-				HighlightNumber:  core.Int64Ptr(int64(1)),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				Index: core.StringPtr("testString"),
+				Query: core.StringPtr("testString"),
+				Bookmark: core.StringPtr("testString"),
+				HighlightFields: []string{"testString"},
+				HighlightNumber: core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
-				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(100)),
-				IncludeDocs:      core.BoolPtr(false),
-				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
-				Sort:             []string{"testString"},
-				Stale:            core.StringPtr("ok"),
-				Counts:           []string{"testString"},
-				Drilldown:        [][]string{[]string{"testString"}},
-				GroupField:       core.StringPtr("testString"),
-				GroupLimit:       core.Int64Ptr(int64(1)),
-				GroupSort:        []string{"testString"},
-				Ranges:           make(map[string]map[string]map[string]string),
+				HighlightPreTag: core.StringPtr("<em>"),
+				HighlightSize: core.Int64Ptr(int64(100)),
+				IncludeDocs: core.BoolPtr(false),
+				IncludeFields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(0)),
+				Sort: []string{"testString"},
+				Stale: core.StringPtr("ok"),
+				Counts: []string{"testString"},
+				Drilldown: [][]string{[]string{"testString"}},
+				GroupField: core.StringPtr("testString"),
+				GroupLimit: core.Int64Ptr(int64(1)),
+				GroupSort: []string{"testString"},
+				Ranges: map[string]map[string]map[string]string{"key1": map[string]map[string]string{"key1": map[string]string{"key1": "testString"}}},
 			}
 
 			searchResult, response, err := cloudantService.PostSearch(postSearchOptions)
@@ -1728,27 +1731,27 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostSearchAsStream(postSearchOptions *PostSearchOptions)`, func() {
 			postSearchOptions := &cloudantv1.PostSearchOptions{
-				Db:               core.StringPtr("testString"),
-				Ddoc:             core.StringPtr("testString"),
-				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
-				Bookmark:         core.StringPtr("testString"),
-				HighlightFields:  []string{"testString"},
-				HighlightNumber:  core.Int64Ptr(int64(1)),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				Index: core.StringPtr("testString"),
+				Query: core.StringPtr("testString"),
+				Bookmark: core.StringPtr("testString"),
+				HighlightFields: []string{"testString"},
+				HighlightNumber: core.Int64Ptr(int64(1)),
 				HighlightPostTag: core.StringPtr("</em>"),
-				HighlightPreTag:  core.StringPtr("<em>"),
-				HighlightSize:    core.Int64Ptr(int64(100)),
-				IncludeDocs:      core.BoolPtr(false),
-				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
-				Sort:             []string{"testString"},
-				Stale:            core.StringPtr("ok"),
-				Counts:           []string{"testString"},
-				Drilldown:        [][]string{[]string{"testString"}},
-				GroupField:       core.StringPtr("testString"),
-				GroupLimit:       core.Int64Ptr(int64(1)),
-				GroupSort:        []string{"testString"},
-				Ranges:           make(map[string]map[string]map[string]string),
+				HighlightPreTag: core.StringPtr("<em>"),
+				HighlightSize: core.Int64Ptr(int64(100)),
+				IncludeDocs: core.BoolPtr(false),
+				IncludeFields: []string{"testString"},
+				Limit: core.Int64Ptr(int64(0)),
+				Sort: []string{"testString"},
+				Stale: core.StringPtr("ok"),
+				Counts: []string{"testString"},
+				Drilldown: [][]string{[]string{"testString"}},
+				GroupField: core.StringPtr("testString"),
+				GroupLimit: core.Int64Ptr(int64(1)),
+				GroupSort: []string{"testString"},
+				Ranges: map[string]map[string]map[string]string{"key1": map[string]map[string]string{"key1": map[string]string{"key1": "testString"}}},
 			}
 
 			result, response, err := cloudantService.PostSearchAsStream(postSearchOptions)
@@ -1764,8 +1767,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions)`, func() {
 			getSearchInfoOptions := &cloudantv1.GetSearchInfoOptions{
-				Db:    core.StringPtr("testString"),
-				Ddoc:  core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
 				Index: core.StringPtr("testString"),
 			}
 
@@ -1782,7 +1785,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions)`, func() {
 			headReplicationDocumentOptions := &cloudantv1.HeadReplicationDocumentOptions{
-				DocID:       core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				IfNoneMatch: core.StringPtr("testString"),
 			}
 
@@ -1828,18 +1831,18 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions)`, func() {
 			getReplicationDocumentOptions := &cloudantv1.GetReplicationDocumentOptions{
-				DocID:            core.StringPtr("testString"),
-				IfNoneMatch:      core.StringPtr("testString"),
-				Attachments:      core.BoolPtr(false),
-				AttEncodingInfo:  core.BoolPtr(false),
-				Conflicts:        core.BoolPtr(false),
+				DocID: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
+				AttEncodingInfo: core.BoolPtr(false),
+				Conflicts: core.BoolPtr(false),
 				DeletedConflicts: core.BoolPtr(false),
-				Latest:           core.BoolPtr(false),
-				LocalSeq:         core.BoolPtr(false),
-				Meta:             core.BoolPtr(false),
-				Rev:              core.StringPtr("testString"),
-				Revs:             core.BoolPtr(false),
-				RevsInfo:         core.BoolPtr(false),
+				Latest: core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
+				Meta: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
+				Revs: core.BoolPtr(false),
+				RevsInfo: core.BoolPtr(false),
 			}
 
 			replicationDocument, response, err := cloudantService.GetReplicationDocument(getReplicationDocumentOptions)
@@ -1855,31 +1858,31 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
-				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
-				Digest:        core.StringPtr("testString"),
+				ContentType: core.StringPtr("testString"),
+				Data: CreateMockByteArray("This is a mock byte array value."),
+				Digest: core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
-				Encoding:      core.StringPtr("testString"),
-				Follows:       core.BoolPtr(true),
-				Length:        core.Int64Ptr(int64(0)),
-				Revpos:        core.Int64Ptr(int64(1)),
-				Stub:          core.BoolPtr(true),
+				Encoding: core.StringPtr("testString"),
+				Follows: core.BoolPtr(true),
+				Length: core.Int64Ptr(int64(0)),
+				Revpos: core.Int64Ptr(int64(1)),
+				Stub: core.BoolPtr(true),
 			}
 
 			revisionsModel := &cloudantv1.Revisions{
-				Ids:   []string{"testString"},
+				Ids: []string{"testString"},
 				Start: core.Int64Ptr(int64(1)),
 			}
 
 			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
-				Rev:    core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 				Status: core.StringPtr("available"),
 			}
 
 			replicationCreateTargetParametersModel := &cloudantv1.ReplicationCreateTargetParameters{
-				N:           core.Int64Ptr(int64(3)),
+				N: core.Int64Ptr(int64(3)),
 				Partitioned: core.BoolPtr(false),
-				Q:           core.Int64Ptr(int64(26)),
+				Q: core.Int64Ptr(int64(26)),
 			}
 
 			replicationDatabaseAuthBasicModel := &cloudantv1.ReplicationDatabaseAuthBasic{
@@ -1893,66 +1896,66 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 
 			replicationDatabaseAuthModel := &cloudantv1.ReplicationDatabaseAuth{
 				Basic: replicationDatabaseAuthBasicModel,
-				Iam:   replicationDatabaseAuthIamModel,
+				Iam: replicationDatabaseAuthIamModel,
 			}
 
 			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
-				Auth:       replicationDatabaseAuthModel,
-				HeadersVar: make(map[string]string),
-				URL:        core.StringPtr("testString"),
+				Auth: replicationDatabaseAuthModel,
+				HeadersVar: map[string]string{"key1": "testString"},
+				URL: core.StringPtr("testString"),
 			}
 
 			userContextModel := &cloudantv1.UserContext{
-				Db:    core.StringPtr("testString"),
-				Name:  core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Name: core.StringPtr("testString"),
 				Roles: []string{"_reader"},
 			}
 
 			replicationDocumentModel := &cloudantv1.ReplicationDocument{
-				Attachments:        make(map[string]cloudantv1.Attachment),
-				Conflicts:          []string{"testString"},
-				Deleted:            core.BoolPtr(true),
-				DeletedConflicts:   []string{"testString"},
-				ID:                 core.StringPtr("testString"),
-				LocalSeq:           core.StringPtr("testString"),
-				Rev:                core.StringPtr("testString"),
-				Revisions:          revisionsModel,
-				RevsInfo:           []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
-				Cancel:             core.BoolPtr(true),
+				Attachments: map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts: []string{"testString"},
+				Deleted: core.BoolPtr(true),
+				DeletedConflicts: []string{"testString"},
+				ID: core.StringPtr("testString"),
+				LocalSeq: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Revisions: revisionsModel,
+				RevsInfo: []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				Cancel: core.BoolPtr(true),
 				CheckpointInterval: core.Int64Ptr(int64(30000)),
-				ConnectionTimeout:  core.Int64Ptr(int64(30000)),
-				Continuous:         core.BoolPtr(false),
-				CreateTarget:       core.BoolPtr(false),
+				ConnectionTimeout: core.Int64Ptr(int64(30000)),
+				Continuous: core.BoolPtr(false),
+				CreateTarget: core.BoolPtr(false),
 				CreateTargetParams: replicationCreateTargetParametersModel,
-				DocIds:             []string{"testString"},
-				Filter:             core.StringPtr("testString"),
-				HTTPConnections:    core.Int64Ptr(int64(20)),
-				QueryParams:        make(map[string]string),
-				RetriesPerRequest:  core.Int64Ptr(int64(5)),
-				Selector:           map[string]interface{}{"anyKey": "anyValue"},
-				SinceSeq:           core.StringPtr("testString"),
-				SocketOptions:      core.StringPtr("testString"),
-				Source:             replicationDatabaseModel,
-				SourceProxy:        core.StringPtr("testString"),
-				Target:             replicationDatabaseModel,
-				TargetProxy:        core.StringPtr("testString"),
-				UseBulkGet:         core.BoolPtr(true),
-				UseCheckpoints:     core.BoolPtr(true),
-				UserCtx:            userContextModel,
-				WinningRevsOnly:    core.BoolPtr(false),
-				WorkerBatchSize:    core.Int64Ptr(int64(500)),
-				WorkerProcesses:    core.Int64Ptr(int64(4)),
+				DocIds: []string{"testString"},
+				Filter: core.StringPtr("testString"),
+				HttpConnections: core.Int64Ptr(int64(20)),
+				QueryParams: map[string]string{"key1": "testString"},
+				RetriesPerRequest: core.Int64Ptr(int64(5)),
+				Selector: map[string]interface{}{"anyKey": "anyValue"},
+				SinceSeq: core.StringPtr("testString"),
+				SocketOptions: core.StringPtr("testString"),
+				Source: replicationDatabaseModel,
+				SourceProxy: core.StringPtr("testString"),
+				Target: replicationDatabaseModel,
+				TargetProxy: core.StringPtr("testString"),
+				UseBulkGet: core.BoolPtr(true),
+				UseCheckpoints: core.BoolPtr(true),
+				UserCtx: userContextModel,
+				WinningRevsOnly: core.BoolPtr(false),
+				WorkerBatchSize: core.Int64Ptr(int64(500)),
+				WorkerProcesses: core.Int64Ptr(int64(4)),
 			}
 			replicationDocumentModel.Attachments["foo"] = *attachmentModel
 			replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
 
 			putReplicationDocumentOptions := &cloudantv1.PutReplicationDocumentOptions{
-				DocID:               core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				ReplicationDocument: replicationDocumentModel,
-				IfMatch:             core.StringPtr("testString"),
-				Batch:               core.StringPtr("ok"),
-				NewEdits:            core.BoolPtr(false),
-				Rev:                 core.StringPtr("testString"),
+				IfMatch: core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
+				NewEdits: core.BoolPtr(false),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.PutReplicationDocument(putReplicationDocumentOptions)
@@ -1968,8 +1971,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetSchedulerDocs(getSchedulerDocsOptions *GetSchedulerDocsOptions)`, func() {
 			getSchedulerDocsOptions := &cloudantv1.GetSchedulerDocsOptions{
-				Limit:  core.Int64Ptr(int64(0)),
-				Skip:   core.Int64Ptr(int64(0)),
+				Limit: core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
 				States: []string{"initializing"},
 			}
 
@@ -2003,7 +2006,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions)`, func() {
 			getSchedulerJobsOptions := &cloudantv1.GetSchedulerJobsOptions{
 				Limit: core.Int64Ptr(int64(25)),
-				Skip:  core.Int64Ptr(int64(0)),
+				Skip: core.Int64Ptr(int64(0)),
 			}
 
 			schedulerJobsResult, response, err := cloudantService.GetSchedulerJobs(getSchedulerJobsOptions)
@@ -2034,7 +2037,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions)`, func() {
-			getSessionInformationOptions := &cloudantv1.GetSessionInformationOptions{}
+			getSessionInformationOptions := &cloudantv1.GetSessionInformationOptions{
+			}
 
 			sessionInformation, response, err := cloudantService.GetSessionInformation(getSessionInformationOptions)
 			Expect(err).To(BeNil())
@@ -2070,10 +2074,10 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			putSecurityOptions := &cloudantv1.PutSecurityOptions{
-				Db:              core.StringPtr("testString"),
-				Admins:          securityObjectModel,
-				Members:         securityObjectModel,
-				Cloudant:        make(map[string][]string),
+				Db: core.StringPtr("testString"),
+				Admins: securityObjectModel,
+				Members: securityObjectModel,
+				Cloudant: map[string][]string{"key1": []string{"_reader"}},
 				CouchdbAuthOnly: core.BoolPtr(true),
 			}
 
@@ -2089,7 +2093,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`PostApiKeys(postApiKeysOptions *PostApiKeysOptions)`, func() {
-			postApiKeysOptions := &cloudantv1.PostApiKeysOptions{}
+			postApiKeysOptions := &cloudantv1.PostApiKeysOptions{
+			}
 
 			apiKeysResult, response, err := cloudantService.PostApiKeys(postApiKeysOptions)
 			Expect(err).To(BeNil())
@@ -2109,10 +2114,10 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			putCloudantSecurityConfigurationOptions := &cloudantv1.PutCloudantSecurityConfigurationOptions{
-				Db:              core.StringPtr("testString"),
-				Cloudant:        make(map[string][]string),
-				Admins:          securityObjectModel,
-				Members:         securityObjectModel,
+				Db: core.StringPtr("testString"),
+				Cloudant: map[string][]string{"key1": []string{"_reader"}},
+				Admins: securityObjectModel,
+				Members: securityObjectModel,
 				CouchdbAuthOnly: core.BoolPtr(true),
 			}
 
@@ -2128,7 +2133,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions)`, func() {
-			getCorsInformationOptions := &cloudantv1.GetCorsInformationOptions{}
+			getCorsInformationOptions := &cloudantv1.GetCorsInformationOptions{
+			}
 
 			corsInformation, response, err := cloudantService.GetCorsInformation(getCorsInformationOptions)
 			Expect(err).To(BeNil())
@@ -2143,9 +2149,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions)`, func() {
 			putCorsConfigurationOptions := &cloudantv1.PutCorsConfigurationOptions{
-				Origins:          []string{"testString"},
+				Origins: []string{"testString"},
 				AllowCredentials: core.BoolPtr(true),
-				EnableCors:       core.BoolPtr(true),
+				EnableCors: core.BoolPtr(true),
 			}
 
 			ok, response, err := cloudantService.PutCorsConfiguration(putCorsConfigurationOptions)
@@ -2161,12 +2167,12 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`HeadAttachment(headAttachmentOptions *HeadAttachmentOptions)`, func() {
 			headAttachmentOptions := &cloudantv1.HeadAttachmentOptions{
-				Db:             core.StringPtr("testString"),
-				DocID:          core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				AttachmentName: core.StringPtr("testString"),
-				IfMatch:        core.StringPtr("testString"),
-				IfNoneMatch:    core.StringPtr("testString"),
-				Rev:            core.StringPtr("testString"),
+				IfMatch: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			response, err := cloudantService.HeadAttachment(headAttachmentOptions)
@@ -2181,14 +2187,14 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetAttachment(getAttachmentOptions *GetAttachmentOptions)`, func() {
 			getAttachmentOptions := &cloudantv1.GetAttachmentOptions{
-				Db:             core.StringPtr("testString"),
-				DocID:          core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				AttachmentName: core.StringPtr("testString"),
-				Accept:         core.StringPtr("testString"),
-				IfMatch:        core.StringPtr("testString"),
-				IfNoneMatch:    core.StringPtr("testString"),
-				Range:          core.StringPtr("testString"),
-				Rev:            core.StringPtr("testString"),
+				Accept: core.StringPtr("testString"),
+				IfMatch: core.StringPtr("testString"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Range: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			result, response, err := cloudantService.GetAttachment(getAttachmentOptions)
@@ -2204,13 +2210,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutAttachment(putAttachmentOptions *PutAttachmentOptions)`, func() {
 			putAttachmentOptions := &cloudantv1.PutAttachmentOptions{
-				Db:             core.StringPtr("testString"),
-				DocID:          core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				AttachmentName: core.StringPtr("testString"),
-				Attachment:     CreateMockReader("This is a mock file."),
-				ContentType:    core.StringPtr("application/octet-stream"),
-				IfMatch:        core.StringPtr("testString"),
-				Rev:            core.StringPtr("testString"),
+				Attachment: CreateMockReader("This is a mock file."),
+				ContentType: core.StringPtr("application/octet-stream"),
+				IfMatch: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.PutAttachment(putAttachmentOptions)
@@ -2226,8 +2232,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`HeadLocalDocument(headLocalDocumentOptions *HeadLocalDocumentOptions)`, func() {
 			headLocalDocumentOptions := &cloudantv1.HeadLocalDocumentOptions{
-				Db:          core.StringPtr("testString"),
-				DocID:       core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				IfNoneMatch: core.StringPtr("testString"),
 			}
 
@@ -2243,13 +2249,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetLocalDocument(getLocalDocumentOptions *GetLocalDocumentOptions)`, func() {
 			getLocalDocumentOptions := &cloudantv1.GetLocalDocumentOptions{
-				Db:              core.StringPtr("testString"),
-				DocID:           core.StringPtr("testString"),
-				Accept:          core.StringPtr("application/json"),
-				IfNoneMatch:     core.StringPtr("testString"),
-				Attachments:     core.BoolPtr(false),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				Accept: core.StringPtr("application/json"),
+				IfNoneMatch: core.StringPtr("testString"),
+				Attachments: core.BoolPtr(false),
 				AttEncodingInfo: core.BoolPtr(false),
-				LocalSeq:        core.BoolPtr(false),
+				LocalSeq: core.BoolPtr(false),
 			}
 
 			document, response, err := cloudantService.GetLocalDocument(getLocalDocumentOptions)
@@ -2265,47 +2271,47 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
-				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
-				Digest:        core.StringPtr("testString"),
+				ContentType: core.StringPtr("testString"),
+				Data: CreateMockByteArray("This is a mock byte array value."),
+				Digest: core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
-				Encoding:      core.StringPtr("testString"),
-				Follows:       core.BoolPtr(true),
-				Length:        core.Int64Ptr(int64(0)),
-				Revpos:        core.Int64Ptr(int64(1)),
-				Stub:          core.BoolPtr(true),
+				Encoding: core.StringPtr("testString"),
+				Follows: core.BoolPtr(true),
+				Length: core.Int64Ptr(int64(0)),
+				Revpos: core.Int64Ptr(int64(1)),
+				Stub: core.BoolPtr(true),
 			}
 
 			revisionsModel := &cloudantv1.Revisions{
-				Ids:   []string{"testString"},
+				Ids: []string{"testString"},
 				Start: core.Int64Ptr(int64(1)),
 			}
 
 			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
-				Rev:    core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
 				Status: core.StringPtr("available"),
 			}
 
 			documentModel := &cloudantv1.Document{
-				Attachments:      make(map[string]cloudantv1.Attachment),
-				Conflicts:        []string{"testString"},
-				Deleted:          core.BoolPtr(true),
+				Attachments: map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts: []string{"testString"},
+				Deleted: core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
-				LocalSeq:         core.StringPtr("testString"),
-				Rev:              core.StringPtr("testString"),
-				Revisions:        revisionsModel,
-				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				ID: core.StringPtr("testString"),
+				LocalSeq: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Revisions: revisionsModel,
+				RevsInfo: []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
 			documentModel.SetProperty("foo", core.StringPtr("testString"))
 
 			putLocalDocumentOptions := &cloudantv1.PutLocalDocumentOptions{
-				Db:          core.StringPtr("testString"),
-				DocID:       core.StringPtr("testString"),
-				Document:    documentModel,
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
+				Document: documentModel,
 				ContentType: core.StringPtr("application/json"),
-				Batch:       core.StringPtr("ok"),
+				Batch: core.StringPtr("ok"),
 			}
 
 			documentResult, response, err := cloudantService.PutLocalDocument(putLocalDocumentOptions)
@@ -2321,8 +2327,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions)`, func() {
 			postRevsDiffOptions := &cloudantv1.PostRevsDiffOptions{
-				Db:                core.StringPtr("testString"),
-				DocumentRevisions: make(map[string][]string),
+				Db: core.StringPtr("testString"),
+				DocumentRevisions: map[string][]string{"key1": []string{"testString"}},
 			}
 
 			mapStringRevsDiff, response, err := cloudantService.PostRevsDiff(postRevsDiffOptions)
@@ -2354,7 +2360,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDocumentShardsInfo(getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions)`, func() {
 			getDocumentShardsInfoOptions := &cloudantv1.GetDocumentShardsInfoOptions{
-				Db:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				DocID: core.StringPtr("testString"),
 			}
 
@@ -2370,7 +2376,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`HeadUpInformation(headUpInformationOptions *HeadUpInformationOptions)`, func() {
-			headUpInformationOptions := &cloudantv1.HeadUpInformationOptions{}
+			headUpInformationOptions := &cloudantv1.HeadUpInformationOptions{
+			}
 
 			response, err := cloudantService.HeadUpInformation(headUpInformationOptions)
 			Expect(err).To(BeNil())
@@ -2383,7 +2390,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions)`, func() {
-			getActiveTasksOptions := &cloudantv1.GetActiveTasksOptions{}
+			getActiveTasksOptions := &cloudantv1.GetActiveTasksOptions{
+			}
 
 			activeTask, response, err := cloudantService.GetActiveTasks(getActiveTasksOptions)
 			Expect(err).To(BeNil())
@@ -2397,7 +2405,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
-			getUpInformationOptions := &cloudantv1.GetUpInformationOptions{}
+			getUpInformationOptions := &cloudantv1.GetUpInformationOptions{
+			}
 
 			upInformation, response, err := cloudantService.GetUpInformation(getUpInformationOptions)
 			Expect(err).To(BeNil())
@@ -2411,7 +2420,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions)`, func() {
-			getActivityTrackerEventsOptions := &cloudantv1.GetActivityTrackerEventsOptions{}
+			getActivityTrackerEventsOptions := &cloudantv1.GetActivityTrackerEventsOptions{
+			}
 
 			activityTrackerEvents, response, err := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptions)
 			Expect(err).To(BeNil())
@@ -2441,7 +2451,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions)`, func() {
-			getCurrentThroughputInformationOptions := &cloudantv1.GetCurrentThroughputInformationOptions{}
+			getCurrentThroughputInformationOptions := &cloudantv1.GetCurrentThroughputInformationOptions{
+			}
 
 			currentThroughputInformation, response, err := cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptions)
 			Expect(err).To(BeNil())
@@ -2472,11 +2483,11 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`DeleteDocument(deleteDocumentOptions *DeleteDocumentOptions)`, func() {
 			deleteDocumentOptions := &cloudantv1.DeleteDocumentOptions{
-				Db:      core.StringPtr("testString"),
-				DocID:   core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				IfMatch: core.StringPtr("testString"),
-				Batch:   core.StringPtr("ok"),
-				Rev:     core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.DeleteDocument(deleteDocumentOptions)
@@ -2492,11 +2503,11 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`DeleteDesignDocument(deleteDesignDocumentOptions *DeleteDesignDocumentOptions)`, func() {
 			deleteDesignDocumentOptions := &cloudantv1.DeleteDesignDocumentOptions{
-				Db:      core.StringPtr("testString"),
-				Ddoc:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
 				IfMatch: core.StringPtr("testString"),
-				Batch:   core.StringPtr("ok"),
-				Rev:     core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.DeleteDesignDocument(deleteDesignDocumentOptions)
@@ -2512,9 +2523,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`DeleteIndex(deleteIndexOptions *DeleteIndexOptions)`, func() {
 			deleteIndexOptions := &cloudantv1.DeleteIndexOptions{
-				Db:    core.StringPtr("testString"),
-				Ddoc:  core.StringPtr("testString"),
-				Type:  core.StringPtr("json"),
+				Db: core.StringPtr("testString"),
+				Ddoc: core.StringPtr("testString"),
+				Type: core.StringPtr("json"),
 				Index: core.StringPtr("testString"),
 			}
 
@@ -2531,10 +2542,10 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions)`, func() {
 			deleteReplicationDocumentOptions := &cloudantv1.DeleteReplicationDocumentOptions{
-				DocID:   core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				IfMatch: core.StringPtr("testString"),
-				Batch:   core.StringPtr("ok"),
-				Rev:     core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
+				Rev: core.StringPtr("testString"),
 			}
 
 			documentResult, response, err := cloudantService.DeleteReplicationDocument(deleteReplicationDocumentOptions)
@@ -2550,12 +2561,12 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`DeleteAttachment(deleteAttachmentOptions *DeleteAttachmentOptions)`, func() {
 			deleteAttachmentOptions := &cloudantv1.DeleteAttachmentOptions{
-				Db:             core.StringPtr("testString"),
-				DocID:          core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
+				DocID: core.StringPtr("testString"),
 				AttachmentName: core.StringPtr("testString"),
-				IfMatch:        core.StringPtr("testString"),
-				Rev:            core.StringPtr("testString"),
-				Batch:          core.StringPtr("ok"),
+				IfMatch: core.StringPtr("testString"),
+				Rev: core.StringPtr("testString"),
+				Batch: core.StringPtr("ok"),
 			}
 
 			documentResult, response, err := cloudantService.DeleteAttachment(deleteAttachmentOptions)
@@ -2571,7 +2582,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions)`, func() {
 			deleteLocalDocumentOptions := &cloudantv1.DeleteLocalDocumentOptions{
-				Db:    core.StringPtr("testString"),
+				Db: core.StringPtr("testString"),
 				DocID: core.StringPtr("testString"),
 				Batch: core.StringPtr("ok"),
 			}
