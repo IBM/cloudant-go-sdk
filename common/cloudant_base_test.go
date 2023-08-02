@@ -284,8 +284,8 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		// create cookie for custom jar
 		urlObj, _ := url.Parse("http://localhost:8080/")
 		cookie := &http.Cookie{
-			Name:   "token",
-			Value:  "some_token",
+			Name:  "token",
+			Value: "some_token",
 		}
 		jar.SetCookies(urlObj, []*http.Cookie{cookie})
 		client.Jar = jar
@@ -297,7 +297,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			Authenticator: iamAuth,
 		})
 		cloudant.BaseService.SetHTTPClient(client)
-	
+
 		Expect(cloudant).ToNot(BeNil())
 		Expect(err).To(BeNil())
 		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
