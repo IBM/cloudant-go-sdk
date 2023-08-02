@@ -17,6 +17,9 @@
 package common
 
 import (
+	"net/http"
+	"net/http/cookiejar"
+	"net/url"
 	"os"
 	"path"
 	"runtime"
@@ -231,5 +234,73 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.Version()))
 		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOOS))
 		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOARCH))
+	})
+
+	It("Validates cookie jar enabled for all auths", func() {
+		cloudant, err := NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: &core.NoAuthAuthenticator{},
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+
+		couchDbAuth, err := GetAuthenticatorFromEnvironment("service1")
+		Expect(err).To(BeNil())
+		cloudant, err = NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: couchDbAuth,
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+
+		iamAuth, err := GetAuthenticatorFromEnvironment("service3")
+		Expect(err).To(BeNil())
+		cloudant, err = NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: iamAuth,
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+
+		basicAuth, err := GetAuthenticatorFromEnvironment("service5")
+		Expect(err).To(BeNil())
+		cloudant, err = NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: basicAuth,
+		})
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+	})
+
+	It("Validates custom cookie jar", func() {
+		client := core.DefaultHTTPClient()
+
+		jar, err := cookiejar.New(nil)
+		Expect(err).To(BeNil())
+		// create cookie for custom jar
+		urlObj, _ := url.Parse("http://localhost:8080/")
+		cookie := &http.Cookie{
+			Name:   "token",
+			Value:  "some_token",
+		}
+		jar.SetCookies(urlObj, []*http.Cookie{cookie})
+		client.Jar = jar
+
+		iamAuth, err := GetAuthenticatorFromEnvironment("service3")
+		Expect(err).To(BeNil())
+		cloudant, err := NewBaseService(&core.ServiceOptions{
+			URL:           "https://cloudant.example",
+			Authenticator: iamAuth,
+		})
+		cloudant.BaseService.SetHTTPClient(client)
+	
+		Expect(cloudant).ToNot(BeNil())
+		Expect(err).To(BeNil())
+		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+		Expect(cloudant.BaseService.Client.Jar.Cookies(urlObj)[0]).Should(Equal(cookie))
 	})
 })
