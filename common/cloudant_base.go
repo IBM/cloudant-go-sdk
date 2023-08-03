@@ -19,6 +19,7 @@ package common
 import (
 	"fmt"
 	"net/http"
+	"net/http/cookiejar"
 	neturl "net/url"
 	"runtime"
 	"strconv"
@@ -27,6 +28,7 @@ import (
 
 	"github.com/IBM/cloudant-go-sdk/auth"
 	"github.com/IBM/go-sdk-core/v5/core"
+	"golang.org/x/net/publicsuffix"
 )
 
 type BaseService struct {
@@ -101,6 +103,12 @@ func NewBaseService(opts *core.ServiceOptions) (*BaseService, error) {
 		return &BaseService{}, err
 	}
 	client := core.DefaultHTTPClient()
+	if client.Jar == nil {
+		client.Jar, err = cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+		if err != nil {
+			return &BaseService{}, err
+		}
+	}
 	client.Timeout = 6 * time.Minute
 	baseService.SetHTTPClient(client)
 
