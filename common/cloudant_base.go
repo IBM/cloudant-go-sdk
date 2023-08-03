@@ -104,11 +104,10 @@ func NewBaseService(opts *core.ServiceOptions) (*BaseService, error) {
 	}
 	client := core.DefaultHTTPClient()
 	if client.Jar == nil {
-		jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+		client.Jar, err = cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
 		if err != nil {
 			return &BaseService{}, err
 		}
-		client.Jar = jar
 	}
 	client.Timeout = 6 * time.Minute
 	baseService.SetHTTPClient(client)

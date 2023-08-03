@@ -237,43 +237,27 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 	})
 
 	It("Validates cookie jar enabled for all auths", func() {
-		cloudant, err := NewBaseService(&core.ServiceOptions{
-			URL:           "https://cloudant.example",
-			Authenticator: &core.NoAuthAuthenticator{},
-		})
-		Expect(cloudant).ToNot(BeNil())
-		Expect(err).To(BeNil())
-		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
-
 		couchDbAuth, err := GetAuthenticatorFromEnvironment("service1")
 		Expect(err).To(BeNil())
-		cloudant, err = NewBaseService(&core.ServiceOptions{
-			URL:           "https://cloudant.example",
-			Authenticator: couchDbAuth,
-		})
-		Expect(cloudant).ToNot(BeNil())
-		Expect(err).To(BeNil())
-		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
-
 		iamAuth, err := GetAuthenticatorFromEnvironment("service3")
 		Expect(err).To(BeNil())
-		cloudant, err = NewBaseService(&core.ServiceOptions{
-			URL:           "https://cloudant.example",
-			Authenticator: iamAuth,
-		})
-		Expect(cloudant).ToNot(BeNil())
-		Expect(err).To(BeNil())
-		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
-
 		basicAuth, err := GetAuthenticatorFromEnvironment("service5")
 		Expect(err).To(BeNil())
-		cloudant, err = NewBaseService(&core.ServiceOptions{
-			URL:           "https://cloudant.example",
-			Authenticator: basicAuth,
-		})
-		Expect(cloudant).ToNot(BeNil())
-		Expect(err).To(BeNil())
-		Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+		authList := []core.Authenticator{
+			&core.NoAuthAuthenticator{},
+			couchDbAuth,
+			iamAuth,
+			basicAuth,
+		}
+		for _, item := range authList {
+			cloudant, err := NewBaseService(&core.ServiceOptions{
+				URL:           "https://cloudant.example",
+				Authenticator: item,
+			})
+			Expect(cloudant).ToNot(BeNil())
+			Expect(err).To(BeNil())
+			Expect(cloudant.BaseService.Client.Jar).ToNot(BeNil())
+		}
 	})
 
 	It("Validates custom cookie jar", func() {
