@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2023. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,9 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/http/cookiejar"
 	"net/http/httptest"
+	"net/url"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -28,6 +30,7 @@ import (
 	"github.com/IBM/go-sdk-core/v5/core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"golang.org/x/net/publicsuffix"
 )
 
 type contextKey string
@@ -106,139 +109,166 @@ var _ = Describe("Authenticator Unit Tests", func() {
 				Build()
 			Expect(err).To(BeNil())
 			Expect(request).ToNot(BeNil())
-
-			auth, err = NewCouchDbSessionAuthenticator("user", "pass")
-			Expect(err).To(BeNil())
-			Expect(auth).ToNot(BeNil())
-			Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
 		})
 
 		AfterEach(func() {
 			server.Close()
 		})
 
-		It("Test setting URL, Headers and Context on Authenticator", func() {
-			err = auth.Authenticate(request)
-			Expect(err).To(BeNil())
+		jarSuite := func(description string, withJar bool) {
+			Context(description, func() {
+				BeforeEach(func() {
+					auth, err = NewCouchDbSessionAuthenticator("user", "pass")
+					Expect(err).To(BeNil())
+					Expect(auth).ToNot(BeNil())
+					Expect(auth.AuthenticationType()).To(Equal(AUTHTYPE_COUCHDB_SESSION))
+					if withJar {
+						auth.client.Jar, _ = cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+					}
+				})
 
-			Expect(auth.URL).To(Equal(server.URL))
-			Expect(auth.header).To(HaveKeyWithValue("X-Req-Id", []string{"abcdefgh"}))
-			Expect(auth.ctx.Value(contextKey("key"))).To(Equal("abcdefgh"))
-		})
+				AfterEach(func() {
+					cookie, err := getCookie(auth)
+					Expect(err).To(BeNil())
+					Expect(cookie).ToNot(BeNil())
+					Expect(cookie.Value).To(HavePrefix("fakefake"))
+				})
 
-		It("Test setting custom http client on Authenticator", func() {
-			// set http.Client with custom timeout
-			auth.Client = &http.Client{Timeout: time.Second}
+				It("Test setting URL, Headers and Context on Authenticator", func() {
+					err = auth.Authenticate(request)
+					Expect(err).To(BeNil())
 
-			err = auth.Authenticate(request)
-			Expect(err).To(BeNil())
+					Expect(auth.URL).To(Equal(server.URL))
+					Expect(auth.header).To(HaveKeyWithValue("X-Req-Id", []string{"abcdefgh"}))
+					Expect(auth.ctx.Value(contextKey("key"))).To(Equal("abcdefgh"))
+				})
 
-			Expect(auth.Client.Timeout).To(Equal(time.Second))
-		})
+				It("Test setting custom http client on Authenticator", func() {
+					jar, _ := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+					auth.SetClient(&http.Client{Timeout: time.Second, Jar: jar})
 
-		It("Test authentication re-request after expiration", func() {
-			testDone := make(chan interface{})
-			go func() {
+					err = auth.Authenticate(request)
+					Expect(err).To(BeNil())
 
-				err = auth.Authenticate(request)
-				Expect(err).To(BeNil())
+					Expect(auth.client.Timeout).To(Equal(time.Second))
+				})
 
-				// Fetch a cookie from the cache to confirm it's present
-				// and prepare cache state for the next test
-				cookie, err := auth.getCookie()
-				Expect(err).To(BeNil())
-				Expect(cookie).ToNot(BeNil())
-				Expect(cookie.Name).To(Equal("AuthSession"))
-				Expect(cookie.Value).To(Equal("fakefake-1"))
-				Expect(cookie.Expires).ToNot(BeNil())
-
-				// Fetch cookie again to verify cache is working as expected,
-				// we are getting old cookie and refresh process's not triggered
-				oldRefresh := auth.session.refreshTime
-				cookie, err = auth.getCookie()
-				Expect(err).To(BeNil())
-				Expect(cookie.Value).To(Equal("fakefake-1"))
-				Expect(auth.session.refreshTime).To(Equal(oldRefresh))
-
-				// Force expiration and verify we got a new cookie
-				auth.session.expires = time.Now().Add(-time.Minute)
-
-				// Run getCookie in three parallel threads, to verify
-				// that request mutex works and we are querying /_session only once
-				var wg sync.WaitGroup
-
-				for i := 1; i <= 3; i++ {
-					wg.Add(1)
+				It("Test authentication re-request after expiration", func() {
+					testDone := make(chan interface{})
 					go func() {
-						defer GinkgoRecover()
-						defer wg.Done()
-						cookie, err := auth.getCookie()
+
+						err = auth.Authenticate(request)
 						Expect(err).To(BeNil())
-						Expect(cookie.Value).To(Equal("fakefake-2"))
-						Expect(auth.session.refreshTime).ToNot(Equal(oldRefresh))
-					}()
-				}
-				wg.Wait()
-				close(testDone)
-			}()
-			Eventually(testDone, 1.0).Should(BeClosed())
-		})
 
-		It("Test authentication refresh", func() {
-			testDone := make(chan interface{})
-			go func() {
-				err = auth.Authenticate(request)
-				Expect(err).To(BeNil())
+						// Fetch a cookie from the cache to confirm it's present
+						// and prepare cache state for the next test
+						cookie, err := getCookie(auth)
+						Expect(err).To(BeNil())
+						Expect(cookie).ToNot(BeNil())
+						Expect(cookie.Name).To(Equal("AuthSession"))
+						Expect(cookie.Value).To(Equal("fakefake-1"))
+						Expect(cookie.Expires).ToNot(BeNil())
 
-				// Test code path in getCookie() when needsRefresh() is false
-				oldCookie, err := auth.getCookie()
-				Expect(err).To(BeNil())
-				Expect(oldCookie).ToNot(BeNil())
-				Expect(oldCookie.Value).To(Equal("fakefake-1"))
+						// Fetch cookie again to verify cache is working as expected,
+						// we are getting old cookie and refresh process's not triggered
+						oldRefresh := auth.session.refreshTime
+						cookie, err = getCookie(auth)
+						Expect(err).To(BeNil())
+						Expect(cookie.Value).To(Equal("fakefake-1"))
+						Expect(auth.session.refreshTime).To(Equal(oldRefresh))
 
-				// Move time into the refresh window
-				auth.session.refreshTime = time.Now().Add(-10 * time.Minute)
+						// Force expiration and verify we got a new cookie
+						auth.session.expires = time.Now().Add(-time.Minute)
 
-				// Run getCookie in three parallel threads, to verify
-				// that we are still serving stale cached cookie
-				// and request mutex works and we are querying /_session only once
-				var refresherNumber int32
-				var wg sync.WaitGroup
+						// Fetch cookie in three parallel threads, to verify
+						// that request mutex works and we are querying /_session only once
+						var wg sync.WaitGroup
 
-				for i := 1; i <= 3; i++ {
-					wg.Add(1)
-					go func() {
-						defer GinkgoRecover()
-						defer wg.Done()
-						atomic.AddInt32(&refresherNumber, 1)
-						cookie, err := auth.getCookie()
-						// make sure that at least first refresh is async
-						// and returns an old still-valid cookie
-						if int(atomic.LoadInt32(&refresherNumber)) == 1 {
-							Expect(err).To(BeNil())
-							Expect(cookie).To(Equal(oldCookie))
-							Expect(cookie.Value).To(Equal("fakefake-1"))
+						for i := 1; i <= 3; i++ {
+							wg.Add(1)
+							go func() {
+								defer GinkgoRecover()
+								defer wg.Done()
+								cookie, err := getCookie(auth)
+								Expect(err).To(BeNil())
+								Expect(cookie.Value).To(Equal("fakefake-2"))
+								Expect(auth.session.refreshTime).ToNot(Equal(oldRefresh))
+							}()
 						}
+						wg.Wait()
+						close(testDone)
 					}()
-				}
-				wg.Wait()
+					Eventually(testDone, 1.0).Should(BeClosed())
+				})
 
-				// wait for 1s (default duration) to confirm that eventually
-				// we'll get a new cookie.
-				Eventually(func() (*http.Cookie, error) {
-					return auth.getCookie()
-				}).ShouldNot(Equal(oldCookie))
+				It("Test authentication refresh", func() {
+					testDone := make(chan interface{})
+					go func() {
+						err = auth.Authenticate(request)
+						Expect(err).To(BeNil())
 
-				// wait a bit to confirm that we haven't had hits
-				// from some late refresh process
-				Consistently(func() int {
-					return int(atomic.LoadInt32(&callNumber))
-				}, "100ms", "100ms").Should(Equal(2))
+						// Fetch initial cookie when needsRefresh() is false
+						oldCookie, err := getCookie(auth)
+						Expect(err).To(BeNil())
+						Expect(oldCookie).ToNot(BeNil())
+						Expect(oldCookie.Value).To(Equal("fakefake-1"))
 
-				close(testDone)
-			}()
-			Eventually(testDone, 3.0).Should(BeClosed())
-		})
+						// Move time into the refresh window
+						auth.session.refreshTime = time.Now().Add(-10 * time.Minute)
+
+						// Fetch cookie in three parallel threads, to verify
+						// that we are still serving stale cached cookie
+						// and request mutex works and we are querying /_session only once
+						var refresherNumber int32
+						var wg sync.WaitGroup
+
+						for i := 1; i <= 3; i++ {
+							wg.Add(1)
+							go func() {
+								defer GinkgoRecover()
+								defer wg.Done()
+								atomic.AddInt32(&refresherNumber, 1)
+								cookie, err := getCookie(auth)
+								// make sure that at least first refresh is async
+								// and returns an old still-valid cookie
+								if int(atomic.LoadInt32(&refresherNumber)) == 1 {
+									Expect(err).To(BeNil())
+									Expect(cookie).To(Equal(oldCookie))
+									Expect(cookie.Value).To(Equal("fakefake-1"))
+								}
+							}()
+						}
+						wg.Wait()
+
+						// wait for 1s (default duration) to confirm that eventually
+						// we'll get a new cookie.
+						Eventually(func() (*http.Cookie, error) {
+							return getCookie(auth)
+						}).ShouldNot(Equal(oldCookie))
+
+						// wait a bit to confirm that we haven't had hits
+						// from some late refresh process
+						Consistently(func() int {
+							return int(atomic.LoadInt32(&callNumber))
+						}, "100ms", "100ms").Should(Equal(2))
+
+						close(testDone)
+					}()
+					Eventually(testDone, 3.0).Should(BeClosed())
+				})
+			})
+		}
+
+		for _, conf := range []struct {
+			description string
+			withJar     bool
+		}{
+			{"with jar", true},
+			{"without jar", false},
+		} {
+			jarSuite(conf.description, conf.withJar)
+		}
+
 	})
 
 	It("Test authentication failures", func() {
@@ -298,17 +328,39 @@ var _ = Describe("Authenticator Unit Tests", func() {
 	})
 
 	It("Test requestSession fails when auth URL is invalid", func() {
-		auth := &CouchDbSessionAuthenticator{}
-		_, err := auth.requestSession()
+		auth, err := NewCouchDbSessionAuthenticator("user", "pass")
+		Expect(err).To(BeNil())
+		_, err = auth.requestSession()
 		Expect(err).To(HaveOccurred())
 		Expect(err.Error()).To(Equal("service URL is empty"))
 	})
 
 	It("Test requestSession fails when server's down", func() {
-		auth := &CouchDbSessionAuthenticator{}
+		auth, err := NewCouchDbSessionAuthenticator("user", "pass")
+		Expect(err).To(BeNil())
 		auth.URL = "http://localhost"
-		_, err := auth.requestSession()
+		_, err = auth.requestSession()
 		Expect(err).To(HaveOccurred())
 		Expect(err.Error()).Should(HaveSuffix("connection refused"))
 	})
 })
+
+// getCookie returns current AuthSession cookie as stored in cookiejar.
+func getCookie(a *CouchDbSessionAuthenticator) (*http.Cookie, error) {
+	url, err := url.Parse(a.URL)
+	if err != nil {
+		return nil, err
+	}
+	if err := a.refreshCookie(); err != nil {
+		return nil, err
+	}
+	if a.client.Jar == nil && a.session != nil {
+		return a.session.getCookie(), nil
+	}
+	for _, cookie := range a.client.Jar.Cookies(url) {
+		if cookie.Name == "AuthSession" {
+			return cookie, nil
+		}
+	}
+	return nil, fmt.Errorf("Missing AuthSession cookie")
+}

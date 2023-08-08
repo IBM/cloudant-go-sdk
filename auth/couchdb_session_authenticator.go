@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2023. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,9 @@ package auth
 import (
 	"bytes"
 	"context"
-	"crypto/tls"
 	"fmt"
 	"net/http"
 	"sync"
-	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
 )
@@ -38,11 +36,10 @@ type CouchDbSessionAuthenticator struct {
 	// [Required] The username and password used to access CouchDB session end-point
 	Username, Password string
 
-	// [Optional] The http.Client object used to to obtain CouchDB authentication cookie.
-	// If not specified by the user, a suitable default Client will be constructed.
-	Client *http.Client
+	// HTTP client used to to obtain CouchDB authentication cookie.
+	client *http.Client
 
-	// CouchDB URL inherited from the service config.
+	// CouchDB URL inherited from the service request.
 	URL string
 
 	// Client's headers inherited from the service request.
@@ -51,7 +48,7 @@ type CouchDbSessionAuthenticator struct {
 	// Context inherited from from the service request.
 	ctx context.Context
 
-	// A flag that indicates whether verification of the server's SSL certificate should be disabled; INherired from the service config
+	// A flag that indicates whether verification of the server's SSL certificate should be disabled
 	DisableSSLVerification bool
 
 	// A session instance that stores and manages the authentication cookie.
@@ -74,6 +71,8 @@ func NewCouchDbSessionAuthenticator(username, password string) (*CouchDbSessionA
 	if err := authenticator.Validate(); err != nil {
 		return nil, err
 	}
+	client := core.DefaultHTTPClient()
+	authenticator.SetClient(client)
 	return authenticator, nil
 }
 
@@ -116,23 +115,29 @@ func (a *CouchDbSessionAuthenticator) Validate() error {
 
 // Authenticate adds session authentication cookie to a request.
 func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error {
-
 	a.URL = request.URL.Scheme + "://" + request.URL.Host
 	a.header = request.Header
 	a.ctx = request.Context()
 
-	cookie, err := a.getCookie()
-	if err != nil {
-		return err
+	err := a.refreshCookie()
+
+	if a.client.Jar == nil && a.session != nil {
+		if cookie := a.session.getCookie(); cookie != nil {
+			request.AddCookie(cookie)
+		}
 	}
 
-	request.AddCookie(cookie)
-	return nil
+	return err
 }
 
-// getCookie returns an AuthSession cookie to be used in a request.
+// SetClient sets the http client for the authenticator.
+func (a *CouchDbSessionAuthenticator) SetClient(client *http.Client) {
+	a.client = client
+}
+
+// refreshCookie checks if an AuthSession cookie needs to be refreshed.
 // A new cookie will be fetched from the session end-point when needed.
-func (a *CouchDbSessionAuthenticator) getCookie() (*http.Cookie, error) {
+func (a *CouchDbSessionAuthenticator) refreshCookie() error {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
@@ -141,7 +146,7 @@ func (a *CouchDbSessionAuthenticator) getCookie() (*http.Cookie, error) {
 	if a.session == nil || !a.session.isValid() {
 		newSession, err := a.requestSession()
 		if err != nil {
-			return nil, err
+			return err
 		}
 		a.session = newSession
 	} else if a.session.needsRefresh() {
@@ -159,7 +164,7 @@ func (a *CouchDbSessionAuthenticator) getCookie() (*http.Cookie, error) {
 		}()
 	}
 
-	return a.session.getCookie(), nil
+	return nil
 }
 
 // flushRefreshChannel drains authenticator's refresh channel
@@ -200,16 +205,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() (*session, error) {
 
 	req.SetBasicAuth(a.Username, a.Password)
 
-	if a.Client == nil {
-		a.Client = &http.Client{
-			Timeout: time.Second * 30,
-			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: a.DisableSSLVerification},
-			},
-		}
-	}
-
-	resp, err := a.Client.Do(req)
+	resp, err := a.client.Do(req)
 	if err != nil {
 		return nil, err
 	}

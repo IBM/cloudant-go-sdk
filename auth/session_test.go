@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2023. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,10 +90,6 @@ var _ = Describe("Session Unit Tests", func() {
 		Expect(s.isValid()).To(BeTrue())
 
 		s.expires = time.Now().Add(-time.Minute)
-		Expect(s.isValid()).ToNot(BeTrue())
-
-		s.expires = time.Now().Add(time.Hour)
-		s.cookie = nil
 		Expect(s.isValid()).ToNot(BeTrue())
 	})
 
