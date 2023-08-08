@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2021, 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2021, 2023. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,20 +102,17 @@ func NewBaseService(opts *core.ServiceOptions) (*BaseService, error) {
 	if err != nil {
 		return &BaseService{}, err
 	}
-	client := core.DefaultHTTPClient()
-	if client.Jar == nil {
-		client.Jar, err = cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
-		if err != nil {
-			return &BaseService{}, err
-		}
-	}
-	client.Timeout = 6 * time.Minute
-	baseService.SetHTTPClient(client)
 
 	// Set a default value for the User-Agent http header.
 	baseService.SetUserAgent(buildUserAgent())
 
-	return &BaseService{0, baseService}, nil
+	service := &BaseService{0, baseService}
+	// Set a default HTTP client
+	client := core.DefaultHTTPClient()
+	client.Timeout = 6 * time.Minute
+	service.SetHTTPClient(client)
+
+	return service, nil
 }
 
 func (c *BaseService) Clone() *BaseService {
@@ -165,21 +162,48 @@ func (c *BaseService) Request(req *http.Request, result interface{}) (detailedRe
 
 func (c *BaseService) SetServiceURL(url string) error {
 	err := c.BaseService.SetServiceURL(url)
-	if err == nil {
-		serviceUrl, err := neturl.ParseRequestURI(c.BaseService.GetServiceURL())
-		if err == nil {
-			serviceUrlPathSegments := strings.Split(strings.Trim(serviceUrl.EscapedPath(), "/"), "/")
-			serviceUrlPathSegmentsSize := len(serviceUrlPathSegments)
-			// In the no-path case the result is a slice with an empty string
-			// set the size to zero in those cases
-			if serviceUrlPathSegmentsSize == 1 && serviceUrlPathSegments[0] == "" {
-				c.serviceUrlPathSegmentsSize = 0
-			} else {
-				c.serviceUrlPathSegmentsSize = serviceUrlPathSegmentsSize
-			}
-		}
+	if err != nil {
+		return err
 	}
-	return err
+	// Set CouchDb Session's auth URL to Base service URL
+	if c.Options.Authenticator.AuthenticationType() == auth.AUTHTYPE_COUCHDB_SESSION {
+		a := c.Options.Authenticator.(*auth.CouchDbSessionAuthenticator)
+		a.URL = c.BaseService.GetServiceURL()
+	}
+	serviceUrl, err := neturl.ParseRequestURI(c.BaseService.GetServiceURL())
+	if err != nil {
+		return nil
+	}
+	serviceUrlPathSegments := strings.Split(strings.Trim(serviceUrl.EscapedPath(), "/"), "/")
+	serviceUrlPathSegmentsSize := len(serviceUrlPathSegments)
+	// In the no-path case the result is a slice with an empty string
+	// set the size to zero in those cases
+	if serviceUrlPathSegmentsSize == 1 && serviceUrlPathSegments[0] == "" {
+		c.serviceUrlPathSegmentsSize = 0
+	} else {
+		c.serviceUrlPathSegmentsSize = serviceUrlPathSegmentsSize
+	}
+	return nil
+}
+
+// SetHTTPClient will set "client" as the http.Client instance to be used
+// to invoke individual HTTP requests.
+// If automatic retries are currently enabled on "service", then
+// "client" will be set as the embedded client instance within
+// the retryable client; otherwise "client" will be stored
+// directly on "service".
+func (c *BaseService) SetHTTPClient(client *http.Client) {
+	// set cookiejar on if it is missing
+	if client.Jar == nil {
+		// we can ignore the error, jar.New it is actually always returns nil
+		client.Jar, _ = cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+	}
+	// Set service's HTTP client as CouchDb Session's client to share cookiejar
+	if c.Options.Authenticator.AuthenticationType() == auth.AUTHTYPE_COUCHDB_SESSION {
+		a := c.Options.Authenticator.(*auth.CouchDbSessionAuthenticator)
+		a.SetClient(client)
+	}
+	c.BaseService.SetHTTPClient(client)
 }
 
 // GetAuthenticatorFromEnvironment instantiates an Authenticator
