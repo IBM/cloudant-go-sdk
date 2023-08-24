@@ -351,11 +351,9 @@ func getCookie(a *CouchDbSessionAuthenticator) (*http.Cookie, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := a.refreshCookie(); err != nil {
-		return nil, err
-	}
+	cookie, err := a.refreshCookie()
 	if a.client.Jar == nil && a.session != nil {
-		return a.session.getCookie(), nil
+		return cookie, err
 	}
 	for _, cookie := range a.client.Jar.Cookies(url) {
 		if cookie.Name == "AuthSession" {

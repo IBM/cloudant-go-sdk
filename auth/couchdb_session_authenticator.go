@@ -119,12 +119,13 @@ func (a *CouchDbSessionAuthenticator) Authenticate(request *http.Request) error 
 	a.header = request.Header
 	a.ctx = request.Context()
 
-	err := a.refreshCookie()
+	cookie, err := a.refreshCookie()
+	if err != nil {
+		return err
+	}
 
 	if a.client.Jar == nil && a.session != nil {
-		if cookie := a.session.getCookie(); cookie != nil {
-			request.AddCookie(cookie)
-		}
+		request.AddCookie(cookie)
 	}
 
 	return err
@@ -136,8 +137,9 @@ func (a *CouchDbSessionAuthenticator) SetClient(client *http.Client) {
 }
 
 // refreshCookie checks if an AuthSession cookie needs to be refreshed.
-// A new cookie will be fetched from the session end-point when needed.
-func (a *CouchDbSessionAuthenticator) refreshCookie() error {
+// A new cookie will be fetched and returned from the session end-point
+// when needed.
+func (a *CouchDbSessionAuthenticator) refreshCookie() (*http.Cookie, error) {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
@@ -146,7 +148,7 @@ func (a *CouchDbSessionAuthenticator) refreshCookie() error {
 	if a.session == nil || !a.session.isValid() {
 		newSession, err := a.requestSession()
 		if err != nil {
-			return err
+			return nil, err
 		}
 		a.session = newSession
 	} else if a.session.needsRefresh() {
@@ -164,7 +166,7 @@ func (a *CouchDbSessionAuthenticator) refreshCookie() error {
 		}()
 	}
 
-	return nil
+	return a.session.getCookie(), nil
 }
 
 // flushRefreshChannel drains authenticator's refresh channel
