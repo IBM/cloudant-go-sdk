@@ -13,9 +13,10 @@ Please make sure that your PR fulfills the following requirements:
 - [ ] The commit message follows the
 [Angular Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines).
 - [ ] Tests for the changes have been added (for bug fixes / features)
+- [ ] Tests have been run with `-race` flag (for refactoring / new features)
 - [ ] Docs have been added / updated (for bug fixes / features)
 
-## PR Type  
+## PR Type
 <!-- Please check the one that applies to this PR using "x". -->
 - [ ] Bugfix
 - [ ] Feature
