@@ -1,6 +1,6 @@
 module github.com/IBM/cloudant-go-sdk
 
-go 1.19
+go 1.20
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.14.1
