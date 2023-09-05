@@ -173,7 +173,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions)`, func() {
 			getDbUpdatesOptions := &cloudantv1.GetDbUpdatesOptions{
 				Feed:      core.StringPtr("normal"),
-				Heartbeat: core.Int64Ptr(int64(60000)),
+				Heartbeat: core.Int64Ptr(int64(0)),
 				Timeout:   core.Int64Ptr(int64(60000)),
 				Since:     core.StringPtr("0"),
 			}
@@ -202,7 +202,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				Feed:            core.StringPtr("normal"),
 				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(60000)),
+				Heartbeat:       core.Int64Ptr(int64(0)),
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
@@ -236,7 +236,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				Feed:            core.StringPtr("normal"),
 				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(60000)),
+				Heartbeat:       core.Int64Ptr(int64(0)),
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
@@ -1467,6 +1467,62 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`PostPartitionExplain - Retrieve information about which partition index is used for a query`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PostPartitionExplain(postPartitionExplainOptions *PostPartitionExplainOptions)`, func() {
+			postPartitionExplainOptions := &cloudantv1.PostPartitionExplainOptions{
+				Db:             core.StringPtr("testString"),
+				PartitionKey:   core.StringPtr("testString"),
+				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark:       core.StringPtr("testString"),
+				Conflicts:      core.BoolPtr(true),
+				ExecutionStats: core.BoolPtr(true),
+				Fields:         []string{"testString"},
+				Limit:          core.Int64Ptr(int64(25)),
+				Skip:           core.Int64Ptr(int64(0)),
+				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
+				Stable:         core.BoolPtr(true),
+				Update:         core.StringPtr("true"),
+				UseIndex:       []string{"testString"},
+			}
+
+			explainResult, response, err := cloudantService.PostPartitionExplain(postPartitionExplainOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(explainResult).ToNot(BeNil())
+		})
+	})
+
+	Describe(`PostPartitionExplainAsStream - Retrieve information about which partition index is used for a query as stream`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PostPartitionExplainAsStream(postPartitionExplainOptions *PostPartitionExplainOptions)`, func() {
+			postPartitionExplainOptions := &cloudantv1.PostPartitionExplainOptions{
+				Db:             core.StringPtr("testString"),
+				PartitionKey:   core.StringPtr("testString"),
+				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				Bookmark:       core.StringPtr("testString"),
+				Conflicts:      core.BoolPtr(true),
+				ExecutionStats: core.BoolPtr(true),
+				Fields:         []string{"testString"},
+				Limit:          core.Int64Ptr(int64(25)),
+				Skip:           core.Int64Ptr(int64(0)),
+				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
+				Stable:         core.BoolPtr(true),
+				Update:         core.StringPtr("true"),
+				UseIndex:       []string{"testString"},
+			}
+
+			result, response, err := cloudantService.PostPartitionExplainAsStream(postPartitionExplainOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(result).ToNot(BeNil())
+		})
+	})
+
 	Describe(`PostPartitionFind - Query a database partition index by using selector syntax`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -1542,6 +1598,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Update:         core.StringPtr("true"),
 				UseIndex:       []string{"testString"},
 				R:              core.Int64Ptr(int64(1)),
+				Accept:         core.StringPtr("application/json"),
 			}
 
 			explainResult, response, err := cloudantService.PostExplain(postExplainOptions)

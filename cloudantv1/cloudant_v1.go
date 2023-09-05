@@ -4163,6 +4163,199 @@ func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Con
 	return
 }
 
+// PostPartitionExplain : Retrieve information about which partition index is used for a query
+// Shows which index is being used by the query. Parameters are the same as the
+// [`/{db}/_partition/{partition_key}/_find` endpoint](#postpartitionfind-queries).
+func (cloudant *CloudantV1) PostPartitionExplain(postPartitionExplainOptions *PostPartitionExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionExplainWithContext(context.Background(), postPartitionExplainOptions)
+}
+
+// PostPartitionExplainWithContext is an alternate form of the PostPartitionExplain method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionExplainWithContext(ctx context.Context, postPartitionExplainOptions *PostPartitionExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postPartitionExplainOptions, "postPartitionExplainOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postPartitionExplainOptions, "postPartitionExplainOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db":            *postPartitionExplainOptions.Db,
+		"partition_key": *postPartitionExplainOptions.PartitionKey,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_explain`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postPartitionExplainOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionExplain")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if postPartitionExplainOptions.Selector != nil {
+		body["selector"] = postPartitionExplainOptions.Selector
+	}
+	if postPartitionExplainOptions.Bookmark != nil {
+		body["bookmark"] = postPartitionExplainOptions.Bookmark
+	}
+	if postPartitionExplainOptions.Conflicts != nil {
+		body["conflicts"] = postPartitionExplainOptions.Conflicts
+	}
+	if postPartitionExplainOptions.ExecutionStats != nil {
+		body["execution_stats"] = postPartitionExplainOptions.ExecutionStats
+	}
+	if postPartitionExplainOptions.Fields != nil {
+		body["fields"] = postPartitionExplainOptions.Fields
+	}
+	if postPartitionExplainOptions.Limit != nil {
+		body["limit"] = postPartitionExplainOptions.Limit
+	}
+	if postPartitionExplainOptions.Skip != nil {
+		body["skip"] = postPartitionExplainOptions.Skip
+	}
+	if postPartitionExplainOptions.Sort != nil {
+		body["sort"] = postPartitionExplainOptions.Sort
+	}
+	if postPartitionExplainOptions.Stable != nil {
+		body["stable"] = postPartitionExplainOptions.Stable
+	}
+	if postPartitionExplainOptions.Update != nil {
+		body["update"] = postPartitionExplainOptions.Update
+	}
+	if postPartitionExplainOptions.UseIndex != nil {
+		body["use_index"] = postPartitionExplainOptions.UseIndex
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalExplainResult)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// PostPartitionExplainAsStream : Retrieve information about which partition index is used for a query as stream
+// Shows which index is being used by the query. Parameters are the same as the
+// [`/{db}/_partition/{partition_key}/_find` endpoint](#postpartitionfind-queries).
+func (cloudant *CloudantV1) PostPartitionExplainAsStream(postPartitionExplainOptions *PostPartitionExplainOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	return cloudant.PostPartitionExplainAsStreamWithContext(context.Background(), postPartitionExplainOptions)
+}
+
+// PostPartitionExplainAsStreamWithContext is an alternate form of the PostPartitionExplainAsStream method which supports a Context parameter
+func (cloudant *CloudantV1) PostPartitionExplainAsStreamWithContext(ctx context.Context, postPartitionExplainOptions *PostPartitionExplainOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postPartitionExplainOptions, "postPartitionExplainOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postPartitionExplainOptions, "postPartitionExplainOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db":            *postPartitionExplainOptions.Db,
+		"partition_key": *postPartitionExplainOptions.PartitionKey,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_explain`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postPartitionExplainOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionExplainAsStream")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if postPartitionExplainOptions.Selector != nil {
+		body["selector"] = postPartitionExplainOptions.Selector
+	}
+	if postPartitionExplainOptions.Bookmark != nil {
+		body["bookmark"] = postPartitionExplainOptions.Bookmark
+	}
+	if postPartitionExplainOptions.Conflicts != nil {
+		body["conflicts"] = postPartitionExplainOptions.Conflicts
+	}
+	if postPartitionExplainOptions.ExecutionStats != nil {
+		body["execution_stats"] = postPartitionExplainOptions.ExecutionStats
+	}
+	if postPartitionExplainOptions.Fields != nil {
+		body["fields"] = postPartitionExplainOptions.Fields
+	}
+	if postPartitionExplainOptions.Limit != nil {
+		body["limit"] = postPartitionExplainOptions.Limit
+	}
+	if postPartitionExplainOptions.Skip != nil {
+		body["skip"] = postPartitionExplainOptions.Skip
+	}
+	if postPartitionExplainOptions.Sort != nil {
+		body["sort"] = postPartitionExplainOptions.Sort
+	}
+	if postPartitionExplainOptions.Stable != nil {
+		body["stable"] = postPartitionExplainOptions.Stable
+	}
+	if postPartitionExplainOptions.Update != nil {
+		body["update"] = postPartitionExplainOptions.Update
+	}
+	if postPartitionExplainOptions.UseIndex != nil {
+		body["use_index"] = postPartitionExplainOptions.UseIndex
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	response, err = cloudant.Service.Request(request, &result)
+
+	return
+}
+
 // PostPartitionFind : Query a database partition index by using selector syntax
 // Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
 // all fields in selector by using the `_index` endpoint.
@@ -4365,8 +4558,7 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 }
 
 // PostExplain : Retrieve information about which index is used for a query
-// Shows which index is being used by the query. Parameters are the same as the [`_find`
-// endpoint](#query-an-index-by-using-selector-syntax).
+// Shows which index is being used by the query. Parameters are the same as the [`_find` endpoint](#postfind).
 func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
 	return cloudant.PostExplainWithContext(context.Background(), postExplainOptions)
 }
@@ -4404,6 +4596,9 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
+	if postExplainOptions.Accept != nil {
+		builder.AddHeader("Accept", fmt.Sprint(*postExplainOptions.Accept))
+	}
 
 	body := make(map[string]interface{})
 	if postExplainOptions.Selector != nil {
@@ -8628,6 +8823,9 @@ type DatabaseInformation struct {
 
 	// The UUID of the database.
 	UUID *string `json:"uuid,omitempty"`
+
+	// Information about database's partitioned indexes.
+	PartitionedIndexes *PartitionedIndexesInformation `json:"partitioned_indexes,omitempty"`
 }
 
 // UnmarshalDatabaseInformation unmarshals an instance of DatabaseInformation from the specified map of raw messages.
@@ -8682,6 +8880,10 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "uuid", &obj.UUID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "partitioned_indexes", &obj.PartitionedIndexes, UnmarshalPartitionedIndexesInformation)
 	if err != nil {
 		return
 	}
@@ -10151,11 +10353,14 @@ type ExplainResult struct {
 	// The used maximum number of results returned.
 	Limit *int64 `json:"limit" validate:"required"`
 
-	// Query options used.
-	Opts map[string]interface{} `json:"opts" validate:"required"`
+	// Arguments passed to the underlying view.
+	Mrargs *ExplainResultMrArgs `json:"mrargs,omitempty"`
 
-	// Range parameters passed to the underlying view.
-	Range *ExplainResultRange `json:"range,omitempty"`
+	// Options used for the request.
+	Opts *ExplainResultOpts `json:"opts" validate:"required"`
+
+	// Schema for any JSON type.
+	Partitioned interface{} `json:"partitioned,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -10173,18 +10378,17 @@ type ExplainResult struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Skip parameter used.
@@ -10214,11 +10418,15 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "opts", &obj.Opts)
+	err = core.UnmarshalModel(m, "mrargs", &obj.Mrargs, UnmarshalExplainResultMrArgs)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "range", &obj.Range, UnmarshalExplainResultRange)
+	err = core.UnmarshalModel(m, "opts", &obj.Opts, UnmarshalExplainResultOpts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		return
 	}
@@ -10234,23 +10442,190 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 	return
 }
 
-// ExplainResultRange : Range parameters passed to the underlying view.
-type ExplainResultRange struct {
+// ExplainResultMrArgs : Arguments passed to the underlying view.
+type ExplainResultMrArgs struct {
+	// Schema for any JSON type.
+	Conflicts interface{} `json:"conflicts,omitempty"`
+
+	// Direction parameter passed to the underlying view.
+	Direction *string `json:"direction,omitempty"`
+
 	// End key parameter passed to the underlying view.
 	EndKey []interface{} `json:"end_key,omitempty"`
 
+	// A parameter that specifies whether to include the full content of the documents in the response in the underlying
+	// view.
+	IncludeDocs *bool `json:"include_docs,omitempty"`
+
+	// Partition parameter passed to the underlying view.
+	Partition *bool `json:"partition,omitempty"`
+
+	// A parameter that specifies returning only documents that match any of the specified keys in the underlying view.
+	Reduce *bool `json:"reduce,omitempty"`
+
+	// A parameter that specifies whether the view results should be returned form a "stable" set of shards passed to the
+	// underlying view.
+	Stable *bool `json:"stable,omitempty"`
+
 	// Start key parameter passed to the underlying view.
 	StartKey []interface{} `json:"start_key,omitempty"`
+
+	// Schema for any JSON type.
+	Update interface{} `json:"update,omitempty"`
+
+	// The type of the underlying view.
+	ViewType *string `json:"view_type,omitempty"`
 }
 
-// UnmarshalExplainResultRange unmarshals an instance of ExplainResultRange from the specified map of raw messages.
-func UnmarshalExplainResultRange(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ExplainResultRange)
+// Constants associated with the ExplainResultMrArgs.ViewType property.
+// The type of the underlying view.
+const (
+	ExplainResultMrArgsViewTypeMapConst    = "map"
+	ExplainResultMrArgsViewTypeReduceConst = "reduce"
+)
+
+// UnmarshalExplainResultMrArgs unmarshals an instance of ExplainResultMrArgs from the specified map of raw messages.
+func UnmarshalExplainResultMrArgs(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ExplainResultMrArgs)
+	err = core.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "direction", &obj.Direction)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "partition", &obj.Partition)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "stable", &obj.Stable)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "update", &obj.Update)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "view_type", &obj.ViewType)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ExplainResultOpts : Options used for the request.
+type ExplainResultOpts struct {
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark" validate:"required"`
+
+	// Conflicts used in the request query.
+	Conflicts *bool `json:"conflicts" validate:"required"`
+
+	// Execution statistics used in the request query.
+	ExecutionStats *bool `json:"execution_stats" validate:"required"`
+
+	// Schema for any JSON type.
+	Fields interface{} `json:"fields" validate:"required"`
+
+	// Limit used in the request query.
+	Limit *int64 `json:"limit" validate:"required"`
+
+	// On which database partition the request was used. If it was not used on a database partition, it returns with `""`.
+	Partition *string `json:"partition" validate:"required"`
+
+	// The read quorum that is needed for the result.
+	R []int64 `json:"r" validate:"required"`
+
+	// Skip used in the request query.
+	Skip *int64 `json:"skip" validate:"required"`
+
+	// Schema for any JSON type.
+	Sort interface{} `json:"sort" validate:"required"`
+
+	// Stable used in the request query.
+	Stable *bool `json:"stable" validate:"required"`
+
+	// Stale used in the request query.
+	// Deprecated: this field is deprecated and may be removed in a future release.
+	Stale *bool `json:"stale" validate:"required"`
+
+	// Update used in the request query.
+	Update *bool `json:"update" validate:"required"`
+
+	// Use index used in the request query.
+	UseIndex []string `json:"use_index" validate:"required"`
+}
+
+// UnmarshalExplainResultOpts unmarshals an instance of ExplainResultOpts from the specified map of raw messages.
+func UnmarshalExplainResultOpts(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ExplainResultOpts)
+	err = core.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "execution_stats", &obj.ExecutionStats)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "fields", &obj.Fields)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "partition", &obj.Partition)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "r", &obj.R)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "skip", &obj.Skip)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sort", &obj.Sort)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "stable", &obj.Stable)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "stale", &obj.Stale)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "update", &obj.Update)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "use_index", &obj.UseIndex)
 	if err != nil {
 		return
 	}
@@ -10577,9 +10952,18 @@ type GetDbUpdatesOptions struct {
 	// Query parameter to specify the changes feed type.
 	Feed *string `json:"feed,omitempty"`
 
-	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
-	// applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
-	// indefinitely. May also be `true` to use default value of 60000.
+	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off by
+	// default and only applicable for
+	// `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
+	// to use a value of `60000`.
+	//
+	// **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+	// environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism. Instead,
+	// consider one of the following options:
+	//   * Use the `timeout` parameter with a value that is compatible with your network environment.
+	//   * Switch to scheduled usage of one of the non-continuous changes feed types
+	//     (`normal` or `longpoll`).
+	//   * Use TCP keepalive.
 	Heartbeat *int64 `json:"heartbeat,omitempty"`
 
 	// Query parameter to specify the maximum period in milliseconds to wait for a change before the response is sent, even
@@ -12049,18 +12433,17 @@ type IndexDefinition struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	PartialFilterSelector map[string]interface{} `json:"partial_filter_selector,omitempty"`
 }
 
@@ -12195,6 +12578,9 @@ type IndexInformation struct {
 	// Index name.
 	Name *string `json:"name" validate:"required"`
 
+	// Indicates if index is partitioned.
+	Partitioned *bool `json:"partitioned,omitempty"`
+
 	// Schema for the type of an index.
 	Type *string `json:"type" validate:"required"`
 }
@@ -12219,6 +12605,10 @@ func UnmarshalIndexInformation(m map[string]json.RawMessage, result interface{})
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		return
 	}
@@ -12482,6 +12872,61 @@ func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result int
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "external", &obj.External)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PartitionedIndexesDetailedInformation : Number of partitioned indexes by type.
+type PartitionedIndexesDetailedInformation struct {
+	// Number of partitioned indexes of search type.
+	Search *int64 `json:"search,omitempty"`
+
+	// Number of partitioned indexes of view type.
+	View *int64 `json:"view,omitempty"`
+}
+
+// UnmarshalPartitionedIndexesDetailedInformation unmarshals an instance of PartitionedIndexesDetailedInformation from the specified map of raw messages.
+func UnmarshalPartitionedIndexesDetailedInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PartitionedIndexesDetailedInformation)
+	err = core.UnmarshalPrimitive(m, "search", &obj.Search)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "view", &obj.View)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PartitionedIndexesInformation : Information about database's partitioned indexes.
+type PartitionedIndexesInformation struct {
+	// Total number of partitioned indexes in the database.
+	Count *int64 `json:"count,omitempty"`
+
+	// Number of partitioned indexes by type.
+	Indexes *PartitionedIndexesDetailedInformation `json:"indexes,omitempty"`
+
+	// Maximum allowed number of partitioned indexes in the database.
+	Limit *int64 `json:"limit,omitempty"`
+}
+
+// UnmarshalPartitionedIndexesInformation unmarshals an instance of PartitionedIndexesInformation from the specified map of raw messages.
+func UnmarshalPartitionedIndexesInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PartitionedIndexesInformation)
+	err = core.UnmarshalPrimitive(m, "count", &obj.Count)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "indexes", &obj.Indexes, UnmarshalPartitionedIndexesDetailedInformation)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		return
 	}
@@ -12878,18 +13323,17 @@ type PostChangesOptions struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Header parameter to specify the ID of the last events received by the server on a previous connection. Overrides
@@ -12928,9 +13372,18 @@ type PostChangesOptions struct {
 	//       function in the view specified by the query parameter `view`.
 	Filter *string `json:"filter,omitempty"`
 
-	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Only
-	// applicable for longpoll, continuous, and eventsource feeds. Overrides any timeout to keep the feed alive
-	// indefinitely. May also be `true` to use default value of 60000.
+	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off by
+	// default and only applicable for
+	// `continuous` and `eventsource` feeds. Overrides any timeout to keep the feed alive indefinitely. May also be `true`
+	// to use a value of `60000`.
+	//
+	// **Note:** Delivery of heartbeats cannot be relied on at specific intervals. If your application runs in an
+	// environment where idle network connections may break, `heartbeat` is not suitable as a keepalive mechanism. Instead,
+	// consider one of the following options:
+	//   * Use the `timeout` parameter with a value that is compatible with your network environment.
+	//   * Switch to scheduled usage of one of the non-continuous changes feed types
+	//     (`normal` or `longpoll`).
+	//   * Use TCP keepalive.
 	Heartbeat *int64 `json:"heartbeat,omitempty"`
 
 	// Query parameter to specify whether to include the full content of the documents in the response.
@@ -13430,19 +13883,21 @@ type PostExplainOptions struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
+
+	// The type of the response: application/json or application/octet-stream.
+	Accept *string `json:"Accept,omitempty"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -13528,6 +13983,12 @@ func (_options *PostExplainOptions) SetDb(db string) *PostExplainOptions {
 // SetSelector : Allow user to set Selector
 func (_options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
 	_options.Selector = selector
+	return _options
+}
+
+// SetAccept : Allow user to set Accept
+func (_options *PostExplainOptions) SetAccept(accept string) *PostExplainOptions {
+	_options.Accept = core.StringPtr(accept)
 	return _options
 }
 
@@ -13624,18 +14085,17 @@ type PostFindOptions struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
@@ -14053,6 +14513,197 @@ func (options *PostPartitionAllDocsOptions) SetHeaders(param map[string]string) 
 	return options
 }
 
+// PostPartitionExplainOptions : The PostPartitionExplain options.
+type PostPartitionExplainOptions struct {
+	// Path parameter to specify the database name.
+	Db *string `json:"db" validate:"required,ne="`
+
+	// Path parameter to specify the database partition key.
+	PartitionKey *string `json:"partition_key" validate:"required,ne="`
+
+	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
+	// provides an expression to evaluate with the field content or other data.
+	//
+	// The selector object must:
+	//   * Be structured as valid JSON.
+	//   * Contain a valid query expression.
+	//
+	// Using a selector is significantly more efficient than using a JavaScript filter function, and is the recommended
+	// option if filtering on document attributes only.
+	//
+	// Elementary selector syntax requires you to specify one or more fields, and the corresponding values required for
+	// those fields. You can create more complex selector expressions by combining operators.
+	//
+	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
+	//
+	// There are two core types of operators in the selector syntax:
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
+	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
+	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
+	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
+	// of a query. You should include at least one of these in a selector.
+	//
+	// For further reference see
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	Selector map[string]interface{} `json:"selector" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// Skip the first 'n' results, where 'n' is the value that is specified.
+	Skip *int64 `json:"skip,omitempty"`
+
+	// The sort field contains a list of pairs, each mapping a field name to a sort direction (asc or desc). The first
+	// field name and direction pair is the topmost level of sort. The second pair, if provided, is the next level of sort.
+	// The field can be any field, using dotted notation if desired for sub-document fields.
+	//
+	// For example in JSON: `[{"fieldName1": "desc"}, {"fieldName2.subFieldName1": "desc"}]`
+	//
+	// When sorting with multiple fields, ensure that there is an index already defined with all the sort fields in the
+	// same order and each object in the sort array has a single key or at least one of the sort fields is included in the
+	// selector. All sorting fields must use the same sort direction, either all ascending or all descending.
+	Sort []map[string]string `json:"sort,omitempty"`
+
+	// Whether or not the view results should be returned from a "stable" set of shards.
+	Stable *bool `json:"stable,omitempty"`
+
+	// Whether to update the index prior to returning the result.
+	Update *string `json:"update,omitempty"`
+
+	// Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant Query
+	// algorithm to find the best index.
+	UseIndex []string `json:"use_index,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the PostPartitionExplainOptions.Sort property.
+// Schema for a mapping of field name to sort direction.
+const (
+	PostPartitionExplainOptionsSortAscConst  = "asc"
+	PostPartitionExplainOptionsSortDescConst = "desc"
+)
+
+// Constants associated with the PostPartitionExplainOptions.Update property.
+// Whether to update the index prior to returning the result.
+const (
+	PostPartitionExplainOptionsUpdateFalseConst = "false"
+	PostPartitionExplainOptionsUpdateLazyConst  = "lazy"
+	PostPartitionExplainOptionsUpdateTrueConst  = "true"
+)
+
+// NewPostPartitionExplainOptions : Instantiate PostPartitionExplainOptions
+func (*CloudantV1) NewPostPartitionExplainOptions(db string, partitionKey string, selector map[string]interface{}) *PostPartitionExplainOptions {
+	return &PostPartitionExplainOptions{
+		Db:           core.StringPtr(db),
+		PartitionKey: core.StringPtr(partitionKey),
+		Selector:     selector,
+	}
+}
+
+// SetDb : Allow user to set Db
+func (_options *PostPartitionExplainOptions) SetDb(db string) *PostPartitionExplainOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
+}
+
+// SetPartitionKey : Allow user to set PartitionKey
+func (_options *PostPartitionExplainOptions) SetPartitionKey(partitionKey string) *PostPartitionExplainOptions {
+	_options.PartitionKey = core.StringPtr(partitionKey)
+	return _options
+}
+
+// SetSelector : Allow user to set Selector
+func (_options *PostPartitionExplainOptions) SetSelector(selector map[string]interface{}) *PostPartitionExplainOptions {
+	_options.Selector = selector
+	return _options
+}
+
+// SetBookmark : Allow user to set Bookmark
+func (_options *PostPartitionExplainOptions) SetBookmark(bookmark string) *PostPartitionExplainOptions {
+	_options.Bookmark = core.StringPtr(bookmark)
+	return _options
+}
+
+// SetConflicts : Allow user to set Conflicts
+func (_options *PostPartitionExplainOptions) SetConflicts(conflicts bool) *PostPartitionExplainOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
+}
+
+// SetExecutionStats : Allow user to set ExecutionStats
+func (_options *PostPartitionExplainOptions) SetExecutionStats(executionStats bool) *PostPartitionExplainOptions {
+	_options.ExecutionStats = core.BoolPtr(executionStats)
+	return _options
+}
+
+// SetFields : Allow user to set Fields
+func (_options *PostPartitionExplainOptions) SetFields(fields []string) *PostPartitionExplainOptions {
+	_options.Fields = fields
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *PostPartitionExplainOptions) SetLimit(limit int64) *PostPartitionExplainOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetSkip : Allow user to set Skip
+func (_options *PostPartitionExplainOptions) SetSkip(skip int64) *PostPartitionExplainOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
+}
+
+// SetSort : Allow user to set Sort
+func (_options *PostPartitionExplainOptions) SetSort(sort []map[string]string) *PostPartitionExplainOptions {
+	_options.Sort = sort
+	return _options
+}
+
+// SetStable : Allow user to set Stable
+func (_options *PostPartitionExplainOptions) SetStable(stable bool) *PostPartitionExplainOptions {
+	_options.Stable = core.BoolPtr(stable)
+	return _options
+}
+
+// SetUpdate : Allow user to set Update
+func (_options *PostPartitionExplainOptions) SetUpdate(update string) *PostPartitionExplainOptions {
+	_options.Update = core.StringPtr(update)
+	return _options
+}
+
+// SetUseIndex : Allow user to set UseIndex
+func (_options *PostPartitionExplainOptions) SetUseIndex(useIndex []string) *PostPartitionExplainOptions {
+	_options.UseIndex = useIndex
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostPartitionExplainOptions) SetHeaders(param map[string]string) *PostPartitionExplainOptions {
+	options.Headers = param
+	return options
+}
+
 // PostPartitionFindOptions : The PostPartitionFind options.
 type PostPartitionFindOptions struct {
 	// Path parameter to specify the database name.
@@ -14077,18 +14728,17 @@ type PostPartitionFindOptions struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
@@ -16336,18 +16986,17 @@ type ReplicationDocument struct {
 	// Operators are identified by the use of a dollar sign `$` prefix in the name field.
 	//
 	// There are two core types of operators in the selector syntax:
-	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. In addition
-	// to the common boolean operators (`$and`, `$or`, `$not`, `$nor`) there are three combination operators: `$all`,
-	// `$elemMatch`, and `$allMatch`. A combination operator takes a single argument. The argument is either another
-	// selector, or an array of selectors.
+	// * Combination operators: applied at the topmost level of selection. They are used to combine selectors. A
+	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument.
+	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
+	// available combination and conditional operators.
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
 	//
 	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-query#selector-syntax).
+	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Start the replication at a specific sequence value.
@@ -16359,12 +17008,18 @@ type ReplicationDocument struct {
 	// Schema for a replication source or target database.
 	Source *ReplicationDatabase `json:"source" validate:"required"`
 
+	// This setting is forbidden in IBM Cloudant replication documents. This setting may be used with alternative
+	// replication mediators.
+	//
 	// Address of a (http or socks5 protocol) proxy server through which replication with the source database should occur.
 	SourceProxy *string `json:"source_proxy,omitempty"`
 
 	// Schema for a replication source or target database.
 	Target *ReplicationDatabase `json:"target" validate:"required"`
 
+	// This setting is forbidden in IBM Cloudant replication documents. This setting may be used with alternative
+	// replication mediators.
+	//
 	// Address of a (http or socks5 protocol) proxy server through which replication with the target database should occur.
 	TargetProxy *string `json:"target_proxy,omitempty"`
 
