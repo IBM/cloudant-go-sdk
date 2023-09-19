@@ -100,7 +100,8 @@ Example JSON request body:
 
 #### Facet counting deserialization errors in no match cases
 
-When obtaining a `SearchResult` with `counts` if there are no matches a deserialization error is encountered.
+In Apache CouchDB versions `3.3.2` or older and Cloudant versions `8435` and older
+when obtaining a `SearchResult` with `counts` if there are no matches a deserialization error is encountered.
 
 The workaround is to use [Raw IO](/#raw-io) functions to custom deserialize the response.
 
@@ -196,3 +197,14 @@ client.SetEnableGzipCompression(false)
   json: cannot unmarshal string into Go value of type map[string]json.RawMessage
   ```
   If you need to read a replication document that uses string format source or target URLs the workaround is to use the `GetDocumentAsStream` [Raw IO](/#raw-io) function with the `_replicator` database name and your replication document id to custom deserialize the response.
+
+### Queries
+
+#### Explain response
+
+With Apache CouchDB versions `3.3.2` or older and Cloudant versions `8442` and older
+deserialization of the `_explain` response fails when the request does not
+list any `fields` to project and hence the response includes `"fields": "all_fields"`.
+
+If it is not possible to use a newer server version the workaround is to use
+[Raw IO](/#raw-io) functions to custom deserialize the response.
