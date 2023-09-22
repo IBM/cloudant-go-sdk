@@ -1242,7 +1242,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
-				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1300,7 +1300,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
-				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1366,7 +1366,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
-				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1389,7 +1389,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
-				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1426,7 +1426,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
-				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1496,7 +1496,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -1597,7 +1597,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -1706,7 +1706,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -1744,7 +1744,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -1803,7 +1803,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -1900,7 +1900,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -2009,7 +2009,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -2053,7 +2053,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -2112,7 +2112,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.Descending = core.BoolPtr(false)
 				postChangesOptionsModel.Feed = core.StringPtr("normal")
 				postChangesOptionsModel.Filter = core.StringPtr("testString")
-				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(60000))
+				postChangesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
@@ -2471,7 +2471,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"error": "Error", "info": {"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
+					fmt.Fprintf(res, "%s", `[{"error": "Error", "info": {"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID", "partitioned_indexes": {"count": 0, "indexes": {"search": 0, "view": 0}, "limit": 10}}, "key": "Key"}]`)
 				}))
 			})
 			It(`Invoke PostDbsInfo successfully with retries`, func() {
@@ -2541,7 +2541,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `[{"error": "Error", "info": {"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}, "key": "Key"}]`)
+					fmt.Fprintf(res, "%s", `[{"error": "Error", "info": {"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID", "partitioned_indexes": {"count": 0, "indexes": {"search": 0, "view": 0}, "limit": 10}}, "key": "Key"}]`)
 				}))
 			})
 			It(`Invoke PostDbsInfo successfully`, func() {
@@ -2911,7 +2911,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}`)
+					fmt.Fprintf(res, "%s", `{"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID", "partitioned_indexes": {"count": 0, "indexes": {"search": 0, "view": 0}, "limit": 10}}`)
 				}))
 			})
 			It(`Invoke GetDatabaseInformation successfully with retries`, func() {
@@ -2965,7 +2965,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID"}`)
+					fmt.Fprintf(res, "%s", `{"cluster": {"n": 3, "q": 1, "r": 1, "w": 1}, "committed_update_seq": "CommittedUpdateSeq", "compact_running": true, "compacted_seq": "CompactedSeq", "db_name": "DbName", "disk_format_version": 17, "doc_count": 0, "doc_del_count": 0, "engine": "Engine", "props": {"partitioned": false}, "sizes": {"active": 6, "external": 8, "file": 4}, "update_seq": "UpdateSeq", "uuid": "UUID", "partitioned_indexes": {"count": 0, "indexes": {"search": 0, "view": 0}, "limit": 10}}`)
 				}))
 			})
 			It(`Invoke GetDatabaseInformation successfully`, func() {
@@ -13864,6 +13864,310 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`PostPartitionExplain(postPartitionExplainOptions *PostPartitionExplainOptions) - Operation response error`, func() {
+		postPartitionExplainPath := "/testString/_partition/testString/_explain"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionExplainPath))
+					Expect(req.Method).To(Equal("POST"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke PostPartitionExplain with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionExplainOptions model
+				postPartitionExplainOptionsModel := new(cloudantv1.PostPartitionExplainOptions)
+				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
+				postPartitionExplainOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Update = core.StringPtr("true")
+				postPartitionExplainOptionsModel.UseIndex = []string{"testString"}
+				postPartitionExplainOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.PostPartitionExplain(postPartitionExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostPartitionExplain(postPartitionExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`PostPartitionExplain(postPartitionExplainOptions *PostPartitionExplainOptions)`, func() {
+		postPartitionExplainPath := "/testString/_partition/testString/_explain"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionExplainPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "skip": 0}`)
+				}))
+			})
+			It(`Invoke PostPartitionExplain successfully with retries`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
+
+				// Construct an instance of the PostPartitionExplainOptions model
+				postPartitionExplainOptionsModel := new(cloudantv1.PostPartitionExplainOptions)
+				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
+				postPartitionExplainOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Update = core.StringPtr("true")
+				postPartitionExplainOptionsModel.UseIndex = []string{"testString"}
+				postPartitionExplainOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := cloudantService.PostPartitionExplainWithContext(ctx, postPartitionExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr := cloudantService.PostPartitionExplain(postPartitionExplainOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = cloudantService.PostPartitionExplainWithContext(ctx, postPartitionExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postPartitionExplainPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "skip": 0}`)
+				}))
+			})
+			It(`Invoke PostPartitionExplain successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.PostPartitionExplain(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the PostPartitionExplainOptions model
+				postPartitionExplainOptionsModel := new(cloudantv1.PostPartitionExplainOptions)
+				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
+				postPartitionExplainOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Update = core.StringPtr("true")
+				postPartitionExplainOptionsModel.UseIndex = []string{"testString"}
+				postPartitionExplainOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.PostPartitionExplain(postPartitionExplainOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke PostPartitionExplain with error: Operation validation and request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionExplainOptions model
+				postPartitionExplainOptionsModel := new(cloudantv1.PostPartitionExplainOptions)
+				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
+				postPartitionExplainOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Update = core.StringPtr("true")
+				postPartitionExplainOptionsModel.UseIndex = []string{"testString"}
+				postPartitionExplainOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.PostPartitionExplain(postPartitionExplainOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PostPartitionExplainOptions model with no property values
+				postPartitionExplainOptionsModelNew := new(cloudantv1.PostPartitionExplainOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PostPartitionExplain(postPartitionExplainOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke PostPartitionExplain successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the PostPartitionExplainOptions model
+				postPartitionExplainOptionsModel := new(cloudantv1.PostPartitionExplainOptions)
+				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
+				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
+				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
+				postPartitionExplainOptionsModel.Stable = core.BoolPtr(true)
+				postPartitionExplainOptionsModel.Update = core.StringPtr("true")
+				postPartitionExplainOptionsModel.UseIndex = []string{"testString"}
+				postPartitionExplainOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostPartitionExplain(postPartitionExplainOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions) - Operation response error`, func() {
 		postPartitionFindPath := "/testString/_partition/testString/_find"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -14515,7 +14819,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"covered": false, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 25, "opts": {"anyKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"anyKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully with retries`, func() {
@@ -14597,7 +14901,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"covered": false, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}, "limit": 25, "opts": {"anyKey": "anyValue"}, "range": {"end_key": ["anyValue"], "start_key": ["anyValue"]}, "selector": {"anyKey": "anyValue"}, "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully`, func() {
@@ -15352,7 +15656,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully with retries`, func() {
@@ -15406,7 +15710,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "type": "json"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "indexes": [{"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}]}`)
 				}))
 			})
 			It(`Invoke GetIndexesInformation successfully`, func() {
@@ -15554,7 +15858,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
@@ -15651,7 +15954,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
@@ -15756,7 +16058,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
@@ -15806,7 +16107,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
@@ -15877,7 +16177,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
 				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Def = indexDefinitionModel
 				postIndexOptionsModel.Name = core.StringPtr("testString")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
@@ -25126,13 +25425,13 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := cloudantService.NewGetDbUpdatesOptions()
 				getDbUpdatesOptionsModel.SetFeed("normal")
-				getDbUpdatesOptionsModel.SetHeartbeat(int64(60000))
+				getDbUpdatesOptionsModel.SetHeartbeat(int64(0))
 				getDbUpdatesOptionsModel.SetTimeout(int64(60000))
 				getDbUpdatesOptionsModel.SetSince("0")
 				getDbUpdatesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getDbUpdatesOptionsModel).ToNot(BeNil())
 				Expect(getDbUpdatesOptionsModel.Feed).To(Equal(core.StringPtr("normal")))
-				Expect(getDbUpdatesOptionsModel.Heartbeat).To(Equal(core.Int64Ptr(int64(60000))))
+				Expect(getDbUpdatesOptionsModel.Heartbeat).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getDbUpdatesOptionsModel.Timeout).To(Equal(core.Int64Ptr(int64(60000))))
 				Expect(getDbUpdatesOptionsModel.Since).To(Equal(core.StringPtr("0")))
 				Expect(getDbUpdatesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -25785,7 +26084,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.SetDescending(false)
 				postChangesOptionsModel.SetFeed("normal")
 				postChangesOptionsModel.SetFilter("testString")
-				postChangesOptionsModel.SetHeartbeat(int64(60000))
+				postChangesOptionsModel.SetHeartbeat(int64(0))
 				postChangesOptionsModel.SetIncludeDocs(false)
 				postChangesOptionsModel.SetLimit(int64(0))
 				postChangesOptionsModel.SetSeqInterval(int64(1))
@@ -25806,7 +26105,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postChangesOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
 				Expect(postChangesOptionsModel.Feed).To(Equal(core.StringPtr("normal")))
 				Expect(postChangesOptionsModel.Filter).To(Equal(core.StringPtr("testString")))
-				Expect(postChangesOptionsModel.Heartbeat).To(Equal(core.Int64Ptr(int64(60000))))
+				Expect(postChangesOptionsModel.Heartbeat).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postChangesOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postChangesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postChangesOptionsModel.SeqInterval).To(Equal(core.Int64Ptr(int64(1))))
@@ -26128,7 +26427,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel.SetDb("testString")
 				postIndexOptionsModel.SetIndex(indexDefinitionModel)
 				postIndexOptionsModel.SetDdoc("testString")
-				postIndexOptionsModel.SetDef(indexDefinitionModel)
 				postIndexOptionsModel.SetName("testString")
 				postIndexOptionsModel.SetPartitioned(true)
 				postIndexOptionsModel.SetType("json")
@@ -26137,7 +26435,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postIndexOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postIndexOptionsModel.Index).To(Equal(indexDefinitionModel))
 				Expect(postIndexOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
-				Expect(postIndexOptionsModel.Def).To(Equal(indexDefinitionModel))
 				Expect(postIndexOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(postIndexOptionsModel.Partitioned).To(Equal(core.BoolPtr(true)))
 				Expect(postIndexOptionsModel.Type).To(Equal(core.StringPtr("json")))
@@ -26181,6 +26478,42 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
 				Expect(postPartitionAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewPostPartitionExplainOptions successfully`, func() {
+				// Construct an instance of the PostPartitionExplainOptions model
+				db := "testString"
+				partitionKey := "testString"
+				postPartitionExplainOptionsSelector := map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel := cloudantService.NewPostPartitionExplainOptions(db, partitionKey, postPartitionExplainOptionsSelector)
+				postPartitionExplainOptionsModel.SetDb("testString")
+				postPartitionExplainOptionsModel.SetPartitionKey("testString")
+				postPartitionExplainOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
+				postPartitionExplainOptionsModel.SetBookmark("testString")
+				postPartitionExplainOptionsModel.SetConflicts(true)
+				postPartitionExplainOptionsModel.SetExecutionStats(true)
+				postPartitionExplainOptionsModel.SetFields([]string{"testString"})
+				postPartitionExplainOptionsModel.SetLimit(int64(25))
+				postPartitionExplainOptionsModel.SetSkip(int64(0))
+				postPartitionExplainOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
+				postPartitionExplainOptionsModel.SetStable(true)
+				postPartitionExplainOptionsModel.SetUpdate("true")
+				postPartitionExplainOptionsModel.SetUseIndex([]string{"testString"})
+				postPartitionExplainOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(postPartitionExplainOptionsModel).ToNot(BeNil())
+				Expect(postPartitionExplainOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionExplainOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionExplainOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(postPartitionExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
+				Expect(postPartitionExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
+				Expect(postPartitionExplainOptionsModel.Fields).To(Equal([]string{"testString"}))
+				Expect(postPartitionExplainOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
+				Expect(postPartitionExplainOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionExplainOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
+				Expect(postPartitionExplainOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
+				Expect(postPartitionExplainOptionsModel.Update).To(Equal(core.StringPtr("true")))
+				Expect(postPartitionExplainOptionsModel.UseIndex).To(Equal([]string{"testString"}))
+				Expect(postPartitionExplainOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostPartitionFindOptions successfully`, func() {
 				// Construct an instance of the PostPartitionFindOptions model
