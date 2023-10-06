@@ -1020,6 +1020,7 @@ var _ = Describe(`ChangesFollower with context`, func() {
 		runDuration := e.Get("stop after").Durations[0]
 		Expect(runDuration).To(BeNumerically("~", timeout, p))
 		Expect(runDuration).To(BeNumerically("<", runnerTimeout))
+		Expect(ctx.Err()).To(Equal(context.DeadlineExceeded))
 	})
 
 	It(`Checks passing context with deadline.`, func() {
@@ -1050,6 +1051,7 @@ var _ = Describe(`ChangesFollower with context`, func() {
 		runDuration := e.Get("stop after").Durations[0]
 		Expect(runDuration).To(BeNumerically("~", duration, p))
 		Expect(runDuration).To(BeNumerically("<", runnerTimeout))
+		Expect(ctx.Err()).To(Equal(context.DeadlineExceeded))
 	})
 
 	It(`Checks passing context with cancel.`, func() {
