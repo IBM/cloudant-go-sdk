@@ -296,6 +296,7 @@ func runner(cf *ChangesFollower, c runnerConfig) (int, error) {
 	go func() {
 		defer GinkgoRecover()
 		defer close(countCh)
+		defer close(errors)
 		count := 0
 		var changesCh <-chan ChangesItem
 		var err error
