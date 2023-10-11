@@ -7,7 +7,7 @@ require (
 	github.com/go-openapi/strfmt v0.21.7
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.28.0
-	golang.org/x/net v0.16.0
+	golang.org/x/net v0.17.0
 )
 
 require (
