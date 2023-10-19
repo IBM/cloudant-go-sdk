@@ -8800,7 +8800,8 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 
 // DatabaseInformationCluster : Schema for database cluster information.
 type DatabaseInformationCluster struct {
-	// Schema for the number of replicas of a database in a cluster.
+	// Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it cannot
+	// be changed by the user.
 	N *int64 `json:"n" validate:"required"`
 
 	// Schema for the number of shards in a database. Each shard is a partition of the hash value range.
@@ -16150,8 +16151,10 @@ type PutDatabaseOptions struct {
 	// Query parameter to specify whether to enable database partitions when creating a database.
 	Partitioned *bool `json:"partitioned,omitempty"`
 
-	// The number of shards in the database. Each shard is a partition of the hash value range. Its value is set by the
-	// service. For more information about modifying database configuration, contact IBM Cloudant support.
+	// The number of shards in the database. Each shard is a partition of the hash value range. Cloudant recommends using
+	// the default value for most databases. However, if your database is expected to be larger than 250 GB or have a lot
+	// of indexes, you may need to adjust the settings. In these cases, it's best to reach out to IBM Cloudant customer
+	// support for guidance on how to meet your specific needs and requirements.
 	Q *int64 `json:"q,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -16640,7 +16643,8 @@ func (options *PutSecurityOptions) SetHeaders(param map[string]string) *PutSecur
 
 // ReplicationCreateTargetParameters : Request parameters to use during target database creation.
 type ReplicationCreateTargetParameters struct {
-	// Schema for the number of replicas of a database in a cluster.
+	// Schema for the number of replicas of a database in a cluster. The cluster is using the default value and it cannot
+	// be changed by the user.
 	N *int64 `json:"n,omitempty"`
 
 	// Parameter to specify whether to enable database partitions when creating the target database.
