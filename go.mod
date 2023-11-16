@@ -3,7 +3,7 @@ module github.com/IBM/cloudant-go-sdk
 go 1.20
 
 require (
-	github.com/IBM/go-sdk-core/v5 v5.14.1
+	github.com/IBM/go-sdk-core/v5 v5.15.0
 	github.com/go-openapi/strfmt v0.21.7
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.30.0
