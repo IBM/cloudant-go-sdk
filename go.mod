@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.15.0
-	github.com/go-openapi/strfmt v0.21.7
+	github.com/go-openapi/strfmt v0.21.8
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.30.0
 	golang.org/x/net v0.19.0
