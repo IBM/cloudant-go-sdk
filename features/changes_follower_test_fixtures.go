@@ -238,7 +238,7 @@ func (ms *MockServer) Start() *cloudantv1.CloudantV1 {
 				return
 			}
 
-			l, err := strconv.Atoi(r.URL.Query().Get("limit"))
+			l, err := strconv.ParseUint(r.URL.Query().Get("limit"), 10, 32)
 			Expect(err).ShouldNot(HaveOccurred())
 			ms.limit.Store(int32(l))
 		}
