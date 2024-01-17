@@ -1,10 +1,7 @@
 name: "CodeQL"
-
 on:
-  pull_request:
-    branches: [ "main" ]
-    paths-ignore:
-    - 'examples'
+  push:
+    branches: ['main']
   schedule:
   - cron: '54 3 * * 2'
 jobs:
