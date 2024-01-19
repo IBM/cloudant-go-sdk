@@ -11,10 +11,6 @@ jobs:
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
-      # only required for workflows in private repositories
-      actions: read
-      contents: read
-      # required for all workflows
       security-events: write
     strategy:
       fail-fast: false
