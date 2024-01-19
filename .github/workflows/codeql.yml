@@ -9,7 +9,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     permissions:
       # only required for workflows in private repositories
       actions: read
@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'go' ]
+        language: ['go']
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
