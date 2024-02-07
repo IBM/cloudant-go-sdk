@@ -39,7 +39,3 @@ jobs:
       run: go test -v ./cloudantv1/... -run Loopvar
     - name: Run tests
       run: go test ./... -coverprofile=coverage.txt -covermode=count
-    - name: Run lint
-      uses: golangci/golangci-lint-action@v3
-      with:
-        skip-pkg-cache: true

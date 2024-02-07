@@ -14,6 +14,7 @@ pipeline {
                       regex: /NONE|${globals.SVRE_PRE_RELEASE}/)
   }
   environment {
+    GOEXPERIMENT = 'loopvar'
     GH_CREDS = credentials('gh-sdks-automation')
     ARTIFACTORY_CREDS = credentials('artifactory')
     ARTIFACTORY_URL_UP = "${Artifactory.server('taas-artifactory-upload').getUrl()}"
@@ -279,7 +280,7 @@ void defaultInit() {
 void applyCustomizations() {
   libName = 'go'
   testVersionPrefix = '@v'
-  
+
   rtGoResolver (
       id: 'go-resolver',
       serverId: 'taas-artifactory',
