@@ -171,10 +171,12 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions)`, func() {
 			getDbUpdatesOptions := &cloudantv1.GetDbUpdatesOptions{
-				Feed:      core.StringPtr("normal"),
-				Heartbeat: core.Int64Ptr(int64(0)),
-				Timeout:   core.Int64Ptr(int64(60000)),
-				Since:     core.StringPtr("0"),
+				Descending: core.BoolPtr(false),
+				Feed:       core.StringPtr("normal"),
+				Heartbeat:  core.Int64Ptr(int64(0)),
+				Limit:      core.Int64Ptr(int64(0)),
+				Timeout:    core.Int64Ptr(int64(60000)),
+				Since:      core.StringPtr("0"),
 			}
 
 			dbUpdates, response, err := cloudantService.GetDbUpdates(getDbUpdatesOptions)

@@ -484,11 +484,17 @@ func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUp
 	}
 	builder.AddHeader("Accept", "application/json")
 
+	if getDbUpdatesOptions.Descending != nil {
+		builder.AddQuery("descending", fmt.Sprint(*getDbUpdatesOptions.Descending))
+	}
 	if getDbUpdatesOptions.Feed != nil {
 		builder.AddQuery("feed", fmt.Sprint(*getDbUpdatesOptions.Feed))
 	}
 	if getDbUpdatesOptions.Heartbeat != nil {
 		builder.AddQuery("heartbeat", fmt.Sprint(*getDbUpdatesOptions.Heartbeat))
+	}
+	if getDbUpdatesOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*getDbUpdatesOptions.Limit))
 	}
 	if getDbUpdatesOptions.Timeout != nil {
 		builder.AddQuery("timeout", fmt.Sprint(*getDbUpdatesOptions.Timeout))
@@ -10859,6 +10865,9 @@ func (options *GetDatabaseInformationOptions) SetHeaders(param map[string]string
 
 // GetDbUpdatesOptions : The GetDbUpdates options.
 type GetDbUpdatesOptions struct {
+	// Query parameter to specify whether to return the documents in descending by key order.
+	Descending *bool `json:"descending,omitempty"`
+
 	// Query parameter to specify the changes feed type.
 	Feed *string `json:"feed,omitempty"`
 
@@ -10875,6 +10884,9 @@ type GetDbUpdatesOptions struct {
 	//     (`normal` or `longpoll`).
 	//   * Use TCP keepalive.
 	Heartbeat *int64 `json:"heartbeat,omitempty"`
+
+	// Query parameter to specify the number of returned documents to limit the result to.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// Query parameter to specify the maximum period in milliseconds to wait for a change before the response is sent, even
 	// if there are no results. Only applicable for `longpoll` or `continuous` feeds. Default value is specified by
@@ -10904,6 +10916,12 @@ func (*CloudantV1) NewGetDbUpdatesOptions() *GetDbUpdatesOptions {
 	return &GetDbUpdatesOptions{}
 }
 
+// SetDescending : Allow user to set Descending
+func (_options *GetDbUpdatesOptions) SetDescending(descending bool) *GetDbUpdatesOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
+}
+
 // SetFeed : Allow user to set Feed
 func (_options *GetDbUpdatesOptions) SetFeed(feed string) *GetDbUpdatesOptions {
 	_options.Feed = core.StringPtr(feed)
@@ -10913,6 +10931,12 @@ func (_options *GetDbUpdatesOptions) SetFeed(feed string) *GetDbUpdatesOptions {
 // SetHeartbeat : Allow user to set Heartbeat
 func (_options *GetDbUpdatesOptions) SetHeartbeat(heartbeat int64) *GetDbUpdatesOptions {
 	_options.Heartbeat = core.Int64Ptr(heartbeat)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *GetDbUpdatesOptions) SetLimit(limit int64) *GetDbUpdatesOptions {
+	_options.Limit = core.Int64Ptr(limit)
 	return _options
 }
 

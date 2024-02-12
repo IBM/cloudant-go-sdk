@@ -1222,8 +1222,10 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(getDbUpdatesPath))
 					Expect(req.Method).To(Equal("GET"))
+					// TODO: Add check for descending query parameter
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"normal"}))
 					// TODO: Add check for heartbeat query parameter
+					// TODO: Add check for limit query parameter
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
 					res.Header().Set("Content-type", "application/json")
@@ -1241,8 +1243,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
+				getDbUpdatesOptionsModel.Descending = core.BoolPtr(false)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1275,8 +1279,10 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getDbUpdatesPath))
 					Expect(req.Method).To(Equal("GET"))
 
+					// TODO: Add check for descending query parameter
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"normal"}))
 					// TODO: Add check for heartbeat query parameter
+					// TODO: Add check for limit query parameter
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
 					// Sleep a short time to support a timeout test
@@ -1299,8 +1305,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
+				getDbUpdatesOptionsModel.Descending = core.BoolPtr(false)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1339,8 +1347,10 @@ var _ = Describe(`CloudantV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getDbUpdatesPath))
 					Expect(req.Method).To(Equal("GET"))
 
+					// TODO: Add check for descending query parameter
 					Expect(req.URL.Query()["feed"]).To(Equal([]string{"normal"}))
 					// TODO: Add check for heartbeat query parameter
+					// TODO: Add check for limit query parameter
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
 					// Set mock response
@@ -1365,8 +1375,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
+				getDbUpdatesOptionsModel.Descending = core.BoolPtr(false)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1388,8 +1400,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
+				getDbUpdatesOptionsModel.Descending = core.BoolPtr(false)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1425,8 +1439,10 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := new(cloudantv1.GetDbUpdatesOptions)
+				getDbUpdatesOptionsModel.Descending = core.BoolPtr(false)
 				getDbUpdatesOptionsModel.Feed = core.StringPtr("normal")
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
+				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -25424,14 +25440,18 @@ var _ = Describe(`CloudantV1`, func() {
 			It(`Invoke NewGetDbUpdatesOptions successfully`, func() {
 				// Construct an instance of the GetDbUpdatesOptions model
 				getDbUpdatesOptionsModel := cloudantService.NewGetDbUpdatesOptions()
+				getDbUpdatesOptionsModel.SetDescending(false)
 				getDbUpdatesOptionsModel.SetFeed("normal")
 				getDbUpdatesOptionsModel.SetHeartbeat(int64(0))
+				getDbUpdatesOptionsModel.SetLimit(int64(0))
 				getDbUpdatesOptionsModel.SetTimeout(int64(60000))
 				getDbUpdatesOptionsModel.SetSince("0")
 				getDbUpdatesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getDbUpdatesOptionsModel).ToNot(BeNil())
+				Expect(getDbUpdatesOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
 				Expect(getDbUpdatesOptionsModel.Feed).To(Equal(core.StringPtr("normal")))
 				Expect(getDbUpdatesOptionsModel.Heartbeat).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(getDbUpdatesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getDbUpdatesOptionsModel.Timeout).To(Equal(core.Int64Ptr(int64(60000))))
 				Expect(getDbUpdatesOptionsModel.Since).To(Equal(core.StringPtr("0")))
 				Expect(getDbUpdatesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
