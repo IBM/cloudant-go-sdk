@@ -19,6 +19,7 @@ package cloudantv1_test
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -1588,7 +1589,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "seq": "Seq"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "seq": "Seq"}]}`)
 				}))
 			})
 			It(`Invoke PostChanges successfully with retries`, func() {
@@ -1692,7 +1693,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "seq": "Seq"}]}`)
+					fmt.Fprintf(res, "%s", `{"last_seq": "LastSeq", "pending": 7, "results": [{"changes": [{"rev": "Rev"}], "deleted": false, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "seq": "Seq"}]}`)
 				}))
 			})
 			It(`Invoke PostChanges successfully`, func() {
@@ -3444,7 +3445,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3553,7 +3554,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3670,7 +3671,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3745,7 +3746,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3825,7 +3826,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3940,7 +3941,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully with retries`, func() {
@@ -4023,7 +4024,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully`, func() {
@@ -4514,7 +4515,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully with retries`, func() {
@@ -4601,7 +4602,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully`, func() {
@@ -5081,7 +5082,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5190,7 +5191,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5307,7 +5308,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5385,7 +5386,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5468,7 +5469,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5592,7 +5593,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
 				}))
 			})
 			It(`Invoke PostBulkGet successfully with retries`, func() {
@@ -5677,7 +5678,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
 				}))
 			})
 			It(`Invoke PostBulkGet successfully`, func() {
@@ -6919,7 +6920,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
 				}))
 			})
 			It(`Invoke GetDocument successfully with retries`, func() {
@@ -6997,7 +6998,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
 				}))
 			})
 			It(`Invoke GetDocument successfully`, func() {
@@ -7927,7 +7928,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8044,7 +8045,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8169,7 +8170,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8248,7 +8249,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8332,7 +8333,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8776,7 +8777,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully with retries`, func() {
@@ -8854,7 +8855,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -9080,7 +9081,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel}
-				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.SetProperty("foo", "testString")
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -9229,7 +9230,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel}
-				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.SetProperty("foo", "testString")
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -9386,7 +9387,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel}
-				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.SetProperty("foo", "testString")
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -9483,7 +9484,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel}
-				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.SetProperty("foo", "testString")
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -9601,7 +9602,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Options = designDocumentOptionsModel
 				designDocumentModel.ValidateDocUpdate = core.StringPtr("testString")
 				designDocumentModel.Views = map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel}
-				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.SetProperty("foo", "testString")
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
@@ -9943,7 +9944,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully with retries`, func() {
@@ -10029,7 +10030,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully`, func() {
@@ -10267,7 +10268,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully with retries`, func() {
@@ -10357,7 +10358,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully`, func() {
@@ -10544,15 +10545,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -10607,7 +10608,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostView successfully with retries`, func() {
@@ -10633,15 +10634,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -10699,7 +10700,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostView successfully`, func() {
@@ -10730,15 +10731,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -10772,15 +10773,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -10835,15 +10836,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -10920,15 +10921,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -11017,15 +11018,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -11065,15 +11066,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -11128,15 +11129,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postViewOptionsModel.EndKey = core.StringPtr("testString")
+				postViewOptionsModel.EndKey = "testString"
 				postViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postViewOptionsModel.Key = core.StringPtr("testString")
+				postViewOptionsModel.Key = "testString"
 				postViewOptionsModel.Keys = []interface{}{"testString"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
-				postViewOptionsModel.StartKey = core.StringPtr("testString")
+				postViewOptionsModel.StartKey = "testString"
 				postViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postViewOptionsModel.Update = core.StringPtr("true")
 				postViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -11192,15 +11193,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11262,7 +11263,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
 				}))
 			})
 			It(`Invoke PostViewQueries successfully with retries`, func() {
@@ -11285,15 +11286,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11358,7 +11359,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
 				}))
 			})
 			It(`Invoke PostViewQueries successfully`, func() {
@@ -11386,15 +11387,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11432,15 +11433,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11499,15 +11500,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11588,15 +11589,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11689,15 +11690,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11741,15 +11742,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -11808,15 +11809,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 
@@ -12154,7 +12155,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully with retries`, func() {
@@ -12238,7 +12239,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully`, func() {
@@ -12734,7 +12735,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionSearch successfully with retries`, func() {
@@ -12819,7 +12820,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionSearch successfully`, func() {
@@ -13267,14 +13268,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13329,7 +13330,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionView successfully with retries`, func() {
@@ -13356,14 +13357,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13421,7 +13422,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionView successfully`, func() {
@@ -13453,14 +13454,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13495,14 +13496,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13558,14 +13559,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13643,14 +13644,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13740,14 +13741,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13788,14 +13789,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13851,14 +13852,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
-				postPartitionViewOptionsModel.EndKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.EndKey = "testString"
 				postPartitionViewOptionsModel.EndKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
-				postPartitionViewOptionsModel.Key = core.StringPtr("testString")
+				postPartitionViewOptionsModel.Key = "testString"
 				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
-				postPartitionViewOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
 				postPartitionViewOptionsModel.Update = core.StringPtr("true")
 				postPartitionViewOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -14274,7 +14275,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
 				}))
 			})
 			It(`Invoke PostPartitionFind successfully with retries`, func() {
@@ -14356,7 +14357,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
 				}))
 			})
 			It(`Invoke PostPartitionFind successfully`, func() {
@@ -15139,7 +15140,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
 				}))
 			})
 			It(`Invoke PostFind successfully with retries`, func() {
@@ -15221,7 +15222,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
+					fmt.Fprintf(res, "%s", `{"bookmark": "Bookmark", "docs": [{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}], "execution_stats": {"execution_time_ms": 15, "results_returned": 0, "total_docs_examined": 0, "total_keys_examined": 0, "total_quorum_docs_examined": 0}, "warning": "Warning"}`)
 				}))
 			})
 			It(`Invoke PostFind successfully`, func() {
@@ -16785,7 +16786,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostSearch successfully with retries`, func() {
@@ -16875,7 +16876,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}], "groups": [{"total_rows": 0, "bookmark": "Bookmark", "by": "By", "counts": {"mapKey": {"mapKey": 0}}, "ranges": {"mapKey": {"mapKey": 0}}, "rows": [{"doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "fields": {"anyKey": "anyValue"}, "highlights": {"mapKey": ["Inner"]}, "id": "ID"}]}]}`)
 				}))
 			})
 			It(`Invoke PostSearch successfully`, func() {
@@ -18086,7 +18087,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -18163,7 +18164,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -18409,7 +18410,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
-				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -18578,7 +18579,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
-				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -18755,7 +18756,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
-				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -18872,7 +18873,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
-				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -19010,7 +19011,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
-				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutReplicationDocumentOptions model
@@ -22760,7 +22761,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
 				}))
 			})
 			It(`Invoke GetLocalDocument successfully with retries`, func() {
@@ -22827,7 +22828,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}`)
 				}))
 			})
 			It(`Invoke GetLocalDocument successfully`, func() {
@@ -23000,7 +23001,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23110,7 +23111,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23228,7 +23229,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23304,7 +23305,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23385,7 +23386,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -26015,7 +26016,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				documentModel.Attachments["foo"] = *attachmentModel
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -26025,13 +26026,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
 				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.GetProperty("foo")).To(Equal("testString"))
 
 				documentModel.SetProperties(nil)
 				Expect(documentModel.GetProperties()).To(BeEmpty())
 
 				documentModelExpectedMap := make(map[string]interface{})
-				documentModelExpectedMap["foo"] = core.StringPtr("testString")
+				documentModelExpectedMap["foo"] = "testString"
 				documentModel.SetProperties(documentModelExpectedMap)
 				documentModelActualMap := documentModel.GetProperties()
 				Expect(documentModelActualMap).To(Equal(documentModelExpectedMap))
@@ -26280,7 +26281,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				documentModel.Attachments["foo"] = *attachmentModel
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -26290,13 +26291,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
 				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.GetProperty("foo")).To(Equal("testString"))
 
 				documentModel.SetProperties(nil)
 				Expect(documentModel.GetProperties()).To(BeEmpty())
 
 				documentModelExpectedMap := make(map[string]interface{})
-				documentModelExpectedMap["foo"] = core.StringPtr("testString")
+				documentModelExpectedMap["foo"] = "testString"
 				documentModel.SetProperties(documentModelExpectedMap)
 				documentModelActualMap := documentModel.GetProperties()
 				Expect(documentModelActualMap).To(Equal(documentModelExpectedMap))
@@ -26635,14 +26636,14 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetLimit(int64(0))
 				postPartitionViewOptionsModel.SetSkip(int64(0))
 				postPartitionViewOptionsModel.SetUpdateSeq(false)
-				postPartitionViewOptionsModel.SetEndKey(core.StringPtr("testString"))
+				postPartitionViewOptionsModel.SetEndKey("testString")
 				postPartitionViewOptionsModel.SetEndKeyDocID("testString")
 				postPartitionViewOptionsModel.SetGroup(false)
 				postPartitionViewOptionsModel.SetGroupLevel(int64(1))
-				postPartitionViewOptionsModel.SetKey(core.StringPtr("testString"))
+				postPartitionViewOptionsModel.SetKey("testString")
 				postPartitionViewOptionsModel.SetKeys([]interface{}{"testString"})
 				postPartitionViewOptionsModel.SetReduce(true)
-				postPartitionViewOptionsModel.SetStartKey(core.StringPtr("testString"))
+				postPartitionViewOptionsModel.SetStartKey("testString")
 				postPartitionViewOptionsModel.SetStartKeyDocID("testString")
 				postPartitionViewOptionsModel.SetUpdate("true")
 				postPartitionViewOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -26660,14 +26661,14 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postPartitionViewOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.EndKey).To(Equal("testString"))
 				Expect(postPartitionViewOptionsModel.EndKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(postPartitionViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.Key).To(Equal("testString"))
 				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(postPartitionViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionViewOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionViewOptionsModel.StartKey).To(Equal("testString"))
 				Expect(postPartitionViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Update).To(Equal(core.StringPtr("true")))
 				Expect(postPartitionViewOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -26769,15 +26770,15 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.SetLimit(int64(0))
 				postViewOptionsModel.SetSkip(int64(0))
 				postViewOptionsModel.SetUpdateSeq(false)
-				postViewOptionsModel.SetEndKey(core.StringPtr("testString"))
+				postViewOptionsModel.SetEndKey("testString")
 				postViewOptionsModel.SetEndKeyDocID("testString")
 				postViewOptionsModel.SetGroup(false)
 				postViewOptionsModel.SetGroupLevel(int64(1))
-				postViewOptionsModel.SetKey(core.StringPtr("testString"))
+				postViewOptionsModel.SetKey("testString")
 				postViewOptionsModel.SetKeys([]interface{}{"testString"})
 				postViewOptionsModel.SetReduce(true)
 				postViewOptionsModel.SetStable(false)
-				postViewOptionsModel.SetStartKey(core.StringPtr("testString"))
+				postViewOptionsModel.SetStartKey("testString")
 				postViewOptionsModel.SetStartKeyDocID("testString")
 				postViewOptionsModel.SetUpdate("true")
 				postViewOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -26794,15 +26795,15 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(postViewOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.EndKey).To(Equal("testString"))
 				Expect(postViewOptionsModel.EndKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postViewOptionsModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(postViewOptionsModel.Key).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.Key).To(Equal("testString"))
 				Expect(postViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(postViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.Stable).To(Equal(core.BoolPtr(false)))
-				Expect(postViewOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postViewOptionsModel.StartKey).To(Equal("testString"))
 				Expect(postViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postViewOptionsModel.Update).To(Equal(core.StringPtr("true")))
 				Expect(postViewOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -26820,15 +26821,15 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Limit = core.Int64Ptr(int64(0))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
-				viewQueryModel.EndKey = core.StringPtr("testString")
+				viewQueryModel.EndKey = "testString"
 				viewQueryModel.EndKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Group = core.BoolPtr(false)
 				viewQueryModel.GroupLevel = core.Int64Ptr(int64(1))
-				viewQueryModel.Key = core.StringPtr("testString")
+				viewQueryModel.Key = "testString"
 				viewQueryModel.Keys = []interface{}{"testString"}
 				viewQueryModel.Reduce = core.BoolPtr(true)
 				viewQueryModel.Stable = core.BoolPtr(false)
-				viewQueryModel.StartKey = core.StringPtr("testString")
+				viewQueryModel.StartKey = "testString"
 				viewQueryModel.StartKeyDocID = core.StringPtr("testString")
 				viewQueryModel.Update = core.StringPtr("true")
 				Expect(viewQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
@@ -26840,15 +26841,15 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(viewQueryModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(viewQueryModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(viewQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
-				Expect(viewQueryModel.EndKey).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.EndKey).To(Equal("testString"))
 				Expect(viewQueryModel.EndKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(viewQueryModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(viewQueryModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(viewQueryModel.Key).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.Key).To(Equal("testString"))
 				Expect(viewQueryModel.Keys).To(Equal([]interface{}{"testString"}))
 				Expect(viewQueryModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(viewQueryModel.Stable).To(Equal(core.BoolPtr(false)))
-				Expect(viewQueryModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(viewQueryModel.StartKey).To(Equal("testString"))
 				Expect(viewQueryModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(viewQueryModel.Update).To(Equal(core.StringPtr("true")))
 
@@ -27063,7 +27064,7 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Attachments["foo"] = *attachmentModel
 				designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 				designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-				designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				designDocumentModel.SetProperty("foo", "testString")
 				Expect(designDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(designDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(designDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -27078,13 +27079,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(designDocumentModel.Options).To(Equal(designDocumentOptionsModel))
 				Expect(designDocumentModel.ValidateDocUpdate).To(Equal(core.StringPtr("testString")))
 				Expect(designDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(designDocumentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(designDocumentModel.GetProperty("foo")).To(Equal("testString"))
 
 				designDocumentModel.SetProperties(nil)
 				Expect(designDocumentModel.GetProperties()).To(BeEmpty())
 
 				designDocumentModelExpectedMap := make(map[string]interface{})
-				designDocumentModelExpectedMap["foo"] = core.StringPtr("testString")
+				designDocumentModelExpectedMap["foo"] = "testString"
 				designDocumentModel.SetProperties(designDocumentModelExpectedMap)
 				designDocumentModelActualMap := designDocumentModel.GetProperties()
 				Expect(designDocumentModelActualMap).To(Equal(designDocumentModelExpectedMap))
@@ -27167,7 +27168,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				documentModel.Attachments["foo"] = *attachmentModel
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -27177,13 +27178,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
 				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.GetProperty("foo")).To(Equal("testString"))
 
 				documentModel.SetProperties(nil)
 				Expect(documentModel.GetProperties()).To(BeEmpty())
 
 				documentModelExpectedMap := make(map[string]interface{})
-				documentModelExpectedMap["foo"] = core.StringPtr("testString")
+				documentModelExpectedMap["foo"] = "testString"
 				documentModel.SetProperties(documentModelExpectedMap)
 				documentModelActualMap := documentModel.GetProperties()
 				Expect(documentModelActualMap).To(Equal(documentModelExpectedMap))
@@ -27267,7 +27268,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				documentModel.Attachments["foo"] = *attachmentModel
-				documentModel.SetProperty("foo", core.StringPtr("testString"))
+				documentModel.SetProperty("foo", "testString")
 				Expect(documentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(documentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(documentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -27277,13 +27278,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(documentModel.Revisions).To(Equal(revisionsModel))
 				Expect(documentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
 				Expect(documentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(documentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(documentModel.GetProperty("foo")).To(Equal("testString"))
 
 				documentModel.SetProperties(nil)
 				Expect(documentModel.GetProperties()).To(BeEmpty())
 
 				documentModelExpectedMap := make(map[string]interface{})
-				documentModelExpectedMap["foo"] = core.StringPtr("testString")
+				documentModelExpectedMap["foo"] = "testString"
 				documentModel.SetProperties(documentModelExpectedMap)
 				documentModelActualMap := documentModel.GetProperties()
 				Expect(documentModelActualMap).To(Equal(documentModelExpectedMap))
@@ -27437,7 +27438,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
 				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
-				replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+				replicationDocumentModel.SetProperty("foo", "testString")
 				Expect(replicationDocumentModel.Conflicts).To(Equal([]string{"testString"}))
 				Expect(replicationDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
 				Expect(replicationDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
@@ -27471,13 +27472,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(500))))
 				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(4))))
 				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
-				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal("testString"))
 
 				replicationDocumentModel.SetProperties(nil)
 				Expect(replicationDocumentModel.GetProperties()).To(BeEmpty())
 
 				replicationDocumentModelExpectedMap := make(map[string]interface{})
-				replicationDocumentModelExpectedMap["foo"] = core.StringPtr("testString")
+				replicationDocumentModelExpectedMap["foo"] = "testString"
 				replicationDocumentModel.SetProperties(replicationDocumentModelExpectedMap)
 				replicationDocumentModelActualMap := replicationDocumentModel.GetProperties()
 				Expect(replicationDocumentModelActualMap).To(Equal(replicationDocumentModelExpectedMap))
@@ -27576,6 +27577,617 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`Model unmarshaling tests`, func() {
+		It(`Invoke UnmarshalActivityTrackerEvents successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ActivityTrackerEvents)
+			model.Types = []string{"management"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ActivityTrackerEvents
+			err = cloudantv1.UnmarshalActivityTrackerEvents(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalAllDocsQuery successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.AllDocsQuery)
+			model.AttEncodingInfo = core.BoolPtr(false)
+			model.Attachments = core.BoolPtr(false)
+			model.Conflicts = core.BoolPtr(false)
+			model.Descending = core.BoolPtr(false)
+			model.IncludeDocs = core.BoolPtr(false)
+			model.InclusiveEnd = core.BoolPtr(true)
+			model.Limit = core.Int64Ptr(int64(0))
+			model.Skip = core.Int64Ptr(int64(0))
+			model.UpdateSeq = core.BoolPtr(false)
+			model.EndKey = core.StringPtr("testString")
+			model.Key = core.StringPtr("testString")
+			model.Keys = []string{"testString"}
+			model.StartKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.AllDocsQuery
+			err = cloudantv1.UnmarshalAllDocsQuery(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalAnalyzer successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.Analyzer)
+			model.Name = core.StringPtr("classic")
+			model.Stopwords = []string{"testString"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.Analyzer
+			err = cloudantv1.UnmarshalAnalyzer(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalAnalyzerConfiguration successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.AnalyzerConfiguration)
+			model.Name = core.StringPtr("classic")
+			model.Stopwords = []string{"testString"}
+			model.Fields = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.AnalyzerConfiguration
+			err = cloudantv1.UnmarshalAnalyzerConfiguration(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalAttachment successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.Attachment)
+			model.ContentType = core.StringPtr("testString")
+			model.Data = CreateMockByteArray("This is a mock byte array value.")
+			model.Digest = core.StringPtr("testString")
+			model.EncodedLength = core.Int64Ptr(int64(0))
+			model.Encoding = core.StringPtr("testString")
+			model.Follows = core.BoolPtr(true)
+			model.Length = core.Int64Ptr(int64(0))
+			model.Revpos = core.Int64Ptr(int64(1))
+			model.Stub = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.Attachment
+			err = cloudantv1.UnmarshalAttachment(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalBulkDocs successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.BulkDocs)
+			model.Docs = nil
+			model.NewEdits = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.BulkDocs
+			err = cloudantv1.UnmarshalBulkDocs(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalBulkGetQueryDocument successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.BulkGetQueryDocument)
+			model.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
+			model.ID = core.StringPtr("testString")
+			model.Rev = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.BulkGetQueryDocument
+			err = cloudantv1.UnmarshalBulkGetQueryDocument(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDesignDocument successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.DesignDocument)
+			model.Attachments = nil
+			model.Conflicts = []string{"testString"}
+			model.Deleted = core.BoolPtr(true)
+			model.DeletedConflicts = []string{"testString"}
+			model.ID = core.StringPtr("testString")
+			model.LocalSeq = core.StringPtr("testString")
+			model.Rev = core.StringPtr("testString")
+			model.Revisions = nil
+			model.RevsInfo = nil
+			model.Autoupdate = core.BoolPtr(true)
+			model.Filters = map[string]string{"key1": "testString"}
+			model.Indexes = nil
+			model.Language = core.StringPtr("javascript")
+			model.Options = nil
+			model.ValidateDocUpdate = core.StringPtr("testString")
+			model.Views = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.DesignDocument
+			err = cloudantv1.UnmarshalDesignDocument(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDesignDocumentOptions successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.DesignDocumentOptions)
+			model.Partitioned = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.DesignDocumentOptions
+			err = cloudantv1.UnmarshalDesignDocumentOptions(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDesignDocumentViewsMapReduce successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.DesignDocumentViewsMapReduce)
+			model.Map = core.StringPtr("testString")
+			model.Reduce = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.DesignDocumentViewsMapReduce
+			err = cloudantv1.UnmarshalDesignDocumentViewsMapReduce(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDocument successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.Document)
+			model.Attachments = nil
+			model.Conflicts = []string{"testString"}
+			model.Deleted = core.BoolPtr(true)
+			model.DeletedConflicts = []string{"testString"}
+			model.ID = core.StringPtr("testString")
+			model.LocalSeq = core.StringPtr("testString")
+			model.Rev = core.StringPtr("testString")
+			model.Revisions = nil
+			model.RevsInfo = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.Document
+			err = cloudantv1.UnmarshalDocument(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDocumentRevisionStatus successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.DocumentRevisionStatus)
+			model.Rev = core.StringPtr("testString")
+			model.Status = core.StringPtr("available")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.DocumentRevisionStatus
+			err = cloudantv1.UnmarshalDocumentRevisionStatus(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIndexDefinition successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.IndexDefinition)
+			model.DefaultAnalyzer = nil
+			model.DefaultField = nil
+			model.Fields = nil
+			model.IndexArrayLengths = core.BoolPtr(true)
+			model.PartialFilterSelector = map[string]interface{}{"anyKey": "anyValue"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.IndexDefinition
+			err = cloudantv1.UnmarshalIndexDefinition(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIndexField successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.IndexField)
+			model.Name = core.StringPtr("testString")
+			model.Type = core.StringPtr("boolean")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.IndexField
+			err = cloudantv1.UnmarshalIndexField(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalIndexTextOperatorDefaultField successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.IndexTextOperatorDefaultField)
+			model.Analyzer = nil
+			model.Enabled = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.IndexTextOperatorDefaultField
+			err = cloudantv1.UnmarshalIndexTextOperatorDefaultField(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationCreateTargetParameters successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationCreateTargetParameters)
+			model.N = core.Int64Ptr(int64(3))
+			model.Partitioned = core.BoolPtr(false)
+			model.Q = core.Int64Ptr(int64(26))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationCreateTargetParameters
+			err = cloudantv1.UnmarshalReplicationCreateTargetParameters(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDatabase successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDatabase)
+			model.Auth = nil
+			model.HeadersVar = map[string]string{"key1": "testString"}
+			model.URL = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDatabase
+			err = cloudantv1.UnmarshalReplicationDatabase(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDatabaseAuth successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDatabaseAuth)
+			model.Basic = nil
+			model.Iam = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDatabaseAuth
+			err = cloudantv1.UnmarshalReplicationDatabaseAuth(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDatabaseAuthBasic successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDatabaseAuthBasic)
+			model.Password = core.StringPtr("testString")
+			model.Username = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDatabaseAuthBasic
+			err = cloudantv1.UnmarshalReplicationDatabaseAuthBasic(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDatabaseAuthIam successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDatabaseAuthIam)
+			model.ApiKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDatabaseAuthIam
+			err = cloudantv1.UnmarshalReplicationDatabaseAuthIam(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDocument successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDocument)
+			model.Attachments = nil
+			model.Conflicts = []string{"testString"}
+			model.Deleted = core.BoolPtr(true)
+			model.DeletedConflicts = []string{"testString"}
+			model.ID = core.StringPtr("testString")
+			model.LocalSeq = core.StringPtr("testString")
+			model.Rev = core.StringPtr("testString")
+			model.Revisions = nil
+			model.RevsInfo = nil
+			model.Cancel = core.BoolPtr(true)
+			model.CheckpointInterval = core.Int64Ptr(int64(30000))
+			model.ConnectionTimeout = core.Int64Ptr(int64(30000))
+			model.Continuous = core.BoolPtr(false)
+			model.CreateTarget = core.BoolPtr(false)
+			model.CreateTargetParams = nil
+			model.DocIds = []string{"testString"}
+			model.Filter = core.StringPtr("testString")
+			model.HTTPConnections = core.Int64Ptr(int64(20))
+			model.QueryParams = map[string]string{"key1": "testString"}
+			model.RetriesPerRequest = core.Int64Ptr(int64(5))
+			model.Selector = map[string]interface{}{"anyKey": "anyValue"}
+			model.SinceSeq = core.StringPtr("testString")
+			model.SocketOptions = core.StringPtr("testString")
+			model.Source = nil
+			model.SourceProxy = core.StringPtr("testString")
+			model.Target = nil
+			model.TargetProxy = core.StringPtr("testString")
+			model.UseBulkGet = core.BoolPtr(true)
+			model.UseCheckpoints = core.BoolPtr(true)
+			model.UserCtx = nil
+			model.WinningRevsOnly = core.BoolPtr(false)
+			model.WorkerBatchSize = core.Int64Ptr(int64(500))
+			model.WorkerProcesses = core.Int64Ptr(int64(4))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDocument
+			err = cloudantv1.UnmarshalReplicationDocument(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalRevisions successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.Revisions)
+			model.Ids = []string{"testString"}
+			model.Start = core.Int64Ptr(int64(1))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.Revisions
+			err = cloudantv1.UnmarshalRevisions(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSearchIndexDefinition successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.SearchIndexDefinition)
+			model.Analyzer = nil
+			model.Index = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.SearchIndexDefinition
+			err = cloudantv1.UnmarshalSearchIndexDefinition(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecurity successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.Security)
+			model.Admins = nil
+			model.Members = nil
+			model.Cloudant = map[string][]string{"key1": []string{"_reader"}}
+			model.CouchdbAuthOnly = core.BoolPtr(true)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.Security
+			err = cloudantv1.UnmarshalSecurity(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalSecurityObject successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.SecurityObject)
+			model.Names = []string{"testString"}
+			model.Roles = []string{"testString"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.SecurityObject
+			err = cloudantv1.UnmarshalSecurityObject(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalUserContext successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.UserContext)
+			model.Db = core.StringPtr("testString")
+			model.Name = core.StringPtr("testString")
+			model.Roles = []string{"_reader"}
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.UserContext
+			err = cloudantv1.UnmarshalUserContext(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalViewQuery successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ViewQuery)
+			model.AttEncodingInfo = core.BoolPtr(false)
+			model.Attachments = core.BoolPtr(false)
+			model.Conflicts = core.BoolPtr(false)
+			model.Descending = core.BoolPtr(false)
+			model.IncludeDocs = core.BoolPtr(false)
+			model.InclusiveEnd = core.BoolPtr(true)
+			model.Limit = core.Int64Ptr(int64(0))
+			model.Skip = core.Int64Ptr(int64(0))
+			model.UpdateSeq = core.BoolPtr(false)
+			model.EndKey = "testString"
+			model.EndKeyDocID = core.StringPtr("testString")
+			model.Group = core.BoolPtr(false)
+			model.GroupLevel = core.Int64Ptr(int64(1))
+			model.Key = "testString"
+			model.Keys = []interface{}{"testString"}
+			model.Reduce = core.BoolPtr(true)
+			model.Stable = core.BoolPtr(false)
+			model.StartKey = "testString"
+			model.StartKeyDocID = core.StringPtr("testString")
+			model.Update = core.StringPtr("true")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ViewQuery
+			err = cloudantv1.UnmarshalViewQuery(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+	})
+
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
 			mockByteArray := CreateMockByteArray("This is a test")
@@ -27605,8 +28217,7 @@ var _ = Describe(`CloudantV1`, func() {
 //
 
 func CreateMockByteArray(mockData string) *[]byte {
-	ba := make([]byte, 0)
-	ba = append(ba, mockData...)
+	ba := []byte(mockData)
 	return &ba
 }
 
