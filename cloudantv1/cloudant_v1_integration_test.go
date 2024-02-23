@@ -397,7 +397,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", core.StringPtr("testString"))
+			documentModel.SetProperty("foo", "testString")
 
 			postDocumentOptions := &cloudantv1.PostDocumentOptions{
 				Db:          core.StringPtr("testString"),
@@ -576,7 +576,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", core.StringPtr("testString"))
+			documentModel.SetProperty("foo", "testString")
 
 			bulkDocsModel := &cloudantv1.BulkDocs{
 				Docs:     []cloudantv1.Document{*documentModel},
@@ -854,7 +854,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", core.StringPtr("testString"))
+			documentModel.SetProperty("foo", "testString")
 
 			putDocumentOptions := &cloudantv1.PutDocumentOptions{
 				Db:          core.StringPtr("testString"),
@@ -993,7 +993,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			designDocumentModel.Attachments["foo"] = *attachmentModel
 			designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
 			designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
-			designDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+			designDocumentModel.SetProperty("foo", "testString")
 
 			putDesignDocumentOptions := &cloudantv1.PutDesignDocumentOptions{
 				Db:             core.StringPtr("testString"),
@@ -1111,15 +1111,15 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Limit:           core.Int64Ptr(int64(0)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
+				EndKey:          "testString",
 				EndKeyDocID:     core.StringPtr("testString"),
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
+				Key:             "testString",
 				Keys:            []interface{}{"testString"},
 				Reduce:          core.BoolPtr(true),
 				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
 				Update:          core.StringPtr("true"),
 			}
@@ -1149,15 +1149,15 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Limit:           core.Int64Ptr(int64(0)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
+				EndKey:          "testString",
 				EndKeyDocID:     core.StringPtr("testString"),
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
+				Key:             "testString",
 				Keys:            []interface{}{"testString"},
 				Reduce:          core.BoolPtr(true),
 				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
 				Update:          core.StringPtr("true"),
 			}
@@ -1184,15 +1184,15 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Limit:           core.Int64Ptr(int64(0)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
+				EndKey:          "testString",
 				EndKeyDocID:     core.StringPtr("testString"),
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
+				Key:             "testString",
 				Keys:            []interface{}{"testString"},
 				Reduce:          core.BoolPtr(true),
 				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
 				Update:          core.StringPtr("true"),
 			}
@@ -1226,15 +1226,15 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Limit:           core.Int64Ptr(int64(0)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
+				EndKey:          "testString",
 				EndKeyDocID:     core.StringPtr("testString"),
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
+				Key:             "testString",
 				Keys:            []interface{}{"testString"},
 				Reduce:          core.BoolPtr(true),
 				Stable:          core.BoolPtr(false),
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
 				Update:          core.StringPtr("true"),
 			}
@@ -1411,14 +1411,14 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Limit:           core.Int64Ptr(int64(0)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
+				EndKey:          "testString",
 				EndKeyDocID:     core.StringPtr("testString"),
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
+				Key:             "testString",
 				Keys:            []interface{}{"testString"},
 				Reduce:          core.BoolPtr(true),
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
 				Update:          core.StringPtr("true"),
 			}
@@ -1449,14 +1449,14 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Limit:           core.Int64Ptr(int64(0)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
-				EndKey:          core.StringPtr("testString"),
+				EndKey:          "testString",
 				EndKeyDocID:     core.StringPtr("testString"),
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
-				Key:             core.StringPtr("testString"),
+				Key:             "testString",
 				Keys:            []interface{}{"testString"},
 				Reduce:          core.BoolPtr(true),
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
 				Update:          core.StringPtr("true"),
 			}
@@ -1972,7 +1972,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				WorkerProcesses:    core.Int64Ptr(int64(4)),
 			}
 			replicationDocumentModel.Attachments["foo"] = *attachmentModel
-			replicationDocumentModel.SetProperty("foo", core.StringPtr("testString"))
+			replicationDocumentModel.SetProperty("foo", "testString")
 
 			putReplicationDocumentOptions := &cloudantv1.PutReplicationDocumentOptions{
 				DocID:               core.StringPtr("testString"),
@@ -2326,7 +2326,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", core.StringPtr("testString"))
+			documentModel.SetProperty("foo", "testString")
 
 			putLocalDocumentOptions := &cloudantv1.PutLocalDocumentOptions{
 				Db:          core.StringPtr("testString"),
