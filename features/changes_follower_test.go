@@ -1081,5 +1081,28 @@ var _ = Describe(`ChangesFollower with context`, func() {
 		runDuration := e.Get("stop after").Durations[0]
 		Expect(runDuration).To(BeNumerically("~", timeout, p))
 		Expect(runDuration).To(BeNumerically("<", runnerTimeout))
+		Expect(ctx.Err()).To(Equal(context.Canceled))
+	})
+
+	It(`Checks passing expired context.`, func() {
+		ms := NewMockServer(0, noErrors)
+		service := ms.Start()
+		defer ms.Stop()
+
+		ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
+		cancel()
+
+		postChangesOptions := service.NewPostChangesOptions("db")
+		follower, err := NewChangesFollowerWithContext(ctx, service, postChangesOptions)
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(follower).ToNot(BeNil())
+
+		changesCh, err := follower.StartOneOff()
+		Expect(err).ShouldNot(HaveOccurred())
+		ci := <-changesCh
+		Expect(changesCh).Should(BeClosed())
+		item, err := ci.Item()
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(item).To(Equal(cloudantv1.ChangesResultItem{}))
 	})
 })
