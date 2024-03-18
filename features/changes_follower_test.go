@@ -1084,21 +1084,23 @@ var _ = Describe(`ChangesFollower with context`, func() {
 		Expect(ctx.Err()).To(Equal(context.Canceled))
 	})
 
-	It(`Checks passing expired context.`, func() {
+	It(`Checks passing context with timeout on empty changes feed.`, func() {
 		ms := NewMockServer(0, noErrors)
 		service := ms.Start()
 		defer ms.Stop()
 
-		ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
-		cancel()
+		timeout := 100 * time.Millisecond
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
+		time.AfterFunc(timeout, cancel)
 
 		postChangesOptions := service.NewPostChangesOptions("db")
 		follower, err := NewChangesFollowerWithContext(ctx, service, postChangesOptions)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(follower).ToNot(BeNil())
 
-		changesCh, err := follower.StartOneOff()
+		changesCh, err := follower.Start()
 		Expect(err).ShouldNot(HaveOccurred())
+		time.Sleep(2 * timeout)
 		ci := <-changesCh
 		Expect(changesCh).Should(BeClosed())
 		item, err := ci.Item()
