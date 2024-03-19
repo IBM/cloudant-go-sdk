@@ -1081,5 +1081,30 @@ var _ = Describe(`ChangesFollower with context`, func() {
 		runDuration := e.Get("stop after").Durations[0]
 		Expect(runDuration).To(BeNumerically("~", timeout, p))
 		Expect(runDuration).To(BeNumerically("<", runnerTimeout))
+		Expect(ctx.Err()).To(Equal(context.Canceled))
+	})
+
+	It(`Checks passing context with timeout on empty changes feed.`, func() {
+		ms := NewMockServer(0, noErrors)
+		service := ms.Start()
+		defer ms.Stop()
+
+		timeout := 100 * time.Millisecond
+		ctx, cancel := context.WithTimeout(context.Background(), timeout)
+		time.AfterFunc(timeout, cancel)
+
+		postChangesOptions := service.NewPostChangesOptions("db")
+		follower, err := NewChangesFollowerWithContext(ctx, service, postChangesOptions)
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(follower).ToNot(BeNil())
+
+		changesCh, err := follower.Start()
+		Expect(err).ShouldNot(HaveOccurred())
+		time.Sleep(2 * timeout)
+		ci := <-changesCh
+		Expect(changesCh).Should(BeClosed())
+		item, err := ci.Item()
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(item).To(Equal(cloudantv1.ChangesResultItem{}))
 	})
 })

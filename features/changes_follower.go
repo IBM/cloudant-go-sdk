@@ -357,7 +357,7 @@ func (cf *ChangesFollower) run(m Mode) (<-chan ChangesItem, error) {
 	go func() {
 		defer close(changes)
 		for batch := range cf.getChangesBatch() {
-			if errors.Is(batch.error, context.Canceled) || errors.Is(batch.error, context.DeadlineExceeded) {
+			if errors.Is(cf.ctx.Err(), context.Canceled) || errors.Is(cf.ctx.Err(), context.DeadlineExceeded) {
 				return
 			} else if batch.error != nil {
 				select {
