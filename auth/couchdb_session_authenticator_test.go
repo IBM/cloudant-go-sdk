@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package auth
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/cookiejar"
@@ -34,6 +35,8 @@ import (
 )
 
 type contextKey string
+
+var expectedErrType *core.SDKProblem
 
 var _ = Describe("Authenticator Unit Tests", func() {
 	It("Create new Authenticator programmatically", func() {
@@ -65,12 +68,14 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		for _, tt := range errortests {
 			_, err := NewCouchDbSessionAuthenticator(tt.user, tt.password)
 			Expect(err).To(HaveOccurred())
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			_, err = NewCouchDbSessionAuthenticatorFromMap(map[string]string{
 				"USERNAME": tt.user,
 				"PASSWORD": tt.password,
 			})
 			Expect(err).To(HaveOccurred())
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 		}
 	})
 
@@ -300,7 +305,8 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 		err = auth.Authenticate(request)
 		Expect(err).To(HaveOccurred())
-		Expect(err.Error()).To(Equal(string(authError)))
+		Expect(err.Error()).To(ContainSubstring(string(authError)))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Test missing AuthSession cookie in the response", func() {
@@ -324,7 +330,8 @@ var _ = Describe("Authenticator Unit Tests", func() {
 
 		err = auth.Authenticate(request)
 		Expect(err).To(HaveOccurred())
-		Expect(err.Error()).To(HavePrefix("Missing AuthSession cookie"))
+		Expect(err.Error()).To(HavePrefix("missing AuthSession cookie"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Test requestSession fails when auth URL is invalid", func() {
@@ -333,6 +340,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		_, err = auth.requestSession()
 		Expect(err).To(HaveOccurred())
 		Expect(err.Error()).To(Equal("service URL is empty"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Test requestSession fails when server's down", func() {
@@ -342,6 +350,7 @@ var _ = Describe("Authenticator Unit Tests", func() {
 		_, err = auth.requestSession()
 		Expect(err).To(HaveOccurred())
 		Expect(err.Error()).Should(HaveSuffix("connection refused"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 })
 
@@ -360,5 +369,5 @@ func getCookie(a *CouchDbSessionAuthenticator) (*http.Cookie, error) {
 			return cookie, nil
 		}
 	}
-	return nil, fmt.Errorf("Missing AuthSession cookie")
+	return nil, fmt.Errorf("missing AuthSession cookie")
 }
