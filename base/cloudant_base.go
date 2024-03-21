@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2021, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2021, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package common
+package base
 
 import (
 	"fmt"
@@ -27,6 +27,7 @@ import (
 	"time"
 
 	"github.com/IBM/cloudant-go-sdk/auth"
+	"github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"golang.org/x/net/publicsuffix"
 )
@@ -151,7 +152,8 @@ func (c *BaseService) Request(req *http.Request, result interface{}) (detailedRe
 							// If we couldn't unescape for some reason, just error with the escaped form
 							segmentToValidateMessage = segmentToValidate
 						}
-						return nil, fmt.Errorf("%v %v starts with the invalid _ character.", rule.errorParameterName, segmentToValidateMessage)
+						err = fmt.Errorf("%v %v starts with the invalid _ character.", rule.errorParameterName, segmentToValidateMessage)
+						return nil, core.SDKErrorf(err, "", "invalid-parameter", common.GetComponentInfo())
 					}
 				}
 			}
@@ -238,7 +240,7 @@ func GetAuthenticatorFromEnvironment(credentialKey string) (core.Authenticator, 
 
 // buildUserAgent builds the user agent string.
 func buildUserAgent() string {
-	return fmt.Sprintf("cloudant-go-sdk/%s (%s)", Version, getSystemInfo())
+	return fmt.Sprintf("cloudant-go-sdk/%s (%s)", common.Version, getSystemInfo())
 }
 
 // getSystemInfo returns the system information.

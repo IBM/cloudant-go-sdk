@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2021, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2021, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package common
+package base
 
 import (
+	"errors"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
@@ -27,10 +28,13 @@ import (
 	"time"
 
 	"github.com/IBM/cloudant-go-sdk/auth"
+	"github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v5/core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
+
+var expectedErrType *core.SDKProblem
 
 var _ = Describe(`Cloudant custom base service UT`, func() {
 	It("Validates a doc ID", func() {
@@ -52,7 +56,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			return
 		}
 
-		sdkHeaders := GetSdkHeaders("cloudant", "V1", "GetDocument")
+		sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocument")
 		for headerName, headerValue := range sdkHeaders {
 			builder.AddHeader(headerName, headerValue)
 		}
@@ -65,6 +69,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(response).To(BeNil())
 		Expect(err).ToNot(BeNil())
 		Expect(err.Error()).To(ContainSubstring("_testDocument"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Validates a doc ID with GetDocumentAsStream", func() {
@@ -86,7 +91,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			return
 		}
 
-		sdkHeaders := GetSdkHeaders("cloudant", "V1", "GetDocumentAsStream")
+		sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsStream")
 		for headerName, headerValue := range sdkHeaders {
 			builder.AddHeader(headerName, headerValue)
 		}
@@ -99,6 +104,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(response).To(BeNil())
 		Expect(err).ToNot(BeNil())
 		Expect(err.Error()).To(ContainSubstring("_testDocument"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Validates a doc ID at long service path", func() {
@@ -120,7 +126,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			return
 		}
 
-		sdkHeaders := GetSdkHeaders("cloudant", "V1", "GetDocument")
+		sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocument")
 		for headerName, headerValue := range sdkHeaders {
 			builder.AddHeader(headerName, headerValue)
 		}
@@ -133,6 +139,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(response).To(BeNil())
 		Expect(err).ToNot(BeNil())
 		Expect(err.Error()).To(ContainSubstring("_testDocument"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Validates a doc ID at long service path after change", func() {
@@ -156,7 +163,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			return
 		}
 
-		sdkHeaders := GetSdkHeaders("cloudant", "V1", "GetDocument")
+		sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocument")
 		for headerName, headerValue := range sdkHeaders {
 			builder.AddHeader(headerName, headerValue)
 		}
@@ -169,6 +176,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(response).To(BeNil())
 		Expect(err).ToNot(BeNil())
 		Expect(err.Error()).To(ContainSubstring("_testDocument"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It("Validates URL trailing slash is stripped", func() {
@@ -339,7 +347,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			builder := core.NewRequestBuilder(core.GET)
 			_, err = builder.ResolveRequestURL(server.URL, "/db", nil)
 			Expect(err).To(BeNil())
-			sdkHeaders := GetSdkHeaders("cloudant", "V1", "GetDatabase")
+			sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDatabase")
 			for headerName, headerValue := range sdkHeaders {
 				builder.AddHeader(headerName, headerValue)
 			}

@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2020, 2022. All Rights Reserved.
+ * © Copyright IBM Corporation 2020, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,5 +28,12 @@ var _ = Describe(`Headers Unit Tests`, func() {
 		analyticsHeader, foundIt := headers[headerNameSdkAnalytics]
 		Expect(foundIt).To(BeTrue())
 		Expect(analyticsHeader).To(Equal("service_name=myService;service_version=v123;operation_id=myOperation"))
+	})
+
+	It("GetComponentInfo", func() {
+		var problemComponent = GetComponentInfo()
+		Expect(problemComponent).ToNot(BeNil())
+		Expect(problemComponent.Name).To(Equal("github.com/IBM/cloudant-go-sdk"))
+		Expect(problemComponent.Version).ToNot(BeNil())
 	})
 })
