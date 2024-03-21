@@ -27,6 +27,7 @@ import (
 	"strings"
 	"time"
 
+	base "github.com/IBM/cloudant-go-sdk/base"
 	common "github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v5/core"
 	"github.com/go-openapi/strfmt"
@@ -35,7 +36,7 @@ import (
 // CloudantV1 : NoSQL database based on Apache CouchDB
 // See: https://cloud.ibm.com/docs/services/Cloudant/
 type CloudantV1 struct {
-	Service *common.BaseService
+	Service *base.BaseService
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
@@ -58,7 +59,7 @@ func NewCloudantV1UsingExternalConfig(options *CloudantV1Options) (cloudant *Clo
 	}
 
 	if options.Authenticator == nil {
-		options.Authenticator, err = common.GetAuthenticatorFromEnvironment(options.ServiceName)
+		options.Authenticator, err = base.GetAuthenticatorFromEnvironment(options.ServiceName)
 		if err != nil {
 			return
 		}
@@ -88,7 +89,7 @@ func NewCloudantV1(options *CloudantV1Options) (service *CloudantV1, err error) 
 		EnableGzipCompression: true,
 	}
 
-	baseService, err := common.NewBaseService(serviceOptions)
+	baseService, err := base.NewBaseService(serviceOptions)
 	if err != nil {
 		return
 	}
