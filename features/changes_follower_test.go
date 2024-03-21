@@ -18,6 +18,7 @@ package features
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
@@ -28,6 +29,8 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gmeasure"
 )
+
+var expectedErrType *core.SDKProblem
 
 var _ = Describe(`ChangesFollower initialization`, func() {
 	var (
@@ -70,6 +73,7 @@ var _ = Describe(`ChangesFollower initialization`, func() {
 		Expect(follower).To(BeNil())
 		Expect(followerErr).Should(HaveOccurred())
 		Expect(followerErr.Error()).To(MatchRegexp("Field validation for 'Db' failed"))
+		Expect(errors.As(followerErr, &expectedErrType)).To(BeTrue())
 	})
 
 	Context("With valid PostChangesOptions", func() {
@@ -97,6 +101,7 @@ var _ = Describe(`ChangesFollower initialization`, func() {
 
 			Expect(err).Should(HaveOccurred())
 			Expect(err.Error()).To(Equal("error tolerance duration must not be negative"))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 		})
 	})
 
@@ -136,6 +141,7 @@ var _ = Describe(`ChangesFollower initialization`, func() {
 			Expect(follower).To(BeNil())
 			Expect(followerErr).Should(HaveOccurred())
 			Expect(followerErr.Error()).To(MatchRegexp("timeout must be at least 60000 ms"))
+			Expect(errors.As(followerErr, &expectedErrType)).To(BeTrue())
 		}
 	})
 })
@@ -241,6 +247,7 @@ var _ = Describe(`ChangesFollower options`, func() {
 
 			Expect(follower).To(BeNil())
 			Expect(followerErr.Error()).To(MatchRegexp(errMsg))
+			Expect(errors.As(followerErr, &expectedErrType)).To(BeTrue())
 		})
 
 		It(`Validate invalid option descending`, func() {
@@ -331,6 +338,7 @@ var _ = Describe(`ChangesFollower finite`, func() {
 			Expect(item).To(Equal(cloudantv1.ChangesResultItem{}))
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			ms.Stop()
 		}
@@ -360,6 +368,7 @@ var _ = Describe(`ChangesFollower finite`, func() {
 				Expect(item).To(Equal(cloudantv1.ChangesResultItem{}))
 				Expect(err).To(HaveOccurred())
 				Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+				Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 			}, gmeasure.Precision(p))
 			runDuration := e.Get("stop after").Durations[0]
 			Expect(runDuration).To(BeNumerically("<", 100*time.Millisecond))
@@ -393,6 +402,7 @@ var _ = Describe(`ChangesFollower finite`, func() {
 				Expect(item).To(Equal(cloudantv1.ChangesResultItem{}))
 				Expect(err).To(HaveOccurred())
 				Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+				Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 			}, gmeasure.Precision(p))
 			runDuration := e.Get("stop after").Durations[0]
 			Expect(runDuration).To(BeNumerically(">=", tolerance))
@@ -517,6 +527,7 @@ var _ = Describe(`ChangesFollower finite`, func() {
 			changesCh, err := follower.StartOneOff()
 			Expect(changesCh).To(BeNil())
 			Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			ms.Stop()
 		}
@@ -544,10 +555,12 @@ var _ = Describe(`ChangesFollower finite`, func() {
 		changesCh, err := follower.StartOneOff()
 		Expect(changesCh).To(BeNil())
 		Expect(err.Error()).To(Equal(errMsg))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 		changesCh, err = follower.Start()
 		Expect(changesCh).To(BeNil())
 		Expect(err.Error()).To(Equal(errMsg))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It(`Checks that setting a limit terminates the stream early for FINITE mode and limits smaller, the same and larger than the default batch size.`, func() {
@@ -745,6 +758,7 @@ var _ = Describe(`ChangesFollower listen`, func() {
 			_, err = runner(follower, cfg)
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			ms.Stop()
 		}
@@ -770,6 +784,7 @@ var _ = Describe(`ChangesFollower listen`, func() {
 			_, err = runner(follower, cfg)
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			ms.Stop()
 		}
@@ -796,6 +811,7 @@ var _ = Describe(`ChangesFollower listen`, func() {
 			_, err = runner(follower, cfg)
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			ms.Stop()
 		}
@@ -908,6 +924,7 @@ var _ = Describe(`ChangesFollower listen`, func() {
 			changesCh, err := follower.Start()
 			Expect(changesCh).To(BeNil())
 			Expect(err.Error()).To(MatchRegexp(ErrorText(error)))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 			ms.Stop()
 		}
@@ -935,10 +952,12 @@ var _ = Describe(`ChangesFollower listen`, func() {
 		changesCh, err := follower.StartOneOff()
 		Expect(changesCh).To(BeNil())
 		Expect(err.Error()).To(Equal(errMsg))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 
 		changesCh, err = follower.Start()
 		Expect(changesCh).To(BeNil())
 		Expect(err.Error()).To(Equal(errMsg))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
 	It(`Checks that setting a limit terminates the stream early for LISTEN mode and limits smaller, the same and larger than the default batch size.`, func() {

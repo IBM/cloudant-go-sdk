@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2022, 2024. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import (
 	"time"
 
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v5/core"
 )
 
@@ -168,7 +169,8 @@ func NewChangesFollowerWithContext(ctx context.Context, c *cloudantv1.CloudantV1
 
 	client := c.Service.GetHTTPClient()
 	if client.Timeout > 0 && client.Timeout < minClientTimeout {
-		return nil, fmt.Errorf("to use ChangesFollower the client timeout must be at least %d ms. The client timeout is %d ms", minClientTimeout/time.Millisecond, client.Timeout/time.Millisecond)
+		err := fmt.Errorf("to use ChangesFollower the client timeout must be at least %d ms. The client timeout is %d ms", minClientTimeout/time.Millisecond, client.Timeout/time.Millisecond)
+		return nil, core.SDKErrorf(err, "", "changes-follower-invalid-timeout", common.GetComponentInfo())
 	}
 
 	cf := &ChangesFollower{
@@ -194,7 +196,7 @@ func NewChangesFollowerWithContext(ctx context.Context, c *cloudantv1.CloudantV1
 // from the previous successful request.
 func (cf *ChangesFollower) SetErrorTolerance(d time.Duration) error {
 	if d < 0 {
-		return errors.New("error tolerance duration must not be negative")
+		return core.SDKErrorf(nil, "error tolerance duration must not be negative", "changes-follower-invalid-tolerance", common.GetComponentInfo())
 	} else if d == 0 {
 		cf.suppression = Never
 	} else if d < forever {
@@ -278,10 +280,12 @@ func validateOptions(o *cloudantv1.PostChangesOptions) error {
 		errAttrs = append(errAttrs, fmt.Sprintf("filter=%s", *o.Filter))
 	}
 	if len(errAttrs) == 1 {
-		return fmt.Errorf("the option '%s' is invalid when using ChangesFollower", errAttrs[0])
+		err := fmt.Errorf("the option '%s' is invalid when using ChangesFollower", errAttrs[0])
+		return core.SDKErrorf(err, "", "changes-follower-validation-failed", common.GetComponentInfo())
 	}
 	if len(errAttrs) > 0 {
-		return fmt.Errorf("the options %s are invalid when using ChangesFollower", strings.Join(errAttrs, ", "))
+		err := fmt.Errorf("the options %s are invalid when using ChangesFollower", strings.Join(errAttrs, ", "))
+		return core.SDKErrorf(err, "", "changes-follower-validation-failed", common.GetComponentInfo())
 	}
 
 	return nil
@@ -304,7 +308,7 @@ func (cf *ChangesFollower) run(m Mode) (<-chan ChangesItem, error) {
 	cf.runLock.Lock()
 
 	if cf.running {
-		return nil, errors.New("cannot start a feed that has already started")
+		return nil, core.SDKErrorf(nil, "cannot start a feed that has already started", "changes-follower-feed-started", common.GetComponentInfo())
 	}
 	cf.running = true
 
