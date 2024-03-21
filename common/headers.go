@@ -18,6 +18,8 @@ package common
 
 import (
 	"fmt"
+
+	"github.com/IBM/go-sdk-core/v5/core"
 )
 
 const (
@@ -52,4 +54,9 @@ func GetSdkHeaders(serviceName string, serviceVersion string, operationID string
 func GetSdkAnalyticsHeader(serviceName string, serviceVersion string, operationID string) string {
 	return fmt.Sprintf("service_name=%s;service_version=%s;operation_id=%s",
 		serviceName, serviceVersion, operationID)
+}
+
+func GetComponentInfo() *core.ProblemComponent {
+	// This should match the module name in go.mod.
+	return core.NewProblemComponent("github.com/IBM/cloudant-go-sdk", Version)
 }

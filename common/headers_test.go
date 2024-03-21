@@ -29,4 +29,11 @@ var _ = Describe(`Headers Unit Tests`, func() {
 		Expect(foundIt).To(BeTrue())
 		Expect(analyticsHeader).To(Equal("service_name=myService;service_version=v123;operation_id=myOperation"))
 	})
+
+	It("GetComponentInfo", func() {
+		var problemComponent = GetComponentInfo()
+		Expect(problemComponent).ToNot(BeNil())
+		Expect(problemComponent.Name).To(Equal("github.com/IBM/cloudant-go-sdk"))
+		Expect(problemComponent.Version).ToNot(BeNil())
+	})
 })
