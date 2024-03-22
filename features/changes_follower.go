@@ -149,6 +149,10 @@ type ChangesItem struct {
 // that either returns an acquired item or an error received
 // during its fetch.
 func (ci ChangesItem) Item() (cloudantv1.ChangesResultItem, error) {
+	if ci.error == nil && ci.item.ID == nil {
+		err := core.SDKErrorf(nil, "can't read from a closed channel", "changes-follower-closed-channel", common.GetComponentInfo())
+		return ci.item, err
+	}
 	return ci.item, ci.error
 }
 
