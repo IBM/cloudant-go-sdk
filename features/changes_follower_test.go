@@ -1123,7 +1123,9 @@ var _ = Describe(`ChangesFollower with context`, func() {
 		ci := <-changesCh
 		Expect(changesCh).Should(BeClosed())
 		item, err := ci.Item()
-		Expect(err).ShouldNot(HaveOccurred())
+		Expect(err).Should(HaveOccurred())
+		Expect(err.Error()).To(Equal("can't read from a closed channel"))
+		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 		Expect(item).To(Equal(cloudantv1.ChangesResultItem{}))
 	})
 })
