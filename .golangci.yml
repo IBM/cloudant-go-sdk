@@ -7,10 +7,7 @@ linters:
     - staticcheck
     - unused
     - gosimple
-    - structcheck
-    - varcheck
     - ineffassign
-    - deadcode
     - typecheck
 
     # custom
@@ -32,10 +29,7 @@ issues:
         - staticcheck
         - unused
         - gosimple
-        - structcheck
-        - varcheck
         - ineffassign
-        - deadcode
         - typecheck
 
         # custom
@@ -48,10 +42,7 @@ issues:
         - staticcheck
         - unused
         - gosimple
-        - structcheck
-        - varcheck
         - ineffassign
-        - deadcode
         - typecheck
 
         # custom
@@ -64,10 +55,7 @@ issues:
         - staticcheck
         - unused
         - gosimple
-        - structcheck
-        - varcheck
         - ineffassign
-        - deadcode
         - typecheck
 
         # custom
