@@ -155,7 +155,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions *PutCapacityThroughputConfigurationOptions)`, func() {
 			putCapacityThroughputConfigurationOptions := &cloudantv1.PutCapacityThroughputConfigurationOptions{
-				Blocks: core.Int64Ptr(int64(0)),
+				Blocks: core.Int64Ptr(int64(10)),
 			}
 
 			capacityThroughputInformation, response, err := cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptions)
@@ -193,7 +193,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostChanges(postChangesOptions *PostChangesOptions)`, func() {
 			postChangesOptions := &cloudantv1.PostChangesOptions{
 				Db:              core.StringPtr("testString"),
-				DocIds:          []string{"testString"},
+				DocIds:          []string{"0007741142412418284"},
 				Fields:          []string{"testString"},
 				Selector:        map[string]interface{}{"anyKey": "anyValue"},
 				LastEventID:     core.StringPtr("testString"),
@@ -227,7 +227,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostChangesAsStream(postChangesOptions *PostChangesOptions)`, func() {
 			postChangesOptions := &cloudantv1.PostChangesOptions{
 				Db:              core.StringPtr("testString"),
-				DocIds:          []string{"testString"},
+				DocIds:          []string{"0007741142412418284"},
 				Fields:          []string{"testString"},
 				Selector:        map[string]interface{}{"anyKey": "anyValue"},
 				LastEventID:     core.StringPtr("testString"),
@@ -295,7 +295,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions)`, func() {
 			postDbsInfoOptions := &cloudantv1.PostDbsInfoOptions{
-				Keys: []string{"testString"},
+				Keys: []string{"products", "users", "orders"},
 			}
 
 			dbsInfoResult, response, err := cloudantService.PostDbsInfo(postDbsInfoOptions)
@@ -390,14 +390,23 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:        []string{"testString"},
 				Deleted:          core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
+				ID:               core.StringPtr("exampleid"),
 				LocalSeq:         core.StringPtr("testString"),
 				Rev:              core.StringPtr("testString"),
 				Revisions:        revisionsModel,
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", "testString")
+			documentModel.SetProperty("brand", core.StringPtr("Foo"))
+			documentModel.SetProperty("colours", core.StringPtr("[\"red\",\"green\",\"black\",\"blue\"]"))
+			documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+			documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+			documentModel.SetProperty("keywords", core.StringPtr("[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]"))
+			documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+			documentModel.SetProperty("price", core.StringPtr("14.99"))
+			documentModel.SetProperty("productid", core.StringPtr("1000042"))
+			documentModel.SetProperty("taxonomy", core.StringPtr("[\"Home\",\"Kitchen\",\"Small Appliances\"]"))
+			documentModel.SetProperty("type", core.StringPtr("product"))
 
 			postDocumentOptions := &cloudantv1.PostDocumentOptions{
 				Db:          core.StringPtr("testString"),
@@ -426,13 +435,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				IncludeDocs:     core.BoolPtr(false),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
 				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        core.StringPtr("0007741142412418284"),
 			}
 
 			allDocsResult, response, err := cloudantService.PostAllDocs(postAllDocsOptions)
@@ -455,13 +464,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				IncludeDocs:     core.BoolPtr(false),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
 				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        core.StringPtr("0007741142412418284"),
 			}
 
 			result, response, err := cloudantService.PostAllDocsAsStream(postAllDocsOptions)
@@ -488,7 +497,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
+				Keys:            []string{"small-appliances:1000042", "small-appliances:1000043"},
 				StartKey:        core.StringPtr("testString"),
 			}
 
@@ -521,7 +530,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
+				Keys:            []string{"small-appliances:1000042", "small-appliances:1000043"},
 				StartKey:        core.StringPtr("testString"),
 			}
 
@@ -569,14 +578,18 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:        []string{"testString"},
 				Deleted:          core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
+				ID:               core.StringPtr("0007241142412418284"),
 				LocalSeq:         core.StringPtr("testString"),
 				Rev:              core.StringPtr("testString"),
 				Revisions:        revisionsModel,
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", "testString")
+			documentModel.SetProperty("date", core.StringPtr("2019-01-28T10:44:22.000Z"))
+			documentModel.SetProperty("eventType", core.StringPtr("addedToBasket"))
+			documentModel.SetProperty("productId", core.StringPtr("1000042"))
+			documentModel.SetProperty("type", core.StringPtr("event"))
+			documentModel.SetProperty("userid", core.StringPtr("abc123"))
 
 			bulkDocsModel := &cloudantv1.BulkDocs{
 				Docs:     []cloudantv1.Document{*documentModel},
@@ -602,8 +615,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGet(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID:        core.StringPtr("order00067"),
+				Rev:       core.StringPtr("3-917fa2381192822767f010b95b45325b"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
@@ -629,8 +642,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID:        core.StringPtr("order00067"),
+				Rev:       core.StringPtr("3-917fa2381192822767f010b95b45325b"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
@@ -656,8 +669,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGetAsRelated(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID:        core.StringPtr("order00067"),
+				Rev:       core.StringPtr("3-917fa2381192822767f010b95b45325b"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
@@ -683,8 +696,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkGetAsStream(postBulkGetOptions *PostBulkGetOptions)`, func() {
 			bulkGetQueryDocumentModel := &cloudantv1.BulkGetQueryDocument{
 				AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
-				ID:        core.StringPtr("testString"),
-				Rev:       core.StringPtr("testString"),
+				ID:        core.StringPtr("order00067"),
+				Rev:       core.StringPtr("3-917fa2381192822767f010b95b45325b"),
 			}
 
 			postBulkGetOptions := &cloudantv1.PostBulkGetOptions{
@@ -847,14 +860,23 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:        []string{"testString"},
 				Deleted:          core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
+				ID:               core.StringPtr("exampleid"),
 				LocalSeq:         core.StringPtr("testString"),
 				Rev:              core.StringPtr("testString"),
 				Revisions:        revisionsModel,
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", "testString")
+			documentModel.SetProperty("brand", core.StringPtr("Foo"))
+			documentModel.SetProperty("colours", core.StringPtr("[\"red\",\"green\",\"black\",\"blue\"]"))
+			documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+			documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+			documentModel.SetProperty("keywords", core.StringPtr("[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]"))
+			documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+			documentModel.SetProperty("price", core.StringPtr("14.99"))
+			documentModel.SetProperty("productid", core.StringPtr("1000042"))
+			documentModel.SetProperty("taxonomy", core.StringPtr("[\"Home\",\"Kitchen\",\"Small Appliances\"]"))
+			documentModel.SetProperty("type", core.StringPtr("product"))
 
 			putDocumentOptions := &cloudantv1.PutDocumentOptions{
 				Db:          core.StringPtr("testString"),
@@ -952,7 +974,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			analyzerConfigurationModel := &cloudantv1.AnalyzerConfiguration{
-				Name:      core.StringPtr("classic"),
+				Name:      core.StringPtr("standard"),
 				Stopwords: []string{"testString"},
 				Fields:    map[string]cloudantv1.Analyzer{"key1": *analyzerModel},
 			}
@@ -960,7 +982,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 
 			searchIndexDefinitionModel := &cloudantv1.SearchIndexDefinition{
 				Analyzer: analyzerConfigurationModel,
-				Index:    core.StringPtr("testString"),
+				Index:    core.StringPtr("function (doc) {\n  index(\"price\", doc.price);\n}"),
 			}
 
 			designDocumentOptionsModel := &cloudantv1.DesignDocumentOptions{
@@ -968,7 +990,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			designDocumentViewsMapReduceModel := &cloudantv1.DesignDocumentViewsMapReduce{
-				Map:    core.StringPtr("testString"),
+				Map:    core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}"),
 				Reduce: core.StringPtr("testString"),
 			}
 
@@ -977,9 +999,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:         []string{"testString"},
 				Deleted:           core.BoolPtr(true),
 				DeletedConflicts:  []string{"testString"},
-				ID:                core.StringPtr("testString"),
+				ID:                core.StringPtr("_design/appliances"),
 				LocalSeq:          core.StringPtr("testString"),
-				Rev:               core.StringPtr("testString"),
+				Rev:               core.StringPtr("8-7e2537e5989294471061e0cfd7292725"),
 				Revisions:         revisionsModel,
 				RevsInfo:          []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 				Autoupdate:        core.BoolPtr(true),
@@ -1042,13 +1064,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				IncludeDocs:     core.BoolPtr(false),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
 				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        core.StringPtr("0007741142412418284"),
 				Accept:          core.StringPtr("application/json"),
 			}
 
@@ -1076,7 +1098,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
-				Keys:            []string{"testString"},
+				Keys:            []string{"small-appliances:1000042", "small-appliances:1000043"},
 				StartKey:        core.StringPtr("testString"),
 			}
 
@@ -1106,9 +1128,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Attachments:     core.BoolPtr(false),
 				Conflicts:       core.BoolPtr(false),
 				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(true),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          "testString",
@@ -1116,7 +1138,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
 				Key:             "testString",
-				Keys:            []interface{}{"testString"},
+				Keys:            []interface{}{"examplekey"},
 				Reduce:          core.BoolPtr(true),
 				Stable:          core.BoolPtr(false),
 				StartKey:        "testString",
@@ -1144,9 +1166,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Attachments:     core.BoolPtr(false),
 				Conflicts:       core.BoolPtr(false),
 				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(true),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          "testString",
@@ -1154,7 +1176,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
 				Key:             "testString",
-				Keys:            []interface{}{"testString"},
+				Keys:            []interface{}{"examplekey"},
 				Reduce:          core.BoolPtr(true),
 				Stable:          core.BoolPtr(false),
 				StartKey:        "testString",
@@ -1179,9 +1201,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Attachments:     core.BoolPtr(false),
 				Conflicts:       core.BoolPtr(false),
 				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(true),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(5)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          "testString",
@@ -1221,9 +1243,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Attachments:     core.BoolPtr(false),
 				Conflicts:       core.BoolPtr(false),
 				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(true),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(5)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          "testString",
@@ -1284,13 +1306,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				IncludeDocs:     core.BoolPtr(false),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
 				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        core.StringPtr("0007741142412418284"),
 			}
 
 			allDocsResult, response, err := cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptions)
@@ -1314,13 +1336,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				IncludeDocs:     core.BoolPtr(false),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          core.StringPtr("testString"),
 				Key:             core.StringPtr("testString"),
 				Keys:            []string{"testString"},
-				StartKey:        core.StringPtr("testString"),
+				StartKey:        core.StringPtr("0007741142412418284"),
 			}
 
 			result, response, err := cloudantService.PostPartitionAllDocsAsStream(postPartitionAllDocsOptions)
@@ -1349,7 +1371,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
+				Limit:            core.Int64Ptr(int64(3)),
 				Sort:             []string{"testString"},
 				Stale:            core.StringPtr("ok"),
 			}
@@ -1380,7 +1402,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
+				Limit:            core.Int64Ptr(int64(3)),
 				Sort:             []string{"testString"},
 				Stale:            core.StringPtr("ok"),
 			}
@@ -1406,9 +1428,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Attachments:     core.BoolPtr(false),
 				Conflicts:       core.BoolPtr(false),
 				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(true),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          "testString",
@@ -1416,7 +1438,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
 				Key:             "testString",
-				Keys:            []interface{}{"testString"},
+				Keys:            []interface{}{"examplekey"},
 				Reduce:          core.BoolPtr(true),
 				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
@@ -1444,9 +1466,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Attachments:     core.BoolPtr(false),
 				Conflicts:       core.BoolPtr(false),
 				Descending:      core.BoolPtr(false),
-				IncludeDocs:     core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(true),
 				InclusiveEnd:    core.BoolPtr(true),
-				Limit:           core.Int64Ptr(int64(0)),
+				Limit:           core.Int64Ptr(int64(10)),
 				Skip:            core.Int64Ptr(int64(0)),
 				UpdateSeq:       core.BoolPtr(false),
 				EndKey:          "testString",
@@ -1454,7 +1476,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Group:           core.BoolPtr(false),
 				GroupLevel:      core.Int64Ptr(int64(1)),
 				Key:             "testString",
-				Keys:            []interface{}{"testString"},
+				Keys:            []interface{}{"examplekey"},
 				Reduce:          core.BoolPtr(true),
 				StartKey:        "testString",
 				StartKeyDocID:   core.StringPtr("testString"),
@@ -1480,7 +1502,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
+				Fields:         []string{"productid", "name", "description"},
 				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
@@ -1508,7 +1530,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
+				Fields:         []string{"productid", "name", "description"},
 				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
@@ -1536,7 +1558,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
+				Fields:         []string{"productid", "name", "description"},
 				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
@@ -1563,8 +1585,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
+				Fields:         []string{"_id", "type", "name", "email"},
+				Limit:          core.Int64Ptr(int64(3)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
 				Stable:         core.BoolPtr(true),
@@ -1591,8 +1613,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
+				Fields:         []string{"_id", "type", "name", "email"},
+				Limit:          core.Int64Ptr(int64(3)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
 				Stable:         core.BoolPtr(true),
@@ -1619,8 +1641,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"testString"},
-				Limit:          core.Int64Ptr(int64(25)),
+				Fields:         []string{"_id", "type", "name", "email"},
+				Limit:          core.Int64Ptr(int64(3)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
 				Stable:         core.BoolPtr(true),
@@ -1668,7 +1690,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			indexFieldModel := &cloudantv1.IndexField{
-				Name: core.StringPtr("testString"),
+				Name: core.StringPtr("asc"),
 				Type: core.StringPtr("boolean"),
 			}
 			indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
@@ -1684,8 +1706,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			postIndexOptions := &cloudantv1.PostIndexOptions{
 				Db:          core.StringPtr("testString"),
 				Index:       indexDefinitionModel,
-				Ddoc:        core.StringPtr("testString"),
-				Name:        core.StringPtr("testString"),
+				Ddoc:        core.StringPtr("json-index"),
+				Name:        core.StringPtr("getUserByName"),
 				Partitioned: core.BoolPtr(true),
 				Type:        core.StringPtr("json"),
 			}
@@ -1703,8 +1725,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions)`, func() {
 			postSearchAnalyzeOptions := &cloudantv1.PostSearchAnalyzeOptions{
-				Analyzer: core.StringPtr("arabic"),
-				Text:     core.StringPtr("testString"),
+				Analyzer: core.StringPtr("english"),
+				Text:     core.StringPtr("running is fun"),
 			}
 
 			searchAnalyzeResult, response, err := cloudantService.PostSearchAnalyze(postSearchAnalyzeOptions)
@@ -1732,7 +1754,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
+				Limit:            core.Int64Ptr(int64(3)),
 				Sort:             []string{"testString"},
 				Stale:            core.StringPtr("ok"),
 				Counts:           []string{"testString"},
@@ -1768,7 +1790,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HighlightSize:    core.Int64Ptr(int64(100)),
 				IncludeDocs:      core.BoolPtr(false),
 				IncludeFields:    []string{"testString"},
-				Limit:            core.Int64Ptr(int64(0)),
+				Limit:            core.Int64Ptr(int64(3)),
 				Sort:             []string{"testString"},
 				Stale:            core.StringPtr("ok"),
 				Counts:           []string{"testString"},
@@ -1907,7 +1929,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			replicationCreateTargetParametersModel := &cloudantv1.ReplicationCreateTargetParameters{
 				N:           core.Int64Ptr(int64(3)),
 				Partitioned: core.BoolPtr(false),
-				Q:           core.Int64Ptr(int64(26)),
+				Q:           core.Int64Ptr(int64(1)),
 			}
 
 			replicationDatabaseAuthBasicModel := &cloudantv1.ReplicationDatabaseAuthBasic{
@@ -1927,13 +1949,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
 				Auth:       replicationDatabaseAuthModel,
 				HeadersVar: map[string]string{"key1": "testString"},
-				URL:        core.StringPtr("testString"),
+				URL:        core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb"),
 			}
 
 			userContextModel := &cloudantv1.UserContext{
 				Db:    core.StringPtr("testString"),
-				Name:  core.StringPtr("testString"),
-				Roles: []string{"_reader"},
+				Name:  core.StringPtr("john"),
+				Roles: []string{"researcher"},
 			}
 
 			replicationDocumentModel := &cloudantv1.ReplicationDocument{
@@ -1946,30 +1968,30 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Rev:                core.StringPtr("testString"),
 				Revisions:          revisionsModel,
 				RevsInfo:           []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
-				Cancel:             core.BoolPtr(true),
-				CheckpointInterval: core.Int64Ptr(int64(30000)),
-				ConnectionTimeout:  core.Int64Ptr(int64(30000)),
-				Continuous:         core.BoolPtr(false),
-				CreateTarget:       core.BoolPtr(false),
+				Cancel:             core.BoolPtr(false),
+				CheckpointInterval: core.Int64Ptr(int64(4500)),
+				ConnectionTimeout:  core.Int64Ptr(int64(15000)),
+				Continuous:         core.BoolPtr(true),
+				CreateTarget:       core.BoolPtr(true),
 				CreateTargetParams: replicationCreateTargetParametersModel,
-				DocIds:             []string{"testString"},
-				Filter:             core.StringPtr("testString"),
-				HTTPConnections:    core.Int64Ptr(int64(20)),
+				DocIds:             []string{"badger", "lemur", "llama"},
+				Filter:             core.StringPtr("ddoc/my_filter"),
+				HTTPConnections:    core.Int64Ptr(int64(10)),
 				QueryParams:        map[string]string{"key1": "testString"},
-				RetriesPerRequest:  core.Int64Ptr(int64(5)),
+				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
-				SinceSeq:           core.StringPtr("testString"),
-				SocketOptions:      core.StringPtr("testString"),
+				SinceSeq:           core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU"),
+				SocketOptions:      core.StringPtr("[{keepalive, true}, {nodelay, false}]"),
 				Source:             replicationDatabaseModel,
 				SourceProxy:        core.StringPtr("testString"),
 				Target:             replicationDatabaseModel,
 				TargetProxy:        core.StringPtr("testString"),
 				UseBulkGet:         core.BoolPtr(true),
-				UseCheckpoints:     core.BoolPtr(true),
+				UseCheckpoints:     core.BoolPtr(false),
 				UserCtx:            userContextModel,
 				WinningRevsOnly:    core.BoolPtr(false),
-				WorkerBatchSize:    core.Int64Ptr(int64(500)),
-				WorkerProcesses:    core.Int64Ptr(int64(4)),
+				WorkerBatchSize:    core.Int64Ptr(int64(400)),
+				WorkerProcesses:    core.Int64Ptr(int64(3)),
 			}
 			replicationDocumentModel.Attachments["foo"] = *attachmentModel
 			replicationDocumentModel.SetProperty("foo", "testString")
@@ -2093,8 +2115,8 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutSecurity(putSecurityOptions *PutSecurityOptions)`, func() {
 			securityObjectModel := &cloudantv1.SecurityObject{
-				Names: []string{"testString"},
-				Roles: []string{"testString"},
+				Names: []string{"superuser"},
+				Roles: []string{"admins"},
 			}
 
 			putSecurityOptions := &cloudantv1.PutSecurityOptions{
@@ -2171,7 +2193,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions)`, func() {
 			putCorsConfigurationOptions := &cloudantv1.PutCorsConfigurationOptions{
-				Origins:          []string{"testString"},
+				Origins:          []string{"https://example.com", "https://www.example.com"},
 				AllowCredentials: core.BoolPtr(true),
 				EnableCors:       core.BoolPtr(true),
 			}
@@ -2319,14 +2341,23 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Conflicts:        []string{"testString"},
 				Deleted:          core.BoolPtr(true),
 				DeletedConflicts: []string{"testString"},
-				ID:               core.StringPtr("testString"),
+				ID:               core.StringPtr("exampleid"),
 				LocalSeq:         core.StringPtr("testString"),
 				Rev:              core.StringPtr("testString"),
 				Revisions:        revisionsModel,
 				RevsInfo:         []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
 			}
 			documentModel.Attachments["foo"] = *attachmentModel
-			documentModel.SetProperty("foo", "testString")
+			documentModel.SetProperty("brand", core.StringPtr("Foo"))
+			documentModel.SetProperty("colours", core.StringPtr("[\"red\",\"green\",\"black\",\"blue\"]"))
+			documentModel.SetProperty("description", core.StringPtr("Slim Colourful Design Electronic Cooking Appliance for ..."))
+			documentModel.SetProperty("image", core.StringPtr("assets/img/0gmsnghhew.jpg"))
+			documentModel.SetProperty("keywords", core.StringPtr("[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]"))
+			documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
+			documentModel.SetProperty("price", core.StringPtr("14.99"))
+			documentModel.SetProperty("productid", core.StringPtr("1000042"))
+			documentModel.SetProperty("taxonomy", core.StringPtr("[\"Home\",\"Kitchen\",\"Small Appliances\"]"))
+			documentModel.SetProperty("type", core.StringPtr("product"))
 
 			putLocalDocumentOptions := &cloudantv1.PutLocalDocumentOptions{
 				Db:          core.StringPtr("testString"),
@@ -2454,7 +2485,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 		It(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions)`, func() {
 			postActivityTrackerEventsOptions := &cloudantv1.PostActivityTrackerEventsOptions{
-				Types: []string{"management"},
+				Types: []string{"management", "data"},
 			}
 
 			ok, response, err := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptions)

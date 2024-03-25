@@ -994,7 +994,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
 				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
-				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(10))
 				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PutCapacityThroughputConfiguration(putCapacityThroughputConfigurationOptionsModel)
@@ -1061,7 +1061,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
 				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
-				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(10))
 				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1136,7 +1136,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
 				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
-				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(10))
 				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1156,7 +1156,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
 				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
-				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(10))
 				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -1197,7 +1197,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
 				putCapacityThroughputConfigurationOptionsModel := new(cloudantv1.PutCapacityThroughputConfigurationOptions)
-				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.Blocks = core.Int64Ptr(int64(10))
 				putCapacityThroughputConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1503,7 +1503,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1604,7 +1604,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1713,7 +1713,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1751,7 +1751,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1810,7 +1810,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -1907,7 +1907,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -2016,7 +2016,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -2060,7 +2060,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -2119,7 +2119,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the PostChangesOptions model
 				postChangesOptionsModel := new(cloudantv1.PostChangesOptions)
 				postChangesOptionsModel.Db = core.StringPtr("testString")
-				postChangesOptionsModel.DocIds = []string{"testString"}
+				postChangesOptionsModel.DocIds = []string{"0007741142412418284"}
 				postChangesOptionsModel.Fields = []string{"testString"}
 				postChangesOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				postChangesOptionsModel.LastEventID = core.StringPtr("testString")
@@ -2435,7 +2435,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostDbsInfoOptions model
 				postDbsInfoOptionsModel := new(cloudantv1.PostDbsInfoOptions)
-				postDbsInfoOptionsModel.Keys = []string{"testString"}
+				postDbsInfoOptionsModel.Keys = []string{"products", "users", "orders"}
 				postDbsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostDbsInfo(postDbsInfoOptionsModel)
@@ -2502,7 +2502,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostDbsInfoOptions model
 				postDbsInfoOptionsModel := new(cloudantv1.PostDbsInfoOptions)
-				postDbsInfoOptionsModel.Keys = []string{"testString"}
+				postDbsInfoOptionsModel.Keys = []string{"products", "users", "orders"}
 				postDbsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2577,7 +2577,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostDbsInfoOptions model
 				postDbsInfoOptionsModel := new(cloudantv1.PostDbsInfoOptions)
-				postDbsInfoOptionsModel.Keys = []string{"testString"}
+				postDbsInfoOptionsModel.Keys = []string{"products", "users", "orders"}
 				postDbsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2597,7 +2597,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostDbsInfoOptions model
 				postDbsInfoOptionsModel := new(cloudantv1.PostDbsInfoOptions)
-				postDbsInfoOptionsModel.Keys = []string{"testString"}
+				postDbsInfoOptionsModel.Keys = []string{"products", "users", "orders"}
 				postDbsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -2638,7 +2638,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostDbsInfoOptions model
 				postDbsInfoOptionsModel := new(cloudantv1.PostDbsInfoOptions)
-				postDbsInfoOptionsModel.Keys = []string{"testString"}
+				postDbsInfoOptionsModel.Keys = []string{"products", "users", "orders"}
 				postDbsInfoOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3440,12 +3440,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3549,12 +3558,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3666,12 +3684,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3741,12 +3768,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3821,12 +3857,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PostDocumentOptions model
@@ -3882,13 +3927,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostAllDocs(postAllDocsOptionsModel)
@@ -3962,13 +4007,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4050,13 +4095,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4083,13 +4128,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -4137,13 +4182,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4213,13 +4258,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4301,13 +4346,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4340,13 +4385,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -4394,13 +4439,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postAllDocsOptionsModel.Keys = []string{"testString"}
-				postAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4456,7 +4501,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4540,7 +4585,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4632,7 +4677,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4669,7 +4714,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4727,7 +4772,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4807,7 +4852,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4899,7 +4944,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -4942,7 +4987,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -5000,7 +5045,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -5077,12 +5122,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("0007241142412418284")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("date", "2019-01-28T10:44:22.000Z")
+				documentModel.SetProperty("eventType", "addedToBasket")
+				documentModel.SetProperty("productId", "1000042")
+				documentModel.SetProperty("type", "event")
+				documentModel.SetProperty("userid", "abc123")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5186,12 +5235,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("0007241142412418284")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("date", "2019-01-28T10:44:22.000Z")
+				documentModel.SetProperty("eventType", "addedToBasket")
+				documentModel.SetProperty("productId", "1000042")
+				documentModel.SetProperty("type", "event")
+				documentModel.SetProperty("userid", "abc123")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5303,12 +5356,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("0007241142412418284")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("date", "2019-01-28T10:44:22.000Z")
+				documentModel.SetProperty("eventType", "addedToBasket")
+				documentModel.SetProperty("productId", "1000042")
+				documentModel.SetProperty("type", "event")
+				documentModel.SetProperty("userid", "abc123")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5381,12 +5438,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("0007241142412418284")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("date", "2019-01-28T10:44:22.000Z")
+				documentModel.SetProperty("eventType", "addedToBasket")
+				documentModel.SetProperty("productId", "1000042")
+				documentModel.SetProperty("type", "event")
+				documentModel.SetProperty("userid", "abc123")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5464,12 +5525,16 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("0007241142412418284")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("date", "2019-01-28T10:44:22.000Z")
+				documentModel.SetProperty("eventType", "addedToBasket")
+				documentModel.SetProperty("productId", "1000042")
+				documentModel.SetProperty("type", "event")
+				documentModel.SetProperty("userid", "abc123")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the BulkDocs model
@@ -5526,8 +5591,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5608,8 +5673,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5698,8 +5763,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5729,8 +5794,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5781,8 +5846,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5859,8 +5924,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5949,8 +6014,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -5980,8 +6045,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6032,8 +6097,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6114,8 +6179,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6204,8 +6269,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6235,8 +6300,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6287,8 +6352,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6369,8 +6434,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6459,8 +6524,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6496,8 +6561,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -6548,8 +6613,8 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the BulkGetQueryDocument model
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 
 				// Construct an instance of the PostBulkGetOptions model
 				postBulkGetOptionsModel := new(cloudantv1.PostBulkGetOptions)
@@ -7923,12 +7988,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8040,12 +8114,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8165,12 +8248,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8244,12 +8336,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -8328,12 +8429,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutDocumentOptions model
@@ -9044,7 +9154,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the AnalyzerConfiguration model
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
@@ -9052,7 +9162,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the SearchIndexDefinition model
 				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
 				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+				searchIndexDefinitionModel.Index = core.StringPtr("function (doc) {\n  index(\"price\", doc.price);\n}")
 
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
@@ -9060,7 +9170,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9069,9 +9179,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Conflicts = []string{"testString"}
 				designDocumentModel.Deleted = core.BoolPtr(true)
 				designDocumentModel.DeletedConflicts = []string{"testString"}
-				designDocumentModel.ID = core.StringPtr("testString")
+				designDocumentModel.ID = core.StringPtr("_design/appliances")
 				designDocumentModel.LocalSeq = core.StringPtr("testString")
-				designDocumentModel.Rev = core.StringPtr("testString")
+				designDocumentModel.Rev = core.StringPtr("8-7e2537e5989294471061e0cfd7292725")
 				designDocumentModel.Revisions = revisionsModel
 				designDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				designDocumentModel.Autoupdate = core.BoolPtr(true)
@@ -9193,7 +9303,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the AnalyzerConfiguration model
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
@@ -9201,7 +9311,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the SearchIndexDefinition model
 				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
 				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+				searchIndexDefinitionModel.Index = core.StringPtr("function (doc) {\n  index(\"price\", doc.price);\n}")
 
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
@@ -9209,7 +9319,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9218,9 +9328,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Conflicts = []string{"testString"}
 				designDocumentModel.Deleted = core.BoolPtr(true)
 				designDocumentModel.DeletedConflicts = []string{"testString"}
-				designDocumentModel.ID = core.StringPtr("testString")
+				designDocumentModel.ID = core.StringPtr("_design/appliances")
 				designDocumentModel.LocalSeq = core.StringPtr("testString")
-				designDocumentModel.Rev = core.StringPtr("testString")
+				designDocumentModel.Rev = core.StringPtr("8-7e2537e5989294471061e0cfd7292725")
 				designDocumentModel.Revisions = revisionsModel
 				designDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				designDocumentModel.Autoupdate = core.BoolPtr(true)
@@ -9350,7 +9460,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the AnalyzerConfiguration model
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
@@ -9358,7 +9468,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the SearchIndexDefinition model
 				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
 				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+				searchIndexDefinitionModel.Index = core.StringPtr("function (doc) {\n  index(\"price\", doc.price);\n}")
 
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
@@ -9366,7 +9476,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9375,9 +9485,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Conflicts = []string{"testString"}
 				designDocumentModel.Deleted = core.BoolPtr(true)
 				designDocumentModel.DeletedConflicts = []string{"testString"}
-				designDocumentModel.ID = core.StringPtr("testString")
+				designDocumentModel.ID = core.StringPtr("_design/appliances")
 				designDocumentModel.LocalSeq = core.StringPtr("testString")
-				designDocumentModel.Rev = core.StringPtr("testString")
+				designDocumentModel.Rev = core.StringPtr("8-7e2537e5989294471061e0cfd7292725")
 				designDocumentModel.Revisions = revisionsModel
 				designDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				designDocumentModel.Autoupdate = core.BoolPtr(true)
@@ -9447,7 +9557,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the AnalyzerConfiguration model
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
@@ -9455,7 +9565,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the SearchIndexDefinition model
 				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
 				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+				searchIndexDefinitionModel.Index = core.StringPtr("function (doc) {\n  index(\"price\", doc.price);\n}")
 
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
@@ -9463,7 +9573,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9472,9 +9582,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Conflicts = []string{"testString"}
 				designDocumentModel.Deleted = core.BoolPtr(true)
 				designDocumentModel.DeletedConflicts = []string{"testString"}
-				designDocumentModel.ID = core.StringPtr("testString")
+				designDocumentModel.ID = core.StringPtr("_design/appliances")
 				designDocumentModel.LocalSeq = core.StringPtr("testString")
-				designDocumentModel.Rev = core.StringPtr("testString")
+				designDocumentModel.Rev = core.StringPtr("8-7e2537e5989294471061e0cfd7292725")
 				designDocumentModel.Revisions = revisionsModel
 				designDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				designDocumentModel.Autoupdate = core.BoolPtr(true)
@@ -9565,7 +9675,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the AnalyzerConfiguration model
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
-				analyzerConfigurationModel.Name = core.StringPtr("classic")
+				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
@@ -9573,7 +9683,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the SearchIndexDefinition model
 				searchIndexDefinitionModel := new(cloudantv1.SearchIndexDefinition)
 				searchIndexDefinitionModel.Analyzer = analyzerConfigurationModel
-				searchIndexDefinitionModel.Index = core.StringPtr("testString")
+				searchIndexDefinitionModel.Index = core.StringPtr("function (doc) {\n  index(\"price\", doc.price);\n}")
 
 				// Construct an instance of the DesignDocumentOptions model
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
@@ -9581,7 +9691,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9590,9 +9700,9 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentModel.Conflicts = []string{"testString"}
 				designDocumentModel.Deleted = core.BoolPtr(true)
 				designDocumentModel.DeletedConflicts = []string{"testString"}
-				designDocumentModel.ID = core.StringPtr("testString")
+				designDocumentModel.ID = core.StringPtr("_design/appliances")
 				designDocumentModel.LocalSeq = core.StringPtr("testString")
-				designDocumentModel.Rev = core.StringPtr("testString")
+				designDocumentModel.Rev = core.StringPtr("8-7e2537e5989294471061e0cfd7292725")
 				designDocumentModel.Revisions = revisionsModel
 				designDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
 				designDocumentModel.Autoupdate = core.BoolPtr(true)
@@ -9882,13 +9992,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(false)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -9965,13 +10075,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(false)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10056,13 +10166,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(false)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10090,13 +10200,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(false)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -10145,13 +10255,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Descending = core.BoolPtr(false)
 				postDesignDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postDesignDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postDesignDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postDesignDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postDesignDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postDesignDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
-				postDesignDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -10206,7 +10316,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -10293,7 +10403,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -10388,7 +10498,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -10426,7 +10536,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -10485,7 +10595,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -10540,9 +10650,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -10550,7 +10660,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -10629,9 +10739,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -10639,7 +10749,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -10726,9 +10836,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -10736,7 +10846,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -10768,9 +10878,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -10778,7 +10888,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -10831,9 +10941,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -10841,7 +10951,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -10916,9 +11026,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -10926,7 +11036,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -11013,9 +11123,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -11023,7 +11133,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -11061,9 +11171,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -11071,7 +11181,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -11124,9 +11234,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Attachments = core.BoolPtr(false)
 				postViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postViewOptionsModel.Descending = core.BoolPtr(false)
-				postViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postViewOptionsModel.EndKey = "testString"
@@ -11134,7 +11244,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.Group = core.BoolPtr(false)
 				postViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postViewOptionsModel.Key = "testString"
-				postViewOptionsModel.Keys = []interface{}{"testString"}
+				postViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postViewOptionsModel.Reduce = core.BoolPtr(true)
 				postViewOptionsModel.Stable = core.BoolPtr(false)
 				postViewOptionsModel.StartKey = "testString"
@@ -11188,9 +11298,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11281,9 +11391,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11382,9 +11492,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11428,9 +11538,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11495,9 +11605,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11584,9 +11694,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11685,9 +11795,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11737,9 +11847,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -11804,9 +11914,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -12096,13 +12206,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostPartitionAllDocs(postPartitionAllDocsOptionsModel)
@@ -12177,13 +12287,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -12266,13 +12376,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -12300,13 +12410,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -12355,13 +12465,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -12432,13 +12542,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -12521,13 +12631,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -12561,13 +12671,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -12616,13 +12726,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.Descending = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionAllDocsOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionAllDocsOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionAllDocsOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionAllDocsOptionsModel.EndKey = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Key = core.StringPtr("testString")
 				postPartitionAllDocsOptionsModel.Keys = []string{"testString"}
-				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("testString")
+				postPartitionAllDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
 				postPartitionAllDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -12680,7 +12790,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -12762,7 +12872,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -12852,7 +12962,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -12887,7 +12997,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -12943,7 +13053,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13021,7 +13131,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13111,7 +13221,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13152,7 +13262,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13208,7 +13318,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postPartitionSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postPartitionSearchOptionsModel.IncludeFields = []string{"testString"}
-				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postPartitionSearchOptionsModel.Sort = []string{"testString"}
 				postPartitionSearchOptionsModel.Stale = core.StringPtr("ok")
 				postPartitionSearchOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -13263,9 +13373,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13273,7 +13383,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13352,9 +13462,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13362,7 +13472,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13449,9 +13559,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13459,7 +13569,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13491,9 +13601,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13501,7 +13611,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13554,9 +13664,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13564,7 +13674,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13639,9 +13749,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13649,7 +13759,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13736,9 +13846,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13746,7 +13856,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13784,9 +13894,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13794,7 +13904,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13847,9 +13957,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Attachments = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Conflicts = core.BoolPtr(false)
 				postPartitionViewOptionsModel.Descending = core.BoolPtr(false)
-				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(false)
+				postPartitionViewOptionsModel.IncludeDocs = core.BoolPtr(true)
 				postPartitionViewOptionsModel.InclusiveEnd = core.BoolPtr(true)
-				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postPartitionViewOptionsModel.Limit = core.Int64Ptr(int64(10))
 				postPartitionViewOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionViewOptionsModel.UpdateSeq = core.BoolPtr(false)
 				postPartitionViewOptionsModel.EndKey = "testString"
@@ -13857,7 +13967,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.Group = core.BoolPtr(false)
 				postPartitionViewOptionsModel.GroupLevel = core.Int64Ptr(int64(1))
 				postPartitionViewOptionsModel.Key = "testString"
-				postPartitionViewOptionsModel.Keys = []interface{}{"testString"}
+				postPartitionViewOptionsModel.Keys = []interface{}{"examplekey"}
 				postPartitionViewOptionsModel.Reduce = core.BoolPtr(true)
 				postPartitionViewOptionsModel.StartKey = "testString"
 				postPartitionViewOptionsModel.StartKeyDocID = core.StringPtr("testString")
@@ -13912,7 +14022,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -13991,7 +14101,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14078,7 +14188,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14110,7 +14220,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14163,7 +14273,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"testString"}
+				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14216,7 +14326,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14295,7 +14405,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14382,7 +14492,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14414,7 +14524,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14467,7 +14577,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14542,7 +14652,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14629,7 +14739,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14667,7 +14777,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14720,7 +14830,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"testString"}
+				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14776,8 +14886,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postExplainOptionsModel.Fields = []string{"testString"}
-				postExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postExplainOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postExplainOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -14855,8 +14965,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postExplainOptionsModel.Fields = []string{"testString"}
-				postExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postExplainOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postExplainOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -14942,8 +15052,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postExplainOptionsModel.Fields = []string{"testString"}
-				postExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postExplainOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postExplainOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -14974,8 +15084,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postExplainOptionsModel.Fields = []string{"testString"}
-				postExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postExplainOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postExplainOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -15027,8 +15137,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postExplainOptionsModel.Fields = []string{"testString"}
-				postExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postExplainOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postExplainOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postExplainOptionsModel.Stable = core.BoolPtr(true)
@@ -15080,8 +15190,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15159,8 +15269,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15246,8 +15356,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15278,8 +15388,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15331,8 +15441,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15406,8 +15516,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15493,8 +15603,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15531,8 +15641,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15584,8 +15694,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postFindOptionsModel.Fields = []string{"testString"}
-				postFindOptionsModel.Limit = core.Int64Ptr(int64(25))
+				postFindOptionsModel.Fields = []string{"_id", "type", "name", "email"}
+				postFindOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
 				postFindOptionsModel.Stable = core.BoolPtr(true)
@@ -15858,7 +15968,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
-				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Name = core.StringPtr("asc")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
 
@@ -15874,8 +15984,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
-				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Name = core.StringPtr("testString")
+				postIndexOptionsModel.Ddoc = core.StringPtr("json-index")
+				postIndexOptionsModel.Name = core.StringPtr("getUserByName")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -15954,7 +16064,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
-				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Name = core.StringPtr("asc")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
 
@@ -15970,8 +16080,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
-				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Name = core.StringPtr("testString")
+				postIndexOptionsModel.Ddoc = core.StringPtr("json-index")
+				postIndexOptionsModel.Name = core.StringPtr("getUserByName")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -16058,7 +16168,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
-				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Name = core.StringPtr("asc")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
 
@@ -16074,8 +16184,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
-				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Name = core.StringPtr("testString")
+				postIndexOptionsModel.Ddoc = core.StringPtr("json-index")
+				postIndexOptionsModel.Name = core.StringPtr("getUserByName")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -16107,7 +16217,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
-				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Name = core.StringPtr("asc")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
 
@@ -16123,8 +16233,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
-				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Name = core.StringPtr("testString")
+				postIndexOptionsModel.Ddoc = core.StringPtr("json-index")
+				postIndexOptionsModel.Name = core.StringPtr("getUserByName")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -16177,7 +16287,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
-				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Name = core.StringPtr("asc")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
 
@@ -16193,8 +16303,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel := new(cloudantv1.PostIndexOptions)
 				postIndexOptionsModel.Db = core.StringPtr("testString")
 				postIndexOptionsModel.Index = indexDefinitionModel
-				postIndexOptionsModel.Ddoc = core.StringPtr("testString")
-				postIndexOptionsModel.Name = core.StringPtr("testString")
+				postIndexOptionsModel.Ddoc = core.StringPtr("json-index")
+				postIndexOptionsModel.Name = core.StringPtr("getUserByName")
 				postIndexOptionsModel.Partitioned = core.BoolPtr(true)
 				postIndexOptionsModel.Type = core.StringPtr("json")
 				postIndexOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -16464,8 +16574,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostSearchAnalyzeOptions model
 				postSearchAnalyzeOptionsModel := new(cloudantv1.PostSearchAnalyzeOptions)
-				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("arabic")
-				postSearchAnalyzeOptionsModel.Text = core.StringPtr("testString")
+				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("english")
+				postSearchAnalyzeOptionsModel.Text = core.StringPtr("running is fun")
 				postSearchAnalyzeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostSearchAnalyze(postSearchAnalyzeOptionsModel)
@@ -16532,8 +16642,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostSearchAnalyzeOptions model
 				postSearchAnalyzeOptionsModel := new(cloudantv1.PostSearchAnalyzeOptions)
-				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("arabic")
-				postSearchAnalyzeOptionsModel.Text = core.StringPtr("testString")
+				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("english")
+				postSearchAnalyzeOptionsModel.Text = core.StringPtr("running is fun")
 				postSearchAnalyzeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -16608,8 +16718,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostSearchAnalyzeOptions model
 				postSearchAnalyzeOptionsModel := new(cloudantv1.PostSearchAnalyzeOptions)
-				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("arabic")
-				postSearchAnalyzeOptionsModel.Text = core.StringPtr("testString")
+				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("english")
+				postSearchAnalyzeOptionsModel.Text = core.StringPtr("running is fun")
 				postSearchAnalyzeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -16629,8 +16739,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostSearchAnalyzeOptions model
 				postSearchAnalyzeOptionsModel := new(cloudantv1.PostSearchAnalyzeOptions)
-				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("arabic")
-				postSearchAnalyzeOptionsModel.Text = core.StringPtr("testString")
+				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("english")
+				postSearchAnalyzeOptionsModel.Text = core.StringPtr("running is fun")
 				postSearchAnalyzeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -16671,8 +16781,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostSearchAnalyzeOptions model
 				postSearchAnalyzeOptionsModel := new(cloudantv1.PostSearchAnalyzeOptions)
-				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("arabic")
-				postSearchAnalyzeOptionsModel.Text = core.StringPtr("testString")
+				postSearchAnalyzeOptionsModel.Analyzer = core.StringPtr("english")
+				postSearchAnalyzeOptionsModel.Text = core.StringPtr("running is fun")
 				postSearchAnalyzeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -16725,7 +16835,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -16812,7 +16922,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -16907,7 +17017,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -16947,7 +17057,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -17008,7 +17118,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -17091,7 +17201,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -17186,7 +17296,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -17232,7 +17342,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -17293,7 +17403,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.HighlightSize = core.Int64Ptr(int64(100))
 				postSearchOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postSearchOptionsModel.IncludeFields = []string{"testString"}
-				postSearchOptionsModel.Limit = core.Int64Ptr(int64(0))
+				postSearchOptionsModel.Limit = core.Int64Ptr(int64(3))
 				postSearchOptionsModel.Sort = []string{"testString"}
 				postSearchOptionsModel.Stale = core.StringPtr("ok")
 				postSearchOptionsModel.Counts = []string{"testString"}
@@ -18347,7 +18457,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -18367,13 +18477,13 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18386,30 +18496,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.Continuous = core.BoolPtr(false)
-				replicationDocumentModel.CreateTarget = core.BoolPtr(false)
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
@@ -18516,7 +18626,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -18536,13 +18646,13 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18555,30 +18665,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.Continuous = core.BoolPtr(false)
-				replicationDocumentModel.CreateTarget = core.BoolPtr(false)
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
@@ -18693,7 +18803,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -18713,13 +18823,13 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18732,30 +18842,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.Continuous = core.BoolPtr(false)
-				replicationDocumentModel.CreateTarget = core.BoolPtr(false)
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
@@ -18810,7 +18920,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -18830,13 +18940,13 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18849,30 +18959,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.Continuous = core.BoolPtr(false)
-				replicationDocumentModel.CreateTarget = core.BoolPtr(false)
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
@@ -18948,7 +19058,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
 				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
 				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
-				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
 
 				// Construct an instance of the ReplicationDatabaseAuthBasic model
 				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
@@ -18968,13 +19078,13 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
 				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
 				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
-				replicationDatabaseModel.URL = core.StringPtr("testString")
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
 
 				// Construct an instance of the UserContext model
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
-				userContextModel.Name = core.StringPtr("testString")
-				userContextModel.Roles = []string{"_reader"}
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"researcher"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18987,30 +19097,30 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.Rev = core.StringPtr("testString")
 				replicationDocumentModel.Revisions = revisionsModel
 				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				replicationDocumentModel.Cancel = core.BoolPtr(true)
-				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(30000))
-				replicationDocumentModel.Continuous = core.BoolPtr(false)
-				replicationDocumentModel.CreateTarget = core.BoolPtr(false)
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
 				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
-				replicationDocumentModel.DocIds = []string{"testString"}
-				replicationDocumentModel.Filter = core.StringPtr("testString")
-				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
-				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
-				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
-				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
 				replicationDocumentModel.Source = replicationDatabaseModel
 				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
 				replicationDocumentModel.Target = replicationDatabaseModel
 				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
 				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
-				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
 				replicationDocumentModel.UserCtx = userContextModel
 				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
-				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
-				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
 				replicationDocumentModel.SetProperty("foo", "testString")
 				replicationDocumentModel.Attachments["foo"] = *attachmentModel
 
@@ -20335,8 +20445,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the SecurityObject model
 				securityObjectModel := new(cloudantv1.SecurityObject)
-				securityObjectModel.Names = []string{"testString"}
-				securityObjectModel.Roles = []string{"testString"}
+				securityObjectModel.Names = []string{"superuser"}
+				securityObjectModel.Roles = []string{"admins"}
 
 				// Construct an instance of the PutSecurityOptions model
 				putSecurityOptionsModel := new(cloudantv1.PutSecurityOptions)
@@ -20411,8 +20521,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the SecurityObject model
 				securityObjectModel := new(cloudantv1.SecurityObject)
-				securityObjectModel.Names = []string{"testString"}
-				securityObjectModel.Roles = []string{"testString"}
+				securityObjectModel.Names = []string{"superuser"}
+				securityObjectModel.Roles = []string{"admins"}
 
 				// Construct an instance of the PutSecurityOptions model
 				putSecurityOptionsModel := new(cloudantv1.PutSecurityOptions)
@@ -20495,8 +20605,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the SecurityObject model
 				securityObjectModel := new(cloudantv1.SecurityObject)
-				securityObjectModel.Names = []string{"testString"}
-				securityObjectModel.Roles = []string{"testString"}
+				securityObjectModel.Names = []string{"superuser"}
+				securityObjectModel.Roles = []string{"admins"}
 
 				// Construct an instance of the PutSecurityOptions model
 				putSecurityOptionsModel := new(cloudantv1.PutSecurityOptions)
@@ -20524,8 +20634,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the SecurityObject model
 				securityObjectModel := new(cloudantv1.SecurityObject)
-				securityObjectModel.Names = []string{"testString"}
-				securityObjectModel.Roles = []string{"testString"}
+				securityObjectModel.Names = []string{"superuser"}
+				securityObjectModel.Roles = []string{"admins"}
 
 				// Construct an instance of the PutSecurityOptions model
 				putSecurityOptionsModel := new(cloudantv1.PutSecurityOptions)
@@ -20574,8 +20684,8 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the SecurityObject model
 				securityObjectModel := new(cloudantv1.SecurityObject)
-				securityObjectModel.Names = []string{"testString"}
-				securityObjectModel.Roles = []string{"testString"}
+				securityObjectModel.Names = []string{"superuser"}
+				securityObjectModel.Roles = []string{"admins"}
 
 				// Construct an instance of the PutSecurityOptions model
 				putSecurityOptionsModel := new(cloudantv1.PutSecurityOptions)
@@ -21313,7 +21423,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
+				putCorsConfigurationOptionsModel.Origins = []string{"https://example.com", "https://www.example.com"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -21382,7 +21492,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
+				putCorsConfigurationOptionsModel.Origins = []string{"https://example.com", "https://www.example.com"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -21459,7 +21569,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
+				putCorsConfigurationOptionsModel.Origins = []string{"https://example.com", "https://www.example.com"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -21481,7 +21591,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
+				putCorsConfigurationOptionsModel.Origins = []string{"https://example.com", "https://www.example.com"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -21524,7 +21634,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PutCorsConfigurationOptions model
 				putCorsConfigurationOptionsModel := new(cloudantv1.PutCorsConfigurationOptions)
-				putCorsConfigurationOptionsModel.Origins = []string{"testString"}
+				putCorsConfigurationOptionsModel.Origins = []string{"https://example.com", "https://www.example.com"}
 				putCorsConfigurationOptionsModel.AllowCredentials = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.EnableCors = core.BoolPtr(true)
 				putCorsConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -22996,12 +23106,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23106,12 +23225,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23224,12 +23352,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23300,12 +23437,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -23381,12 +23527,21 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.Conflicts = []string{"testString"}
 				documentModel.Deleted = core.BoolPtr(true)
 				documentModel.DeletedConflicts = []string{"testString"}
-				documentModel.ID = core.StringPtr("testString")
+				documentModel.ID = core.StringPtr("exampleid")
 				documentModel.LocalSeq = core.StringPtr("testString")
 				documentModel.Rev = core.StringPtr("testString")
 				documentModel.Revisions = revisionsModel
 				documentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
-				documentModel.SetProperty("foo", "testString")
+				documentModel.SetProperty("brand", "Foo")
+				documentModel.SetProperty("colours", "[\"red\",\"green\",\"black\",\"blue\"]")
+				documentModel.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for ...")
+				documentModel.SetProperty("image", "assets/img/0gmsnghhew.jpg")
+				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
+				documentModel.SetProperty("name", "Digital Kitchen Scales")
+				documentModel.SetProperty("price", "14.99")
+				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
+				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
 
 				// Construct an instance of the PutLocalDocumentOptions model
@@ -24774,7 +24929,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostActivityTrackerEventsOptions model
 				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
-				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Types = []string{"management", "data"}
 				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptionsModel)
@@ -24841,7 +24996,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostActivityTrackerEventsOptions model
 				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
-				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Types = []string{"management", "data"}
 				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -24916,7 +25071,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostActivityTrackerEventsOptions model
 				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
-				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Types = []string{"management", "data"}
 				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -24936,7 +25091,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostActivityTrackerEventsOptions model
 				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
-				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Types = []string{"management", "data"}
 				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -24977,7 +25132,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the PostActivityTrackerEventsOptions model
 				postActivityTrackerEventsOptionsModel := new(cloudantv1.PostActivityTrackerEventsOptions)
-				postActivityTrackerEventsOptionsModel.Types = []string{"management"}
+				postActivityTrackerEventsOptionsModel.Types = []string{"management", "data"}
 				postActivityTrackerEventsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -25870,12 +26025,12 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPostActivityTrackerEventsOptions successfully`, func() {
 				// Construct an instance of the PostActivityTrackerEventsOptions model
-				postActivityTrackerEventsOptionsTypes := []string{"management"}
+				postActivityTrackerEventsOptionsTypes := []string{"management", "data"}
 				postActivityTrackerEventsOptionsModel := cloudantService.NewPostActivityTrackerEventsOptions(postActivityTrackerEventsOptionsTypes)
-				postActivityTrackerEventsOptionsModel.SetTypes([]string{"management"})
+				postActivityTrackerEventsOptionsModel.SetTypes([]string{"management", "data"})
 				postActivityTrackerEventsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postActivityTrackerEventsOptionsModel).ToNot(BeNil())
-				Expect(postActivityTrackerEventsOptionsModel.Types).To(Equal([]string{"management"}))
+				Expect(postActivityTrackerEventsOptionsModel.Types).To(Equal([]string{"management", "data"}))
 				Expect(postActivityTrackerEventsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostAllDocsOptions successfully`, func() {
@@ -25889,13 +26044,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postAllDocsOptionsModel.SetDescending(false)
 				postAllDocsOptionsModel.SetIncludeDocs(false)
 				postAllDocsOptionsModel.SetInclusiveEnd(true)
-				postAllDocsOptionsModel.SetLimit(int64(0))
+				postAllDocsOptionsModel.SetLimit(int64(10))
 				postAllDocsOptionsModel.SetSkip(int64(0))
 				postAllDocsOptionsModel.SetUpdateSeq(false)
 				postAllDocsOptionsModel.SetEndKey("testString")
 				postAllDocsOptionsModel.SetKey("testString")
 				postAllDocsOptionsModel.SetKeys([]string{"testString"})
-				postAllDocsOptionsModel.SetStartKey("testString")
+				postAllDocsOptionsModel.SetStartKey("0007741142412418284")
 				postAllDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postAllDocsOptionsModel).ToNot(BeNil())
 				Expect(postAllDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -25905,13 +26060,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postAllDocsOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
 				Expect(postAllDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postAllDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postAllDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postAllDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(postAllDocsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostAllDocsQueriesOptions successfully`, func() {
@@ -25929,7 +26084,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 				Expect(allDocsQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.Attachments).To(Equal(core.BoolPtr(false)))
@@ -25942,7 +26097,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(allDocsQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Key).To(Equal(core.StringPtr("testString")))
-				Expect(allDocsQueryModel.Keys).To(Equal([]string{"testString"}))
+				Expect(allDocsQueryModel.Keys).To(Equal([]string{"small-appliances:1000042", "small-appliances:1000043"}))
 				Expect(allDocsQueryModel.StartKey).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostAllDocsQueriesOptions model
@@ -26064,11 +26219,11 @@ var _ = Describe(`CloudantV1`, func() {
 				bulkGetQueryDocumentModel := new(cloudantv1.BulkGetQueryDocument)
 				Expect(bulkGetQueryDocumentModel).ToNot(BeNil())
 				bulkGetQueryDocumentModel.AttsSince = []string{"1-99b02e08da151943c2dcb40090160bb8"}
-				bulkGetQueryDocumentModel.ID = core.StringPtr("testString")
-				bulkGetQueryDocumentModel.Rev = core.StringPtr("testString")
+				bulkGetQueryDocumentModel.ID = core.StringPtr("order00067")
+				bulkGetQueryDocumentModel.Rev = core.StringPtr("3-917fa2381192822767f010b95b45325b")
 				Expect(bulkGetQueryDocumentModel.AttsSince).To(Equal([]string{"1-99b02e08da151943c2dcb40090160bb8"}))
-				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(bulkGetQueryDocumentModel.ID).To(Equal(core.StringPtr("order00067")))
+				Expect(bulkGetQueryDocumentModel.Rev).To(Equal(core.StringPtr("3-917fa2381192822767f010b95b45325b")))
 
 				// Construct an instance of the PostBulkGetOptions model
 				db := "testString"
@@ -26095,7 +26250,7 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				postChangesOptionsModel := cloudantService.NewPostChangesOptions(db)
 				postChangesOptionsModel.SetDb("testString")
-				postChangesOptionsModel.SetDocIds([]string{"testString"})
+				postChangesOptionsModel.SetDocIds([]string{"0007741142412418284"})
 				postChangesOptionsModel.SetFields([]string{"testString"})
 				postChangesOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
 				postChangesOptionsModel.SetLastEventID("testString")
@@ -26116,7 +26271,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postChangesOptionsModel).ToNot(BeNil())
 				Expect(postChangesOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postChangesOptionsModel.DocIds).To(Equal([]string{"testString"}))
+				Expect(postChangesOptionsModel.DocIds).To(Equal([]string{"0007741142412418284"}))
 				Expect(postChangesOptionsModel.Fields).To(Equal([]string{"testString"}))
 				Expect(postChangesOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(postChangesOptionsModel.LastEventID).To(Equal(core.StringPtr("testString")))
@@ -26138,12 +26293,12 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPostDbsInfoOptions successfully`, func() {
 				// Construct an instance of the PostDbsInfoOptions model
-				postDbsInfoOptionsKeys := []string{"testString"}
+				postDbsInfoOptionsKeys := []string{"products", "users", "orders"}
 				postDbsInfoOptionsModel := cloudantService.NewPostDbsInfoOptions(postDbsInfoOptionsKeys)
-				postDbsInfoOptionsModel.SetKeys([]string{"testString"})
+				postDbsInfoOptionsModel.SetKeys([]string{"products", "users", "orders"})
 				postDbsInfoOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDbsInfoOptionsModel).ToNot(BeNil())
-				Expect(postDbsInfoOptionsModel.Keys).To(Equal([]string{"testString"}))
+				Expect(postDbsInfoOptionsModel.Keys).To(Equal([]string{"products", "users", "orders"}))
 				Expect(postDbsInfoOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostDesignDocsOptions successfully`, func() {
@@ -26158,13 +26313,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.SetDescending(false)
 				postDesignDocsOptionsModel.SetIncludeDocs(false)
 				postDesignDocsOptionsModel.SetInclusiveEnd(true)
-				postDesignDocsOptionsModel.SetLimit(int64(0))
+				postDesignDocsOptionsModel.SetLimit(int64(10))
 				postDesignDocsOptionsModel.SetSkip(int64(0))
 				postDesignDocsOptionsModel.SetUpdateSeq(false)
 				postDesignDocsOptionsModel.SetEndKey("testString")
 				postDesignDocsOptionsModel.SetKey("testString")
 				postDesignDocsOptionsModel.SetKeys([]string{"testString"})
-				postDesignDocsOptionsModel.SetStartKey("testString")
+				postDesignDocsOptionsModel.SetStartKey("0007741142412418284")
 				postDesignDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDesignDocsOptionsModel).ToNot(BeNil())
 				Expect(postDesignDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -26175,13 +26330,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postDesignDocsOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
 				Expect(postDesignDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postDesignDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postDesignDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postDesignDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postDesignDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postDesignDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(postDesignDocsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postDesignDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postDesignDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postDesignDocsOptionsModel.StartKey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postDesignDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostDesignDocsQueriesOptions successfully`, func() {
@@ -26199,7 +26354,7 @@ var _ = Describe(`CloudantV1`, func() {
 				allDocsQueryModel.UpdateSeq = core.BoolPtr(false)
 				allDocsQueryModel.EndKey = core.StringPtr("testString")
 				allDocsQueryModel.Key = core.StringPtr("testString")
-				allDocsQueryModel.Keys = []string{"testString"}
+				allDocsQueryModel.Keys = []string{"small-appliances:1000042", "small-appliances:1000043"}
 				allDocsQueryModel.StartKey = core.StringPtr("testString")
 				Expect(allDocsQueryModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.Attachments).To(Equal(core.BoolPtr(false)))
@@ -26212,7 +26367,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(allDocsQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(allDocsQueryModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(allDocsQueryModel.Key).To(Equal(core.StringPtr("testString")))
-				Expect(allDocsQueryModel.Keys).To(Equal([]string{"testString"}))
+				Expect(allDocsQueryModel.Keys).To(Equal([]string{"small-appliances:1000042", "small-appliances:1000043"}))
 				Expect(allDocsQueryModel.StartKey).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the PostDesignDocsQueriesOptions model
@@ -26330,8 +26485,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel.SetBookmark("testString")
 				postExplainOptionsModel.SetConflicts(true)
 				postExplainOptionsModel.SetExecutionStats(true)
-				postExplainOptionsModel.SetFields([]string{"testString"})
-				postExplainOptionsModel.SetLimit(int64(25))
+				postExplainOptionsModel.SetFields([]string{"_id", "type", "name", "email"})
+				postExplainOptionsModel.SetLimit(int64(3))
 				postExplainOptionsModel.SetSkip(int64(0))
 				postExplainOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
 				postExplainOptionsModel.SetStable(true)
@@ -26345,8 +26500,8 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postExplainOptionsModel.Fields).To(Equal([]string{"testString"}))
-				Expect(postExplainOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
+				Expect(postExplainOptionsModel.Fields).To(Equal([]string{"_id", "type", "name", "email"}))
+				Expect(postExplainOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postExplainOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postExplainOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
 				Expect(postExplainOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
@@ -26365,8 +26520,8 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel.SetBookmark("testString")
 				postFindOptionsModel.SetConflicts(true)
 				postFindOptionsModel.SetExecutionStats(true)
-				postFindOptionsModel.SetFields([]string{"testString"})
-				postFindOptionsModel.SetLimit(int64(25))
+				postFindOptionsModel.SetFields([]string{"_id", "type", "name", "email"})
+				postFindOptionsModel.SetLimit(int64(3))
 				postFindOptionsModel.SetSkip(int64(0))
 				postFindOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
 				postFindOptionsModel.SetStable(true)
@@ -26380,8 +26535,8 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postFindOptionsModel.Fields).To(Equal([]string{"testString"}))
-				Expect(postFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
+				Expect(postFindOptionsModel.Fields).To(Equal([]string{"_id", "type", "name", "email"}))
+				Expect(postFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postFindOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
 				Expect(postFindOptionsModel.Stable).To(Equal(core.BoolPtr(true)))
@@ -26410,10 +26565,10 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the IndexField model
 				indexFieldModel := new(cloudantv1.IndexField)
 				Expect(indexFieldModel).ToNot(BeNil())
-				indexFieldModel.Name = core.StringPtr("testString")
+				indexFieldModel.Name = core.StringPtr("asc")
 				indexFieldModel.Type = core.StringPtr("boolean")
 				indexFieldModel.SetProperty("foo", core.StringPtr("asc"))
-				Expect(indexFieldModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(indexFieldModel.Name).To(Equal(core.StringPtr("asc")))
 				Expect(indexFieldModel.Type).To(Equal(core.StringPtr("boolean")))
 				Expect(indexFieldModel.GetProperties()).ToNot(BeEmpty())
 				Expect(indexFieldModel.GetProperty("foo")).To(Equal(core.StringPtr("asc")))
@@ -26447,16 +26602,16 @@ var _ = Describe(`CloudantV1`, func() {
 				postIndexOptionsModel := cloudantService.NewPostIndexOptions(db, postIndexOptionsIndex)
 				postIndexOptionsModel.SetDb("testString")
 				postIndexOptionsModel.SetIndex(indexDefinitionModel)
-				postIndexOptionsModel.SetDdoc("testString")
-				postIndexOptionsModel.SetName("testString")
+				postIndexOptionsModel.SetDdoc("json-index")
+				postIndexOptionsModel.SetName("getUserByName")
 				postIndexOptionsModel.SetPartitioned(true)
 				postIndexOptionsModel.SetType("json")
 				postIndexOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postIndexOptionsModel).ToNot(BeNil())
 				Expect(postIndexOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postIndexOptionsModel.Index).To(Equal(indexDefinitionModel))
-				Expect(postIndexOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
-				Expect(postIndexOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(postIndexOptionsModel.Ddoc).To(Equal(core.StringPtr("json-index")))
+				Expect(postIndexOptionsModel.Name).To(Equal(core.StringPtr("getUserByName")))
 				Expect(postIndexOptionsModel.Partitioned).To(Equal(core.BoolPtr(true)))
 				Expect(postIndexOptionsModel.Type).To(Equal(core.StringPtr("json")))
 				Expect(postIndexOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -26474,13 +26629,13 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionAllDocsOptionsModel.SetDescending(false)
 				postPartitionAllDocsOptionsModel.SetIncludeDocs(false)
 				postPartitionAllDocsOptionsModel.SetInclusiveEnd(true)
-				postPartitionAllDocsOptionsModel.SetLimit(int64(0))
+				postPartitionAllDocsOptionsModel.SetLimit(int64(10))
 				postPartitionAllDocsOptionsModel.SetSkip(int64(0))
 				postPartitionAllDocsOptionsModel.SetUpdateSeq(false)
 				postPartitionAllDocsOptionsModel.SetEndKey("testString")
 				postPartitionAllDocsOptionsModel.SetKey("testString")
 				postPartitionAllDocsOptionsModel.SetKeys([]string{"testString"})
-				postPartitionAllDocsOptionsModel.SetStartKey("testString")
+				postPartitionAllDocsOptionsModel.SetStartKey("0007741142412418284")
 				postPartitionAllDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postPartitionAllDocsOptionsModel).ToNot(BeNil())
 				Expect(postPartitionAllDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
@@ -26491,13 +26646,13 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionAllDocsOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionAllDocsOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionAllDocsOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionAllDocsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postPartitionAllDocsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionAllDocsOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionAllDocsOptionsModel.EndKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Key).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionAllDocsOptionsModel.Keys).To(Equal([]string{"testString"}))
-				Expect(postPartitionAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionAllDocsOptionsModel.StartKey).To(Equal(core.StringPtr("0007741142412418284")))
 				Expect(postPartitionAllDocsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostPartitionExplainOptions successfully`, func() {
@@ -26512,7 +26667,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.SetBookmark("testString")
 				postPartitionExplainOptionsModel.SetConflicts(true)
 				postPartitionExplainOptionsModel.SetExecutionStats(true)
-				postPartitionExplainOptionsModel.SetFields([]string{"testString"})
+				postPartitionExplainOptionsModel.SetFields([]string{"productid", "name", "description"})
 				postPartitionExplainOptionsModel.SetLimit(int64(25))
 				postPartitionExplainOptionsModel.SetSkip(int64(0))
 				postPartitionExplainOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
@@ -26527,7 +26682,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionExplainOptionsModel.Fields).To(Equal([]string{"testString"}))
+				Expect(postPartitionExplainOptionsModel.Fields).To(Equal([]string{"productid", "name", "description"}))
 				Expect(postPartitionExplainOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
 				Expect(postPartitionExplainOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionExplainOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
@@ -26548,7 +26703,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.SetBookmark("testString")
 				postPartitionFindOptionsModel.SetConflicts(true)
 				postPartitionFindOptionsModel.SetExecutionStats(true)
-				postPartitionFindOptionsModel.SetFields([]string{"testString"})
+				postPartitionFindOptionsModel.SetFields([]string{"productid", "name", "description"})
 				postPartitionFindOptionsModel.SetLimit(int64(25))
 				postPartitionFindOptionsModel.SetSkip(int64(0))
 				postPartitionFindOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
@@ -26563,7 +26718,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"testString"}))
+				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"productid", "name", "description"}))
 				Expect(postPartitionFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
 				Expect(postPartitionFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionFindOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
@@ -26593,7 +26748,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.SetHighlightSize(int64(100))
 				postPartitionSearchOptionsModel.SetIncludeDocs(false)
 				postPartitionSearchOptionsModel.SetIncludeFields([]string{"testString"})
-				postPartitionSearchOptionsModel.SetLimit(int64(0))
+				postPartitionSearchOptionsModel.SetLimit(int64(3))
 				postPartitionSearchOptionsModel.SetSort([]string{"testString"})
 				postPartitionSearchOptionsModel.SetStale("ok")
 				postPartitionSearchOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -26611,7 +26766,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionSearchOptionsModel.HighlightSize).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(postPartitionSearchOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionSearchOptionsModel.IncludeFields).To(Equal([]string{"testString"}))
-				Expect(postPartitionSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postPartitionSearchOptionsModel.Sort).To(Equal([]string{"testString"}))
 				Expect(postPartitionSearchOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
 				Expect(postPartitionSearchOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -26631,9 +26786,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetAttachments(false)
 				postPartitionViewOptionsModel.SetConflicts(false)
 				postPartitionViewOptionsModel.SetDescending(false)
-				postPartitionViewOptionsModel.SetIncludeDocs(false)
+				postPartitionViewOptionsModel.SetIncludeDocs(true)
 				postPartitionViewOptionsModel.SetInclusiveEnd(true)
-				postPartitionViewOptionsModel.SetLimit(int64(0))
+				postPartitionViewOptionsModel.SetLimit(int64(10))
 				postPartitionViewOptionsModel.SetSkip(int64(0))
 				postPartitionViewOptionsModel.SetUpdateSeq(false)
 				postPartitionViewOptionsModel.SetEndKey("testString")
@@ -26641,7 +26796,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionViewOptionsModel.SetGroup(false)
 				postPartitionViewOptionsModel.SetGroupLevel(int64(1))
 				postPartitionViewOptionsModel.SetKey("testString")
-				postPartitionViewOptionsModel.SetKeys([]interface{}{"testString"})
+				postPartitionViewOptionsModel.SetKeys([]interface{}{"examplekey"})
 				postPartitionViewOptionsModel.SetReduce(true)
 				postPartitionViewOptionsModel.SetStartKey("testString")
 				postPartitionViewOptionsModel.SetStartKeyDocID("testString")
@@ -26656,9 +26811,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Attachments).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.Conflicts).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
-				Expect(postPartitionViewOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
+				Expect(postPartitionViewOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postPartitionViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postPartitionViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.EndKey).To(Equal("testString"))
@@ -26666,7 +26821,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(postPartitionViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postPartitionViewOptionsModel.Key).To(Equal("testString"))
-				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
+				Expect(postPartitionViewOptionsModel.Keys).To(Equal([]interface{}{"examplekey"}))
 				Expect(postPartitionViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionViewOptionsModel.StartKey).To(Equal("testString"))
 				Expect(postPartitionViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
@@ -26688,15 +26843,15 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPostSearchAnalyzeOptions successfully`, func() {
 				// Construct an instance of the PostSearchAnalyzeOptions model
-				postSearchAnalyzeOptionsAnalyzer := "arabic"
-				postSearchAnalyzeOptionsText := "testString"
+				postSearchAnalyzeOptionsAnalyzer := "english"
+				postSearchAnalyzeOptionsText := "running is fun"
 				postSearchAnalyzeOptionsModel := cloudantService.NewPostSearchAnalyzeOptions(postSearchAnalyzeOptionsAnalyzer, postSearchAnalyzeOptionsText)
-				postSearchAnalyzeOptionsModel.SetAnalyzer("arabic")
-				postSearchAnalyzeOptionsModel.SetText("testString")
+				postSearchAnalyzeOptionsModel.SetAnalyzer("english")
+				postSearchAnalyzeOptionsModel.SetText("running is fun")
 				postSearchAnalyzeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postSearchAnalyzeOptionsModel).ToNot(BeNil())
-				Expect(postSearchAnalyzeOptionsModel.Analyzer).To(Equal(core.StringPtr("arabic")))
-				Expect(postSearchAnalyzeOptionsModel.Text).To(Equal(core.StringPtr("testString")))
+				Expect(postSearchAnalyzeOptionsModel.Analyzer).To(Equal(core.StringPtr("english")))
+				Expect(postSearchAnalyzeOptionsModel.Text).To(Equal(core.StringPtr("running is fun")))
 				Expect(postSearchAnalyzeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostSearchOptions successfully`, func() {
@@ -26718,7 +26873,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.SetHighlightSize(int64(100))
 				postSearchOptionsModel.SetIncludeDocs(false)
 				postSearchOptionsModel.SetIncludeFields([]string{"testString"})
-				postSearchOptionsModel.SetLimit(int64(0))
+				postSearchOptionsModel.SetLimit(int64(3))
 				postSearchOptionsModel.SetSort([]string{"testString"})
 				postSearchOptionsModel.SetStale("ok")
 				postSearchOptionsModel.SetCounts([]string{"testString"})
@@ -26741,7 +26896,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postSearchOptionsModel.HighlightSize).To(Equal(core.Int64Ptr(int64(100))))
 				Expect(postSearchOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postSearchOptionsModel.IncludeFields).To(Equal([]string{"testString"}))
-				Expect(postSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postSearchOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(3))))
 				Expect(postSearchOptionsModel.Sort).To(Equal([]string{"testString"}))
 				Expect(postSearchOptionsModel.Stale).To(Equal(core.StringPtr("ok")))
 				Expect(postSearchOptionsModel.Counts).To(Equal([]string{"testString"}))
@@ -26765,9 +26920,9 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.SetAttachments(false)
 				postViewOptionsModel.SetConflicts(false)
 				postViewOptionsModel.SetDescending(false)
-				postViewOptionsModel.SetIncludeDocs(false)
+				postViewOptionsModel.SetIncludeDocs(true)
 				postViewOptionsModel.SetInclusiveEnd(true)
-				postViewOptionsModel.SetLimit(int64(0))
+				postViewOptionsModel.SetLimit(int64(10))
 				postViewOptionsModel.SetSkip(int64(0))
 				postViewOptionsModel.SetUpdateSeq(false)
 				postViewOptionsModel.SetEndKey("testString")
@@ -26775,7 +26930,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postViewOptionsModel.SetGroup(false)
 				postViewOptionsModel.SetGroupLevel(int64(1))
 				postViewOptionsModel.SetKey("testString")
-				postViewOptionsModel.SetKeys([]interface{}{"testString"})
+				postViewOptionsModel.SetKeys([]interface{}{"examplekey"})
 				postViewOptionsModel.SetReduce(true)
 				postViewOptionsModel.SetStable(false)
 				postViewOptionsModel.SetStartKey("testString")
@@ -26790,9 +26945,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postViewOptionsModel.Attachments).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.Conflicts).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
-				Expect(postViewOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
+				Expect(postViewOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(postViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(postViewOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(postViewOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postViewOptionsModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.EndKey).To(Equal("testString"))
@@ -26800,7 +26955,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postViewOptionsModel.Group).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.GroupLevel).To(Equal(core.Int64Ptr(int64(1))))
 				Expect(postViewOptionsModel.Key).To(Equal("testString"))
-				Expect(postViewOptionsModel.Keys).To(Equal([]interface{}{"testString"}))
+				Expect(postViewOptionsModel.Keys).To(Equal([]interface{}{"examplekey"}))
 				Expect(postViewOptionsModel.Reduce).To(Equal(core.BoolPtr(true)))
 				Expect(postViewOptionsModel.Stable).To(Equal(core.BoolPtr(false)))
 				Expect(postViewOptionsModel.StartKey).To(Equal("testString"))
@@ -26816,9 +26971,9 @@ var _ = Describe(`CloudantV1`, func() {
 				viewQueryModel.Attachments = core.BoolPtr(false)
 				viewQueryModel.Conflicts = core.BoolPtr(false)
 				viewQueryModel.Descending = core.BoolPtr(false)
-				viewQueryModel.IncludeDocs = core.BoolPtr(false)
+				viewQueryModel.IncludeDocs = core.BoolPtr(true)
 				viewQueryModel.InclusiveEnd = core.BoolPtr(true)
-				viewQueryModel.Limit = core.Int64Ptr(int64(0))
+				viewQueryModel.Limit = core.Int64Ptr(int64(5))
 				viewQueryModel.Skip = core.Int64Ptr(int64(0))
 				viewQueryModel.UpdateSeq = core.BoolPtr(false)
 				viewQueryModel.EndKey = "testString"
@@ -26836,9 +26991,9 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(viewQueryModel.Attachments).To(Equal(core.BoolPtr(false)))
 				Expect(viewQueryModel.Conflicts).To(Equal(core.BoolPtr(false)))
 				Expect(viewQueryModel.Descending).To(Equal(core.BoolPtr(false)))
-				Expect(viewQueryModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
+				Expect(viewQueryModel.IncludeDocs).To(Equal(core.BoolPtr(true)))
 				Expect(viewQueryModel.InclusiveEnd).To(Equal(core.BoolPtr(true)))
-				Expect(viewQueryModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(viewQueryModel.Limit).To(Equal(core.Int64Ptr(int64(5))))
 				Expect(viewQueryModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(viewQueryModel.UpdateSeq).To(Equal(core.BoolPtr(false)))
 				Expect(viewQueryModel.EndKey).To(Equal("testString"))
@@ -26899,12 +27054,12 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPutCapacityThroughputConfigurationOptions successfully`, func() {
 				// Construct an instance of the PutCapacityThroughputConfigurationOptions model
-				putCapacityThroughputConfigurationOptionsBlocks := int64(0)
+				putCapacityThroughputConfigurationOptionsBlocks := int64(10)
 				putCapacityThroughputConfigurationOptionsModel := cloudantService.NewPutCapacityThroughputConfigurationOptions(putCapacityThroughputConfigurationOptionsBlocks)
-				putCapacityThroughputConfigurationOptionsModel.SetBlocks(int64(0))
+				putCapacityThroughputConfigurationOptionsModel.SetBlocks(int64(10))
 				putCapacityThroughputConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putCapacityThroughputConfigurationOptionsModel).ToNot(BeNil())
-				Expect(putCapacityThroughputConfigurationOptionsModel.Blocks).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(putCapacityThroughputConfigurationOptionsModel.Blocks).To(Equal(core.Int64Ptr(int64(10))))
 				Expect(putCapacityThroughputConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPutCloudantSecurityConfigurationOptions successfully`, func() {
@@ -26936,14 +27091,14 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 			It(`Invoke NewPutCorsConfigurationOptions successfully`, func() {
 				// Construct an instance of the PutCorsConfigurationOptions model
-				putCorsConfigurationOptionsOrigins := []string{"testString"}
+				putCorsConfigurationOptionsOrigins := []string{"https://example.com", "https://www.example.com"}
 				putCorsConfigurationOptionsModel := cloudantService.NewPutCorsConfigurationOptions(putCorsConfigurationOptionsOrigins)
-				putCorsConfigurationOptionsModel.SetOrigins([]string{"testString"})
+				putCorsConfigurationOptionsModel.SetOrigins([]string{"https://example.com", "https://www.example.com"})
 				putCorsConfigurationOptionsModel.SetAllowCredentials(true)
 				putCorsConfigurationOptionsModel.SetEnableCors(true)
 				putCorsConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(putCorsConfigurationOptionsModel).ToNot(BeNil())
-				Expect(putCorsConfigurationOptionsModel.Origins).To(Equal([]string{"testString"}))
+				Expect(putCorsConfigurationOptionsModel.Origins).To(Equal([]string{"https://example.com", "https://www.example.com"}))
 				Expect(putCorsConfigurationOptionsModel.AllowCredentials).To(Equal(core.BoolPtr(true)))
 				Expect(putCorsConfigurationOptionsModel.EnableCors).To(Equal(core.BoolPtr(true)))
 				Expect(putCorsConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -27508,10 +27663,10 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the SecurityObject model
 				securityObjectModel := new(cloudantv1.SecurityObject)
 				Expect(securityObjectModel).ToNot(BeNil())
-				securityObjectModel.Names = []string{"testString"}
-				securityObjectModel.Roles = []string{"testString"}
-				Expect(securityObjectModel.Names).To(Equal([]string{"testString"}))
-				Expect(securityObjectModel.Roles).To(Equal([]string{"testString"}))
+				securityObjectModel.Names = []string{"superuser"}
+				securityObjectModel.Roles = []string{"admins"}
+				Expect(securityObjectModel.Names).To(Equal([]string{"superuser"}))
+				Expect(securityObjectModel.Roles).To(Equal([]string{"admins"}))
 
 				// Construct an instance of the PutSecurityOptions model
 				db := "testString"
