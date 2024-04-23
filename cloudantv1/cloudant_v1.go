@@ -591,9 +591,13 @@ func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUp
 //
 // ### Note
 //
-// Before using the changes feed we recommend reading the
+// Before using the changes feed read the
 // [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
 // appropriate use cases.
+//
+// If you need to pass parameters to dynamically change the filtered content use the `_selector` filter type for better
+// performance and compatibility. The SDKs have full support for change requests using selector filters, but don't
+// support passing parameters to design document filters.
 func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostChangesWithContext(context.Background(), postChangesOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -730,9 +734,13 @@ func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChan
 //
 // ### Note
 //
-// Before using the changes feed we recommend reading the
+// Before using the changes feed read the
 // [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-faq-using-changes-feed) to understand the limitations and
 // appropriate use cases.
+//
+// If you need to pass parameters to dynamically change the filtered content use the `_selector` filter type for better
+// performance and compatibility. The SDKs have full support for change requests using selector filters, but don't
+// support passing parameters to design document filters.
 func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostChangesAsStreamWithContext(context.Background(), postChangesOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8513,7 +8521,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.6")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.8")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -10513,7 +10521,7 @@ type DesignDocument struct {
 	// Schema for a list of document revision identifiers.
 	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
 
-	// Document ID.
+	// Schema for a design document ID.
 	ID *string `json:"_id,omitempty"`
 
 	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
@@ -11087,7 +11095,7 @@ type Document struct {
 	// Schema for a list of document revision identifiers.
 	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
 
-	// Document ID.
+	// Schema for a document ID.
 	ID *string `json:"_id,omitempty"`
 
 	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
@@ -11442,6 +11450,9 @@ type ExplainResult struct {
 	// Schema for information about an index.
 	Index *IndexInformation `json:"index" validate:"required"`
 
+	// Schema for the list of all the other indexes that were not chosen for serving the query.
+	IndexCandidates []IndexCandidate `json:"index_candidates,omitempty"`
+
 	// The used maximum number of results returned.
 	Limit *int64 `json:"limit" validate:"required"`
 
@@ -11483,6 +11494,9 @@ type ExplainResult struct {
 	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
+	// Schema for a list of objects with extra information on the selector to provide insights about its usability.
+	SelectorHints []SelectorHint `json:"selector_hints,omitempty"`
+
 	// Skip parameter used.
 	Skip *int64 `json:"skip" validate:"required"`
 }
@@ -11510,6 +11524,11 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "index-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "index_candidates", &obj.IndexCandidates, UnmarshalIndexCandidate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "index_candidates-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
@@ -11533,6 +11552,11 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 	err = core.UnmarshalPrimitive(m, "selector", &obj.Selector)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "selector-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "selector_hints", &obj.SelectorHints, UnmarshalSelectorHint)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "selector_hints-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "skip", &obj.Skip)
@@ -13538,6 +13562,143 @@ func (options *HeadUpInformationOptions) SetHeaders(param map[string]string) *He
 	return options
 }
 
+// IndexAnalysis : Schema for detailed explanation of why the specific index was excluded by the query planner.
+type IndexAnalysis struct {
+	// When `true`, the query is answered using the index only and no documents are fetched.
+	Covering *bool `json:"covering" validate:"required"`
+
+	// A position of the unused index based on its potential relevance to the query.
+	Ranking *int64 `json:"ranking" validate:"required"`
+
+	// A list of reasons explaining why index was not chosen for the query.
+	Reasons []IndexAnalysisExclusionReason `json:"reasons" validate:"required"`
+
+	// Indicates whether an index can still be used for the query.
+	Usable *bool `json:"usable" validate:"required"`
+}
+
+// UnmarshalIndexAnalysis unmarshals an instance of IndexAnalysis from the specified map of raw messages.
+func UnmarshalIndexAnalysis(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IndexAnalysis)
+	err = core.UnmarshalPrimitive(m, "covering", &obj.Covering)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "covering-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ranking", &obj.Ranking)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ranking-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "reasons", &obj.Reasons, UnmarshalIndexAnalysisExclusionReason)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "reasons-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "usable", &obj.Usable)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "usable-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IndexAnalysisExclusionReason : A reason for index's exclusion.
+type IndexAnalysisExclusionReason struct {
+	// A reason code for index's exclusion.
+	//
+	// The full list of possible reason codes is following:
+	//
+	// * alphabetically_comes_after: json
+	//   There is another suitable index whose name comes before that of this index.
+	// * empty_selector: text
+	// "text" indexes do not support queries with empty selectors.
+	// * excluded_by_user: any use_index was used to manually specify the index.
+	// * field_mismatch: any Fields in "selector" of the query do match with the fields available in the index.
+	// * is_partial: json, text Partial indexes can be selected only manually.
+	// * less_overlap: json There is a better match of fields available within the indexes for the query.
+	// * needs_text_search: json The use of the $text operator requires a "text" index.
+	// * scope_mismatch: json The scope of the query and the index is not the same.
+	// * sort_order_mismatch: json, special Fields in "sort" of the query do not match with the fields available in the
+	// index.
+	// * too_many_fields: json The index has more fields than the chosen one.
+	// * unfavored_type: any The type of the index is not preferred.
+	Name *string `json:"name,omitempty"`
+}
+
+// Constants associated with the IndexAnalysisExclusionReason.Name property.
+// A reason code for index's exclusion.
+//
+// The full list of possible reason codes is following:
+//
+//   - alphabetically_comes_after: json
+//     There is another suitable index whose name comes before that of this index.
+//   - empty_selector: text
+//
+// "text" indexes do not support queries with empty selectors.
+// * excluded_by_user: any use_index was used to manually specify the index.
+// * field_mismatch: any Fields in "selector" of the query do match with the fields available in the index.
+// * is_partial: json, text Partial indexes can be selected only manually.
+// * less_overlap: json There is a better match of fields available within the indexes for the query.
+// * needs_text_search: json The use of the $text operator requires a "text" index.
+// * scope_mismatch: json The scope of the query and the index is not the same.
+// * sort_order_mismatch: json, special Fields in "sort" of the query do not match with the fields available in the
+// index.
+// * too_many_fields: json The index has more fields than the chosen one.
+// * unfavored_type: any The type of the index is not preferred.
+const (
+	IndexAnalysisExclusionReasonNameAlphabeticallyComesAfterConst = "alphabetically_comes_after"
+	IndexAnalysisExclusionReasonNameEmptySelectorConst            = "empty_selector"
+	IndexAnalysisExclusionReasonNameExcludedByUserConst           = "excluded_by_user"
+	IndexAnalysisExclusionReasonNameFieldMismatchConst            = "field_mismatch"
+	IndexAnalysisExclusionReasonNameIsPartialConst                = "is_partial"
+	IndexAnalysisExclusionReasonNameLessOverlapConst              = "less_overlap"
+	IndexAnalysisExclusionReasonNameNeedsTextSearchConst          = "needs_text_search"
+	IndexAnalysisExclusionReasonNameScopeMismatchConst            = "scope_mismatch"
+	IndexAnalysisExclusionReasonNameSortOrderMismatchConst        = "sort_order_mismatch"
+	IndexAnalysisExclusionReasonNameTooManyFieldsConst            = "too_many_fields"
+	IndexAnalysisExclusionReasonNameUnfavoredTypeConst            = "unfavored_type"
+)
+
+// UnmarshalIndexAnalysisExclusionReason unmarshals an instance of IndexAnalysisExclusionReason from the specified map of raw messages.
+func UnmarshalIndexAnalysisExclusionReason(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IndexAnalysisExclusionReason)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IndexCandidate : Schema for an index that was not chosen for serving the query with the reason for the exclusion.
+type IndexCandidate struct {
+	// Schema for detailed explanation of why the specific index was excluded by the query planner.
+	Analysis *IndexAnalysis `json:"analysis" validate:"required"`
+
+	// Schema for information about an index.
+	Index *IndexInformation `json:"index" validate:"required"`
+}
+
+// UnmarshalIndexCandidate unmarshals an instance of IndexCandidate from the specified map of raw messages.
+func UnmarshalIndexCandidate(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IndexCandidate)
+	err = core.UnmarshalModel(m, "analysis", &obj.Analysis, UnmarshalIndexAnalysis)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "analysis-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "index", &obj.Index, UnmarshalIndexInformation)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "index-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // IndexDefinition : Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties
 // that do not apply to `json` indexes, these are:
 // * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all document
@@ -14548,19 +14709,24 @@ type PostChangesOptions struct {
 	// Query parameter to specify the changes feed type.
 	Feed *string `json:"feed,omitempty"`
 
-	// Query parameter to specify a filter function from a design document that will filter the changes stream emitting
-	// only filtered events. For example: `design_doc/filtername`.
+	// Query parameter to specify a filter to emit only specific events from the changes stream.
 	//
-	// Additionally, some keywords are reserved for built-in filters:
-	//
+	// The built-in filter types are:
 	//   * `_design` - Returns only changes to design documents.
 	//   * `_doc_ids` - Returns changes for documents with an ID matching one specified in
-	//       `doc_ids` request body parameter.
+	//       `doc_ids` request body parameter. (`POST` only)
 	//   * `_selector` - Returns changes for documents that match the `selector`
 	//       request body parameter. The selector syntax is the same as used for
-	//       `_find`.
+	//       `_find`. (`POST` only)
 	//   * `_view` - Returns changes for documents that match an existing map
 	//       function in the view specified by the query parameter `view`.
+	//
+	// Additionally, the value can be the name of a JS filter function from a design document. For example:
+	// `design_doc/filtername`.
+	//
+	// **Note:** For better performance use the built-in `_selector`, `_design` or `_doc_ids` filters rather than JS based
+	// `_view` or design document filters. If you need to pass values to change the filtered content use the `_selector`
+	// filter type.
 	Filter *string `json:"filter,omitempty"`
 
 	// Query parameter to specify the period in milliseconds after which an empty line is sent in the results. Off by
@@ -15125,8 +15291,12 @@ type PostExplainOptions struct {
 	// Whether to update the index prior to returning the result.
 	Update *string `json:"update,omitempty"`
 
-	// Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant Query
-	// algorithm to find the best index.
+	// Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query planner
+	// choose an index. Specified as a two element array of design document id followed by index name, for example
+	// `["my_design_doc", "my_index"]`.
+	//
+	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+	// indexes that might get added later.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// The read quorum that is needed for the result. The value defaults to 1, in which case the document that was found in
@@ -15318,8 +15488,12 @@ type PostFindOptions struct {
 	// Whether to update the index prior to returning the result.
 	Update *string `json:"update,omitempty"`
 
-	// Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant Query
-	// algorithm to find the best index.
+	// Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query planner
+	// choose an index. Specified as a two element array of design document id followed by index name, for example
+	// `["my_design_doc", "my_index"]`.
+	//
+	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+	// indexes that might get added later.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// The read quorum that is needed for the result. The value defaults to 1, in which case the document that was found in
@@ -15759,8 +15933,12 @@ type PostPartitionExplainOptions struct {
 	// Whether to update the index prior to returning the result.
 	Update *string `json:"update,omitempty"`
 
-	// Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant Query
-	// algorithm to find the best index.
+	// Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query planner
+	// choose an index. Specified as a two element array of design document id followed by index name, for example
+	// `["my_design_doc", "my_index"]`.
+	//
+	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+	// indexes that might get added later.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -15950,8 +16128,12 @@ type PostPartitionFindOptions struct {
 	// Whether to update the index prior to returning the result.
 	Update *string `json:"update,omitempty"`
 
-	// Use this option to identify a specific index for query to run against, rather than by using the IBM Cloudant Query
-	// algorithm to find the best index.
+	// Use this option to identify a specific index to answer the query, rather than letting the IBM Cloudant query planner
+	// choose an index. Specified as a two element array of design document id followed by index name, for example
+	// `["my_design_doc", "my_index"]`.
+	//
+	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
+	// indexes that might get added later.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -18112,7 +18294,7 @@ type ReplicationDocument struct {
 	// Schema for a list of document revision identifiers.
 	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
 
-	// Document ID.
+	// Schema for a document ID.
 	ID *string `json:"_id,omitempty"`
 
 	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
@@ -19491,6 +19673,47 @@ func UnmarshalSecurityObject(m map[string]json.RawMessage, result interface{}) (
 	err = core.UnmarshalPrimitive(m, "roles", &obj.Roles)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "roles-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SelectorHint : Schema for extra information on the selector.
+type SelectorHint struct {
+	// A list of fields in the given selector that can be used to restrict the query.
+	IndexableFields []string `json:"indexable_fields" validate:"required"`
+
+	// A type of the index.
+	Type *string `json:"type" validate:"required"`
+
+	// A list of fields in the given selector that can't be used to restrict the query.
+	UnindexableFields []string `json:"unindexable_fields" validate:"required"`
+}
+
+// Constants associated with the SelectorHint.Type property.
+// A type of the index.
+const (
+	SelectorHintTypeJSONConst = "json"
+	SelectorHintTypeTextConst = "text"
+)
+
+// UnmarshalSelectorHint unmarshals an instance of SelectorHint from the specified map of raw messages.
+func UnmarshalSelectorHint(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SelectorHint)
+	err = core.UnmarshalPrimitive(m, "indexable_fields", &obj.IndexableFields)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "indexable_fields-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "unindexable_fields", &obj.UnindexableFields)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unindexable_fields-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
