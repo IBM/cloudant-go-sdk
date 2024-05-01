@@ -43,6 +43,7 @@ to avoid surprises.
       - [Session cookie authentication](#session-cookie-authentication)
     + [Authentication with external configuration](#authentication-with-external-configuration)
     + [Programmatic authentication](#programmatic-authentication)
+  * [Automatic retries](#automatic-retries)
   * [Request timeout configuration](#request-timeout-configuration)
   * [Code examples](#code-examples)
     + [1. Create a database and add a document](#1-create-a-database-and-add-a-document)
@@ -290,10 +291,16 @@ documentation in the
 or in the
 [Go SDK Core document](https://github.com/IBM/go-sdk-core/blob/main/Authentication.md) about authentication.
 
+### Automatic retries
+
+The SDK supports a generalized retry feature that can automatically retry on common errors.
+
+The [automatic retries](https://github.com/IBM/ibm-cloud-sdk-common#automatic-retries) section has details on how to enable the retries with default values and customize the retries programmatically or with external configuration.
+
 ### Request timeout configuration
 
 A 6m request timeout, which includes a 30s connect timeout, is set by default. Note that this also affects changes feed requests, regardless of a timeout set on `PostChangesOptions`. Be sure to set a request timeout appropriate to your application usage and environment.
-The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md) section contains details on how to change the value.
+The [request timeout](https://github.com/IBM/ibm-cloud-sdk-common#configuring-request-timeouts) section contains details on how to change the value.
 
 **Note:** System settings may take precedence over configured timeout values.
 
