@@ -4,9 +4,11 @@
 
 _GET `/`_
 
-### [Example request](./snippets/getServerInformation/example_request.go)
+### [Example request](snippets/getServerInformation/example_request.go)
 
+[embedmd]:# (snippets/getServerInformation/example_request.go)
 ```go
+// section: code
 getServerInformationOptions := service.NewGetServerInformationOptions()
 
 serverInformation, response, err := service.GetServerInformation(getServerInformationOptions)
@@ -22,9 +24,11 @@ fmt.Println(string(b))
 
 _GET `/_active_tasks`_
 
-### [Example request](./snippets/getActiveTasks/example_request.go)
+### [Example request](snippets/getActiveTasks/example_request.go)
 
+[embedmd]:# (snippets/getActiveTasks/example_request.go)
 ```go
+// section: code
 getActiveTasksOptions := service.NewGetActiveTasksOptions()
 
 activeTask, response, err := service.GetActiveTasks(getActiveTasksOptions)
@@ -40,9 +44,11 @@ fmt.Println(string(b))
 
 _GET `/_all_dbs`_
 
-### [Example request](./snippets/getAllDbs/example_request.go)
+### [Example request](snippets/getAllDbs/example_request.go)
 
+[embedmd]:# (snippets/getAllDbs/example_request.go)
 ```go
+// section: code
 getAllDbsOptions := service.NewGetAllDbsOptions()
 
 result, response, err := service.GetAllDbs(getAllDbsOptions)
@@ -58,9 +64,11 @@ fmt.Println(string(b))
 
 _POST `/_api/v2/api_keys`_
 
-### [Example request](./snippets/postApiKeys/example_request.go)
+### [Example request](snippets/postApiKeys/example_request.go)
 
+[embedmd]:# (snippets/postApiKeys/example_request.go)
 ```go
+// section: code
 postApiKeysOptions := service.NewPostApiKeysOptions()
 
 apiKeysResult, response, err := service.PostApiKeys(postApiKeysOptions)
@@ -76,9 +84,11 @@ fmt.Println(string(b))
 
 _PUT `/_api/v2/db/{db}/_security`_
 
-### [Example request](./snippets/putCloudantSecurity/example_request.go)
+### [Example request](snippets/putCloudantSecurity/example_request.go)
 
+[embedmd]:# (snippets/putCloudantSecurity/example_request.go)
 ```go
+// section: code
 putCloudantSecurityConfigurationOptions := service.NewPutCloudantSecurityConfigurationOptions(
   "products",
   map[string][]string{
@@ -93,19 +103,21 @@ if err != nil {
 
 b, _ := json.MarshalIndent(ok, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to read data from a database, but didn't identify itself, the task can continue only if the `nobody` user has the role `_reader`.
+// section: markdown
+// If instead of using Cloudant's security model for managing permissions you opt to use the Apache CouchDB `_users` database (that is using legacy credentials _and_ the `couchdb_auth_only:true` option) then be aware that the user must already exist in `_users` database before adding permissions. For information on the `_users` database, see <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#using-the-users-database-with-cloudant-nosql-db" target="_blank">Using the `_users` database with Cloudant</a>.
 ```
-
-The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to read data from a database, but didn't identify itself, the task can continue only if the `nobody` user has the role `_reader`.
-
-If instead of using Cloudant's security model for managing permissions you opt to use the Apache CouchDB `_users` database (that is using legacy credentials _and_ the `couchdb_auth_only:true` option) then be aware that the user must already exist in `_users` database before adding permissions. For information on the `_users` database, see <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#using-the-users-database-with-cloudant-nosql-db" target="_blank">Using the `_users` database with Cloudant</a>.
 
 ## getActivityTrackerEvents
 
 _GET `/_api/v2/user/activity_tracker/events`_
 
-### [Example request](./snippets/getActivityTrackerEvents/example_request.go)
+### [Example request](snippets/getActivityTrackerEvents/example_request.go)
 
+[embedmd]:# (snippets/getActivityTrackerEvents/example_request.go)
 ```go
+// section: code
 getActivityTrackerEventsOptions := service.NewGetActivityTrackerEventsOptions()
 
 activityTrackerEvents, response, err := service.GetActivityTrackerEvents(getActivityTrackerEventsOptions)
@@ -121,9 +133,11 @@ fmt.Println(string(b))
 
 _POST `/_api/v2/user/activity_tracker/events`_
 
-### [Example request](./snippets/postActivityTrackerEvents/example_request.go)
+### [Example request](snippets/postActivityTrackerEvents/example_request.go)
 
+[embedmd]:# (snippets/postActivityTrackerEvents/example_request.go)
 ```go
+// section: code
 postActivityTrackerEventsOptions := service.NewPostActivityTrackerEventsOptions(
   []string{"management"},
 )
@@ -141,9 +155,11 @@ fmt.Println(string(b))
 
 _GET `/_api/v2/user/capacity/throughput`_
 
-### [Example request](./snippets/getCapacityThroughputInformation/example_request.go)
+### [Example request](snippets/getCapacityThroughputInformation/example_request.go)
 
+[embedmd]:# (snippets/getCapacityThroughputInformation/example_request.go)
 ```go
+// section: code
 getCapacityThroughputInformationOptions := service.NewGetCapacityThroughputInformationOptions()
 
 capacityThroughputInformation, response, err := service.GetCapacityThroughputInformation(getCapacityThroughputInformationOptions)
@@ -159,9 +175,11 @@ fmt.Println(string(b))
 
 _PUT `/_api/v2/user/capacity/throughput`_
 
-### [Example request](./snippets/putCapacityThroughputConfiguration/example_request.go)
+### [Example request](snippets/putCapacityThroughputConfiguration/example_request.go)
 
+[embedmd]:# (snippets/putCapacityThroughputConfiguration/example_request.go)
 ```go
+// section: code
 putCapacityThroughputConfigurationOptions := service.NewPutCapacityThroughputConfigurationOptions(
   1,
 )
@@ -179,9 +197,11 @@ fmt.Println(string(b))
 
 _GET `/_api/v2/user/config/cors`_
 
-### [Example request](./snippets/getCorsInformation/example_request.go)
+### [Example request](snippets/getCorsInformation/example_request.go)
 
+[embedmd]:# (snippets/getCorsInformation/example_request.go)
 ```go
+// section: code
 getCorsInformationOptions := service.NewGetCorsInformationOptions()
 
 corsConfiguration, response, err := service.GetCorsInformation(getCorsInformationOptions)
@@ -197,9 +217,11 @@ fmt.Println(string(b))
 
 _PUT `/_api/v2/user/config/cors`_
 
-### [Example request](./snippets/putCorsConfiguration/example_request.go)
+### [Example request](snippets/putCorsConfiguration/example_request.go)
 
+[embedmd]:# (snippets/putCorsConfiguration/example_request.go)
 ```go
+// section: code
 putCorsConfigurationOptions := service.NewPutCorsConfigurationOptions([]string{
   "https://example.com",
 })
@@ -218,9 +240,11 @@ fmt.Println(string(b))
 
 _GET `/_api/v2/user/current/throughput`_
 
-### [Example request](./snippets/getCurrentThroughputInformation/example_request.go)
+### [Example request](snippets/getCurrentThroughputInformation/example_request.go)
 
+[embedmd]:# (snippets/getCurrentThroughputInformation/example_request.go)
 ```go
+// section: code
 getCurrentThroughputInformationOptions := service.NewGetCurrentThroughputInformationOptions()
 
 currentThroughputInformation, response, err := service.GetCurrentThroughputInformation(getCurrentThroughputInformationOptions)
@@ -236,9 +260,11 @@ fmt.Println(string(b))
 
 _GET `/_db_updates`_
 
-### [Example request](./snippets/getDbUpdates/example_request.go)
+### [Example request](snippets/getDbUpdates/example_request.go)
 
+[embedmd]:# (snippets/getDbUpdates/example_request.go)
 ```go
+// section: code
 getDbUpdatesOptions := service.NewGetDbUpdatesOptions()
 getDbUpdatesOptions.SetFeed("normal")
 getDbUpdatesOptions.SetHeartbeat(10000)
@@ -251,17 +277,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(dbUpdates, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This request requires `server_admin` access.
 ```
-
-This request requires `server_admin` access.
 
 ## postDbsInfo
 
 _POST `/_dbs_info`_
 
-### [Example request](./snippets/postDbsInfo/example_request.go)
+### [Example request](snippets/postDbsInfo/example_request.go)
 
+[embedmd]:# (snippets/postDbsInfo/example_request.go)
 ```go
+// section: code
 postDbsInfoOptions := service.NewPostDbsInfoOptions([]string{
   "products",
   "users",
@@ -281,9 +309,11 @@ fmt.Println(string(b))
 
 _GET `/_membership`_
 
-### [Example request](./snippets/getMembershipInformation/example_request.go)
+### [Example request](snippets/getMembershipInformation/example_request.go)
 
+[embedmd]:# (snippets/getMembershipInformation/example_request.go)
 ```go
+// section: code
 getMembershipInformationOptions := service.NewGetMembershipInformationOptions()
 
 membershipInformation, response, err := service.GetMembershipInformation(getMembershipInformationOptions)
@@ -299,9 +329,11 @@ fmt.Println(string(b))
 
 _DELETE `/_replicator/{doc_id}`_
 
-### [Example request](./snippets/deleteReplicationDocument/example_request.go)
+### [Example request](snippets/deleteReplicationDocument/example_request.go)
 
+[embedmd]:# (snippets/deleteReplicationDocument/example_request.go)
 ```go
+// section: code
 deleteReplicationDocumentOptions := service.NewDeleteReplicationDocumentOptions(
   "repldoc-example",
 )
@@ -320,9 +352,11 @@ fmt.Println(string(b))
 
 _GET `/_replicator/{doc_id}`_
 
-### [Example request](./snippets/getReplicationDocument/example_request.go)
+### [Example request](snippets/getReplicationDocument/example_request.go)
 
+[embedmd]:# (snippets/getReplicationDocument/example_request.go)
 ```go
+// section: code
 getReplicationDocumentOptions := service.NewGetReplicationDocumentOptions(
   "repldoc-example",
 )
@@ -340,9 +374,11 @@ fmt.Println(string(b))
 
 _HEAD `/_replicator/{doc_id}`_
 
-### [Example request](./snippets/headReplicationDocument/example_request.go)
+### [Example request](snippets/headReplicationDocument/example_request.go)
 
+[embedmd]:# (snippets/headReplicationDocument/example_request.go)
 ```go
+// section: code
 headReplicationDocumentOptions := service.NewHeadReplicationDocumentOptions(
   "repldoc-example",
 )
@@ -360,11 +396,13 @@ fmt.Println(response.Headers["Etag"])
 
 _PUT `/_replicator/{doc_id}`_
 
-### [Example request](./snippets/putReplicationDocument/example_request.go)
+### [Example request](snippets/putReplicationDocument/example_request.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/putReplicationDocument/example_request.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 source, err := service.NewReplicationDatabase(
   "<your-source-service-url>/animaldb",
 )
@@ -415,9 +453,11 @@ fmt.Println(string(b))
 
 _GET `/_scheduler/docs`_
 
-### [Example request](./snippets/getSchedulerDocs/example_request.go)
+### [Example request](snippets/getSchedulerDocs/example_request.go)
 
+[embedmd]:# (snippets/getSchedulerDocs/example_request.go)
 ```go
+// section: code
 getSchedulerDocsOptions := service.NewGetSchedulerDocsOptions()
 getSchedulerDocsOptions.SetLimit(100)
 getSchedulerDocsOptions.SetStates([]string{"completed"})
@@ -435,9 +475,11 @@ fmt.Println(string(b))
 
 _GET `/_scheduler/docs/_replicator/{doc_id}`_
 
-### [Example request](./snippets/getSchedulerDocument/example_request.go)
+### [Example request](snippets/getSchedulerDocument/example_request.go)
 
+[embedmd]:# (snippets/getSchedulerDocument/example_request.go)
 ```go
+// section: code
 getSchedulerDocumentOptions := service.NewGetSchedulerDocumentOptions(
   "repldoc-example",
 )
@@ -455,9 +497,11 @@ fmt.Println(string(b))
 
 _GET `/_scheduler/jobs`_
 
-### [Example request](./snippets/getSchedulerJobs/example_request.go)
+### [Example request](snippets/getSchedulerJobs/example_request.go)
 
+[embedmd]:# (snippets/getSchedulerJobs/example_request.go)
 ```go
+// section: code
 getSchedulerJobsOptions := service.NewGetSchedulerJobsOptions()
 getSchedulerJobsOptions.SetLimit(100)
 
@@ -474,9 +518,11 @@ fmt.Println(string(b))
 
 _GET `/_scheduler/jobs/{job_id}`_
 
-### [Example request](./snippets/getSchedulerJob/example_request.go)
+### [Example request](snippets/getSchedulerJob/example_request.go)
 
+[embedmd]:# (snippets/getSchedulerJob/example_request.go)
 ```go
+// section: code
 getSchedulerJobOptions := service.NewGetSchedulerJobOptions(
   "7b94915cd8c4a0173c77c55cd0443939+continuous",
 )
@@ -494,9 +540,11 @@ fmt.Println(string(b))
 
 _HEAD `/_scheduler/jobs/{job_id}`_
 
-### [Example request](./snippets/headSchedulerJob/example_request.go)
+### [Example request](snippets/headSchedulerJob/example_request.go)
 
+[embedmd]:# (snippets/headSchedulerJob/example_request.go)
 ```go
+// section: code
 headSchedulerJobOptions := service.NewHeadSchedulerJobOptions(
   "7b94915cd8c4a0173c77c55cd0443939+continuous",
 )
@@ -513,9 +561,11 @@ fmt.Println(response.StatusCode)
 
 _POST `/_search_analyze`_
 
-### [Example request](./snippets/postSearchAnalyze/example_request.go)
+### [Example request](snippets/postSearchAnalyze/example_request.go)
 
+[embedmd]:# (snippets/postSearchAnalyze/example_request.go)
 ```go
+// section: code
 postSearchAnalyzeOptions := service.NewPostSearchAnalyzeOptions(
   "english",
   "running is fun",
@@ -534,9 +584,11 @@ fmt.Println(string(b))
 
 _GET `/_session`_
 
-### [Example request](./snippets/getSessionInformation/example_request.go)
+### [Example request](snippets/getSessionInformation/example_request.go)
 
+[embedmd]:# (snippets/getSessionInformation/example_request.go)
 ```go
+// section: code
 getSessionInformationOptions := service.NewGetSessionInformationOptions()
 
 sessionInformation, response, err := service.GetSessionInformation(getSessionInformationOptions)
@@ -546,17 +598,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(sessionInformation, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// For more details on Session Authentication, see [Authentication.](#authentication)
 ```
-
-For more details on Session Authentication, see [Authentication.](#authentication)
 
 ## getUpInformation
 
 _GET `/_up`_
 
-### [Example request](./snippets/getUpInformation/example_request.go)
+### [Example request](snippets/getUpInformation/example_request.go)
 
+[embedmd]:# (snippets/getUpInformation/example_request.go)
 ```go
+// section: code
 getUpInformationOptions := service.NewGetUpInformationOptions()
 
 upInformation, response, err := service.GetUpInformation(getUpInformationOptions)
@@ -572,9 +626,11 @@ fmt.Println(string(b))
 
 _GET `/_uuids`_
 
-### [Example request](./snippets/getUuids/example_request.go)
+### [Example request](snippets/getUuids/example_request.go)
 
+[embedmd]:# (snippets/getUuids/example_request.go)
 ```go
+// section: code
 getUuidsOptions := service.NewGetUuidsOptions()
 getUuidsOptions.SetCount(10)
 
@@ -591,9 +647,11 @@ fmt.Println(string(b))
 
 _DELETE `/{db}`_
 
-### [Example request](./snippets/deleteDatabase/example_request.go)
+### [Example request](snippets/deleteDatabase/example_request.go)
 
+[embedmd]:# (snippets/deleteDatabase/example_request.go)
 ```go
+// section: code
 deleteDatabaseOptions := service.NewDeleteDatabaseOptions(
   "<db-name>",
 )
@@ -611,9 +669,11 @@ fmt.Println(string(b))
 
 _GET `/{db}`_
 
-### [Example request](./snippets/getDatabaseInformation/example_request.go)
+### [Example request](snippets/getDatabaseInformation/example_request.go)
 
+[embedmd]:# (snippets/getDatabaseInformation/example_request.go)
 ```go
+// section: code
 getDatabaseInformationOptions := service.NewGetDatabaseInformationOptions(
   "products",
 )
@@ -631,9 +691,11 @@ fmt.Println(string(b))
 
 _HEAD `/{db}`_
 
-### [Example request](./snippets/headDatabase/example_request.go)
+### [Example request](snippets/headDatabase/example_request.go)
 
+[embedmd]:# (snippets/headDatabase/example_request.go)
 ```go
+// section: code
 headDatabaseOptions := service.NewHeadDatabaseOptions(
   "products",
 )
@@ -650,11 +712,13 @@ fmt.Println(response.StatusCode)
 
 _POST `/{db}`_
 
-### [Example request](./snippets/postDocument/example_request.go)
+### [Example request](snippets/postDocument/example_request.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postDocument/example_request.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 productsDoc := cloudantv1.Document{
   ID: core.StringPtr("small-appliances:1000042"),
 }
@@ -684,9 +748,11 @@ fmt.Println(string(b))
 
 _PUT `/{db}`_
 
-### [Example request](./snippets/putDatabase/example_request.go)
+### [Example request](snippets/putDatabase/example_request.go)
 
+[embedmd]:# (snippets/putDatabase/example_request.go)
 ```go
+// section: code
 putDatabaseOptions := service.NewPutDatabaseOptions(
   "products",
 )
@@ -705,9 +771,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_all_docs`_
 
-### [Example request](./snippets/postAllDocs/example_request.go)
+### [Example request](snippets/postAllDocs/example_request.go)
 
+[embedmd]:# (snippets/postAllDocs/example_request.go)
 ```go
+// section: code
 postAllDocsOptions := service.NewPostAllDocsOptions(
   "orders",
 )
@@ -724,9 +792,11 @@ b, _ := json.MarshalIndent(allDocsResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Example request as a stream](./snippets/postAllDocs/example_request_as_a_stream.go)
+### [Example request as a stream](snippets/postAllDocs/example_request_as_a_stream.go)
 
+[embedmd]:# (snippets/postAllDocs/example_request_as_a_stream.go)
 ```go
+// section: code
 postAllDocsOptions := service.NewPostAllDocsOptions(
   "orders",
 )
@@ -756,11 +826,13 @@ if allDocsResult != nil {
 
 _POST `/{db}/_all_docs/queries`_
 
-### [Example request](./snippets/postAllDocsQueries/example_request.go)
+### [Example request](snippets/postAllDocsQueries/example_request.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postAllDocsQueries/example_request.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 allDocsQueries := []cloudantv1.AllDocsQuery{
   {
     Keys: []string{
@@ -791,11 +863,13 @@ fmt.Println(string(b))
 
 _POST `/{db}/_bulk_docs`_
 
-### [Example request: create documents](./snippets/postBulkDocs/example_request_create_documents.go)
+### [Example request: create documents](snippets/postBulkDocs/example_request_create_documents.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postBulkDocs/example_request_create_documents.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 eventDoc1 := cloudantv1.Document{
   ID: core.StringPtr("0007241142412418284"),
 }
@@ -838,11 +912,13 @@ b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Example request: delete documents](./snippets/postBulkDocs/example_request_delete_documents.go)
+### [Example request: delete documents](snippets/postBulkDocs/example_request_delete_documents.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postBulkDocs/example_request_delete_documents.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 eventDoc1 := cloudantv1.Document{
   ID: core.StringPtr("0007241142412418284"),
 }
@@ -879,9 +955,11 @@ b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Example request as a stream](./snippets/postBulkDocs/example_request_as_a_stream.go)
+### [Example request as a stream](snippets/postBulkDocs/example_request_as_a_stream.go)
 
+[embedmd]:# (snippets/postBulkDocs/example_request_as_a_stream.go)
 ```go
+// section: code
 file, err := os.Open("upload.json")
 if err != nil {
   panic(err)
@@ -900,10 +978,9 @@ if err != nil {
 
 b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
-```
-
-Content of upload.json
-```go
+// section: markdown
+// Content of upload.json
+// section: code
 {
   "docs": [
     {
@@ -930,11 +1007,13 @@ Content of upload.json
 
 _POST `/{db}/_bulk_get`_
 
-### [Example request](./snippets/postBulkGet/example_request.go)
+### [Example request](snippets/postBulkGet/example_request.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postBulkGet/example_request.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 docID := "order00067"
 
 bulkGetDocs := []cloudantv1.BulkGetQueryDocument{
@@ -961,11 +1040,13 @@ b, _ := json.MarshalIndent(bulkGetResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Alternative example request for `open_revs=all`](./snippets/postBulkGet/alternative_example_request_for_open_revs_all.go)
+### [Alternative example request for `open_revs=all`](snippets/postBulkGet/alternative_example_request_for_open_revs_all.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postBulkGet/alternative_example_request_for_open_revs_all.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 postBulkGetOptions := service.NewPostBulkGetOptions(
   "orders",
   []cloudantv1.BulkGetQueryDocument{{ID: core.StringPtr("order00067")}},
@@ -980,9 +1061,11 @@ b, _ := json.MarshalIndent(bulkGetResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Alternative example request for `atts_since`](./snippets/postBulkGet/alternative_example_request_for_atts_since.go)
+### [Alternative example request for `atts_since`](snippets/postBulkGet/alternative_example_request_for_atts_since.go)
 
+[embedmd]:# (snippets/postBulkGet/alternative_example_request_for_atts_since.go)
 ```go
+// section: code
 docID := "order00058"
 
 postBulkGetOptions := service.NewPostBulkGetOptions(
@@ -1008,9 +1091,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_changes`_
 
-### [Example request](./snippets/postChanges/example_request.go)
+### [Example request](snippets/postChanges/example_request.go)
 
+[embedmd]:# (snippets/postChanges/example_request.go)
 ```go
+// section: code
 postChangesOptions := service.NewPostChangesOptions(
   "orders",
 )
@@ -1024,9 +1109,11 @@ b, _ := json.MarshalIndent(changesResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Example request as a stream](./snippets/postChanges/example_request_as_a_stream.go)
+### [Example request as a stream](snippets/postChanges/example_request_as_a_stream.go)
 
+[embedmd]:# (snippets/postChanges/example_request_as_a_stream.go)
 ```go
+// section: code
 postChangesOptions := service.NewPostChangesOptions(
   "orders",
 )
@@ -1053,9 +1140,11 @@ if changesResult != nil {
 
 _DELETE `/{db}/_design/{ddoc}`_
 
-### [Example request](./snippets/deleteDesignDocument/example_request.go)
+### [Example request](snippets/deleteDesignDocument/example_request.go)
 
+[embedmd]:# (snippets/deleteDesignDocument/example_request.go)
 ```go
+// section: code
 deleteDesignDocumentOptions := service.NewDeleteDesignDocumentOptions(
   "products",
   "appliances",
@@ -1069,17 +1158,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This request requires the example revisions in the DELETE body to be replaced with valid revisions.
 ```
-
-This request requires the example revisions in the DELETE body to be replaced with valid revisions.
 
 ## getDesignDocument
 
 _GET `/{db}/_design/{ddoc}`_
 
-### [Example request](./snippets/getDesignDocument/example_request.go)
+### [Example request](snippets/getDesignDocument/example_request.go)
 
+[embedmd]:# (snippets/getDesignDocument/example_request.go)
 ```go
+// section: code
 getDesignDocumentOptions := service.NewGetDesignDocumentOptions(
   "products",
   "appliances",
@@ -1099,9 +1190,11 @@ fmt.Println(string(b))
 
 _HEAD `/{db}/_design/{ddoc}`_
 
-### [Example request](./snippets/headDesignDocument/example_request.go)
+### [Example request](snippets/headDesignDocument/example_request.go)
 
+[embedmd]:# (snippets/headDesignDocument/example_request.go)
 ```go
+// section: code
 headDesignDocumentOptions := service.NewHeadDesignDocumentOptions(
   "products",
   "appliances",
@@ -1120,9 +1213,11 @@ fmt.Println(response.Headers["Etag"])
 
 _PUT `/{db}/_design/{ddoc}`_
 
-### [Example request](./snippets/putDesignDocument/example_request.go)
+### [Example request](snippets/putDesignDocument/example_request.go)
 
+[embedmd]:# (snippets/putDesignDocument/example_request.go)
 ```go
+// section: code
 emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce(
   "function(doc) {" +
     "if(doc.email_verified  === true){ emit(doc.email, [doc.name, doc.email_verified, doc.joined])" +
@@ -1204,17 +1299,19 @@ if err != nil {
 
 b, _ = json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example creates `allusers` design document in the `users` database and `appliances` design document in the partitioned `products` database.
 ```
-
-This example creates `allusers` design document in the `users` database and `appliances` design document in the partitioned `products` database.
 
 ## getDesignDocumentInformation
 
 _GET `/{db}/_design/{ddoc}/_info`_
 
-### [Example request](./snippets/getDesignDocumentInformation/example_request.go)
+### [Example request](snippets/getDesignDocumentInformation/example_request.go)
 
+[embedmd]:# (snippets/getDesignDocumentInformation/example_request.go)
 ```go
+// section: code
 getDesignDocumentInformationOptions := service.NewGetDesignDocumentInformationOptions(
   "products",
   "appliances",
@@ -1233,9 +1330,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_design/{ddoc}/_search/{index}`_
 
-### [Example request](./snippets/postSearch/example_request.go)
+### [Example request](snippets/postSearch/example_request.go)
 
+[embedmd]:# (snippets/postSearch/example_request.go)
 ```go
+// section: code
 postSearchOptions := service.NewPostSearchOptions(
   "users",
   "allusers",
@@ -1250,17 +1349,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(searchResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `activeUsers` Cloudant Search index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
-
-This example requires the `activeUsers` Cloudant Search index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 
 ## getSearchInfo
 
 _GET `/{db}/_design/{ddoc}/_search_info/{index}`_
 
-### [Example request](./snippets/getSearchInfo/example_request.go)
+### [Example request](snippets/getSearchInfo/example_request.go)
 
+[embedmd]:# (snippets/getSearchInfo/example_request.go)
 ```go
+// section: code
 getSearchInfoOptions := service.NewGetSearchInfoOptions(
   "products",
   "appliances",
@@ -1274,17 +1375,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(searchInfoResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
-
-This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 
 ## postView
 
 _POST `/{db}/_design/{ddoc}/_view/{view}`_
 
-### [Example request](./snippets/postView/example_request.go)
+### [Example request](snippets/postView/example_request.go)
 
+[embedmd]:# (snippets/postView/example_request.go)
 ```go
+// section: code
 postViewOptions := service.NewPostViewOptions(
   "users",
   "allusers",
@@ -1298,19 +1401,21 @@ if err != nil {
 
 b, _ := json.MarshalIndent(viewResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `getVerifiedEmails` view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 ```
-
-This example requires the `getVerifiedEmails` view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 
 ## postViewQueries
 
 _POST `/{db}/_design/{ddoc}/_view/{view}/queries`_
 
-### [Example request](./snippets/postViewQueries/example_request.go)
+### [Example request](snippets/postViewQueries/example_request.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postViewQueries/example_request.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 postViewQueriesOptions := service.NewPostViewQueriesOptions(
   "users",
   "allusers",
@@ -1334,17 +1439,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(viewQueriesResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `getVerifiedEmails` view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 ```
-
-This example requires the `getVerifiedEmails` view to exist. To create the design document with this view, see [Create or modify a design document.](#putdesigndocument)
 
 ## postDesignDocs
 
 _POST `/{db}/_design_docs`_
 
-### [Example request](./snippets/postDesignDocs/example_request.go)
+### [Example request](snippets/postDesignDocs/example_request.go)
 
+[embedmd]:# (snippets/postDesignDocs/example_request.go)
 ```go
+// section: code
 postDesignDocsOptions := service.NewPostDesignDocsOptions(
   "users",
 )
@@ -1363,11 +1470,13 @@ fmt.Println(string(b))
 
 _POST `/{db}/_design_docs/queries`_
 
-### [Example request](./snippets/postDesignDocsQueries/example_request.go)
+### [Example request](snippets/postDesignDocsQueries/example_request.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postDesignDocsQueries/example_request.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 doc1 := cloudantv1.AllDocsQuery{
   Descending:  core.BoolPtr(true),
   IncludeDocs: core.BoolPtr(true),
@@ -1401,9 +1510,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_explain`_
 
-### [Example request](./snippets/postExplain/example_request.go)
+### [Example request](snippets/postExplain/example_request.go)
 
+[embedmd]:# (snippets/postExplain/example_request.go)
 ```go
+// section: code
 postExplainOptions := service.NewPostExplainOptions(
   "users",
   map[string]interface{}{
@@ -1428,9 +1539,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_find`_
 
-### [Example request for "json" index type](./snippets/postFind/example_request_for_json_index_type.go)
+### [Example request for "json" index type](snippets/postFind/example_request_for_json_index_type.go)
 
+[embedmd]:# (snippets/postFind/example_request_for_json_index_type.go)
 ```go
+// section: code
 postFindOptions := service.NewPostFindOptions(
   "users",
   map[string]interface{}{
@@ -1452,13 +1565,15 @@ if err != nil {
 
 b, _ := json.MarshalIndent(findResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `getUserByEmail` Cloudant Query "json" index to exist. To create the index, see [Create a new index on a database.](#postindex)
 ```
 
-This example requires the `getUserByEmail` Cloudant Query "json" index to exist. To create the index, see [Create a new index on a database.](#postindex)
+### [Example request for "text" index type](snippets/postFind/example_request_for_text_index_type.go)
 
-### [Example request for "text" index type](./snippets/postFind/example_request_for_text_index_type.go)
-
+[embedmd]:# (snippets/postFind/example_request_for_text_index_type.go)
 ```go
+// section: code
 postFindOptions := service.NewPostFindOptions(
   "users",
   map[string]interface{}{
@@ -1479,17 +1594,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(findResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `getUserByAddress` Cloudant Query "text" index to exist. To create the index, see [Create a new index on a database.](#postindex)
 ```
-
-This example requires the `getUserByAddress` Cloudant Query "text" index to exist. To create the index, see [Create a new index on a database.](#postindex)
 
 ## getIndexesInformation
 
 _GET `/{db}/_index`_
 
-### [Example request](./snippets/getIndexesInformation/example_request.go)
+### [Example request](snippets/getIndexesInformation/example_request.go)
 
+[embedmd]:# (snippets/getIndexesInformation/example_request.go)
 ```go
+// section: code
 getIndexesInformationOptions := service.NewGetIndexesInformationOptions(
   "users",
 )
@@ -1507,11 +1624,13 @@ fmt.Println(string(b))
 
 _POST `/{db}/_index`_
 
-### [Example request using "json" type index](./snippets/postIndex/example_request_using_json_type_index.go)
+### [Example request using "json" type index](snippets/postIndex/example_request_using_json_type_index.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postIndex/example_request_using_json_type_index.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 // Type "json" index fields require an object that maps the name of a field to a sort direction.
 var indexField cloudantv1.IndexField
 indexField.SetProperty("email", core.StringPtr("asc"))
@@ -1537,11 +1656,13 @@ b, _ := json.MarshalIndent(indexResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-### [Example request using "text" type index](./snippets/postIndex/example_request_using_text_type_index.go)
+### [Example request using "text" type index](snippets/postIndex/example_request_using_text_type_index.go)
 
-
-This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+[embedmd]:# (snippets/postIndex/example_request_using_text_type_index.go)
 ```go
+// section: markdown
+// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code
 // Type "text" index fields require an object with a name and type properties for the field.
 var indexField cloudantv1.IndexField
 indexField.SetProperty("name", core.StringPtr("address"))
@@ -1572,9 +1693,11 @@ fmt.Println(string(b))
 
 _DELETE `/{db}/_index/_design/{ddoc}/{type}/{index}`_
 
-### [Example request](./snippets/deleteIndex/example_request.go)
+### [Example request](snippets/deleteIndex/example_request.go)
 
+[embedmd]:# (snippets/deleteIndex/example_request.go)
 ```go
+// section: code
 deleteIndexOptions := service.NewDeleteIndexOptions(
   "users",
   "json-index",
@@ -1589,17 +1712,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(ok, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example will fail if `getUserByName` index doesn't exist. To create the index, see [Create a new index on a database.](#postindex)
 ```
-
-This example will fail if `getUserByName` index doesn't exist. To create the index, see [Create a new index on a database.](#postindex)
 
 ## deleteLocalDocument
 
 _DELETE `/{db}/_local/{doc_id}`_
 
-### [Example request](./snippets/deleteLocalDocument/example_request.go)
+### [Example request](snippets/deleteLocalDocument/example_request.go)
 
+[embedmd]:# (snippets/deleteLocalDocument/example_request.go)
 ```go
+// section: code
 deleteLocalDocumentOptions := service.NewDeleteLocalDocumentOptions(
   "orders",
   "local-0007741142412418284",
@@ -1618,9 +1743,11 @@ fmt.Println(string(b))
 
 _GET `/{db}/_local/{doc_id}`_
 
-### [Example request](./snippets/getLocalDocument/example_request.go)
+### [Example request](snippets/getLocalDocument/example_request.go)
 
+[embedmd]:# (snippets/getLocalDocument/example_request.go)
 ```go
+// section: code
 getLocalDocumentOptions := service.NewGetLocalDocumentOptions(
   "orders",
   "local-0007741142412418284",
@@ -1639,9 +1766,11 @@ fmt.Println(string(b))
 
 _PUT `/{db}/_local/{doc_id}`_
 
-### [Example request](./snippets/putLocalDocument/example_request.go)
+### [Example request](snippets/putLocalDocument/example_request.go)
 
+[embedmd]:# (snippets/putLocalDocument/example_request.go)
 ```go
+// section: code
 localDocument := cloudantv1.Document{}
 properties := map[string]interface{}{
   "type":            "order",
@@ -1678,9 +1807,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_missing_revs`_
 
-### [Example request](./snippets/postMissingRevs/example_request.go)
+### [Example request](snippets/postMissingRevs/example_request.go)
 
+[embedmd]:# (snippets/postMissingRevs/example_request.go)
 ```go
+// section: code
 postMissingRevsOptions := service.NewPostMissingRevsOptions(
   "orders",
   map[string][]string{
@@ -1695,17 +1826,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(missingRevsResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the example revisions in the POST body to be replaced with valid revisions.
 ```
-
-This example requires the example revisions in the POST body to be replaced with valid revisions.
 
 ## getPartitionInformation
 
 _GET `/{db}/_partition/{partition_key}`_
 
-### [Example request](./snippets/getPartitionInformation/example_request.go)
+### [Example request](snippets/getPartitionInformation/example_request.go)
 
+[embedmd]:# (snippets/getPartitionInformation/example_request.go)
 ```go
+// section: code
 getPartitionInformationOptions := service.NewGetPartitionInformationOptions(
   "products",
   "small-appliances",
@@ -1724,9 +1857,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_partition/{partition_key}/_all_docs`_
 
-### [Example request](./snippets/postPartitionAllDocs/example_request.go)
+### [Example request](snippets/postPartitionAllDocs/example_request.go)
 
+[embedmd]:# (snippets/postPartitionAllDocs/example_request.go)
 ```go
+// section: code
 postPartitionAllDocsOptions := service.NewPostPartitionAllDocsOptions(
   "products",
   "small-appliances",
@@ -1746,9 +1881,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`_
 
-### [Example request](./snippets/postPartitionSearch/example_request.go)
+### [Example request](snippets/postPartitionSearch/example_request.go)
 
+[embedmd]:# (snippets/postPartitionSearch/example_request.go)
 ```go
+// section: code
 postPartitionSearchOptions := service.NewPostPartitionSearchOptions(
   "products",
   "small-appliances",
@@ -1764,17 +1901,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(searchResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
-
-This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 
 ## postPartitionView
 
 _POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`_
 
-### [Example request](./snippets/postPartitionView/example_request.go)
+### [Example request](snippets/postPartitionView/example_request.go)
 
+[embedmd]:# (snippets/postPartitionView/example_request.go)
 ```go
+// section: code
 postPartitionViewOptions := service.NewPostPartitionViewOptions(
   "products",
   "small-appliances",
@@ -1791,17 +1930,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(viewResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `byApplianceProdId` partitioned view to exist. To create the view, see [Create or modify a design document.](#putdesigndocument)
 ```
-
-This example requires the `byApplianceProdId` partitioned view to exist. To create the view, see [Create or modify a design document.](#putdesigndocument)
 
 ## postPartitionFind
 
 _POST `/{db}/_partition/{partition_key}/_find`_
 
-### [Example request](./snippets/postPartitionFind/example_request.go)
+### [Example request](snippets/postPartitionFind/example_request.go)
 
+[embedmd]:# (snippets/postPartitionFind/example_request.go)
 ```go
+// section: code
 selector := map[string]interface{}{
   "type": map[string]string{
     "$eq": "product",
@@ -1830,9 +1971,11 @@ fmt.Println(string(b))
 
 _POST `/{db}/_revs_diff`_
 
-### [Example request](./snippets/postRevsDiff/example_request.go)
+### [Example request](snippets/postRevsDiff/example_request.go)
 
+[embedmd]:# (snippets/postRevsDiff/example_request.go)
 ```go
+// section: code
 postRevsDiffOptions := service.NewPostRevsDiffOptions(
   "orders",
   map[string][]string{
@@ -1851,17 +1994,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(mapStringRevsDiff, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the example revisions in the POST body to be replaced with valid revisions.
 ```
-
-This example requires the example revisions in the POST body to be replaced with valid revisions.
 
 ## getSecurity
 
 _GET `/{db}/_security`_
 
-### [Example request](./snippets/getSecurity/example_request.go)
+### [Example request](snippets/getSecurity/example_request.go)
 
+[embedmd]:# (snippets/getSecurity/example_request.go)
 ```go
+// section: code
 getSecurityOptions := service.NewGetSecurityOptions(
   "products",
 )
@@ -1879,9 +2024,11 @@ fmt.Println(string(b))
 
 _PUT `/{db}/_security`_
 
-### [Example request](./snippets/putSecurity/example_request.go)
+### [Example request](snippets/putSecurity/example_request.go)
 
+[embedmd]:# (snippets/putSecurity/example_request.go)
 ```go
+// section: code
 putSecurityOptions := service.NewPutSecurityOptions(
   "products",
 )
@@ -1897,19 +2044,21 @@ if err != nil {
 
 b, _ := json.MarshalIndent(ok, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to read data from a database, but didn't identify itself, the task can continue only if the `nobody` user has the role `_reader`.
+// section: markdown
+// If instead of using Cloudant's security model for managing permissions you opt to use the Apache CouchDB `_users` database (that is using legacy credentials _and_ the `couchdb_auth_only:true` option) then be aware that the user must already exist in `_users` database before adding permissions. For information on the `_users` database, see <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#using-the-users-database-with-cloudant-nosql-db" target="_blank">Using the `_users` database with Cloudant</a>.
 ```
-
-The `nobody` username applies to all unauthenticated connection attempts. For example, if an application tries to read data from a database, but didn't identify itself, the task can continue only if the `nobody` user has the role `_reader`.
-
-If instead of using Cloudant's security model for managing permissions you opt to use the Apache CouchDB `_users` database (that is using legacy credentials _and_ the `couchdb_auth_only:true` option) then be aware that the user must already exist in `_users` database before adding permissions. For information on the `_users` database, see <a href="https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-work-with-your-account#using-the-users-database-with-cloudant-nosql-db" target="_blank">Using the `_users` database with Cloudant</a>.
 
 ## getShardsInformation
 
 _GET `/{db}/_shards`_
 
-### [Example request](./snippets/getShardsInformation/example_request.go)
+### [Example request](snippets/getShardsInformation/example_request.go)
 
+[embedmd]:# (snippets/getShardsInformation/example_request.go)
 ```go
+// section: code
 getShardsInformationOptions := service.NewGetShardsInformationOptions(
   "products",
 )
@@ -1927,9 +2076,11 @@ fmt.Println(string(b))
 
 _GET `/{db}/_shards/{doc_id}`_
 
-### [Example request](./snippets/getDocumentShardsInfo/example_request.go)
+### [Example request](snippets/getDocumentShardsInfo/example_request.go)
 
+[embedmd]:# (snippets/getDocumentShardsInfo/example_request.go)
 ```go
+// section: code
 getDocumentShardsInfoOptions := service.NewGetDocumentShardsInfoOptions(
   "products",
   "small-appliances:1000042",
@@ -1948,9 +2099,11 @@ fmt.Println(string(b))
 
 _DELETE `/{db}/{doc_id}`_
 
-### [Example request](./snippets/deleteDocument/example_request.go)
+### [Example request](snippets/deleteDocument/example_request.go)
 
+[embedmd]:# (snippets/deleteDocument/example_request.go)
 ```go
+// section: code
 deleteDocumentOptions := service.NewDeleteDocumentOptions(
   "events",
   "0007241142412418284",
@@ -1970,9 +2123,11 @@ fmt.Println(string(b))
 
 _GET `/{db}/{doc_id}`_
 
-### [Example request](./snippets/getDocument/example_request.go)
+### [Example request](snippets/getDocument/example_request.go)
 
+[embedmd]:# (snippets/getDocument/example_request.go)
 ```go
+// section: code
 getDocumentOptions := service.NewGetDocumentOptions(
   "products",
   "small-appliances:1000042",
@@ -1991,9 +2146,11 @@ fmt.Println(string(b))
 
 _HEAD `/{db}/{doc_id}`_
 
-### [Example request](./snippets/headDocument/example_request.go)
+### [Example request](snippets/headDocument/example_request.go)
 
+[embedmd]:# (snippets/headDocument/example_request.go)
 ```go
+// section: code
 headDocumentOptions := service.NewHeadDocumentOptions(
   "events",
   "0007241142412418284",
@@ -2012,9 +2169,11 @@ fmt.Println(response.Headers["Etag"])
 
 _PUT `/{db}/{doc_id}`_
 
-### [Example request](./snippets/putDocument/example_request.go)
+### [Example request](snippets/putDocument/example_request.go)
 
+[embedmd]:# (snippets/putDocument/example_request.go)
 ```go
+// section: code
 eventDoc := cloudantv1.Document{}
 eventDoc.SetProperty("type", "event")
 eventDoc.SetProperty("userid", "abc123")
@@ -2041,9 +2200,11 @@ fmt.Println(string(b))
 
 _DELETE `/{db}/{doc_id}/{attachment_name}`_
 
-### [Example request](./snippets/deleteAttachment/example_request.go)
+### [Example request](snippets/deleteAttachment/example_request.go)
 
+[embedmd]:# (snippets/deleteAttachment/example_request.go)
 ```go
+// section: code
 deleteAttachmentOptions := service.NewDeleteAttachmentOptions(
   "products",
   "small-appliances:100001",
@@ -2058,17 +2219,19 @@ if err != nil {
 
 b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
+// section: markdown
+// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
-
-This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 
 ## getAttachment
 
 _GET `/{db}/{doc_id}/{attachment_name}`_
 
-### [Example request](./snippets/getAttachment/example_request.go)
+### [Example request](snippets/getAttachment/example_request.go)
 
+[embedmd]:# (snippets/getAttachment/example_request.go)
 ```go
+// section: code
 getAttachmentOptions := service.NewGetAttachmentOptions(
   "products",
   "small-appliances:100001",
@@ -2082,17 +2245,19 @@ if err != nil {
 
 data, _ := ioutil.ReadAll(result)
 fmt.Println("\n", string(data))
+// section: markdown
+// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
-
-This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 
 ## headAttachment
 
 _HEAD `/{db}/{doc_id}/{attachment_name}`_
 
-### [Example request](./snippets/headAttachment/example_request.go)
+### [Example request](snippets/headAttachment/example_request.go)
 
+[embedmd]:# (snippets/headAttachment/example_request.go)
 ```go
+// section: code
 headAttachmentOptions := service.NewHeadAttachmentOptions(
   "products",
   "small-appliances:100001",
@@ -2107,17 +2272,19 @@ if err != nil {
 fmt.Println(response.StatusCode)
 fmt.Println(response.Headers["Content-Length"])
 fmt.Println(response.Headers["Content-Type"])
+// section: markdown
+// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
-
-This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 
 ## putAttachment
 
 _PUT `/{db}/{doc_id}/{attachment_name}`_
 
-### [Example request](./snippets/putAttachment/example_request.go)
+### [Example request](snippets/putAttachment/example_request.go)
 
+[embedmd]:# (snippets/putAttachment/example_request.go)
 ```go
+// section: code
 putAttachmentOptions := service.NewPutAttachmentOptions(
   "products",
   "small-appliances:100001",
