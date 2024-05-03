@@ -3518,7 +3518,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PostDocument successfully with retries`, func() {
@@ -3639,7 +3639,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PostDocument successfully`, func() {
@@ -3986,7 +3986,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully with retries`, func() {
@@ -4069,7 +4069,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostAllDocs successfully`, func() {
@@ -4560,7 +4560,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully with retries`, func() {
@@ -4647,7 +4647,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostAllDocsQueries successfully`, func() {
@@ -5195,7 +5195,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `[{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}]`)
+					fmt.Fprintf(res, "%s", `[{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}]`)
 				}))
 			})
 			It(`Invoke PostBulkDocs successfully with retries`, func() {
@@ -5311,7 +5311,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `[{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}]`)
+					fmt.Fprintf(res, "%s", `[{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}]`)
 				}))
 			})
 			It(`Invoke PostBulkDocs successfully`, func() {
@@ -5658,7 +5658,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
 				}))
 			})
 			It(`Invoke PostBulkGet successfully with retries`, func() {
@@ -5743,7 +5743,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"docs": [{"error": {"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}, "ok": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}}], "id": "ID"}]}`)
 				}))
 			})
 			It(`Invoke PostBulkGet successfully`, func() {
@@ -6717,7 +6717,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteDocument successfully with retries`, func() {
@@ -6779,7 +6779,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteDocument successfully`, func() {
@@ -8074,7 +8074,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutDocument successfully with retries`, func() {
@@ -8203,7 +8203,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutDocument successfully`, func() {
@@ -8619,7 +8619,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteDesignDocument successfully with retries`, func() {
@@ -8681,7 +8681,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteDesignDocument successfully`, func() {
@@ -9262,7 +9262,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutDesignDocument successfully with retries`, func() {
@@ -9414,7 +9414,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutDesignDocument successfully`, func() {
@@ -9968,8 +9968,6 @@ var _ = Describe(`CloudantV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(postDesignDocsPath))
 					Expect(req.Method).To(Equal("POST"))
-					Expect(req.Header["Accept"]).ToNot(BeNil())
-					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -9999,7 +9997,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.PostDesignDocs(postDesignDocsOptionsModel)
@@ -10046,15 +10043,13 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Accept"]).ToNot(BeNil())
-					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully with retries`, func() {
@@ -10082,7 +10077,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -10135,12 +10129,10 @@ var _ = Describe(`CloudantV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Accept"]).ToNot(BeNil())
-					Expect(req.Header["Accept"][0]).To(Equal(fmt.Sprintf("%v", "application/json")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostDesignDocs successfully`, func() {
@@ -10173,7 +10165,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -10207,7 +10198,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -10262,7 +10252,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.Key = core.StringPtr("testString")
 				postDesignDocsOptionsModel.Keys = []string{"testString"}
 				postDesignDocsOptionsModel.StartKey = core.StringPtr("0007741142412418284")
-				postDesignDocsOptionsModel.Accept = core.StringPtr("application/json")
 				postDesignDocsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -10378,7 +10367,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully with retries`, func() {
@@ -10468,7 +10457,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}]}`)
 				}))
 			})
 			It(`Invoke PostDesignDocsQueries successfully`, func() {
@@ -10718,7 +10707,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostView successfully with retries`, func() {
@@ -10810,7 +10799,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostView successfully`, func() {
@@ -11373,7 +11362,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
 				}))
 			})
 			It(`Invoke PostViewQueries successfully with retries`, func() {
@@ -11469,7 +11458,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"results": [{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}]}`)
 				}))
 			})
 			It(`Invoke PostViewQueries successfully`, func() {
@@ -12265,7 +12254,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully with retries`, func() {
@@ -12349,7 +12338,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "Key", "value": {"deleted": false, "rev": "Rev"}}], "update_seq": "UpdateSeq"}`)
 				}))
 			})
 			It(`Invoke PostPartitionAllDocs successfully`, func() {
@@ -12781,7 +12770,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -12863,7 +12852,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -12953,7 +12942,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -12988,7 +12977,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -13044,7 +13033,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -13122,7 +13111,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -13212,7 +13201,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -13253,7 +13242,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -13309,7 +13298,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionSearchOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.Index = core.StringPtr("testString")
-				postPartitionSearchOptionsModel.Query = core.StringPtr("testString")
+				postPartitionSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionSearchOptionsModel.HighlightFields = []string{"testString"}
 				postPartitionSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -13440,7 +13429,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionView successfully with retries`, func() {
@@ -13532,7 +13521,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"total_rows": 0, "update_seq": "UpdateSeq", "rows": [{"caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3, "doc": {"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}]}, "id": "ID", "key": "anyValue", "value": "anyValue"}]}`)
 				}))
 			})
 			It(`Invoke PostPartitionView successfully`, func() {
@@ -16826,7 +16815,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -16913,7 +16902,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17008,7 +16997,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17048,7 +17037,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17109,7 +17098,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17192,7 +17181,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17287,7 +17276,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17333,7 +17322,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17394,7 +17383,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postSearchOptionsModel.Db = core.StringPtr("testString")
 				postSearchOptionsModel.Ddoc = core.StringPtr("testString")
 				postSearchOptionsModel.Index = core.StringPtr("testString")
-				postSearchOptionsModel.Query = core.StringPtr("testString")
+				postSearchOptionsModel.Query = core.StringPtr("name:Jane* AND active:True")
 				postSearchOptionsModel.Bookmark = core.StringPtr("testString")
 				postSearchOptionsModel.HighlightFields = []string{"testString"}
 				postSearchOptionsModel.HighlightNumber = core.Int64Ptr(int64(1))
@@ -17934,7 +17923,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteReplicationDocument successfully with retries`, func() {
@@ -17995,7 +17984,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteReplicationDocument successfully`, func() {
@@ -18483,7 +18472,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"researcher"}
+				userContextModel.Roles = []string{"_replicator"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18588,7 +18577,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutReplicationDocument successfully with retries`, func() {
@@ -18652,7 +18641,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"researcher"}
+				userContextModel.Roles = []string{"_replicator"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18760,7 +18749,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutReplicationDocument successfully`, func() {
@@ -18829,7 +18818,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"researcher"}
+				userContextModel.Roles = []string{"_replicator"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -18946,7 +18935,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"researcher"}
+				userContextModel.Roles = []string{"_replicator"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -19084,7 +19073,7 @@ var _ = Describe(`CloudantV1`, func() {
 				userContextModel := new(cloudantv1.UserContext)
 				userContextModel.Db = core.StringPtr("testString")
 				userContextModel.Name = core.StringPtr("john")
-				userContextModel.Roles = []string{"researcher"}
+				userContextModel.Roles = []string{"_replicator"}
 
 				// Construct an instance of the ReplicationDocument model
 				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
@@ -21810,7 +21799,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteAttachment successfully with retries`, func() {
@@ -21873,7 +21862,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteAttachment successfully`, func() {
@@ -22295,7 +22284,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutAttachment successfully with retries`, func() {
@@ -22376,7 +22365,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutAttachment successfully`, func() {
@@ -22630,7 +22619,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteLocalDocument successfully with retries`, func() {
@@ -22687,7 +22676,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke DeleteLocalDocument successfully`, func() {
@@ -23185,7 +23174,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutLocalDocument successfully with retries`, func() {
@@ -23307,7 +23296,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(201)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
 				}))
 			})
 			It(`Invoke PutLocalDocument successfully`, func() {
@@ -26306,7 +26295,6 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				postDesignDocsOptionsModel := cloudantService.NewPostDesignDocsOptions(db)
 				postDesignDocsOptionsModel.SetDb("testString")
-				postDesignDocsOptionsModel.SetAccept("application/json")
 				postDesignDocsOptionsModel.SetAttEncodingInfo(false)
 				postDesignDocsOptionsModel.SetAttachments(false)
 				postDesignDocsOptionsModel.SetConflicts(false)
@@ -26323,7 +26311,6 @@ var _ = Describe(`CloudantV1`, func() {
 				postDesignDocsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(postDesignDocsOptionsModel).ToNot(BeNil())
 				Expect(postDesignDocsOptionsModel.Db).To(Equal(core.StringPtr("testString")))
-				Expect(postDesignDocsOptionsModel.Accept).To(Equal(core.StringPtr("application/json")))
 				Expect(postDesignDocsOptionsModel.AttEncodingInfo).To(Equal(core.BoolPtr(false)))
 				Expect(postDesignDocsOptionsModel.Attachments).To(Equal(core.BoolPtr(false)))
 				Expect(postDesignDocsOptionsModel.Conflicts).To(Equal(core.BoolPtr(false)))
@@ -26733,13 +26720,13 @@ var _ = Describe(`CloudantV1`, func() {
 				partitionKey := "testString"
 				ddoc := "testString"
 				index := "testString"
-				postPartitionSearchOptionsQuery := "testString"
+				postPartitionSearchOptionsQuery := "name:Jane* AND active:True"
 				postPartitionSearchOptionsModel := cloudantService.NewPostPartitionSearchOptions(db, partitionKey, ddoc, index, postPartitionSearchOptionsQuery)
 				postPartitionSearchOptionsModel.SetDb("testString")
 				postPartitionSearchOptionsModel.SetPartitionKey("testString")
 				postPartitionSearchOptionsModel.SetDdoc("testString")
 				postPartitionSearchOptionsModel.SetIndex("testString")
-				postPartitionSearchOptionsModel.SetQuery("testString")
+				postPartitionSearchOptionsModel.SetQuery("name:Jane* AND active:True")
 				postPartitionSearchOptionsModel.SetBookmark("testString")
 				postPartitionSearchOptionsModel.SetHighlightFields([]string{"testString"})
 				postPartitionSearchOptionsModel.SetHighlightNumber(int64(1))
@@ -26757,7 +26744,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionSearchOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.Index).To(Equal(core.StringPtr("testString")))
-				Expect(postPartitionSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
+				Expect(postPartitionSearchOptionsModel.Query).To(Equal(core.StringPtr("name:Jane* AND active:True")))
 				Expect(postPartitionSearchOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionSearchOptionsModel.HighlightFields).To(Equal([]string{"testString"}))
 				Expect(postPartitionSearchOptionsModel.HighlightNumber).To(Equal(core.Int64Ptr(int64(1))))
@@ -26859,12 +26846,12 @@ var _ = Describe(`CloudantV1`, func() {
 				db := "testString"
 				ddoc := "testString"
 				index := "testString"
-				postSearchOptionsQuery := "testString"
+				postSearchOptionsQuery := "name:Jane* AND active:True"
 				postSearchOptionsModel := cloudantService.NewPostSearchOptions(db, ddoc, index, postSearchOptionsQuery)
 				postSearchOptionsModel.SetDb("testString")
 				postSearchOptionsModel.SetDdoc("testString")
 				postSearchOptionsModel.SetIndex("testString")
-				postSearchOptionsModel.SetQuery("testString")
+				postSearchOptionsModel.SetQuery("name:Jane* AND active:True")
 				postSearchOptionsModel.SetBookmark("testString")
 				postSearchOptionsModel.SetHighlightFields([]string{"testString"})
 				postSearchOptionsModel.SetHighlightNumber(int64(1))
@@ -26887,7 +26874,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postSearchOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.Index).To(Equal(core.StringPtr("testString")))
-				Expect(postSearchOptionsModel.Query).To(Equal(core.StringPtr("testString")))
+				Expect(postSearchOptionsModel.Query).To(Equal(core.StringPtr("name:Jane* AND active:True")))
 				Expect(postSearchOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postSearchOptionsModel.HighlightFields).To(Equal([]string{"testString"}))
 				Expect(postSearchOptionsModel.HighlightNumber).To(Equal(core.Int64Ptr(int64(1))))
