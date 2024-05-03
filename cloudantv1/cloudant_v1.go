@@ -923,6 +923,7 @@ func (cloudant *CloudantV1) HeadDatabaseWithContext(ctx context.Context, headDat
 }
 
 // GetAllDbs : Query a list of all database names in the instance
+// Query to retrieve a list of database names from the instance.
 func (cloudant *CloudantV1) GetAllDbs(getAllDbsOptions *GetAllDbsOptions) (result []string, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.GetAllDbsWithContext(context.Background(), getAllDbsOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -1138,6 +1139,7 @@ func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, delet
 }
 
 // GetDatabaseInformation : Retrieve information about a database
+// Retrieve detailed information about the database.
 func (cloudant *CloudantV1) GetDatabaseInformation(getDatabaseInformationOptions *GetDatabaseInformationOptions) (result *DatabaseInformation, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.GetDatabaseInformationWithContext(context.Background(), getDatabaseInformationOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -1206,6 +1208,7 @@ func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Contex
 }
 
 // PutDatabase : Create a database
+// Create a new database with the requested properties.
 func (cloudant *CloudantV1) PutDatabase(putDatabaseOptions *PutDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PutDatabaseWithContext(context.Background(), putDatabaseOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -3303,9 +3306,6 @@ func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postD
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
-	if postDesignDocsOptions.Accept != nil {
-		builder.AddHeader("Accept", fmt.Sprint(*postDesignDocsOptions.Accept))
-	}
 
 	body := make(map[string]interface{})
 	if postDesignDocsOptions.AttEncodingInfo != nil {
@@ -5530,6 +5530,7 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 }
 
 // DeleteIndex : Delete an index
+// Delete the index functions from the design document and index files on the server.
 func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.DeleteIndexWithContext(context.Background(), deleteIndexOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8521,7 +8522,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.8")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.9")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -10075,7 +10076,7 @@ type DeleteAttachmentOptions struct {
 	// Path parameter to specify the attachment name.
 	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify a document revision.
@@ -10184,7 +10185,7 @@ type DeleteDesignDocumentOptions struct {
 	// `_design/` prefix.
 	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
@@ -10257,7 +10258,7 @@ type DeleteDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
@@ -10449,7 +10450,7 @@ type DeleteReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
@@ -11000,6 +11001,9 @@ type DocsResultRow struct {
 	// The reason the error occurred (if available).
 	Reason *string `json:"reason,omitempty"`
 
+	// An internal error reference (if available).
+	Ref *int64 `json:"ref,omitempty"`
+
 	// Schema for a document.
 	Doc *Document `json:"doc,omitempty"`
 
@@ -11029,6 +11033,11 @@ func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (e
 	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "doc", &obj.Doc, UnmarshalDocument)
@@ -11271,6 +11280,9 @@ type DocumentResult struct {
 
 	// The reason the error occurred (if available).
 	Reason *string `json:"reason,omitempty"`
+
+	// An internal error reference (if available).
+	Ref *int64 `json:"ref,omitempty"`
 }
 
 // UnmarshalDocumentResult unmarshals an instance of DocumentResult from the specified map of raw messages.
@@ -11304,6 +11316,11 @@ func UnmarshalDocumentResult(m map[string]json.RawMessage, result interface{}) (
 	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -11939,10 +11956,10 @@ type GetAttachmentOptions struct {
 	// The type of the response:  or *_/_*.
 	Accept *string `json:"Accept,omitempty"`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Header parameter to specify the byte range for a request. This allows the implementation of resumable downloads and
@@ -12244,7 +12261,7 @@ type GetDesignDocumentOptions struct {
 	// `_design/` prefix.
 	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
@@ -12385,7 +12402,7 @@ type GetDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
@@ -12595,7 +12612,7 @@ type GetLocalDocumentOptions struct {
 	// The type of the response: application/json, multipart/mixed, multipart/related, or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
@@ -12729,7 +12746,7 @@ type GetReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
@@ -13199,10 +13216,10 @@ type HeadAttachmentOptions struct {
 	// Path parameter to specify the attachment name.
 	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify a document revision.
@@ -13300,7 +13317,7 @@ type HeadDesignDocumentOptions struct {
 	// `_design/` prefix.
 	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -13347,7 +13364,7 @@ type HeadDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Query parameter to specify whether to force retrieving latest leaf revision, no matter what rev was requested.
@@ -13412,7 +13429,7 @@ type HeadLocalDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -13456,7 +13473,7 @@ type HeadReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Header parameter to specify a double quoted document revision token for cache control.
+	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -14947,9 +14964,6 @@ type PostDesignDocsOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// The type of the response: application/json or application/octet-stream.
-	Accept *string `json:"Accept,omitempty"`
-
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
 	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
@@ -15006,12 +15020,6 @@ func (*CloudantV1) NewPostDesignDocsOptions(db string) *PostDesignDocsOptions {
 // SetDb : Allow user to set Db
 func (_options *PostDesignDocsOptions) SetDb(db string) *PostDesignDocsOptions {
 	_options.Db = core.StringPtr(db)
-	return _options
-}
-
-// SetAccept : Allow user to set Accept
-func (_options *PostDesignDocsOptions) SetAccept(accept string) *PostDesignDocsOptions {
-	_options.Accept = core.StringPtr(accept)
 	return _options
 }
 
@@ -17381,7 +17389,7 @@ type PutAttachmentOptions struct {
 	// Content-Type of the attachment.
 	ContentType *string `json:"Content-Type" validate:"required"`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify a document revision.
@@ -17667,7 +17675,7 @@ type PutDesignDocumentOptions struct {
 	// HTTP request body for DesignDocument operations.
 	DesignDocument *DesignDocument `json:"designDocument" validate:"required"`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
@@ -17767,7 +17775,7 @@ type PutDocumentOptions struct {
 	// The type of the input.
 	ContentType *string `json:"Content-Type,omitempty"`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
@@ -17951,7 +17959,7 @@ type PutReplicationDocumentOptions struct {
 	// HTTP request body for replication operations.
 	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
 
-	// Header parameter to specify the document revision. Alternative to rev query parameter.
+	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
@@ -19937,7 +19945,7 @@ func UnmarshalThroughputInformation(m map[string]json.RawMessage, result interfa
 // UpInformation : Schema for information about the up state of the server.
 type UpInformation struct {
 	// seeds.
-	Seeds map[string]interface{} `json:"seeds" validate:"required"`
+	Seeds map[string]interface{} `json:"seeds,omitempty"`
 
 	// status.
 	Status *string `json:"status" validate:"required"`
@@ -20345,6 +20353,9 @@ type ViewResultRow struct {
 	// The reason the error occurred (if available).
 	Reason *string `json:"reason,omitempty"`
 
+	// An internal error reference (if available).
+	Ref *int64 `json:"ref,omitempty"`
+
 	// Schema for a document.
 	Doc *Document `json:"doc,omitempty"`
 
@@ -20374,6 +20385,11 @@ func UnmarshalViewResultRow(m map[string]json.RawMessage, result interface{}) (e
 	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "doc", &obj.Doc, UnmarshalDocument)

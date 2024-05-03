@@ -1071,7 +1071,6 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Key:             core.StringPtr("testString"),
 				Keys:            []string{"testString"},
 				StartKey:        core.StringPtr("0007741142412418284"),
-				Accept:          core.StringPtr("application/json"),
 			}
 
 			allDocsResult, response, err := cloudantService.PostDesignDocs(postDesignDocsOptions)
@@ -1362,7 +1361,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				PartitionKey:     core.StringPtr("testString"),
 				Ddoc:             core.StringPtr("testString"),
 				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
+				Query:            core.StringPtr("name:Jane* AND active:True"),
 				Bookmark:         core.StringPtr("testString"),
 				HighlightFields:  []string{"testString"},
 				HighlightNumber:  core.Int64Ptr(int64(1)),
@@ -1393,7 +1392,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				PartitionKey:     core.StringPtr("testString"),
 				Ddoc:             core.StringPtr("testString"),
 				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
+				Query:            core.StringPtr("name:Jane* AND active:True"),
 				Bookmark:         core.StringPtr("testString"),
 				HighlightFields:  []string{"testString"},
 				HighlightNumber:  core.Int64Ptr(int64(1)),
@@ -1745,7 +1744,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Db:               core.StringPtr("testString"),
 				Ddoc:             core.StringPtr("testString"),
 				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
+				Query:            core.StringPtr("name:Jane* AND active:True"),
 				Bookmark:         core.StringPtr("testString"),
 				HighlightFields:  []string{"testString"},
 				HighlightNumber:  core.Int64Ptr(int64(1)),
@@ -1781,7 +1780,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Db:               core.StringPtr("testString"),
 				Ddoc:             core.StringPtr("testString"),
 				Index:            core.StringPtr("testString"),
-				Query:            core.StringPtr("testString"),
+				Query:            core.StringPtr("name:Jane* AND active:True"),
 				Bookmark:         core.StringPtr("testString"),
 				HighlightFields:  []string{"testString"},
 				HighlightNumber:  core.Int64Ptr(int64(1)),
@@ -1955,7 +1954,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			userContextModel := &cloudantv1.UserContext{
 				Db:    core.StringPtr("testString"),
 				Name:  core.StringPtr("john"),
-				Roles: []string{"researcher"},
+				Roles: []string{"_replicator"},
 			}
 
 			replicationDocumentModel := &cloudantv1.ReplicationDocument{
