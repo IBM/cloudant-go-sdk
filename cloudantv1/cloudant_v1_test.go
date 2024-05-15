@@ -19,6 +19,7 @@ package cloudantv1_test
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -3415,7 +3416,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -3533,7 +3534,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -3659,7 +3660,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -3743,7 +3744,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -3832,7 +3833,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -5097,7 +5098,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -5210,7 +5211,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -5331,7 +5332,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -5413,7 +5414,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -5500,7 +5501,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -7963,7 +7964,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -8089,7 +8090,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -8223,7 +8224,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -8311,7 +8312,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -8404,7 +8405,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -9128,7 +9129,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -9277,7 +9278,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -9434,7 +9435,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -9531,7 +9532,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -9649,7 +9650,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -18423,7 +18424,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -18592,7 +18593,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -18769,7 +18770,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -18886,7 +18887,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -19024,7 +19025,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -23070,7 +23071,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -23189,7 +23190,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -23316,7 +23317,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -23401,7 +23402,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -23491,7 +23492,7 @@ var _ = Describe(`CloudantV1`, func() {
 				// Construct an instance of the Attachment model
 				attachmentModel := new(cloudantv1.Attachment)
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -26113,7 +26114,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -26122,7 +26123,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
-				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("This is a mock byte array value.")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
 				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
 				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
@@ -26376,7 +26377,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -26385,7 +26386,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
-				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("This is a mock byte array value.")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
 				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
 				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
@@ -27109,7 +27110,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -27118,7 +27119,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
-				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("This is a mock byte array value.")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
 				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
 				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
@@ -27263,7 +27264,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -27272,7 +27273,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
-				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("This is a mock byte array value.")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
 				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
 				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
@@ -27363,7 +27364,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -27372,7 +27373,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
-				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("This is a mock byte array value.")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
 				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
 				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
@@ -27457,7 +27458,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel := new(cloudantv1.Attachment)
 				Expect(attachmentModel).ToNot(BeNil())
 				attachmentModel.ContentType = core.StringPtr("testString")
-				attachmentModel.Data = CreateMockByteArray("This is a mock byte array value.")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 				attachmentModel.Digest = core.StringPtr("testString")
 				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
 				attachmentModel.Encoding = core.StringPtr("testString")
@@ -27466,7 +27467,7 @@ var _ = Describe(`CloudantV1`, func() {
 				attachmentModel.Revpos = core.Int64Ptr(int64(1))
 				attachmentModel.Stub = core.BoolPtr(true)
 				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
-				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("This is a mock byte array value.")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
 				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
 				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
@@ -27811,7 +27812,7 @@ var _ = Describe(`CloudantV1`, func() {
 			// Construct an instance of the model.
 			model := new(cloudantv1.Attachment)
 			model.ContentType = core.StringPtr("testString")
-			model.Data = CreateMockByteArray("This is a mock byte array value.")
+			model.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
 			model.Digest = core.StringPtr("testString")
 			model.EncodedLength = core.Int64Ptr(int64(0))
 			model.Encoding = core.StringPtr("testString")
@@ -28331,7 +28332,7 @@ var _ = Describe(`CloudantV1`, func() {
 	})
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
-			mockByteArray := CreateMockByteArray("This is a test")
+			mockByteArray := CreateMockByteArray("VGhpcyBpcyBhIHRlc3Qgb2YgdGhlIGVtZXJnZW5jeSBicm9hZGNhc3Qgc3lzdGVt")
 			Expect(mockByteArray).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockUUID() successfully`, func() {
@@ -28357,8 +28358,11 @@ var _ = Describe(`CloudantV1`, func() {
 // Utility functions used by the generated test code
 //
 
-func CreateMockByteArray(mockData string) *[]byte {
-	ba := []byte(mockData)
+func CreateMockByteArray(encodedString string) *[]byte {
+	ba, err := base64.StdEncoding.DecodeString(encodedString)
+	if err != nil {
+		panic(err)
+	}
 	return &ba
 }
 
