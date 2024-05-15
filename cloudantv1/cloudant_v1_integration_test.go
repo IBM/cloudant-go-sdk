@@ -365,7 +365,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostDocument(postDocumentOptions *PostDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
 				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
 				Digest:        core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
 				Encoding:      core.StringPtr("testString"),
@@ -553,7 +553,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
 				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
 				Digest:        core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
 				Encoding:      core.StringPtr("testString"),
@@ -835,7 +835,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PutDocument(putDocumentOptions *PutDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
 				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
 				Digest:        core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
 				Encoding:      core.StringPtr("testString"),
@@ -948,7 +948,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
 				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
 				Digest:        core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
 				Encoding:      core.StringPtr("testString"),
@@ -1905,7 +1905,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
 				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
 				Digest:        core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
 				Encoding:      core.StringPtr("testString"),
@@ -2315,7 +2315,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		It(`PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions)`, func() {
 			attachmentModel := &cloudantv1.Attachment{
 				ContentType:   core.StringPtr("testString"),
-				Data:          CreateMockByteArray("This is a mock byte array value."),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
 				Digest:        core.StringPtr("testString"),
 				EncodedLength: core.Int64Ptr(int64(0)),
 				Encoding:      core.StringPtr("testString"),
