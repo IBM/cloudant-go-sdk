@@ -8522,7 +8522,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.9")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.10")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9808,6 +9808,10 @@ type DatabaseInformation struct {
 	// The engine used for the database.
 	Engine *string `json:"engine,omitempty"`
 
+	// An opaque string to detect whether a database has beenrecreated. The field name is for compatibility with old
+	// replicatorversions. Do not use the value to infer timing infromation. Typicallyonly used by replicators.
+	InstanceStartTime *string `json:"instance_start_time" validate:"required"`
+
 	// Schema for database properties.
 	Props *DatabaseInformationProps `json:"props" validate:"required"`
 
@@ -9871,6 +9875,11 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 	err = core.UnmarshalPrimitive(m, "engine", &obj.Engine)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "engine-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "instance_start_time", &obj.InstanceStartTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "instance_start_time-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "props", &obj.Props, UnmarshalDatabaseInformationProps)
