@@ -185,6 +185,13 @@ client.SetEnableGzipCompression(false)
 ...
 ```
 
+#### Request body write errors on 4xx responses from Apache CouchDB
+
+This problem has been observed only when using request body compression (enabled by default), HTTP/1.1 protocol, and an Apache CouchDB server. It is not known to impact IBM Cloudant.
+
+When a request is made that is rejected by the server (for example a `409 conflict` repsonse) then in very rare cases the client may return an error writing the request body (for example `write: connection reset by peer` or `write: broken pipe`) instead of the `4xx` error returned by the server. This occurs because the client is still writing the request body after the CouchDB server has already responded with an error and terminated the connection. In nearly all cases the server error is returned correctly. However, if you experience a scenario where this issue occurs a workaround is to disable request body compression as outlined in the example above.
+
+
 ### Replication Documents
 
 * In order to be able to deserialize a replication document into the model
