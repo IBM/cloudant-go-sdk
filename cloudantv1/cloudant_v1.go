@@ -40,7 +40,7 @@ type CloudantV1 struct {
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "http://localhost:5984"
+const DefaultServiceURL = "https://~replace-with-cloudant-host~.cloudantnosqldb.appdomain.cloud"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "cloudant"
@@ -8522,7 +8522,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.11")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.13")
 }
 
 // ActiveTask : Schema for information about a running task.
