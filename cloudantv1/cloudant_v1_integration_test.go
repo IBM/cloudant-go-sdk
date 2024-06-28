@@ -994,7 +994,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Reduce: core.StringPtr("testString"),
 			}
 
-			designDocumentModel := &cloudantv1.DesignDocument{
+			designDocumentModel := &cloudantv1.DesignDocumentJavascript{
 				Attachments:       map[string]cloudantv1.Attachment{"key1": *attachmentModel},
 				Conflicts:         []string{"testString"},
 				Deleted:           core.BoolPtr(true),
@@ -1012,9 +1012,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				ValidateDocUpdate: core.StringPtr("testString"),
 				Views:             map[string]cloudantv1.DesignDocumentViewsMapReduce{"key1": *designDocumentViewsMapReduceModel},
 			}
-			designDocumentModel.Attachments["foo"] = *attachmentModel
-			designDocumentModel.Indexes["foo"] = *searchIndexDefinitionModel
-			designDocumentModel.Views["foo"] = *designDocumentViewsMapReduceModel
+			designDocumentJavascriptModel.Attachments["foo"] = *attachmentModel
+			designDocumentJavascriptModel.Indexes["foo"] = *searchIndexDefinitionModel
+			designDocumentJavascriptModel.Views["foo"] = *designDocumentViewsMapReduceModel
 			designDocumentModel.SetProperty("foo", "testString")
 
 			putDesignDocumentOptions := &cloudantv1.PutDesignDocumentOptions{
@@ -1976,6 +1976,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				DocIds:             []string{"badger", "lemur", "llama"},
 				Filter:             core.StringPtr("ddoc/my_filter"),
 				HTTPConnections:    core.Int64Ptr(int64(10)),
+				Owner:              core.StringPtr("testString"),
 				QueryParams:        map[string]string{"key1": "testString"},
 				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},

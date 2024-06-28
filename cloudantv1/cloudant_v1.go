@@ -2996,14 +2996,14 @@ func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context,
 // GetDesignDocument : Retrieve a design document
 // Returns design document with the specified `doc_id` from the specified database. Unless you request a specific
 // revision, the current revision of the design document is always returned.
-func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions) (result *DesignDocument, response *core.DetailedResponse, err error) {
+func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions) (result DesignDocumentIntf, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.GetDesignDocumentWithContext(context.Background(), getDesignDocumentOptions)
 	err = core.RepurposeSDKProblem(err, "")
 	return
 }
 
 // GetDesignDocumentWithContext is an alternate form of the GetDesignDocument method which supports a Context parameter
-func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, getDesignDocumentOptions *GetDesignDocumentOptions) (result *DesignDocument, response *core.DetailedResponse, err error) {
+func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, getDesignDocumentOptions *GetDesignDocumentOptions) (result DesignDocumentIntf, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDesignDocumentOptions, "getDesignDocumentOptions cannot be nil")
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
@@ -5367,9 +5367,9 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 }
 
 // GetIndexesInformation : Retrieve information about all indexes
-// When you make a GET request to `/db/_index`, you get a list of all indexes used by Cloudant Query in the database,
-// including the primary index. In addition to the information available through this API, indexes are also stored in
-// the `indexes` property of design documents.
+// When you make a GET request to `/db/_index`, you get a list of all the indexes using `"language":"query"` in the
+// database and the primary index. In addition to the information available through this API, the indexes are stored in
+// the `indexes` property of their respective design documents.
 func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions) (result *IndexesInformation, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.GetIndexesInformationWithContext(context.Background(), getIndexesInformationOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8522,7 +8522,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.13")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev-local")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -10518,6 +10518,9 @@ func (options *DeleteReplicationDocumentOptions) SetHeaders(param map[string]str
 }
 
 // DesignDocument : Schema for a design document.
+// Models which "extend" this model:
+// - DesignDocumentJavascript
+// - DesignDocumentQuery
 type DesignDocument struct {
 	// Schema for a map of attachment name to attachment metadata.
 	Attachments map[string]Attachment `json:"_attachments,omitempty"`
@@ -10633,6 +10636,24 @@ type DesignDocument struct {
 	additionalProperties map[string]interface{}
 }
 
+// Constants associated with the DesignDocument.Language property.
+// Defines Query Server key to process design document functions.
+const (
+	DesignDocumentLanguageJavascriptConst = "javascript"
+)
+
+func (*DesignDocument) isaDesignDocument() bool {
+	return true
+}
+
+type DesignDocumentIntf interface {
+	isaDesignDocument() bool
+	SetProperty(key string, value interface{})
+	SetProperties(m map[string]interface{})
+	GetProperty(key string) interface{}
+	GetProperties() map[string]interface{}
+}
+
 // SetProperty allows the user to set an arbitrary property on an instance of DesignDocument
 func (o *DesignDocument) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
@@ -10724,113 +10745,32 @@ func (o *DesignDocument) MarshalJSON() (buffer []byte, err error) {
 
 // UnmarshalDesignDocument unmarshals an instance of DesignDocument from the specified map of raw messages.
 func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DesignDocument)
-	err = core.UnmarshalModel(m, "_attachments", &obj.Attachments, UnmarshalAttachment)
+	// Retrieve discriminator value to determine correct "subclass".
+	var discValue string
+	err = core.UnmarshalPrimitive(m, "language", &discValue)
 	if err != nil {
-		err = core.SDKErrorf(err, "", "_attachments-error", common.GetComponentInfo())
+		errMsg := fmt.Sprintf("error unmarshalling discriminator property 'language': %s", err.Error())
+		err = core.SDKErrorf(err, errMsg, "discriminator-unmarshal-error", common.GetComponentInfo())
 		return
 	}
-	delete(m, "_attachments")
-	err = core.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_conflicts-error", common.GetComponentInfo())
+	if discValue == "" {
+		err = core.SDKErrorf(err, "required discriminator property 'language' not found in JSON object", "missing-discriminator", common.GetComponentInfo())
 		return
 	}
-	delete(m, "_conflicts")
-	err = core.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_deleted-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_deleted")
-	err = core.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_deleted_conflicts-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_deleted_conflicts")
-	err = core.UnmarshalPrimitive(m, "_id", &obj.ID)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_id-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_id")
-	err = core.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_local_seq-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_local_seq")
-	err = core.UnmarshalPrimitive(m, "_rev", &obj.Rev)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_rev-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_rev")
-	err = core.UnmarshalModel(m, "_revisions", &obj.Revisions, UnmarshalRevisions)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_revisions-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_revisions")
-	err = core.UnmarshalModel(m, "_revs_info", &obj.RevsInfo, UnmarshalDocumentRevisionStatus)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "_revs_info-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "_revs_info")
-	err = core.UnmarshalPrimitive(m, "autoupdate", &obj.Autoupdate)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "autoupdate-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "autoupdate")
-	err = core.UnmarshalPrimitive(m, "filters", &obj.Filters)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "filters-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "filters")
-	err = core.UnmarshalModel(m, "indexes", &obj.Indexes, UnmarshalSearchIndexDefinition)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "indexes-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "indexes")
-	err = core.UnmarshalPrimitive(m, "language", &obj.Language)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "language-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "language")
-	err = core.UnmarshalModel(m, "options", &obj.Options, UnmarshalDesignDocumentOptions)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "options-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "options")
-	err = core.UnmarshalPrimitive(m, "validate_doc_update", &obj.ValidateDocUpdate)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "validate_doc_update-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "validate_doc_update")
-	err = core.UnmarshalModel(m, "views", &obj.Views, UnmarshalDesignDocumentViewsMapReduce)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "views-error", common.GetComponentInfo())
-		return
-	}
-	delete(m, "views")
-	for k := range m {
-		var v interface{}
-		e := core.UnmarshalPrimitive(m, k, &v)
-		if e != nil {
-			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
-			return
+	if discValue == "javascript" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalDesignDocumentJavascript)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-DesignDocumentJavascript-error", common.GetComponentInfo())
 		}
-		obj.SetProperty(k, v)
+	} else if discValue == "query" {
+		err = core.UnmarshalModel(m, "", result, UnmarshalDesignDocumentQuery)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-DesignDocumentQuery-error", common.GetComponentInfo())
+		}
+	} else {
+		errMsg := fmt.Sprintf("unrecognized value for discriminator property 'language': %s", discValue)
+		err = core.SDKErrorf(err, errMsg, "invalid-discriminator", common.GetComponentInfo())
 	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -10872,6 +10812,40 @@ func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interfa
 	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DesignDocumentQueriesMapReduce : Schema for view functions definition.
+type DesignDocumentQueriesMapReduce struct {
+	// Schema for any JSON type.
+	Map interface{} `json:"map,omitempty"`
+
+	// Schema for any JSON type.
+	Options interface{} `json:"options,omitempty"`
+
+	// JavaScript reduce function as a string.
+	Reduce *string `json:"reduce,omitempty"`
+}
+
+// UnmarshalDesignDocumentQueriesMapReduce unmarshals an instance of DesignDocumentQueriesMapReduce from the specified map of raw messages.
+func UnmarshalDesignDocumentQueriesMapReduce(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DesignDocumentQueriesMapReduce)
+	err = core.UnmarshalPrimitive(m, "map", &obj.Map)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "map-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "options", &obj.Options)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "options-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "reduce-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -17682,7 +17656,7 @@ type PutDesignDocumentOptions struct {
 	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
 	// HTTP request body for DesignDocument operations.
-	DesignDocument *DesignDocument `json:"designDocument" validate:"required"`
+	DesignDocument DesignDocumentIntf `json:"designDocument" validate:"required"`
 
 	// Header parameter for a conditional HTTP request matching an ETag.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -17711,7 +17685,7 @@ const (
 )
 
 // NewPutDesignDocumentOptions : Instantiate PutDesignDocumentOptions
-func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string, designDocument *DesignDocument) *PutDesignDocumentOptions {
+func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string, designDocument DesignDocumentIntf) *PutDesignDocumentOptions {
 	return &PutDesignDocumentOptions{
 		Db:             core.StringPtr(db),
 		Ddoc:           core.StringPtr(ddoc),
@@ -17732,7 +17706,7 @@ func (_options *PutDesignDocumentOptions) SetDdoc(ddoc string) *PutDesignDocumen
 }
 
 // SetDesignDocument : Allow user to set DesignDocument
-func (_options *PutDesignDocumentOptions) SetDesignDocument(designDocument *DesignDocument) *PutDesignDocumentOptions {
+func (_options *PutDesignDocumentOptions) SetDesignDocument(designDocument DesignDocumentIntf) *PutDesignDocumentOptions {
 	_options.DesignDocument = designDocument
 	return _options
 }
@@ -18356,6 +18330,10 @@ type ReplicationDocument struct {
 	// Maximum number of HTTP connections per replication.
 	HTTPConnections *int64 `json:"http_connections,omitempty"`
 
+	// The replication document owner. The server sets an appropriate value if the field is unset when writing a
+	// replication document. Only administrators can modify the value to an owner other than themselves.
+	Owner *string `json:"owner,omitempty"`
+
 	// Schema for a map of string key value pairs, such as query parameters.
 	QueryParams map[string]string `json:"query_params,omitempty"`
 
@@ -18547,6 +18525,9 @@ func (o *ReplicationDocument) MarshalJSON() (buffer []byte, err error) {
 	if o.HTTPConnections != nil {
 		m["http_connections"] = o.HTTPConnections
 	}
+	if o.Owner != nil {
+		m["owner"] = o.Owner
+	}
 	if o.QueryParams != nil {
 		m["query_params"] = o.QueryParams
 	}
@@ -18710,6 +18691,12 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "http_connections")
+	err = core.UnmarshalPrimitive(m, "owner", &obj.Owner)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "owner-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "owner")
 	err = core.UnmarshalPrimitive(m, "query_params", &obj.QueryParams)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "query_params-error", common.GetComponentInfo())
@@ -19793,10 +19780,63 @@ type ServerVendor struct {
 	Name *string `json:"name" validate:"required"`
 
 	// Vendor variant.
-	Variant *string `json:"variant,omitempty"`
+	Variant *string `json:"variant" validate:"required"`
 
 	// Vendor version.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version" validate:"required"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]*string
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of ServerVendor
+func (o *ServerVendor) SetProperty(key string, value *string) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]*string)
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServerVendor
+func (o *ServerVendor) SetProperties(m map[string]*string) {
+	o.additionalProperties = make(map[string]*string)
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServerVendor
+func (o *ServerVendor) GetProperty(key string) *string {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServerVendor
+func (o *ServerVendor) GetProperties() map[string]*string {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of ServerVendor
+func (o *ServerVendor) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.Name != nil {
+		m["name"] = o.Name
+	}
+	if o.Variant != nil {
+		m["variant"] = o.Variant
+	}
+	if o.Version != nil {
+		m["version"] = o.Version
+	}
+	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
+	return
 }
 
 // UnmarshalServerVendor unmarshals an instance of ServerVendor from the specified map of raw messages.
@@ -19807,15 +19847,27 @@ func UnmarshalServerVendor(m map[string]json.RawMessage, result interface{}) (er
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
+	delete(m, "name")
 	err = core.UnmarshalPrimitive(m, "variant", &obj.Variant)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "variant-error", common.GetComponentInfo())
 		return
 	}
+	delete(m, "variant")
 	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
 		return
+	}
+	delete(m, "version")
+	for k := range m {
+		var v *string
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -20420,6 +20472,674 @@ func UnmarshalViewResultRow(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
 		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DesignDocumentJavascript : Schema for a design document.
+// This model "extends" DesignDocument
+type DesignDocumentJavascript struct {
+	// Schema for a map of attachment name to attachment metadata.
+	Attachments map[string]Attachment `json:"_attachments,omitempty"`
+
+	// Schema for a list of document revision identifiers.
+	Conflicts []string `json:"_conflicts,omitempty"`
+
+	// Deletion flag. Available if document was removed.
+	Deleted *bool `json:"_deleted,omitempty"`
+
+	// Schema for a list of document revision identifiers.
+	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
+
+	// Schema for a design document ID.
+	ID *string `json:"_id" validate:"required"`
+
+	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
+	LocalSeq *string `json:"_local_seq,omitempty"`
+
+	// Schema for a document revision identifier.
+	Rev *string `json:"_rev,omitempty"`
+
+	// Schema for list of revision information.
+	Revisions *Revisions `json:"_revisions,omitempty"`
+
+	// Schema for a list of objects with information about local revisions and their status.
+	RevsInfo []DocumentRevisionStatus `json:"_revs_info,omitempty"`
+
+	// Indicates whether to automatically build indexes defined in this design document.
+	Autoupdate *bool `json:"autoupdate,omitempty"`
+
+	// Schema for filter functions definition. This schema is a map where keys are the names of the filter functions and
+	// values are the function definition in string format.
+	//
+	// Filter function formats, or filters the changes feed that pass filter rules. The function takes 2 parameters:
+	//
+	//   * `doc`: The document that is being processed.
+	//   * `req`: A Request JavaScript object with these properties:
+	//
+	//     * `body` - string, Request body data as string.
+	//       If the request method is GET this field contains the value
+	//       `"undefined"`.
+	//       If the method is DELETE or HEAD the value is `""` (empty string).
+	//     * `cookie` - Cookies object.
+	//     * `form` - Form Data object, contains the decoded body as key-value
+	//       pairs if the Content-Type header was
+	//       application/x-www-form-urlencoded.
+	//     * `headers` - Request Headers object.
+	//     * `id` - string, requested document id if it was specified
+	//       or null otherwise.
+	//     * `info` - Database Information object,
+	//       see `DatabaseInformation`.
+	//     * `method` - string or an array of chars, request method.
+	//       String value is a method as one of: HEAD, GET, POST, PUT,
+	//       DELETE, OPTIONS, TRACE, COPY. For not supported methods
+	//       it will be represented as an array of char codes e.g. for VIEW
+	//       it will be 86,73,69,87.
+	//     * `path` - array of strings, requested path sections.
+	//     * `peer` - string, request source IP address.
+	//     * `query` - string, URL query parameters object. Note that multiple
+	//       keys are not supported and the last key value suppresses others.
+	//     * `requested_path` - array of strings,
+	//       actual requested path section.
+	//     * `raw_path` - string, raw requested path.
+	//     * `userCtx`: User Context Object, containing information about the
+	//       user writing the document (if present), see the `UserContext`.
+	//     * `secObj`: Security Object, with lists of database security roles,
+	//       see the `SecurityObject`.
+	//     * `uuid` - string, generated UUID by a specified algorithm in the
+	//       config file.
+	//
+	// Filter functions must return true if a document passed all the rules.
+	Filters map[string]string `json:"filters,omitempty"`
+
+	// Search (text) index function definitions.
+	Indexes map[string]SearchIndexDefinition `json:"indexes,omitempty"`
+
+	// Defines Query Server key to process design document functions.
+	Language *string `json:"language,omitempty"`
+
+	// Schema for design document options.
+	Options *DesignDocumentOptions `json:"options,omitempty"`
+
+	// Validate document update function can be used to prevent invalid or unauthorized document update requests from being
+	// stored. Validation functions typically examine the structure of the new document to ensure that required fields are
+	// present and to verify that the requesting user should be allowed to make changes to the document properties. When a
+	// write request is received for a given database, the validation function in each design document in that database is
+	// called in an unspecified order. If any of the validation functions throw an error, the write will not succeed.
+	//
+	// The validation function can abort the pending document write by throwing one of two error objects:
+	//
+	// ```
+	// // user is not authorized to make the change but may re-authenticate throw({ unauthorized: 'Error message here.' });
+	//
+	// // change is not allowed throw({ forbidden: 'Error message here.' });
+	// ```
+	//
+	// The function takes 4 parameters:
+	//
+	//   * `newDoc` - New version of document that will be stored
+	//     from the update request.
+	//   * `oldDoc` - Previous version of document that is already stored.
+	//   * `userCtx` - User Context Object, containing information about the
+	//     user writing the document (if present), see the `UserContext`.
+	//   * `secObj` - Security Object, with lists of database security roles,
+	//     see the `SecurityObject`.
+	ValidateDocUpdate *string `json:"validate_doc_update,omitempty"`
+
+	// Schema for design document views.
+	Views map[string]DesignDocumentViewsMapReduce `json:"views,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// Constants associated with the DesignDocumentJavascript.Language property.
+// Defines Query Server key to process design document functions.
+const (
+	DesignDocumentJavascriptLanguageJavascriptConst = "javascript"
+)
+
+// NewDesignDocumentJavascript : Instantiate DesignDocumentJavascript (Generic Model Constructor)
+func (*CloudantV1) NewDesignDocumentJavascript(id string) (_model *DesignDocumentJavascript, err error) {
+	_model = &DesignDocumentJavascript{
+		ID: core.StringPtr(id),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*DesignDocumentJavascript) isaDesignDocument() bool {
+	return true
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of DesignDocumentJavascript
+func (o *DesignDocumentJavascript) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of DesignDocumentJavascript
+func (o *DesignDocumentJavascript) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of DesignDocumentJavascript
+func (o *DesignDocumentJavascript) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of DesignDocumentJavascript
+func (o *DesignDocumentJavascript) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of DesignDocumentJavascript
+func (o *DesignDocumentJavascript) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.Attachments != nil {
+		m["_attachments"] = o.Attachments
+	}
+	if o.Conflicts != nil {
+		m["_conflicts"] = o.Conflicts
+	}
+	if o.Deleted != nil {
+		m["_deleted"] = o.Deleted
+	}
+	if o.DeletedConflicts != nil {
+		m["_deleted_conflicts"] = o.DeletedConflicts
+	}
+	if o.ID != nil {
+		m["_id"] = o.ID
+	}
+	if o.LocalSeq != nil {
+		m["_local_seq"] = o.LocalSeq
+	}
+	if o.Rev != nil {
+		m["_rev"] = o.Rev
+	}
+	if o.Revisions != nil {
+		m["_revisions"] = o.Revisions
+	}
+	if o.RevsInfo != nil {
+		m["_revs_info"] = o.RevsInfo
+	}
+	if o.Autoupdate != nil {
+		m["autoupdate"] = o.Autoupdate
+	}
+	if o.Filters != nil {
+		m["filters"] = o.Filters
+	}
+	if o.Indexes != nil {
+		m["indexes"] = o.Indexes
+	}
+	if o.Language != nil {
+		m["language"] = o.Language
+	}
+	if o.Options != nil {
+		m["options"] = o.Options
+	}
+	if o.ValidateDocUpdate != nil {
+		m["validate_doc_update"] = o.ValidateDocUpdate
+	}
+	if o.Views != nil {
+		m["views"] = o.Views
+	}
+	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalDesignDocumentJavascript unmarshals an instance of DesignDocumentJavascript from the specified map of raw messages.
+func UnmarshalDesignDocumentJavascript(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DesignDocumentJavascript)
+	err = core.UnmarshalModel(m, "_attachments", &obj.Attachments, UnmarshalAttachment)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_attachments-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_attachments")
+	err = core.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_conflicts-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_conflicts")
+	err = core.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_deleted-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_deleted")
+	err = core.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_deleted_conflicts-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_deleted_conflicts")
+	err = core.UnmarshalPrimitive(m, "_id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_id-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_id")
+	err = core.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_local_seq-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_local_seq")
+	err = core.UnmarshalPrimitive(m, "_rev", &obj.Rev)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_rev-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_rev")
+	err = core.UnmarshalModel(m, "_revisions", &obj.Revisions, UnmarshalRevisions)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_revisions-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_revisions")
+	err = core.UnmarshalModel(m, "_revs_info", &obj.RevsInfo, UnmarshalDocumentRevisionStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_revs_info-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_revs_info")
+	err = core.UnmarshalPrimitive(m, "autoupdate", &obj.Autoupdate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "autoupdate-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "autoupdate")
+	err = core.UnmarshalPrimitive(m, "filters", &obj.Filters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "filters-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "filters")
+	err = core.UnmarshalModel(m, "indexes", &obj.Indexes, UnmarshalSearchIndexDefinition)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "indexes-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "indexes")
+	err = core.UnmarshalPrimitive(m, "language", &obj.Language)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "language-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "language")
+	err = core.UnmarshalModel(m, "options", &obj.Options, UnmarshalDesignDocumentOptions)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "options-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "options")
+	err = core.UnmarshalPrimitive(m, "validate_doc_update", &obj.ValidateDocUpdate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "validate_doc_update-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "validate_doc_update")
+	err = core.UnmarshalModel(m, "views", &obj.Views, UnmarshalDesignDocumentViewsMapReduce)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "views-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "views")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
+			return
+		}
+		obj.SetProperty(k, v)
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DesignDocumentQuery : Schema for a design document.
+// This model "extends" DesignDocument
+type DesignDocumentQuery struct {
+	// Schema for a map of attachment name to attachment metadata.
+	Attachments map[string]Attachment `json:"_attachments,omitempty"`
+
+	// Schema for a list of document revision identifiers.
+	Conflicts []string `json:"_conflicts,omitempty"`
+
+	// Deletion flag. Available if document was removed.
+	Deleted *bool `json:"_deleted,omitempty"`
+
+	// Schema for a list of document revision identifiers.
+	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
+
+	// Schema for a design document ID.
+	ID *string `json:"_id,omitempty"`
+
+	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
+	LocalSeq *string `json:"_local_seq,omitempty"`
+
+	// Schema for a document revision identifier.
+	Rev *string `json:"_rev,omitempty"`
+
+	// Schema for list of revision information.
+	Revisions *Revisions `json:"_revisions,omitempty"`
+
+	// Schema for a list of objects with information about local revisions and their status.
+	RevsInfo []DocumentRevisionStatus `json:"_revs_info,omitempty"`
+
+	// Indicates whether to automatically build indexes defined in this design document.
+	Autoupdate *bool `json:"autoupdate,omitempty"`
+
+	// Schema for filter functions definition. This schema is a map where keys are the names of the filter functions and
+	// values are the function definition in string format.
+	//
+	// Filter function formats, or filters the changes feed that pass filter rules. The function takes 2 parameters:
+	//
+	//   * `doc`: The document that is being processed.
+	//   * `req`: A Request JavaScript object with these properties:
+	//
+	//     * `body` - string, Request body data as string.
+	//       If the request method is GET this field contains the value
+	//       `"undefined"`.
+	//       If the method is DELETE or HEAD the value is `""` (empty string).
+	//     * `cookie` - Cookies object.
+	//     * `form` - Form Data object, contains the decoded body as key-value
+	//       pairs if the Content-Type header was
+	//       application/x-www-form-urlencoded.
+	//     * `headers` - Request Headers object.
+	//     * `id` - string, requested document id if it was specified
+	//       or null otherwise.
+	//     * `info` - Database Information object,
+	//       see `DatabaseInformation`.
+	//     * `method` - string or an array of chars, request method.
+	//       String value is a method as one of: HEAD, GET, POST, PUT,
+	//       DELETE, OPTIONS, TRACE, COPY. For not supported methods
+	//       it will be represented as an array of char codes e.g. for VIEW
+	//       it will be 86,73,69,87.
+	//     * `path` - array of strings, requested path sections.
+	//     * `peer` - string, request source IP address.
+	//     * `query` - string, URL query parameters object. Note that multiple
+	//       keys are not supported and the last key value suppresses others.
+	//     * `requested_path` - array of strings,
+	//       actual requested path section.
+	//     * `raw_path` - string, raw requested path.
+	//     * `userCtx`: User Context Object, containing information about the
+	//       user writing the document (if present), see the `UserContext`.
+	//     * `secObj`: Security Object, with lists of database security roles,
+	//       see the `SecurityObject`.
+	//     * `uuid` - string, generated UUID by a specified algorithm in the
+	//       config file.
+	//
+	// Filter functions must return true if a document passed all the rules.
+	Filters map[string]string `json:"filters,omitempty"`
+
+	// Search (text) index function definitions.
+	Indexes map[string]SearchIndexDefinition `json:"indexes,omitempty"`
+
+	// Defines Query Server key to process design document functions.
+	Language *string `json:"language,omitempty"`
+
+	// Schema for design document options.
+	Options *DesignDocumentOptions `json:"options,omitempty"`
+
+	// Validate document update function can be used to prevent invalid or unauthorized document update requests from being
+	// stored. Validation functions typically examine the structure of the new document to ensure that required fields are
+	// present and to verify that the requesting user should be allowed to make changes to the document properties. When a
+	// write request is received for a given database, the validation function in each design document in that database is
+	// called in an unspecified order. If any of the validation functions throw an error, the write will not succeed.
+	//
+	// The validation function can abort the pending document write by throwing one of two error objects:
+	//
+	// ```
+	// // user is not authorized to make the change but may re-authenticate throw({ unauthorized: 'Error message here.' });
+	//
+	// // change is not allowed throw({ forbidden: 'Error message here.' });
+	// ```
+	//
+	// The function takes 4 parameters:
+	//
+	//   * `newDoc` - New version of document that will be stored
+	//     from the update request.
+	//   * `oldDoc` - Previous version of document that is already stored.
+	//   * `userCtx` - User Context Object, containing information about the
+	//     user writing the document (if present), see the `UserContext`.
+	//   * `secObj` - Security Object, with lists of database security roles,
+	//     see the `SecurityObject`.
+	ValidateDocUpdate *string `json:"validate_doc_update,omitempty"`
+
+	// Schema for design document views.
+	Views map[string]DesignDocumentQueriesMapReduce `json:"views,omitempty"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]interface{}
+}
+
+// Constants associated with the DesignDocumentQuery.Language property.
+// Defines Query Server key to process design document functions.
+const (
+	DesignDocumentQueryLanguageQueryConst = "query"
+)
+
+func (*DesignDocumentQuery) isaDesignDocument() bool {
+	return true
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of DesignDocumentQuery
+func (o *DesignDocumentQuery) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of DesignDocumentQuery
+func (o *DesignDocumentQuery) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of DesignDocumentQuery
+func (o *DesignDocumentQuery) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of DesignDocumentQuery
+func (o *DesignDocumentQuery) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of DesignDocumentQuery
+func (o *DesignDocumentQuery) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.Attachments != nil {
+		m["_attachments"] = o.Attachments
+	}
+	if o.Conflicts != nil {
+		m["_conflicts"] = o.Conflicts
+	}
+	if o.Deleted != nil {
+		m["_deleted"] = o.Deleted
+	}
+	if o.DeletedConflicts != nil {
+		m["_deleted_conflicts"] = o.DeletedConflicts
+	}
+	if o.ID != nil {
+		m["_id"] = o.ID
+	}
+	if o.LocalSeq != nil {
+		m["_local_seq"] = o.LocalSeq
+	}
+	if o.Rev != nil {
+		m["_rev"] = o.Rev
+	}
+	if o.Revisions != nil {
+		m["_revisions"] = o.Revisions
+	}
+	if o.RevsInfo != nil {
+		m["_revs_info"] = o.RevsInfo
+	}
+	if o.Autoupdate != nil {
+		m["autoupdate"] = o.Autoupdate
+	}
+	if o.Filters != nil {
+		m["filters"] = o.Filters
+	}
+	if o.Indexes != nil {
+		m["indexes"] = o.Indexes
+	}
+	if o.Language != nil {
+		m["language"] = o.Language
+	}
+	if o.Options != nil {
+		m["options"] = o.Options
+	}
+	if o.ValidateDocUpdate != nil {
+		m["validate_doc_update"] = o.ValidateDocUpdate
+	}
+	if o.Views != nil {
+		m["views"] = o.Views
+	}
+	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalDesignDocumentQuery unmarshals an instance of DesignDocumentQuery from the specified map of raw messages.
+func UnmarshalDesignDocumentQuery(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DesignDocumentQuery)
+	err = core.UnmarshalModel(m, "_attachments", &obj.Attachments, UnmarshalAttachment)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_attachments-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_attachments")
+	err = core.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_conflicts-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_conflicts")
+	err = core.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_deleted-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_deleted")
+	err = core.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_deleted_conflicts-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_deleted_conflicts")
+	err = core.UnmarshalPrimitive(m, "_id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_id-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_id")
+	err = core.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_local_seq-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_local_seq")
+	err = core.UnmarshalPrimitive(m, "_rev", &obj.Rev)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_rev-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_rev")
+	err = core.UnmarshalModel(m, "_revisions", &obj.Revisions, UnmarshalRevisions)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_revisions-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_revisions")
+	err = core.UnmarshalModel(m, "_revs_info", &obj.RevsInfo, UnmarshalDocumentRevisionStatus)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "_revs_info-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "_revs_info")
+	err = core.UnmarshalPrimitive(m, "autoupdate", &obj.Autoupdate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "autoupdate-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "autoupdate")
+	err = core.UnmarshalPrimitive(m, "filters", &obj.Filters)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "filters-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "filters")
+	err = core.UnmarshalModel(m, "indexes", &obj.Indexes, UnmarshalSearchIndexDefinition)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "indexes-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "indexes")
+	err = core.UnmarshalPrimitive(m, "language", &obj.Language)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "language-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "language")
+	err = core.UnmarshalModel(m, "options", &obj.Options, UnmarshalDesignDocumentOptions)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "options-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "options")
+	err = core.UnmarshalPrimitive(m, "validate_doc_update", &obj.ValidateDocUpdate)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "validate_doc_update-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "validate_doc_update")
+	err = core.UnmarshalModel(m, "views", &obj.Views, UnmarshalDesignDocumentQueriesMapReduce)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "views-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "views")
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
