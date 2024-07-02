@@ -1976,6 +1976,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				DocIds:             []string{"badger", "lemur", "llama"},
 				Filter:             core.StringPtr("ddoc/my_filter"),
 				HTTPConnections:    core.Int64Ptr(int64(10)),
+				Owner:              core.StringPtr("testString"),
 				QueryParams:        map[string]string{"key1": "testString"},
 				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
