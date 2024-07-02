@@ -27725,12 +27725,6 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
-			It(`Invoke NewDesignDocumentJavascript successfully`, func() {
-				id := "testString"
-				_model, err := cloudantService.NewDesignDocumentJavascript(id)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
 		})
 	})
 	Describe(`Model unmarshaling tests`, func() {

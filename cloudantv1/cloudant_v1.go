@@ -10636,12 +10636,6 @@ type DesignDocument struct {
 	additionalProperties map[string]interface{}
 }
 
-// Constants associated with the DesignDocument.Language property.
-// Defines Query Server key to process design document functions.
-const (
-	DesignDocumentLanguageJavascriptConst = "javascript"
-)
-
 func (*DesignDocument) isaDesignDocument() bool {
 	return true
 }
@@ -20493,7 +20487,7 @@ type DesignDocumentJavascript struct {
 	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
 
 	// Schema for a design document ID.
-	ID *string `json:"_id" validate:"required"`
+	ID *string `json:"_id,omitempty"`
 
 	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
 	LocalSeq *string `json:"_local_seq,omitempty"`
@@ -20592,24 +20586,6 @@ type DesignDocumentJavascript struct {
 
 	// Allows users to set arbitrary properties
 	additionalProperties map[string]interface{}
-}
-
-// Constants associated with the DesignDocumentJavascript.Language property.
-// Defines Query Server key to process design document functions.
-const (
-	DesignDocumentJavascriptLanguageJavascriptConst = "javascript"
-)
-
-// NewDesignDocumentJavascript : Instantiate DesignDocumentJavascript (Generic Model Constructor)
-func (*CloudantV1) NewDesignDocumentJavascript(id string) (_model *DesignDocumentJavascript, err error) {
-	_model = &DesignDocumentJavascript{
-		ID: core.StringPtr(id),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	if err != nil {
-		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
-	}
-	return
 }
 
 func (*DesignDocumentJavascript) isaDesignDocument() bool {
@@ -20933,12 +20909,6 @@ type DesignDocumentQuery struct {
 	// Allows users to set arbitrary properties
 	additionalProperties map[string]interface{}
 }
-
-// Constants associated with the DesignDocumentQuery.Language property.
-// Defines Query Server key to process design document functions.
-const (
-	DesignDocumentQueryLanguageQueryConst = "query"
-)
 
 func (*DesignDocumentQuery) isaDesignDocument() bool {
 	return true
