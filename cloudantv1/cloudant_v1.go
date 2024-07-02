@@ -5367,9 +5367,9 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 }
 
 // GetIndexesInformation : Retrieve information about all indexes
-// When you make a GET request to `/db/_index`, you get a list of all indexes used by Cloudant Query in the database,
-// including the primary index. In addition to the information available through this API, indexes are also stored in
-// the `indexes` property of design documents.
+// When you make a GET request to `/db/_index`, you get a list of all the indexes using `"language":"query"` in the
+// database and the primary index. In addition to the information available through this API, the indexes are stored in
+// the `indexes` property of their respective design documents.
 func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions) (result *IndexesInformation, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.GetIndexesInformationWithContext(context.Background(), getIndexesInformationOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8522,7 +8522,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.13")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.14")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -18356,6 +18356,10 @@ type ReplicationDocument struct {
 	// Maximum number of HTTP connections per replication.
 	HTTPConnections *int64 `json:"http_connections,omitempty"`
 
+	// The replication document owner. The server sets an appropriate value if the field is unset when writing a
+	// replication document. Only administrators can modify the value to an owner other than themselves.
+	Owner *string `json:"owner,omitempty"`
+
 	// Schema for a map of string key value pairs, such as query parameters.
 	QueryParams map[string]string `json:"query_params,omitempty"`
 
@@ -18547,6 +18551,9 @@ func (o *ReplicationDocument) MarshalJSON() (buffer []byte, err error) {
 	if o.HTTPConnections != nil {
 		m["http_connections"] = o.HTTPConnections
 	}
+	if o.Owner != nil {
+		m["owner"] = o.Owner
+	}
 	if o.QueryParams != nil {
 		m["query_params"] = o.QueryParams
 	}
@@ -18710,6 +18717,12 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "http_connections")
+	err = core.UnmarshalPrimitive(m, "owner", &obj.Owner)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "owner-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "owner")
 	err = core.UnmarshalPrimitive(m, "query_params", &obj.QueryParams)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "query_params-error", common.GetComponentInfo())
@@ -19793,10 +19806,63 @@ type ServerVendor struct {
 	Name *string `json:"name" validate:"required"`
 
 	// Vendor variant.
-	Variant *string `json:"variant,omitempty"`
+	Variant *string `json:"variant" validate:"required"`
 
 	// Vendor version.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version" validate:"required"`
+
+	// Allows users to set arbitrary properties
+	additionalProperties map[string]*string
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of ServerVendor
+func (o *ServerVendor) SetProperty(key string, value *string) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]*string)
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServerVendor
+func (o *ServerVendor) SetProperties(m map[string]*string) {
+	o.additionalProperties = make(map[string]*string)
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServerVendor
+func (o *ServerVendor) GetProperty(key string) *string {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServerVendor
+func (o *ServerVendor) GetProperties() map[string]*string {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of ServerVendor
+func (o *ServerVendor) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	if o.Name != nil {
+		m["name"] = o.Name
+	}
+	if o.Variant != nil {
+		m["variant"] = o.Variant
+	}
+	if o.Version != nil {
+		m["version"] = o.Version
+	}
+	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
+	return
 }
 
 // UnmarshalServerVendor unmarshals an instance of ServerVendor from the specified map of raw messages.
@@ -19807,15 +19873,27 @@ func UnmarshalServerVendor(m map[string]json.RawMessage, result interface{}) (er
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
+	delete(m, "name")
 	err = core.UnmarshalPrimitive(m, "variant", &obj.Variant)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "variant-error", common.GetComponentInfo())
 		return
 	}
+	delete(m, "variant")
 	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
 		return
+	}
+	delete(m, "version")
+	for k := range m {
+		var v *string
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return

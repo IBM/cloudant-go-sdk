@@ -18187,7 +18187,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "owner": "Owner", "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -18264,7 +18264,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 1}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "owner": "Owner", "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -18495,6 +18495,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
@@ -18664,6 +18665,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
@@ -18841,6 +18843,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
@@ -18958,6 +18961,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
@@ -19096,6 +19100,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
 				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
@@ -27565,6 +27570,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.DocIds = []string{"testString"}
 				replicationDocumentModel.Filter = core.StringPtr("testString")
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
@@ -27599,6 +27605,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.DocIds).To(Equal([]string{"testString"}))
 				Expect(replicationDocumentModel.Filter).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.HTTPConnections).To(Equal(core.Int64Ptr(int64(20))))
+				Expect(replicationDocumentModel.Owner).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.QueryParams).To(Equal(map[string]string{"key1": "testString"}))
 				Expect(replicationDocumentModel.RetriesPerRequest).To(Equal(core.Int64Ptr(int64(5))))
 				Expect(replicationDocumentModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
@@ -28165,6 +28172,7 @@ var _ = Describe(`CloudantV1`, func() {
 			model.DocIds = []string{"testString"}
 			model.Filter = core.StringPtr("testString")
 			model.HTTPConnections = core.Int64Ptr(int64(20))
+			model.Owner = core.StringPtr("testString")
 			model.QueryParams = map[string]string{"key1": "testString"}
 			model.RetriesPerRequest = core.Int64Ptr(int64(5))
 			model.Selector = map[string]interface{}{"anyKey": "anyValue"}
