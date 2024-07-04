@@ -243,3 +243,13 @@ list any `fields` to project and hence the response includes `"fields": "all_fie
 
 If it is not possible to use a newer server version the workaround is to use
 [Raw IO](/#raw-io) functions to custom deserialize the response.
+
+### Design documents
+
+#### Query language design documents
+
+The type of the `map` function for `views` differs between design documents with `"language":"javascript"` (`map` function is a string) and `"language":"query"` (`map` function is an object).
+
+The SDK model for a design document expects a `javascript` design document and the [`GetDesignDocument` operation](https://cloud.ibm.com/apidocs/cloudant?code=go#getdesigndocument) fails for a `query` design document with an error such as `error unmarshalling cloudantv1.DesignDocument: error unmarshalling property 'views' as map[string]cloudantv1.DesignDocumentViewsMapReduce: error unmarshalling property 'map': json: cannot unmarshal object into Go value of type string`.
+
+In general manage `query` design documents using the `_index` endpoint operations: [`PostIndex`](https://cloud.ibm.com/apidocs/cloudant?code=go#postindex), [`DeleteIndex`](https://cloud.ibm.com/apidocs/cloudant?code=go#deleteindex), and [`GetIndexesInformation`](https://cloud.ibm.com/apidocs/cloudant?code=go#getindexesinformation). However, if you must retrieve the content of a `query` design document workaround the error by using the [`PostDesignDocs` operation](https://cloud.ibm.com/apidocs/cloudant?code=go#postdesigndocs) with the `IncludeDocs` parameter and the `Key` parameter to limit the response to a single specific design document. If a completely raw response is preferred then instead use the [`PostAllDocsAsStream operation`](https://cloud.ibm.com/apidocs/cloudant?code=go#postalldocs).
