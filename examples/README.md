@@ -1803,33 +1803,6 @@ b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 ```
 
-## postMissingRevs
-
-_POST `/{db}/_missing_revs`_
-
-### [Example request](snippets/postMissingRevs/example_request.go)
-
-[embedmd]:# (snippets/postMissingRevs/example_request.go)
-```go
-// section: code
-postMissingRevsOptions := service.NewPostMissingRevsOptions(
-  "orders",
-  map[string][]string{
-    "order00077": {"<order00077-existing-revision>", "<2-missing-revision>"},
-  },
-)
-
-missingRevsResult, response, err := service.PostMissingRevs(postMissingRevsOptions)
-if err != nil {
-  panic(err)
-}
-
-b, _ := json.MarshalIndent(missingRevsResult, "", "  ")
-fmt.Println(string(b))
-// section: markdown
-// This example requires the example revisions in the POST body to be replaced with valid revisions.
-```
-
 ## getPartitionInformation
 
 _GET `/{db}/_partition/{partition_key}`_
