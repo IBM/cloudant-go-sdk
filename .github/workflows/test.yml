@@ -36,6 +36,6 @@ jobs:
     - name: Run tests
       run: go test ./... -coverprofile=coverage.txt -covermode=count
     - name: Run lint
-      uses: golangci/golangci-lint-action@v3
+      uses: golangci/golangci-lint-action@v6
       with:
         skip-pkg-cache: true
