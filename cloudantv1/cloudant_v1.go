@@ -10095,7 +10095,7 @@ type DeleteAttachmentOptions struct {
 	// code immediately.
 	Batch *string `json:"batch,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10162,7 +10162,7 @@ type DeleteDatabaseOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10204,7 +10204,7 @@ type DeleteDesignDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10277,7 +10277,7 @@ type DeleteDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10347,7 +10347,7 @@ type DeleteIndexOptions struct {
 	// Path parameter to specify the index name.
 	Index *string `json:"index" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10411,7 +10411,7 @@ type DeleteLocalDocumentOptions struct {
 	// code immediately.
 	Batch *string `json:"batch,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10469,7 +10469,7 @@ type DeleteReplicationDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -10518,6 +10518,7 @@ func (options *DeleteReplicationDocumentOptions) SetHeaders(param map[string]str
 }
 
 // DesignDocument : Schema for a design document.
+// This type supports additional properties of type interface{}.
 type DesignDocument struct {
 	// Schema for a map of attachment name to attachment metadata.
 	Attachments map[string]Attachment `json:"_attachments,omitempty"`
@@ -10629,11 +10630,11 @@ type DesignDocument struct {
 	// Schema for design document views.
 	Views map[string]DesignDocumentViewsMapReduce `json:"views,omitempty"`
 
-	// Allows users to set arbitrary properties
+	// Allows users to set arbitrary properties of type interface{}.
 	additionalProperties map[string]interface{}
 }
 
-// SetProperty allows the user to set an arbitrary property on an instance of DesignDocument
+// SetProperty allows the user to set an arbitrary property on an instance of DesignDocument.
 func (o *DesignDocument) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]interface{})
@@ -10641,7 +10642,7 @@ func (o *DesignDocument) SetProperty(key string, value interface{}) {
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of DesignDocument
+// SetProperties allows the user to set a map of arbitrary properties on an instance of DesignDocument.
 func (o *DesignDocument) SetProperties(m map[string]interface{}) {
 	o.additionalProperties = make(map[string]interface{})
 	for k, v := range m {
@@ -10649,12 +10650,12 @@ func (o *DesignDocument) SetProperties(m map[string]interface{}) {
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of DesignDocument
+// GetProperty allows the user to retrieve an arbitrary property from an instance of DesignDocument.
 func (o *DesignDocument) GetProperty(key string) interface{} {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of DesignDocument
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of DesignDocument.
 func (o *DesignDocument) GetProperties() map[string]interface{} {
 	return o.additionalProperties
 }
@@ -11100,6 +11101,7 @@ func UnmarshalDocsResultRowValue(m map[string]json.RawMessage, result interface{
 }
 
 // Document : Schema for a document.
+// This type supports additional properties of type interface{}.
 type Document struct {
 	// Schema for a map of attachment name to attachment metadata.
 	Attachments map[string]Attachment `json:"_attachments,omitempty"`
@@ -11128,11 +11130,11 @@ type Document struct {
 	// Schema for a list of objects with information about local revisions and their status.
 	RevsInfo []DocumentRevisionStatus `json:"_revs_info,omitempty"`
 
-	// Allows users to set arbitrary properties
+	// Allows users to set arbitrary properties of type interface{}.
 	additionalProperties map[string]interface{}
 }
 
-// SetProperty allows the user to set an arbitrary property on an instance of Document
+// SetProperty allows the user to set an arbitrary property on an instance of Document.
 func (o *Document) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]interface{})
@@ -11140,7 +11142,7 @@ func (o *Document) SetProperty(key string, value interface{}) {
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of Document
+// SetProperties allows the user to set a map of arbitrary properties on an instance of Document.
 func (o *Document) SetProperties(m map[string]interface{}) {
 	o.additionalProperties = make(map[string]interface{})
 	for k, v := range m {
@@ -11148,12 +11150,12 @@ func (o *Document) SetProperties(m map[string]interface{}) {
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of Document
+// GetProperty allows the user to retrieve an arbitrary property from an instance of Document.
 func (o *Document) GetProperty(key string) interface{} {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of Document
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of Document.
 func (o *Document) GetProperties() map[string]interface{} {
 	return o.additionalProperties
 }
@@ -11854,7 +11856,7 @@ func UnmarshalFindResult(m map[string]json.RawMessage, result interface{}) (err 
 // GetActiveTasksOptions : The GetActiveTasks options.
 type GetActiveTasksOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -11872,7 +11874,7 @@ func (options *GetActiveTasksOptions) SetHeaders(param map[string]string) *GetAc
 // GetActivityTrackerEventsOptions : The GetActivityTrackerEvents options.
 type GetActivityTrackerEventsOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -11906,7 +11908,7 @@ type GetAllDbsOptions struct {
 	// that matches the key type emitted by the view function.
 	StartKey *string `json:"start_key,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -11978,7 +11980,7 @@ type GetAttachmentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12048,7 +12050,7 @@ func (options *GetAttachmentOptions) SetHeaders(param map[string]string) *GetAtt
 // GetCapacityThroughputInformationOptions : The GetCapacityThroughputInformation options.
 type GetCapacityThroughputInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12066,7 +12068,7 @@ func (options *GetCapacityThroughputInformationOptions) SetHeaders(param map[str
 // GetCorsInformationOptions : The GetCorsInformation options.
 type GetCorsInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12084,7 +12086,7 @@ func (options *GetCorsInformationOptions) SetHeaders(param map[string]string) *G
 // GetCurrentThroughputInformationOptions : The GetCurrentThroughputInformation options.
 type GetCurrentThroughputInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12104,7 +12106,7 @@ type GetDatabaseInformationOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12162,7 +12164,7 @@ type GetDbUpdatesOptions struct {
 	// a valid update sequence or `now` value. Default is `0` i.e. all changes.
 	Since *string `json:"since,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12231,7 +12233,7 @@ type GetDesignDocumentInformationOptions struct {
 	// `_design/` prefix.
 	Ddoc *string `json:"ddoc" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12307,7 +12309,7 @@ type GetDesignDocumentOptions struct {
 	// Query parameter to specify whether to includes detailed information for all known document revisions.
 	RevsInfo *bool `json:"revs_info,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12448,7 +12450,7 @@ type GetDocumentOptions struct {
 	// Query parameter to specify whether to includes detailed information for all known document revisions.
 	RevsInfo *bool `json:"revs_info,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12552,7 +12554,7 @@ type GetDocumentShardsInfoOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12587,7 +12589,7 @@ type GetIndexesInformationOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12634,7 +12636,7 @@ type GetLocalDocumentOptions struct {
 	// Query parameter to specify whether to include the last update sequence for the document.
 	LocalSeq *bool `json:"local_seq,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12697,7 +12699,7 @@ func (options *GetLocalDocumentOptions) SetHeaders(param map[string]string) *Get
 // GetMembershipInformationOptions : The GetMembershipInformation options.
 type GetMembershipInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12720,7 +12722,7 @@ type GetPartitionInformationOptions struct {
 	// Path parameter to specify the database partition key.
 	PartitionKey *string `json:"partition_key" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12792,7 +12794,7 @@ type GetReplicationDocumentOptions struct {
 	// Query parameter to specify whether to includes detailed information for all known document revisions.
 	RevsInfo *bool `json:"revs_info,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12893,7 +12895,7 @@ type GetSchedulerDocsOptions struct {
 	// string.
 	States []string `json:"states,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12943,7 +12945,7 @@ type GetSchedulerDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -12971,7 +12973,7 @@ type GetSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
 	JobID *string `json:"job_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13002,7 +13004,7 @@ type GetSchedulerJobsOptions struct {
 	// Query parameter to specify the number of records before starting to return the results.
 	Skip *int64 `json:"skip,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13041,7 +13043,7 @@ type GetSearchInfoOptions struct {
 	// Path parameter to specify the index name.
 	Index *string `json:"index" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13083,7 +13085,7 @@ type GetSecurityOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13109,7 +13111,7 @@ func (options *GetSecurityOptions) SetHeaders(param map[string]string) *GetSecur
 // GetServerInformationOptions : The GetServerInformation options.
 type GetServerInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13127,7 +13129,7 @@ func (options *GetServerInformationOptions) SetHeaders(param map[string]string) 
 // GetSessionInformationOptions : The GetSessionInformation options.
 type GetSessionInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13147,7 +13149,7 @@ type GetShardsInformationOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13173,7 +13175,7 @@ func (options *GetShardsInformationOptions) SetHeaders(param map[string]string) 
 // GetUpInformationOptions : The GetUpInformation options.
 type GetUpInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13193,7 +13195,7 @@ type GetUuidsOptions struct {
 	// Query parameter to specify the number of UUIDs to return.
 	Count *int64 `json:"count,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13234,7 +13236,7 @@ type HeadAttachmentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13294,7 +13296,7 @@ type HeadDatabaseOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13329,7 +13331,7 @@ type HeadDesignDocumentOptions struct {
 	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13382,7 +13384,7 @@ type HeadDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13441,7 +13443,7 @@ type HeadLocalDocumentOptions struct {
 	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13485,7 +13487,7 @@ type HeadReplicationDocumentOptions struct {
 	// Header parameter for a conditional HTTP request not matching an ETag.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13519,7 +13521,7 @@ type HeadSchedulerDocumentOptions struct {
 	// Path parameter to specify the document ID.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13547,7 +13549,7 @@ type HeadSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
 	JobID *string `json:"job_id" validate:"required,ne="`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13573,7 +13575,7 @@ func (options *HeadSchedulerJobOptions) SetHeaders(param map[string]string) *Hea
 // HeadUpInformationOptions : The HeadUpInformation options.
 type HeadUpInformationOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -13815,6 +13817,7 @@ func UnmarshalIndexDefinition(m map[string]json.RawMessage, result interface{}) 
 }
 
 // IndexField : Schema for indexed fields for use with declarative JSON query.
+// This type supports additional properties of type *string. Schema for sort direction.
 type IndexField struct {
 	// Name of the field.
 	Name *string `json:"name,omitempty"`
@@ -13822,7 +13825,7 @@ type IndexField struct {
 	// The type of the named field.
 	Type *string `json:"type,omitempty"`
 
-	// Allows users to set arbitrary properties
+	// Schema for sort direction.
 	additionalProperties map[string]*string
 }
 
@@ -13834,7 +13837,8 @@ const (
 	IndexFieldTypeStringConst  = "string"
 )
 
-// SetProperty allows the user to set an arbitrary property on an instance of IndexField
+// SetProperty allows the user to set an arbitrary property on an instance of IndexField.
+// Schema for sort direction.
 func (o *IndexField) SetProperty(key string, value *string) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]*string)
@@ -13842,7 +13846,8 @@ func (o *IndexField) SetProperty(key string, value *string) {
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of IndexField
+// SetProperties allows the user to set a map of arbitrary properties on an instance of IndexField.
+// Schema for sort direction.
 func (o *IndexField) SetProperties(m map[string]*string) {
 	o.additionalProperties = make(map[string]*string)
 	for k, v := range m {
@@ -13850,12 +13855,12 @@ func (o *IndexField) SetProperties(m map[string]*string) {
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of IndexField
+// GetProperty allows the user to retrieve an arbitrary property from an instance of IndexField.
 func (o *IndexField) GetProperty(key string) *string {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of IndexField
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of IndexField.
 func (o *IndexField) GetProperties() map[string]*string {
 	return o.additionalProperties
 }
@@ -14318,7 +14323,7 @@ type PostActivityTrackerEventsOptions struct {
 	// "management" is a required element of this array.
 	Types []string `json:"types" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14394,7 +14399,7 @@ type PostAllDocsOptions struct {
 	// Schema for a document ID.
 	StartKey *string `json:"start_key,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14504,7 +14509,7 @@ type PostAllDocsQueriesOptions struct {
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
 	Queries []AllDocsQuery `json:"queries" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14537,7 +14542,7 @@ func (options *PostAllDocsQueriesOptions) SetHeaders(param map[string]string) *P
 // PostApiKeysOptions : The PostApiKeys options.
 type PostApiKeysOptions struct {
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14563,7 +14568,7 @@ type PostBulkDocsOptions struct {
 	// HTTP request body for postBulkDocs.
 	Body io.ReadCloser `json:"body,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14619,7 +14624,7 @@ type PostBulkGetOptions struct {
 	// Query parameter to specify whether to include a list of all known document revisions.
 	Revs *bool `json:"revs,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14800,7 +14805,7 @@ type PostChangesOptions struct {
 	// at least one record for them.
 	View *string `json:"view,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -14945,7 +14950,7 @@ type PostDbsInfoOptions struct {
 	// A list of database names.
 	Keys []string `json:"keys" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15015,7 +15020,7 @@ type PostDesignDocsOptions struct {
 	// Schema for a document ID.
 	StartKey *string `json:"start_key,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15128,7 +15133,7 @@ type PostDesignDocsQueriesOptions struct {
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15182,7 +15187,7 @@ type PostDocumentOptions struct {
 	// code immediately.
 	Batch *string `json:"batch,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15322,7 +15327,7 @@ type PostExplainOptions struct {
 	// the index.
 	R *int64 `json:"r,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15519,7 +15524,7 @@ type PostFindOptions struct {
 	// the index.
 	R *int64 `json:"r,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15655,7 +15660,7 @@ type PostIndexOptions struct {
 	// Schema for the type of an index.
 	Type *string `json:"type,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15767,7 +15772,7 @@ type PostPartitionAllDocsOptions struct {
 	// Schema for a document ID.
 	StartKey *string `json:"start_key,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -15958,7 +15963,7 @@ type PostPartitionExplainOptions struct {
 	// indexes that might get added later.
 	UseIndex []string `json:"use_index,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -16153,7 +16158,7 @@ type PostPartitionFindOptions struct {
 	// indexes that might get added later.
 	UseIndex []string `json:"use_index,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -16325,7 +16330,7 @@ type PostPartitionSearchOptions struct {
 	// Do not wait for the index to finish building to return results.
 	Stale *string `json:"stale,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -16533,7 +16538,7 @@ type PostPartitionViewOptions struct {
 	// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 	Update *string `json:"update,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -16711,7 +16716,7 @@ type PostRevsDiffOptions struct {
 	// HTTP request body for operations with Document revisions.
 	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -16749,7 +16754,7 @@ type PostSearchAnalyzeOptions struct {
 	// The text to tokenize with the analyzer.
 	Text *string `json:"text" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -16910,7 +16915,7 @@ type PostSearchOptions struct {
 	// available when making global queries.
 	Ranges map[string]map[string]map[string]string `json:"ranges,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17152,7 +17157,7 @@ type PostViewOptions struct {
 	// * `lazy` - Return the view results without waiting for an update, but update them immediately after the request.
 	Update *string `json:"update,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17337,7 +17342,7 @@ type PostViewQueriesOptions struct {
 	// names and their meaning are the same as the query parameters of a regular view request.
 	Queries []ViewQuery `json:"queries" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17404,7 +17409,7 @@ type PutAttachmentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17473,7 +17478,7 @@ type PutCapacityThroughputConfigurationOptions struct {
 	// of provisioned throughput capacity.
 	Blocks *int64 `json:"blocks" validate:"required"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17513,7 +17518,7 @@ type PutCloudantSecurityConfigurationOptions struct {
 	// Manage permissions using the `_users` database only.
 	CouchdbAuthOnly *bool `json:"couchdb_auth_only,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17588,7 +17593,7 @@ type PutCorsConfigurationOptions struct {
 	// Boolean value to turn CORS on and off.
 	EnableCors *bool `json:"enable_cors,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17637,7 +17642,7 @@ type PutDatabaseOptions struct {
 	// support for guidance on how to meet your specific needs and requirements.
 	Q *int64 `json:"q,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17699,7 +17704,7 @@ type PutDesignDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17799,7 +17804,7 @@ type PutDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17899,7 +17904,7 @@ type PutLocalDocumentOptions struct {
 	// code immediately.
 	Batch *string `json:"batch,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -17983,7 +17988,7 @@ type PutReplicationDocumentOptions struct {
 	// Query parameter to specify a document revision.
 	Rev *string `json:"rev,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -18061,7 +18066,7 @@ type PutSecurityOptions struct {
 	// Manage permissions using the `_users` database only.
 	CouchdbAuthOnly *bool `json:"couchdb_auth_only,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -18298,6 +18303,7 @@ func UnmarshalReplicationDatabaseAuthIam(m map[string]json.RawMessage, result in
 }
 
 // ReplicationDocument : Schema for a replication document. Note that `selector`, `doc_ids`, and `filter` are incompatible with each other.
+// This type supports additional properties of type interface{}.
 type ReplicationDocument struct {
 	// Schema for a map of attachment name to attachment metadata.
 	Attachments map[string]Attachment `json:"_attachments,omitempty"`
@@ -18446,7 +18452,7 @@ type ReplicationDocument struct {
 	// improve throughput.
 	WorkerProcesses *int64 `json:"worker_processes,omitempty"`
 
-	// Allows users to set arbitrary properties
+	// Allows users to set arbitrary properties of type interface{}.
 	additionalProperties map[string]interface{}
 }
 
@@ -18463,7 +18469,7 @@ func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *R
 	return
 }
 
-// SetProperty allows the user to set an arbitrary property on an instance of ReplicationDocument
+// SetProperty allows the user to set an arbitrary property on an instance of ReplicationDocument.
 func (o *ReplicationDocument) SetProperty(key string, value interface{}) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]interface{})
@@ -18471,7 +18477,7 @@ func (o *ReplicationDocument) SetProperty(key string, value interface{}) {
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of ReplicationDocument
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ReplicationDocument.
 func (o *ReplicationDocument) SetProperties(m map[string]interface{}) {
 	o.additionalProperties = make(map[string]interface{})
 	for k, v := range m {
@@ -18479,12 +18485,12 @@ func (o *ReplicationDocument) SetProperties(m map[string]interface{}) {
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of ReplicationDocument
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ReplicationDocument.
 func (o *ReplicationDocument) GetProperty(key string) interface{} {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ReplicationDocument
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ReplicationDocument.
 func (o *ReplicationDocument) GetProperties() map[string]interface{} {
 	return o.additionalProperties
 }
@@ -19801,6 +19807,7 @@ func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}
 }
 
 // ServerVendor : Schema for server vendor information.
+// This type supports additional properties of type *string.
 type ServerVendor struct {
 	// Vendor name.
 	Name *string `json:"name" validate:"required"`
@@ -19811,11 +19818,11 @@ type ServerVendor struct {
 	// Vendor version.
 	Version *string `json:"version" validate:"required"`
 
-	// Allows users to set arbitrary properties
+	// Allows users to set arbitrary properties of type *string.
 	additionalProperties map[string]*string
 }
 
-// SetProperty allows the user to set an arbitrary property on an instance of ServerVendor
+// SetProperty allows the user to set an arbitrary property on an instance of ServerVendor.
 func (o *ServerVendor) SetProperty(key string, value *string) {
 	if o.additionalProperties == nil {
 		o.additionalProperties = make(map[string]*string)
@@ -19823,7 +19830,7 @@ func (o *ServerVendor) SetProperty(key string, value *string) {
 	o.additionalProperties[key] = value
 }
 
-// SetProperties allows the user to set a map of arbitrary properties on an instance of ServerVendor
+// SetProperties allows the user to set a map of arbitrary properties on an instance of ServerVendor.
 func (o *ServerVendor) SetProperties(m map[string]*string) {
 	o.additionalProperties = make(map[string]*string)
 	for k, v := range m {
@@ -19831,12 +19838,12 @@ func (o *ServerVendor) SetProperties(m map[string]*string) {
 	}
 }
 
-// GetProperty allows the user to retrieve an arbitrary property from an instance of ServerVendor
+// GetProperty allows the user to retrieve an arbitrary property from an instance of ServerVendor.
 func (o *ServerVendor) GetProperty(key string) *string {
 	return o.additionalProperties[key]
 }
 
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServerVendor
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of ServerVendor.
 func (o *ServerVendor) GetProperties() map[string]*string {
 	return o.additionalProperties
 }
