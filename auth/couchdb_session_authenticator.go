@@ -222,7 +222,7 @@ func (a *CouchDbSessionAuthenticator) requestSession() (*session, error) {
 			Headers:    resp.Header,
 			RawResult:  buff.Bytes(),
 		}
-		err := fmt.Errorf(buff.String())
+		err := fmt.Errorf("%s", buff)
 
 		cInfo := common.GetComponentInfo()
 		component := core.NewProblemComponent(cInfo.Name, cInfo.Version)
