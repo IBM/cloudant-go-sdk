@@ -2,6 +2,8 @@ name: docs
 on:
   pull_request:
     branches: ['main']
+env:
+  GOTOOLCHAIN: local
 jobs:
   docs:
     runs-on: ubuntu-latest
