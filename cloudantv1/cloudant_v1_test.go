@@ -362,206 +362,6 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
-	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) - Operation response error`, func() {
-		getMembershipInformationPath := "/_membership"
-		Context(`Using mock server endpoint with invalid JSON response`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprint(res, `} this is not valid json {`)
-				}))
-			})
-			It(`Invoke GetMembershipInformation with error: Operation response processing error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetMembershipInformationOptions model
-				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
-				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Expect response parsing to fail since we are receiving a text/plain response
-				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-
-				// Enable retries and test again
-				cloudantService.EnableRetries(0, 0)
-				result, response, operationErr = cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
-	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
-		getMembershipInformationPath := "/_membership"
-		Context(`Using mock server endpoint with timeout`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Sleep a short time to support a timeout test
-					time.Sleep(100 * time.Millisecond)
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"all_nodes": ["AllNodes"], "cluster_nodes": ["ClusterNodes"]}`)
-				}))
-			})
-			It(`Invoke GetMembershipInformation successfully with retries`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-				cloudantService.EnableRetries(0, 0)
-
-				// Construct an instance of the GetMembershipInformationOptions model
-				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
-				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with a Context to test a timeout error
-				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc()
-				_, _, operationErr := cloudantService.GetMembershipInformationWithContext(ctx, getMembershipInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-
-				// Disable retries and test again
-				cloudantService.DisableRetries()
-				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-				// Re-test the timeout error with retries disabled
-				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
-				defer cancelFunc2()
-				_, _, operationErr = cloudantService.GetMembershipInformationWithContext(ctx, getMembershipInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Verify the contents of the request
-					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
-					Expect(req.Method).To(Equal("GET"))
-
-					// Set mock response
-					res.Header().Set("Content-type", "application/json")
-					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"all_nodes": ["AllNodes"], "cluster_nodes": ["ClusterNodes"]}`)
-				}))
-			})
-			It(`Invoke GetMembershipInformation successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Invoke operation with nil options model (negative test)
-				result, response, operationErr := cloudantService.GetMembershipInformation(nil)
-				Expect(operationErr).NotTo(BeNil())
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-
-				// Construct an instance of the GetMembershipInformationOptions model
-				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
-				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation with valid options model (positive test)
-				result, response, operationErr = cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-				Expect(result).ToNot(BeNil())
-
-			})
-			It(`Invoke GetMembershipInformation with error: Operation request error`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetMembershipInformationOptions model
-				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
-				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-				// Invoke operation with empty URL (negative test)
-				err := cloudantService.SetServiceURL("")
-				Expect(err).To(BeNil())
-				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
-				Expect(operationErr).ToNot(BeNil())
-				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
-				Expect(response).To(BeNil())
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-		Context(`Using mock server endpoint with missing response body`, func() {
-			BeforeEach(func() {
-				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-					defer GinkgoRecover()
-
-					// Set success status code with no respoonse body
-					res.WriteHeader(200)
-				}))
-			})
-			It(`Invoke GetMembershipInformation successfully`, func() {
-				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
-					URL:           testServer.URL,
-					Authenticator: &core.NoAuthAuthenticator{},
-				})
-				Expect(serviceErr).To(BeNil())
-				Expect(cloudantService).ToNot(BeNil())
-
-				// Construct an instance of the GetMembershipInformationOptions model
-				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
-				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
-
-				// Invoke operation
-				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
-				Expect(operationErr).To(BeNil())
-				Expect(response).ToNot(BeNil())
-
-				// Verify a nil result
-				Expect(result).To(BeNil())
-			})
-			AfterEach(func() {
-				testServer.Close()
-			})
-		})
-	})
 	Describe(`GetUuids(getUuidsOptions *GetUuidsOptions) - Operation response error`, func() {
 		getUuidsPath := "/_uuids"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -831,7 +631,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
+					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}}`)
 				}))
 			})
 			It(`Invoke GetCapacityThroughputInformation successfully with retries`, func() {
@@ -884,7 +684,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
+					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}}`)
 				}))
 			})
 			It(`Invoke GetCapacityThroughputInformation successfully`, func() {
@@ -1048,7 +848,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
+					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}}`)
 				}))
 			})
 			It(`Invoke PutCapacityThroughputConfiguration successfully with retries`, func() {
@@ -1118,7 +918,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 0, "query": 0, "read": 0, "write": 0}}}`)
+					fmt.Fprintf(res, "%s", `{"current": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}, "target": {"throughput": {"blocks": 1, "query": 0, "read": 0, "write": 0}}}`)
 				}))
 			})
 			It(`Invoke PutCapacityThroughputConfiguration successfully`, func() {
@@ -8888,7 +8688,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "options": {}, "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully with retries`, func() {
@@ -8966,7 +8766,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "options": {}, "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -9169,9 +8969,14 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
 
+				// Construct an instance of the DesignDocumentViewsMapReduceOptions model
+				designDocumentViewsMapReduceOptionsModel := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+				designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Options = designDocumentViewsMapReduceOptionsModel
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9318,9 +9123,14 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
 
+				// Construct an instance of the DesignDocumentViewsMapReduceOptions model
+				designDocumentViewsMapReduceOptionsModel := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+				designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Options = designDocumentViewsMapReduceOptionsModel
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9475,9 +9285,14 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
 
+				// Construct an instance of the DesignDocumentViewsMapReduceOptions model
+				designDocumentViewsMapReduceOptionsModel := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+				designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Options = designDocumentViewsMapReduceOptionsModel
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9572,9 +9387,14 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
 
+				// Construct an instance of the DesignDocumentViewsMapReduceOptions model
+				designDocumentViewsMapReduceOptionsModel := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+				designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Options = designDocumentViewsMapReduceOptionsModel
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9690,9 +9510,14 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentOptionsModel := new(cloudantv1.DesignDocumentOptions)
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
 
+				// Construct an instance of the DesignDocumentViewsMapReduceOptions model
+				designDocumentViewsMapReduceOptionsModel := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+				designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Options = designDocumentViewsMapReduceOptionsModel
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -24499,6 +24324,206 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) - Operation response error`, func() {
+		getMembershipInformationPath := "/_membership"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetMembershipInformation with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetMembershipInformationOptions model
+				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
+				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
+		getMembershipInformationPath := "/_membership"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"all_nodes": ["AllNodes"], "cluster_nodes": ["ClusterNodes"]}`)
+				}))
+			})
+			It(`Invoke GetMembershipInformation successfully with retries`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetMembershipInformationOptions model
+				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
+				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := cloudantService.GetMembershipInformationWithContext(ctx, getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = cloudantService.GetMembershipInformationWithContext(ctx, getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getMembershipInformationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"all_nodes": ["AllNodes"], "cluster_nodes": ["ClusterNodes"]}`)
+				}))
+			})
+			It(`Invoke GetMembershipInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.GetMembershipInformation(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetMembershipInformationOptions model
+				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
+				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetMembershipInformation with error: Operation request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetMembershipInformationOptions model
+				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
+				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetMembershipInformation successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetMembershipInformationOptions model
+				getMembershipInformationOptionsModel := new(cloudantv1.GetMembershipInformationOptions)
+				getMembershipInformationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetMembershipInformation(getMembershipInformationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions) - Operation response error`, func() {
 		getUpInformationPath := "/_up"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -27182,12 +27207,30 @@ var _ = Describe(`CloudantV1`, func() {
 				designDocumentOptionsModel.Partitioned = core.BoolPtr(true)
 				Expect(designDocumentOptionsModel.Partitioned).To(Equal(core.BoolPtr(true)))
 
+				// Construct an instance of the DesignDocumentViewsMapReduceOptions model
+				designDocumentViewsMapReduceOptionsModel := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+				Expect(designDocumentViewsMapReduceOptionsModel).ToNot(BeNil())
+				designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+				Expect(designDocumentViewsMapReduceOptionsModel.GetProperties()).ToNot(BeEmpty())
+				Expect(designDocumentViewsMapReduceOptionsModel.GetProperty("foo")).To(Equal("testString"))
+
+				designDocumentViewsMapReduceOptionsModel.SetProperties(nil)
+				Expect(designDocumentViewsMapReduceOptionsModel.GetProperties()).To(BeEmpty())
+
+				designDocumentViewsMapReduceOptionsModelExpectedMap := make(map[string]interface{})
+				designDocumentViewsMapReduceOptionsModelExpectedMap["foo"] = "testString"
+				designDocumentViewsMapReduceOptionsModel.SetProperties(designDocumentViewsMapReduceOptionsModelExpectedMap)
+				designDocumentViewsMapReduceOptionsModelActualMap := designDocumentViewsMapReduceOptionsModel.GetProperties()
+				Expect(designDocumentViewsMapReduceOptionsModelActualMap).To(Equal(designDocumentViewsMapReduceOptionsModelExpectedMap))
+
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
 				Expect(designDocumentViewsMapReduceModel).ToNot(BeNil())
 				designDocumentViewsMapReduceModel.Map = core.StringPtr("testString")
+				designDocumentViewsMapReduceModel.Options = designDocumentViewsMapReduceOptionsModel
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 				Expect(designDocumentViewsMapReduceModel.Map).To(Equal(core.StringPtr("testString")))
+				Expect(designDocumentViewsMapReduceModel.Options).To(Equal(designDocumentViewsMapReduceOptionsModel))
 				Expect(designDocumentViewsMapReduceModel.Reduce).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the DesignDocument model
@@ -27935,6 +27978,7 @@ var _ = Describe(`CloudantV1`, func() {
 			// Construct an instance of the model.
 			model := new(cloudantv1.DesignDocumentViewsMapReduce)
 			model.Map = core.StringPtr("testString")
+			model.Options = nil
 			model.Reduce = core.StringPtr("testString")
 
 			b, err := json.Marshal(model)
@@ -27946,6 +27990,23 @@ var _ = Describe(`CloudantV1`, func() {
 
 			var result *cloudantv1.DesignDocumentViewsMapReduce
 			err = cloudantv1.UnmarshalDesignDocumentViewsMapReduce(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDesignDocumentViewsMapReduceOptions successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.DesignDocumentViewsMapReduceOptions)
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.DesignDocumentViewsMapReduceOptions
+			err = cloudantv1.UnmarshalDesignDocumentViewsMapReduceOptions(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))

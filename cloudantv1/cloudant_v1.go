@@ -233,67 +233,6 @@ func (cloudant *CloudantV1) GetServerInformationWithContext(ctx context.Context,
 	return
 }
 
-// GetMembershipInformation : Retrieve cluster membership information
-// Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
-// node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a cluster.
-func (cloudant *CloudantV1) GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
-	result, response, err = cloudant.GetMembershipInformationWithContext(context.Background(), getMembershipInformationOptions)
-	err = core.RepurposeSDKProblem(err, "")
-	return
-}
-
-// GetMembershipInformationWithContext is an alternate form of the GetMembershipInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Context, getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getMembershipInformationOptions, "getMembershipInformationOptions")
-	if err != nil {
-		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_membership`, nil)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
-		return
-	}
-
-	for headerName, headerValue := range getMembershipInformationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetMembershipInformation")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		core.EnrichHTTPProblem(err, "getMembershipInformation", getServiceComponentInfo())
-		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMembershipInformation)
-		if err != nil {
-			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
 // GetUuids : Retrieve one or more UUIDs
 // Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
 // provides a list of UUIDs.
@@ -4197,6 +4136,10 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.
 // Partitioned Search indexes, which are defined in design documents, allow partition databases to be queried by using
 // Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
 // views. The index function decides what data to index and store in the index.
+//
+// Before using read the
+// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
+// limitations and appropriate use cases.
 func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostPartitionSearchWithContext(context.Background(), postPartitionSearchOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4315,6 +4258,10 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 // Partitioned Search indexes, which are defined in design documents, allow partition databases to be queried by using
 // Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
 // views. The index function decides what data to index and store in the index.
+//
+// Before using read the
+// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
+// limitations and appropriate use cases.
 func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptions *PostPartitionSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostPartitionSearchAsStreamWithContext(context.Background(), postPartitionSearchOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4425,6 +4372,10 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 // for accessing views, the POST method supports the specification of explicit keys to be retrieved from the view
 // results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
 // API.
+//
+// Before using read the
+// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
+// limitations and appropriate use cases.
 func (cloudant *CloudantV1) PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostPartitionViewWithContext(context.Background(), postPartitionViewOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4565,6 +4516,10 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 // for accessing views, the POST method supports the specification of explicit keys to be retrieved from the view
 // results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
 // API.
+//
+// Before using read the
+// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
+// limitations and appropriate use cases.
 func (cloudant *CloudantV1) PostPartitionViewAsStream(postPartitionViewOptions *PostPartitionViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostPartitionViewAsStreamWithContext(context.Background(), postPartitionViewOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4810,6 +4765,10 @@ func (cloudant *CloudantV1) PostPartitionExplainWithContext(ctx context.Context,
 // Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
 // recommended because it has a noticeable performance impact causing a full scan of the partition with each request. In
 // this case the response body will include a warning field recommending that an index is created.
+//
+// Before using read the
+// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
+// limitations and appropriate use cases.
 func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostPartitionFindWithContext(context.Background(), postPartitionFindOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -4926,6 +4885,10 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 // Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
 // recommended because it has a noticeable performance impact causing a full scan of the partition with each request. In
 // this case the response body will include a warning field recommending that an index is created.
+//
+// Before using read the
+// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
+// limitations and appropriate use cases.
 func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *PostPartitionFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostPartitionFindAsStreamWithContext(context.Background(), postPartitionFindOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8262,6 +8225,67 @@ func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getAc
 	return
 }
 
+// GetMembershipInformation : Retrieve cluster membership information
+// Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
+// node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a cluster.
+func (cloudant *CloudantV1) GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.GetMembershipInformationWithContext(context.Background(), getMembershipInformationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetMembershipInformationWithContext is an alternate form of the GetMembershipInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Context, getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getMembershipInformationOptions, "getMembershipInformationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_membership`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range getMembershipInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetMembershipInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "getMembershipInformation", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalMembershipInformation)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // GetUpInformation : Retrieve information about whether the server is up
 // Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or `nolb`,
 // the endpoint returns a 404 response.
@@ -8522,7 +8546,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.14")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.15")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9344,6 +9368,9 @@ type BulkDocs struct {
 	Docs []Document `json:"docs" validate:"required"`
 
 	// If `false`, prevents the database from assigning them new revision IDs. Default is `true`.
+	//
+	// Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+	// very easy to accidentally end up with a large number of conflicts.
 	NewEdits *bool `json:"new_edits,omitempty"`
 }
 
@@ -10967,6 +10994,9 @@ type DesignDocumentViewsMapReduce struct {
 	// JavaScript map function as a string.
 	Map *string `json:"map" validate:"required"`
 
+	// Options of view build resuls.
+	Options *DesignDocumentViewsMapReduceOptions `json:"options,omitempty"`
+
 	// JavaScript reduce function as a string.
 	Reduce *string `json:"reduce,omitempty"`
 }
@@ -10991,10 +11021,80 @@ func UnmarshalDesignDocumentViewsMapReduce(m map[string]json.RawMessage, result 
 		err = core.SDKErrorf(err, "", "map-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalModel(m, "options", &obj.Options, UnmarshalDesignDocumentViewsMapReduceOptions)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "options-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reduce-error", common.GetComponentInfo())
 		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DesignDocumentViewsMapReduceOptions : Options of view build resuls.
+// This type supports additional properties of type interface{}.
+type DesignDocumentViewsMapReduceOptions struct {
+
+	// Allows users to set arbitrary properties of type interface{}.
+	additionalProperties map[string]interface{}
+}
+
+// SetProperty allows the user to set an arbitrary property on an instance of DesignDocumentViewsMapReduceOptions.
+func (o *DesignDocumentViewsMapReduceOptions) SetProperty(key string, value interface{}) {
+	if o.additionalProperties == nil {
+		o.additionalProperties = make(map[string]interface{})
+	}
+	o.additionalProperties[key] = value
+}
+
+// SetProperties allows the user to set a map of arbitrary properties on an instance of DesignDocumentViewsMapReduceOptions.
+func (o *DesignDocumentViewsMapReduceOptions) SetProperties(m map[string]interface{}) {
+	o.additionalProperties = make(map[string]interface{})
+	for k, v := range m {
+		o.additionalProperties[k] = v
+	}
+}
+
+// GetProperty allows the user to retrieve an arbitrary property from an instance of DesignDocumentViewsMapReduceOptions.
+func (o *DesignDocumentViewsMapReduceOptions) GetProperty(key string) interface{} {
+	return o.additionalProperties[key]
+}
+
+// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of DesignDocumentViewsMapReduceOptions.
+func (o *DesignDocumentViewsMapReduceOptions) GetProperties() map[string]interface{} {
+	return o.additionalProperties
+}
+
+// MarshalJSON performs custom serialization for instances of DesignDocumentViewsMapReduceOptions
+func (o *DesignDocumentViewsMapReduceOptions) MarshalJSON() (buffer []byte, err error) {
+	m := make(map[string]interface{})
+	if len(o.additionalProperties) > 0 {
+		for k, v := range o.additionalProperties {
+			m[k] = v
+		}
+	}
+	buffer, err = json.Marshal(m)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalDesignDocumentViewsMapReduceOptions unmarshals an instance of DesignDocumentViewsMapReduceOptions from the specified map of raw messages.
+func UnmarshalDesignDocumentViewsMapReduceOptions(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DesignDocumentViewsMapReduceOptions)
+	for k := range m {
+		var v interface{}
+		e := core.UnmarshalPrimitive(m, k, &v)
+		if e != nil {
+			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
+			return
+		}
+		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -11513,13 +11613,19 @@ type ExplainResult struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Schema for a list of objects with extra information on the selector to provide insights about its usability.
@@ -13774,13 +13880,19 @@ type IndexDefinition struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	PartialFilterSelector map[string]interface{} `json:"partial_filter_selector,omitempty"`
 }
 
@@ -14710,13 +14822,19 @@ type PostChangesOptions struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Header parameter to specify the ID of the last events received by the server on a previous connection. Overrides
@@ -15266,13 +15384,19 @@ type PostExplainOptions struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
@@ -15319,6 +15443,9 @@ type PostExplainOptions struct {
 	//
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
+	//
+	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+	// full scan of all documents will answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// The read quorum that is needed for the result. The value defaults to 1, in which case the document that was found in
@@ -15463,13 +15590,19 @@ type PostFindOptions struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
@@ -15516,6 +15649,9 @@ type PostFindOptions struct {
 	//
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
+	//
+	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+	// full scan of all documents will answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// The read quorum that is needed for the result. The value defaults to 1, in which case the document that was found in
@@ -15908,13 +16044,19 @@ type PostPartitionExplainOptions struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
@@ -15961,6 +16103,9 @@ type PostPartitionExplainOptions struct {
 	//
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
+	//
+	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+	// full scan of all documents will answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -16103,13 +16248,19 @@ type PostPartitionFindOptions struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
@@ -16156,6 +16307,9 @@ type PostPartitionFindOptions struct {
 	//
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
+	//
+	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
+	// full scan of all documents will answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -16523,6 +16677,10 @@ type PostPartitionViewOptions struct {
 
 	// Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce function
 	// is defined.
+	//
+	// A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+	//
+	// Be aware that `include_docs=true` can only be used with `map` views.
 	Reduce *bool `json:"reduce,omitempty"`
 
 	// Schema for any JSON type.
@@ -17134,6 +17292,10 @@ type PostViewOptions struct {
 
 	// Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce function
 	// is defined.
+	//
+	// A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+	//
+	// Be aware that `include_docs=true` can only be used with `map` views.
 	Reduce *bool `json:"reduce,omitempty"`
 
 	// Query parameter to specify whether use the same replica of  the index on each request. The default value `false`
@@ -17475,7 +17637,7 @@ func (options *PutAttachmentOptions) SetHeaders(param map[string]string) *PutAtt
 // PutCapacityThroughputConfigurationOptions : The PutCapacityThroughputConfiguration options.
 type PutCapacityThroughputConfigurationOptions struct {
 	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
-	// of provisioned throughput capacity.
+	// of provisioned throughput capacity. Not available for some plans.
 	Blocks *int64 `json:"blocks" validate:"required"`
 
 	// Allows users to set headers on API requests.
@@ -17634,6 +17796,10 @@ type PutDatabaseOptions struct {
 	Db *string `json:"db" validate:"required,ne="`
 
 	// Query parameter to specify whether to enable database partitions when creating a database.
+	//
+	// Before using read the
+	// [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partitioned-databases-database-partitioning)
+	// to understand the limitations and appropriate use cases.
 	Partitioned *bool `json:"partitioned,omitempty"`
 
 	// The number of shards in the database. Each shard is a partition of the hash value range. Cloudant recommends using
@@ -17699,6 +17865,9 @@ type PutDesignDocumentOptions struct {
 	// Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a well-formed
 	// _rev must be included in the document. False is used by the replicator to insert documents into the target database
 	// even if that leads to the creation of conflicts.
+	//
+	// Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+	// very easy to accidentally end up with a large number of conflicts.
 	NewEdits *bool `json:"new_edits,omitempty"`
 
 	// Query parameter to specify a document revision.
@@ -17799,6 +17968,9 @@ type PutDocumentOptions struct {
 	// Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a well-formed
 	// _rev must be included in the document. False is used by the replicator to insert documents into the target database
 	// even if that leads to the creation of conflicts.
+	//
+	// Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+	// very easy to accidentally end up with a large number of conflicts.
 	NewEdits *bool `json:"new_edits,omitempty"`
 
 	// Query parameter to specify a document revision.
@@ -17983,6 +18155,9 @@ type PutReplicationDocumentOptions struct {
 	// Query parameter to specify whether to prevent insertion of conflicting document revisions. If false, a well-formed
 	// _rev must be included in the document. False is used by the replicator to insert documents into the target database
 	// even if that leads to the creation of conflicts.
+	//
+	// Avoid using this parameter, since this option applies document revisions without checking for conflicts, so it is
+	// very easy to accidentally end up with a large number of conflicts.
 	NewEdits *bool `json:"new_edits,omitempty"`
 
 	// Query parameter to specify a document revision.
@@ -18393,13 +18568,19 @@ type ReplicationDocument struct {
 	// combination operator takes a single argument. The argument is either another selector, or an array of selectors.
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
-	// argument. See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all
-	// available combination and conditional operators.
+	// argument.
+	//
+	// It is important for query performance to use appropriate selectors:
 	// * Only equality operators such as `$eq`, `$gt`, `$gte`, `$lt`, and `$lte` (but not `$ne`) can be used as the basis
 	// of a query. You should include at least one of these in a selector.
+	// * Some operators such as `$not`, `$or`, `$in`, and `$regex` cannot be answered from an index. For query selectors
+	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
+	// documents that will need to be scanned.
 	//
-	// For further reference see
-	// [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// combination and conditional operators.
+	//
+	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Start the replication at a specific sequence value.
@@ -19996,8 +20177,8 @@ func UnmarshalShardsInformation(m map[string]json.RawMessage, result interface{}
 // ThroughputInformation : Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
 type ThroughputInformation struct {
 	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
-	// of provisioned throughput capacity.
-	Blocks *int64 `json:"blocks" validate:"required"`
+	// of provisioned throughput capacity. Not available for some plans.
+	Blocks *int64 `json:"blocks,omitempty"`
 
 	// Provisioned global queries capacity in operations per second.
 	Query *int64 `json:"query" validate:"required"`
@@ -20259,6 +20440,10 @@ type ViewQuery struct {
 
 	// Parameter to specify whether to use the reduce function in a map-reduce view. Default is true when a reduce function
 	// is defined.
+	//
+	// A default `reduce` view type can be disabled to behave like a `map` by setting `reduce=false` explicitly.
+	//
+	// Be aware that `include_docs=true` can only be used with `map` views.
 	Reduce *bool `json:"reduce,omitempty"`
 
 	// Query parameter to specify whether use the same replica of  the index on each request. The default value `false`

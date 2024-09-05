@@ -105,20 +105,6 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetMembershipInformation - Retrieve cluster membership information`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
-			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
-
-			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(membershipInformation).ToNot(BeNil())
-		})
-	})
-
 	Describe(`GetUuids - Retrieve one or more UUIDs`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -989,9 +975,13 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Partitioned: core.BoolPtr(true),
 			}
 
+			designDocumentViewsMapReduceOptionsModel := &cloudantv1.DesignDocumentViewsMapReduceOptions{}
+			designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
+
 			designDocumentViewsMapReduceModel := &cloudantv1.DesignDocumentViewsMapReduce{
-				Map:    core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}"),
-				Reduce: core.StringPtr("testString"),
+				Map:     core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}"),
+				Options: designDocumentViewsMapReduceOptionsModel,
+				Reduce:  core.StringPtr("testString"),
 			}
 
 			designDocumentModel := &cloudantv1.DesignDocument{
@@ -2448,6 +2438,20 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(activeTask).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetMembershipInformation - Retrieve cluster membership information`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
+			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
+
+			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(membershipInformation).ToNot(BeNil())
 		})
 	})
 
