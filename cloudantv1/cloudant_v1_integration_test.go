@@ -975,13 +975,9 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Partitioned: core.BoolPtr(true),
 			}
 
-			designDocumentViewsMapReduceOptionsModel := &cloudantv1.DesignDocumentViewsMapReduceOptions{}
-			designDocumentViewsMapReduceOptionsModel.SetProperty("foo", "testString")
-
 			designDocumentViewsMapReduceModel := &cloudantv1.DesignDocumentViewsMapReduce{
-				Map:     core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}"),
-				Options: designDocumentViewsMapReduceOptionsModel,
-				Reduce:  core.StringPtr("testString"),
+				Map:    core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}"),
+				Reduce: core.StringPtr("testString"),
 			}
 
 			designDocumentModel := &cloudantv1.DesignDocument{
