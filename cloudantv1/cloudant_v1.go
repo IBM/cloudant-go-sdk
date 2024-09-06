@@ -8546,7 +8546,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.15")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.18")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -10994,9 +10994,6 @@ type DesignDocumentViewsMapReduce struct {
 	// JavaScript map function as a string.
 	Map *string `json:"map" validate:"required"`
 
-	// Options of view build resuls.
-	Options *DesignDocumentViewsMapReduceOptions `json:"options,omitempty"`
-
 	// JavaScript reduce function as a string.
 	Reduce *string `json:"reduce,omitempty"`
 }
@@ -11021,80 +11018,10 @@ func UnmarshalDesignDocumentViewsMapReduce(m map[string]json.RawMessage, result 
 		err = core.SDKErrorf(err, "", "map-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "options", &obj.Options, UnmarshalDesignDocumentViewsMapReduceOptions)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "options-error", common.GetComponentInfo())
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reduce-error", common.GetComponentInfo())
 		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DesignDocumentViewsMapReduceOptions : Options of view build resuls.
-// This type supports additional properties of type interface{}.
-type DesignDocumentViewsMapReduceOptions struct {
-
-	// Allows users to set arbitrary properties of type interface{}.
-	additionalProperties map[string]interface{}
-}
-
-// SetProperty allows the user to set an arbitrary property on an instance of DesignDocumentViewsMapReduceOptions.
-func (o *DesignDocumentViewsMapReduceOptions) SetProperty(key string, value interface{}) {
-	if o.additionalProperties == nil {
-		o.additionalProperties = make(map[string]interface{})
-	}
-	o.additionalProperties[key] = value
-}
-
-// SetProperties allows the user to set a map of arbitrary properties on an instance of DesignDocumentViewsMapReduceOptions.
-func (o *DesignDocumentViewsMapReduceOptions) SetProperties(m map[string]interface{}) {
-	o.additionalProperties = make(map[string]interface{})
-	for k, v := range m {
-		o.additionalProperties[k] = v
-	}
-}
-
-// GetProperty allows the user to retrieve an arbitrary property from an instance of DesignDocumentViewsMapReduceOptions.
-func (o *DesignDocumentViewsMapReduceOptions) GetProperty(key string) interface{} {
-	return o.additionalProperties[key]
-}
-
-// GetProperties allows the user to retrieve the map of arbitrary properties from an instance of DesignDocumentViewsMapReduceOptions.
-func (o *DesignDocumentViewsMapReduceOptions) GetProperties() map[string]interface{} {
-	return o.additionalProperties
-}
-
-// MarshalJSON performs custom serialization for instances of DesignDocumentViewsMapReduceOptions
-func (o *DesignDocumentViewsMapReduceOptions) MarshalJSON() (buffer []byte, err error) {
-	m := make(map[string]interface{})
-	if len(o.additionalProperties) > 0 {
-		for k, v := range o.additionalProperties {
-			m[k] = v
-		}
-	}
-	buffer, err = json.Marshal(m)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "model-marshal", common.GetComponentInfo())
-	}
-	return
-}
-
-// UnmarshalDesignDocumentViewsMapReduceOptions unmarshals an instance of DesignDocumentViewsMapReduceOptions from the specified map of raw messages.
-func UnmarshalDesignDocumentViewsMapReduceOptions(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DesignDocumentViewsMapReduceOptions)
-	for k := range m {
-		var v interface{}
-		e := core.UnmarshalPrimitive(m, k, &v)
-		if e != nil {
-			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
-			return
-		}
-		obj.SetProperty(k, v)
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
