@@ -1,9 +1,9 @@
 // section: code
 deleteDocumentOptions := service.NewDeleteDocumentOptions(
-  "events",
-  "0007241142412418284",
+  "orders",
+  "order00058",
 )
-deleteDocumentOptions.SetRev("2-9a0d1cd9f40472509e9aac6461837367")
+deleteDocumentOptions.SetRev("1-99b02e08da151943c2dcb40090160bb8")
 
 documentResult, response, err := service.DeleteDocument(deleteDocumentOptions)
 if err != nil {

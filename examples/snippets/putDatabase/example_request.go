@@ -1,6 +1,6 @@
 // section: code
 putDatabaseOptions := service.NewPutDatabaseOptions(
-  "products",
+  "events",
 )
 putDatabaseOptions.SetPartitioned(true)
 

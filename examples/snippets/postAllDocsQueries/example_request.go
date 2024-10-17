@@ -4,8 +4,8 @@
 allDocsQueries := []cloudantv1.AllDocsQuery{
   {
     Keys: []string{
-      "small-appliances:1000042",
-      "small-appliances:1000043",
+      "1000042",
+      "1000043",
     },
   },
   {

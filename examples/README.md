@@ -389,7 +389,7 @@ if err != nil {
 }
 
 fmt.Println(response.StatusCode)
-fmt.Println(response.Headers["Etag"])
+fmt.Println(response.Headers["ETag"])
 ```
 
 ## putReplicationDocument
@@ -411,7 +411,7 @@ if err != nil {
 }
 
 target, err := service.NewReplicationDatabase(
-  "<your-target-service-url>" + "/" + "animaldb-target",
+  "<your-target-service-url>/animaldb-target",
 )
 if err != nil {
   panic(err)
@@ -720,10 +720,10 @@ _POST `/{db}`_
 // This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
 // section: code
 productsDoc := cloudantv1.Document{
-  ID: core.StringPtr("small-appliances:1000042"),
+  ID: core.StringPtr("1000042"),
 }
 productsDoc.SetProperty("type", "product")
-productsDoc.SetProperty("productid", "1000042")
+productsDoc.SetProperty("productId", "1000042")
 productsDoc.SetProperty("brand", "Salter")
 productsDoc.SetProperty("name", "Digital Kitchen Scales")
 productsDoc.SetProperty("description", "Slim Colourful Design Electronic Cooking Appliance for Home / Kitchen, Weigh up to 5kg + Aquatronic for Liquids ml + fl. oz. 15Yr Guarantee - Green")
@@ -754,7 +754,7 @@ _PUT `/{db}`_
 ```go
 // section: code
 putDatabaseOptions := service.NewPutDatabaseOptions(
-  "products",
+  "events",
 )
 putDatabaseOptions.SetPartitioned(true)
 
@@ -836,8 +836,8 @@ _POST `/{db}/_all_docs/queries`_
 allDocsQueries := []cloudantv1.AllDocsQuery{
   {
     Keys: []string{
-      "small-appliances:1000042",
-      "small-appliances:1000043",
+      "1000042",
+      "1000043",
     },
   },
   {
@@ -871,19 +871,19 @@ _POST `/{db}/_bulk_docs`_
 // This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
 // section: code
 eventDoc1 := cloudantv1.Document{
-  ID: core.StringPtr("0007241142412418284"),
+  ID: core.StringPtr("ns1HJS13AMkK:0007241142412418284"),
 }
 eventDoc1.SetProperty("type", "event")
-eventDoc1.SetProperty("userid", "abc123")
+eventDoc1.SetProperty("userId", "abc123")
 eventDoc1.SetProperty("eventType", "addedToBasket")
 eventDoc1.SetProperty("productId", "1000042")
 eventDoc1.SetProperty("date", "2019-01-28T10:44:22.000Z")
 
 eventDoc2 := cloudantv1.Document{
-  ID: core.StringPtr("0007241142412418285"),
+  ID: core.StringPtr("H8tDIwfadxp9:0007241142412418285"),
 }
 eventDoc2.SetProperty("type", "event")
-eventDoc2.SetProperty("userid", "abc234")
+eventDoc2.SetProperty("userId", "abc234")
 eventDoc2.SetProperty("eventType", "addedToBasket")
 eventDoc2.SetProperty("productId", "1000050")
 eventDoc2.SetProperty("date", "2019-01-25T20:00:00.000Z")
@@ -920,13 +920,13 @@ fmt.Println(string(b))
 // This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
 // section: code
 eventDoc1 := cloudantv1.Document{
-  ID: core.StringPtr("0007241142412418284"),
+  ID: core.StringPtr("ns1HJS13AMkK:0007241142412418284"),
 }
 eventDoc1.Rev = core.StringPtr("1-5005d65514fe9e90f8eccf174af5dd64")
 eventDoc1.Deleted = core.BoolPtr(true)
 
 eventDoc2 := cloudantv1.Document{
-  ID: core.StringPtr("0007241142412418285"),
+  ID: core.StringPtr("H8tDIwfadxp9:0007241142412418285"),
 }
 eventDoc2.Rev = core.StringPtr("1-2d7810b054babeda4812b3924428d6d6")
 eventDoc2.Deleted = core.BoolPtr(true)
@@ -984,17 +984,17 @@ fmt.Println(string(b))
 {
   "docs": [
     {
-      "_id": "0007241142412418284",
+      "_id": "ns1HJS13AMkK:0007241142412418284",
       "type": "event",
-      "userid": "abc123",
+      "userId": "abc123",
       "eventType": "addedToBasket",
       "productId": "1000042",
       "date": "2019-01-28T10:44:22.000Z"
     },
     {
-      "_id": "0007241142412418285",
+      "_id": "H8tDIwfadxp9:0007241142412418285",
       "type": "event",
-      "userid": "abc123",
+      "userId": "abc234",
       "eventType": "addedToBasket",
       "productId": "1000050",
       "date": "2019-01-25T20:00:00.000Z"
@@ -1196,8 +1196,8 @@ _HEAD `/{db}/_design/{ddoc}`_
 ```go
 // section: code
 headDesignDocumentOptions := service.NewHeadDesignDocumentOptions(
-  "products",
-  "appliances",
+  "events",
+  "checkout",
 )
 
 response, err := service.HeadDesignDocument(headDesignDocumentOptions)
@@ -1206,7 +1206,7 @@ if err != nil {
 }
 
 fmt.Println(response.StatusCode)
-fmt.Println(response.Headers["Etag"])
+fmt.Println(response.Headers["ETag"])
 ```
 
 ## putDesignDocument
@@ -1218,20 +1218,12 @@ _PUT `/{db}/_design/{ddoc}`_
 [embedmd]:# (snippets/putDesignDocument/example_request.go)
 ```go
 // section: code
-emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce(
-  "function(doc) {" +
-    "if(doc.email_verified  === true){ emit(doc.email, [doc.name, doc.email_verified, doc.joined])" +
-  "}",
-)
+emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce("function(doc) { if(doc.email_verified === true) { emit(doc.email, [doc.name, doc.email_verified, doc.joined]); }}")
 if err != nil {
   panic(err)
 }
 
-userIndexDefinition, err := service.NewSearchIndexDefinition(
-  "function(doc) {" +
-    "index(\"name\", doc.name); index(\"active\", doc.active);" +
-  "}",
-)
+userIndexDefinition, err := service.NewSearchIndexDefinition("function(doc) { index(\"name\", doc.name); index(\"active\", doc.active); }")
 if err != nil {
   panic(err)
 }
@@ -1259,36 +1251,28 @@ if err != nil {
 b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 
-applianceProdIdViewMapReduce, err := service.NewDesignDocumentViewsMapReduce(
-  "function(doc) {" +
-    "emit(doc.productid, [doc.brand, doc.name, doc.description])" +
-  "}",
-)
+applianceProdIdViewMapReduce, err := service.NewDesignDocumentViewsMapReduce("function(doc) { emit(doc.productId, [doc.date, doc.eventType, doc.userId]); }")
 if err != nil {
   panic(err)
 }
 
-priceIndexDefinition, err := service.NewSearchIndexDefinition(
-  "function(doc) {" +
-    "index(\"price\", doc.price);" +
-  "}",
-)
+dateIndexDefinition, err := service.NewSearchIndexDefinition("function(doc) { index(\"date\", doc.date); }")
 if err != nil {
   panic(err)
 }
 
 partitionedDesignDocument := &cloudantv1.DesignDocument{
   Views: map[string]cloudantv1.DesignDocumentViewsMapReduce{
-    "byApplianceProdId": *applianceProdIdViewMapReduce,
+    "byProductId": *applianceProdIdViewMapReduce,
   },
   Indexes: map[string]cloudantv1.SearchIndexDefinition{
-    "findByPrice": *priceIndexDefinition,
+    "findByDate": *dateIndexDefinition,
   },
 }
 
 putPartitionedDesignDocumentOptions := service.NewPutDesignDocumentOptions(
-  "products",
-  "appliances",
+  "events",
+  "checkout",
   partitionedDesignDocument,
 )
 
@@ -1300,7 +1284,7 @@ if err != nil {
 b, _ = json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example creates `allusers` design document in the `users` database and `appliances` design document in the partitioned `products` database.
+// This example creates `allusers` design document in the `users` database and `checkout` design document in the partitioned `events` database.
 ```
 
 ## getDesignDocumentInformation
@@ -1363,9 +1347,9 @@ _GET `/{db}/_design/{ddoc}/_search_info/{index}`_
 ```go
 // section: code
 getSearchInfoOptions := service.NewGetSearchInfoOptions(
-  "products",
-  "appliances",
-  "findByPrice",
+  "events",
+  "checkout",
+  "findByDate",
 )
 
 searchInfoResult, response, err := service.GetSearchInfo(getSearchInfoOptions)
@@ -1376,7 +1360,7 @@ if err != nil {
 b, _ := json.MarshalIndent(searchInfoResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `findByDate` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
 
 ## postView
@@ -1775,13 +1759,13 @@ localDocument := cloudantv1.Document{}
 properties := map[string]interface{}{
   "type":            "order",
   "user":            "Bob Smith",
-  "orderid":         "0007741142412418284",
-  "userid":          "abc123",
+  "orderId":         "0007741142412418284",
+  "userId":          "abc123",
   "total":           214.98,
   "deliveryAddress": "19 Front Street, Darlington, DL5 1TY",
   "delivered":       true,
   "courier":         "UPS",
-  "courierid":       "15125425151261289",
+  "courierId":       "15125425151261289",
   "date":            "2019-01-28T10:44:22.000Z",
 }
 for key, value := range properties {
@@ -1813,8 +1797,8 @@ _GET `/{db}/_partition/{partition_key}`_
 ```go
 // section: code
 getPartitionInformationOptions := service.NewGetPartitionInformationOptions(
-  "products",
-  "small-appliances",
+  "events",
+  "ns1HJS13AMkK",
 )
 
 partitionInformation, response, err := service.GetPartitionInformation(getPartitionInformationOptions)
@@ -1836,8 +1820,8 @@ _POST `/{db}/_partition/{partition_key}/_all_docs`_
 ```go
 // section: code
 postPartitionAllDocsOptions := service.NewPostPartitionAllDocsOptions(
-  "products",
-  "small-appliances",
+  "events",
+  "ns1HJS13AMkK",
 )
 postPartitionAllDocsOptions.SetIncludeDocs(true)
 
@@ -1860,11 +1844,11 @@ _POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`_
 ```go
 // section: code
 postPartitionSearchOptions := service.NewPostPartitionSearchOptions(
-  "products",
-  "small-appliances",
-  "appliances",
-  "findByPrice",
-  "price:[14 TO 20]",
+  "events",
+  "ns1HJS13AMkK",
+  "checkout",
+  "findByDate",
+  "date:[2019-01-01T12:00:00.000Z TO 2019-01-31T12:00:00.000Z]",
 )
 
 searchResult, response, err := service.PostPartitionSearch(postPartitionSearchOptions)
@@ -1875,7 +1859,7 @@ if err != nil {
 b, _ := json.MarshalIndent(searchResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example requires the `findByPrice` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `findByDate` Cloudant Search partitioned index to exist. To create the design document with this index, see [Create or modify a design document.](#putdesigndocument)
 ```
 
 ## postPartitionView
@@ -1888,10 +1872,10 @@ _POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`_
 ```go
 // section: code
 postPartitionViewOptions := service.NewPostPartitionViewOptions(
-  "products",
-  "small-appliances",
-  "appliances",
-  "byApplianceProdId",
+  "events",
+  "ns1HJS13AMkK",
+  "checkout",
+  "byProductId",
 )
 postPartitionViewOptions.SetIncludeDocs(true)
 postPartitionViewOptions.SetLimit(10)
@@ -1904,8 +1888,14 @@ if err != nil {
 b, _ := json.MarshalIndent(viewResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example requires the `byApplianceProdId` partitioned view to exist. To create the view, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `byProductId` partitioned view to exist. To create the view, see [Create or modify a design document.](#putdesigndocument)
 ```
+
+## postPartitionExplain
+
+_POST `/{db}/_partition/{partition_key}/_explain`_
+
+### [Example request](snippets/postPartitionExplain/example_request.go)
 
 ## postPartitionFind
 
@@ -1917,18 +1907,18 @@ _POST `/{db}/_partition/{partition_key}/_find`_
 ```go
 // section: code
 selector := map[string]interface{}{
-  "type": map[string]string{
-    "$eq": "product",
+  "userId": map[string]string{
+    "$eq": "abc123",
   },
 }
 
 postPartitionFindOptions := service.NewPostPartitionFindOptions(
-  "products",
-  "small-appliances",
+  "events",
+  "ns1HJS13AMkK",
   selector,
 )
 postPartitionFindOptions.SetFields([]string{
-  "productid", "name", "description",
+  "productId", "eventType", "date",
 })
 
 findResult, response, err := service.PostPartitionFind(postPartitionFindOptions)
@@ -2056,7 +2046,7 @@ _GET `/{db}/_shards/{doc_id}`_
 // section: code
 getDocumentShardsInfoOptions := service.NewGetDocumentShardsInfoOptions(
   "products",
-  "small-appliances:1000042",
+  "1000042",
 )
 
 documentShardInfo, response, err := service.GetDocumentShardsInfo(getDocumentShardsInfoOptions)
@@ -2078,10 +2068,10 @@ _DELETE `/{db}/{doc_id}`_
 ```go
 // section: code
 deleteDocumentOptions := service.NewDeleteDocumentOptions(
-  "events",
-  "0007241142412418284",
+  "orders",
+  "order00058",
 )
-deleteDocumentOptions.SetRev("2-9a0d1cd9f40472509e9aac6461837367")
+deleteDocumentOptions.SetRev("1-99b02e08da151943c2dcb40090160bb8")
 
 documentResult, response, err := service.DeleteDocument(deleteDocumentOptions)
 if err != nil {
@@ -2103,7 +2093,7 @@ _GET `/{db}/{doc_id}`_
 // section: code
 getDocumentOptions := service.NewGetDocumentOptions(
   "products",
-  "small-appliances:1000042",
+  "1000042",
 )
 
 document, response, err := service.GetDocument(getDocumentOptions)
@@ -2125,8 +2115,8 @@ _HEAD `/{db}/{doc_id}`_
 ```go
 // section: code
 headDocumentOptions := service.NewHeadDocumentOptions(
-  "events",
-  "0007241142412418284",
+  "orders",
+  "order00058",
 )
 
 response, err := service.HeadDocument(headDocumentOptions)
@@ -2135,7 +2125,7 @@ if err != nil {
 }
 
 fmt.Println(response.StatusCode)
-fmt.Println(response.Headers["Etag"])
+fmt.Println(response.Headers["ETag"])
 ```
 
 ## putDocument
@@ -2149,14 +2139,14 @@ _PUT `/{db}/{doc_id}`_
 // section: code
 eventDoc := cloudantv1.Document{}
 eventDoc.SetProperty("type", "event")
-eventDoc.SetProperty("userid", "abc123")
+eventDoc.SetProperty("userId", "abc123")
 eventDoc.SetProperty("eventType", "addedToBasket")
 eventDoc.SetProperty("productId", "1000042")
 eventDoc.SetProperty("date", "2019-01-28T10:44:22.000Z")
 
 putDocumentOptions := service.NewPutDocumentOptions(
   "events",
-  "0007241142412418284",
+  "ns1HJS13AMkK:0007241142412418284",
 )
 putDocumentOptions.SetDocument(&eventDoc)
 
@@ -2180,7 +2170,7 @@ _DELETE `/{db}/{doc_id}/{attachment_name}`_
 // section: code
 deleteAttachmentOptions := service.NewDeleteAttachmentOptions(
   "products",
-  "small-appliances:100001",
+  "1000042",
   "product_details.txt",
 )
 deleteAttachmentOptions.SetRev("4-1a0d1cd6f40472509e9aac646183736a")
@@ -2193,7 +2183,7 @@ if err != nil {
 b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
 
 ## getAttachment
@@ -2207,7 +2197,7 @@ _GET `/{db}/{doc_id}/{attachment_name}`_
 // section: code
 getAttachmentOptions := service.NewGetAttachmentOptions(
   "products",
-  "small-appliances:100001",
+  "1000042",
   "product_details.txt",
 )
 
@@ -2219,7 +2209,7 @@ if err != nil {
 data, _ := ioutil.ReadAll(result)
 fmt.Println("\n", string(data))
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
 
 ## headAttachment
@@ -2233,7 +2223,7 @@ _HEAD `/{db}/{doc_id}/{attachment_name}`_
 // section: code
 headAttachmentOptions := service.NewHeadAttachmentOptions(
   "products",
-  "small-appliances:100001",
+  "1000042",
   "product_details.txt",
 )
 
@@ -2246,7 +2236,7 @@ fmt.Println(response.StatusCode)
 fmt.Println(response.Headers["Content-Length"])
 fmt.Println(response.Headers["Content-Type"])
 // section: markdown
-// This example requires the `product_details.txt` attachment in `small-appliances:100001` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
+// This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
 ```
 
 ## putAttachment
@@ -2260,7 +2250,7 @@ _PUT `/{db}/{doc_id}/{attachment_name}`_
 // section: code
 putAttachmentOptions := service.NewPutAttachmentOptions(
   "products",
-  "small-appliances:100001",
+  "1000042",
   "product_details.txt",
   ioutil.NopCloser(
     bytes.NewReader([]byte("This appliance includes...")),
