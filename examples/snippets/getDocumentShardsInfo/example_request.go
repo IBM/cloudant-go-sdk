@@ -1,7 +1,7 @@
 // section: code
 getDocumentShardsInfoOptions := service.NewGetDocumentShardsInfoOptions(
   "products",
-  "small-appliances:1000042",
+  "1000042",
 )
 
 documentShardInfo, response, err := service.GetDocumentShardsInfo(getDocumentShardsInfoOptions)

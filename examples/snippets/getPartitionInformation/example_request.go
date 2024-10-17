@@ -1,7 +1,7 @@
 // section: code
 getPartitionInformationOptions := service.NewGetPartitionInformationOptions(
-  "products",
-  "small-appliances",
+  "events",
+  "ns1HJS13AMkK",
 )
 
 partitionInformation, response, err := service.GetPartitionInformation(getPartitionInformationOptions)

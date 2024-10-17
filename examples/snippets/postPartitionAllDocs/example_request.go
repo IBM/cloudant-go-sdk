@@ -1,7 +1,7 @@
 // section: code
 postPartitionAllDocsOptions := service.NewPostPartitionAllDocsOptions(
-  "products",
-  "small-appliances",
+  "events",
+  "ns1HJS13AMkK",
 )
 postPartitionAllDocsOptions.SetIncludeDocs(true)
 

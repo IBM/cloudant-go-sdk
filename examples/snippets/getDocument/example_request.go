@@ -1,7 +1,7 @@
 // section: code
 getDocumentOptions := service.NewGetDocumentOptions(
   "products",
-  "small-appliances:1000042",
+  "1000042",
 )
 
 document, response, err := service.GetDocument(getDocumentOptions)

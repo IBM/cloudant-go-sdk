@@ -1,7 +1,7 @@
 // section: code
 headDesignDocumentOptions := service.NewHeadDesignDocumentOptions(
-  "products",
-  "appliances",
+  "events",
+  "checkout",
 )
 
 response, err := service.HeadDesignDocument(headDesignDocumentOptions)
@@ -10,4 +10,4 @@ if err != nil {
 }
 
 fmt.Println(response.StatusCode)
-fmt.Println(response.Headers["Etag"])
+fmt.Println(response.Headers["ETag"])

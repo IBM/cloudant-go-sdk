@@ -9,4 +9,4 @@ if err != nil {
 }
 
 fmt.Println(response.StatusCode)
-fmt.Println(response.Headers["Etag"])
+fmt.Println(response.Headers["ETag"])

@@ -9,7 +9,7 @@ if err != nil {
 }
 
 target, err := service.NewReplicationDatabase(
-  "<your-target-service-url>" + "/" + "animaldb-target",
+  "<your-target-service-url>/animaldb-target",
 )
 if err != nil {
   panic(err)

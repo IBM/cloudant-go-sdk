@@ -1,9 +1,9 @@
 // section: code
 postPartitionViewOptions := service.NewPostPartitionViewOptions(
-  "products",
-  "small-appliances",
-  "appliances",
-  "byApplianceProdId",
+  "events",
+  "ns1HJS13AMkK",
+  "checkout",
+  "byProductId",
 )
 postPartitionViewOptions.SetIncludeDocs(true)
 postPartitionViewOptions.SetLimit(10)
@@ -16,4 +16,4 @@ if err != nil {
 b, _ := json.MarshalIndent(viewResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example requires the `byApplianceProdId` partitioned view to exist. To create the view, see [Create or modify a design document.](#putdesigndocument)
+// This example requires the `byProductId` partitioned view to exist. To create the view, see [Create or modify a design document.](#putdesigndocument)

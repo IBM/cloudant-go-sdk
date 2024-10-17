@@ -1,18 +1,10 @@
 // section: code
-emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce(
-  "function(doc) {" +
-    "if(doc.email_verified  === true){ emit(doc.email, [doc.name, doc.email_verified, doc.joined])" +
-  "}",
-)
+emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce("function(doc) { if(doc.email_verified === true) { emit(doc.email, [doc.name, doc.email_verified, doc.joined]); }}")
 if err != nil {
   panic(err)
 }
 
-userIndexDefinition, err := service.NewSearchIndexDefinition(
-  "function(doc) {" +
-    "index(\"name\", doc.name); index(\"active\", doc.active);" +
-  "}",
-)
+userIndexDefinition, err := service.NewSearchIndexDefinition("function(doc) { index(\"name\", doc.name); index(\"active\", doc.active); }")
 if err != nil {
   panic(err)
 }
@@ -40,36 +32,28 @@ if err != nil {
 b, _ := json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 
-applianceProdIdViewMapReduce, err := service.NewDesignDocumentViewsMapReduce(
-  "function(doc) {" +
-    "emit(doc.productid, [doc.brand, doc.name, doc.description])" +
-  "}",
-)
+applianceProdIdViewMapReduce, err := service.NewDesignDocumentViewsMapReduce("function(doc) { emit(doc.productId, [doc.date, doc.eventType, doc.userId]); }")
 if err != nil {
   panic(err)
 }
 
-priceIndexDefinition, err := service.NewSearchIndexDefinition(
-  "function(doc) {" +
-    "index(\"price\", doc.price);" +
-  "}",
-)
+dateIndexDefinition, err := service.NewSearchIndexDefinition("function(doc) { index(\"date\", doc.date); }")
 if err != nil {
   panic(err)
 }
 
 partitionedDesignDocument := &cloudantv1.DesignDocument{
   Views: map[string]cloudantv1.DesignDocumentViewsMapReduce{
-    "byApplianceProdId": *applianceProdIdViewMapReduce,
+    "byProductId": *applianceProdIdViewMapReduce,
   },
   Indexes: map[string]cloudantv1.SearchIndexDefinition{
-    "findByPrice": *priceIndexDefinition,
+    "findByDate": *dateIndexDefinition,
   },
 }
 
 putPartitionedDesignDocumentOptions := service.NewPutDesignDocumentOptions(
-  "products",
-  "appliances",
+  "events",
+  "checkout",
   partitionedDesignDocument,
 )
 
@@ -81,4 +65,4 @@ if err != nil {
 b, _ = json.MarshalIndent(documentResult, "", "  ")
 fmt.Println(string(b))
 // section: markdown
-// This example creates `allusers` design document in the `users` database and `appliances` design document in the partitioned `products` database.
+// This example creates `allusers` design document in the `users` database and `checkout` design document in the partitioned `events` database.

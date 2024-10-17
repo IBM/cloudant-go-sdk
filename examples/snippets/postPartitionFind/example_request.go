@@ -1,17 +1,17 @@
 // section: code
 selector := map[string]interface{}{
-  "type": map[string]string{
-    "$eq": "product",
+  "userId": map[string]string{
+    "$eq": "abc123",
   },
 }
 
 postPartitionFindOptions := service.NewPostPartitionFindOptions(
-  "products",
-  "small-appliances",
+  "events",
+  "ns1HJS13AMkK",
   selector,
 )
 postPartitionFindOptions.SetFields([]string{
-  "productid", "name", "description",
+  "productId", "eventType", "date",
 })
 
 findResult, response, err := service.PostPartitionFind(postPartitionFindOptions)

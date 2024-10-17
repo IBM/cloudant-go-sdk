@@ -1,7 +1,7 @@
 // section: code
 headDocumentOptions := service.NewHeadDocumentOptions(
-  "events",
-  "0007241142412418284",
+  "orders",
+  "order00058",
 )
 
 response, err := service.HeadDocument(headDocumentOptions)
@@ -10,4 +10,4 @@ if err != nil {
 }
 
 fmt.Println(response.StatusCode)
-fmt.Println(response.Headers["Etag"])
+fmt.Println(response.Headers["ETag"])
