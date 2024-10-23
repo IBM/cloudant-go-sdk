@@ -4,6 +4,7 @@ on:
     branches: ['main']
   pull_request:
     branches-ignore: ['gh-pages']
+permissions: {}
 env:
   GOTOOLCHAIN: local
   WIREMOCK_URL: http://127.0.0.1:8080
