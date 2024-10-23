@@ -195,6 +195,15 @@ func (c *BaseService) SetServiceURL(url string) error {
 // the retryable client; otherwise "client" will be stored
 // directly on "service".
 func (c *BaseService) SetHTTPClient(client *http.Client) {
+	if client.Transport == nil {
+		client.Transport = http.DefaultTransport
+	}
+
+	// wrap client's transport into ErrorResponse unless it was already wrapped
+	if _, ok := client.Transport.(*ErrorResponse); !ok {
+		client.Transport = NewErrorResponse(client.Transport)
+	}
+
 	// set cookiejar on if it is missing
 	if client.Jar == nil {
 		// we can ignore the error, jar.New it is actually always returns nil
