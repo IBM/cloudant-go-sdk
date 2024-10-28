@@ -117,7 +117,9 @@ func transformError(resp *http.Response) error {
 		var newErrorJson bytes.Buffer
 		if err := json.NewEncoder(&newErrorJson).Encode(respError); err == nil {
 			save = io.NopCloser(&newErrorJson)
-			savecl = int64(len(newErrorJson.Bytes()))
+			if resp.Header.Get("Transfer-Encoding") != "chunked" {
+				savecl = int64(len(newErrorJson.Bytes()))
+			}
 		}
 	}
 
