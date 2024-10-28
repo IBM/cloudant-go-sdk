@@ -623,7 +623,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 				}`,
 			},
 			{
-				description: "Validates no augmentation on successfull response",
+				description: "Validates no augmentation on successful response",
 				status:      http.StatusOK,
 				headers:     defaultHeaders,
 				body:        `{"_id": "testdoc", "_rev": "1-abc", "foo": "bar"}`,
@@ -701,7 +701,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 				}`,
 			},
 			{
-				description: "Validates no augmentation on none json response",
+				description: "Validates no augmentation on non-json response",
 				status:      http.StatusBadRequest,
 				headers: map[string]string{
 					"x-couch-request-id": "testreqid",
