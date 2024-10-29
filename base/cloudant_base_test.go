@@ -711,11 +711,14 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 				expect: `foo`,
 			},
 			{
-				description: "FIXME! Validates no augmentation on missing content type",
+				description: "Validates no augmentation on missing content type",
 				status:      http.StatusTeapot,
-				headers:     requestIdHeader,
-				body:        `000`,
-				expect:      `000`,
+				headers: map[string]string{
+					"x-couch-request-id": "testreqid",
+					"content-type":       "",
+				},
+				body:   `000`,
+				expect: `000`,
 			},
 			{
 				description: "Validates no augmentation on missing 'error' in response with trace",
