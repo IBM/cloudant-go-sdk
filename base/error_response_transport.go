@@ -91,26 +91,29 @@ func transformError(resp *http.Response) error {
 		return nil
 	}
 
-	respErrorWasAugmented := false
-	if _, ok := respError["trace"]; !ok {
-		if _, ok := respError["errors"]; !ok {
-			err := make(map[string]string)
-			if m, ok := respError["error"]; ok {
-				err["code"] = m.(string)
-				err["message"] = m.(string)
-				if m, ok := respError["reason"]; ok && m != "" {
-					err["message"] += ": " + m.(string)
-				}
-				respError["errors"] = []map[string]string{err}
-				respErrorWasAugmented = true
-			}
-		}
+	if _, ok := respError["trace"]; ok {
+		resp.Body = save
+		return nil
+	}
 
-		trace := resp.Header.Get("X-Couch-Request-Id")
-		if _, ok := respError["errors"]; ok && trace != "" {
-			respError["trace"] = trace
+	respErrorWasAugmented := false
+	if _, ok := respError["errors"]; !ok {
+		err := make(map[string]string)
+		if m, ok := respError["error"]; ok {
+			err["code"] = m.(string)
+			err["message"] = m.(string)
+			if m, ok := respError["reason"]; ok && m != "" {
+				err["message"] += ": " + m.(string)
+			}
+			respError["errors"] = []map[string]string{err}
 			respErrorWasAugmented = true
 		}
+	}
+
+	trace := resp.Header.Get("X-Couch-Request-Id")
+	if _, ok := respError["errors"]; ok && trace != "" {
+		respError["trace"] = trace
+		respErrorWasAugmented = true
 	}
 
 	if respErrorWasAugmented {
