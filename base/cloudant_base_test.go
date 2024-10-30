@@ -17,7 +17,10 @@
 package base
 
 import (
+	"encoding/json"
 	"errors"
+	"io"
+	"maps"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
@@ -25,6 +28,7 @@ import (
 	"os"
 	"path"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/IBM/cloudant-go-sdk/auth"
@@ -391,5 +395,386 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			Expect(cloudant.BaseService.GetServiceURL()).To(Equal(newUrl))
 			Expect(a.URL).To(Equal(newUrl))
 		})
+	})
+
+	Context("augmentation error tests", func() {
+		var (
+			service *BaseService
+		)
+
+		BeforeEach(func() {
+			var err error
+			service, err = NewBaseService(&core.ServiceOptions{
+				URL:           "https://~replace-with-cloudant-host~.cloudantnosqldb.appdomain.cloud",
+				Authenticator: &core.NoAuthAuthenticator{},
+			})
+			Expect(service).ToNot(BeNil())
+			Expect(err).ShouldNot(HaveOccurred())
+		})
+
+		AfterEach(func() {
+			service = nil
+		})
+
+		It("Validates that ErrorResponse was added", func() {
+			var expect *ErrorResponse
+			Expect(service.GetHTTPClient().Transport).To(BeAssignableToTypeOf(expect))
+		})
+
+		It("Validates that ErrorResponse added to new http clients", func() {
+			before := service.GetHTTPClient().Transport
+
+			client := core.DefaultHTTPClient()
+			service.SetHTTPClient(client)
+
+			after := service.GetHTTPClient().Transport
+
+			var expect *ErrorResponse
+			Expect(after).To(BeAssignableToTypeOf(expect))
+			Expect(after).ShouldNot(BeIdenticalTo(before))
+		})
+
+		It("Validates that ErrorResponse added only once", func() {
+			client := service.GetHTTPClient()
+			before := client.Transport
+			service.SetHTTPClient(client)
+
+			after := service.GetHTTPClient().Transport
+
+			var expect *ErrorResponse
+			Expect(after).To(BeAssignableToTypeOf(expect))
+			Expect(after).Should(BeIdenticalTo(before))
+		})
+
+		type testConf struct {
+			description string
+			method      string
+			status      int
+			headers     map[string]string
+			body        string
+			expect      string
+			stream      bool
+		}
+
+		testSuite := func(cfg testConf) {
+			It(cfg.description, func() {
+				server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+					for key, value := range cfg.headers {
+						w.Header().Set(key, value)
+					}
+					if cfg.stream {
+						// should be set automatically, but just in case
+						w.Header().Set("Transfer-Encoding", "chunked")
+						w.Header().Set("X-Content-Type-Options", "nosniff")
+					}
+					w.WriteHeader(cfg.status)
+					if len(cfg.body) > 0 {
+						if cfg.stream {
+							flusher, ok := w.(http.Flusher)
+							Expect(ok).Should(BeTrue())
+							for _, line := range strings.Split(cfg.body, "\n") {
+								_, _ = w.Write([]byte(strings.TrimSpace(line) + "\n"))
+								flusher.Flush()
+							}
+						} else {
+							_, _ = w.Write([]byte(cfg.body))
+						}
+					}
+				}))
+				Expect(server).ToNot(BeNil())
+				defer server.Close()
+
+				client := service.GetHTTPClient()
+				if cfg.method == "" {
+					cfg.method = http.MethodGet
+				}
+				req, err := http.NewRequest(cfg.method, server.URL+"/testdb/testdoc", nil)
+				Expect(err).ShouldNot(HaveOccurred())
+
+				resp, err := client.Do(req)
+				Expect(err).ShouldNot(HaveOccurred())
+
+				Expect(resp.StatusCode).To(Equal(cfg.status))
+
+				for key, value := range cfg.headers {
+					Expect(resp.Header.Values(key)).To(ContainElement(value))
+				}
+
+				// this covers both normal and AsStream responses
+				bodyBytes, err := io.ReadAll(resp.Body)
+				Expect(err).ShouldNot(HaveOccurred())
+				defer resp.Body.Close()
+
+				body := make(map[string]interface{})
+				err = json.Unmarshal(bodyBytes, &body)
+				// test JSON response
+				if err == nil {
+					expect := make(map[string]interface{})
+					err = json.Unmarshal([]byte(cfg.expect), &expect)
+					Expect(err).ShouldNot(HaveOccurred())
+					Expect(body).To(Equal(expect))
+				} else {
+					// vs literal equivalence
+					Expect(bodyBytes).To(Equal([]byte(cfg.expect)))
+				}
+			})
+		}
+
+		contentTypeHeader := map[string]string{"content-type": "application/json"}
+		requestIdHeader := map[string]string{"x-couch-request-id": "testreqid"}
+		defaultHeaders := maps.Clone(contentTypeHeader)
+		maps.Copy(defaultHeaders, requestIdHeader)
+
+		errorOnlyBody := `{"error": "test_value"}`
+		errorReasonBody := `{"error": "test_value", "reason": "A valid test reason"}`
+
+		for _, cfg := range []testConf{
+			{
+				description: "Validates augmented error without reason without trace",
+				status:      http.StatusTeapot,
+				headers:     contentTypeHeader,
+				body:        errorOnlyBody,
+				expect: `{
+					"error": "test_value",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value"
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented error without reason with trace",
+				status:      http.StatusTeapot,
+				headers:     defaultHeaders,
+				body:        errorOnlyBody,
+				expect: `{
+					"trace": "testreqid",
+					"error": "test_value",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value"
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented error with reason without trace",
+				status:      http.StatusTeapot,
+				headers:     contentTypeHeader,
+				body:        errorReasonBody,
+				expect: `{
+					"error": "test_value",
+					"reason": "A valid test reason",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value: A valid test reason"
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented error with reason and trace",
+				status:      http.StatusTeapot,
+				headers:     defaultHeaders,
+				body:        errorReasonBody,
+				expect: `{
+					"trace": "testreqid",
+					"error": "test_value",
+					"reason": "A valid test reason",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value: A valid test reason"
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented error with reason and trace as a stream",
+				status:      http.StatusTeapot,
+				headers:     defaultHeaders,
+				stream:      true,
+				body: `{
+					"error": "test_value",
+					"reason": "A valid test reason"
+				}`,
+				expect: `{
+					"trace": "testreqid",
+					"error": "test_value",
+					"reason": "A valid test reason",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value: A valid test reason"
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented error with reason and trace with json charset",
+				status:      http.StatusTeapot,
+				headers: map[string]string{
+					"x-couch-request-id": "testreqid",
+					"content-type":       "application/json; charset=utf-8",
+				},
+				body: errorReasonBody,
+				expect: `{
+					"trace": "testreqid",
+					"error": "test_value",
+					"reason": "A valid test reason",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value: A valid test reason"
+					}]
+				}`,
+			},
+			{
+				description: "Validates no augmentation on successful response",
+				status:      http.StatusOK,
+				headers:     defaultHeaders,
+				body:        `{"_id": "testdoc", "_rev": "1-abc", "foo": "bar"}`,
+				expect:      `{"_id": "testdoc", "_rev": "1-abc", "foo": "bar"}`,
+			},
+			{
+				description: "Validates no augmentation on HEAD request",
+				status:      http.StatusTeapot,
+				method:      http.MethodHead,
+				headers:     defaultHeaders,
+			},
+			{
+				description: "Validates no augmentation on empty body",
+				status:      http.StatusTeapot,
+				headers:     defaultHeaders,
+				body:        `{}`,
+				expect:      `{}`,
+			},
+			{
+				description: "Validates no augmentation of existing trace",
+				status:      http.StatusTooManyRequests,
+				headers:     defaultHeaders,
+				body: `{
+					"trace": "testanotherreqid",
+					"error": "too_many_requests",
+					"reason": "Buy a bigger plan."
+				}`,
+				expect: `{
+					"trace": "testanotherreqid",
+					"error": "too_many_requests",
+					"reason": "Buy a bigger plan."
+				}`,
+			},
+			{
+				description: "Validates no augmentation of existing 'errors' without trace",
+				status:      http.StatusForbidden,
+				headers:     contentTypeHeader,
+				body: `{
+					"error": "forbidden",
+					"reason": "You must have _reader to access this resource.",
+					"errors": [{
+						"code": "forbidden",
+						"message": "forbidden: You must have _reader to access this resource."
+					}]
+				}`,
+				expect: `{
+					"error": "forbidden",
+					"reason": "You must have _reader to access this resource.",
+					"errors": [{
+						"code": "forbidden",
+						"message": "forbidden: You must have _reader to access this resource."
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented trace with no augmentation of existing 'errors'",
+				status:      http.StatusForbidden,
+				headers:     defaultHeaders,
+				body: `{
+					"error": "forbidden",
+					"reason": "You must have _reader to access this resource.",
+					"errors": [{
+						"code": "forbidden",
+						"message": "forbidden: You must have _reader to access this resource."
+					}]
+				}`,
+				expect: `{
+					"trace": "testreqid",
+					"error": "forbidden",
+					"reason": "You must have _reader to access this resource.",
+					"errors": [{
+						"code": "forbidden",
+						"message": "forbidden: You must have _reader to access this resource."
+					}]
+				}`,
+			},
+			{
+				description: "Validates no augmentation on non-json response",
+				status:      http.StatusBadRequest,
+				headers: map[string]string{
+					"x-couch-request-id": "testreqid",
+					"content-type":       "text/plain",
+				},
+				body:   `foo`,
+				expect: `foo`,
+			},
+			{
+				description: "Validates no augmentation on missing content type",
+				status:      http.StatusTeapot,
+				headers: map[string]string{
+					"x-couch-request-id": "testreqid",
+					"content-type":       "",
+				},
+				body:   `000`,
+				expect: `000`,
+			},
+			{
+				description: "Validates no augmentation on missing 'error' in response with trace",
+				status:      http.StatusBadRequest,
+				headers:     defaultHeaders,
+				body: `{
+					"foo": "bar",
+					"reason": "testing"
+				}`,
+				expect: `{
+					"foo": "bar",
+					"reason": "testing"
+				}`,
+			},
+			{
+				description: "Validates no augmentation on missing 'error' in response without trace",
+				status:      http.StatusBadRequest,
+				headers:     contentTypeHeader,
+				body: `{
+					"foo": "bar",
+					"reason": "testing"
+				}`,
+				expect: `{
+					"foo": "bar",
+					"reason": "testing"
+				}`,
+			},
+			{
+				description: "Validates no augmentation on broken json",
+				status:      http.StatusBadRequest,
+				headers:     contentTypeHeader,
+				body:        `{"err`,
+				expect:      `{"err`,
+			},
+			{
+				description: "Validates augmented on empty reason with trace",
+				status:      http.StatusTeapot,
+				headers:     defaultHeaders,
+				body: `{
+					"error": "test_value",
+					"reason": ""
+				}`,
+				expect: `{
+					"trace": "testreqid",
+					"error": "test_value",
+					"reason": "",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value"
+					}]
+				}`,
+			},
+		} {
+			if len(cfg.headers) > 0 {
+				testSuite(cfg)
+			}
+		}
 	})
 })
