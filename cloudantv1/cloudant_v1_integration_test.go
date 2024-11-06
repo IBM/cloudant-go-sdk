@@ -162,7 +162,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Heartbeat:  core.Int64Ptr(int64(0)),
 				Limit:      core.Int64Ptr(int64(0)),
 				Timeout:    core.Int64Ptr(int64(60000)),
-				Since:      core.StringPtr("0"),
+				Since:      core.StringPtr("testString"),
 			}
 
 			dbUpdates, response, err := cloudantService.GetDbUpdates(getDbUpdatesOptions)
@@ -193,7 +193,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
-				Since:           core.StringPtr("0"),
+				Since:           core.StringPtr("testString"),
 				Style:           core.StringPtr("main_only"),
 				Timeout:         core.Int64Ptr(int64(60000)),
 				View:            core.StringPtr("testString"),
@@ -227,7 +227,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
-				Since:           core.StringPtr("0"),
+				Since:           core.StringPtr("testString"),
 				Style:           core.StringPtr("main_only"),
 				Timeout:         core.Int64Ptr(int64(60000)),
 				View:            core.StringPtr("testString"),
@@ -1484,6 +1484,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Db:             core.StringPtr("testString"),
 				PartitionKey:   core.StringPtr("testString"),
 				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				AllowFallback:  core.BoolPtr(true),
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
@@ -1512,6 +1513,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Db:             core.StringPtr("testString"),
 				PartitionKey:   core.StringPtr("testString"),
 				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				AllowFallback:  core.BoolPtr(true),
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
@@ -1540,6 +1542,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Db:             core.StringPtr("testString"),
 				PartitionKey:   core.StringPtr("testString"),
 				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				AllowFallback:  core.BoolPtr(true),
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
@@ -1567,6 +1570,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			postExplainOptions := &cloudantv1.PostExplainOptions{
 				Db:             core.StringPtr("testString"),
 				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				AllowFallback:  core.BoolPtr(true),
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
@@ -1595,6 +1599,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			postFindOptions := &cloudantv1.PostFindOptions{
 				Db:             core.StringPtr("testString"),
 				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				AllowFallback:  core.BoolPtr(true),
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
@@ -1623,6 +1628,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			postFindOptions := &cloudantv1.PostFindOptions{
 				Db:             core.StringPtr("testString"),
 				Selector:       map[string]interface{}{"anyKey": "anyValue"},
+				AllowFallback:  core.BoolPtr(true),
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),

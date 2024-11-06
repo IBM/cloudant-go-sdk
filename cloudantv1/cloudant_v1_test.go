@@ -223,7 +223,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "Variant", "version": "Version"}, "version": "Version", "features_flags": ["FeaturesFlags"]}`)
+					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "paas", "version": "Version"}, "version": "Version", "features_flags": ["FeaturesFlags"]}`)
 				}))
 			})
 			It(`Invoke GetServerInformation successfully with retries`, func() {
@@ -276,7 +276,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "Variant", "version": "Version"}, "version": "Version", "features_flags": ["FeaturesFlags"]}`)
+					fmt.Fprintf(res, "%s", `{"couchdb": "Couchdb", "features": ["Features"], "vendor": {"name": "Name", "variant": "paas", "version": "Version"}, "version": "Version", "features_flags": ["FeaturesFlags"]}`)
 				}))
 			})
 			It(`Invoke GetServerInformation successfully`, func() {
@@ -1029,7 +1029,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for heartbeat query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for timeout query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -1050,7 +1050,7 @@ var _ = Describe(`CloudantV1`, func() {
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
-				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
+				getDbUpdatesOptionsModel.Since = core.StringPtr("testString")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := cloudantService.GetDbUpdates(getDbUpdatesOptionsModel)
@@ -1086,7 +1086,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for heartbeat query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for timeout query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -1112,7 +1112,7 @@ var _ = Describe(`CloudantV1`, func() {
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
-				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
+				getDbUpdatesOptionsModel.Since = core.StringPtr("testString")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1154,7 +1154,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for heartbeat query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for timeout query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -1182,7 +1182,7 @@ var _ = Describe(`CloudantV1`, func() {
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
-				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
+				getDbUpdatesOptionsModel.Since = core.StringPtr("testString")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1207,7 +1207,7 @@ var _ = Describe(`CloudantV1`, func() {
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
-				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
+				getDbUpdatesOptionsModel.Since = core.StringPtr("testString")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := cloudantService.SetServiceURL("")
@@ -1246,7 +1246,7 @@ var _ = Describe(`CloudantV1`, func() {
 				getDbUpdatesOptionsModel.Heartbeat = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				getDbUpdatesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
-				getDbUpdatesOptionsModel.Since = core.StringPtr("0")
+				getDbUpdatesOptionsModel.Since = core.StringPtr("testString")
 				getDbUpdatesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1284,7 +1284,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for include_docs query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for seq_interval query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"main_only"}))
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
@@ -1318,7 +1318,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1380,7 +1380,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for include_docs query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for seq_interval query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"main_only"}))
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
@@ -1419,7 +1419,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1487,7 +1487,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for include_docs query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for seq_interval query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"main_only"}))
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
@@ -1528,7 +1528,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1566,7 +1566,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1625,7 +1625,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1683,7 +1683,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for include_docs query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for seq_interval query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"main_only"}))
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
@@ -1722,7 +1722,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1790,7 +1790,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// TODO: Add check for include_docs query parameter
 					// TODO: Add check for limit query parameter
 					// TODO: Add check for seq_interval query parameter
-					Expect(req.URL.Query()["since"]).To(Equal([]string{"0"}))
+					Expect(req.URL.Query()["since"]).To(Equal([]string{"testString"}))
 					Expect(req.URL.Query()["style"]).To(Equal([]string{"main_only"}))
 					// TODO: Add check for timeout query parameter
 					Expect(req.URL.Query()["view"]).To(Equal([]string{"testString"}))
@@ -1831,7 +1831,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1875,7 +1875,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -1934,7 +1934,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.IncludeDocs = core.BoolPtr(false)
 				postChangesOptionsModel.Limit = core.Int64Ptr(int64(0))
 				postChangesOptionsModel.SeqInterval = core.Int64Ptr(int64(1))
-				postChangesOptionsModel.Since = core.StringPtr("0")
+				postChangesOptionsModel.Since = core.StringPtr("testString")
 				postChangesOptionsModel.Style = core.StringPtr("main_only")
 				postChangesOptionsModel.Timeout = core.Int64Ptr(int64(60000))
 				postChangesOptionsModel.View = core.StringPtr("testString")
@@ -13809,6 +13809,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -13871,7 +13872,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "asc", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostPartitionExplain successfully with retries`, func() {
@@ -13888,6 +13889,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -13953,7 +13955,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "asc", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostPartitionExplain successfully`, func() {
@@ -13975,6 +13977,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14007,6 +14010,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14060,6 +14064,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Db = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14113,6 +14118,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14192,6 +14198,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14279,6 +14286,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14311,6 +14319,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14364,6 +14373,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14439,6 +14449,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14526,6 +14537,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14564,6 +14576,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14617,6 +14630,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Db = core.StringPtr("testString")
 				postPartitionFindOptionsModel.PartitionKey = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postPartitionFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14673,6 +14687,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
 				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14736,7 +14751,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "asc", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully with retries`, func() {
@@ -14752,6 +14767,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
 				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14818,7 +14834,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "Direction", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
+					fmt.Fprintf(res, "%s", `{"covering": true, "dbname": "Dbname", "fields": ["Fields"], "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}, "index_candidates": [{"analysis": {"covering": true, "ranking": 1, "reasons": [{"name": "alphabetically_comes_after"}], "usable": true}, "index": {"ddoc": "Ddoc", "def": {"default_analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "default_field": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"]}, "enabled": true}, "fields": [{"name": "Name", "type": "boolean"}], "index_array_lengths": true, "partial_filter_selector": {"anyKey": "anyValue"}}, "name": "Name", "partitioned": false, "type": "json"}}], "limit": 25, "mrargs": {"conflicts": "anyValue", "direction": "asc", "end_key": "anyValue", "include_docs": false, "partition": "Partition", "reduce": true, "stable": true, "start_key": "anyValue", "update": "anyValue", "view_type": "map"}, "opts": {"bookmark": "Bookmark", "conflicts": false, "execution_stats": false, "fields": ["Fields"], "limit": 25, "partition": "Partition", "r": 1, "skip": 0, "sort": "anyValue", "stable": false, "stale": false, "update": true, "use_index": ["UseIndex"]}, "partitioned": "anyValue", "selector": {"anyKey": "anyValue"}, "selector_hints": [{"indexable_fields": ["IndexableFields"], "type": "json", "unindexable_fields": ["UnindexableFields"]}], "skip": 0}`)
 				}))
 			})
 			It(`Invoke PostExplain successfully`, func() {
@@ -14839,6 +14855,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
 				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14871,6 +14888,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
 				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14924,6 +14942,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel := new(cloudantv1.PostExplainOptions)
 				postExplainOptionsModel.Db = core.StringPtr("testString")
 				postExplainOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postExplainOptionsModel.AllowFallback = core.BoolPtr(true)
 				postExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -14977,6 +14996,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15056,6 +15076,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15143,6 +15164,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15175,6 +15197,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15228,6 +15251,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15303,6 +15327,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15390,6 +15415,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15428,6 +15454,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -15481,6 +15508,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := new(cloudantv1.PostFindOptions)
 				postFindOptionsModel.Db = core.StringPtr("testString")
 				postFindOptionsModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				postFindOptionsModel.AllowFallback = core.BoolPtr(true)
 				postFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postFindOptionsModel.ExecutionStats = core.BoolPtr(true)
@@ -25596,7 +25624,7 @@ var _ = Describe(`CloudantV1`, func() {
 				getDbUpdatesOptionsModel.SetHeartbeat(int64(0))
 				getDbUpdatesOptionsModel.SetLimit(int64(0))
 				getDbUpdatesOptionsModel.SetTimeout(int64(60000))
-				getDbUpdatesOptionsModel.SetSince("0")
+				getDbUpdatesOptionsModel.SetSince("testString")
 				getDbUpdatesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getDbUpdatesOptionsModel).ToNot(BeNil())
 				Expect(getDbUpdatesOptionsModel.Descending).To(Equal(core.BoolPtr(false)))
@@ -25604,7 +25632,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getDbUpdatesOptionsModel.Heartbeat).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getDbUpdatesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getDbUpdatesOptionsModel.Timeout).To(Equal(core.Int64Ptr(int64(60000))))
-				Expect(getDbUpdatesOptionsModel.Since).To(Equal(core.StringPtr("0")))
+				Expect(getDbUpdatesOptionsModel.Since).To(Equal(core.StringPtr("testString")))
 				Expect(getDbUpdatesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetDesignDocumentInformationOptions successfully`, func() {
@@ -26018,6 +26046,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(headUpInformationOptionsModel).ToNot(BeNil())
 				Expect(headUpInformationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewIndexDefinition successfully`, func() {
+				fields := []cloudantv1.IndexField{}
+				_model, err := cloudantService.NewIndexDefinition(fields)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewPostActivityTrackerEventsOptions successfully`, func() {
 				// Construct an instance of the PostActivityTrackerEventsOptions model
 				postActivityTrackerEventsOptionsTypes := []string{"management", "data"}
@@ -26259,7 +26293,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postChangesOptionsModel.SetIncludeDocs(false)
 				postChangesOptionsModel.SetLimit(int64(0))
 				postChangesOptionsModel.SetSeqInterval(int64(1))
-				postChangesOptionsModel.SetSince("0")
+				postChangesOptionsModel.SetSince("testString")
 				postChangesOptionsModel.SetStyle("main_only")
 				postChangesOptionsModel.SetTimeout(int64(60000))
 				postChangesOptionsModel.SetView("testString")
@@ -26280,7 +26314,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postChangesOptionsModel.IncludeDocs).To(Equal(core.BoolPtr(false)))
 				Expect(postChangesOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postChangesOptionsModel.SeqInterval).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(postChangesOptionsModel.Since).To(Equal(core.StringPtr("0")))
+				Expect(postChangesOptionsModel.Since).To(Equal(core.StringPtr("testString")))
 				Expect(postChangesOptionsModel.Style).To(Equal(core.StringPtr("main_only")))
 				Expect(postChangesOptionsModel.Timeout).To(Equal(core.Int64Ptr(int64(60000))))
 				Expect(postChangesOptionsModel.View).To(Equal(core.StringPtr("testString")))
@@ -26475,6 +26509,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postExplainOptionsModel := cloudantService.NewPostExplainOptions(db, postExplainOptionsSelector)
 				postExplainOptionsModel.SetDb("testString")
 				postExplainOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
+				postExplainOptionsModel.SetAllowFallback(true)
 				postExplainOptionsModel.SetBookmark("testString")
 				postExplainOptionsModel.SetConflicts(true)
 				postExplainOptionsModel.SetExecutionStats(true)
@@ -26490,6 +26525,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postExplainOptionsModel).ToNot(BeNil())
 				Expect(postExplainOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postExplainOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(postExplainOptionsModel.AllowFallback).To(Equal(core.BoolPtr(true)))
 				Expect(postExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
@@ -26510,6 +26546,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postFindOptionsModel := cloudantService.NewPostFindOptions(db, postFindOptionsSelector)
 				postFindOptionsModel.SetDb("testString")
 				postFindOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
+				postFindOptionsModel.SetAllowFallback(true)
 				postFindOptionsModel.SetBookmark("testString")
 				postFindOptionsModel.SetConflicts(true)
 				postFindOptionsModel.SetExecutionStats(true)
@@ -26525,6 +26562,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postFindOptionsModel).ToNot(BeNil())
 				Expect(postFindOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postFindOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(postFindOptionsModel.AllowFallback).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
@@ -26657,6 +26695,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.SetDb("testString")
 				postPartitionExplainOptionsModel.SetPartitionKey("testString")
 				postPartitionExplainOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
+				postPartitionExplainOptionsModel.SetAllowFallback(true)
 				postPartitionExplainOptionsModel.SetBookmark("testString")
 				postPartitionExplainOptionsModel.SetConflicts(true)
 				postPartitionExplainOptionsModel.SetExecutionStats(true)
@@ -26672,6 +26711,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionExplainOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionExplainOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionExplainOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(postPartitionExplainOptionsModel.AllowFallback).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
@@ -26693,6 +26733,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.SetDb("testString")
 				postPartitionFindOptionsModel.SetPartitionKey("testString")
 				postPartitionFindOptionsModel.SetSelector(map[string]interface{}{"anyKey": "anyValue"})
+				postPartitionFindOptionsModel.SetAllowFallback(true)
 				postPartitionFindOptionsModel.SetBookmark("testString")
 				postPartitionFindOptionsModel.SetConflicts(true)
 				postPartitionFindOptionsModel.SetExecutionStats(true)
@@ -26708,6 +26749,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionFindOptionsModel.Db).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.PartitionKey).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(postPartitionFindOptionsModel.AllowFallback).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
