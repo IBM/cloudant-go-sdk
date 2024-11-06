@@ -110,7 +110,10 @@ func transformError(resp *http.Response) error {
 		}
 	}
 
-	trace := resp.Header.Get("X-Couch-Request-Id")
+	trace := resp.Header.Get("X-Request-Id")
+	if trace == "" {
+		trace = resp.Header.Get("X-Couch-Request-Id")
+	}
 	if _, ok := respError["errors"]; ok && trace != "" {
 		respError["trace"] = trace
 		respErrorWasAugmented = true

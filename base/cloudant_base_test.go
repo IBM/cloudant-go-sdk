@@ -586,6 +586,43 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 				}`,
 			},
 			{
+				description: "Validates augmented error with reason and request id",
+				status:      http.StatusTeapot,
+				headers: map[string]string{
+					"x-request-id": "test_req_id",
+					"content-type": "application/json",
+				},
+				body: errorReasonBody,
+				expect: `{
+					"trace": "test_req_id",
+					"error": "test_value",
+					"reason": "A valid test reason",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value: A valid test reason"
+					}]
+				}`,
+			},
+			{
+				description: "Validates augmented error with reason and preferred request id",
+				status:      http.StatusTeapot,
+				headers: map[string]string{
+					"x-request-id":       "preferred_req_id",
+					"x-couch-request-id": "test_req_id",
+					"content-type":       "application/json",
+				},
+				body: errorReasonBody,
+				expect: `{
+					"trace": "preferred_req_id",
+					"error": "test_value",
+					"reason": "A valid test reason",
+					"errors": [{
+						"code": "test_value",
+						"message": "test_value: A valid test reason"
+					}]
+				}`,
+			},
+			{
 				description: "Validates augmented error with reason and trace as a stream",
 				status:      http.StatusTeapot,
 				headers:     defaultHeaders,
