@@ -4697,6 +4697,9 @@ func (cloudant *CloudantV1) PostPartitionExplainWithContext(ctx context.Context,
 	if postPartitionExplainOptions.Selector != nil {
 		body["selector"] = postPartitionExplainOptions.Selector
 	}
+	if postPartitionExplainOptions.AllowFallback != nil {
+		body["allow_fallback"] = postPartitionExplainOptions.AllowFallback
+	}
 	if postPartitionExplainOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionExplainOptions.Bookmark
 	}
@@ -4762,9 +4765,13 @@ func (cloudant *CloudantV1) PostPartitionExplainWithContext(ctx context.Context,
 // Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
 // all fields in selector by using the `_index` endpoint.
 //
-// Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
-// recommended because it has a noticeable performance impact causing a full scan of the partition with each request. In
-// this case the response body will include a warning field recommending that an index is created.
+// Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This isn't
+// recommended because it has a significant performance impact causing a full scan of the partition with each request.
+// In this case the response body includes a warning field recommending the creation of an index.
+//
+// To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400` status
+// code if no suitable index exists. If you want to use only a specific index for your query set
+// `allow_fallback` to `false` and set the `use_index` option.
 //
 // Before using read the
 // [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
@@ -4816,6 +4823,9 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 	body := make(map[string]interface{})
 	if postPartitionFindOptions.Selector != nil {
 		body["selector"] = postPartitionFindOptions.Selector
+	}
+	if postPartitionFindOptions.AllowFallback != nil {
+		body["allow_fallback"] = postPartitionFindOptions.AllowFallback
 	}
 	if postPartitionFindOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionFindOptions.Bookmark
@@ -4882,9 +4892,13 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 // Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
 // all fields in selector by using the `_index` endpoint.
 //
-// Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
-// recommended because it has a noticeable performance impact causing a full scan of the partition with each request. In
-// this case the response body will include a warning field recommending that an index is created.
+// Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This isn't
+// recommended because it has a significant performance impact causing a full scan of the partition with each request.
+// In this case the response body includes a warning field recommending the creation of an index.
+//
+// To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400` status
+// code if no suitable index exists. If you want to use only a specific index for your query set
+// `allow_fallback` to `false` and set the `use_index` option.
 //
 // Before using read the
 // [FAQs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-database-partitioning#partition-querying) to understand the
@@ -4936,6 +4950,9 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 	body := make(map[string]interface{})
 	if postPartitionFindOptions.Selector != nil {
 		body["selector"] = postPartitionFindOptions.Selector
+	}
+	if postPartitionFindOptions.AllowFallback != nil {
+		body["allow_fallback"] = postPartitionFindOptions.AllowFallback
 	}
 	if postPartitionFindOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionFindOptions.Bookmark
@@ -5038,6 +5055,9 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 	if postExplainOptions.Selector != nil {
 		body["selector"] = postExplainOptions.Selector
 	}
+	if postExplainOptions.AllowFallback != nil {
+		body["allow_fallback"] = postExplainOptions.AllowFallback
+	}
 	if postExplainOptions.Bookmark != nil {
 		body["bookmark"] = postExplainOptions.Bookmark
 	}
@@ -5106,9 +5126,13 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 // Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
 // all fields in selector by using the `_index` endpoint.
 //
-// Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
+// Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This isn't
 // recommended because it has a significant performance impact causing a full scan of the database with each request. In
-// this case the response body will include a warning field recommending that an index is created.
+// this case the response body includes a warning field recommending the creation of an index.
+//
+// To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400` status
+// code if no suitable index exists. If you want to use only a specific index for your query set
+// `allow_fallback` to `false` and set the `use_index` option.
 func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostFindWithContext(context.Background(), postFindOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -5155,6 +5179,9 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 	body := make(map[string]interface{})
 	if postFindOptions.Selector != nil {
 		body["selector"] = postFindOptions.Selector
+	}
+	if postFindOptions.AllowFallback != nil {
+		body["allow_fallback"] = postFindOptions.AllowFallback
 	}
 	if postFindOptions.Bookmark != nil {
 		body["bookmark"] = postFindOptions.Bookmark
@@ -5224,9 +5251,13 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 // Query documents by using a declarative JSON querying syntax. It's best practice to create an appropriate index for
 // all fields in selector by using the `_index` endpoint.
 //
-// Queries without an appropriate backing index will fallback to using the built-in `_all_docs` index. This is not
+// Queries without an appropriate backing index by default fallback to using the built-in `_all_docs` index. This isn't
 // recommended because it has a significant performance impact causing a full scan of the database with each request. In
-// this case the response body will include a warning field recommending that an index is created.
+// this case the response body includes a warning field recommending the creation of an index.
+//
+// To avoid the fallback behavior set the `allow_fallback` option to `false` and the server responds with a `400` status
+// code if no suitable index exists. If you want to use only a specific index for your query set
+// `allow_fallback` to `false` and set the `use_index` option.
 func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostFindAsStreamWithContext(context.Background(), postFindOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -5273,6 +5304,9 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 	body := make(map[string]interface{})
 	if postFindOptions.Selector != nil {
 		body["selector"] = postFindOptions.Selector
+	}
+	if postFindOptions.AllowFallback != nil {
+		body["allow_fallback"] = postFindOptions.AllowFallback
 	}
 	if postFindOptions.Bookmark != nil {
 		body["bookmark"] = postFindOptions.Bookmark
@@ -8546,7 +8580,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.20")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.22")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -8652,7 +8686,7 @@ type ActiveTask struct {
 	// Schema for a Unix epoch timestamp.
 	UpdatedOn *int64 `json:"updated_on" validate:"required"`
 
-	// Name of user running replication or owning the indexer. Available for `indexer`, `replication` type tasks.
+	// Name of user running the process.
 	User *string `json:"user,omitempty"`
 
 	// Number of view indexes. Available for `view_compaction` type tasks.
@@ -9820,7 +9854,7 @@ type DatabaseInformation struct {
 	// An opaque string that describes the compaction state of the database.
 	CompactedSeq *string `json:"compacted_seq,omitempty"`
 
-	// The name of the database.
+	// Schema for a database name.
 	DbName *string `json:"db_name" validate:"required"`
 
 	// The version of the physical format used for the data when it is stored on disk.
@@ -10001,7 +10035,7 @@ func UnmarshalDatabaseInformationProps(m map[string]json.RawMessage, result inte
 
 // DbEvent : Schema for a database change event.
 type DbEvent struct {
-	// Database name.
+	// Schema for a database name.
 	DbName *string `json:"db_name" validate:"required"`
 
 	// Sequence number.
@@ -10075,7 +10109,7 @@ type DbsInfoResult struct {
 	// Schema for information about a database.
 	Info *DatabaseInformation `json:"info,omitempty"`
 
-	// Database name.
+	// Schema for a database name.
 	Key *string `json:"key" validate:"required"`
 }
 
@@ -10559,7 +10593,7 @@ type DesignDocument struct {
 	// Schema for a list of document revision identifiers.
 	DeletedConflicts []string `json:"_deleted_conflicts,omitempty"`
 
-	// Schema for a design document ID.
+	// Schema for a design document ID including a `_design/` prefix.
 	ID *string `json:"_id,omitempty"`
 
 	// Document's update sequence in current database. Available if requested with local_seq=true query parameter.
@@ -11044,10 +11078,10 @@ type DocsResultRow struct {
 	// Schema for a document.
 	Doc *Document `json:"doc,omitempty"`
 
-	// id.
+	// Schema for a document ID.
 	ID *string `json:"id,omitempty"`
 
-	// Document ID.
+	// Schema for a document ID.
 	Key *string `json:"key" validate:"required"`
 
 	// Value of built-in `/_all_docs` style view.
@@ -11495,7 +11529,7 @@ type ExplainResult struct {
 	// When `true`, the query is answered using the index only and no documents are fetched.
 	Covering *bool `json:"covering" validate:"required"`
 
-	// Name of database.
+	// Schema for a database name.
 	Dbname *string `json:"dbname" validate:"required"`
 
 	// Fields that were requested to be projected from the document. If no fields were requested to be projected this will
@@ -11506,7 +11540,7 @@ type ExplainResult struct {
 	Index *IndexInformation `json:"index" validate:"required"`
 
 	// Schema for the list of all the other indexes that were not chosen for serving the query.
-	IndexCandidates []IndexCandidate `json:"index_candidates,omitempty"`
+	IndexCandidates []IndexCandidate `json:"index_candidates" validate:"required"`
 
 	// The used maximum number of results returned.
 	Limit *int64 `json:"limit" validate:"required"`
@@ -11556,7 +11590,7 @@ type ExplainResult struct {
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
 	// Schema for a list of objects with extra information on the selector to provide insights about its usability.
-	SelectorHints []SelectorHint `json:"selector_hints,omitempty"`
+	SelectorHints []SelectorHint `json:"selector_hints" validate:"required"`
 
 	// Skip parameter used.
 	Skip *int64 `json:"skip" validate:"required"`
@@ -11663,6 +11697,13 @@ type ExplainResultMrArgs struct {
 	// The type of the underlying view.
 	ViewType *string `json:"view_type,omitempty"`
 }
+
+// Constants associated with the ExplainResultMrArgs.Direction property.
+// Direction parameter passed to the underlying view.
+const (
+	ExplainResultMrArgsDirectionAscConst  = "asc"
+	ExplainResultMrArgsDirectionDescConst = "desc"
+)
 
 // Constants associated with the ExplainResultMrArgs.ViewType property.
 // The type of the underlying view.
@@ -13778,7 +13819,7 @@ type IndexDefinition struct {
 	//
 	// For "text" type indexes each object has a `name` property of the field name and a `type` property of the field type
 	// (string, number, or boolean).
-	Fields []IndexField `json:"fields,omitempty"`
+	Fields []IndexField `json:"fields" validate:"required"`
 
 	// Whether to scan every document for arrays and store the length for each array found. Set the index_array_lengths
 	// field to false if:
@@ -13821,6 +13862,18 @@ type IndexDefinition struct {
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	PartialFilterSelector map[string]interface{} `json:"partial_filter_selector,omitempty"`
+}
+
+// NewIndexDefinition : Instantiate IndexDefinition (Generic Model Constructor)
+func (*CloudantV1) NewIndexDefinition(fields []IndexField) (_model *IndexDefinition, err error) {
+	_model = &IndexDefinition{
+		Fields: fields,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
 }
 
 // UnmarshalIndexDefinition unmarshals an instance of IndexDefinition from the specified map of raw messages.
@@ -13955,7 +14008,7 @@ func UnmarshalIndexField(m map[string]json.RawMessage, result interface{}) (err 
 
 // IndexInformation : Schema for information about an index.
 type IndexInformation struct {
-	// Design document ID including a `_design/` prefix.
+	// Schema for a nullable design document ID including a `_design/` prefix.
 	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
@@ -14154,7 +14207,7 @@ func UnmarshalOk(m map[string]json.RawMessage, result interface{}) (err error) {
 
 // PartitionInformation : Schema for information about a database partition.
 type PartitionInformation struct {
-	// The name of the database.
+	// Schema for a database name.
 	DbName *string `json:"db_name" validate:"required"`
 
 	// A count of the documents in the specified database partition.
@@ -14163,7 +14216,7 @@ type PartitionInformation struct {
 	// Number of deleted documents.
 	DocDelCount *int64 `json:"doc_del_count" validate:"required"`
 
-	// The name of the partition in the database.
+	// Schema for a partition key.
 	Partition *string `json:"partition" validate:"required"`
 
 	// Schema for information about the partition index count and limit in a database.
@@ -15326,6 +15379,9 @@ type PostExplainOptions struct {
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
+	// Whether to allow fallback to other indexes.  Default is true.
+	AllowFallback *bool `json:"allow_fallback,omitempty"`
+
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
 
@@ -15371,8 +15427,9 @@ type PostExplainOptions struct {
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
 	//
-	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-	// full scan of all documents will answer the query.
+	// If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+	// another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+	// server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// The read quorum that is needed for the result. The value defaults to 1, in which case the document that was found in
@@ -15417,6 +15474,12 @@ func (_options *PostExplainOptions) SetDb(db string) *PostExplainOptions {
 // SetSelector : Allow user to set Selector
 func (_options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
 	_options.Selector = selector
+	return _options
+}
+
+// SetAllowFallback : Allow user to set AllowFallback
+func (_options *PostExplainOptions) SetAllowFallback(allowFallback bool) *PostExplainOptions {
+	_options.AllowFallback = core.BoolPtr(allowFallback)
 	return _options
 }
 
@@ -15532,6 +15595,9 @@ type PostFindOptions struct {
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
+	// Whether to allow fallback to other indexes.  Default is true.
+	AllowFallback *bool `json:"allow_fallback,omitempty"`
+
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
 
@@ -15577,8 +15643,9 @@ type PostFindOptions struct {
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
 	//
-	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-	// full scan of all documents will answer the query.
+	// If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+	// another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+	// server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// The read quorum that is needed for the result. The value defaults to 1, in which case the document that was found in
@@ -15623,6 +15690,12 @@ func (_options *PostFindOptions) SetDb(db string) *PostFindOptions {
 // SetSelector : Allow user to set Selector
 func (_options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
 	_options.Selector = selector
+	return _options
+}
+
+// SetAllowFallback : Allow user to set AllowFallback
+func (_options *PostFindOptions) SetAllowFallback(allowFallback bool) *PostFindOptions {
+	_options.AllowFallback = core.BoolPtr(allowFallback)
 	return _options
 }
 
@@ -15986,6 +16059,9 @@ type PostPartitionExplainOptions struct {
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
+	// Whether to allow fallback to other indexes.  Default is true.
+	AllowFallback *bool `json:"allow_fallback,omitempty"`
+
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
 
@@ -16031,8 +16107,9 @@ type PostPartitionExplainOptions struct {
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
 	//
-	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-	// full scan of all documents will answer the query.
+	// If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+	// another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+	// server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -16078,6 +16155,12 @@ func (_options *PostPartitionExplainOptions) SetPartitionKey(partitionKey string
 // SetSelector : Allow user to set Selector
 func (_options *PostPartitionExplainOptions) SetSelector(selector map[string]interface{}) *PostPartitionExplainOptions {
 	_options.Selector = selector
+	return _options
+}
+
+// SetAllowFallback : Allow user to set AllowFallback
+func (_options *PostPartitionExplainOptions) SetAllowFallback(allowFallback bool) *PostPartitionExplainOptions {
+	_options.AllowFallback = core.BoolPtr(allowFallback)
 	return _options
 }
 
@@ -16190,6 +16273,9 @@ type PostPartitionFindOptions struct {
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
 	Selector map[string]interface{} `json:"selector" validate:"required"`
 
+	// Whether to allow fallback to other indexes.  Default is true.
+	AllowFallback *bool `json:"allow_fallback,omitempty"`
+
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
 
@@ -16235,8 +16321,9 @@ type PostPartitionFindOptions struct {
 	// It’s recommended to specify indexes explicitly in your queries to prevent existing queries being affected by new
 	// indexes that might get added later.
 	//
-	// If the specified index does not exist or cannot answer the query then the value is ignored and another index or a
-	// full scan of all documents will answer the query.
+	// If the specified index doesn't exist or can't answer the query then the server ignores the value and answers using
+	// another index or a full scan of all documents. To change this behavior set `allow_fallback` to `false` and the
+	// server responds instead with a `400` status code if the requested index is unsuitable to answer the query.
 	UseIndex []string `json:"use_index,omitempty"`
 
 	// Allows users to set headers on API requests.
@@ -16282,6 +16369,12 @@ func (_options *PostPartitionFindOptions) SetPartitionKey(partitionKey string) *
 // SetSelector : Allow user to set Selector
 func (_options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
 	_options.Selector = selector
+	return _options
+}
+
+// SetAllowFallback : Allow user to set AllowFallback
+func (_options *PostPartitionFindOptions) SetAllowFallback(allowFallback bool) *PostPartitionFindOptions {
+	_options.AllowFallback = core.BoolPtr(allowFallback)
 	return _options
 }
 
@@ -18340,7 +18433,7 @@ type ReplicationDatabaseAuthBasic struct {
 	// The password associated with the username.
 	Password *string `json:"password" validate:"required"`
 
-	// The username.
+	// Schema for a username.
 	Username *string `json:"username" validate:"required"`
 }
 
@@ -19290,7 +19383,7 @@ type SchedulerJob struct {
 	// Replication target.
 	Target *string `json:"target" validate:"required"`
 
-	// Name of user running replication.
+	// Name of user running the process.
 	User *string `json:"user" validate:"required"`
 }
 
@@ -19593,7 +19686,7 @@ type SearchResult struct {
 	Ranges map[string]map[string]int64 `json:"ranges,omitempty"`
 
 	// Array of row objects.
-	Rows []SearchResultRow `json:"rows,omitempty"`
+	Rows []SearchResultRow `json:"rows" validate:"required"`
 
 	// Array of grouped search matches.
 	Groups []SearchResultProperties `json:"groups,omitempty"`
@@ -19660,7 +19753,7 @@ type SearchResultProperties struct {
 	Ranges map[string]map[string]int64 `json:"ranges,omitempty"`
 
 	// Array of row objects.
-	Rows []SearchResultRow `json:"rows,omitempty"`
+	Rows []SearchResultRow `json:"rows" validate:"required"`
 }
 
 // UnmarshalSearchResultProperties unmarshals an instance of SearchResultProperties from the specified map of raw messages.
@@ -19929,6 +20022,12 @@ type ServerVendor struct {
 	// Allows users to set arbitrary properties of type *string.
 	additionalProperties map[string]*string
 }
+
+// Constants associated with the ServerVendor.Variant property.
+// Vendor variant.
+const (
+	ServerVendorVariantPaasConst = "paas"
+)
 
 // SetProperty allows the user to set an arbitrary property on an instance of ServerVendor.
 func (o *ServerVendor) SetProperty(key string, value *string) {
@@ -20218,7 +20317,7 @@ type UserContext struct {
 	// Database name in the context of the provided operation.
 	Db *string `json:"db,omitempty"`
 
-	// User name.
+	// Name of user running the process.
 	Name *string `json:"name" validate:"required"`
 
 	// List of user roles.
