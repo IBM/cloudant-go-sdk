@@ -6014,7 +6014,7 @@ func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSea
 	return
 }
 
-// HeadReplicationDocument : Retrieve the HTTP headers for a replication document
+// HeadReplicationDocument : Retrieve the HTTP headers for a persistent replication
 // Retrieves the HTTP headers containing minimal amount of information about the specified replication document from the
 // `_replicator` database.  The method supports the same query arguments as the `GET /_replicator/{doc_id}` method, but
 // only headers like content length and the revision (ETag header) are returned.
@@ -6199,7 +6199,84 @@ func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, hea
 	return
 }
 
-// DeleteReplicationDocument : Cancel a replication
+// PostReplicator : Create a persistent replication with a generated ID
+// Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
+// replication.
+func (cloudant *CloudantV1) PostReplicator(postReplicatorOptions *PostReplicatorOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.PostReplicatorWithContext(context.Background(), postReplicatorOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// PostReplicatorWithContext is an alternate form of the PostReplicator method which supports a Context parameter
+func (cloudant *CloudantV1) PostReplicatorWithContext(ctx context.Context, postReplicatorOptions *PostReplicatorOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postReplicatorOptions, "postReplicatorOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(postReplicatorOptions, "postReplicatorOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range postReplicatorOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostReplicator")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	if postReplicatorOptions.Batch != nil {
+		builder.AddQuery("batch", fmt.Sprint(*postReplicatorOptions.Batch))
+	}
+
+	_, err = builder.SetBodyContentJSON(postReplicatorOptions.ReplicationDocument)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "postReplicator", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDocumentResult)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteReplicationDocument : Cancel a persistent replication
 // Cancels a replication by deleting the document that describes it from the `_replicator` database.
 func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.DeleteReplicationDocumentWithContext(context.Background(), deleteReplicationDocumentOptions)
@@ -6278,7 +6355,7 @@ func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Con
 	return
 }
 
-// GetReplicationDocument : Retrieve a replication document
+// GetReplicationDocument : Retrieve the configuration for a persistent replication
 // Retrieves a replication document from the `_replicator` database to view the configuration of the replication. The
 // status of the replication is no longer recorded in the document but can be checked via the replication scheduler.
 func (cloudant *CloudantV1) GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions) (result *ReplicationDocument, response *core.DetailedResponse, err error) {
@@ -6382,7 +6459,7 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 	return
 }
 
-// PutReplicationDocument : Create or modify a replication using a replication document
+// PutReplicationDocument : Create or modify a persistent replication
 // Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
 // replication.
 func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
@@ -8580,7 +8657,7 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.22")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev2e75137")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9115,7 +9192,7 @@ type Analyzer struct {
 	// the analyzer usage:
 	// * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
 	// index default_field the default is `standard`.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// Custom stopwords to use with the named analyzer.
 	Stopwords []string `json:"stopwords,omitempty"`
@@ -9170,6 +9247,18 @@ const (
 	AnalyzerNameWhitespaceConst = "whitespace"
 )
 
+// NewAnalyzer : Instantiate Analyzer (Generic Model Constructor)
+func (*CloudantV1) NewAnalyzer(name string) (_model *Analyzer, err error) {
+	_model = &Analyzer{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
 // UnmarshalAnalyzer unmarshals an instance of Analyzer from the specified map of raw messages.
 func UnmarshalAnalyzer(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Analyzer)
@@ -9193,7 +9282,7 @@ type AnalyzerConfiguration struct {
 	// the analyzer usage:
 	// * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
 	// index default_field the default is `standard`.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// Custom stopwords to use with the named analyzer.
 	Stopwords []string `json:"stopwords,omitempty"`
@@ -9250,6 +9339,18 @@ const (
 	AnalyzerConfigurationNameTurkishConst    = "turkish"
 	AnalyzerConfigurationNameWhitespaceConst = "whitespace"
 )
+
+// NewAnalyzerConfiguration : Instantiate AnalyzerConfiguration (Generic Model Constructor)
+func (*CloudantV1) NewAnalyzerConfiguration(name string) (_model *AnalyzerConfiguration, err error) {
+	_model = &AnalyzerConfiguration{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
 
 // UnmarshalAnalyzerConfiguration unmarshals an instance of AnalyzerConfiguration from the specified map of raw messages.
 func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -11666,36 +11767,36 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 // ExplainResultMrArgs : Arguments passed to the underlying view.
 type ExplainResultMrArgs struct {
 	// Schema for any JSON type.
-	Conflicts interface{} `json:"conflicts,omitempty"`
+	Conflicts interface{} `json:"conflicts" validate:"required"`
 
 	// Direction parameter passed to the underlying view.
-	Direction *string `json:"direction,omitempty"`
+	Direction *string `json:"direction" validate:"required"`
 
 	// Schema for any JSON type.
-	EndKey interface{} `json:"end_key,omitempty"`
+	EndKey interface{} `json:"end_key" validate:"required"`
 
 	// A parameter that specifies whether to include the full content of the documents in the response in the underlying
 	// view.
-	IncludeDocs *bool `json:"include_docs,omitempty"`
+	IncludeDocs *bool `json:"include_docs" validate:"required"`
 
 	// Partition parameter passed to the underlying view.
-	Partition *string `json:"partition,omitempty"`
+	Partition *string `json:"partition" validate:"required"`
 
 	// A parameter that specifies returning only documents that match any of the specified keys in the underlying view.
-	Reduce *bool `json:"reduce,omitempty"`
+	Reduce *bool `json:"reduce" validate:"required"`
 
 	// A parameter that specifies whether the view results should be returned form a "stable" set of shards passed to the
 	// underlying view.
-	Stable *bool `json:"stable,omitempty"`
+	Stable *bool `json:"stable" validate:"required"`
 
 	// Schema for any JSON type.
 	StartKey interface{} `json:"start_key,omitempty"`
 
 	// Schema for any JSON type.
-	Update interface{} `json:"update,omitempty"`
+	Update interface{} `json:"update" validate:"required"`
 
 	// The type of the underlying view.
-	ViewType *string `json:"view_type,omitempty"`
+	ViewType *string `json:"view_type" validate:"required"`
 }
 
 // Constants associated with the ExplainResultMrArgs.Direction property.
@@ -13726,7 +13827,7 @@ type IndexAnalysisExclusionReason struct {
 	// index.
 	// * too_many_fields: json The index has more fields than the chosen one.
 	// * unfavored_type: any The type of the index is not preferred.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 }
 
 // Constants associated with the IndexAnalysisExclusionReason.Name property.
@@ -16882,6 +16983,51 @@ func (_options *PostPartitionViewOptions) SetUpdate(update string) *PostPartitio
 
 // SetHeaders : Allow user to set Headers
 func (options *PostPartitionViewOptions) SetHeaders(param map[string]string) *PostPartitionViewOptions {
+	options.Headers = param
+	return options
+}
+
+// PostReplicatorOptions : The PostReplicator options.
+type PostReplicatorOptions struct {
+	// HTTP request body for replication operations.
+	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
+
+	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
+	// code immediately.
+	Batch *string `json:"batch,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the PostReplicatorOptions.Batch property.
+// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
+// code immediately.
+const (
+	PostReplicatorOptionsBatchOkConst = "ok"
+)
+
+// NewPostReplicatorOptions : Instantiate PostReplicatorOptions
+func (*CloudantV1) NewPostReplicatorOptions(replicationDocument *ReplicationDocument) *PostReplicatorOptions {
+	return &PostReplicatorOptions{
+		ReplicationDocument: replicationDocument,
+	}
+}
+
+// SetReplicationDocument : Allow user to set ReplicationDocument
+func (_options *PostReplicatorOptions) SetReplicationDocument(replicationDocument *ReplicationDocument) *PostReplicatorOptions {
+	_options.ReplicationDocument = replicationDocument
+	return _options
+}
+
+// SetBatch : Allow user to set Batch
+func (_options *PostReplicatorOptions) SetBatch(batch string) *PostReplicatorOptions {
+	_options.Batch = core.StringPtr(batch)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostReplicatorOptions) SetHeaders(param map[string]string) *PostReplicatorOptions {
 	options.Headers = param
 	return options
 }

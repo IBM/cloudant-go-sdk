@@ -17679,6 +17679,723 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`PostReplicator(postReplicatorOptions *PostReplicatorOptions) - Operation response error`, func() {
+		postReplicatorPath := "/_replicator"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postReplicatorPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke PostReplicator with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"_replicator"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = map[string]cloudantv1.Attachment{"key1": *attachmentModel}
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
+				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
+				replicationDocumentModel.SetProperty("foo", "testString")
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostReplicatorOptions model
+				postReplicatorOptionsModel := new(cloudantv1.PostReplicatorOptions)
+				postReplicatorOptionsModel.ReplicationDocument = replicationDocumentModel
+				postReplicatorOptionsModel.Batch = core.StringPtr("ok")
+				postReplicatorOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.PostReplicator(postReplicatorOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.PostReplicator(postReplicatorOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`PostReplicator(postReplicatorOptions *PostReplicatorOptions)`, func() {
+		postReplicatorPath := "/_replicator"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postReplicatorPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
+				}))
+			})
+			It(`Invoke PostReplicator successfully with retries`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"_replicator"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = map[string]cloudantv1.Attachment{"key1": *attachmentModel}
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
+				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
+				replicationDocumentModel.SetProperty("foo", "testString")
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostReplicatorOptions model
+				postReplicatorOptionsModel := new(cloudantv1.PostReplicatorOptions)
+				postReplicatorOptionsModel.ReplicationDocument = replicationDocumentModel
+				postReplicatorOptionsModel.Batch = core.StringPtr("ok")
+				postReplicatorOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := cloudantService.PostReplicatorWithContext(ctx, postReplicatorOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr := cloudantService.PostReplicator(postReplicatorOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = cloudantService.PostReplicatorWithContext(ctx, postReplicatorOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(postReplicatorPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-enabled operation, verify Content-Encoding is set to "gzip"
+					Expect(req.Header.Get("Content-Encoding")).To(Equal("gzip"))
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.URL.Query()["batch"]).To(Equal([]string{"ok"}))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(201)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "rev": "Rev", "ok": true, "caused_by": "CausedBy", "error": "Error", "reason": "Reason", "ref": 3}`)
+				}))
+			})
+			It(`Invoke PostReplicator successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.PostReplicator(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"_replicator"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = map[string]cloudantv1.Attachment{"key1": *attachmentModel}
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
+				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
+				replicationDocumentModel.SetProperty("foo", "testString")
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostReplicatorOptions model
+				postReplicatorOptionsModel := new(cloudantv1.PostReplicatorOptions)
+				postReplicatorOptionsModel.ReplicationDocument = replicationDocumentModel
+				postReplicatorOptionsModel.Batch = core.StringPtr("ok")
+				postReplicatorOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.PostReplicator(postReplicatorOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke PostReplicator with error: Operation validation and request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"_replicator"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = map[string]cloudantv1.Attachment{"key1": *attachmentModel}
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
+				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
+				replicationDocumentModel.SetProperty("foo", "testString")
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostReplicatorOptions model
+				postReplicatorOptionsModel := new(cloudantv1.PostReplicatorOptions)
+				postReplicatorOptionsModel.ReplicationDocument = replicationDocumentModel
+				postReplicatorOptionsModel.Batch = core.StringPtr("ok")
+				postReplicatorOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.PostReplicator(postReplicatorOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the PostReplicatorOptions model with no property values
+				postReplicatorOptionsModelNew := new(cloudantv1.PostReplicatorOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.PostReplicator(postReplicatorOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(201)
+				}))
+			})
+			It(`Invoke PostReplicator successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(1))
+
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
+				replicationDatabaseModel.URL = core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb")
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("john")
+				userContextModel.Roles = []string{"_replicator"}
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				replicationDocumentModel.Attachments = map[string]cloudantv1.Attachment{"key1": *attachmentModel}
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(false)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(4500))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(15000))
+				replicationDocumentModel.Continuous = core.BoolPtr(true)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(true)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"badger", "lemur", "llama"}
+				replicationDocumentModel.Filter = core.StringPtr("ddoc/my_filter")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
+				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
+				replicationDocumentModel.SocketOptions = core.StringPtr("[{keepalive, true}, {nodelay, false}]")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(false)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(400))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(3))
+				replicationDocumentModel.SetProperty("foo", "testString")
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+
+				// Construct an instance of the PostReplicatorOptions model
+				postReplicatorOptionsModel := new(cloudantv1.PostReplicatorOptions)
+				postReplicatorOptionsModel.ReplicationDocument = replicationDocumentModel
+				postReplicatorOptionsModel.Batch = core.StringPtr("ok")
+				postReplicatorOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.PostReplicator(postReplicatorOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) - Operation response error`, func() {
 		deleteReplicationDocumentPath := "/_replicator/testString"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -25383,6 +26100,18 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewAnalyzer successfully`, func() {
+				name := "classic"
+				_model, err := cloudantService.NewAnalyzer(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewAnalyzerConfiguration successfully`, func() {
+				name := "classic"
+				_model, err := cloudantService.NewAnalyzerConfiguration(name)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 			It(`Invoke NewBulkDocs successfully`, func() {
 				docs := []cloudantv1.Document{}
 				_model, err := cloudantService.NewBulkDocs(docs)
@@ -26862,6 +27591,193 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionViewOptionsModel.StartKeyDocID).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionViewOptionsModel.Update).To(Equal(core.StringPtr("true")))
 				Expect(postPartitionViewOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewPostReplicatorOptions successfully`, func() {
+				// Construct an instance of the Attachment model
+				attachmentModel := new(cloudantv1.Attachment)
+				Expect(attachmentModel).ToNot(BeNil())
+				attachmentModel.ContentType = core.StringPtr("testString")
+				attachmentModel.Data = CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")
+				attachmentModel.Digest = core.StringPtr("testString")
+				attachmentModel.EncodedLength = core.Int64Ptr(int64(0))
+				attachmentModel.Encoding = core.StringPtr("testString")
+				attachmentModel.Follows = core.BoolPtr(true)
+				attachmentModel.Length = core.Int64Ptr(int64(0))
+				attachmentModel.Revpos = core.Int64Ptr(int64(1))
+				attachmentModel.Stub = core.BoolPtr(true)
+				Expect(attachmentModel.ContentType).To(Equal(core.StringPtr("testString")))
+				Expect(attachmentModel.Data).To(Equal(CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=")))
+				Expect(attachmentModel.Digest).To(Equal(core.StringPtr("testString")))
+				Expect(attachmentModel.EncodedLength).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(attachmentModel.Encoding).To(Equal(core.StringPtr("testString")))
+				Expect(attachmentModel.Follows).To(Equal(core.BoolPtr(true)))
+				Expect(attachmentModel.Length).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(attachmentModel.Revpos).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(attachmentModel.Stub).To(Equal(core.BoolPtr(true)))
+
+				// Construct an instance of the Revisions model
+				revisionsModel := new(cloudantv1.Revisions)
+				Expect(revisionsModel).ToNot(BeNil())
+				revisionsModel.Ids = []string{"testString"}
+				revisionsModel.Start = core.Int64Ptr(int64(1))
+				Expect(revisionsModel.Ids).To(Equal([]string{"testString"}))
+				Expect(revisionsModel.Start).To(Equal(core.Int64Ptr(int64(1))))
+
+				// Construct an instance of the DocumentRevisionStatus model
+				documentRevisionStatusModel := new(cloudantv1.DocumentRevisionStatus)
+				Expect(documentRevisionStatusModel).ToNot(BeNil())
+				documentRevisionStatusModel.Rev = core.StringPtr("testString")
+				documentRevisionStatusModel.Status = core.StringPtr("available")
+				Expect(documentRevisionStatusModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(documentRevisionStatusModel.Status).To(Equal(core.StringPtr("available")))
+
+				// Construct an instance of the ReplicationCreateTargetParameters model
+				replicationCreateTargetParametersModel := new(cloudantv1.ReplicationCreateTargetParameters)
+				Expect(replicationCreateTargetParametersModel).ToNot(BeNil())
+				replicationCreateTargetParametersModel.N = core.Int64Ptr(int64(3))
+				replicationCreateTargetParametersModel.Partitioned = core.BoolPtr(false)
+				replicationCreateTargetParametersModel.Q = core.Int64Ptr(int64(26))
+				Expect(replicationCreateTargetParametersModel.N).To(Equal(core.Int64Ptr(int64(3))))
+				Expect(replicationCreateTargetParametersModel.Partitioned).To(Equal(core.BoolPtr(false)))
+				Expect(replicationCreateTargetParametersModel.Q).To(Equal(core.Int64Ptr(int64(26))))
+
+				// Construct an instance of the ReplicationDatabaseAuthBasic model
+				replicationDatabaseAuthBasicModel := new(cloudantv1.ReplicationDatabaseAuthBasic)
+				Expect(replicationDatabaseAuthBasicModel).ToNot(BeNil())
+				replicationDatabaseAuthBasicModel.Password = core.StringPtr("testString")
+				replicationDatabaseAuthBasicModel.Username = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthBasicModel.Password).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDatabaseAuthBasicModel.Username).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ReplicationDatabaseAuthIam model
+				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
+				Expect(replicationDatabaseAuthIamModel).ToNot(BeNil())
+				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ReplicationDatabaseAuth model
+				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
+				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
+				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
+				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				Expect(replicationDatabaseAuthModel.Basic).To(Equal(replicationDatabaseAuthBasicModel))
+				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
+
+				// Construct an instance of the ReplicationDatabase model
+				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
+				Expect(replicationDatabaseModel).ToNot(BeNil())
+				replicationDatabaseModel.Auth = replicationDatabaseAuthModel
+				replicationDatabaseModel.HeadersVar = map[string]string{"key1": "testString"}
+				replicationDatabaseModel.URL = core.StringPtr("testString")
+				Expect(replicationDatabaseModel.Auth).To(Equal(replicationDatabaseAuthModel))
+				Expect(replicationDatabaseModel.HeadersVar).To(Equal(map[string]string{"key1": "testString"}))
+				Expect(replicationDatabaseModel.URL).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the UserContext model
+				userContextModel := new(cloudantv1.UserContext)
+				Expect(userContextModel).ToNot(BeNil())
+				userContextModel.Db = core.StringPtr("testString")
+				userContextModel.Name = core.StringPtr("testString")
+				userContextModel.Roles = []string{"_reader"}
+				Expect(userContextModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(userContextModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(userContextModel.Roles).To(Equal([]string{"_reader"}))
+
+				// Construct an instance of the ReplicationDocument model
+				replicationDocumentModel := new(cloudantv1.ReplicationDocument)
+				Expect(replicationDocumentModel).ToNot(BeNil())
+				replicationDocumentModel.Attachments = map[string]cloudantv1.Attachment{"key1": *attachmentModel}
+				replicationDocumentModel.Conflicts = []string{"testString"}
+				replicationDocumentModel.Deleted = core.BoolPtr(true)
+				replicationDocumentModel.DeletedConflicts = []string{"testString"}
+				replicationDocumentModel.ID = core.StringPtr("testString")
+				replicationDocumentModel.LocalSeq = core.StringPtr("testString")
+				replicationDocumentModel.Rev = core.StringPtr("testString")
+				replicationDocumentModel.Revisions = revisionsModel
+				replicationDocumentModel.RevsInfo = []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}
+				replicationDocumentModel.Cancel = core.BoolPtr(true)
+				replicationDocumentModel.CheckpointInterval = core.Int64Ptr(int64(30000))
+				replicationDocumentModel.ConnectionTimeout = core.Int64Ptr(int64(30000))
+				replicationDocumentModel.Continuous = core.BoolPtr(false)
+				replicationDocumentModel.CreateTarget = core.BoolPtr(false)
+				replicationDocumentModel.CreateTargetParams = replicationCreateTargetParametersModel
+				replicationDocumentModel.DocIds = []string{"testString"}
+				replicationDocumentModel.Filter = core.StringPtr("testString")
+				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
+				replicationDocumentModel.Owner = core.StringPtr("testString")
+				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
+				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
+				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
+				replicationDocumentModel.SocketOptions = core.StringPtr("testString")
+				replicationDocumentModel.Source = replicationDatabaseModel
+				replicationDocumentModel.SourceProxy = core.StringPtr("testString")
+				replicationDocumentModel.Target = replicationDatabaseModel
+				replicationDocumentModel.TargetProxy = core.StringPtr("testString")
+				replicationDocumentModel.UseBulkGet = core.BoolPtr(true)
+				replicationDocumentModel.UseCheckpoints = core.BoolPtr(true)
+				replicationDocumentModel.UserCtx = userContextModel
+				replicationDocumentModel.WinningRevsOnly = core.BoolPtr(false)
+				replicationDocumentModel.WorkerBatchSize = core.Int64Ptr(int64(500))
+				replicationDocumentModel.WorkerProcesses = core.Int64Ptr(int64(4))
+				replicationDocumentModel.Attachments["foo"] = *attachmentModel
+				replicationDocumentModel.SetProperty("foo", "testString")
+				Expect(replicationDocumentModel.Conflicts).To(Equal([]string{"testString"}))
+				Expect(replicationDocumentModel.Deleted).To(Equal(core.BoolPtr(true)))
+				Expect(replicationDocumentModel.DeletedConflicts).To(Equal([]string{"testString"}))
+				Expect(replicationDocumentModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.LocalSeq).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.Rev).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.Revisions).To(Equal(revisionsModel))
+				Expect(replicationDocumentModel.RevsInfo).To(Equal([]cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel}))
+				Expect(replicationDocumentModel.Cancel).To(Equal(core.BoolPtr(true)))
+				Expect(replicationDocumentModel.CheckpointInterval).To(Equal(core.Int64Ptr(int64(30000))))
+				Expect(replicationDocumentModel.ConnectionTimeout).To(Equal(core.Int64Ptr(int64(30000))))
+				Expect(replicationDocumentModel.Continuous).To(Equal(core.BoolPtr(false)))
+				Expect(replicationDocumentModel.CreateTarget).To(Equal(core.BoolPtr(false)))
+				Expect(replicationDocumentModel.CreateTargetParams).To(Equal(replicationCreateTargetParametersModel))
+				Expect(replicationDocumentModel.DocIds).To(Equal([]string{"testString"}))
+				Expect(replicationDocumentModel.Filter).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.HTTPConnections).To(Equal(core.Int64Ptr(int64(20))))
+				Expect(replicationDocumentModel.Owner).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.QueryParams).To(Equal(map[string]string{"key1": "testString"}))
+				Expect(replicationDocumentModel.RetriesPerRequest).To(Equal(core.Int64Ptr(int64(5))))
+				Expect(replicationDocumentModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
+				Expect(replicationDocumentModel.SinceSeq).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.SocketOptions).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.Source).To(Equal(replicationDatabaseModel))
+				Expect(replicationDocumentModel.SourceProxy).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.Target).To(Equal(replicationDatabaseModel))
+				Expect(replicationDocumentModel.TargetProxy).To(Equal(core.StringPtr("testString")))
+				Expect(replicationDocumentModel.UseBulkGet).To(Equal(core.BoolPtr(true)))
+				Expect(replicationDocumentModel.UseCheckpoints).To(Equal(core.BoolPtr(true)))
+				Expect(replicationDocumentModel.UserCtx).To(Equal(userContextModel))
+				Expect(replicationDocumentModel.WinningRevsOnly).To(Equal(core.BoolPtr(false)))
+				Expect(replicationDocumentModel.WorkerBatchSize).To(Equal(core.Int64Ptr(int64(500))))
+				Expect(replicationDocumentModel.WorkerProcesses).To(Equal(core.Int64Ptr(int64(4))))
+				Expect(replicationDocumentModel.GetProperties()).ToNot(BeEmpty())
+				Expect(replicationDocumentModel.GetProperty("foo")).To(Equal("testString"))
+
+				replicationDocumentModel.SetProperties(nil)
+				Expect(replicationDocumentModel.GetProperties()).To(BeEmpty())
+
+				replicationDocumentModelExpectedMap := make(map[string]interface{})
+				replicationDocumentModelExpectedMap["foo"] = "testString"
+				replicationDocumentModel.SetProperties(replicationDocumentModelExpectedMap)
+				replicationDocumentModelActualMap := replicationDocumentModel.GetProperties()
+				Expect(replicationDocumentModelActualMap).To(Equal(replicationDocumentModelExpectedMap))
+				Expect(replicationDocumentModel.Attachments["foo"]).To(Equal(*attachmentModel))
+
+				// Construct an instance of the PostReplicatorOptions model
+				var replicationDocument *cloudantv1.ReplicationDocument = nil
+				postReplicatorOptionsModel := cloudantService.NewPostReplicatorOptions(replicationDocument)
+				postReplicatorOptionsModel.SetReplicationDocument(replicationDocumentModel)
+				postReplicatorOptionsModel.SetBatch("ok")
+				postReplicatorOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(postReplicatorOptionsModel).ToNot(BeNil())
+				Expect(postReplicatorOptionsModel.ReplicationDocument).To(Equal(replicationDocumentModel))
+				Expect(postReplicatorOptionsModel.Batch).To(Equal(core.StringPtr("ok")))
+				Expect(postReplicatorOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPostRevsDiffOptions successfully`, func() {
 				// Construct an instance of the PostRevsDiffOptions model
