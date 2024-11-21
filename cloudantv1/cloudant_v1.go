@@ -12038,7 +12038,7 @@ type GetAttachmentOptions struct {
 	// Path parameter to specify the attachment name.
 	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
 
-	// The type of the response:  or *_/_*.
+	// The type of the response: *_/_*.
 	Accept *string `json:"Accept,omitempty"`
 
 	// Header parameter for a conditional HTTP request matching an ETag.
