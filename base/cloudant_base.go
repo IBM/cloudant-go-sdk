@@ -17,6 +17,7 @@
 package base
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/cookiejar"
@@ -259,4 +260,33 @@ func getSystemInfo() string {
 		runtime.GOOS,
 		runtime.GOARCH,
 	)
+}
+
+func UnmarshalPrimitiveSpecial(rawInput map[string]json.RawMessage, propertyName string, result *map[string]map[string]int64, containerObjectType string) (err error) {
+	if containerObjectType != "*cloudantv1.SearchResult" && containerObjectType != "*cloudantv1.SearchResultProperties" {
+		err = fmt.Errorf("UnmarshalPrimitiveSpecial is called with the wrong result type: '%s', it should be '*cloudantv1.SearchResult' or '*cloudantv1.SearchResultProperties'", containerObjectType)
+		return
+	}
+	if propertyName != "counts" && propertyName != "ranges" {
+		err = fmt.Errorf("UnmarshalPrimitiveSpecial is called with the wrong propertyName: '%s', it should be 'counts' or 'ranges'", propertyName)
+		return
+	}
+
+	// Unmarshal rawInput with interim map[string]map[string]float64 type:
+	var converted map[string]map[string]float64
+	err = core.UnmarshalPrimitive(rawInput, propertyName, &converted)
+	if err != nil {
+		return
+	}
+	// Marshal it back as rawMsg:
+	rawMsg, err := json.Marshal(converted)
+	if err != nil {
+		err = fmt.Errorf("error marshalling converted property '%s': %s", propertyName, err.Error())
+		return
+	}
+
+	// Unmarshal rawMsg with final map[string]map[string]int64 type
+	// This should not fail if the given number on the map leaf ends with `.0`:
+	err = json.Unmarshal(rawMsg, &result)
+	return
 }
