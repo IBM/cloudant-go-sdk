@@ -8728,172 +8728,172 @@ const (
 // UnmarshalActiveTask unmarshals an instance of ActiveTask from the specified map of raw messages.
 func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ActiveTask)
-	err = core.UnmarshalPrimitive(m, "bulk_get_attempts", &obj.BulkGetAttempts)
+	err = base.UnmarshalPrimitive(m, "bulk_get_attempts", &obj.BulkGetAttempts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "bulk_get_attempts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "bulk_get_docs", &obj.BulkGetDocs)
+	err = base.UnmarshalPrimitive(m, "bulk_get_docs", &obj.BulkGetDocs)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "bulk_get_docs-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "changes_done", &obj.ChangesDone)
+	err = base.UnmarshalPrimitive(m, "changes_done", &obj.ChangesDone)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "changes_done-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "changes_pending", &obj.ChangesPending)
+	err = base.UnmarshalPrimitive(m, "changes_pending", &obj.ChangesPending)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "changes_pending-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "checkpoint_interval", &obj.CheckpointInterval)
+	err = base.UnmarshalPrimitive(m, "checkpoint_interval", &obj.CheckpointInterval)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "checkpoint_interval-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "checkpointed_source_seq", &obj.CheckpointedSourceSeq)
+	err = base.UnmarshalPrimitive(m, "checkpointed_source_seq", &obj.CheckpointedSourceSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "checkpointed_source_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "continuous", &obj.Continuous)
+	err = base.UnmarshalPrimitive(m, "continuous", &obj.Continuous)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "continuous-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "database", &obj.Database)
+	err = base.UnmarshalPrimitive(m, "database", &obj.Database)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "database-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "design_document", &obj.DesignDocument)
+	err = base.UnmarshalPrimitive(m, "design_document", &obj.DesignDocument)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "design_document-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
+	err = base.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_write_failures", &obj.DocWriteFailures)
+	err = base.UnmarshalPrimitive(m, "doc_write_failures", &obj.DocWriteFailures)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_write_failures-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "docs_read", &obj.DocsRead)
+	err = base.UnmarshalPrimitive(m, "docs_read", &obj.DocsRead)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "docs_read-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "docs_written", &obj.DocsWritten)
+	err = base.UnmarshalPrimitive(m, "docs_written", &obj.DocsWritten)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "docs_written-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "index", &obj.Index)
+	err = base.UnmarshalPrimitive(m, "index", &obj.Index)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "index-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "indexer_pid", &obj.IndexerPid)
+	err = base.UnmarshalPrimitive(m, "indexer_pid", &obj.IndexerPid)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "indexer_pid-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "missing_revisions_found", &obj.MissingRevisionsFound)
+	err = base.UnmarshalPrimitive(m, "missing_revisions_found", &obj.MissingRevisionsFound)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "missing_revisions_found-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "node", &obj.Node)
+	err = base.UnmarshalPrimitive(m, "node", &obj.Node)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "node-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "phase", &obj.Phase)
+	err = base.UnmarshalPrimitive(m, "phase", &obj.Phase)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "phase-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "pid", &obj.Pid)
+	err = base.UnmarshalPrimitive(m, "pid", &obj.Pid)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pid-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "process_status", &obj.ProcessStatus)
+	err = base.UnmarshalPrimitive(m, "process_status", &obj.ProcessStatus)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "process_status-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "progress", &obj.Progress)
+	err = base.UnmarshalPrimitive(m, "progress", &obj.Progress)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "progress-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "replication_id", &obj.ReplicationID)
+	err = base.UnmarshalPrimitive(m, "replication_id", &obj.ReplicationID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "replication_id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "retry", &obj.Retry)
+	err = base.UnmarshalPrimitive(m, "retry", &obj.Retry)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "retry-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "revisions_checked", &obj.RevisionsChecked)
+	err = base.UnmarshalPrimitive(m, "revisions_checked", &obj.RevisionsChecked)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "revisions_checked-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "source", &obj.Source)
+	err = base.UnmarshalPrimitive(m, "source", &obj.Source)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "source_seq", &obj.SourceSeq)
+	err = base.UnmarshalPrimitive(m, "source_seq", &obj.SourceSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "started_on", &obj.StartedOn)
+	err = base.UnmarshalPrimitive(m, "started_on", &obj.StartedOn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "started_on-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "target", &obj.Target)
+	err = base.UnmarshalPrimitive(m, "target", &obj.Target)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "target-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "through_seq", &obj.ThroughSeq)
+	err = base.UnmarshalPrimitive(m, "through_seq", &obj.ThroughSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "through_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "total_changes", &obj.TotalChanges)
+	err = base.UnmarshalPrimitive(m, "total_changes", &obj.TotalChanges)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_changes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	err = base.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "updated_on", &obj.UpdatedOn)
+	err = base.UnmarshalPrimitive(m, "updated_on", &obj.UpdatedOn)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "updated_on-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "user", &obj.User)
+	err = base.UnmarshalPrimitive(m, "user", &obj.User)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "user-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "view", &obj.View)
+	err = base.UnmarshalPrimitive(m, "view", &obj.View)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "view-error", common.GetComponentInfo())
 		return
@@ -8930,7 +8930,7 @@ func (*CloudantV1) NewActivityTrackerEvents(types []string) (_model *ActivityTra
 // UnmarshalActivityTrackerEvents unmarshals an instance of ActivityTrackerEvents from the specified map of raw messages.
 func UnmarshalActivityTrackerEvents(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ActivityTrackerEvents)
-	err = core.UnmarshalPrimitive(m, "types", &obj.Types)
+	err = base.UnmarshalPrimitive(m, "types", &obj.Types)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "types-error", common.GetComponentInfo())
 		return
@@ -9006,67 +9006,67 @@ type AllDocsQuery struct {
 // UnmarshalAllDocsQuery unmarshals an instance of AllDocsQuery from the specified map of raw messages.
 func UnmarshalAllDocsQuery(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AllDocsQuery)
-	err = core.UnmarshalPrimitive(m, "att_encoding_info", &obj.AttEncodingInfo)
+	err = base.UnmarshalPrimitive(m, "att_encoding_info", &obj.AttEncodingInfo)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "att_encoding_info-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "attachments", &obj.Attachments)
+	err = base.UnmarshalPrimitive(m, "attachments", &obj.Attachments)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "attachments-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "conflicts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "descending", &obj.Descending)
+	err = base.UnmarshalPrimitive(m, "descending", &obj.Descending)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "descending-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
+	err = base.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "include_docs-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "inclusive_end", &obj.InclusiveEnd)
+	err = base.UnmarshalPrimitive(m, "inclusive_end", &obj.InclusiveEnd)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "inclusive_end-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	err = base.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "skip", &obj.Skip)
+	err = base.UnmarshalPrimitive(m, "skip", &obj.Skip)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "skip-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
+	err = base.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
+	err = base.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "end_key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = base.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "keys", &obj.Keys)
+	err = base.UnmarshalPrimitive(m, "keys", &obj.Keys)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "keys-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
+	err = base.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start_key-error", common.GetComponentInfo())
 		return
@@ -9090,7 +9090,7 @@ type AllDocsResult struct {
 // UnmarshalAllDocsResult unmarshals an instance of AllDocsResult from the specified map of raw messages.
 func UnmarshalAllDocsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AllDocsResult)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
@@ -9100,7 +9100,7 @@ func UnmarshalAllDocsResult(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "rows-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
+	err = base.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update_seq-error", common.GetComponentInfo())
 		return
@@ -9173,12 +9173,12 @@ const (
 // UnmarshalAnalyzer unmarshals an instance of Analyzer from the specified map of raw messages.
 func UnmarshalAnalyzer(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Analyzer)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stopwords", &obj.Stopwords)
+	err = base.UnmarshalPrimitive(m, "stopwords", &obj.Stopwords)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stopwords-error", common.GetComponentInfo())
 		return
@@ -9254,12 +9254,12 @@ const (
 // UnmarshalAnalyzerConfiguration unmarshals an instance of AnalyzerConfiguration from the specified map of raw messages.
 func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(AnalyzerConfiguration)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stopwords", &obj.Stopwords)
+	err = base.UnmarshalPrimitive(m, "stopwords", &obj.Stopwords)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stopwords-error", common.GetComponentInfo())
 		return
@@ -9288,17 +9288,17 @@ type ApiKeysResult struct {
 // UnmarshalApiKeysResult unmarshals an instance of ApiKeysResult from the specified map of raw messages.
 func UnmarshalApiKeysResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ApiKeysResult)
-	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	err = base.UnmarshalPrimitive(m, "ok", &obj.Ok)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ok-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = base.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	err = base.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
@@ -9347,47 +9347,47 @@ type Attachment struct {
 // UnmarshalAttachment unmarshals an instance of Attachment from the specified map of raw messages.
 func UnmarshalAttachment(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Attachment)
-	err = core.UnmarshalPrimitive(m, "content_type", &obj.ContentType)
+	err = base.UnmarshalPrimitive(m, "content_type", &obj.ContentType)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "content_type-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "data", &obj.Data)
+	err = base.UnmarshalPrimitive(m, "data", &obj.Data)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "data-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "digest", &obj.Digest)
+	err = base.UnmarshalPrimitive(m, "digest", &obj.Digest)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "digest-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "encoded_length", &obj.EncodedLength)
+	err = base.UnmarshalPrimitive(m, "encoded_length", &obj.EncodedLength)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "encoded_length-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "encoding", &obj.Encoding)
+	err = base.UnmarshalPrimitive(m, "encoding", &obj.Encoding)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "encoding-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "follows", &obj.Follows)
+	err = base.UnmarshalPrimitive(m, "follows", &obj.Follows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "follows-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "length", &obj.Length)
+	err = base.UnmarshalPrimitive(m, "length", &obj.Length)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "length-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "revpos", &obj.Revpos)
+	err = base.UnmarshalPrimitive(m, "revpos", &obj.Revpos)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "revpos-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stub", &obj.Stub)
+	err = base.UnmarshalPrimitive(m, "stub", &obj.Stub)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stub-error", common.GetComponentInfo())
 		return
@@ -9428,7 +9428,7 @@ func UnmarshalBulkDocs(m map[string]json.RawMessage, result interface{}) (err er
 		err = core.SDKErrorf(err, "", "docs-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "new_edits", &obj.NewEdits)
+	err = base.UnmarshalPrimitive(m, "new_edits", &obj.NewEdits)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "new_edits-error", common.GetComponentInfo())
 		return
@@ -9464,17 +9464,17 @@ func (*CloudantV1) NewBulkGetQueryDocument(id string) (_model *BulkGetQueryDocum
 // UnmarshalBulkGetQueryDocument unmarshals an instance of BulkGetQueryDocument from the specified map of raw messages.
 func UnmarshalBulkGetQueryDocument(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(BulkGetQueryDocument)
-	err = core.UnmarshalPrimitive(m, "atts_since", &obj.AttsSince)
+	err = base.UnmarshalPrimitive(m, "atts_since", &obj.AttsSince)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "atts_since-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rev-error", common.GetComponentInfo())
 		return
@@ -9544,7 +9544,7 @@ func UnmarshalBulkGetResultItem(m map[string]json.RawMessage, result interface{}
 		err = core.SDKErrorf(err, "", "docs-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
@@ -9624,7 +9624,7 @@ type Change struct {
 // UnmarshalChange unmarshals an instance of Change from the specified map of raw messages.
 func UnmarshalChange(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Change)
-	err = core.UnmarshalPrimitive(m, "rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rev-error", common.GetComponentInfo())
 		return
@@ -9648,12 +9648,12 @@ type ChangesResult struct {
 // UnmarshalChangesResult unmarshals an instance of ChangesResult from the specified map of raw messages.
 func UnmarshalChangesResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ChangesResult)
-	err = core.UnmarshalPrimitive(m, "last_seq", &obj.LastSeq)
+	err = base.UnmarshalPrimitive(m, "last_seq", &obj.LastSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "last_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "pending", &obj.Pending)
+	err = base.UnmarshalPrimitive(m, "pending", &obj.Pending)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pending-error", common.GetComponentInfo())
 		return
@@ -9693,7 +9693,7 @@ func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}
 		err = core.SDKErrorf(err, "", "changes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
+	err = base.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "deleted-error", common.GetComponentInfo())
 		return
@@ -9703,12 +9703,12 @@ func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}
 		err = core.SDKErrorf(err, "", "doc-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "seq", &obj.Seq)
+	err = base.UnmarshalPrimitive(m, "seq", &obj.Seq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "seq-error", common.GetComponentInfo())
 		return
@@ -9732,17 +9732,17 @@ type ContentInformationSizes struct {
 // UnmarshalContentInformationSizes unmarshals an instance of ContentInformationSizes from the specified map of raw messages.
 func UnmarshalContentInformationSizes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ContentInformationSizes)
-	err = core.UnmarshalPrimitive(m, "active", &obj.Active)
+	err = base.UnmarshalPrimitive(m, "active", &obj.Active)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "active-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "external", &obj.External)
+	err = base.UnmarshalPrimitive(m, "external", &obj.External)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "external-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "file", &obj.File)
+	err = base.UnmarshalPrimitive(m, "file", &obj.File)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "file-error", common.GetComponentInfo())
 		return
@@ -9769,17 +9769,17 @@ type CorsInformation struct {
 // UnmarshalCorsInformation unmarshals an instance of CorsInformation from the specified map of raw messages.
 func UnmarshalCorsInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CorsInformation)
-	err = core.UnmarshalPrimitive(m, "allow_credentials", &obj.AllowCredentials)
+	err = base.UnmarshalPrimitive(m, "allow_credentials", &obj.AllowCredentials)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "allow_credentials-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "enable_cors", &obj.EnableCors)
+	err = base.UnmarshalPrimitive(m, "enable_cors", &obj.EnableCors)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "enable_cors-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "origins", &obj.Origins)
+	err = base.UnmarshalPrimitive(m, "origins", &obj.Origins)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "origins-error", common.GetComponentInfo())
 		return
@@ -9821,17 +9821,17 @@ type CurrentThroughputInformationThroughput struct {
 // UnmarshalCurrentThroughputInformationThroughput unmarshals an instance of CurrentThroughputInformationThroughput from the specified map of raw messages.
 func UnmarshalCurrentThroughputInformationThroughput(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(CurrentThroughputInformationThroughput)
-	err = core.UnmarshalPrimitive(m, "query", &obj.Query)
+	err = base.UnmarshalPrimitive(m, "query", &obj.Query)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "query-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "read", &obj.Read)
+	err = base.UnmarshalPrimitive(m, "read", &obj.Read)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "read-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "write", &obj.Write)
+	err = base.UnmarshalPrimitive(m, "write", &obj.Write)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "write-error", common.GetComponentInfo())
 		return
@@ -9898,47 +9898,47 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 		err = core.SDKErrorf(err, "", "cluster-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "committed_update_seq", &obj.CommittedUpdateSeq)
+	err = base.UnmarshalPrimitive(m, "committed_update_seq", &obj.CommittedUpdateSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "committed_update_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "compact_running", &obj.CompactRunning)
+	err = base.UnmarshalPrimitive(m, "compact_running", &obj.CompactRunning)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "compact_running-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "compacted_seq", &obj.CompactedSeq)
+	err = base.UnmarshalPrimitive(m, "compacted_seq", &obj.CompactedSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "compacted_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "db_name", &obj.DbName)
+	err = base.UnmarshalPrimitive(m, "db_name", &obj.DbName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "db_name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "disk_format_version", &obj.DiskFormatVersion)
+	err = base.UnmarshalPrimitive(m, "disk_format_version", &obj.DiskFormatVersion)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "disk_format_version-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_count", &obj.DocCount)
+	err = base.UnmarshalPrimitive(m, "doc_count", &obj.DocCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_del_count", &obj.DocDelCount)
+	err = base.UnmarshalPrimitive(m, "doc_del_count", &obj.DocDelCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_del_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "engine", &obj.Engine)
+	err = base.UnmarshalPrimitive(m, "engine", &obj.Engine)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "engine-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "instance_start_time", &obj.InstanceStartTime)
+	err = base.UnmarshalPrimitive(m, "instance_start_time", &obj.InstanceStartTime)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "instance_start_time-error", common.GetComponentInfo())
 		return
@@ -9953,12 +9953,12 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 		err = core.SDKErrorf(err, "", "sizes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
+	err = base.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "uuid", &obj.UUID)
+	err = base.UnmarshalPrimitive(m, "uuid", &obj.UUID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "uuid-error", common.GetComponentInfo())
 		return
@@ -9991,22 +9991,22 @@ type DatabaseInformationCluster struct {
 // UnmarshalDatabaseInformationCluster unmarshals an instance of DatabaseInformationCluster from the specified map of raw messages.
 func UnmarshalDatabaseInformationCluster(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DatabaseInformationCluster)
-	err = core.UnmarshalPrimitive(m, "n", &obj.N)
+	err = base.UnmarshalPrimitive(m, "n", &obj.N)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "n-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "q", &obj.Q)
+	err = base.UnmarshalPrimitive(m, "q", &obj.Q)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "q-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "r", &obj.R)
+	err = base.UnmarshalPrimitive(m, "r", &obj.R)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "r-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "w", &obj.W)
+	err = base.UnmarshalPrimitive(m, "w", &obj.W)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "w-error", common.GetComponentInfo())
 		return
@@ -10024,7 +10024,7 @@ type DatabaseInformationProps struct {
 // UnmarshalDatabaseInformationProps unmarshals an instance of DatabaseInformationProps from the specified map of raw messages.
 func UnmarshalDatabaseInformationProps(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DatabaseInformationProps)
-	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
+	err = base.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
 		return
@@ -10056,17 +10056,17 @@ const (
 // UnmarshalDbEvent unmarshals an instance of DbEvent from the specified map of raw messages.
 func UnmarshalDbEvent(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DbEvent)
-	err = core.UnmarshalPrimitive(m, "db_name", &obj.DbName)
+	err = base.UnmarshalPrimitive(m, "db_name", &obj.DbName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "db_name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "seq", &obj.Seq)
+	err = base.UnmarshalPrimitive(m, "seq", &obj.Seq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	err = base.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
@@ -10087,7 +10087,7 @@ type DbUpdates struct {
 // UnmarshalDbUpdates unmarshals an instance of DbUpdates from the specified map of raw messages.
 func UnmarshalDbUpdates(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DbUpdates)
-	err = core.UnmarshalPrimitive(m, "last_seq", &obj.LastSeq)
+	err = base.UnmarshalPrimitive(m, "last_seq", &obj.LastSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "last_seq-error", common.GetComponentInfo())
 		return
@@ -10116,7 +10116,7 @@ type DbsInfoResult struct {
 // UnmarshalDbsInfoResult unmarshals an instance of DbsInfoResult from the specified map of raw messages.
 func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DbsInfoResult)
-	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	err = base.UnmarshalPrimitive(m, "error", &obj.Error)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
 		return
@@ -10126,7 +10126,7 @@ func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "info-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = base.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "key-error", common.GetComponentInfo())
 		return
@@ -10793,37 +10793,37 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	delete(m, "_attachments")
-	err = core.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_conflicts-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_conflicts")
-	err = core.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
+	err = base.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_deleted-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_deleted")
-	err = core.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
+	err = base.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_deleted_conflicts-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_deleted_conflicts")
-	err = core.UnmarshalPrimitive(m, "_id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "_id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_id-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_id")
-	err = core.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
+	err = base.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_local_seq-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_local_seq")
-	err = core.UnmarshalPrimitive(m, "_rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "_rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_rev-error", common.GetComponentInfo())
 		return
@@ -10841,13 +10841,13 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	delete(m, "_revs_info")
-	err = core.UnmarshalPrimitive(m, "autoupdate", &obj.Autoupdate)
+	err = base.UnmarshalPrimitive(m, "autoupdate", &obj.Autoupdate)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "autoupdate-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "autoupdate")
-	err = core.UnmarshalPrimitive(m, "filters", &obj.Filters)
+	err = base.UnmarshalPrimitive(m, "filters", &obj.Filters)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "filters-error", common.GetComponentInfo())
 		return
@@ -10859,7 +10859,7 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	delete(m, "indexes")
-	err = core.UnmarshalPrimitive(m, "language", &obj.Language)
+	err = base.UnmarshalPrimitive(m, "language", &obj.Language)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "language-error", common.GetComponentInfo())
 		return
@@ -10871,7 +10871,7 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 		return
 	}
 	delete(m, "options")
-	err = core.UnmarshalPrimitive(m, "validate_doc_update", &obj.ValidateDocUpdate)
+	err = base.UnmarshalPrimitive(m, "validate_doc_update", &obj.ValidateDocUpdate)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "validate_doc_update-error", common.GetComponentInfo())
 		return
@@ -10885,7 +10885,7 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 	delete(m, "views")
 	for k := range m {
 		var v interface{}
-		e := core.UnmarshalPrimitive(m, k, &v)
+		e := base.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
 			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
@@ -10908,7 +10908,7 @@ type DesignDocumentInformation struct {
 // UnmarshalDesignDocumentInformation unmarshals an instance of DesignDocumentInformation from the specified map of raw messages.
 func UnmarshalDesignDocumentInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DesignDocumentInformation)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
@@ -10931,7 +10931,7 @@ type DesignDocumentOptions struct {
 // UnmarshalDesignDocumentOptions unmarshals an instance of DesignDocumentOptions from the specified map of raw messages.
 func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DesignDocumentOptions)
-	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
+	err = base.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
 		return
@@ -10974,22 +10974,22 @@ type DesignDocumentViewIndex struct {
 // UnmarshalDesignDocumentViewIndex unmarshals an instance of DesignDocumentViewIndex from the specified map of raw messages.
 func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DesignDocumentViewIndex)
-	err = core.UnmarshalPrimitive(m, "collator_versions", &obj.CollatorVersions)
+	err = base.UnmarshalPrimitive(m, "collator_versions", &obj.CollatorVersions)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "collator_versions-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "compact_running", &obj.CompactRunning)
+	err = base.UnmarshalPrimitive(m, "compact_running", &obj.CompactRunning)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "compact_running-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "language", &obj.Language)
+	err = base.UnmarshalPrimitive(m, "language", &obj.Language)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "language-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "signature", &obj.Signature)
+	err = base.UnmarshalPrimitive(m, "signature", &obj.Signature)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "signature-error", common.GetComponentInfo())
 		return
@@ -10999,7 +10999,7 @@ func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result inter
 		err = core.SDKErrorf(err, "", "sizes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "updater_running", &obj.UpdaterRunning)
+	err = base.UnmarshalPrimitive(m, "updater_running", &obj.UpdaterRunning)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "updater_running-error", common.GetComponentInfo())
 		return
@@ -11009,12 +11009,12 @@ func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result inter
 		err = core.SDKErrorf(err, "", "updates_pending-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "waiting_clients", &obj.WaitingClients)
+	err = base.UnmarshalPrimitive(m, "waiting_clients", &obj.WaitingClients)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "waiting_clients-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "waiting_commit", &obj.WaitingCommit)
+	err = base.UnmarshalPrimitive(m, "waiting_commit", &obj.WaitingCommit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "waiting_commit-error", common.GetComponentInfo())
 		return
@@ -11047,12 +11047,12 @@ func (*CloudantV1) NewDesignDocumentViewsMapReduce(mapVar string) (_model *Desig
 // UnmarshalDesignDocumentViewsMapReduce unmarshals an instance of DesignDocumentViewsMapReduce from the specified map of raw messages.
 func UnmarshalDesignDocumentViewsMapReduce(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DesignDocumentViewsMapReduce)
-	err = core.UnmarshalPrimitive(m, "map", &obj.Map)
+	err = base.UnmarshalPrimitive(m, "map", &obj.Map)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "map-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
+	err = base.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reduce-error", common.GetComponentInfo())
 		return
@@ -11091,22 +11091,22 @@ type DocsResultRow struct {
 // UnmarshalDocsResultRow unmarshals an instance of DocsResultRow from the specified map of raw messages.
 func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocsResultRow)
-	err = core.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
+	err = base.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "caused_by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	err = base.UnmarshalPrimitive(m, "error", &obj.Error)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	err = base.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	err = base.UnmarshalPrimitive(m, "ref", &obj.Ref)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
 		return
@@ -11116,12 +11116,12 @@ func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "doc-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = base.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "key-error", common.GetComponentInfo())
 		return
@@ -11147,12 +11147,12 @@ type DocsResultRowValue struct {
 // UnmarshalDocsResultRowValue unmarshals an instance of DocsResultRowValue from the specified map of raw messages.
 func UnmarshalDocsResultRowValue(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocsResultRowValue)
-	err = core.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
+	err = base.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "deleted-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rev-error", common.GetComponentInfo())
 		return
@@ -11272,37 +11272,37 @@ func UnmarshalDocument(m map[string]json.RawMessage, result interface{}) (err er
 		return
 	}
 	delete(m, "_attachments")
-	err = core.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_conflicts-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_conflicts")
-	err = core.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
+	err = base.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_deleted-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_deleted")
-	err = core.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
+	err = base.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_deleted_conflicts-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_deleted_conflicts")
-	err = core.UnmarshalPrimitive(m, "_id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "_id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_id-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_id")
-	err = core.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
+	err = base.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_local_seq-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_local_seq")
-	err = core.UnmarshalPrimitive(m, "_rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "_rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_rev-error", common.GetComponentInfo())
 		return
@@ -11322,7 +11322,7 @@ func UnmarshalDocument(m map[string]json.RawMessage, result interface{}) (err er
 	delete(m, "_revs_info")
 	for k := range m {
 		var v interface{}
-		e := core.UnmarshalPrimitive(m, k, &v)
+		e := base.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
 			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
@@ -11360,37 +11360,37 @@ type DocumentResult struct {
 // UnmarshalDocumentResult unmarshals an instance of DocumentResult from the specified map of raw messages.
 func UnmarshalDocumentResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocumentResult)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rev-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	err = base.UnmarshalPrimitive(m, "ok", &obj.Ok)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ok-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
+	err = base.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "caused_by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	err = base.UnmarshalPrimitive(m, "error", &obj.Error)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	err = base.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	err = base.UnmarshalPrimitive(m, "ref", &obj.Ref)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
 		return
@@ -11434,12 +11434,12 @@ func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (_model 
 // UnmarshalDocumentRevisionStatus unmarshals an instance of DocumentRevisionStatus from the specified map of raw messages.
 func UnmarshalDocumentRevisionStatus(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocumentRevisionStatus)
-	err = core.UnmarshalPrimitive(m, "rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "rev-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	err = base.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
 		return
@@ -11460,12 +11460,12 @@ type DocumentShardInfo struct {
 // UnmarshalDocumentShardInfo unmarshals an instance of DocumentShardInfo from the specified map of raw messages.
 func UnmarshalDocumentShardInfo(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DocumentShardInfo)
-	err = core.UnmarshalPrimitive(m, "nodes", &obj.Nodes)
+	err = base.UnmarshalPrimitive(m, "nodes", &obj.Nodes)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "nodes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "range", &obj.Range)
+	err = base.UnmarshalPrimitive(m, "range", &obj.Range)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "range-error", common.GetComponentInfo())
 		return
@@ -11495,27 +11495,27 @@ type ExecutionStats struct {
 // UnmarshalExecutionStats unmarshals an instance of ExecutionStats from the specified map of raw messages.
 func UnmarshalExecutionStats(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExecutionStats)
-	err = core.UnmarshalPrimitive(m, "execution_time_ms", &obj.ExecutionTimeMs)
+	err = base.UnmarshalPrimitive(m, "execution_time_ms", &obj.ExecutionTimeMs)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "execution_time_ms-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "results_returned", &obj.ResultsReturned)
+	err = base.UnmarshalPrimitive(m, "results_returned", &obj.ResultsReturned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "results_returned-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "total_docs_examined", &obj.TotalDocsExamined)
+	err = base.UnmarshalPrimitive(m, "total_docs_examined", &obj.TotalDocsExamined)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_docs_examined-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "total_keys_examined", &obj.TotalKeysExamined)
+	err = base.UnmarshalPrimitive(m, "total_keys_examined", &obj.TotalKeysExamined)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_keys_examined-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "total_quorum_docs_examined", &obj.TotalQuorumDocsExamined)
+	err = base.UnmarshalPrimitive(m, "total_quorum_docs_examined", &obj.TotalQuorumDocsExamined)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_quorum_docs_examined-error", common.GetComponentInfo())
 		return
@@ -11599,17 +11599,17 @@ type ExplainResult struct {
 // UnmarshalExplainResult unmarshals an instance of ExplainResult from the specified map of raw messages.
 func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExplainResult)
-	err = core.UnmarshalPrimitive(m, "covering", &obj.Covering)
+	err = base.UnmarshalPrimitive(m, "covering", &obj.Covering)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "covering-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "dbname", &obj.Dbname)
+	err = base.UnmarshalPrimitive(m, "dbname", &obj.Dbname)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "dbname-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "fields", &obj.Fields)
+	err = base.UnmarshalPrimitive(m, "fields", &obj.Fields)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "fields-error", common.GetComponentInfo())
 		return
@@ -11624,7 +11624,7 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "index_candidates-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	err = base.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
@@ -11639,12 +11639,12 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "opts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
+	err = base.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "selector", &obj.Selector)
+	err = base.UnmarshalPrimitive(m, "selector", &obj.Selector)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "selector-error", common.GetComponentInfo())
 		return
@@ -11654,7 +11654,7 @@ func UnmarshalExplainResult(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "selector_hints-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "skip", &obj.Skip)
+	err = base.UnmarshalPrimitive(m, "skip", &obj.Skip)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "skip-error", common.GetComponentInfo())
 		return
@@ -11715,52 +11715,52 @@ const (
 // UnmarshalExplainResultMrArgs unmarshals an instance of ExplainResultMrArgs from the specified map of raw messages.
 func UnmarshalExplainResultMrArgs(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExplainResultMrArgs)
-	err = core.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "conflicts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "direction", &obj.Direction)
+	err = base.UnmarshalPrimitive(m, "direction", &obj.Direction)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "direction-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
+	err = base.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "end_key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
+	err = base.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "include_docs-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partition", &obj.Partition)
+	err = base.UnmarshalPrimitive(m, "partition", &obj.Partition)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partition-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
+	err = base.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reduce-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stable", &obj.Stable)
+	err = base.UnmarshalPrimitive(m, "stable", &obj.Stable)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stable-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
+	err = base.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start_key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update", &obj.Update)
+	err = base.UnmarshalPrimitive(m, "update", &obj.Update)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "view_type", &obj.ViewType)
+	err = base.UnmarshalPrimitive(m, "view_type", &obj.ViewType)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "view_type-error", common.GetComponentInfo())
 		return
@@ -11816,67 +11816,67 @@ type ExplainResultOpts struct {
 // UnmarshalExplainResultOpts unmarshals an instance of ExplainResultOpts from the specified map of raw messages.
 func UnmarshalExplainResultOpts(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ExplainResultOpts)
-	err = core.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
+	err = base.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "bookmark-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "conflicts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "execution_stats", &obj.ExecutionStats)
+	err = base.UnmarshalPrimitive(m, "execution_stats", &obj.ExecutionStats)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "execution_stats-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "fields", &obj.Fields)
+	err = base.UnmarshalPrimitive(m, "fields", &obj.Fields)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "fields-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	err = base.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partition", &obj.Partition)
+	err = base.UnmarshalPrimitive(m, "partition", &obj.Partition)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partition-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "r", &obj.R)
+	err = base.UnmarshalPrimitive(m, "r", &obj.R)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "r-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "skip", &obj.Skip)
+	err = base.UnmarshalPrimitive(m, "skip", &obj.Skip)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "skip-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "sort", &obj.Sort)
+	err = base.UnmarshalPrimitive(m, "sort", &obj.Sort)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "sort-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stable", &obj.Stable)
+	err = base.UnmarshalPrimitive(m, "stable", &obj.Stable)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stable-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stale", &obj.Stale)
+	err = base.UnmarshalPrimitive(m, "stale", &obj.Stale)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stale-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update", &obj.Update)
+	err = base.UnmarshalPrimitive(m, "update", &obj.Update)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "use_index", &obj.UseIndex)
+	err = base.UnmarshalPrimitive(m, "use_index", &obj.UseIndex)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "use_index-error", common.GetComponentInfo())
 		return
@@ -11903,7 +11903,7 @@ type FindResult struct {
 // UnmarshalFindResult unmarshals an instance of FindResult from the specified map of raw messages.
 func UnmarshalFindResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(FindResult)
-	err = core.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
+	err = base.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "bookmark-error", common.GetComponentInfo())
 		return
@@ -11918,7 +11918,7 @@ func UnmarshalFindResult(m map[string]json.RawMessage, result interface{}) (err 
 		err = core.SDKErrorf(err, "", "execution_stats-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "warning", &obj.Warning)
+	err = base.UnmarshalPrimitive(m, "warning", &obj.Warning)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "warning-error", common.GetComponentInfo())
 		return
@@ -13682,12 +13682,12 @@ type IndexAnalysis struct {
 // UnmarshalIndexAnalysis unmarshals an instance of IndexAnalysis from the specified map of raw messages.
 func UnmarshalIndexAnalysis(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexAnalysis)
-	err = core.UnmarshalPrimitive(m, "covering", &obj.Covering)
+	err = base.UnmarshalPrimitive(m, "covering", &obj.Covering)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "covering-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ranking", &obj.Ranking)
+	err = base.UnmarshalPrimitive(m, "ranking", &obj.Ranking)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ranking-error", common.GetComponentInfo())
 		return
@@ -13697,7 +13697,7 @@ func UnmarshalIndexAnalysis(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "reasons-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "usable", &obj.Usable)
+	err = base.UnmarshalPrimitive(m, "usable", &obj.Usable)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "usable-error", common.GetComponentInfo())
 		return
@@ -13766,7 +13766,7 @@ const (
 // UnmarshalIndexAnalysisExclusionReason unmarshals an instance of IndexAnalysisExclusionReason from the specified map of raw messages.
 func UnmarshalIndexAnalysisExclusionReason(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexAnalysisExclusionReason)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
@@ -13894,12 +13894,12 @@ func UnmarshalIndexDefinition(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "fields-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "index_array_lengths", &obj.IndexArrayLengths)
+	err = base.UnmarshalPrimitive(m, "index_array_lengths", &obj.IndexArrayLengths)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "index_array_lengths-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partial_filter_selector", &obj.PartialFilterSelector)
+	err = base.UnmarshalPrimitive(m, "partial_filter_selector", &obj.PartialFilterSelector)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partial_filter_selector-error", common.GetComponentInfo())
 		return
@@ -13981,13 +13981,13 @@ func (o *IndexField) MarshalJSON() (buffer []byte, err error) {
 // UnmarshalIndexField unmarshals an instance of IndexField from the specified map of raw messages.
 func UnmarshalIndexField(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexField)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "name")
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	err = base.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
@@ -13995,7 +13995,7 @@ func UnmarshalIndexField(m map[string]json.RawMessage, result interface{}) (err 
 	delete(m, "type")
 	for k := range m {
 		var v *string
-		e := core.UnmarshalPrimitive(m, k, &v)
+		e := base.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
 			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
@@ -14038,7 +14038,7 @@ const (
 // UnmarshalIndexInformation unmarshals an instance of IndexInformation from the specified map of raw messages.
 func UnmarshalIndexInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexInformation)
-	err = core.UnmarshalPrimitive(m, "ddoc", &obj.Ddoc)
+	err = base.UnmarshalPrimitive(m, "ddoc", &obj.Ddoc)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ddoc-error", common.GetComponentInfo())
 		return
@@ -14048,17 +14048,17 @@ func UnmarshalIndexInformation(m map[string]json.RawMessage, result interface{})
 		err = core.SDKErrorf(err, "", "def-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
+	err = base.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	err = base.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
@@ -14089,17 +14089,17 @@ const (
 // UnmarshalIndexResult unmarshals an instance of IndexResult from the specified map of raw messages.
 func UnmarshalIndexResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexResult)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "result", &obj.Result)
+	err = base.UnmarshalPrimitive(m, "result", &obj.Result)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "result-error", common.GetComponentInfo())
 		return
@@ -14126,7 +14126,7 @@ func UnmarshalIndexTextOperatorDefaultField(m map[string]json.RawMessage, result
 		err = core.SDKErrorf(err, "", "analyzer-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
+	err = base.UnmarshalPrimitive(m, "enabled", &obj.Enabled)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "enabled-error", common.GetComponentInfo())
 		return
@@ -14147,7 +14147,7 @@ type IndexesInformation struct {
 // UnmarshalIndexesInformation unmarshals an instance of IndexesInformation from the specified map of raw messages.
 func UnmarshalIndexesInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(IndexesInformation)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
@@ -14173,12 +14173,12 @@ type MembershipInformation struct {
 // UnmarshalMembershipInformation unmarshals an instance of MembershipInformation from the specified map of raw messages.
 func UnmarshalMembershipInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(MembershipInformation)
-	err = core.UnmarshalPrimitive(m, "all_nodes", &obj.AllNodes)
+	err = base.UnmarshalPrimitive(m, "all_nodes", &obj.AllNodes)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "all_nodes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "cluster_nodes", &obj.ClusterNodes)
+	err = base.UnmarshalPrimitive(m, "cluster_nodes", &obj.ClusterNodes)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "cluster_nodes-error", common.GetComponentInfo())
 		return
@@ -14196,7 +14196,7 @@ type Ok struct {
 // UnmarshalOk unmarshals an instance of Ok from the specified map of raw messages.
 func UnmarshalOk(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Ok)
-	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	err = base.UnmarshalPrimitive(m, "ok", &obj.Ok)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ok-error", common.GetComponentInfo())
 		return
@@ -14229,22 +14229,22 @@ type PartitionInformation struct {
 // UnmarshalPartitionInformation unmarshals an instance of PartitionInformation from the specified map of raw messages.
 func UnmarshalPartitionInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionInformation)
-	err = core.UnmarshalPrimitive(m, "db_name", &obj.DbName)
+	err = base.UnmarshalPrimitive(m, "db_name", &obj.DbName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "db_name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_count", &obj.DocCount)
+	err = base.UnmarshalPrimitive(m, "doc_count", &obj.DocCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_del_count", &obj.DocDelCount)
+	err = base.UnmarshalPrimitive(m, "doc_del_count", &obj.DocDelCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_del_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partition", &obj.Partition)
+	err = base.UnmarshalPrimitive(m, "partition", &obj.Partition)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partition-error", common.GetComponentInfo())
 		return
@@ -14278,7 +14278,7 @@ type PartitionInformationIndexes struct {
 // UnmarshalPartitionInformationIndexes unmarshals an instance of PartitionInformationIndexes from the specified map of raw messages.
 func UnmarshalPartitionInformationIndexes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionInformationIndexes)
-	err = core.UnmarshalPrimitive(m, "count", &obj.Count)
+	err = base.UnmarshalPrimitive(m, "count", &obj.Count)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "count-error", common.GetComponentInfo())
 		return
@@ -14288,7 +14288,7 @@ func UnmarshalPartitionInformationIndexes(m map[string]json.RawMessage, result i
 		err = core.SDKErrorf(err, "", "indexes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	err = base.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
@@ -14309,12 +14309,12 @@ type PartitionInformationIndexesIndexes struct {
 // UnmarshalPartitionInformationIndexesIndexes unmarshals an instance of PartitionInformationIndexesIndexes from the specified map of raw messages.
 func UnmarshalPartitionInformationIndexesIndexes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionInformationIndexesIndexes)
-	err = core.UnmarshalPrimitive(m, "search", &obj.Search)
+	err = base.UnmarshalPrimitive(m, "search", &obj.Search)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "search-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "view", &obj.View)
+	err = base.UnmarshalPrimitive(m, "view", &obj.View)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "view-error", common.GetComponentInfo())
 		return
@@ -14335,12 +14335,12 @@ type PartitionInformationSizes struct {
 // UnmarshalPartitionInformationSizes unmarshals an instance of PartitionInformationSizes from the specified map of raw messages.
 func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionInformationSizes)
-	err = core.UnmarshalPrimitive(m, "active", &obj.Active)
+	err = base.UnmarshalPrimitive(m, "active", &obj.Active)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "active-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "external", &obj.External)
+	err = base.UnmarshalPrimitive(m, "external", &obj.External)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "external-error", common.GetComponentInfo())
 		return
@@ -14361,12 +14361,12 @@ type PartitionedIndexesDetailedInformation struct {
 // UnmarshalPartitionedIndexesDetailedInformation unmarshals an instance of PartitionedIndexesDetailedInformation from the specified map of raw messages.
 func UnmarshalPartitionedIndexesDetailedInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionedIndexesDetailedInformation)
-	err = core.UnmarshalPrimitive(m, "search", &obj.Search)
+	err = base.UnmarshalPrimitive(m, "search", &obj.Search)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "search-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "view", &obj.View)
+	err = base.UnmarshalPrimitive(m, "view", &obj.View)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "view-error", common.GetComponentInfo())
 		return
@@ -14390,7 +14390,7 @@ type PartitionedIndexesInformation struct {
 // UnmarshalPartitionedIndexesInformation unmarshals an instance of PartitionedIndexesInformation from the specified map of raw messages.
 func UnmarshalPartitionedIndexesInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(PartitionedIndexesInformation)
-	err = core.UnmarshalPrimitive(m, "count", &obj.Count)
+	err = base.UnmarshalPrimitive(m, "count", &obj.Count)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "count-error", common.GetComponentInfo())
 		return
@@ -14400,7 +14400,7 @@ func UnmarshalPartitionedIndexesInformation(m map[string]json.RawMessage, result
 		err = core.SDKErrorf(err, "", "indexes-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	err = base.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
@@ -18337,17 +18337,17 @@ type ReplicationCreateTargetParameters struct {
 // UnmarshalReplicationCreateTargetParameters unmarshals an instance of ReplicationCreateTargetParameters from the specified map of raw messages.
 func UnmarshalReplicationCreateTargetParameters(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationCreateTargetParameters)
-	err = core.UnmarshalPrimitive(m, "n", &obj.N)
+	err = base.UnmarshalPrimitive(m, "n", &obj.N)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "n-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
+	err = base.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "q", &obj.Q)
+	err = base.UnmarshalPrimitive(m, "q", &obj.Q)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "q-error", common.GetComponentInfo())
 		return
@@ -18388,12 +18388,12 @@ func UnmarshalReplicationDatabase(m map[string]json.RawMessage, result interface
 		err = core.SDKErrorf(err, "", "auth-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "headers", &obj.HeadersVar)
+	err = base.UnmarshalPrimitive(m, "headers", &obj.HeadersVar)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "headers-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "url", &obj.URL)
+	err = base.UnmarshalPrimitive(m, "url", &obj.URL)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "url-error", common.GetComponentInfo())
 		return
@@ -18453,12 +18453,12 @@ func (*CloudantV1) NewReplicationDatabaseAuthBasic(password string, username str
 // UnmarshalReplicationDatabaseAuthBasic unmarshals an instance of ReplicationDatabaseAuthBasic from the specified map of raw messages.
 func UnmarshalReplicationDatabaseAuthBasic(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationDatabaseAuthBasic)
-	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+	err = base.UnmarshalPrimitive(m, "password", &obj.Password)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "password-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "username", &obj.Username)
+	err = base.UnmarshalPrimitive(m, "username", &obj.Username)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "username-error", common.GetComponentInfo())
 		return
@@ -18488,7 +18488,7 @@ func (*CloudantV1) NewReplicationDatabaseAuthIam(apiKey string) (_model *Replica
 // UnmarshalReplicationDatabaseAuthIam unmarshals an instance of ReplicationDatabaseAuthIam from the specified map of raw messages.
 func UnmarshalReplicationDatabaseAuthIam(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ReplicationDatabaseAuthIam)
-	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+	err = base.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
 		return
@@ -18822,37 +18822,37 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "_attachments")
-	err = core.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "_conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_conflicts-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_conflicts")
-	err = core.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
+	err = base.UnmarshalPrimitive(m, "_deleted", &obj.Deleted)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_deleted-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_deleted")
-	err = core.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
+	err = base.UnmarshalPrimitive(m, "_deleted_conflicts", &obj.DeletedConflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_deleted_conflicts-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_deleted_conflicts")
-	err = core.UnmarshalPrimitive(m, "_id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "_id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_id-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_id")
-	err = core.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
+	err = base.UnmarshalPrimitive(m, "_local_seq", &obj.LocalSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_local_seq-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "_local_seq")
-	err = core.UnmarshalPrimitive(m, "_rev", &obj.Rev)
+	err = base.UnmarshalPrimitive(m, "_rev", &obj.Rev)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "_rev-error", common.GetComponentInfo())
 		return
@@ -18870,31 +18870,31 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "_revs_info")
-	err = core.UnmarshalPrimitive(m, "cancel", &obj.Cancel)
+	err = base.UnmarshalPrimitive(m, "cancel", &obj.Cancel)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "cancel-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "cancel")
-	err = core.UnmarshalPrimitive(m, "checkpoint_interval", &obj.CheckpointInterval)
+	err = base.UnmarshalPrimitive(m, "checkpoint_interval", &obj.CheckpointInterval)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "checkpoint_interval-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "checkpoint_interval")
-	err = core.UnmarshalPrimitive(m, "connection_timeout", &obj.ConnectionTimeout)
+	err = base.UnmarshalPrimitive(m, "connection_timeout", &obj.ConnectionTimeout)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "connection_timeout-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "connection_timeout")
-	err = core.UnmarshalPrimitive(m, "continuous", &obj.Continuous)
+	err = base.UnmarshalPrimitive(m, "continuous", &obj.Continuous)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "continuous-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "continuous")
-	err = core.UnmarshalPrimitive(m, "create_target", &obj.CreateTarget)
+	err = base.UnmarshalPrimitive(m, "create_target", &obj.CreateTarget)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "create_target-error", common.GetComponentInfo())
 		return
@@ -18906,55 +18906,55 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "create_target_params")
-	err = core.UnmarshalPrimitive(m, "doc_ids", &obj.DocIds)
+	err = base.UnmarshalPrimitive(m, "doc_ids", &obj.DocIds)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_ids-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "doc_ids")
-	err = core.UnmarshalPrimitive(m, "filter", &obj.Filter)
+	err = base.UnmarshalPrimitive(m, "filter", &obj.Filter)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "filter-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "filter")
-	err = core.UnmarshalPrimitive(m, "http_connections", &obj.HTTPConnections)
+	err = base.UnmarshalPrimitive(m, "http_connections", &obj.HTTPConnections)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "http_connections-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "http_connections")
-	err = core.UnmarshalPrimitive(m, "owner", &obj.Owner)
+	err = base.UnmarshalPrimitive(m, "owner", &obj.Owner)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "owner-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "owner")
-	err = core.UnmarshalPrimitive(m, "query_params", &obj.QueryParams)
+	err = base.UnmarshalPrimitive(m, "query_params", &obj.QueryParams)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "query_params-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "query_params")
-	err = core.UnmarshalPrimitive(m, "retries_per_request", &obj.RetriesPerRequest)
+	err = base.UnmarshalPrimitive(m, "retries_per_request", &obj.RetriesPerRequest)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "retries_per_request-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "retries_per_request")
-	err = core.UnmarshalPrimitive(m, "selector", &obj.Selector)
+	err = base.UnmarshalPrimitive(m, "selector", &obj.Selector)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "selector-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "selector")
-	err = core.UnmarshalPrimitive(m, "since_seq", &obj.SinceSeq)
+	err = base.UnmarshalPrimitive(m, "since_seq", &obj.SinceSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "since_seq-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "since_seq")
-	err = core.UnmarshalPrimitive(m, "socket_options", &obj.SocketOptions)
+	err = base.UnmarshalPrimitive(m, "socket_options", &obj.SocketOptions)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "socket_options-error", common.GetComponentInfo())
 		return
@@ -18966,7 +18966,7 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "source")
-	err = core.UnmarshalPrimitive(m, "source_proxy", &obj.SourceProxy)
+	err = base.UnmarshalPrimitive(m, "source_proxy", &obj.SourceProxy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source_proxy-error", common.GetComponentInfo())
 		return
@@ -18978,19 +18978,19 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "target")
-	err = core.UnmarshalPrimitive(m, "target_proxy", &obj.TargetProxy)
+	err = base.UnmarshalPrimitive(m, "target_proxy", &obj.TargetProxy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "target_proxy-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "target_proxy")
-	err = core.UnmarshalPrimitive(m, "use_bulk_get", &obj.UseBulkGet)
+	err = base.UnmarshalPrimitive(m, "use_bulk_get", &obj.UseBulkGet)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "use_bulk_get-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "use_bulk_get")
-	err = core.UnmarshalPrimitive(m, "use_checkpoints", &obj.UseCheckpoints)
+	err = base.UnmarshalPrimitive(m, "use_checkpoints", &obj.UseCheckpoints)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "use_checkpoints-error", common.GetComponentInfo())
 		return
@@ -19002,19 +19002,19 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "user_ctx")
-	err = core.UnmarshalPrimitive(m, "winning_revs_only", &obj.WinningRevsOnly)
+	err = base.UnmarshalPrimitive(m, "winning_revs_only", &obj.WinningRevsOnly)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "winning_revs_only-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "winning_revs_only")
-	err = core.UnmarshalPrimitive(m, "worker_batch_size", &obj.WorkerBatchSize)
+	err = base.UnmarshalPrimitive(m, "worker_batch_size", &obj.WorkerBatchSize)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "worker_batch_size-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "worker_batch_size")
-	err = core.UnmarshalPrimitive(m, "worker_processes", &obj.WorkerProcesses)
+	err = base.UnmarshalPrimitive(m, "worker_processes", &obj.WorkerProcesses)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "worker_processes-error", common.GetComponentInfo())
 		return
@@ -19022,7 +19022,7 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 	delete(m, "worker_processes")
 	for k := range m {
 		var v interface{}
-		e := core.UnmarshalPrimitive(m, k, &v)
+		e := base.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
 			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
@@ -19058,12 +19058,12 @@ func (*CloudantV1) NewRevisions(ids []string, start int64) (_model *Revisions, e
 // UnmarshalRevisions unmarshals an instance of Revisions from the specified map of raw messages.
 func UnmarshalRevisions(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(Revisions)
-	err = core.UnmarshalPrimitive(m, "ids", &obj.Ids)
+	err = base.UnmarshalPrimitive(m, "ids", &obj.Ids)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ids-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start", &obj.Start)
+	err = base.UnmarshalPrimitive(m, "start", &obj.Start)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start-error", common.GetComponentInfo())
 		return
@@ -19084,12 +19084,12 @@ type RevsDiff struct {
 // UnmarshalRevsDiff unmarshals an instance of RevsDiff from the specified map of raw messages.
 func UnmarshalRevsDiff(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RevsDiff)
-	err = core.UnmarshalPrimitive(m, "missing", &obj.Missing)
+	err = base.UnmarshalPrimitive(m, "missing", &obj.Missing)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "missing-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "possible_ancestors", &obj.PossibleAncestors)
+	err = base.UnmarshalPrimitive(m, "possible_ancestors", &obj.PossibleAncestors)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "possible_ancestors-error", common.GetComponentInfo())
 		return
@@ -19110,7 +19110,7 @@ type SchedulerDocsResult struct {
 // UnmarshalSchedulerDocsResult unmarshals an instance of SchedulerDocsResult from the specified map of raw messages.
 func UnmarshalSchedulerDocsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerDocsResult)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
@@ -19190,22 +19190,22 @@ const (
 // UnmarshalSchedulerDocument unmarshals an instance of SchedulerDocument from the specified map of raw messages.
 func UnmarshalSchedulerDocument(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerDocument)
-	err = core.UnmarshalPrimitive(m, "database", &obj.Database)
+	err = base.UnmarshalPrimitive(m, "database", &obj.Database)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "database-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
+	err = base.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "error_count", &obj.ErrorCount)
+	err = base.UnmarshalPrimitive(m, "error_count", &obj.ErrorCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "error_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
@@ -19215,42 +19215,42 @@ func UnmarshalSchedulerDocument(m map[string]json.RawMessage, result interface{}
 		err = core.SDKErrorf(err, "", "info-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "last_updated", &obj.LastUpdated)
+	err = base.UnmarshalPrimitive(m, "last_updated", &obj.LastUpdated)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "last_updated-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "node", &obj.Node)
+	err = base.UnmarshalPrimitive(m, "node", &obj.Node)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "node-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "source", &obj.Source)
+	err = base.UnmarshalPrimitive(m, "source", &obj.Source)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "source_proxy", &obj.SourceProxy)
+	err = base.UnmarshalPrimitive(m, "source_proxy", &obj.SourceProxy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source_proxy-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	err = base.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start_time-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "state", &obj.State)
+	err = base.UnmarshalPrimitive(m, "state", &obj.State)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "state-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "target", &obj.Target)
+	err = base.UnmarshalPrimitive(m, "target", &obj.Target)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "target-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "target_proxy", &obj.TargetProxy)
+	err = base.UnmarshalPrimitive(m, "target_proxy", &obj.TargetProxy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "target_proxy-error", common.GetComponentInfo())
 		return
@@ -19296,52 +19296,52 @@ type SchedulerInfo struct {
 // UnmarshalSchedulerInfo unmarshals an instance of SchedulerInfo from the specified map of raw messages.
 func UnmarshalSchedulerInfo(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerInfo)
-	err = core.UnmarshalPrimitive(m, "changes_pending", &obj.ChangesPending)
+	err = base.UnmarshalPrimitive(m, "changes_pending", &obj.ChangesPending)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "changes_pending-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "checkpointed_source_seq", &obj.CheckpointedSourceSeq)
+	err = base.UnmarshalPrimitive(m, "checkpointed_source_seq", &obj.CheckpointedSourceSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "checkpointed_source_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_write_failures", &obj.DocWriteFailures)
+	err = base.UnmarshalPrimitive(m, "doc_write_failures", &obj.DocWriteFailures)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_write_failures-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "docs_read", &obj.DocsRead)
+	err = base.UnmarshalPrimitive(m, "docs_read", &obj.DocsRead)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "docs_read-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "docs_written", &obj.DocsWritten)
+	err = base.UnmarshalPrimitive(m, "docs_written", &obj.DocsWritten)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "docs_written-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	err = base.UnmarshalPrimitive(m, "error", &obj.Error)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "missing_revisions_found", &obj.MissingRevisionsFound)
+	err = base.UnmarshalPrimitive(m, "missing_revisions_found", &obj.MissingRevisionsFound)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "missing_revisions_found-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "revisions_checked", &obj.RevisionsChecked)
+	err = base.UnmarshalPrimitive(m, "revisions_checked", &obj.RevisionsChecked)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "revisions_checked-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "source_seq", &obj.SourceSeq)
+	err = base.UnmarshalPrimitive(m, "source_seq", &obj.SourceSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "through_seq", &obj.ThroughSeq)
+	err = base.UnmarshalPrimitive(m, "through_seq", &obj.ThroughSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "through_seq-error", common.GetComponentInfo())
 		return
@@ -19390,12 +19390,12 @@ type SchedulerJob struct {
 // UnmarshalSchedulerJob unmarshals an instance of SchedulerJob from the specified map of raw messages.
 func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJob)
-	err = core.UnmarshalPrimitive(m, "database", &obj.Database)
+	err = base.UnmarshalPrimitive(m, "database", &obj.Database)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "database-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
+	err = base.UnmarshalPrimitive(m, "doc_id", &obj.DocID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_id-error", common.GetComponentInfo())
 		return
@@ -19405,7 +19405,7 @@ func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (er
 		err = core.SDKErrorf(err, "", "history-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
@@ -19415,32 +19415,32 @@ func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (er
 		err = core.SDKErrorf(err, "", "info-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "node", &obj.Node)
+	err = base.UnmarshalPrimitive(m, "node", &obj.Node)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "node-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "pid", &obj.Pid)
+	err = base.UnmarshalPrimitive(m, "pid", &obj.Pid)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pid-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "source", &obj.Source)
+	err = base.UnmarshalPrimitive(m, "source", &obj.Source)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "source-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
+	err = base.UnmarshalPrimitive(m, "start_time", &obj.StartTime)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start_time-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "target", &obj.Target)
+	err = base.UnmarshalPrimitive(m, "target", &obj.Target)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "target-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "user", &obj.User)
+	err = base.UnmarshalPrimitive(m, "user", &obj.User)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "user-error", common.GetComponentInfo())
 		return
@@ -19464,17 +19464,17 @@ type SchedulerJobEvent struct {
 // UnmarshalSchedulerJobEvent unmarshals an instance of SchedulerJobEvent from the specified map of raw messages.
 func UnmarshalSchedulerJobEvent(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJobEvent)
-	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	err = base.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "timestamp", &obj.Timestamp)
+	err = base.UnmarshalPrimitive(m, "timestamp", &obj.Timestamp)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "timestamp-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	err = base.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
@@ -19495,7 +19495,7 @@ type SchedulerJobsResult struct {
 // UnmarshalSchedulerJobsResult unmarshals an instance of SchedulerJobsResult from the specified map of raw messages.
 func UnmarshalSchedulerJobsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SchedulerJobsResult)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
@@ -19518,7 +19518,7 @@ type SearchAnalyzeResult struct {
 // UnmarshalSearchAnalyzeResult unmarshals an instance of SearchAnalyzeResult from the specified map of raw messages.
 func UnmarshalSearchAnalyzeResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchAnalyzeResult)
-	err = core.UnmarshalPrimitive(m, "tokens", &obj.Tokens)
+	err = base.UnmarshalPrimitive(m, "tokens", &obj.Tokens)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "tokens-error", common.GetComponentInfo())
 		return
@@ -19574,7 +19574,7 @@ func UnmarshalSearchIndexDefinition(m map[string]json.RawMessage, result interfa
 		err = core.SDKErrorf(err, "", "analyzer-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "index", &obj.Index)
+	err = base.UnmarshalPrimitive(m, "index", &obj.Index)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "index-error", common.GetComponentInfo())
 		return
@@ -19607,32 +19607,32 @@ type SearchIndexInfo struct {
 // UnmarshalSearchIndexInfo unmarshals an instance of SearchIndexInfo from the specified map of raw messages.
 func UnmarshalSearchIndexInfo(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchIndexInfo)
-	err = core.UnmarshalPrimitive(m, "committed_seq", &obj.CommittedSeq)
+	err = base.UnmarshalPrimitive(m, "committed_seq", &obj.CommittedSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "committed_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "disk_size", &obj.DiskSize)
+	err = base.UnmarshalPrimitive(m, "disk_size", &obj.DiskSize)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "disk_size-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_count", &obj.DocCount)
+	err = base.UnmarshalPrimitive(m, "doc_count", &obj.DocCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "doc_del_count", &obj.DocDelCount)
+	err = base.UnmarshalPrimitive(m, "doc_del_count", &obj.DocDelCount)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "doc_del_count-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "pending_seq", &obj.PendingSeq)
+	err = base.UnmarshalPrimitive(m, "pending_seq", &obj.PendingSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pending_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "signature", &obj.Signature)
+	err = base.UnmarshalPrimitive(m, "signature", &obj.Signature)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "signature-error", common.GetComponentInfo())
 		return
@@ -19653,7 +19653,7 @@ type SearchInfoResult struct {
 // UnmarshalSearchInfoResult unmarshals an instance of SearchInfoResult from the specified map of raw messages.
 func UnmarshalSearchInfoResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchInfoResult)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
@@ -19695,27 +19695,27 @@ type SearchResult struct {
 // UnmarshalSearchResult unmarshals an instance of SearchResult from the specified map of raw messages.
 func UnmarshalSearchResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchResult)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
+	err = base.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "bookmark-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "by", &obj.By)
+	err = base.UnmarshalPrimitive(m, "by", &obj.By)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "counts", &obj.Counts)
+	err = base.UnmarshalPrimitive(m, "counts", &obj.Counts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "counts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ranges", &obj.Ranges)
+	err = base.UnmarshalPrimitive(m, "ranges", &obj.Ranges)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ranges-error", common.GetComponentInfo())
 		return
@@ -19759,27 +19759,27 @@ type SearchResultProperties struct {
 // UnmarshalSearchResultProperties unmarshals an instance of SearchResultProperties from the specified map of raw messages.
 func UnmarshalSearchResultProperties(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SearchResultProperties)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
+	err = base.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "bookmark-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "by", &obj.By)
+	err = base.UnmarshalPrimitive(m, "by", &obj.By)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "counts", &obj.Counts)
+	err = base.UnmarshalPrimitive(m, "counts", &obj.Counts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "counts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ranges", &obj.Ranges)
+	err = base.UnmarshalPrimitive(m, "ranges", &obj.Ranges)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ranges-error", common.GetComponentInfo())
 		return
@@ -19816,17 +19816,17 @@ func UnmarshalSearchResultRow(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "doc-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "fields", &obj.Fields)
+	err = base.UnmarshalPrimitive(m, "fields", &obj.Fields)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "fields-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "highlights", &obj.Highlights)
+	err = base.UnmarshalPrimitive(m, "highlights", &obj.Highlights)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "highlights-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
@@ -19876,12 +19876,12 @@ func UnmarshalSecurity(m map[string]json.RawMessage, result interface{}) (err er
 		err = core.SDKErrorf(err, "", "members-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "cloudant", &obj.Cloudant)
+	err = base.UnmarshalPrimitive(m, "cloudant", &obj.Cloudant)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "cloudant-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "couchdb_auth_only", &obj.CouchdbAuthOnly)
+	err = base.UnmarshalPrimitive(m, "couchdb_auth_only", &obj.CouchdbAuthOnly)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "couchdb_auth_only-error", common.GetComponentInfo())
 		return
@@ -19902,12 +19902,12 @@ type SecurityObject struct {
 // UnmarshalSecurityObject unmarshals an instance of SecurityObject from the specified map of raw messages.
 func UnmarshalSecurityObject(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SecurityObject)
-	err = core.UnmarshalPrimitive(m, "names", &obj.Names)
+	err = base.UnmarshalPrimitive(m, "names", &obj.Names)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "names-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "roles", &obj.Roles)
+	err = base.UnmarshalPrimitive(m, "roles", &obj.Roles)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "roles-error", common.GetComponentInfo())
 		return
@@ -19938,17 +19938,17 @@ const (
 // UnmarshalSelectorHint unmarshals an instance of SelectorHint from the specified map of raw messages.
 func UnmarshalSelectorHint(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SelectorHint)
-	err = core.UnmarshalPrimitive(m, "indexable_fields", &obj.IndexableFields)
+	err = base.UnmarshalPrimitive(m, "indexable_fields", &obj.IndexableFields)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "indexable_fields-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	err = base.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "unindexable_fields", &obj.UnindexableFields)
+	err = base.UnmarshalPrimitive(m, "unindexable_fields", &obj.UnindexableFields)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "unindexable_fields-error", common.GetComponentInfo())
 		return
@@ -19978,12 +19978,12 @@ type ServerInformation struct {
 // UnmarshalServerInformation unmarshals an instance of ServerInformation from the specified map of raw messages.
 func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ServerInformation)
-	err = core.UnmarshalPrimitive(m, "couchdb", &obj.Couchdb)
+	err = base.UnmarshalPrimitive(m, "couchdb", &obj.Couchdb)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "couchdb-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "features", &obj.Features)
+	err = base.UnmarshalPrimitive(m, "features", &obj.Features)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "features-error", common.GetComponentInfo())
 		return
@@ -19993,12 +19993,12 @@ func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}
 		err = core.SDKErrorf(err, "", "vendor-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
+	err = base.UnmarshalPrimitive(m, "version", &obj.Version)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "features_flags", &obj.FeaturesFlags)
+	err = base.UnmarshalPrimitive(m, "features_flags", &obj.FeaturesFlags)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "features_flags-error", common.GetComponentInfo())
 		return
@@ -20082,19 +20082,19 @@ func (o *ServerVendor) MarshalJSON() (buffer []byte, err error) {
 // UnmarshalServerVendor unmarshals an instance of ServerVendor from the specified map of raw messages.
 func UnmarshalServerVendor(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ServerVendor)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "name")
-	err = core.UnmarshalPrimitive(m, "variant", &obj.Variant)
+	err = base.UnmarshalPrimitive(m, "variant", &obj.Variant)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "variant-error", common.GetComponentInfo())
 		return
 	}
 	delete(m, "variant")
-	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
+	err = base.UnmarshalPrimitive(m, "version", &obj.Version)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
 		return
@@ -20102,7 +20102,7 @@ func UnmarshalServerVendor(m map[string]json.RawMessage, result interface{}) (er
 	delete(m, "version")
 	for k := range m {
 		var v *string
-		e := core.UnmarshalPrimitive(m, k, &v)
+		e := base.UnmarshalPrimitive(m, k, &v)
 		if e != nil {
 			err = core.SDKErrorf(e, "", "additional-properties-error", common.GetComponentInfo())
 			return
@@ -20128,17 +20128,17 @@ type SessionAuthentication struct {
 // UnmarshalSessionAuthentication unmarshals an instance of SessionAuthentication from the specified map of raw messages.
 func UnmarshalSessionAuthentication(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SessionAuthentication)
-	err = core.UnmarshalPrimitive(m, "authenticated", &obj.Authenticated)
+	err = base.UnmarshalPrimitive(m, "authenticated", &obj.Authenticated)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "authenticated-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "authentication_db", &obj.AuthenticationDb)
+	err = base.UnmarshalPrimitive(m, "authentication_db", &obj.AuthenticationDb)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "authentication_db-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "authentication_handlers", &obj.AuthenticationHandlers)
+	err = base.UnmarshalPrimitive(m, "authentication_handlers", &obj.AuthenticationHandlers)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "authentication_handlers-error", common.GetComponentInfo())
 		return
@@ -20162,7 +20162,7 @@ type SessionInformation struct {
 // UnmarshalSessionInformation unmarshals an instance of SessionInformation from the specified map of raw messages.
 func UnmarshalSessionInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(SessionInformation)
-	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	err = base.UnmarshalPrimitive(m, "ok", &obj.Ok)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ok-error", common.GetComponentInfo())
 		return
@@ -20191,7 +20191,7 @@ type ShardsInformation struct {
 // UnmarshalShardsInformation unmarshals an instance of ShardsInformation from the specified map of raw messages.
 func UnmarshalShardsInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ShardsInformation)
-	err = core.UnmarshalPrimitive(m, "shards", &obj.Shards)
+	err = base.UnmarshalPrimitive(m, "shards", &obj.Shards)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "shards-error", common.GetComponentInfo())
 		return
@@ -20219,22 +20219,22 @@ type ThroughputInformation struct {
 // UnmarshalThroughputInformation unmarshals an instance of ThroughputInformation from the specified map of raw messages.
 func UnmarshalThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ThroughputInformation)
-	err = core.UnmarshalPrimitive(m, "blocks", &obj.Blocks)
+	err = base.UnmarshalPrimitive(m, "blocks", &obj.Blocks)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "blocks-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "query", &obj.Query)
+	err = base.UnmarshalPrimitive(m, "query", &obj.Query)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "query-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "read", &obj.Read)
+	err = base.UnmarshalPrimitive(m, "read", &obj.Read)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "read-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "write", &obj.Write)
+	err = base.UnmarshalPrimitive(m, "write", &obj.Write)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "write-error", common.GetComponentInfo())
 		return
@@ -20263,12 +20263,12 @@ const (
 // UnmarshalUpInformation unmarshals an instance of UpInformation from the specified map of raw messages.
 func UnmarshalUpInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UpInformation)
-	err = core.UnmarshalPrimitive(m, "seeds", &obj.Seeds)
+	err = base.UnmarshalPrimitive(m, "seeds", &obj.Seeds)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "seeds-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	err = base.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
 		return
@@ -20293,17 +20293,17 @@ type UpdatesPending struct {
 // UnmarshalUpdatesPending unmarshals an instance of UpdatesPending from the specified map of raw messages.
 func UnmarshalUpdatesPending(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UpdatesPending)
-	err = core.UnmarshalPrimitive(m, "minimum", &obj.Minimum)
+	err = base.UnmarshalPrimitive(m, "minimum", &obj.Minimum)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "minimum-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "preferred", &obj.Preferred)
+	err = base.UnmarshalPrimitive(m, "preferred", &obj.Preferred)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "preferred-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "total", &obj.Total)
+	err = base.UnmarshalPrimitive(m, "total", &obj.Total)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total-error", common.GetComponentInfo())
 		return
@@ -20353,17 +20353,17 @@ func (*CloudantV1) NewUserContext(name string, roles []string) (_model *UserCont
 // UnmarshalUserContext unmarshals an instance of UserContext from the specified map of raw messages.
 func UnmarshalUserContext(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UserContext)
-	err = core.UnmarshalPrimitive(m, "db", &obj.Db)
+	err = base.UnmarshalPrimitive(m, "db", &obj.Db)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "db-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	err = base.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "roles", &obj.Roles)
+	err = base.UnmarshalPrimitive(m, "roles", &obj.Roles)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "roles-error", common.GetComponentInfo())
 		return
@@ -20381,7 +20381,7 @@ type UuidsResult struct {
 // UnmarshalUuidsResult unmarshals an instance of UuidsResult from the specified map of raw messages.
 func UnmarshalUuidsResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UuidsResult)
-	err = core.UnmarshalPrimitive(m, "uuids", &obj.Uuids)
+	err = base.UnmarshalPrimitive(m, "uuids", &obj.Uuids)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "uuids-error", common.GetComponentInfo())
 		return
@@ -20509,102 +20509,102 @@ const (
 // UnmarshalViewQuery unmarshals an instance of ViewQuery from the specified map of raw messages.
 func UnmarshalViewQuery(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ViewQuery)
-	err = core.UnmarshalPrimitive(m, "att_encoding_info", &obj.AttEncodingInfo)
+	err = base.UnmarshalPrimitive(m, "att_encoding_info", &obj.AttEncodingInfo)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "att_encoding_info-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "attachments", &obj.Attachments)
+	err = base.UnmarshalPrimitive(m, "attachments", &obj.Attachments)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "attachments-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
+	err = base.UnmarshalPrimitive(m, "conflicts", &obj.Conflicts)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "conflicts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "descending", &obj.Descending)
+	err = base.UnmarshalPrimitive(m, "descending", &obj.Descending)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "descending-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
+	err = base.UnmarshalPrimitive(m, "include_docs", &obj.IncludeDocs)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "include_docs-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "inclusive_end", &obj.InclusiveEnd)
+	err = base.UnmarshalPrimitive(m, "inclusive_end", &obj.InclusiveEnd)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "inclusive_end-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "limit", &obj.Limit)
+	err = base.UnmarshalPrimitive(m, "limit", &obj.Limit)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "limit-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "skip", &obj.Skip)
+	err = base.UnmarshalPrimitive(m, "skip", &obj.Skip)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "skip-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
+	err = base.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update_seq-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
+	err = base.UnmarshalPrimitive(m, "end_key", &obj.EndKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "end_key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "end_key_doc_id", &obj.EndKeyDocID)
+	err = base.UnmarshalPrimitive(m, "end_key_doc_id", &obj.EndKeyDocID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "end_key_doc_id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "group", &obj.Group)
+	err = base.UnmarshalPrimitive(m, "group", &obj.Group)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "group-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "group_level", &obj.GroupLevel)
+	err = base.UnmarshalPrimitive(m, "group_level", &obj.GroupLevel)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "group_level-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = base.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "keys", &obj.Keys)
+	err = base.UnmarshalPrimitive(m, "keys", &obj.Keys)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "keys-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
+	err = base.UnmarshalPrimitive(m, "reduce", &obj.Reduce)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reduce-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "stable", &obj.Stable)
+	err = base.UnmarshalPrimitive(m, "stable", &obj.Stable)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stable-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
+	err = base.UnmarshalPrimitive(m, "start_key", &obj.StartKey)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start_key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "start_key_doc_id", &obj.StartKeyDocID)
+	err = base.UnmarshalPrimitive(m, "start_key_doc_id", &obj.StartKeyDocID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "start_key_doc_id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update", &obj.Update)
+	err = base.UnmarshalPrimitive(m, "update", &obj.Update)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update-error", common.GetComponentInfo())
 		return
@@ -20628,12 +20628,12 @@ type ViewResult struct {
 // UnmarshalViewResult unmarshals an instance of ViewResult from the specified map of raw messages.
 func UnmarshalViewResult(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ViewResult)
-	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	err = base.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
+	err = base.UnmarshalPrimitive(m, "update_seq", &obj.UpdateSeq)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "update_seq-error", common.GetComponentInfo())
 		return
@@ -20677,22 +20677,22 @@ type ViewResultRow struct {
 // UnmarshalViewResultRow unmarshals an instance of ViewResultRow from the specified map of raw messages.
 func UnmarshalViewResultRow(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(ViewResultRow)
-	err = core.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
+	err = base.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "caused_by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	err = base.UnmarshalPrimitive(m, "error", &obj.Error)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	err = base.UnmarshalPrimitive(m, "reason", &obj.Reason)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	err = base.UnmarshalPrimitive(m, "ref", &obj.Ref)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
 		return
@@ -20702,17 +20702,17 @@ func UnmarshalViewResultRow(m map[string]json.RawMessage, result interface{}) (e
 		err = core.SDKErrorf(err, "", "doc-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	err = base.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "key", &obj.Key)
+	err = base.UnmarshalPrimitive(m, "key", &obj.Key)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "key-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	err = base.UnmarshalPrimitive(m, "value", &obj.Value)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
 		return

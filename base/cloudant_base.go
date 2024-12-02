@@ -17,6 +17,7 @@
 package base
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/cookiejar"
@@ -259,4 +260,24 @@ func getSystemInfo() string {
 		runtime.GOOS,
 		runtime.GOARCH,
 	)
+}
+
+func UnmarshalPrimitive(rawInput map[string]json.RawMessage, propertyName string, result interface{}) (err error) {
+	switch propertyName {
+	case "ranges", "counts":
+		rawMsg, foundIt := rawInput[propertyName]
+		if foundIt && rawMsg != nil {
+			var numberResult float64
+			err = json.Unmarshal(rawMsg, &numberResult)
+			// delegte to core to raise an expected error
+			if err != nil {
+				break
+			}
+			if v, ok := result.(*interface{}); ok {
+				*v = int64(numberResult)
+			}
+		}
+		return
+	}
+	return core.UnmarshalPrimitive(rawInput, propertyName, result)
 }

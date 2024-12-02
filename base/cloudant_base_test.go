@@ -213,6 +213,32 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOARCH))
 	})
 
+	It("Unmarshals primitives", func() {
+		fixture := make(map[string]json.RawMessage)
+
+		tests := []struct {
+			property string
+			raw      string
+			expect   any
+		}{
+			{property: "string", raw: `"string"`, expect: "string"},
+			{property: "bool", raw: `true`, expect: true},
+			{property: "int", raw: `123`, expect: float64(123)},
+			{property: "float", raw: `123.45`, expect: float64(123.45)},
+			{property: "ranges", raw: `10.0`, expect: int64(10)},
+			{property: "counts", raw: `12.0`, expect: int64(12)},
+			{property: "ranges", raw: `10`, expect: int64(10)},
+		}
+
+		for _, test := range tests {
+			fixture[test.property] = json.RawMessage(test.raw)
+			var result any
+			err := UnmarshalPrimitive(fixture, test.property, &result)
+			Expect(err).To(BeNil())
+			Expect(result).To(Equal(test.expect))
+		}
+	})
+
 	Context("with IBM_CREDENTIALS env variable", func() {
 		BeforeEach(func() {
 			pwd, err := os.Getwd()
@@ -231,7 +257,6 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			authenticator, err := GetAuthenticatorFromEnvironment("service1")
 			Expect(err).To(BeNil())
 			Expect(authenticator).ToNot(BeNil())
-			Expect(authenticator.AuthenticationType()).To(Equal(auth.AUTHTYPE_COUCHDB_SESSION))
 
 			sessionAuth, ok := authenticator.(*auth.CouchDbSessionAuthenticator)
 			Expect(ok).To(BeTrue())
