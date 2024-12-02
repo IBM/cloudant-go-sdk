@@ -257,6 +257,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			authenticator, err := GetAuthenticatorFromEnvironment("service1")
 			Expect(err).To(BeNil())
 			Expect(authenticator).ToNot(BeNil())
+			Expect(authenticator.AuthenticationType()).To(Equal(auth.AUTHTYPE_COUCHDB_SESSION))
 
 			sessionAuth, ok := authenticator.(*auth.CouchDbSessionAuthenticator)
 			Expect(ok).To(BeTrue())
