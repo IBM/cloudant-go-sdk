@@ -213,6 +213,71 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOARCH))
 	})
 
+	It("Unmarshals SearchResult Counts and Ranges", func() {
+		searchResult := map[string]json.RawMessage{
+			"counts": json.RawMessage(`{"name": {"Alan": 1743, "Bob": 1672.0, "Chris": 1705}}`),
+			"ranges": json.RawMessage(`{"price": {"expensive": 278682.0, "cheap": 257023}}`),
+		}
+		var counts map[string]map[string]int64
+		expectedCounts := map[string]map[string]int64{"name": {"Alan": 1743, "Bob": 1672, "Chris": 1705}}
+		err := UnmarshalPrimitiveSpecial(searchResult, "counts", &counts, "*cloudantv1.SearchResultProperties")
+		Expect(err).To(BeNil())
+		Expect(counts).To(Equal(expectedCounts))
+		var ranges map[string]map[string]int64
+		expectedRanges := map[string]map[string]int64{
+			"price": {"expensive": 278682, "cheap": 257023},
+		}
+		err = UnmarshalPrimitiveSpecial(searchResult, "ranges", &ranges, "*cloudantv1.SearchResult")
+		Expect(err).To(BeNil())
+		Expect(ranges).To(Equal(expectedRanges))
+	})
+
+	It("Cannot unmarshal Counts and Ranges wrong type", func() {
+		searchResult := map[string]json.RawMessage{
+			"counts": json.RawMessage(`{"name": {"Alan": 1743.6}}`),
+			"ranges": json.RawMessage(`{"price": {"expensive": 278682.78}}`),
+		}
+		var counts map[string]map[string]int64
+		expectedErrorMessage := "UnmarshalPrimitiveSpecial is called with the wrong result type: '*cloudantv1.WrongType', it should be '*cloudantv1.SearchResult' or '*cloudantv1.SearchResultProperties'"
+		err := UnmarshalPrimitiveSpecial(searchResult, "counts", &counts, "*cloudantv1.WrongType")
+		Expect(err).To(Not(BeNil()))
+		Expect(err.Error()).To(Equal(expectedErrorMessage))
+
+		var ranges map[string]map[string]int64
+		err = UnmarshalPrimitiveSpecial(searchResult, "ranges", &ranges, "*cloudantv1.WrongType")
+		Expect(err).To(Not(BeNil()))
+		Expect(err.Error()).To(Equal(expectedErrorMessage))
+	})
+
+	It("Cannot unmarshal Counts and Ranges on fractions", func() {
+		searchResult := map[string]json.RawMessage{
+			"counts": json.RawMessage(`{"name": {"Alan": 1743.6}}`),
+			"ranges": json.RawMessage(`{"price": {"expensive": 278682.78}}`),
+		}
+		var counts map[string]map[string]int64
+		expectedErrorMessageCounts := "json: cannot unmarshal number 1743.6 into Go value of type int64"
+		err := UnmarshalPrimitiveSpecial(searchResult, "counts", &counts, "*cloudantv1.SearchResult")
+		Expect(err).To(Not(BeNil()))
+		Expect(err.Error()).To(Equal(expectedErrorMessageCounts))
+
+		var ranges map[string]map[string]int64
+		expectedErrorMessageRanges := "json: cannot unmarshal number 278682.78 into Go value of type int64"
+		err = UnmarshalPrimitiveSpecial(searchResult, "ranges", &ranges, "*cloudantv1.SearchResultProperties")
+		Expect(err).To(Not(BeNil()))
+		Expect(err.Error()).To(Equal(expectedErrorMessageRanges))
+	})
+
+	It("Cannot unmarshal other fields than counts and ranges", func() {
+		searchResult := map[string]json.RawMessage{
+			"other": json.RawMessage(`{"name": {"Alan": 1743.6}}`),
+		}
+		var other map[string]map[string]int64
+		expectedErrorMessageCounts := "UnmarshalPrimitiveSpecial is called with the wrong propertyName: 'other', it should be 'counts' or 'ranges'"
+		err := UnmarshalPrimitiveSpecial(searchResult, "other", &other, "*cloudantv1.SearchResult")
+		Expect(err).To(Not(BeNil()))
+		Expect(err.Error()).To(Equal(expectedErrorMessageCounts))
+	})
+
 	Context("with IBM_CREDENTIALS env variable", func() {
 		BeforeEach(func() {
 			pwd, err := os.Getwd()
