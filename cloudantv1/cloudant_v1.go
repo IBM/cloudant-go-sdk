@@ -19746,11 +19746,11 @@ type SearchResultProperties struct {
 	By *string `json:"by,omitempty"`
 
 	// The counts facet syntax returns the number of query results for each unique value of each named field.
-	Counts map[string]map[string]int64 `json:"counts,omitempty"`
+	Counts map[string]map[string]base.SearchResultFacet `json:"counts,omitempty"`
 
 	// The range facet syntax reuses the standard Lucene syntax for ranges to return counts of results that fit into each
 	// specified category.
-	Ranges map[string]map[string]int64 `json:"ranges,omitempty"`
+	Ranges map[string]map[string]base.SearchResultFacet `json:"ranges,omitempty"`
 
 	// Array of row objects.
 	Rows []SearchResultRow `json:"rows" validate:"required"`
