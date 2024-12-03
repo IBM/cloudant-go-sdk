@@ -213,6 +213,31 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(cloudant.UserAgent).To(ContainSubstring(runtime.GOARCH))
 	})
 
+	It("Unmarshals SearchResult Counts and Ranges", func() {
+		searchResult := map[string]json.RawMessage{
+			"counts": json.RawMessage(`
+				{
+					"name": {
+						"Alan": 1743.0,
+						"Bob": 1672.0,
+						"Chris": 1705.0
+					}
+				}
+			`),
+		}
+		var counts map[string]map[string]SearchResultFacet
+		expect := map[string]map[string]SearchResultFacet{
+			"name": {
+				"Alan":  SearchResultFacet(1743),
+				"Bob":   SearchResultFacet(1672),
+				"Chris": SearchResultFacet(1705),
+			},
+		}
+		err := core.UnmarshalPrimitive(searchResult, "counts", &counts)
+		Expect(err).To(BeNil())
+		Expect(counts).To(Equal(expect))
+	})
+
 	Context("with IBM_CREDENTIALS env variable", func() {
 		BeforeEach(func() {
 			pwd, err := os.Getwd()

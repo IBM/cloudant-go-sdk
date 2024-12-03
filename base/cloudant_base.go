@@ -17,6 +17,7 @@
 package base
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/cookiejar"
@@ -259,4 +260,16 @@ func getSystemInfo() string {
 		runtime.GOOS,
 		runtime.GOARCH,
 	)
+}
+
+type SearchResultFacet int64
+
+func (srf *SearchResultFacet) UnmarshalJSON(raw []byte) error {
+	var f float64
+	err := json.Unmarshal(raw, &f)
+	if err != nil {
+		return err
+	}
+	*srf = SearchResultFacet(f)
+	return nil
 }
