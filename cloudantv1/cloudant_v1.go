@@ -19710,12 +19710,12 @@ func UnmarshalSearchResult(m map[string]json.RawMessage, result interface{}) (er
 		err = core.SDKErrorf(err, "", "by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "counts", &obj.Counts)
+	err = base.UnmarshalPrimitiveSpecial(m, "counts", &obj.Counts, reflect.TypeOf(obj).String())
 	if err != nil {
 		err = core.SDKErrorf(err, "", "counts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ranges", &obj.Ranges)
+	err = base.UnmarshalPrimitiveSpecial(m, "ranges", &obj.Ranges, reflect.TypeOf(obj).String())
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ranges-error", common.GetComponentInfo())
 		return
@@ -19774,12 +19774,12 @@ func UnmarshalSearchResultProperties(m map[string]json.RawMessage, result interf
 		err = core.SDKErrorf(err, "", "by-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "counts", &obj.Counts)
+	err = base.UnmarshalPrimitiveSpecial(m, "counts", &obj.Counts, reflect.TypeOf(obj).String())
 	if err != nil {
 		err = core.SDKErrorf(err, "", "counts-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ranges", &obj.Ranges)
+	err = base.UnmarshalPrimitiveSpecial(m, "ranges", &obj.Ranges, reflect.TypeOf(obj).String())
 	if err != nil {
 		err = core.SDKErrorf(err, "", "ranges-error", common.GetComponentInfo())
 		return
