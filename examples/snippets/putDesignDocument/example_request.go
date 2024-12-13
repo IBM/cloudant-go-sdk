@@ -1,4 +1,18 @@
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce("function(doc) { if(doc.email_verified === true) { emit(doc.email, [doc.name, doc.email_verified, doc.joined]); }}")
 if err != nil {
   panic(err)

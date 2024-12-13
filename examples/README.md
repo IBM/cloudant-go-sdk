@@ -8,7 +8,21 @@ _GET `/`_
 
 [embedmd]:# (snippets/getServerInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getServerInformationOptions := service.NewGetServerInformationOptions()
 
 serverInformation, response, err := service.GetServerInformation(getServerInformationOptions)
@@ -28,7 +42,21 @@ _GET `/_active_tasks`_
 
 [embedmd]:# (snippets/getActiveTasks/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getActiveTasksOptions := service.NewGetActiveTasksOptions()
 
 activeTask, response, err := service.GetActiveTasks(getActiveTasksOptions)
@@ -48,7 +76,21 @@ _GET `/_all_dbs`_
 
 [embedmd]:# (snippets/getAllDbs/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getAllDbsOptions := service.NewGetAllDbsOptions()
 
 result, response, err := service.GetAllDbs(getAllDbsOptions)
@@ -68,7 +110,21 @@ _POST `/_api/v2/api_keys`_
 
 [embedmd]:# (snippets/postApiKeys/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postApiKeysOptions := service.NewPostApiKeysOptions()
 
 apiKeysResult, response, err := service.PostApiKeys(postApiKeysOptions)
@@ -88,7 +144,21 @@ _PUT `/_api/v2/db/{db}/_security`_
 
 [embedmd]:# (snippets/putCloudantSecurity/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 putCloudantSecurityConfigurationOptions := service.NewPutCloudantSecurityConfigurationOptions(
   "products",
   map[string][]string{
@@ -117,7 +187,21 @@ _GET `/_api/v2/user/activity_tracker/events`_
 
 [embedmd]:# (snippets/getActivityTrackerEvents/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getActivityTrackerEventsOptions := service.NewGetActivityTrackerEventsOptions()
 
 activityTrackerEvents, response, err := service.GetActivityTrackerEvents(getActivityTrackerEventsOptions)
@@ -137,7 +221,21 @@ _POST `/_api/v2/user/activity_tracker/events`_
 
 [embedmd]:# (snippets/postActivityTrackerEvents/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postActivityTrackerEventsOptions := service.NewPostActivityTrackerEventsOptions(
   []string{"management"},
 )
@@ -159,7 +257,21 @@ _GET `/_api/v2/user/capacity/throughput`_
 
 [embedmd]:# (snippets/getCapacityThroughputInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getCapacityThroughputInformationOptions := service.NewGetCapacityThroughputInformationOptions()
 
 capacityThroughputInformation, response, err := service.GetCapacityThroughputInformation(getCapacityThroughputInformationOptions)
@@ -179,7 +291,21 @@ _PUT `/_api/v2/user/capacity/throughput`_
 
 [embedmd]:# (snippets/putCapacityThroughputConfiguration/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 putCapacityThroughputConfigurationOptions := service.NewPutCapacityThroughputConfigurationOptions(
   1,
 )
@@ -201,7 +327,21 @@ _GET `/_api/v2/user/config/cors`_
 
 [embedmd]:# (snippets/getCorsInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getCorsInformationOptions := service.NewGetCorsInformationOptions()
 
 corsConfiguration, response, err := service.GetCorsInformation(getCorsInformationOptions)
@@ -221,7 +361,21 @@ _PUT `/_api/v2/user/config/cors`_
 
 [embedmd]:# (snippets/putCorsConfiguration/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 putCorsConfigurationOptions := service.NewPutCorsConfigurationOptions([]string{
   "https://example.com",
 })
@@ -244,7 +398,21 @@ _GET `/_api/v2/user/current/throughput`_
 
 [embedmd]:# (snippets/getCurrentThroughputInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getCurrentThroughputInformationOptions := service.NewGetCurrentThroughputInformationOptions()
 
 currentThroughputInformation, response, err := service.GetCurrentThroughputInformation(getCurrentThroughputInformationOptions)
@@ -264,7 +432,21 @@ _GET `/_db_updates`_
 
 [embedmd]:# (snippets/getDbUpdates/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getDbUpdatesOptions := service.NewGetDbUpdatesOptions()
 getDbUpdatesOptions.SetFeed("normal")
 getDbUpdatesOptions.SetHeartbeat(10000)
@@ -289,7 +471,21 @@ _POST `/_dbs_info`_
 
 [embedmd]:# (snippets/postDbsInfo/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postDbsInfoOptions := service.NewPostDbsInfoOptions([]string{
   "products",
   "users",
@@ -313,7 +509,21 @@ _GET `/_membership`_
 
 [embedmd]:# (snippets/getMembershipInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getMembershipInformationOptions := service.NewGetMembershipInformationOptions()
 
 membershipInformation, response, err := service.GetMembershipInformation(getMembershipInformationOptions)
@@ -333,7 +543,21 @@ _DELETE `/_replicator/{doc_id}`_
 
 [embedmd]:# (snippets/deleteReplicationDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteReplicationDocumentOptions := service.NewDeleteReplicationDocumentOptions(
   "repldoc-example",
 )
@@ -356,7 +580,21 @@ _GET `/_replicator/{doc_id}`_
 
 [embedmd]:# (snippets/getReplicationDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getReplicationDocumentOptions := service.NewGetReplicationDocumentOptions(
   "repldoc-example",
 )
@@ -378,7 +616,21 @@ _HEAD `/_replicator/{doc_id}`_
 
 [embedmd]:# (snippets/headReplicationDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 headReplicationDocumentOptions := service.NewHeadReplicationDocumentOptions(
   "repldoc-example",
 )
@@ -400,9 +652,22 @@ _PUT `/_replicator/{doc_id}`_
 
 [embedmd]:# (snippets/putReplicationDocument/example_request.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 source, err := service.NewReplicationDatabase(
   "<your-source-service-url>/animaldb",
 )
@@ -457,7 +722,21 @@ _GET `/_scheduler/docs`_
 
 [embedmd]:# (snippets/getSchedulerDocs/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSchedulerDocsOptions := service.NewGetSchedulerDocsOptions()
 getSchedulerDocsOptions.SetLimit(100)
 getSchedulerDocsOptions.SetStates([]string{"completed"})
@@ -479,7 +758,21 @@ _GET `/_scheduler/docs/_replicator/{doc_id}`_
 
 [embedmd]:# (snippets/getSchedulerDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSchedulerDocumentOptions := service.NewGetSchedulerDocumentOptions(
   "repldoc-example",
 )
@@ -501,7 +794,21 @@ _GET `/_scheduler/jobs`_
 
 [embedmd]:# (snippets/getSchedulerJobs/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSchedulerJobsOptions := service.NewGetSchedulerJobsOptions()
 getSchedulerJobsOptions.SetLimit(100)
 
@@ -522,7 +829,21 @@ _GET `/_scheduler/jobs/{job_id}`_
 
 [embedmd]:# (snippets/getSchedulerJob/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSchedulerJobOptions := service.NewGetSchedulerJobOptions(
   "7b94915cd8c4a0173c77c55cd0443939+continuous",
 )
@@ -544,7 +865,21 @@ _HEAD `/_scheduler/jobs/{job_id}`_
 
 [embedmd]:# (snippets/headSchedulerJob/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 headSchedulerJobOptions := service.NewHeadSchedulerJobOptions(
   "7b94915cd8c4a0173c77c55cd0443939+continuous",
 )
@@ -565,7 +900,21 @@ _POST `/_search_analyze`_
 
 [embedmd]:# (snippets/postSearchAnalyze/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postSearchAnalyzeOptions := service.NewPostSearchAnalyzeOptions(
   "english",
   "running is fun",
@@ -588,7 +937,21 @@ _GET `/_session`_
 
 [embedmd]:# (snippets/getSessionInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSessionInformationOptions := service.NewGetSessionInformationOptions()
 
 sessionInformation, response, err := service.GetSessionInformation(getSessionInformationOptions)
@@ -610,7 +973,21 @@ _GET `/_up`_
 
 [embedmd]:# (snippets/getUpInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getUpInformationOptions := service.NewGetUpInformationOptions()
 
 upInformation, response, err := service.GetUpInformation(getUpInformationOptions)
@@ -630,7 +1007,21 @@ _GET `/_uuids`_
 
 [embedmd]:# (snippets/getUuids/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getUuidsOptions := service.NewGetUuidsOptions()
 getUuidsOptions.SetCount(10)
 
@@ -651,7 +1042,21 @@ _DELETE `/{db}`_
 
 [embedmd]:# (snippets/deleteDatabase/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteDatabaseOptions := service.NewDeleteDatabaseOptions(
   "<db-name>",
 )
@@ -673,7 +1078,21 @@ _GET `/{db}`_
 
 [embedmd]:# (snippets/getDatabaseInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getDatabaseInformationOptions := service.NewGetDatabaseInformationOptions(
   "products",
 )
@@ -695,7 +1114,21 @@ _HEAD `/{db}`_
 
 [embedmd]:# (snippets/headDatabase/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 headDatabaseOptions := service.NewHeadDatabaseOptions(
   "products",
 )
@@ -716,9 +1149,22 @@ _POST `/{db}`_
 
 [embedmd]:# (snippets/postDocument/example_request.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 productsDoc := cloudantv1.Document{
   ID: core.StringPtr("1000042"),
 }
@@ -752,7 +1198,21 @@ _PUT `/{db}`_
 
 [embedmd]:# (snippets/putDatabase/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 putDatabaseOptions := service.NewPutDatabaseOptions(
   "events",
 )
@@ -775,7 +1235,21 @@ _POST `/{db}/_all_docs`_
 
 [embedmd]:# (snippets/postAllDocs/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postAllDocsOptions := service.NewPostAllDocsOptions(
   "orders",
 )
@@ -796,7 +1270,23 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postAllDocs/example_request_as_a_stream.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+  "io"
+  "os"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postAllDocsOptions := service.NewPostAllDocsOptions(
   "orders",
 )
@@ -830,9 +1320,22 @@ _POST `/{db}/_all_docs/queries`_
 
 [embedmd]:# (snippets/postAllDocsQueries/example_request.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 allDocsQueries := []cloudantv1.AllDocsQuery{
   {
     Keys: []string{
@@ -867,9 +1370,22 @@ _POST `/{db}/_bulk_docs`_
 
 [embedmd]:# (snippets/postBulkDocs/example_request_create_documents.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 eventDoc1 := cloudantv1.Document{
   ID: core.StringPtr("ns1HJS13AMkK:0007241142412418284"),
 }
@@ -916,9 +1432,22 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postBulkDocs/example_request_delete_documents.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 eventDoc1 := cloudantv1.Document{
   ID: core.StringPtr("ns1HJS13AMkK:0007241142412418284"),
 }
@@ -959,7 +1488,22 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postBulkDocs/example_request_as_a_stream.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+  "os"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 file, err := os.Open("upload.json")
 if err != nil {
   panic(err)
@@ -1011,9 +1555,22 @@ _POST `/{db}/_bulk_get`_
 
 [embedmd]:# (snippets/postBulkGet/example_request.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 docID := "order00067"
 
 bulkGetDocs := []cloudantv1.BulkGetQueryDocument{
@@ -1044,9 +1601,22 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postBulkGet/alternative_example_request_for_open_revs_all.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postBulkGetOptions := service.NewPostBulkGetOptions(
   "orders",
   []cloudantv1.BulkGetQueryDocument{{ID: core.StringPtr("order00067")}},
@@ -1065,7 +1635,21 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postBulkGet/alternative_example_request_for_atts_since.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 docID := "order00058"
 
 postBulkGetOptions := service.NewPostBulkGetOptions(
@@ -1095,7 +1679,21 @@ _POST `/{db}/_changes`_
 
 [embedmd]:# (snippets/postChanges/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postChangesOptions := service.NewPostChangesOptions(
   "orders",
 )
@@ -1113,7 +1711,23 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postChanges/example_request_as_a_stream.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+  "io"
+  "os"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postChangesOptions := service.NewPostChangesOptions(
   "orders",
 )
@@ -1144,7 +1758,21 @@ _DELETE `/{db}/_design/{ddoc}`_
 
 [embedmd]:# (snippets/deleteDesignDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteDesignDocumentOptions := service.NewDeleteDesignDocumentOptions(
   "products",
   "appliances",
@@ -1170,7 +1798,21 @@ _GET `/{db}/_design/{ddoc}`_
 
 [embedmd]:# (snippets/getDesignDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getDesignDocumentOptions := service.NewGetDesignDocumentOptions(
   "products",
   "appliances",
@@ -1194,7 +1836,21 @@ _HEAD `/{db}/_design/{ddoc}`_
 
 [embedmd]:# (snippets/headDesignDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 headDesignDocumentOptions := service.NewHeadDesignDocumentOptions(
   "events",
   "checkout",
@@ -1217,7 +1873,21 @@ _PUT `/{db}/_design/{ddoc}`_
 
 [embedmd]:# (snippets/putDesignDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 emailViewMapReduce, err := service.NewDesignDocumentViewsMapReduce("function(doc) { if(doc.email_verified === true) { emit(doc.email, [doc.name, doc.email_verified, doc.joined]); }}")
 if err != nil {
   panic(err)
@@ -1295,7 +1965,21 @@ _GET `/{db}/_design/{ddoc}/_info`_
 
 [embedmd]:# (snippets/getDesignDocumentInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getDesignDocumentInformationOptions := service.NewGetDesignDocumentInformationOptions(
   "products",
   "appliances",
@@ -1318,7 +2002,21 @@ _POST `/{db}/_design/{ddoc}/_search/{index}`_
 
 [embedmd]:# (snippets/postSearch/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postSearchOptions := service.NewPostSearchOptions(
   "users",
   "allusers",
@@ -1345,7 +2043,21 @@ _GET `/{db}/_design/{ddoc}/_search_info/{index}`_
 
 [embedmd]:# (snippets/getSearchInfo/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSearchInfoOptions := service.NewGetSearchInfoOptions(
   "events",
   "checkout",
@@ -1371,7 +2083,21 @@ _POST `/{db}/_design/{ddoc}/_view/{view}`_
 
 [embedmd]:# (snippets/postView/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postViewOptions := service.NewPostViewOptions(
   "users",
   "allusers",
@@ -1397,9 +2123,22 @@ _POST `/{db}/_design/{ddoc}/_view/{view}/queries`_
 
 [embedmd]:# (snippets/postViewQueries/example_request.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postViewQueriesOptions := service.NewPostViewQueriesOptions(
   "users",
   "allusers",
@@ -1435,7 +2174,21 @@ _POST `/{db}/_design_docs`_
 
 [embedmd]:# (snippets/postDesignDocs/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postDesignDocsOptions := service.NewPostDesignDocsOptions(
   "users",
 )
@@ -1458,9 +2211,22 @@ _POST `/{db}/_design_docs/queries`_
 
 [embedmd]:# (snippets/postDesignDocsQueries/example_request.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 doc1 := cloudantv1.AllDocsQuery{
   Descending:  core.BoolPtr(true),
   IncludeDocs: core.BoolPtr(true),
@@ -1498,7 +2264,21 @@ _POST `/{db}/_explain`_
 
 [embedmd]:# (snippets/postExplain/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postExplainOptions := service.NewPostExplainOptions(
   "users",
   map[string]interface{}{
@@ -1527,7 +2307,21 @@ _POST `/{db}/_find`_
 
 [embedmd]:# (snippets/postFind/example_request_for_json_index_type.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postFindOptions := service.NewPostFindOptions(
   "users",
   map[string]interface{}{
@@ -1557,7 +2351,21 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postFind/example_request_for_text_index_type.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postFindOptions := service.NewPostFindOptions(
   "users",
   map[string]interface{}{
@@ -1590,7 +2398,21 @@ _GET `/{db}/_index`_
 
 [embedmd]:# (snippets/getIndexesInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getIndexesInformationOptions := service.NewGetIndexesInformationOptions(
   "users",
 )
@@ -1612,9 +2434,22 @@ _POST `/{db}/_index`_
 
 [embedmd]:# (snippets/postIndex/example_request_using_json_type_index.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 // Type "json" index fields require an object that maps the name of a field to a sort direction.
 var indexField cloudantv1.IndexField
 indexField.SetProperty("email", core.StringPtr("asc"))
@@ -1644,9 +2479,22 @@ fmt.Println(string(b))
 
 [embedmd]:# (snippets/postIndex/example_request_using_text_type_index.go)
 ```go
-// section: markdown
-// This example requires an import for `github.com/IBM/go-sdk-core/v5/core`.
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+  "github.com/IBM/go-sdk-core/v5/core"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 // Type "text" index fields require an object with a name and type properties for the field.
 var indexField cloudantv1.IndexField
 indexField.SetProperty("name", core.StringPtr("address"))
@@ -1681,7 +2529,21 @@ _DELETE `/{db}/_index/_design/{ddoc}/{type}/{index}`_
 
 [embedmd]:# (snippets/deleteIndex/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteIndexOptions := service.NewDeleteIndexOptions(
   "users",
   "json-index",
@@ -1708,7 +2570,21 @@ _DELETE `/{db}/_local/{doc_id}`_
 
 [embedmd]:# (snippets/deleteLocalDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteLocalDocumentOptions := service.NewDeleteLocalDocumentOptions(
   "orders",
   "local-0007741142412418284",
@@ -1731,7 +2607,21 @@ _GET `/{db}/_local/{doc_id}`_
 
 [embedmd]:# (snippets/getLocalDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getLocalDocumentOptions := service.NewGetLocalDocumentOptions(
   "orders",
   "local-0007741142412418284",
@@ -1754,7 +2644,21 @@ _PUT `/{db}/_local/{doc_id}`_
 
 [embedmd]:# (snippets/putLocalDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 localDocument := cloudantv1.Document{}
 properties := map[string]interface{}{
   "type":            "order",
@@ -1795,7 +2699,21 @@ _GET `/{db}/_partition/{partition_key}`_
 
 [embedmd]:# (snippets/getPartitionInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getPartitionInformationOptions := service.NewGetPartitionInformationOptions(
   "events",
   "ns1HJS13AMkK",
@@ -1818,7 +2736,21 @@ _POST `/{db}/_partition/{partition_key}/_all_docs`_
 
 [embedmd]:# (snippets/postPartitionAllDocs/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postPartitionAllDocsOptions := service.NewPostPartitionAllDocsOptions(
   "events",
   "ns1HJS13AMkK",
@@ -1842,7 +2774,21 @@ _POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`_
 
 [embedmd]:# (snippets/postPartitionSearch/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postPartitionSearchOptions := service.NewPostPartitionSearchOptions(
   "events",
   "ns1HJS13AMkK",
@@ -1870,7 +2816,21 @@ _POST `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`_
 
 [embedmd]:# (snippets/postPartitionView/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postPartitionViewOptions := service.NewPostPartitionViewOptions(
   "events",
   "ns1HJS13AMkK",
@@ -1897,6 +2857,47 @@ _POST `/{db}/_partition/{partition_key}/_explain`_
 
 ### [Example request](snippets/postPartitionExplain/example_request.go)
 
+[embedmd]:# (snippets/postPartitionExplain/example_request.go)
+```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
+// section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
+selector := map[string]interface{}{
+  "userId": map[string]string{
+    "$eq": "abc123",
+  },
+}
+
+postPartitionExplainOptions := service.NewPostPartitionExplainOptions(
+  "events",
+  "ns1HJS13AMkK",
+  selector,
+)
+postExplainOptions.SetExecutionStats(true)
+postExplainOptions.SetLimit(10)
+
+
+explainResult, response, err := service.PostPartitionExplain(postPartitionExplainOptions)
+if err != nil {
+  panic(err)
+}
+
+b, _ := json.MarshalIndent(explainResult, "", "  ")
+fmt.Println(string(b))
+```
+
 ## postPartitionFind
 
 _POST `/{db}/_partition/{partition_key}/_find`_
@@ -1905,7 +2906,21 @@ _POST `/{db}/_partition/{partition_key}/_find`_
 
 [embedmd]:# (snippets/postPartitionFind/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 selector := map[string]interface{}{
   "userId": map[string]string{
     "$eq": "abc123",
@@ -1938,7 +2953,21 @@ _POST `/{db}/_revs_diff`_
 
 [embedmd]:# (snippets/postRevsDiff/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 postRevsDiffOptions := service.NewPostRevsDiffOptions(
   "orders",
   map[string][]string{
@@ -1969,7 +2998,21 @@ _GET `/{db}/_security`_
 
 [embedmd]:# (snippets/getSecurity/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getSecurityOptions := service.NewGetSecurityOptions(
   "products",
 )
@@ -1991,7 +3034,21 @@ _PUT `/{db}/_security`_
 
 [embedmd]:# (snippets/putSecurity/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 putSecurityOptions := service.NewPutSecurityOptions(
   "products",
 )
@@ -2021,7 +3078,21 @@ _GET `/{db}/_shards`_
 
 [embedmd]:# (snippets/getShardsInformation/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getShardsInformationOptions := service.NewGetShardsInformationOptions(
   "products",
 )
@@ -2043,7 +3114,21 @@ _GET `/{db}/_shards/{doc_id}`_
 
 [embedmd]:# (snippets/getDocumentShardsInfo/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getDocumentShardsInfoOptions := service.NewGetDocumentShardsInfoOptions(
   "products",
   "1000042",
@@ -2066,7 +3151,21 @@ _DELETE `/{db}/{doc_id}`_
 
 [embedmd]:# (snippets/deleteDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteDocumentOptions := service.NewDeleteDocumentOptions(
   "orders",
   "order00058",
@@ -2090,7 +3189,21 @@ _GET `/{db}/{doc_id}`_
 
 [embedmd]:# (snippets/getDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getDocumentOptions := service.NewGetDocumentOptions(
   "products",
   "1000042",
@@ -2113,7 +3226,21 @@ _HEAD `/{db}/{doc_id}`_
 
 [embedmd]:# (snippets/headDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 headDocumentOptions := service.NewHeadDocumentOptions(
   "orders",
   "order00058",
@@ -2136,7 +3263,21 @@ _PUT `/{db}/{doc_id}`_
 
 [embedmd]:# (snippets/putDocument/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 eventDoc := cloudantv1.Document{}
 eventDoc.SetProperty("type", "event")
 eventDoc.SetProperty("userId", "abc123")
@@ -2167,7 +3308,21 @@ _DELETE `/{db}/{doc_id}/{attachment_name}`_
 
 [embedmd]:# (snippets/deleteAttachment/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 deleteAttachmentOptions := service.NewDeleteAttachmentOptions(
   "products",
   "1000042",
@@ -2194,7 +3349,22 @@ _GET `/{db}/{doc_id}/{attachment_name}`_
 
 [embedmd]:# (snippets/getAttachment/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+  "io"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 getAttachmentOptions := service.NewGetAttachmentOptions(
   "products",
   "1000042",
@@ -2206,7 +3376,7 @@ if err != nil {
   panic(err)
 }
 
-data, _ := ioutil.ReadAll(result)
+data, _ := io.ReadAll(result)
 fmt.Println("\n", string(data))
 // section: markdown
 // This example requires the `product_details.txt` attachment in `1000042` document to exist. To create the attachment, see [Create or modify an attachment.](#putattachment)
@@ -2220,7 +3390,21 @@ _HEAD `/{db}/{doc_id}/{attachment_name}`_
 
 [embedmd]:# (snippets/headAttachment/example_request.go)
 ```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 headAttachmentOptions := service.NewHeadAttachmentOptions(
   "products",
   "1000042",
@@ -2247,12 +3431,28 @@ _PUT `/{db}/{doc_id}/{attachment_name}`_
 
 [embedmd]:# (snippets/putAttachment/example_request.go)
 ```go
+// section: code imports
+import (
+  "bytes"
+  "encoding/json"
+  "fmt"
+  "io"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
 // section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
 putAttachmentOptions := service.NewPutAttachmentOptions(
   "products",
   "1000042",
   "product_details.txt",
-  ioutil.NopCloser(
+  io.NopCloser(
     bytes.NewReader([]byte("This appliance includes...")),
   ),
   "text/plain",
