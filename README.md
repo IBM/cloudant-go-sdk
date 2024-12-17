@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=Godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
-# IBM Cloudant Go SDK Version 0.9.1
+# IBM Cloudant Go SDK Version 0.9.2
 
 IBM Cloudant Go SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
@@ -112,7 +112,7 @@ project:
 
 ## Installation
 
-The current version of this SDK: 0.9.1
+The current version of this SDK: 0.9.2
 
 There are a few different ways to download and add the
 Cloudant Go SDK project for use by your Go application:
@@ -123,7 +123,7 @@ Use this command to download and add the SDK to allow your Go application to
 use it:
 
 ```terminal
-go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.9.1
+go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.9.2
 ```
 
 ### Go modules
@@ -695,7 +695,7 @@ You have deleted the document.
 
 #### Further code examples
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.1/examples#examples-for-go).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.2/examples#examples-for-go).
 
 ### Error handling
 
@@ -791,7 +791,7 @@ The changes follower requires the client to have HTTP timeouts of at least 1 min
 instantiation if it is insufficient. The default client configuration has sufficiently long timeouts.
 
 For use-cases where these configuration limitations are deemed too restrictive then it is recommended to
-write code to use the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.1/examples#postchanges) instead of the follower.
+write code to use the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.2/examples#postchanges) instead of the follower.
 
 #### Error suppression
 
@@ -826,7 +826,7 @@ The follower is not optimized for some use cases and it is not recommended to us
 * The volume of changes is very high (if the rate of changes in the database exceeds the follower's rate of pulling them it will never catch-up).
 
 In these cases use-case specific control over the number of change requests made and the content size of the responses
-may be achieved by using the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.1/examples#postchanges).
+may be achieved by using the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.2/examples#postchanges).
 
 #### Checkpointing
 
@@ -1169,7 +1169,7 @@ If you encounter an issue with the project, you are welcome to submit a
 
 Before you submit a bug report, search for
 [similar issues](https://github.com/IBM/cloudant-go-sdk/issues?q=is%3Aissue) and review the
-[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.1/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
+[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.2/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
 
 Please consult the [security policy](https://github.com/IBM/cloudant-go-sdk/security/policy) before opening security related issues.
 
@@ -1199,8 +1199,8 @@ Find more open source projects on the [IBM GitHub](http://ibm.github.io/) page.
 
 ## Contributing
 
-For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.1/CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.2/CONTRIBUTING.md).
 
 ## License
 
-This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.1/LICENSE).
+This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.9.2/LICENSE).
