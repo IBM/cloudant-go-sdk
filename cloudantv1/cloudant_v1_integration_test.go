@@ -105,22 +105,6 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetUuids - Retrieve one or more UUIDs`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetUuids(getUuidsOptions *GetUuidsOptions)`, func() {
-			getUuidsOptions := &cloudantv1.GetUuidsOptions{
-				Count: core.Int64Ptr(int64(1)),
-			}
-
-			uuidsResult, response, err := cloudantService.GetUuids(getUuidsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(uuidsResult).ToNot(BeNil())
-		})
-	})
-
 	Describe(`GetCapacityThroughputInformation - Retrieve provisioned throughput capacity information`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -151,6 +135,22 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`GetUuids - Retrieve one or more UUIDs`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetUuids(getUuidsOptions *GetUuidsOptions)`, func() {
+			getUuidsOptions := &cloudantv1.GetUuidsOptions{
+				Count: core.Int64Ptr(int64(1)),
+			}
+
+			uuidsResult, response, err := cloudantService.GetUuids(getUuidsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(uuidsResult).ToNot(BeNil())
+		})
+	})
+
 	Describe(`GetDbUpdates - Retrieve change events for all databases`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -159,7 +159,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			getDbUpdatesOptions := &cloudantv1.GetDbUpdatesOptions{
 				Descending: core.BoolPtr(false),
 				Feed:       core.StringPtr("normal"),
-				Heartbeat:  core.Int64Ptr(int64(0)),
+				Heartbeat:  core.Int64Ptr(int64(1)),
 				Limit:      core.Int64Ptr(int64(0)),
 				Timeout:    core.Int64Ptr(int64(60000)),
 				Since:      core.StringPtr("0"),
@@ -189,7 +189,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				Feed:            core.StringPtr("normal"),
 				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(0)),
+				Heartbeat:       core.Int64Ptr(int64(1)),
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
@@ -223,7 +223,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Descending:      core.BoolPtr(false),
 				Feed:            core.StringPtr("normal"),
 				Filter:          core.StringPtr("testString"),
-				Heartbeat:       core.Int64Ptr(int64(0)),
+				Heartbeat:       core.Int64Ptr(int64(1)),
 				IncludeDocs:     core.BoolPtr(false),
 				Limit:           core.Int64Ptr(int64(0)),
 				SeqInterval:     core.Int64Ptr(int64(1)),
@@ -315,7 +315,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			putDatabaseOptions := &cloudantv1.PutDatabaseOptions{
 				Db:          core.StringPtr("testString"),
 				Partitioned: core.BoolPtr(false),
-				Q:           core.Int64Ptr(int64(26)),
+				Q:           core.Int64Ptr(int64(16)),
 			}
 
 			ok, response, err := cloudantService.PutDatabase(putDatabaseOptions)
@@ -1753,7 +1753,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				GroupField:       core.StringPtr("testString"),
 				GroupLimit:       core.Int64Ptr(int64(1)),
 				GroupSort:        []string{"testString"},
-				Ranges:           map[string]map[string]map[string]string{"key1": map[string]map[string]string{"key1": map[string]string{"key1": "testString"}}},
+				Ranges:           map[string]map[string]string{"key1": map[string]string{"key1": "testString"}},
 			}
 
 			searchResult, response, err := cloudantService.PostSearch(postSearchOptions)
@@ -1789,7 +1789,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				GroupField:       core.StringPtr("testString"),
 				GroupLimit:       core.Int64Ptr(int64(1)),
 				GroupSort:        []string{"testString"},
-				Ranges:           map[string]map[string]map[string]string{"key1": map[string]map[string]string{"key1": map[string]string{"key1": "testString"}}},
+				Ranges:           map[string]map[string]string{"key1": map[string]string{"key1": "testString"}},
 			}
 
 			result, response, err := cloudantService.PostSearchAsStream(postSearchOptions)
@@ -1817,7 +1817,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`HeadReplicationDocument - Retrieve the HTTP headers for a replication document`, func() {
+	Describe(`HeadReplicationDocument - Retrieve the HTTP headers for a persistent replication`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -1863,7 +1863,117 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetReplicationDocument - Retrieve a replication document`, func() {
+	Describe(`PostReplicator - Create a persistent replication with a generated ID`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PostReplicator(postReplicatorOptions *PostReplicatorOptions)`, func() {
+			attachmentModel := &cloudantv1.Attachment{
+				ContentType:   core.StringPtr("testString"),
+				Data:          CreateMockByteArray("VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4="),
+				Digest:        core.StringPtr("testString"),
+				EncodedLength: core.Int64Ptr(int64(0)),
+				Encoding:      core.StringPtr("testString"),
+				Follows:       core.BoolPtr(true),
+				Length:        core.Int64Ptr(int64(0)),
+				Revpos:        core.Int64Ptr(int64(1)),
+				Stub:          core.BoolPtr(true),
+			}
+
+			revisionsModel := &cloudantv1.Revisions{
+				Ids:   []string{"testString"},
+				Start: core.Int64Ptr(int64(1)),
+			}
+
+			documentRevisionStatusModel := &cloudantv1.DocumentRevisionStatus{
+				Rev:    core.StringPtr("testString"),
+				Status: core.StringPtr("available"),
+			}
+
+			replicationCreateTargetParametersModel := &cloudantv1.ReplicationCreateTargetParameters{
+				N:           core.Int64Ptr(int64(3)),
+				Partitioned: core.BoolPtr(false),
+				Q:           core.Int64Ptr(int64(1)),
+			}
+
+			replicationDatabaseAuthBasicModel := &cloudantv1.ReplicationDatabaseAuthBasic{
+				Password: core.StringPtr("testString"),
+				Username: core.StringPtr("testString"),
+			}
+
+			replicationDatabaseAuthIamModel := &cloudantv1.ReplicationDatabaseAuthIam{
+				ApiKey: core.StringPtr("testString"),
+			}
+
+			replicationDatabaseAuthModel := &cloudantv1.ReplicationDatabaseAuth{
+				Basic: replicationDatabaseAuthBasicModel,
+				Iam:   replicationDatabaseAuthIamModel,
+			}
+
+			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
+				Auth:       replicationDatabaseAuthModel,
+				HeadersVar: map[string]string{"key1": "testString"},
+				URL:        core.StringPtr("https://my-source-instance.cloudantnosqldb.appdomain.cloud.example/animaldb"),
+			}
+
+			userContextModel := &cloudantv1.UserContext{
+				Db:    core.StringPtr("testString"),
+				Name:  core.StringPtr("john"),
+				Roles: []string{"_replicator"},
+			}
+
+			replicationDocumentModel := &cloudantv1.ReplicationDocument{
+				Attachments:        map[string]cloudantv1.Attachment{"key1": *attachmentModel},
+				Conflicts:          []string{"testString"},
+				Deleted:            core.BoolPtr(true),
+				DeletedConflicts:   []string{"testString"},
+				ID:                 core.StringPtr("testString"),
+				LocalSeq:           core.StringPtr("testString"),
+				Rev:                core.StringPtr("testString"),
+				Revisions:          revisionsModel,
+				RevsInfo:           []cloudantv1.DocumentRevisionStatus{*documentRevisionStatusModel},
+				Cancel:             core.BoolPtr(false),
+				CheckpointInterval: core.Int64Ptr(int64(4500)),
+				ConnectionTimeout:  core.Int64Ptr(int64(15000)),
+				Continuous:         core.BoolPtr(true),
+				CreateTarget:       core.BoolPtr(true),
+				CreateTargetParams: replicationCreateTargetParametersModel,
+				DocIds:             []string{"badger", "lemur", "llama"},
+				Filter:             core.StringPtr("ddoc/my_filter"),
+				HTTPConnections:    core.Int64Ptr(int64(10)),
+				Owner:              core.StringPtr("testString"),
+				QueryParams:        map[string]string{"key1": "testString"},
+				RetriesPerRequest:  core.Int64Ptr(int64(3)),
+				Selector:           map[string]interface{}{"anyKey": "anyValue"},
+				SinceSeq:           core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU"),
+				SocketOptions:      core.StringPtr("[{keepalive, true}, {nodelay, false}]"),
+				Source:             replicationDatabaseModel,
+				SourceProxy:        core.StringPtr("testString"),
+				Target:             replicationDatabaseModel,
+				TargetProxy:        core.StringPtr("testString"),
+				UseBulkGet:         core.BoolPtr(true),
+				UseCheckpoints:     core.BoolPtr(false),
+				UserCtx:            userContextModel,
+				WinningRevsOnly:    core.BoolPtr(false),
+				WorkerBatchSize:    core.Int64Ptr(int64(400)),
+				WorkerProcesses:    core.Int64Ptr(int64(3)),
+			}
+			replicationDocumentModel.Attachments["foo"] = *attachmentModel
+			replicationDocumentModel.SetProperty("foo", "testString")
+
+			postReplicatorOptions := &cloudantv1.PostReplicatorOptions{
+				ReplicationDocument: replicationDocumentModel,
+				Batch:               core.StringPtr("ok"),
+			}
+
+			documentResult, response, err := cloudantService.PostReplicator(postReplicatorOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(documentResult).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetReplicationDocument - Retrieve the configuration for a persistent replication`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -1890,7 +2000,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`PutReplicationDocument - Create or modify a replication using a replication document`, func() {
+	Describe(`PutReplicationDocument - Create or modify a persistent replication`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -2085,6 +2195,45 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`PostApiKeys - Generates API keys for apps or persons to enable database access`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PostApiKeys(postApiKeysOptions *PostApiKeysOptions)`, func() {
+			postApiKeysOptions := &cloudantv1.PostApiKeysOptions{}
+
+			apiKeysResult, response, err := cloudantService.PostApiKeys(postApiKeysOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(apiKeysResult).ToNot(BeNil())
+		})
+	})
+
+	Describe(`PutCloudantSecurityConfiguration - Modify only Cloudant related database permissions`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions)`, func() {
+			securityObjectModel := &cloudantv1.SecurityObject{
+				Names: []string{"testString"},
+				Roles: []string{"testString"},
+			}
+
+			putCloudantSecurityConfigurationOptions := &cloudantv1.PutCloudantSecurityConfigurationOptions{
+				Db:              core.StringPtr("testString"),
+				Cloudant:        map[string][]string{"key1": []string{"_reader"}},
+				Admins:          securityObjectModel,
+				CouchdbAuthOnly: core.BoolPtr(true),
+				Members:         securityObjectModel,
+			}
+
+			ok, response, err := cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(ok).ToNot(BeNil())
+		})
+	})
+
 	Describe(`GetSecurity - Retrieve database permissions information`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -2114,51 +2263,12 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			putSecurityOptions := &cloudantv1.PutSecurityOptions{
 				Db:              core.StringPtr("testString"),
 				Admins:          securityObjectModel,
-				Members:         securityObjectModel,
 				Cloudant:        map[string][]string{"key1": []string{"_reader"}},
 				CouchdbAuthOnly: core.BoolPtr(true),
+				Members:         securityObjectModel,
 			}
 
 			ok, response, err := cloudantService.PutSecurity(putSecurityOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(ok).ToNot(BeNil())
-		})
-	})
-
-	Describe(`PostApiKeys - Generates API keys for apps or persons to enable database access`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`PostApiKeys(postApiKeysOptions *PostApiKeysOptions)`, func() {
-			postApiKeysOptions := &cloudantv1.PostApiKeysOptions{}
-
-			apiKeysResult, response, err := cloudantService.PostApiKeys(postApiKeysOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(apiKeysResult).ToNot(BeNil())
-		})
-	})
-
-	Describe(`PutCloudantSecurityConfiguration - Modify only Cloudant related database permissions`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions)`, func() {
-			securityObjectModel := &cloudantv1.SecurityObject{
-				Names: []string{"testString"},
-				Roles: []string{"testString"},
-			}
-
-			putCloudantSecurityConfigurationOptions := &cloudantv1.PutCloudantSecurityConfigurationOptions{
-				Db:              core.StringPtr("testString"),
-				Cloudant:        map[string][]string{"key1": []string{"_reader"}},
-				Admins:          securityObjectModel,
-				Members:         securityObjectModel,
-				CouchdbAuthOnly: core.BoolPtr(true),
-			}
-
-			ok, response, err := cloudantService.PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(ok).ToNot(BeNil())
@@ -2443,34 +2553,6 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetMembershipInformation - Retrieve cluster membership information`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
-			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
-
-			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(membershipInformation).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetUpInformation - Retrieve information about whether the server is up`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
-			getUpInformationOptions := &cloudantv1.GetUpInformationOptions{}
-
-			upInformation, response, err := cloudantService.GetUpInformation(getUpInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(upInformation).ToNot(BeNil())
-		})
-	})
-
 	Describe(`GetActivityTrackerEvents - Retrieve Activity Tracker events information`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -2512,6 +2594,34 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(currentThroughputInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetMembershipInformation - Retrieve cluster membership information`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
+			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
+
+			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(membershipInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetUpInformation - Retrieve information about whether the server is up`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
+			getUpInformationOptions := &cloudantv1.GetUpInformationOptions{}
+
+			upInformation, response, err := cloudantService.GetUpInformation(getUpInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(upInformation).ToNot(BeNil())
 		})
 	})
 
@@ -2590,7 +2700,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteReplicationDocument - Cancel a replication`, func() {
+	Describe(`DeleteReplicationDocument - Cancel a persistent replication`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
