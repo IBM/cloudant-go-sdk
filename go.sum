@@ -1,5 +1,5 @@
-github.com/IBM/go-sdk-core/v5 v5.18.3 h1:q6IDU3N2bHGwijK9pMnzKC5gqdaRII56NzB4ZNdSFvY=
-github.com/IBM/go-sdk-core/v5 v5.18.3/go.mod h1:5kILxqEWOrwMhoD2b7J6Xv9Z2M6YIdT/6Oy+XRSsCGQ=
+github.com/IBM/go-sdk-core/v5 v5.18.5 h1:g0JRl3sYXJczB/yuDlrN6x22LJ6jIxhp0Sa4ARNW60c=
+github.com/IBM/go-sdk-core/v5 v5.18.5/go.mod h1:KonTFRR+8ZSgw5cxBSYo6E4WZoY1+7n1kfHM82VcjFU=
 github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 h1:DklsrG3dyBCFEj5IhUbnKptjxatkF07cF2ak3yi77so=
 github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2/go.mod h1:WaHUgvxTVq04UNunO+XhnAqY/wQc+bxr74GqbsZ/Jqw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
