@@ -17249,6 +17249,228 @@ var _ = Describe(`CloudantV1`, func() {
 			})
 		})
 	})
+	Describe(`GetSearchDiskSize(getSearchDiskSizeOptions *GetSearchDiskSizeOptions) - Operation response error`, func() {
+		getSearchDiskSizePath := "/testString/_design/testString/_search_disk_size/testString"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSearchDiskSizePath))
+					Expect(req.Method).To(Equal("GET"))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetSearchDiskSize with error: Operation response processing error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSearchDiskSizeOptions model
+				getSearchDiskSizeOptionsModel := new(cloudantv1.GetSearchDiskSizeOptions)
+				getSearchDiskSizeOptionsModel.Db = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Ddoc = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Index = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				cloudantService.EnableRetries(0, 0)
+				result, response, operationErr = cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetSearchDiskSize(getSearchDiskSizeOptions *GetSearchDiskSizeOptions)`, func() {
+		getSearchDiskSizePath := "/testString/_design/testString/_search_disk_size/testString"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSearchDiskSizePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"disk_size": 0}}`)
+				}))
+			})
+			It(`Invoke GetSearchDiskSize successfully with retries`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+				cloudantService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetSearchDiskSizeOptions model
+				getSearchDiskSizeOptionsModel := new(cloudantv1.GetSearchDiskSizeOptions)
+				getSearchDiskSizeOptionsModel.Db = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Ddoc = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Index = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := cloudantService.GetSearchDiskSizeWithContext(ctx, getSearchDiskSizeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				cloudantService.DisableRetries()
+				result, response, operationErr := cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = cloudantService.GetSearchDiskSizeWithContext(ctx, getSearchDiskSizeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getSearchDiskSizePath))
+					Expect(req.Method).To(Equal("GET"))
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"disk_size": 0}}`)
+				}))
+			})
+			It(`Invoke GetSearchDiskSize successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := cloudantService.GetSearchDiskSize(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetSearchDiskSizeOptions model
+				getSearchDiskSizeOptionsModel := new(cloudantv1.GetSearchDiskSizeOptions)
+				getSearchDiskSizeOptionsModel.Db = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Ddoc = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Index = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetSearchDiskSize with error: Operation validation and request error`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSearchDiskSizeOptions model
+				getSearchDiskSizeOptionsModel := new(cloudantv1.GetSearchDiskSizeOptions)
+				getSearchDiskSizeOptionsModel.Db = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Ddoc = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Index = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := cloudantService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetSearchDiskSizeOptions model with no property values
+				getSearchDiskSizeOptionsModelNew := new(cloudantv1.GetSearchDiskSizeOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetSearchDiskSize successfully`, func() {
+				cloudantService, serviceErr := cloudantv1.NewCloudantV1(&cloudantv1.CloudantV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(cloudantService).ToNot(BeNil())
+
+				// Construct an instance of the GetSearchDiskSizeOptions model
+				getSearchDiskSizeOptionsModel := new(cloudantv1.GetSearchDiskSizeOptions)
+				getSearchDiskSizeOptionsModel.Db = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Ddoc = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Index = core.StringPtr("testString")
+				getSearchDiskSizeOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := cloudantService.GetSearchDiskSize(getSearchDiskSizeOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions) - Operation response error`, func() {
 		getSearchInfoPath := "/testString/_design/testString/_search_info/testString"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
@@ -26588,6 +26810,22 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(getSchedulerJobsOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
 				Expect(getSchedulerJobsOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(getSchedulerJobsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetSearchDiskSizeOptions successfully`, func() {
+				// Construct an instance of the GetSearchDiskSizeOptions model
+				db := "testString"
+				ddoc := "testString"
+				index := "testString"
+				getSearchDiskSizeOptionsModel := cloudantService.NewGetSearchDiskSizeOptions(db, ddoc, index)
+				getSearchDiskSizeOptionsModel.SetDb("testString")
+				getSearchDiskSizeOptionsModel.SetDdoc("testString")
+				getSearchDiskSizeOptionsModel.SetIndex("testString")
+				getSearchDiskSizeOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getSearchDiskSizeOptionsModel).ToNot(BeNil())
+				Expect(getSearchDiskSizeOptionsModel.Db).To(Equal(core.StringPtr("testString")))
+				Expect(getSearchDiskSizeOptionsModel.Ddoc).To(Equal(core.StringPtr("testString")))
+				Expect(getSearchDiskSizeOptionsModel.Index).To(Equal(core.StringPtr("testString")))
+				Expect(getSearchDiskSizeOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetSearchInfoOptions successfully`, func() {
 				// Construct an instance of the GetSearchInfoOptions model

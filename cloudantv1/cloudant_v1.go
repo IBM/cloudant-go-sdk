@@ -5943,6 +5943,77 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 	return
 }
 
+// GetSearchDiskSize : Retrieve information about the search index disk size
+// Retrieve size of the search index on disk.
+func (cloudant *CloudantV1) GetSearchDiskSize(getSearchDiskSizeOptions *GetSearchDiskSizeOptions) (result *SearchDiskSizeInformation, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.GetSearchDiskSizeWithContext(context.Background(), getSearchDiskSizeOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetSearchDiskSizeWithContext is an alternate form of the GetSearchDiskSize method which supports a Context parameter
+func (cloudant *CloudantV1) GetSearchDiskSizeWithContext(ctx context.Context, getSearchDiskSizeOptions *GetSearchDiskSizeOptions) (result *SearchDiskSizeInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getSearchDiskSizeOptions, "getSearchDiskSizeOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getSearchDiskSizeOptions, "getSearchDiskSizeOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db":    *getSearchDiskSizeOptions.Db,
+		"ddoc":  *getSearchDiskSizeOptions.Ddoc,
+		"index": *getSearchDiskSizeOptions.Index,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search_disk_size/{index}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range getSearchDiskSizeOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSearchDiskSize")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "getSearchDiskSize", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSearchDiskSizeInformation)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // GetSearchInfo : Retrieve information about a search index
 // Retrieve search index metadata information, such as the size of the index on disk.
 func (cloudant *CloudantV1) GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions) (result *SearchInfoResult, response *core.DetailedResponse, err error) {
@@ -8657,7 +8728,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.23")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.25")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -10618,7 +10689,7 @@ func (options *DeleteLocalDocumentOptions) SetHeaders(param map[string]string) *
 
 // DeleteReplicationDocumentOptions : The DeleteReplicationDocument options.
 type DeleteReplicationDocumentOptions struct {
-	// Path parameter to specify the document ID.
+	// Path parameter to specify the ID of the stored replication configuration in the `_replicator` database.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter for a conditional HTTP request matching an ETag.
@@ -12929,7 +13000,7 @@ func (options *GetPartitionInformationOptions) SetHeaders(param map[string]strin
 
 // GetReplicationDocumentOptions : The GetReplicationDocument options.
 type GetReplicationDocumentOptions struct {
-	// Path parameter to specify the document ID.
+	// Path parameter to specify the ID of the stored replication configuration in the `_replicator` database.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter for a conditional HTTP request not matching an ETag.
@@ -13202,6 +13273,55 @@ func (_options *GetSchedulerJobsOptions) SetSkip(skip int64) *GetSchedulerJobsOp
 
 // SetHeaders : Allow user to set Headers
 func (options *GetSchedulerJobsOptions) SetHeaders(param map[string]string) *GetSchedulerJobsOptions {
+	options.Headers = param
+	return options
+}
+
+// GetSearchDiskSizeOptions : The GetSearchDiskSize options.
+type GetSearchDiskSizeOptions struct {
+	// Path parameter to specify the database name.
+	Db *string `json:"db" validate:"required,ne="`
+
+	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
+	// `_design/` prefix.
+	Ddoc *string `json:"ddoc" validate:"required,ne="`
+
+	// Path parameter to specify the index name.
+	Index *string `json:"index" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetSearchDiskSizeOptions : Instantiate GetSearchDiskSizeOptions
+func (*CloudantV1) NewGetSearchDiskSizeOptions(db string, ddoc string, index string) *GetSearchDiskSizeOptions {
+	return &GetSearchDiskSizeOptions{
+		Db:    core.StringPtr(db),
+		Ddoc:  core.StringPtr(ddoc),
+		Index: core.StringPtr(index),
+	}
+}
+
+// SetDb : Allow user to set Db
+func (_options *GetSearchDiskSizeOptions) SetDb(db string) *GetSearchDiskSizeOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
+}
+
+// SetDdoc : Allow user to set Ddoc
+func (_options *GetSearchDiskSizeOptions) SetDdoc(ddoc string) *GetSearchDiskSizeOptions {
+	_options.Ddoc = core.StringPtr(ddoc)
+	return _options
+}
+
+// SetIndex : Allow user to set Index
+func (_options *GetSearchDiskSizeOptions) SetIndex(index string) *GetSearchDiskSizeOptions {
+	_options.Index = core.StringPtr(index)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetSearchDiskSizeOptions) SetHeaders(param map[string]string) *GetSearchDiskSizeOptions {
 	options.Headers = param
 	return options
 }
@@ -13656,7 +13776,7 @@ func (options *HeadLocalDocumentOptions) SetHeaders(param map[string]string) *He
 
 // HeadReplicationDocumentOptions : The HeadReplicationDocument options.
 type HeadReplicationDocumentOptions struct {
-	// Path parameter to specify the document ID.
+	// Path parameter to specify the ID of the stored replication configuration in the `_replicator` database.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// Header parameter for a conditional HTTP request not matching an ETag.
@@ -18313,7 +18433,7 @@ func (options *PutLocalDocumentOptions) SetHeaders(param map[string]string) *Put
 
 // PutReplicationDocumentOptions : The PutReplicationDocument options.
 type PutReplicationDocumentOptions struct {
-	// Path parameter to specify the document ID.
+	// Path parameter to specify the ID of the stored replication configuration in the `_replicator` database.
 	DocID *string `json:"doc_id" validate:"required,ne="`
 
 	// HTTP request body for replication operations.
@@ -19681,6 +19801,32 @@ func UnmarshalSearchAnalyzeResult(m map[string]json.RawMessage, result interface
 	return
 }
 
+// SearchDiskSizeInformation : Schema for search index disk size.
+type SearchDiskSizeInformation struct {
+	// The name of the search index prefixed by the design document ID where the index is stored.
+	Name *string `json:"name" validate:"required"`
+
+	// Schema for search index disk size.
+	SearchIndex *SearchIndexDiskSize `json:"search_index" validate:"required"`
+}
+
+// UnmarshalSearchDiskSizeInformation unmarshals an instance of SearchDiskSizeInformation from the specified map of raw messages.
+func UnmarshalSearchDiskSizeInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SearchDiskSizeInformation)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "search_index", &obj.SearchIndex, UnmarshalSearchIndexDiskSize)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "search_index-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // SearchIndexDefinition : Schema for a search index definition.
 type SearchIndexDefinition struct {
 	// Schema for a search analyzer configuration.
@@ -19731,6 +19877,24 @@ func UnmarshalSearchIndexDefinition(m map[string]json.RawMessage, result interfa
 	err = core.UnmarshalPrimitive(m, "index", &obj.Index)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "index-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SearchIndexDiskSize : Schema for search index disk size.
+type SearchIndexDiskSize struct {
+	// The size of the search index on disk.
+	DiskSize *int64 `json:"disk_size,omitempty"`
+}
+
+// UnmarshalSearchIndexDiskSize unmarshals an instance of SearchIndexDiskSize from the specified map of raw messages.
+func UnmarshalSearchIndexDiskSize(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SearchIndexDiskSize)
+	err = core.UnmarshalPrimitive(m, "disk_size", &obj.DiskSize)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "disk_size-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
