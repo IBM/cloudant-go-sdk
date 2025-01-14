@@ -1799,6 +1799,24 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`GetSearchDiskSize - Retrieve information about the search index disk size`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetSearchDiskSize(getSearchDiskSizeOptions *GetSearchDiskSizeOptions)`, func() {
+			getSearchDiskSizeOptions := &cloudantv1.GetSearchDiskSizeOptions{
+				Db:    core.StringPtr("testString"),
+				Ddoc:  core.StringPtr("testString"),
+				Index: core.StringPtr("testString"),
+			}
+
+			searchDiskSizeInformation, response, err := cloudantService.GetSearchDiskSize(getSearchDiskSizeOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(searchDiskSizeInformation).ToNot(BeNil())
+		})
+	})
+
 	Describe(`GetSearchInfo - Retrieve information about a search index`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
