@@ -8543,6 +8543,126 @@ func (cloudant *CloudantV1) PostActivityTrackerEventsWithContext(ctx context.Con
 	return
 }
 
+// GetCapacityDatabasesInformation : Retrieve maximum allowed database count
+// Retrieves the maximum number of databases currently allowed in the instance.
+func (cloudant *CloudantV1) GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions *GetCapacityDatabasesInformationOptions) (result *CapacityDatabasesInformation, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.GetCapacityDatabasesInformationWithContext(context.Background(), getCapacityDatabasesInformationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetCapacityDatabasesInformationWithContext is an alternate form of the GetCapacityDatabasesInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetCapacityDatabasesInformationWithContext(ctx context.Context, getCapacityDatabasesInformationOptions *GetCapacityDatabasesInformationOptions) (result *CapacityDatabasesInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getCapacityDatabasesInformationOptions, "getCapacityDatabasesInformationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/capacity/databases`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range getCapacityDatabasesInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityDatabasesInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "getCapacityDatabasesInformation", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityDatabasesInformation)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetCurrentDatabasesInformation : Retrieve current database count
+// Retrieves the current number of databases that exist in the instance.
+func (cloudant *CloudantV1) GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions *GetCurrentDatabasesInformationOptions) (result *CurrentDatabasesInformation, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.GetCurrentDatabasesInformationWithContext(context.Background(), getCurrentDatabasesInformationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetCurrentDatabasesInformationWithContext is an alternate form of the GetCurrentDatabasesInformation method which supports a Context parameter
+func (cloudant *CloudantV1) GetCurrentDatabasesInformationWithContext(ctx context.Context, getCurrentDatabasesInformationOptions *GetCurrentDatabasesInformationOptions) (result *CurrentDatabasesInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getCurrentDatabasesInformationOptions, "getCurrentDatabasesInformationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/current/databases`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range getCurrentDatabasesInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentDatabasesInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "getCurrentDatabasesInformation", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentDatabasesInformation)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // GetCurrentThroughputInformation : Retrieve the current provisioned throughput capacity consumption
 // View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current consumption
 // shows the quantities of reads, writes, and global queries conducted against the instance for a given second.
@@ -8728,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.25")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.27")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9725,6 +9845,42 @@ func UnmarshalBulkGetResultItem(m map[string]json.RawMessage, result interface{}
 	return
 }
 
+// CapacityDatabasesInformation : Schema for information about maximum total database count.
+type CapacityDatabasesInformation struct {
+	// Schema for information about the current database capacity.
+	Current *CapacityDatabasesInformationCurrent `json:"current,omitempty"`
+}
+
+// UnmarshalCapacityDatabasesInformation unmarshals an instance of CapacityDatabasesInformation from the specified map of raw messages.
+func UnmarshalCapacityDatabasesInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CapacityDatabasesInformation)
+	err = core.UnmarshalModel(m, "current", &obj.Current, UnmarshalCapacityDatabasesInformationCurrent)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "current-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CapacityDatabasesInformationCurrent : Schema for information about the current database capacity.
+type CapacityDatabasesInformationCurrent struct {
+	// Schema for databases count.
+	Databases *DatabasesCountInformation `json:"databases,omitempty"`
+}
+
+// UnmarshalCapacityDatabasesInformationCurrent unmarshals an instance of CapacityDatabasesInformationCurrent from the specified map of raw messages.
+func UnmarshalCapacityDatabasesInformationCurrent(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CapacityDatabasesInformationCurrent)
+	err = core.UnmarshalModel(m, "databases", &obj.Databases, UnmarshalDatabasesCountInformation)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "databases-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // CapacityThroughputInformation : Schema for information about the currently provisioned and target throughput capacity.
 type CapacityThroughputInformation struct {
 	// Detailed information about provisioned throughput capacity.
@@ -9954,6 +10110,24 @@ func UnmarshalCorsInformation(m map[string]json.RawMessage, result interface{}) 
 	err = core.UnmarshalPrimitive(m, "origins", &obj.Origins)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "origins-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// CurrentDatabasesInformation : Schema for information about the current database counts.
+type CurrentDatabasesInformation struct {
+	// Schema for databases count.
+	Databases *DatabasesCountInformation `json:"databases,omitempty"`
+}
+
+// UnmarshalCurrentDatabasesInformation unmarshals an instance of CurrentDatabasesInformation from the specified map of raw messages.
+func UnmarshalCurrentDatabasesInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CurrentDatabasesInformation)
+	err = core.UnmarshalModel(m, "databases", &obj.Databases, UnmarshalDatabasesCountInformation)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "databases-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -10199,6 +10373,24 @@ func UnmarshalDatabaseInformationProps(m map[string]json.RawMessage, result inte
 	err = core.UnmarshalPrimitive(m, "partitioned", &obj.Partitioned)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "partitioned-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DatabasesCountInformation : Schema for databases count.
+type DatabasesCountInformation struct {
+	// The total number of databases.
+	Total *int64 `json:"total,omitempty"`
+}
+
+// UnmarshalDatabasesCountInformation unmarshals an instance of DatabasesCountInformation from the specified map of raw messages.
+func UnmarshalDatabasesCountInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DatabasesCountInformation)
+	err = core.UnmarshalPrimitive(m, "total", &obj.Total)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "total-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -12293,6 +12485,24 @@ func (options *GetAttachmentOptions) SetHeaders(param map[string]string) *GetAtt
 	return options
 }
 
+// GetCapacityDatabasesInformationOptions : The GetCapacityDatabasesInformation options.
+type GetCapacityDatabasesInformationOptions struct {
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetCapacityDatabasesInformationOptions : Instantiate GetCapacityDatabasesInformationOptions
+func (*CloudantV1) NewGetCapacityDatabasesInformationOptions() *GetCapacityDatabasesInformationOptions {
+	return &GetCapacityDatabasesInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetCapacityDatabasesInformationOptions) SetHeaders(param map[string]string) *GetCapacityDatabasesInformationOptions {
+	options.Headers = param
+	return options
+}
+
 // GetCapacityThroughputInformationOptions : The GetCapacityThroughputInformation options.
 type GetCapacityThroughputInformationOptions struct {
 
@@ -12325,6 +12535,24 @@ func (*CloudantV1) NewGetCorsInformationOptions() *GetCorsInformationOptions {
 
 // SetHeaders : Allow user to set Headers
 func (options *GetCorsInformationOptions) SetHeaders(param map[string]string) *GetCorsInformationOptions {
+	options.Headers = param
+	return options
+}
+
+// GetCurrentDatabasesInformationOptions : The GetCurrentDatabasesInformation options.
+type GetCurrentDatabasesInformationOptions struct {
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetCurrentDatabasesInformationOptions : Instantiate GetCurrentDatabasesInformationOptions
+func (*CloudantV1) NewGetCurrentDatabasesInformationOptions() *GetCurrentDatabasesInformationOptions {
+	return &GetCurrentDatabasesInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetCurrentDatabasesInformationOptions) SetHeaders(param map[string]string) *GetCurrentDatabasesInformationOptions {
 	options.Headers = param
 	return options
 }
