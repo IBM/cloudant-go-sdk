@@ -2601,6 +2601,34 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`GetCapacityDatabasesInformation - Retrieve maximum allowed database count`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions *GetCapacityDatabasesInformationOptions)`, func() {
+			getCapacityDatabasesInformationOptions := &cloudantv1.GetCapacityDatabasesInformationOptions{}
+
+			capacityDatabasesInformation, response, err := cloudantService.GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(capacityDatabasesInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetCurrentDatabasesInformation - Retrieve current database count`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions *GetCurrentDatabasesInformationOptions)`, func() {
+			getCurrentDatabasesInformationOptions := &cloudantv1.GetCurrentDatabasesInformationOptions{}
+
+			currentDatabasesInformation, response, err := cloudantService.GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(currentDatabasesInformation).ToNot(BeNil())
+		})
+	})
+
 	Describe(`GetCurrentThroughputInformation - Retrieve the current provisioned throughput capacity consumption`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
