@@ -8,7 +8,7 @@ require (
 	github.com/IBM/go-sdk-core/v5 v5.19.0
 	github.com/go-openapi/strfmt v0.23.0
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.36.2
+	github.com/onsi/gomega v1.36.3
 	golang.org/x/net v0.37.0
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.24.0 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.7 // indirect
