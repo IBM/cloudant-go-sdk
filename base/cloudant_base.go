@@ -153,7 +153,7 @@ func (c *BaseService) Request(req *http.Request, result interface{}) (detailedRe
 							// If we couldn't unescape for some reason, just error with the escaped form
 							segmentToValidateMessage = segmentToValidate
 						}
-						err = fmt.Errorf("%v %v starts with the invalid _ character.", rule.errorParameterName, segmentToValidateMessage)
+						err = fmt.Errorf("%v %v starts with the invalid _ character", rule.errorParameterName, segmentToValidateMessage)
 						return nil, core.SDKErrorf(err, "", "invalid-parameter", common.GetComponentInfo())
 					}
 				}
@@ -171,9 +171,9 @@ func (c *BaseService) SetServiceURL(url string) error {
 	// Set CouchDb Session's auth URL to Base service URL
 	if c.Options.Authenticator.AuthenticationType() == auth.AUTHTYPE_COUCHDB_SESSION {
 		a := c.Options.Authenticator.(*auth.CouchDbSessionAuthenticator)
-		a.URL = c.BaseService.GetServiceURL()
+		a.URL = c.GetServiceURL()
 	}
-	serviceUrl, err := neturl.ParseRequestURI(c.BaseService.GetServiceURL())
+	serviceUrl, err := neturl.ParseRequestURI(c.GetServiceURL())
 	if err != nil {
 		return nil
 	}

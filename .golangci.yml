@@ -1,62 +1,61 @@
+version: "2"
 linters:
-  disable-all: true
+  default: none
   enable:
-    # defaults
-    - govet
     - errcheck
+    - goheader
+    - govet
+    - ineffassign
     - staticcheck
     - unused
-    - gosimple
-    - ineffassign
-    - typecheck
-
-    # custom
-    - goheader
+  settings:
+    goheader:
+      values:
+        regexp:
+          COPYRIGHT: (© Copyright IBM Corporation 20\d{2}(?:, 20\d{2})?\. All Rights Reserved\.|\(C\) Copyright IBM Corp\. 20\d{2}\.)
+      template-path: config/header-template.txt
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - errcheck
+          - govet
+          - ineffassign
+          - staticcheck
+          - unused
+        path: cloudantv1/cloudant_v1\.go
+      - linters:
+          - errcheck
+          - govet
+          - ineffassign
+          - staticcheck
+          - unused
+        path: cloudantv1/cloudant_v1_suite_test\.go
+      - linters:
+          - errcheck
+          - govet
+          - ineffassign
+          - staticcheck
+          - unused
+        path: cloudantv1/cloudant_v1_test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
     - goimports
-linters-settings:
-  goheader:
-    values:
-      regexp:
-        COPYRIGHT: "(© Copyright IBM Corporation 20\\d{2}(?:, 20\\d{2})?\\. All Rights Reserved\\.|\\(C\\) Copyright IBM Corp\\. 20\\d{2}\\.)"
-    template-path: config/header-template.txt
-issues:
-  exclude-rules:
-    - path: cloudantv1/cloudant_v1\.go
-      linters:
-        # defaults
-        - govet
-        - errcheck
-        - staticcheck
-        - unused
-        - gosimple
-        - ineffassign
-        - typecheck
-
-        # custom
-        - goimports
-    - path: cloudantv1/cloudant_v1_suite_test\.go
-      linters:
-        # defaults
-        - govet
-        - errcheck
-        - staticcheck
-        - unused
-        - gosimple
-        - ineffassign
-        - typecheck
-
-        # custom
-        - goimports
-    - path: cloudantv1/cloudant_v1_test\.go
-      linters:
-        # defaults
-        - govet
-        - errcheck
-        - staticcheck
-        - unused
-        - gosimple
-        - ineffassign
-        - typecheck
-
-        # custom
-        - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      - cloudantv1/cloudant_v1\.go
+      - cloudantv1/cloudant_v1_suite_test\.go
+      - cloudantv1/cloudant_v1_test\.go

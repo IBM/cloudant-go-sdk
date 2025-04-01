@@ -431,7 +431,7 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			u, err := url.Parse(server.URL)
 			Expect(err).To(BeNil())
 			var cookie *http.Cookie
-			for _, c := range cloudant.BaseService.Client.Jar.Cookies(u) {
+			for _, c := range cloudant.Client.Jar.Cookies(u) {
 				if c.Name == "AuthSession" {
 					cookie = c
 					break
