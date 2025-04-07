@@ -192,8 +192,15 @@ var _ = Describe(`ChangesFollower options`, func() {
 
 			Expect(followerErr).ShouldNot(HaveOccurred())
 			Expect(follower).ToNot(BeNil())
+			Expect(follower.mode).To(Equal(Finite))
+			Expect(follower.options).ToNot(BeNil())
 
 			o := follower.options
+			Expect(*o.Feed).Should(Equal(cloudantv1.PostChangesOptionsFeedNormalConst))
+
+			follower.mode = Listen
+			follower.setOptionsDefaults()
+
 			Expect(*o.Feed).Should(Equal(cloudantv1.PostChangesOptionsFeedLongpollConst))
 			Expect(*o.Timeout).Should(Equal(LongpollTimeout.Milliseconds()))
 		})
@@ -203,13 +210,20 @@ var _ = Describe(`ChangesFollower options`, func() {
 
 			Expect(followerErr).ShouldNot(HaveOccurred())
 			Expect(follower).ToNot(BeNil())
+			Expect(follower.mode).To(Equal(Finite))
+			Expect(follower.options).ToNot(BeNil())
 
 			follower.setOptionsDefaults().withLimit(12)
 
 			o := follower.options
+			Expect(*o.Feed).Should(Equal(cloudantv1.PostChangesOptionsFeedNormalConst))
+
+			follower.mode = Listen
+			follower.setOptionsDefaults().withLimit(12)
+
 			Expect(*o.Feed).Should(Equal(cloudantv1.PostChangesOptionsFeedLongpollConst))
 			Expect(*o.Timeout).Should(Equal(LongpollTimeout.Milliseconds()))
-			Expect(*o.Limit).Should(Equal(int64(12)))
+			Expect(*o.Limit).Should(BeEquivalentTo(12))
 		})
 
 		It(`Set defaults with PostChangesOptions limit`, func() {
@@ -218,13 +232,20 @@ var _ = Describe(`ChangesFollower options`, func() {
 
 			Expect(followerErr).ShouldNot(HaveOccurred())
 			Expect(follower).ToNot(BeNil())
+			Expect(follower.mode).To(Equal(Finite))
+			Expect(follower.options).ToNot(BeNil())
 
 			follower.setOptionsDefaults().withLimit(12)
 
 			o := follower.options
+			Expect(*o.Feed).Should(Equal(cloudantv1.PostChangesOptionsFeedNormalConst))
+
+			follower.mode = Listen
+			follower.setOptionsDefaults().withLimit(12)
+
 			Expect(*o.Feed).Should(Equal(cloudantv1.PostChangesOptionsFeedLongpollConst))
 			Expect(*o.Timeout).Should(Equal(LongpollTimeout.Milliseconds()))
-			Expect(*o.Limit).Should(Equal(int64(12)))
+			Expect(*o.Limit).Should(BeEquivalentTo(12))
 		})
 	})
 

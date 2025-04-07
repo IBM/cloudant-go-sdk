@@ -296,8 +296,13 @@ func validateOptions(o *cloudantv1.PostChangesOptions) error {
 }
 
 func (cf *ChangesFollower) setOptionsDefaults() *ChangesFollower {
-	cf.options.SetFeed(cloudantv1.PostChangesOptionsFeedLongpollConst)
-	cf.options.SetTimeout(LongpollTimeout.Milliseconds())
+	switch cf.mode {
+	case Finite:
+		cf.options.SetFeed(cloudantv1.PostChangesOptionsFeedNormalConst)
+	case Listen:
+		cf.options.SetFeed(cloudantv1.PostChangesOptionsFeedLongpollConst)
+		cf.options.SetTimeout(LongpollTimeout.Milliseconds())
+	}
 	return cf
 }
 
