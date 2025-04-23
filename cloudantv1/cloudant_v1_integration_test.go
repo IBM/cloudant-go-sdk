@@ -2571,7 +2571,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetActivityTrackerEvents - Retrieve Activity Tracker events information`, func() {
+	Describe(`GetActivityTrackerEvents - Retrieve activity tracking events information`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -2585,7 +2585,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`PostActivityTrackerEvents - Modify Activity Tracker events configuration`, func() {
+	Describe(`PostActivityTrackerEvents - Modify activity tracking events configuration`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})

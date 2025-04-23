@@ -8407,8 +8407,8 @@ func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getAc
 	return
 }
 
-// GetActivityTrackerEvents : Retrieve Activity Tracker events information
-// Check event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+// GetActivityTrackerEvents : Retrieve activity tracking events information
+// Check event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
 func (cloudant *CloudantV1) GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions) (result *ActivityTrackerEvents, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.GetActivityTrackerEventsWithContext(context.Background(), getActivityTrackerEventsOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8467,8 +8467,8 @@ func (cloudant *CloudantV1) GetActivityTrackerEventsWithContext(ctx context.Cont
 	return
 }
 
-// PostActivityTrackerEvents : Modify Activity Tracker events configuration
-// Configure event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
+// PostActivityTrackerEvents : Modify activity tracking events configuration
+// Configure event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance.
 func (cloudant *CloudantV1) PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	result, response, err = cloudant.PostActivityTrackerEventsWithContext(context.Background(), postActivityTrackerEventsOptions)
 	err = core.RepurposeSDKProblem(err, "")
@@ -8848,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.27")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.28")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9170,10 +9170,10 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 	return
 }
 
-// ActivityTrackerEvents : Schema for Activity Tracker events.
+// ActivityTrackerEvents : Schema for activity tracking events.
 type ActivityTrackerEvents struct {
-	// An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
-	// "management" is a required element of this array.
+	// An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance. "management"
+	// is a required element of this array.
 	Types []string `json:"types" validate:"required"`
 }
 
@@ -9395,47 +9395,48 @@ type Analyzer struct {
 // * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
 // index default_field the default is `standard`.
 const (
-	AnalyzerNameArabicConst     = "arabic"
-	AnalyzerNameArmenianConst   = "armenian"
-	AnalyzerNameBasqueConst     = "basque"
-	AnalyzerNameBrazilianConst  = "brazilian"
-	AnalyzerNameBulgarianConst  = "bulgarian"
-	AnalyzerNameCatalanConst    = "catalan"
-	AnalyzerNameChineseConst    = "chinese"
-	AnalyzerNameCjkConst        = "cjk"
-	AnalyzerNameClassicConst    = "classic"
-	AnalyzerNameCzechConst      = "czech"
-	AnalyzerNameDanishConst     = "danish"
-	AnalyzerNameDutchConst      = "dutch"
-	AnalyzerNameEmailConst      = "email"
-	AnalyzerNameEnglishConst    = "english"
-	AnalyzerNameFinnishConst    = "finnish"
-	AnalyzerNameFrenchConst     = "french"
-	AnalyzerNameGalicianConst   = "galician"
-	AnalyzerNameGermanConst     = "german"
-	AnalyzerNameGreekConst      = "greek"
-	AnalyzerNameHindiConst      = "hindi"
-	AnalyzerNameHungarianConst  = "hungarian"
-	AnalyzerNameIndonesianConst = "indonesian"
-	AnalyzerNameIrishConst      = "irish"
-	AnalyzerNameItalianConst    = "italian"
-	AnalyzerNameJapaneseConst   = "japanese"
-	AnalyzerNameKeywordConst    = "keyword"
-	AnalyzerNameLatvianConst    = "latvian"
-	AnalyzerNameNorwegianConst  = "norwegian"
-	AnalyzerNamePerfieldConst   = "perfield"
-	AnalyzerNamePersianConst    = "persian"
-	AnalyzerNamePolishConst     = "polish"
-	AnalyzerNamePortugueseConst = "portuguese"
-	AnalyzerNameRomanianConst   = "romanian"
-	AnalyzerNameRussianConst    = "russian"
-	AnalyzerNameSimpleConst     = "simple"
-	AnalyzerNameSpanishConst    = "spanish"
-	AnalyzerNameStandardConst   = "standard"
-	AnalyzerNameSwedishConst    = "swedish"
-	AnalyzerNameThaiConst       = "thai"
-	AnalyzerNameTurkishConst    = "turkish"
-	AnalyzerNameWhitespaceConst = "whitespace"
+	AnalyzerNameArabicConst             = "arabic"
+	AnalyzerNameArmenianConst           = "armenian"
+	AnalyzerNameBasqueConst             = "basque"
+	AnalyzerNameBrazilianConst          = "brazilian"
+	AnalyzerNameBulgarianConst          = "bulgarian"
+	AnalyzerNameCatalanConst            = "catalan"
+	AnalyzerNameChineseConst            = "chinese"
+	AnalyzerNameCjkConst                = "cjk"
+	AnalyzerNameClassicConst            = "classic"
+	AnalyzerNameCzechConst              = "czech"
+	AnalyzerNameDanishConst             = "danish"
+	AnalyzerNameDutchConst              = "dutch"
+	AnalyzerNameEmailConst              = "email"
+	AnalyzerNameEnglishConst            = "english"
+	AnalyzerNameFinnishConst            = "finnish"
+	AnalyzerNameFrenchConst             = "french"
+	AnalyzerNameGalicianConst           = "galician"
+	AnalyzerNameGermanConst             = "german"
+	AnalyzerNameGreekConst              = "greek"
+	AnalyzerNameHindiConst              = "hindi"
+	AnalyzerNameHungarianConst          = "hungarian"
+	AnalyzerNameIndonesianConst         = "indonesian"
+	AnalyzerNameIrishConst              = "irish"
+	AnalyzerNameItalianConst            = "italian"
+	AnalyzerNameJapaneseConst           = "japanese"
+	AnalyzerNameKeywordConst            = "keyword"
+	AnalyzerNameLatvianConst            = "latvian"
+	AnalyzerNameNorwegianConst          = "norwegian"
+	AnalyzerNamePerfieldConst           = "perfield"
+	AnalyzerNamePersianConst            = "persian"
+	AnalyzerNamePolishConst             = "polish"
+	AnalyzerNamePortugueseConst         = "portuguese"
+	AnalyzerNameRomanianConst           = "romanian"
+	AnalyzerNameRussianConst            = "russian"
+	AnalyzerNameSimpleConst             = "simple"
+	AnalyzerNameSimpleAsciifoldingConst = "simple_asciifolding"
+	AnalyzerNameSpanishConst            = "spanish"
+	AnalyzerNameStandardConst           = "standard"
+	AnalyzerNameSwedishConst            = "swedish"
+	AnalyzerNameThaiConst               = "thai"
+	AnalyzerNameTurkishConst            = "turkish"
+	AnalyzerNameWhitespaceConst         = "whitespace"
 )
 
 // NewAnalyzer : Instantiate Analyzer (Generic Model Constructor)
@@ -9488,47 +9489,48 @@ type AnalyzerConfiguration struct {
 // * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
 // index default_field the default is `standard`.
 const (
-	AnalyzerConfigurationNameArabicConst     = "arabic"
-	AnalyzerConfigurationNameArmenianConst   = "armenian"
-	AnalyzerConfigurationNameBasqueConst     = "basque"
-	AnalyzerConfigurationNameBrazilianConst  = "brazilian"
-	AnalyzerConfigurationNameBulgarianConst  = "bulgarian"
-	AnalyzerConfigurationNameCatalanConst    = "catalan"
-	AnalyzerConfigurationNameChineseConst    = "chinese"
-	AnalyzerConfigurationNameCjkConst        = "cjk"
-	AnalyzerConfigurationNameClassicConst    = "classic"
-	AnalyzerConfigurationNameCzechConst      = "czech"
-	AnalyzerConfigurationNameDanishConst     = "danish"
-	AnalyzerConfigurationNameDutchConst      = "dutch"
-	AnalyzerConfigurationNameEmailConst      = "email"
-	AnalyzerConfigurationNameEnglishConst    = "english"
-	AnalyzerConfigurationNameFinnishConst    = "finnish"
-	AnalyzerConfigurationNameFrenchConst     = "french"
-	AnalyzerConfigurationNameGalicianConst   = "galician"
-	AnalyzerConfigurationNameGermanConst     = "german"
-	AnalyzerConfigurationNameGreekConst      = "greek"
-	AnalyzerConfigurationNameHindiConst      = "hindi"
-	AnalyzerConfigurationNameHungarianConst  = "hungarian"
-	AnalyzerConfigurationNameIndonesianConst = "indonesian"
-	AnalyzerConfigurationNameIrishConst      = "irish"
-	AnalyzerConfigurationNameItalianConst    = "italian"
-	AnalyzerConfigurationNameJapaneseConst   = "japanese"
-	AnalyzerConfigurationNameKeywordConst    = "keyword"
-	AnalyzerConfigurationNameLatvianConst    = "latvian"
-	AnalyzerConfigurationNameNorwegianConst  = "norwegian"
-	AnalyzerConfigurationNamePerfieldConst   = "perfield"
-	AnalyzerConfigurationNamePersianConst    = "persian"
-	AnalyzerConfigurationNamePolishConst     = "polish"
-	AnalyzerConfigurationNamePortugueseConst = "portuguese"
-	AnalyzerConfigurationNameRomanianConst   = "romanian"
-	AnalyzerConfigurationNameRussianConst    = "russian"
-	AnalyzerConfigurationNameSimpleConst     = "simple"
-	AnalyzerConfigurationNameSpanishConst    = "spanish"
-	AnalyzerConfigurationNameStandardConst   = "standard"
-	AnalyzerConfigurationNameSwedishConst    = "swedish"
-	AnalyzerConfigurationNameThaiConst       = "thai"
-	AnalyzerConfigurationNameTurkishConst    = "turkish"
-	AnalyzerConfigurationNameWhitespaceConst = "whitespace"
+	AnalyzerConfigurationNameArabicConst             = "arabic"
+	AnalyzerConfigurationNameArmenianConst           = "armenian"
+	AnalyzerConfigurationNameBasqueConst             = "basque"
+	AnalyzerConfigurationNameBrazilianConst          = "brazilian"
+	AnalyzerConfigurationNameBulgarianConst          = "bulgarian"
+	AnalyzerConfigurationNameCatalanConst            = "catalan"
+	AnalyzerConfigurationNameChineseConst            = "chinese"
+	AnalyzerConfigurationNameCjkConst                = "cjk"
+	AnalyzerConfigurationNameClassicConst            = "classic"
+	AnalyzerConfigurationNameCzechConst              = "czech"
+	AnalyzerConfigurationNameDanishConst             = "danish"
+	AnalyzerConfigurationNameDutchConst              = "dutch"
+	AnalyzerConfigurationNameEmailConst              = "email"
+	AnalyzerConfigurationNameEnglishConst            = "english"
+	AnalyzerConfigurationNameFinnishConst            = "finnish"
+	AnalyzerConfigurationNameFrenchConst             = "french"
+	AnalyzerConfigurationNameGalicianConst           = "galician"
+	AnalyzerConfigurationNameGermanConst             = "german"
+	AnalyzerConfigurationNameGreekConst              = "greek"
+	AnalyzerConfigurationNameHindiConst              = "hindi"
+	AnalyzerConfigurationNameHungarianConst          = "hungarian"
+	AnalyzerConfigurationNameIndonesianConst         = "indonesian"
+	AnalyzerConfigurationNameIrishConst              = "irish"
+	AnalyzerConfigurationNameItalianConst            = "italian"
+	AnalyzerConfigurationNameJapaneseConst           = "japanese"
+	AnalyzerConfigurationNameKeywordConst            = "keyword"
+	AnalyzerConfigurationNameLatvianConst            = "latvian"
+	AnalyzerConfigurationNameNorwegianConst          = "norwegian"
+	AnalyzerConfigurationNamePerfieldConst           = "perfield"
+	AnalyzerConfigurationNamePersianConst            = "persian"
+	AnalyzerConfigurationNamePolishConst             = "polish"
+	AnalyzerConfigurationNamePortugueseConst         = "portuguese"
+	AnalyzerConfigurationNameRomanianConst           = "romanian"
+	AnalyzerConfigurationNameRussianConst            = "russian"
+	AnalyzerConfigurationNameSimpleConst             = "simple"
+	AnalyzerConfigurationNameSimpleAsciifoldingConst = "simple_asciifolding"
+	AnalyzerConfigurationNameSpanishConst            = "spanish"
+	AnalyzerConfigurationNameStandardConst           = "standard"
+	AnalyzerConfigurationNameSwedishConst            = "swedish"
+	AnalyzerConfigurationNameThaiConst               = "thai"
+	AnalyzerConfigurationNameTurkishConst            = "turkish"
+	AnalyzerConfigurationNameWhitespaceConst         = "whitespace"
 )
 
 // NewAnalyzerConfiguration : Instantiate AnalyzerConfiguration (Generic Model Constructor)
@@ -14860,8 +14862,8 @@ func UnmarshalPartitionedIndexesInformation(m map[string]json.RawMessage, result
 
 // PostActivityTrackerEventsOptions : The PostActivityTrackerEvents options.
 type PostActivityTrackerEventsOptions struct {
-	// An array of event types that are being sent to IBM Cloud Activity Tracker for the IBM Cloudant instance.
-	// "management" is a required element of this array.
+	// An array of event types sent to IBM Cloud Activity Tracker Event Routing for the IBM Cloudant instance. "management"
+	// is a required element of this array.
 	Types []string `json:"types" validate:"required"`
 
 	// Allows users to set headers on API requests.
