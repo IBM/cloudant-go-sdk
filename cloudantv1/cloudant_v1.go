@@ -198,12 +198,12 @@ func (cloudant *CloudantV1) GetServerInformationWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range getServerInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetServerInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetServerInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getServerInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -259,12 +259,12 @@ func (cloudant *CloudantV1) GetCapacityThroughputInformationWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range getCapacityThroughputInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityThroughputInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityThroughputInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getCapacityThroughputInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -325,12 +325,12 @@ func (cloudant *CloudantV1) PutCapacityThroughputConfigurationWithContext(ctx co
 		return
 	}
 
-	for headerName, headerValue := range putCapacityThroughputConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCapacityThroughputConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCapacityThroughputConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putCapacityThroughputConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -399,12 +399,12 @@ func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOpt
 		return
 	}
 
-	for headerName, headerValue := range getUuidsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetUuids")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetUuids")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getUuidsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -470,12 +470,12 @@ func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUp
 		return
 	}
 
-	for headerName, headerValue := range getDbUpdatesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDbUpdates")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDbUpdates")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDbUpdatesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -569,12 +569,12 @@ func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChan
 		return
 	}
 
-	for headerName, headerValue := range postChangesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChanges")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChanges")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postChangesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -712,12 +712,12 @@ func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	for headerName, headerValue := range postChangesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChangesAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostChangesAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postChangesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -836,12 +836,12 @@ func (cloudant *CloudantV1) HeadDatabaseWithContext(ctx context.Context, headDat
 		return
 	}
 
-	for headerName, headerValue := range headDatabaseOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadDatabase")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadDatabase")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headDatabaseOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -886,12 +886,12 @@ func (cloudant *CloudantV1) GetAllDbsWithContext(ctx context.Context, getAllDbsO
 		return
 	}
 
-	for headerName, headerValue := range getAllDbsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetAllDbs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetAllDbs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getAllDbsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -960,12 +960,12 @@ func (cloudant *CloudantV1) PostDbsInfoWithContext(ctx context.Context, postDbsI
 		return
 	}
 
-	for headerName, headerValue := range postDbsInfoOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDbsInfo")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDbsInfo")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postDbsInfoOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1042,12 +1042,12 @@ func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, delet
 		return
 	}
 
-	for headerName, headerValue := range deleteDatabaseOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteDatabase")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteDatabase")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteDatabaseOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1111,12 +1111,12 @@ func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Contex
 		return
 	}
 
-	for headerName, headerValue := range getDatabaseInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDatabaseInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDatabaseInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDatabaseInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1180,12 +1180,12 @@ func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatab
 		return
 	}
 
-	for headerName, headerValue := range putDatabaseOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutDatabase")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutDatabase")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putDatabaseOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1260,12 +1260,12 @@ func (cloudant *CloudantV1) HeadDocumentWithContext(ctx context.Context, headDoc
 		return
 	}
 
-	for headerName, headerValue := range headDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	if headDocumentOptions.IfNoneMatch != nil {
@@ -1345,12 +1345,12 @@ func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDoc
 		return
 	}
 
-	for headerName, headerValue := range postDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1430,12 +1430,12 @@ func (cloudant *CloudantV1) PostAllDocsWithContext(ctx context.Context, postAllD
 		return
 	}
 
-	for headerName, headerValue := range postAllDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postAllDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1549,12 +1549,12 @@ func (cloudant *CloudantV1) PostAllDocsAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	for headerName, headerValue := range postAllDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocsAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocsAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postAllDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1658,12 +1658,12 @@ func (cloudant *CloudantV1) PostAllDocsQueriesWithContext(ctx context.Context, p
 		return
 	}
 
-	for headerName, headerValue := range postAllDocsQueriesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocsQueries")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocsQueries")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postAllDocsQueriesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1740,12 +1740,12 @@ func (cloudant *CloudantV1) PostAllDocsQueriesAsStreamWithContext(ctx context.Co
 		return
 	}
 
-	for headerName, headerValue := range postAllDocsQueriesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocsQueriesAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostAllDocsQueriesAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postAllDocsQueriesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1817,12 +1817,12 @@ func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBul
 		return
 	}
 
-	for headerName, headerValue := range postBulkDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkDocs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkDocs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postBulkDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1893,12 +1893,12 @@ func (cloudant *CloudantV1) PostBulkGetWithContext(ctx context.Context, postBulk
 		return
 	}
 
-	for headerName, headerValue := range postBulkGetOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGet")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGet")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postBulkGetOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -1986,12 +1986,12 @@ func (cloudant *CloudantV1) PostBulkGetAsMixedWithContext(ctx context.Context, p
 		return
 	}
 
-	for headerName, headerValue := range postBulkGetOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGetAsMixed")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGetAsMixed")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postBulkGetOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "multipart/mixed")
@@ -2070,12 +2070,12 @@ func (cloudant *CloudantV1) PostBulkGetAsRelatedWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range postBulkGetOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGetAsRelated")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGetAsRelated")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postBulkGetOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "multipart/related")
@@ -2154,12 +2154,12 @@ func (cloudant *CloudantV1) PostBulkGetAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	for headerName, headerValue := range postBulkGetOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGetAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostBulkGetAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postBulkGetOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2241,12 +2241,12 @@ func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, delet
 		return
 	}
 
-	for headerName, headerValue := range deleteDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2322,12 +2322,12 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 		return
 	}
 
-	for headerName, headerValue := range getDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2427,12 +2427,12 @@ func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, g
 		return
 	}
 
-	for headerName, headerValue := range getDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsMixed")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsMixed")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "multipart/mixed")
@@ -2523,12 +2523,12 @@ func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range getDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsRelated")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsRelated")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "multipart/related")
@@ -2619,12 +2619,12 @@ func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	for headerName, headerValue := range getDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2726,12 +2726,12 @@ func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocum
 		return
 	}
 
-	for headerName, headerValue := range putDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2822,12 +2822,12 @@ func (cloudant *CloudantV1) HeadDesignDocumentWithContext(ctx context.Context, h
 		return
 	}
 
-	for headerName, headerValue := range headDesignDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadDesignDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadDesignDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headDesignDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	if headDesignDocumentOptions.IfNoneMatch != nil {
@@ -2887,12 +2887,12 @@ func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range deleteDesignDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteDesignDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteDesignDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteDesignDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -2968,12 +2968,12 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 		return
 	}
 
-	for headerName, headerValue := range getDesignDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDesignDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDesignDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDesignDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3072,12 +3072,12 @@ func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, pu
 		return
 	}
 
-	for headerName, headerValue := range putDesignDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutDesignDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutDesignDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putDesignDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3163,12 +3163,12 @@ func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range getDesignDocumentInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDesignDocumentInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDesignDocumentInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDesignDocumentInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3235,12 +3235,12 @@ func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postD
 		return
 	}
 
-	for headerName, headerValue := range postDesignDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDesignDocs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDesignDocs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postDesignDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3352,12 +3352,12 @@ func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context
 		return
 	}
 
-	for headerName, headerValue := range postDesignDocsQueriesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDesignDocsQueries")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostDesignDocsQueries")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postDesignDocsQueriesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3440,12 +3440,12 @@ func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOpt
 		return
 	}
 
-	for headerName, headerValue := range postViewOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostView")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostView")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postViewOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3582,12 +3582,12 @@ func (cloudant *CloudantV1) PostViewAsStreamWithContext(ctx context.Context, pos
 		return
 	}
 
-	for headerName, headerValue := range postViewOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostViewAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostViewAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postViewOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3712,12 +3712,12 @@ func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, post
 		return
 	}
 
-	for headerName, headerValue := range postViewQueriesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostViewQueries")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostViewQueries")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postViewQueriesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3794,12 +3794,12 @@ func (cloudant *CloudantV1) PostViewQueriesAsStreamWithContext(ctx context.Conte
 		return
 	}
 
-	for headerName, headerValue := range postViewQueriesOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostViewQueriesAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostViewQueriesAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postViewQueriesOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3866,12 +3866,12 @@ func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Conte
 		return
 	}
 
-	for headerName, headerValue := range getPartitionInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetPartitionInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetPartitionInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getPartitionInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -3939,12 +3939,12 @@ func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range postPartitionAllDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionAllDocs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionAllDocs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionAllDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4059,12 +4059,12 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.
 		return
 	}
 
-	for headerName, headerValue := range postPartitionAllDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionAllDocsAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionAllDocsAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionAllDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4175,12 +4175,12 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 		return
 	}
 
-	for headerName, headerValue := range postPartitionSearchOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionSearch")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionSearch")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionSearchOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4297,12 +4297,12 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 		return
 	}
 
-	for headerName, headerValue := range postPartitionSearchOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionSearchAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionSearchAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionSearchOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4411,12 +4411,12 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 		return
 	}
 
-	for headerName, headerValue := range postPartitionViewOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionView")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionView")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionViewOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4555,12 +4555,12 @@ func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Con
 		return
 	}
 
-	for headerName, headerValue := range postPartitionViewOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionViewAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionViewAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionViewOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4682,12 +4682,12 @@ func (cloudant *CloudantV1) PostPartitionExplainWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range postPartitionExplainOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionExplain")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionExplain")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionExplainOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4809,12 +4809,12 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 		return
 	}
 
-	for headerName, headerValue := range postPartitionFindOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionFind")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionFind")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionFindOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -4936,12 +4936,12 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 		return
 	}
 
-	for headerName, headerValue := range postPartitionFindOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionFindAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostPartitionFindAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postPartitionFindOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5040,12 +5040,12 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 		return
 	}
 
-	for headerName, headerValue := range postExplainOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostExplain")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostExplain")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postExplainOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5165,12 +5165,12 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 		return
 	}
 
-	for headerName, headerValue := range postFindOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostFind")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostFind")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postFindOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5290,12 +5290,12 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 		return
 	}
 
-	for headerName, headerValue := range postFindOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostFindAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostFindAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postFindOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5399,12 +5399,12 @@ func (cloudant *CloudantV1) GetIndexesInformationWithContext(ctx context.Context
 		return
 	}
 
-	for headerName, headerValue := range getIndexesInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetIndexesInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetIndexesInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getIndexesInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5468,12 +5468,12 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 		return
 	}
 
-	for headerName, headerValue := range postIndexOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostIndex")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostIndex")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postIndexOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5563,12 +5563,12 @@ func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIn
 		return
 	}
 
-	for headerName, headerValue := range deleteIndexOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteIndex")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteIndex")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteIndexOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5629,12 +5629,12 @@ func (cloudant *CloudantV1) PostSearchAnalyzeWithContext(ctx context.Context, po
 		return
 	}
 
-	for headerName, headerValue := range postSearchAnalyzeOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostSearchAnalyze")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostSearchAnalyze")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postSearchAnalyzeOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5718,12 +5718,12 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 		return
 	}
 
-	for headerName, headerValue := range postSearchOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostSearch")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostSearch")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postSearchOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5855,12 +5855,12 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 		return
 	}
 
-	for headerName, headerValue := range postSearchOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostSearchAsStream")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostSearchAsStream")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postSearchOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -5979,12 +5979,12 @@ func (cloudant *CloudantV1) GetSearchDiskSizeWithContext(ctx context.Context, ge
 		return
 	}
 
-	for headerName, headerValue := range getSearchDiskSizeOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSearchDiskSize")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSearchDiskSize")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSearchDiskSizeOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6050,12 +6050,12 @@ func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSea
 		return
 	}
 
-	for headerName, headerValue := range getSearchInfoOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSearchInfo")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSearchInfo")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSearchInfoOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6121,12 +6121,12 @@ func (cloudant *CloudantV1) HeadReplicationDocumentWithContext(ctx context.Conte
 		return
 	}
 
-	for headerName, headerValue := range headReplicationDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadReplicationDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadReplicationDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headReplicationDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	if headReplicationDocumentOptions.IfNoneMatch != nil {
@@ -6185,12 +6185,12 @@ func (cloudant *CloudantV1) HeadSchedulerDocumentWithContext(ctx context.Context
 		return
 	}
 
-	for headerName, headerValue := range headSchedulerDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadSchedulerDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadSchedulerDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headSchedulerDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -6245,12 +6245,12 @@ func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, hea
 		return
 	}
 
-	for headerName, headerValue := range headSchedulerJobOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadSchedulerJob")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadSchedulerJob")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headSchedulerJobOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -6301,12 +6301,12 @@ func (cloudant *CloudantV1) PostReplicatorWithContext(ctx context.Context, postR
 		return
 	}
 
-	for headerName, headerValue := range postReplicatorOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostReplicator")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostReplicator")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postReplicatorOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6381,12 +6381,12 @@ func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Con
 		return
 	}
 
-	for headerName, headerValue := range deleteReplicationDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteReplicationDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteReplicationDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteReplicationDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6461,12 +6461,12 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 		return
 	}
 
-	for headerName, headerValue := range getReplicationDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetReplicationDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetReplicationDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getReplicationDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6565,12 +6565,12 @@ func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Contex
 		return
 	}
 
-	for headerName, headerValue := range putReplicationDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutReplicationDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutReplicationDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putReplicationDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6647,12 +6647,12 @@ func (cloudant *CloudantV1) GetSchedulerDocsWithContext(ctx context.Context, get
 		return
 	}
 
-	for headerName, headerValue := range getSchedulerDocsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerDocs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerDocs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSchedulerDocsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6727,12 +6727,12 @@ func (cloudant *CloudantV1) GetSchedulerDocumentWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range getSchedulerDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSchedulerDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6790,12 +6790,12 @@ func (cloudant *CloudantV1) GetSchedulerJobsWithContext(ctx context.Context, get
 		return
 	}
 
-	for headerName, headerValue := range getSchedulerJobsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerJobs")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerJobs")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSchedulerJobsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6866,12 +6866,12 @@ func (cloudant *CloudantV1) GetSchedulerJobWithContext(ctx context.Context, getS
 		return
 	}
 
-	for headerName, headerValue := range getSchedulerJobOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerJob")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSchedulerJob")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSchedulerJobOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6926,12 +6926,12 @@ func (cloudant *CloudantV1) GetSessionInformationWithContext(ctx context.Context
 		return
 	}
 
-	for headerName, headerValue := range getSessionInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSessionInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSessionInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSessionInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -6988,12 +6988,12 @@ func (cloudant *CloudantV1) PostApiKeysWithContext(ctx context.Context, postApiK
 		return
 	}
 
-	for headerName, headerValue := range postApiKeysOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostApiKeys")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostApiKeys")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postApiKeysOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7064,12 +7064,12 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx cont
 		return
 	}
 
-	for headerName, headerValue := range putCloudantSecurityConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCloudantSecurityConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCloudantSecurityConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putCloudantSecurityConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7155,12 +7155,12 @@ func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecur
 		return
 	}
 
-	for headerName, headerValue := range getSecurityOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSecurity")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetSecurity")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getSecurityOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7232,12 +7232,12 @@ func (cloudant *CloudantV1) PutSecurityWithContext(ctx context.Context, putSecur
 		return
 	}
 
-	for headerName, headerValue := range putSecurityOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutSecurity")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutSecurity")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putSecurityOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7313,12 +7313,12 @@ func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, g
 		return
 	}
 
-	for headerName, headerValue := range getCorsInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCorsInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCorsInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getCorsInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7379,12 +7379,12 @@ func (cloudant *CloudantV1) PutCorsConfigurationWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range putCorsConfigurationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCorsConfiguration")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCorsConfiguration")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putCorsConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7469,12 +7469,12 @@ func (cloudant *CloudantV1) HeadAttachmentWithContext(ctx context.Context, headA
 		return
 	}
 
-	for headerName, headerValue := range headAttachmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadAttachment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadAttachment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headAttachmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	if headAttachmentOptions.IfMatch != nil {
@@ -7541,12 +7541,12 @@ func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, del
 		return
 	}
 
-	for headerName, headerValue := range deleteAttachmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteAttachment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteAttachment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteAttachmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7624,12 +7624,12 @@ func (cloudant *CloudantV1) GetAttachmentWithContext(ctx context.Context, getAtt
 		return
 	}
 
-	for headerName, headerValue := range getAttachmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetAttachment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetAttachment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getAttachmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "*/*")
@@ -7708,12 +7708,12 @@ func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAtt
 		return
 	}
 
-	for headerName, headerValue := range putAttachmentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutAttachment")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutAttachment")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putAttachmentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7795,12 +7795,12 @@ func (cloudant *CloudantV1) HeadLocalDocumentWithContext(ctx context.Context, he
 		return
 	}
 
-	for headerName, headerValue := range headLocalDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadLocalDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadLocalDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headLocalDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	if headLocalDocumentOptions.IfNoneMatch != nil {
@@ -7859,12 +7859,12 @@ func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, 
 		return
 	}
 
-	for headerName, headerValue := range deleteLocalDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteLocalDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteLocalDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range deleteLocalDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -7934,12 +7934,12 @@ func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, get
 		return
 	}
 
-	for headerName, headerValue := range getLocalDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetLocalDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetLocalDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getLocalDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8029,12 +8029,12 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 		return
 	}
 
-	for headerName, headerValue := range putLocalDocumentOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutLocalDocument")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutLocalDocument")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range putLocalDocumentOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8113,12 +8113,12 @@ func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRev
 		return
 	}
 
-	for headerName, headerValue := range postRevsDiffOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostRevsDiff")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostRevsDiff")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postRevsDiffOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8189,12 +8189,12 @@ func (cloudant *CloudantV1) GetShardsInformationWithContext(ctx context.Context,
 		return
 	}
 
-	for headerName, headerValue := range getShardsInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetShardsInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetShardsInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getShardsInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8260,12 +8260,12 @@ func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context
 		return
 	}
 
-	for headerName, headerValue := range getDocumentShardsInfoOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentShardsInfo")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetDocumentShardsInfo")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getDocumentShardsInfoOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8320,12 +8320,12 @@ func (cloudant *CloudantV1) HeadUpInformationWithContext(ctx context.Context, he
 		return
 	}
 
-	for headerName, headerValue := range headUpInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadUpInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "HeadUpInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range headUpInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
@@ -8372,12 +8372,12 @@ func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getAc
 		return
 	}
 
-	for headerName, headerValue := range getActiveTasksOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActiveTasks")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActiveTasks")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getActiveTasksOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8432,12 +8432,12 @@ func (cloudant *CloudantV1) GetActivityTrackerEventsWithContext(ctx context.Cont
 		return
 	}
 
-	for headerName, headerValue := range getActivityTrackerEventsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActivityTrackerEvents")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActivityTrackerEvents")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getActivityTrackerEventsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8497,12 +8497,12 @@ func (cloudant *CloudantV1) PostActivityTrackerEventsWithContext(ctx context.Con
 		return
 	}
 
-	for headerName, headerValue := range postActivityTrackerEventsOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostActivityTrackerEvents")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostActivityTrackerEvents")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range postActivityTrackerEventsOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8568,12 +8568,12 @@ func (cloudant *CloudantV1) GetCapacityDatabasesInformationWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range getCapacityDatabasesInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityDatabasesInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityDatabasesInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getCapacityDatabasesInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8628,12 +8628,12 @@ func (cloudant *CloudantV1) GetCurrentDatabasesInformationWithContext(ctx contex
 		return
 	}
 
-	for headerName, headerValue := range getCurrentDatabasesInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentDatabasesInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentDatabasesInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getCurrentDatabasesInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8689,12 +8689,12 @@ func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx conte
 		return
 	}
 
-	for headerName, headerValue := range getCurrentThroughputInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentThroughputInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentThroughputInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getCurrentThroughputInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8750,12 +8750,12 @@ func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Cont
 		return
 	}
 
-	for headerName, headerValue := range getMembershipInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetMembershipInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetMembershipInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getMembershipInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
@@ -8813,12 +8813,12 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 		return
 	}
 
-	for headerName, headerValue := range getUpInformationOptions.Headers {
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetUpInformation")
+	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetUpInformation")
-	for headerName, headerValue := range sdkHeaders {
+	for headerName, headerValue := range getUpInformationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
