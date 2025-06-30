@@ -267,6 +267,7 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 
 		w.Header().Set("content-type", "application/json")
 		w.WriteHeader(statusCode)
+		//nolint:errcheck
 		w.Write(data)
 		return
 	} else {

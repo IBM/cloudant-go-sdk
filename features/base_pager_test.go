@@ -104,7 +104,8 @@ var _ = Describe(`BasePager tests`, func() {
 		pager := newBasePager(pd)
 
 		ms.makeItems(1)
-		pager.GetNextWithContext(ctx)
+		_, err := pager.GetNextWithContext(ctx)
+		Expect(err).ShouldNot(HaveOccurred())
 
 		Expect(pager.HasNext()).To(BeTrue())
 	})
@@ -114,7 +115,8 @@ var _ = Describe(`BasePager tests`, func() {
 		pd := newTestPager(opts)
 		pager := newBasePager(pd)
 
-		pager.GetNextWithContext(ctx)
+		_, err := pager.GetNextWithContext(ctx)
+		Expect(err).ShouldNot(HaveOccurred())
 
 		Expect(pager.HasNext()).To(BeFalse())
 	})
