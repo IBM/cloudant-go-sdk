@@ -43,6 +43,12 @@ linters:
           - staticcheck
           - unused
         path: cloudantv1/cloudant_v1_test\.go
+      - linters:
+          - unused
+        path: features/pagination_.+\.go
+      - linters:
+          - unused
+        path: features/.+_pager\.go
     paths:
       - third_party$
       - builtin$
