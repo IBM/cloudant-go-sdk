@@ -190,7 +190,7 @@ func validatePagerOptions[O pagerOptions](rules map[string]string, options O) er
 	return err
 }
 
-// validatePagerResponse validates the options struct using the provided rules.
+// validatePagerResponse validates the response struct using the provided rules.
 func validatePagerResponse[R requestResult](response R) error {
 	validate := validator.New()
 	err := validate.Struct(response)

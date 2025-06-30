@@ -272,7 +272,7 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 	} else {
 		currentPath := r.URL.EscapedPath()
 		statusCode = http.StatusOK
-		if strings.Contains(currentPath, "_all_docs") || strings.Contains(currentPath, "_view") {
+		if strings.Contains(currentPath, "_all_docs") || strings.Contains(currentPath, "_design_docs") || strings.Contains(currentPath, "_view") {
 			rows := make([]cloudantv1.DocsResultRow, len(items))
 			for i, doc := range ms.getDocuments(items) {
 				rows[i] = cloudantv1.DocsResultRow{

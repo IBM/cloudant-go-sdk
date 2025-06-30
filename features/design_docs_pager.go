@@ -40,9 +40,23 @@ func NewDesignDocsPager[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1, o O)
 		return nil, err
 	}
 
-	return nil, ErrNotImplemented
-}
+	opts := *o
+	pd := &keyPager[*cloudantv1.PostDesignDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostDesignDocsWithContext,
+		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
+		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
+		startKeySetter:    opts.SetStartKey,
+		optionsCloner: func(o *cloudantv1.PostDesignDocsOptions) *cloudantv1.PostDesignDocsOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
+	p := newBasePager(pd)
 
-func newDesignDocsPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostDesignDocsOptions) *keyPager[*cloudantv1.PostDesignDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
-	return new(keyPager[*cloudantv1.PostDesignDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow])
+	return p, nil
 }
