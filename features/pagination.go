@@ -23,49 +23,6 @@ import (
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
-// Pages returns an iterator for all pages from the pager.
-func Pages[T PaginatedRow](pd Pager[T]) iter.Seq2[[]T, error] {
-	return PagesWithContext(context.Background(), pd)
-}
-
-// PagesWithContext returns an iterator for all pages from the pager queried with user provided context.
-func PagesWithContext[T PaginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[[]T, error] {
-	return func(yield func([]T, error) bool) {
-		for pd.HasNext() {
-			rows, err := pd.GetNextWithContext(ctx)
-			if err != nil {
-				yield(nil, err)
-				return
-			}
-			if !yield(rows, nil) {
-				return
-			}
-		}
-	}
-}
-
-// Rows returns an iterator for all elements from the pager.
-func Rows[T PaginatedRow](pd Pager[T]) iter.Seq2[T, error] {
-	return RowsWithContext(context.Background(), pd)
-}
-
-// RowsWithContext returns an iterator for all elements from the pager queried with user provided context.
-func RowsWithContext[T PaginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[T, error] {
-	return func(yield func(T, error) bool) {
-		for rows, err := range PagesWithContext(ctx, pd) {
-			if err != nil {
-				yield(*new(T), err)
-				return
-			}
-			for _, row := range rows {
-				if !yield(row, nil) {
-					return
-				}
-			}
-		}
-	}
-}
-
 type Pagination[T PaginatedRow] interface {
 	// Pager returns new Pager.
 	Pager() (Pager[T], error)
@@ -104,7 +61,7 @@ func (pi *paginationImplementor[O, T]) PagesWithContext(ctx context.Context) ite
 			yield(nil, err)
 		}
 	}
-	return PagesWithContext(ctx, pager)
+	return pagesWithContext(ctx, pager)
 }
 
 func (pi *paginationImplementor[O, T]) Rows() iter.Seq2[T, error] {
@@ -118,5 +75,38 @@ func (pi *paginationImplementor[O, T]) RowsWithContext(ctx context.Context) iter
 			yield(*new(T), err)
 		}
 	}
-	return RowsWithContext(ctx, pager)
+	return rowsWithContext(ctx, pager)
+}
+
+// pagesWithContext returns an iterator for all pages from the pager queried with user provided context.
+func pagesWithContext[T PaginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[[]T, error] {
+	return func(yield func([]T, error) bool) {
+		for pd.HasNext() {
+			rows, err := pd.GetNextWithContext(ctx)
+			if err != nil {
+				yield(nil, err)
+				return
+			}
+			if !yield(rows, nil) {
+				return
+			}
+		}
+	}
+}
+
+// rowsWithContext returns an iterator for all elements from the pager queried with user provided context.
+func rowsWithContext[T PaginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[T, error] {
+	return func(yield func(T, error) bool) {
+		for rows, err := range pagesWithContext(ctx, pd) {
+			if err != nil {
+				yield(*new(T), err)
+				return
+			}
+			for _, row := range rows {
+				if !yield(row, nil) {
+					return
+				}
+			}
+		}
+	}
 }
