@@ -129,4 +129,133 @@ var _ = Describe(`Validation tests`, func() {
 			})
 		})
 	})
+
+	Context("with bookmark pager type of options", func() {
+		var (
+			findOptions   *cloudantv1.PostFindOptions
+			searchOptions *cloudantv1.PostSearchOptions
+		)
+
+		BeforeEach(func() {
+			selector := make(map[string]any, 0)
+			findOptions = service.NewPostFindOptions("db", selector)
+			searchOptions = service.NewPostSearchOptions("db", "ddoc", "index", "*:*")
+		})
+
+		AfterEach(func() {
+			findOptions = nil
+			searchOptions = nil
+		})
+
+		Context("with valid options", func() {
+			// AfterEach is an actual assertion step and the setup is happening in It sections
+			// this is recommended ginkgo v1 approach to the table tests
+			AfterEach(func() {
+				findErr := validateOptions(bookmarkPagerValidationRules, findOptions)
+				searchErr := validateOptions(searchPagerValidationRules, searchOptions)
+
+				Expect(findErr).ShouldNot(HaveOccurred())
+				Expect(searchErr).ShouldNot(HaveOccurred())
+			})
+
+			It(`Confirms no validation error when limit is not set`, func() {
+				Expect(findOptions.Limit).To(BeNil())
+				Expect(searchOptions.Limit).To(BeNil())
+			})
+
+			It(`Confirms no validation error on limit equal to min`, func() {
+				findOptions.SetLimit(1)
+				searchOptions.SetLimit(1)
+			})
+
+			It(`Confirms no validation error on limit less than max`, func() {
+				findOptions.SetLimit(199)
+				searchOptions.SetLimit(199)
+			})
+
+			It(`Confirms no validation error on limit equal to max`, func() {
+				findOptions.SetLimit(200)
+				searchOptions.SetLimit(200)
+			})
+		})
+
+		Context("with invalid options", func() {
+			var errMsg string
+
+			BeforeEach(func() {
+				errMsg = ""
+			})
+
+			AfterEach(func() {
+				findErr := validateOptions(bookmarkPagerValidationRules, findOptions)
+				searchErr := validateOptions(searchPagerValidationRules, searchOptions)
+
+				Expect(findErr).Should(HaveOccurred())
+				Expect(findErr.Error()).To(MatchRegexp(errMsg))
+
+				Expect(searchErr).Should(HaveOccurred())
+				Expect(searchErr.Error()).To(MatchRegexp(errMsg))
+			})
+
+			It(`Confirms validation error on limit less than min`, func() {
+				findOptions.SetLimit(0)
+				searchOptions.SetLimit(0)
+				errMsg = "the provided limit 0 is lower than the minimum page size"
+			})
+
+			It(`Confirms validation error on limit greater than max`, func() {
+				findOptions.SetLimit(201)
+				searchOptions.SetLimit(201)
+				errMsg = "the provided limit 201 exceeds the maximum page size"
+			})
+		})
+
+		Context("with search invalid options", func() {
+			var errMsg string
+
+			BeforeEach(func() {
+				errMsg = ""
+				searchOptions = service.NewPostSearchOptions("db", "ddoc", "index", "*:*")
+			})
+
+			AfterEach(func() {
+				searchErr := validateOptions(searchPagerValidationRules, searchOptions)
+
+				Expect(searchErr).Should(HaveOccurred())
+				Expect(searchErr.Error()).To(MatchRegexp(errMsg))
+
+				searchOptions = nil
+			})
+
+			It(`Confirms validation error on on presence of Counts`, func() {
+				searchOptions.SetCounts([]string{"aTestFieldToCount"})
+				errMsg = `the option "Counts" is invalid when using pagination`
+			})
+
+			It(`Confirms validation error on on presence of GroupField`, func() {
+				searchOptions.SetGroupField("testField")
+				errMsg = `the option "GroupField" is invalid when using pagination`
+			})
+
+			It(`Confirms validation error on on presence of GroupLimit`, func() {
+				searchOptions.SetGroupLimit(6)
+				errMsg = `the option "GroupLimit" is invalid when using pagination`
+			})
+
+			It(`Confirms validation error on on presence of GroupSort`, func() {
+				searchOptions.SetGroupSort([]string{"aTestFieldToGroupSort"})
+				errMsg = `the option "GroupSort" is invalid when using pagination`
+			})
+
+			It(`Confirms validation error on on presence of Ranges`, func() {
+				searchOptions.SetRanges(map[string]map[string]string{
+					"aTestFieldForRanges": {
+						"low":  "[0 to 5}",
+						"high": "[5 to 10]",
+					},
+				})
+				errMsg = `the option "Ranges" is invalid when using pagination`
+			})
+		})
+	})
 })

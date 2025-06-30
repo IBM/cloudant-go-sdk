@@ -36,6 +36,20 @@ func NewSearchPagination[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) Pa
 
 // NewSearchPager creates a new pager for searches operations.
 func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.SearchResultRow], error) {
+	switch opts := any(o).(type) {
+	case *cloudantv1.PostSearchOptions:
+		if err := validateOptions(searchPagerValidationRules, opts); err != nil {
+			return nil, err
+		}
+
+		return nil, ErrNotImplemented
+	case *cloudantv1.PostPartitionSearchOptions:
+		if err := validateOptions(bookmarkPagerValidationRules, opts); err != nil {
+			return nil, err
+		}
+
+		return nil, ErrNotImplemented
+	}
 	return nil, ErrNotImplemented
 }
 
