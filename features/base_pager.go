@@ -21,6 +21,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 	"github.com/go-playground/validator/v10"
 )
 
@@ -46,8 +47,13 @@ type paginatedRow interface {
 	keyPaginatedRow | bookmarkPaginatedRow
 }
 
+// PaginatedRow defines a response object for Pager operations
+type PaginatedRow interface {
+	cloudantv1.DocsResultRow | cloudantv1.ViewResultRow | cloudantv1.Document | cloudantv1.SearchResultRow
+}
+
 // Pager is an interface for pagination of Cloudant query operations.
-type Pager[T paginatedRow] interface {
+type Pager[T PaginatedRow] interface {
 	// HasNext returns false if there are no more pages.
 	HasNext() bool
 

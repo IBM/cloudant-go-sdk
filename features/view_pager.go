@@ -30,24 +30,24 @@ func NewViewPagination[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 	return &paginationImplementor[O, cloudantv1.ViewResultRow]{
 		service:  c,
 		options:  o,
-		newPager: NewViewPager[O],
+		newPager: newViewPager[O],
 	}
 }
 
 // NewViewPager creates a new pager for views operations.
-func NewViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.ViewResultRow], error) {
+func newViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.ViewResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
 	}
 
 	switch opts := any(o).(type) {
 	case *cloudantv1.PostViewOptions:
-		pd := newViewPager(c, opts)
+		pd := newViewKeyPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
 	case *cloudantv1.PostPartitionViewOptions:
-		pd := newViewPartitionPager(c, opts)
+		pd := newViewPartitionKeyPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
@@ -56,7 +56,7 @@ func NewViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[clou
 	return nil, ErrNotImplemented
 }
 
-func newViewPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
+func newViewKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
 	opts := *o
 	return &keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
 		service:             c,
@@ -77,7 +77,7 @@ func newViewPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *keyP
 	}
 }
 
-func newViewPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionViewOptions) *keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
+func newViewPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionViewOptions) *keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
 	opts := *o
 	return &keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
 		service:             c,

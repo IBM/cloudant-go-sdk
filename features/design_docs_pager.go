@@ -30,12 +30,12 @@ func NewDesignDocsPagination[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1,
 	return &paginationImplementor[O, cloudantv1.DocsResultRow]{
 		service:  c,
 		options:  o,
-		newPager: NewDesignDocsPager[O],
+		newPager: newDesignDocsPager[O],
 	}
 }
 
-// NewDesignDocsPager creates a new pager for design documents operations.
-func NewDesignDocsPager[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
+// newDesignDocsPager creates a new pager for design documents operations.
+func newDesignDocsPager[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
 	}

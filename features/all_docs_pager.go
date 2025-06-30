@@ -30,24 +30,24 @@ func NewAllDocsPagination[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) 
 	return &paginationImplementor[O, cloudantv1.DocsResultRow]{
 		service:  c,
 		options:  o,
-		newPager: NewAllDocsPager[O],
+		newPager: newAllDocsPager[O],
 	}
 }
 
-// NewAllDocsPager creates a new pager for all documents operations.
-func NewAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
+// newAllDocsPager creates a new pager for all documents operations.
+func newAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
 	}
 
 	switch opts := any(o).(type) {
 	case *cloudantv1.PostAllDocsOptions:
-		pd := newAllDocsPager(c, opts)
+		pd := newAllDocsKeyPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
 	case *cloudantv1.PostPartitionAllDocsOptions:
-		pd := newAllDocsPartitionPager(c, opts)
+		pd := newAllDocsPartitionKeyPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
@@ -56,7 +56,7 @@ func NewAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Page
 	return nil, ErrNotImplemented
 }
 
-func newAllDocsPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptions) *keyPager[*cloudantv1.PostAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
+func newAllDocsKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptions) *keyPager[*cloudantv1.PostAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
 	opts := *o
 	return &keyPager[*cloudantv1.PostAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow]{
 		service:           c,
@@ -75,7 +75,7 @@ func newAllDocsPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptions)
 	}
 }
 
-func newAllDocsPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionAllDocsOptions) *keyPager[*cloudantv1.PostPartitionAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
+func newAllDocsPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionAllDocsOptions) *keyPager[*cloudantv1.PostPartitionAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
 	opts := *o
 	return &keyPager[*cloudantv1.PostPartitionAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow]{
 		service:           c,

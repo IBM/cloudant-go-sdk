@@ -30,19 +30,19 @@ func NewSearchPagination[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) Pa
 	return &paginationImplementor[O, cloudantv1.SearchResultRow]{
 		service:  c,
 		options:  o,
-		newPager: NewSearchPager[O],
+		newPager: newSearchPager[O],
 	}
 }
 
-// NewSearchPager creates a new pager for searches operations.
-func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.SearchResultRow], error) {
+// newSearchPager creates a new pager for searches operations.
+func newSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.SearchResultRow], error) {
 	switch opts := any(o).(type) {
 	case *cloudantv1.PostSearchOptions:
 		if err := validatePagerOptions(searchPagerValidationRules, opts); err != nil {
 			return nil, err
 		}
 
-		pd := newSearchPager(c, opts)
+		pd := newSearchBookmarkPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
@@ -51,7 +51,7 @@ func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[
 			return nil, err
 		}
 
-		pd := newSearchPartitionPager(c, opts)
+		pd := newSearchPartitionBookmarkPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
@@ -59,7 +59,7 @@ func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[
 	return nil, ErrNotImplemented
 }
 
-func newSearchPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostSearchOptions) *bookmarkPager[*cloudantv1.PostSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow] {
+func newSearchBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostSearchOptions) *bookmarkPager[*cloudantv1.PostSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow] {
 	opts := *o
 	return &bookmarkPager[*cloudantv1.PostSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow]{
 		service:           c,
@@ -78,7 +78,7 @@ func newSearchPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostSearchOptions) *
 	}
 }
 
-func newSearchPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionSearchOptions) *bookmarkPager[*cloudantv1.PostPartitionSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow] {
+func newSearchPartitionBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionSearchOptions) *bookmarkPager[*cloudantv1.PostPartitionSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow] {
 	opts := *o
 	return &bookmarkPager[*cloudantv1.PostPartitionSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow]{
 		service:           c,

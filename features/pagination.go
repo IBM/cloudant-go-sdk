@@ -24,12 +24,12 @@ import (
 )
 
 // Pages returns an iterator for all pages from the pager.
-func Pages[T paginatedRow](pd Pager[T]) iter.Seq2[[]T, error] {
+func Pages[T PaginatedRow](pd Pager[T]) iter.Seq2[[]T, error] {
 	return PagesWithContext(context.Background(), pd)
 }
 
 // PagesWithContext returns an iterator for all pages from the pager queried with user provided context.
-func PagesWithContext[T paginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[[]T, error] {
+func PagesWithContext[T PaginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[[]T, error] {
 	return func(yield func([]T, error) bool) {
 		for pd.HasNext() {
 			rows, err := pd.GetNextWithContext(ctx)
@@ -45,12 +45,12 @@ func PagesWithContext[T paginatedRow](ctx context.Context, pd Pager[T]) iter.Seq
 }
 
 // Rows returns an iterator for all elements from the pager.
-func Rows[T paginatedRow](pd Pager[T]) iter.Seq2[T, error] {
+func Rows[T PaginatedRow](pd Pager[T]) iter.Seq2[T, error] {
 	return RowsWithContext(context.Background(), pd)
 }
 
 // RowsWithContext returns an iterator for all elements from the pager queried with user provided context.
-func RowsWithContext[T paginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[T, error] {
+func RowsWithContext[T PaginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2[T, error] {
 	return func(yield func(T, error) bool) {
 		for rows, err := range PagesWithContext(ctx, pd) {
 			if err != nil {
@@ -66,7 +66,7 @@ func RowsWithContext[T paginatedRow](ctx context.Context, pd Pager[T]) iter.Seq2
 	}
 }
 
-type Pagination[T paginatedRow] interface {
+type Pagination[T PaginatedRow] interface {
 	// Pager returns new Pager.
 	Pager() (Pager[T], error)
 

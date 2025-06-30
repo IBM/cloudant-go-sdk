@@ -30,24 +30,24 @@ func NewFindPagination[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 	return &paginationImplementor[O, cloudantv1.Document]{
 		service:  c,
 		options:  o,
-		newPager: NewFindPager[O],
+		newPager: newFindPager[O],
 	}
 }
 
-// NewFindPager creates a new pager for queries operations.
-func NewFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.Document], error) {
+// newFindPager creates a new pager for queries operations.
+func newFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.Document], error) {
 	if err := validatePagerOptions(bookmarkPagerValidationRules, o); err != nil {
 		return nil, err
 	}
 
 	switch opts := any(o).(type) {
 	case *cloudantv1.PostFindOptions:
-		pd := newFindPager(c, opts)
+		pd := newFindBookmarkPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
 	case *cloudantv1.PostPartitionFindOptions:
-		pd := newFindPartitionPager(c, opts)
+		pd := newFindPartitionBookmarkPager(c, opts)
 		p := newBasePager(pd)
 
 		return p, nil
@@ -56,7 +56,7 @@ func NewFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[clou
 	return nil, ErrNotImplemented
 }
 
-func newFindPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
+func newFindBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
 	opts := *o
 	return &bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document]{
 		service:           c,
@@ -75,7 +75,7 @@ func newFindPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostFindOptions) *book
 	}
 }
 
-func newFindPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionFindOptions) *bookmarkPager[*cloudantv1.PostPartitionFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
+func newFindPartitionBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionFindOptions) *bookmarkPager[*cloudantv1.PostPartitionFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
 	opts := *o
 	return &bookmarkPager[*cloudantv1.PostPartitionFindOptions, *cloudantv1.FindResult, cloudantv1.Document]{
 		service:           c,
