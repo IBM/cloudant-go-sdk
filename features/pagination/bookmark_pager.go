@@ -23,6 +23,20 @@ import (
 	"github.com/IBM/go-sdk-core/v5/core"
 )
 
+var (
+	bookmarkPagerValidationRules = map[string]string{
+		"Limit": limitValidationRule,
+	}
+	searchPagerValidationRules = map[string]string{
+		"Counts":     "isdefault",
+		"GroupField": "isdefault",
+		"GroupLimit": "isdefault",
+		"GroupSort":  "isdefault",
+		"Ranges":     "isdefault",
+		"Limit":      limitValidationRule,
+	}
+)
+
 type bookmarkPagerOptions interface {
 	FindPagerOptions | SearchPagerOptions
 }

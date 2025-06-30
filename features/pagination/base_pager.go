@@ -19,7 +19,17 @@ package features
 import (
 	"context"
 	"errors"
+	"fmt"
+
+	"github.com/go-playground/validator/v10"
 )
+
+const (
+	minLimit = 1
+	maxLimit = 200
+)
+
+var limitValidationRule = fmt.Sprintf("omitempty,min=%d,max=%d", minLimit, maxLimit)
 
 var ErrNotImplemented = errors.New("not yet implemented")
 var ErrNoMoreResults = errors.New("no more results available")
@@ -151,4 +161,27 @@ func getPageSizeFromOptionsLimit[O pagerOptions, R requestResult, T paginatedRow
 		pageSize = *pd.getLimit()
 	}
 	return pageSize
+}
+
+// validateOptions validates the options struct using the provided rules.
+func validateOptions[O pagerOptions](rules map[string]string, options O) error {
+	validate := validator.New()
+	validate.RegisterStructValidationMapRules(rules, options)
+	err := validate.Struct(options)
+	if err != nil {
+		errs := err.(validator.ValidationErrors)
+		for _, e := range errs {
+			switch e.Tag() {
+			case "min":
+				return fmt.Errorf("the provided limit %d is lower than the minimum page size value of %s", e.Value(), e.Param())
+			case "max":
+				return fmt.Errorf("the provided limit %d exceeds the maximum page size value of %s", e.Value(), e.Param())
+			// This validates that the value is the default value and is almost the opposite of required.
+			// i.e. it returns an error if the value is not the default.
+			case "isdefault":
+				return fmt.Errorf("the option %q is invalid when using pagination", e.Field())
+			}
+		}
+	}
+	return err
 }

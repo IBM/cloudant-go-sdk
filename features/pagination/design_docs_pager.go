@@ -36,6 +36,10 @@ func NewDesignDocsPagination[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1,
 
 // NewDesignDocsPager creates a new pager for design documents operations.
 func NewDesignDocsPager[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
+	if err := validateOptions(keyPagerValidationRules, o); err != nil {
+		return nil, err
+	}
+
 	return nil, ErrNotImplemented
 }
 

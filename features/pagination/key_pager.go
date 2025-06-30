@@ -24,6 +24,11 @@ import (
 	"github.com/IBM/go-sdk-core/v5/core"
 )
 
+var keyPagerValidationRules = map[string]string{
+	"Keys":  "isdefault",
+	"Limit": limitValidationRule,
+}
+
 type keyPagerOptions interface {
 	AllDocsPagerOptions | DesignDocsPagerOptions | ViewPagerOptions
 }
