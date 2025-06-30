@@ -38,28 +38,50 @@ type bookmarkPaginatedRow interface {
 type bookmarkPager[O bookmarkPagerOptions, R bookmarkRequestResult, T bookmarkPaginatedRow] struct {
 	service           *cloudantv1.CloudantV1
 	options           O
+	hasNextPage       bool
 	requestFunction   func(context.Context, O) (R, *core.DetailedResponse, error)
 	resultItemsGetter func(R) []T
 	bookmarkGetter    func(R) string
 	bookmarkSetter    func(string) O
+	optionsCloner     func(O) O
 	limitGetter       func() *int64
 	limitSetter       func(int64) O
 }
 
 func (p *bookmarkPager[O, R, T]) nextRequestFunction(ctx context.Context) (R, error) {
-	return nil, ErrNotImplemented
+	result, _, err := p.requestFunction(ctx, p.options)
+	return result, err
 }
 
-func (p *bookmarkPager[O, R, T]) itemsGetter(result R) []T {
-	return make([]T, 0)
+func (p *bookmarkPager[O, R, T]) itemsGetter(result R) ([]T, error) {
+	items := p.resultItemsGetter(result)
+	if p.limitGetter() != nil && len(items) < int(*p.limitGetter()) {
+		p.hasNextPage = false
+	}
+	return items, nil
+}
+
+func (p *bookmarkPager[O, R, T]) hasNext() bool {
+	return p.hasNextPage
 }
 
 func (p *bookmarkPager[O, R, T]) setNextPageOptions(result R) {
+	bookmark := p.bookmarkGetter(result)
+	p.bookmarkSetter(bookmark)
+}
+
+func (p *bookmarkPager[O, R, T]) getOptions() O {
+	return p.optionsCloner(p.options)
+}
+
+func (p *bookmarkPager[O, R, T]) setOptions(o O) {
+	p.options = p.optionsCloner(o)
 }
 
 func (p *bookmarkPager[O, R, T]) getLimit() *int64 {
-	return nil
+	return p.limitGetter()
 }
 
 func (p *bookmarkPager[O, R, T]) setLimit(pageSize int64) {
+	p.limitSetter(pageSize)
 }

@@ -242,3 +242,43 @@ func newTestKeyPager(o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostVi
 		limitSetter: opts.SetLimit,
 	}
 }
+
+// newTestBookmarkPager returns a bookmarkPager configured for tests
+func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
+	opts := *o
+	return &bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document]{
+		options:     &opts,
+		hasNextPage: true,
+		requestFunction: func(ctx context.Context, o *cloudantv1.PostFindOptions) (*cloudantv1.FindResult, *core.DetailedResponse, error) {
+			ms, err := fromContext(ctx)
+			if err != nil {
+				return nil, nil, err
+			}
+
+			limit := int(*opts.Limit)
+			page := 0
+			if opts.Bookmark != nil {
+				if i, err := strconv.Atoi(*opts.Bookmark); err == nil {
+					page = i
+				}
+			}
+			items, err := ms.getItems(page*limit+1, limit)
+			if err != nil {
+				return nil, nil, ms.err
+			}
+
+			docs := ms.getDocuments(items)
+			bookmark := fmt.Sprintf("%d", page+1)
+			return &cloudantv1.FindResult{Docs: docs, Bookmark: &bookmark}, nil, nil
+		},
+		resultItemsGetter: func(result *cloudantv1.FindResult) []cloudantv1.Document { return result.Docs },
+		bookmarkGetter:    func(result *cloudantv1.FindResult) string { return *result.Bookmark },
+		bookmarkSetter:    opts.SetBookmark,
+		optionsCloner: func(o *cloudantv1.PostFindOptions) *cloudantv1.PostFindOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
+}
