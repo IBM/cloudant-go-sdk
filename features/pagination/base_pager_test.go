@@ -75,7 +75,7 @@ var _ = Describe(`BasePager tests`, func() {
 		pd := newTestPager(opts)
 		pager := newBasePager(pd)
 
-		Expect(pager.pageSize).To(BeEquivalentTo(20))
+		Expect(pager.pageSize).To(BeEquivalentTo(200))
 	})
 
 	It(`Confirms BasePager sets pageSize from limit`, func() {

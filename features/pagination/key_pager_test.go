@@ -73,7 +73,7 @@ var _ = Describe(`KeyPager tests`, func() {
 		pd := newTestKeyPager(opts)
 		pager := newBasePager(pd)
 
-		Expect(pager.pageSize).To(BeEquivalentTo(20))
+		Expect(pager.pageSize).To(BeEquivalentTo(200))
 	})
 
 	It(`Confirms KeyPager sets pageSize from a limit`, func() {
