@@ -23,7 +23,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestChangesFollower(t *testing.T) {
+func TestFeatures(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "ChangesFollower Suite")
+	RunSpecs(t, "Features Suite")
 }

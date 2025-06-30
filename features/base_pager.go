@@ -122,7 +122,7 @@ func (p *basePager[O, R, T]) GetNextWithContext(ctx context.Context) ([]T, error
 	if err != nil {
 		return nil, err
 	}
-	err = validateResponse(result)
+	err = validatePagerResponse(result)
 	if err != nil {
 		return nil, err
 	}
@@ -167,8 +167,8 @@ func getPageSizeFromOptionsLimit[O pagerOptions, R requestResult, T paginatedRow
 	return pageSize
 }
 
-// validateOptions validates the options struct using the provided rules.
-func validateOptions[O pagerOptions](rules map[string]string, options O) error {
+// validatePagerOptions validates the options struct using the provided rules.
+func validatePagerOptions[O pagerOptions](rules map[string]string, options O) error {
 	validate := validator.New()
 	validate.RegisterStructValidationMapRules(rules, options)
 	err := validate.Struct(options)
@@ -190,8 +190,8 @@ func validateOptions[O pagerOptions](rules map[string]string, options O) error {
 	return err
 }
 
-// validateOptions validates the options struct using the provided rules.
-func validateResponse[R requestResult](response R) error {
+// validatePagerResponse validates the options struct using the provided rules.
+func validatePagerResponse[R requestResult](response R) error {
 	validate := validator.New()
 	err := validate.Struct(response)
 	return err

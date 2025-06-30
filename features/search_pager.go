@@ -38,7 +38,7 @@ func NewSearchPagination[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) Pa
 func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.SearchResultRow], error) {
 	switch opts := any(o).(type) {
 	case *cloudantv1.PostSearchOptions:
-		if err := validateOptions(searchPagerValidationRules, opts); err != nil {
+		if err := validatePagerOptions(searchPagerValidationRules, opts); err != nil {
 			return nil, err
 		}
 
@@ -47,7 +47,7 @@ func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[
 
 		return p, nil
 	case *cloudantv1.PostPartitionSearchOptions:
-		if err := validateOptions(bookmarkPagerValidationRules, opts); err != nil {
+		if err := validatePagerOptions(bookmarkPagerValidationRules, opts); err != nil {
 			return nil, err
 		}
 

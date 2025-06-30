@@ -36,7 +36,7 @@ func NewViewPagination[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 
 // NewViewPager creates a new pager for views operations.
 func NewViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.ViewResultRow], error) {
-	if err := validateOptions(keyPagerValidationRules, o); err != nil {
+	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
 	}
 

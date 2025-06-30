@@ -34,9 +34,7 @@ import (
 )
 
 const (
-	pageSize         = 10
-	StatusBrokenJson = 600
-	StatusBadIO      = 601
+	pageSize = 10
 )
 
 var errorCodes = []int{

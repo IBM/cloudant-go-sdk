@@ -64,8 +64,8 @@ var _ = Describe(`Validation tests`, func() {
 			// AfterEach is an actual assertion step and the setup is happening in It sections
 			// this is recommended ginkgo v1 approach to the table tests
 			AfterEach(func() {
-				allDocsErr := validateOptions(keyPagerValidationRules, allDocsOptions)
-				viewErr := validateOptions(keyPagerValidationRules, viewOptions)
+				allDocsErr := validatePagerOptions(keyPagerValidationRules, allDocsOptions)
+				viewErr := validatePagerOptions(keyPagerValidationRules, viewOptions)
 
 				Expect(allDocsErr).ShouldNot(HaveOccurred())
 				Expect(viewErr).ShouldNot(HaveOccurred())
@@ -100,8 +100,8 @@ var _ = Describe(`Validation tests`, func() {
 			})
 
 			AfterEach(func() {
-				allDocsErr := validateOptions(keyPagerValidationRules, allDocsOptions)
-				viewErr := validateOptions(keyPagerValidationRules, viewOptions)
+				allDocsErr := validatePagerOptions(keyPagerValidationRules, allDocsOptions)
+				viewErr := validatePagerOptions(keyPagerValidationRules, viewOptions)
 
 				Expect(allDocsErr).Should(HaveOccurred())
 				Expect(allDocsErr.Error()).To(MatchRegexp(errMsg))
@@ -151,8 +151,8 @@ var _ = Describe(`Validation tests`, func() {
 			// AfterEach is an actual assertion step and the setup is happening in It sections
 			// this is recommended ginkgo v1 approach to the table tests
 			AfterEach(func() {
-				findErr := validateOptions(bookmarkPagerValidationRules, findOptions)
-				searchErr := validateOptions(searchPagerValidationRules, searchOptions)
+				findErr := validatePagerOptions(bookmarkPagerValidationRules, findOptions)
+				searchErr := validatePagerOptions(searchPagerValidationRules, searchOptions)
 
 				Expect(findErr).ShouldNot(HaveOccurred())
 				Expect(searchErr).ShouldNot(HaveOccurred())
@@ -187,8 +187,8 @@ var _ = Describe(`Validation tests`, func() {
 			})
 
 			AfterEach(func() {
-				findErr := validateOptions(bookmarkPagerValidationRules, findOptions)
-				searchErr := validateOptions(searchPagerValidationRules, searchOptions)
+				findErr := validatePagerOptions(bookmarkPagerValidationRules, findOptions)
+				searchErr := validatePagerOptions(searchPagerValidationRules, searchOptions)
 
 				Expect(findErr).Should(HaveOccurred())
 				Expect(findErr.Error()).To(MatchRegexp(errMsg))
@@ -219,7 +219,7 @@ var _ = Describe(`Validation tests`, func() {
 			})
 
 			AfterEach(func() {
-				searchErr := validateOptions(searchPagerValidationRules, searchOptions)
+				searchErr := validatePagerOptions(searchPagerValidationRules, searchOptions)
 
 				Expect(searchErr).Should(HaveOccurred())
 				Expect(searchErr.Error()).To(MatchRegexp(errMsg))

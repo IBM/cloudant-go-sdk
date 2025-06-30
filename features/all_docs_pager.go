@@ -36,7 +36,7 @@ func NewAllDocsPagination[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) 
 
 // NewAllDocsPager creates a new pager for all documents operations.
 func NewAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
-	if err := validateOptions(keyPagerValidationRules, o); err != nil {
+	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
 	}
 

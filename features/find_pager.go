@@ -36,7 +36,7 @@ func NewFindPagination[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 
 // NewFindPager creates a new pager for queries operations.
 func NewFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.Document], error) {
-	if err := validateOptions(keyPagerValidationRules, o); err != nil {
+	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
 	}
 
