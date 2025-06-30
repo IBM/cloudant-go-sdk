@@ -17,36 +17,25 @@
 package features
 
 import (
-	"context"
-
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
-// AllDocsPagerOptions defines options for paginating through all documents or partitioned documents in a Cloudant database.
+// AllDocsPagerOptions defines options for paginating through all documents or partitioned all documents in a Cloudant database.
 type AllDocsPagerOptions interface {
 	*cloudantv1.PostAllDocsOptions | *cloudantv1.PostPartitionAllDocsOptions
 }
 
-// AllDocsPager is an interface for pagination of database all-docs operations.
-type AllDocsPager interface {
-	// HasNext returns false if there are no more pages.
-	HasNext() bool
-
-	// GetNext retrieves the next page of results.
-	GetNext() ([]cloudantv1.DocsResultRow, error)
-
-	// GetNextWithContext retrieves the next page of results with user provided context.
-	GetNextWithContext(context.Context) ([]cloudantv1.DocsResultRow, error)
-
-	// GetAll retrieves all elements from the pager.
-	GetAll() ([]cloudantv1.DocsResultRow, error)
-
-	// GetAllWithContext retrieves all the elements from the pager with user provided context.
-	GetAllWithContext(context.Context) ([]cloudantv1.DocsResultRow, error)
+// NewAllDocsPagination creates a new pagination for all documents operations.
+func NewAllDocsPagination[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) Pagination[cloudantv1.DocsResultRow] {
+	return &paginationImplementor[O, cloudantv1.DocsResultRow]{
+		service:  c,
+		options:  o,
+		newPager: NewAllDocsPager[O],
+	}
 }
 
-// NewAllDocsPager creates a new pager for all-docs operations.
-func NewAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (AllDocsPager, error) {
+// NewAllDocsPager creates a new pager for all documents operations.
+func NewAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
 	return nil, ErrNotImplemented
 }
 

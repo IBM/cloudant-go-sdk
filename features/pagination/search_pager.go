@@ -17,8 +17,6 @@
 package features
 
 import (
-	"context"
-
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -27,26 +25,17 @@ type SearchPagerOptions interface {
 	*cloudantv1.PostSearchOptions | *cloudantv1.PostPartitionSearchOptions
 }
 
-// SearchPager is an interface for pagination of database search operations.
-type SearchPager interface {
-	// HasNext returns false if there are no more pages.
-	HasNext() bool
-
-	// GetNext retrieves the next page of results.
-	GetNext() ([]cloudantv1.SearchResultRow, error)
-
-	// GetNextWithContext retrieves the next page of results with user provided context.
-	GetNextWithContext(context.Context) ([]cloudantv1.SearchResultRow, error)
-
-	// GetAll retrieves all elements from the pager.
-	GetAll() ([]cloudantv1.SearchResultRow, error)
-
-	// GetAllWithContext retrieves all the elements from the pager with user provided context.
-	GetAllWithContext(context.Context) ([]cloudantv1.SearchResultRow, error)
+// NewSearchPagination creates a new pagination for searches operations.
+func NewSearchPagination[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) Pagination[cloudantv1.SearchResultRow] {
+	return &paginationImplementor[O, cloudantv1.SearchResultRow]{
+		service:  c,
+		options:  o,
+		newPager: NewSearchPager[O],
+	}
 }
 
-// NewSearchPager creates a new pager for search operations.
-func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (SearchPager, error) {
+// NewSearchPager creates a new pager for searches operations.
+func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.SearchResultRow], error) {
 	return nil, ErrNotImplemented
 }
 

@@ -17,8 +17,6 @@
 package features
 
 import (
-	"context"
-
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -27,26 +25,17 @@ type ViewPagerOptions interface {
 	*cloudantv1.PostViewOptions | *cloudantv1.PostPartitionViewOptions
 }
 
-// ViewPager is an interface for pagination of database views operations.
-type ViewPager interface {
-	// HasNext returns false if there are no more pages.
-	HasNext() bool
-
-	// GetNext retrieves the next page of results.
-	GetNext() ([]cloudantv1.ViewResultRow, error)
-
-	// GetNextWithContext retrieves the next page of results with user provided context.
-	GetNextWithContext(context.Context) ([]cloudantv1.ViewResultRow, error)
-
-	// GetAll retrieves all elements from the pager.
-	GetAll() ([]cloudantv1.ViewResultRow, error)
-
-	// GetAllWithContext retrieves all the elements from the pager with user provided context.
-	GetAllWithContext(context.Context) ([]cloudantv1.ViewResultRow, error)
+// NewViewPagination creates a new pagination for views operations.
+func NewViewPagination[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) Pagination[cloudantv1.ViewResultRow] {
+	return &paginationImplementor[O, cloudantv1.ViewResultRow]{
+		service:  c,
+		options:  o,
+		newPager: NewViewPager[O],
+	}
 }
 
-// NewViewPager creates a new pager for view operations.
-func NewViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (ViewPager, error) {
+// NewViewPager creates a new pager for views operations.
+func NewViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.ViewResultRow], error) {
 	return nil, ErrNotImplemented
 }
 

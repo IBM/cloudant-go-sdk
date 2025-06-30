@@ -66,22 +66,27 @@ var _ = Describe(`KeyPager tests`, func() {
 		pager := newBasePager(pd)
 
 		Expect(pager).NotTo(BeNil())
-		Expect(pager.pager).To(Equal(pd))
+
+		p := pager.(*basePager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow])
+
+		Expect(p.pager).To(Equal(pd))
 	})
 
 	It(`Confirms KeyPager has default pageSize`, func() {
 		pd := newTestKeyPager(opts)
 		pager := newBasePager(pd)
+		p := pager.(*basePager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow])
 
-		Expect(pager.pageSize).To(BeEquivalentTo(200))
+		Expect(p.pageSize).To(BeEquivalentTo(200))
 	})
 
 	It(`Confirms KeyPager sets pageSize from a limit`, func() {
 		opts.SetLimit(42)
 		pd := newTestKeyPager(opts)
 		pager := newBasePager(pd)
+		p := pager.(*basePager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow])
 
-		Expect(pager.pageSize).To(BeEquivalentTo(42))
+		Expect(p.pageSize).To(BeEquivalentTo(42))
 	})
 
 	It(`Confirms KeyPager GetNext returns a page with a total items number less than a limit`, func() {

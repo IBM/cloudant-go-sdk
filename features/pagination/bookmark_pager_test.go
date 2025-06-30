@@ -67,22 +67,27 @@ var _ = Describe(`BookmarkPager tests`, func() {
 		pager := newBasePager(pd)
 
 		Expect(pager).NotTo(BeNil())
-		Expect(pager.pager).To(Equal(pd))
+
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
+
+		Expect(p.pager).To(Equal(pd))
 	})
 
 	It(`Confirms BookmarkPager has default pageSize`, func() {
 		pd := newTestBookmarkPager(opts)
 		pager := newBasePager(pd)
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
 
-		Expect(pager.pageSize).To(BeEquivalentTo(200))
+		Expect(p.pageSize).To(BeEquivalentTo(200))
 	})
 
 	It(`Confirms BookmarkPager sets pageSize from a limit`, func() {
 		opts.SetLimit(42)
 		pd := newTestBookmarkPager(opts)
 		pager := newBasePager(pd)
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
 
-		Expect(pager.pageSize).To(BeEquivalentTo(42))
+		Expect(p.pageSize).To(BeEquivalentTo(42))
 	})
 
 	It(`Confirms BookmarkPager GetNext returns a page with a total items number less than a limit`, func() {

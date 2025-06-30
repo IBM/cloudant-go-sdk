@@ -68,22 +68,27 @@ var _ = Describe(`BasePager tests`, func() {
 		pager := newBasePager(pd)
 
 		Expect(pager).NotTo(BeNil())
-		Expect(pager.pager).To(Equal(pd))
+
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
+
+		Expect(p.pager).To(Equal(pd))
 	})
 
 	It(`Confirms BasePager has default pageSize`, func() {
 		pd := newTestPager(opts)
 		pager := newBasePager(pd)
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
 
-		Expect(pager.pageSize).To(BeEquivalentTo(200))
+		Expect(p.pageSize).To(BeEquivalentTo(200))
 	})
 
 	It(`Confirms BasePager sets pageSize from limit`, func() {
 		opts.SetLimit(42)
 		pd := newTestPager(opts)
 		pager := newBasePager(pd)
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
 
-		Expect(pager.pageSize).To(BeEquivalentTo(42))
+		Expect(p.pageSize).To(BeEquivalentTo(42))
 	})
 
 	It(`Confirms BasePager default HasNext is true`, func() {
@@ -168,7 +173,8 @@ var _ = Describe(`BasePager tests`, func() {
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(page).To(Equal(ms.documents()[:3]))
 
-		pager.err = http.ErrServerClosed
+		p := pager.(*basePager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
+		p.err = http.ErrServerClosed
 		page, err = pager.GetNextWithContext(ctx)
 
 		Expect(err).Should(HaveOccurred())
@@ -317,142 +323,6 @@ var _ = Describe(`BasePager tests`, func() {
 
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(items).To(Equal(ms.documents()))
-	})
-
-	It(`Confirms BasePager Pages works as iterator`, func() {
-		opts.SetLimit(23)
-		pd := newTestPager(opts)
-		pager := newBasePager(pd)
-
-		ms.makeItems(3*23 - 1)
-		docs := ms.documents()
-		pageNum := 1
-		pageSize := 23
-		for page, err := range pager.PagesWithContext(ctx) {
-			start := (pageNum - 1) * pageSize
-			end := start + pageSize
-			// last page
-			if pageNum == 3 {
-				end -= 1
-				pageSize -= 1
-			}
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(page).Should(HaveLen(pageSize))
-			Expect(page).To(Equal(docs[start:end]))
-			pageNum += 1
-		}
-	})
-
-	It(`Confirms BasePager Pages supports break`, func() {
-		opts.SetLimit(23)
-		pd := newTestPager(opts)
-		pager := newBasePager(pd)
-
-		ms.makeItems(3*23 - 1)
-		docs := ms.documents()
-		pageNum := 1
-		pageSize := 23
-		for page, err := range pager.PagesWithContext(ctx) {
-			start := (pageNum - 1) * pageSize
-			end := start + pageSize
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(page).Should(HaveLen(pageSize))
-			Expect(page).To(Equal(docs[start:end]))
-			if pageNum == 2 {
-				break
-			}
-			pageNum += 1
-		}
-		Expect(pager.HasNext()).To(BeTrue())
-		Expect(*pd.options.Bookmark).To(Equal("2"))
-	})
-
-	It(`Confirms BasePager Pages returns an error and stops cycle`, func() {
-		opts.SetLimit(23)
-		pd := newTestPager(opts)
-		pager := newBasePager(pd)
-
-		ms.makeItems(3*23 - 1)
-		ms.setError(http.ErrServerClosed, 24)
-		docs := ms.documents()
-		pageNum := 1
-		pageSize := 23
-		for page, err := range pager.PagesWithContext(ctx) {
-			if pageNum == 2 {
-				Expect(err).Should(HaveOccurred())
-				Expect(err).Should(MatchError(http.ErrServerClosed))
-				continue
-			}
-			start := (pageNum - 1) * pageSize
-			end := start + pageSize
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(page).To(Equal(docs[start:end]))
-			pageNum += 1
-		}
-		Expect(pager.HasNext()).To(BeTrue())
-		// iterator exits on error even with continue
-		Expect(pageNum).To(Equal(2))
-		Expect(*pd.options.Bookmark).To(Equal("1"))
-	})
-
-	It(`Confirms BasePager Rows works as iterator`, func() {
-		opts.SetLimit(23)
-		pd := newTestPager(opts)
-		pager := newBasePager(pd)
-
-		ms.makeItems(3*23 - 1)
-		docs := ms.documents()
-		i := 0
-		for item, err := range pager.RowsWithContext(ctx) {
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(item).To(Equal(docs[i]))
-			i += 1
-		}
-	})
-
-	It(`Confirms BasePager Rows supports break`, func() {
-		opts.SetLimit(23)
-		pd := newTestPager(opts)
-		pager := newBasePager(pd)
-
-		ms.makeItems(3*23 - 1)
-		docs := ms.documents()
-		i := 0
-		for item, err := range pager.RowsWithContext(ctx) {
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(item).To(Equal(docs[i]))
-			i += 1
-			if i == 24 {
-				break
-			}
-		}
-		Expect(pager.HasNext()).To(BeTrue())
-		Expect(*pd.options.Bookmark).To(Equal("2"))
-	})
-
-	It(`Confirms BasePager Rows returns an error and stops cycle`, func() {
-		opts.SetLimit(23)
-		pd := newTestPager(opts)
-		pager := newBasePager(pd)
-
-		ms.makeItems(3*23 - 1)
-		ms.setError(http.ErrServerClosed, 24)
-		docs := ms.documents()
-		i := 0
-		for item, err := range pager.RowsWithContext(ctx) {
-			if i == 23 {
-				Expect(err).Should(HaveOccurred())
-				Expect(err).Should(MatchError(http.ErrServerClosed))
-				continue
-			}
-			Expect(err).ShouldNot(HaveOccurred())
-			Expect(item).To(Equal(docs[i]))
-			i += 1
-		}
-		Expect(pager.HasNext()).To(BeTrue())
-		// iterator exits cycle on error
-		Expect(i).To(Equal(23))
-		Expect(*pd.options.Bookmark).To(Equal("1"))
 	})
 
 	It(`Confirms BasePager sets next page options`, func() {

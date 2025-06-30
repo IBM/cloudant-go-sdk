@@ -19,13 +19,12 @@ package features
 import (
 	"context"
 	"errors"
-	"iter"
 )
 
 var ErrNotImplemented = errors.New("not yet implemented")
 var ErrNoMoreResults = errors.New("no more results available")
 
-type basePagerOptions interface {
+type pagerOptions interface {
 	keyPagerOptions | bookmarkPagerOptions
 }
 
@@ -37,8 +36,26 @@ type paginatedRow interface {
 	keyPaginatedRow | bookmarkPaginatedRow
 }
 
-// pager is an interface implementing callbacks necessary for Pager interface
-type pager[O basePagerOptions, R requestResult, T paginatedRow] interface {
+// Pager is an interface for pagination of Cloudant query operations.
+type Pager[T paginatedRow] interface {
+	// HasNext returns false if there are no more pages.
+	HasNext() bool
+
+	// GetNext retrieves the next page of results.
+	GetNext() ([]T, error)
+
+	// GetNextWithContext retrieves the next page of results with user provided context.
+	GetNextWithContext(context.Context) ([]T, error)
+
+	// GetAll retrieves all elements from the pager.
+	GetAll() ([]T, error)
+
+	// GetAllWithContext retrieves all the elements from the pager with user provided context.
+	GetAllWithContext(context.Context) ([]T, error)
+}
+
+// pagerImplementor is an internal interface of callbacks necessary for Pager interface implementation
+type pagerImplementor[O pagerOptions, R requestResult, T paginatedRow] interface {
 	nextRequestFunction(context.Context) (R, error)
 	itemsGetter(R) ([]T, error)
 	hasNext() bool
@@ -49,20 +66,21 @@ type pager[O basePagerOptions, R requestResult, T paginatedRow] interface {
 	setLimit(int64)
 }
 
-// basePager is a generic structure designed to handle pagination logic.
-// It works with any type T that satisfies the paginatedRow interface.
+// basePager is a generic implementation of Pager interface.
 // Fields:
-//   - pager: An implementation of `pager` iterface.
+//   - pager: An implementation of `paginated` iterface.
+//   - options: An option structure of one of pagerOptions union types.
+//   - err: Holds any errors encountered while fetching the next page of items.
 //   - pageSize: The number of items per page, controlling the batch size of each query.
-type basePager[O basePagerOptions, R requestResult, T paginatedRow] struct {
-	pager    pager[O, R, T]
+type basePager[O pagerOptions, R requestResult, T paginatedRow] struct {
+	pager    pagerImplementor[O, R, T]
 	options  O
 	err      error
 	pageSize int64
 }
 
 // newBasePager creates a new base pager for database operations.
-func newBasePager[O basePagerOptions, R requestResult, T paginatedRow](pd pager[O, R, T]) *basePager[O, R, T] {
+func newBasePager[O pagerOptions, R requestResult, T paginatedRow](pd pagerImplementor[O, R, T]) Pager[T] {
 	pageSize := getPageSizeFromOptionsLimit(pd)
 	return &basePager[O, R, T]{
 		pager:    pd,
@@ -115,61 +133,19 @@ func (p *basePager[O, R, T]) GetAll() ([]T, error) {
 // GetAllWithContext retrieves all the elements from the pager with user provided context.
 func (p *basePager[O, R, T]) GetAllWithContext(ctx context.Context) ([]T, error) {
 	acc := make([]T, 0)
-	for item, err := range p.RowsWithContext(ctx) {
+	for p.HasNext() {
+		items, err := p.GetNextWithContext(ctx)
 		if err != nil {
 			p.pager.setOptions(p.options)
 			return nil, err
 		}
-		acc = append(acc, item)
+		acc = append(acc, items...)
 	}
 	return acc, nil
 }
 
-// Pages returns an iterator for all pages from the pager.
-func (p *basePager[O, R, T]) Pages() iter.Seq2[[]T, error] {
-	return p.PagesWithContext(context.Background())
-}
-
-// PagesWithContext returns an iterator for all pages from the pager queried with user provided context.
-func (p *basePager[O, R, T]) PagesWithContext(ctx context.Context) iter.Seq2[[]T, error] {
-	return func(yield func([]T, error) bool) {
-		for p.HasNext() {
-			rows, err := p.GetNextWithContext(ctx)
-			if err != nil {
-				yield(nil, err)
-				return
-			}
-			if !yield(rows, nil) {
-				return
-			}
-		}
-	}
-}
-
-// Rows returns an iterator for all elements from the pager.
-func (p *basePager[O, R, T]) Rows() iter.Seq2[T, error] {
-	return p.RowsWithContext(context.Background())
-}
-
-// RowsWithContext returns an iterator for all elements from the pager queried with user provided context.
-func (p *basePager[O, R, T]) RowsWithContext(ctx context.Context) iter.Seq2[T, error] {
-	return func(yield func(T, error) bool) {
-		for rows, err := range p.PagesWithContext(ctx) {
-			if err != nil {
-				yield(*new(T), err)
-				return
-			}
-			for _, row := range rows {
-				if !yield(row, nil) {
-					return
-				}
-			}
-		}
-	}
-}
-
-// getPageSizeFromOptionsLimit infers pageSize from options limit or defaults to 20.
-func getPageSizeFromOptionsLimit[O basePagerOptions, R requestResult, T paginatedRow](pd pager[O, R, T]) int64 {
+// getPageSizeFromOptionsLimit infers pageSize from options limit or defaults to 200.
+func getPageSizeFromOptionsLimit[O pagerOptions, R requestResult, T paginatedRow](pd pagerImplementor[O, R, T]) int64 {
 	pageSize := int64(200)
 	if pd.getLimit() != nil {
 		pageSize = *pd.getLimit()

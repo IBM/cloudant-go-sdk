@@ -17,8 +17,6 @@
 package features
 
 import (
-	"context"
-
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -27,26 +25,17 @@ type FindPagerOptions interface {
 	*cloudantv1.PostFindOptions | *cloudantv1.PostPartitionFindOptions
 }
 
-// FindPager is an interface for pagination of database query operations.
-type FindPager interface {
-	// HasNext returns false if there are no more pages.
-	HasNext() bool
-
-	// GetNext retrieves the next page of results.
-	GetNext() ([]cloudantv1.Document, error)
-
-	// GetNextWithContext retrieves the next page of results with user provided context.
-	GetNextWithContext(context.Context) ([]cloudantv1.Document, error)
-
-	// GetAll retrieves all elements from the pager.
-	GetAll() ([]cloudantv1.Document, error)
-
-	// GetAllWithContext retrieves all the elements from the pager with user provided context.
-	GetAllWithContext(context.Context) ([]cloudantv1.Document, error)
+// NewFindPagination creates a new pagination for queries operations.
+func NewFindPagination[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) Pagination[cloudantv1.Document] {
+	return &paginationImplementor[O, cloudantv1.Document]{
+		service:  c,
+		options:  o,
+		newPager: NewFindPager[O],
+	}
 }
 
-// NewFindPager creates a new pager for query operations.
-func NewFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (FindPager, error) {
+// NewFindPager creates a new pager for queries operations.
+func NewFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.Document], error) {
 	return nil, ErrNotImplemented
 }
 
