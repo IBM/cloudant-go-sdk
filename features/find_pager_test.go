@@ -70,14 +70,15 @@ var _ = Describe(`Find pager tests`, func() {
 				selector := make(map[string]any)
 				opts := service.NewPostFindOptions("db", selector)
 				opts.SetLimit(int64(defaultTestPageSize))
-				pager, err := NewFindPager(service, opts)
+				pagination := NewFindPagination(service, opts)
 
-				Expect(err).ShouldNot(HaveOccurred())
-				Expect(pager).ToNot(BeNil())
+				Expect(pagination).ToNot(BeNil())
 
 				ms.makeItems(expectItems)
 
-				runGetNextAssertion(pager, expectPages, expectItems)
+				runPagesAssertion(pagination, expectPages)
+				runRowsAssertion(pagination, expectItems)
+				runPagerAssertion(pagination, expectPages, expectItems)
 			})
 
 			for _, test := range concretePagerTestCases {
@@ -97,20 +98,22 @@ var _ = Describe(`Find pager tests`, func() {
 				selector := make(map[string]any)
 				opts := service.NewPostFindOptions("db", selector)
 				opts.SetLimit(int64(defaultTestPageSize))
-				pager, err := NewFindPager(service, opts)
+				pagination := NewFindPagination(service, opts)
 
-				Expect(err).ShouldNot(HaveOccurred())
-				Expect(pager).ToNot(BeNil())
+				Expect(pagination).ToNot(BeNil())
 
 				ms.makeItems(expectItems)
 				ms.setHTTPError(expectStatusCode, expectItems-2)
 
-				runGetNextWithErrorAssertion(pager, expectedError, expectItems)
+				runPagesWithErrorAssertion(pagination, expectedError, expectPages)
+				runRowsWithErrorAssertion(pagination, expectedError, expectPages*defaultTestPageSize)
+				runPagerWithErrorAssertion(pagination, expectedError, expectItems)
 			})
 
 			for pageNum := range 2 {
 				for _, code := range append(terminalErrors, transientErrors...) {
 					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
+						expectPages = pageNum
 						expectItems = defaultTestPageSize * (pageNum + 1)
 						expectStatusCode = code
 						expectedError = statusText(expectStatusCode)
@@ -126,14 +129,15 @@ var _ = Describe(`Find pager tests`, func() {
 				selector := make(map[string]any)
 				opts := service.NewPostPartitionFindOptions("db", "partition", selector)
 				opts.SetLimit(int64(defaultTestPageSize))
-				pager, err := NewFindPager(service, opts)
+				pagination := NewFindPagination(service, opts)
 
-				Expect(err).ShouldNot(HaveOccurred())
-				Expect(pager).ToNot(BeNil())
+				Expect(pagination).ToNot(BeNil())
 
 				ms.makeItems(expectItems)
 
-				runGetNextAssertion(pager, expectPages, expectItems)
+				runPagesAssertion(pagination, expectPages)
+				runRowsAssertion(pagination, expectItems)
+				runPagerAssertion(pagination, expectPages, expectItems)
 			})
 
 			for _, test := range concretePagerTestCases {
@@ -152,20 +156,22 @@ var _ = Describe(`Find pager tests`, func() {
 				selector := make(map[string]any)
 				opts := service.NewPostPartitionFindOptions("db", "partition", selector)
 				opts.SetLimit(int64(defaultTestPageSize))
-				pager, err := NewFindPager(service, opts)
+				pagination := NewFindPagination(service, opts)
 
-				Expect(err).ShouldNot(HaveOccurred())
-				Expect(pager).ToNot(BeNil())
+				Expect(pagination).ToNot(BeNil())
 
 				ms.makeItems(expectItems)
 				ms.setHTTPError(expectStatusCode, expectItems-2)
 
-				runGetNextWithErrorAssertion(pager, expectedError, expectItems)
+				runPagesWithErrorAssertion(pagination, expectedError, expectPages)
+				runRowsWithErrorAssertion(pagination, expectedError, expectPages*defaultTestPageSize)
+				runPagerWithErrorAssertion(pagination, expectedError, expectItems)
 			})
 
 			for pageNum := range 2 {
 				for _, code := range append(terminalErrors, transientErrors...) {
 					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
+						expectPages = pageNum
 						expectItems = defaultTestPageSize * (pageNum + 1)
 						expectStatusCode = code
 						expectedError = statusText(expectStatusCode)

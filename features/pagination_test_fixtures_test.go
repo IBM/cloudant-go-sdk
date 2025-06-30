@@ -491,10 +491,39 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 	}
 }
 
-func runGetNextAssertion[T paginatedRow](pager Pager[T], expectPages, expectItems int) {
+func runPagesAssertion[T paginatedRow](p Pagination[T], expectPages int) {
+	pageCount := 0
+	for _, err := range p.Pages() {
+		Expect(err).ShouldNot(HaveOccurred())
+		pageCount += 1
+	}
+
+	Expect(pageCount).To(Equal(expectPages))
+}
+
+func runRowsAssertion[T paginatedRow](p Pagination[T], expectItems int) {
+	items := 0
+	uniqueItems := make(map[string]bool, 0)
+	for row, err := range p.Rows() {
+		Expect(err).ShouldNot(HaveOccurred())
+		items += 1
+		data, err := json.Marshal(row)
+		Expect(err).ShouldNot(HaveOccurred())
+		uniqueItems[fmt.Sprintf("%x", md5.Sum(data))] = true
+	}
+
+	Expect(items).To(Equal(expectItems))
+	Expect(uniqueItems).Should(HaveLen(expectItems))
+}
+
+func runPagerAssertion[T paginatedRow](p Pagination[T], expectPages, expectItems int) {
 	pageCount := 0
 	items := 0
 	uniqueItems := make(map[string]bool, 0)
+
+	pager, err := p.Pager()
+	Expect(err).ShouldNot(HaveOccurred())
+
 	for pager.HasNext() {
 		rows, err := pager.GetNext()
 		Expect(err).ShouldNot(HaveOccurred())
@@ -512,7 +541,36 @@ func runGetNextAssertion[T paginatedRow](pager Pager[T], expectPages, expectItem
 	Expect(uniqueItems).Should(HaveLen(expectItems))
 }
 
-func runGetNextWithErrorAssertion[T paginatedRow](pager Pager[T], expectedError string, expectItems int) {
+func runPagesWithErrorAssertion[T paginatedRow](p Pagination[T], expectedError string, expectPages int) {
+	pageCount := 0
+	for _, err := range p.Pages() {
+		if err != nil {
+			Expect(err).Should(MatchError(ContainSubstring(expectedError)))
+			break
+		}
+		pageCount += 1
+	}
+
+	Expect(pageCount).To(Equal(expectPages))
+}
+
+func runRowsWithErrorAssertion[T paginatedRow](p Pagination[T], expectedError string, expectItems int) {
+	items := 0
+	for _, err := range p.Rows() {
+		if err != nil {
+			Expect(err).Should(MatchError(ContainSubstring(expectedError)))
+			break
+		}
+		items += 1
+	}
+
+	Expect(items).To(Equal(expectItems))
+}
+
+func runPagerWithErrorAssertion[T paginatedRow](p Pagination[T], expectedError string, expectItems int) {
+	pager, err := p.Pager()
+	Expect(err).ShouldNot(HaveOccurred())
+
 	// assertion for an error on a second page
 	if expectItems > defaultTestPageSize {
 		items, err := pager.GetNext()
