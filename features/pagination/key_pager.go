@@ -25,7 +25,7 @@ import (
 )
 
 type keyPagerOptions interface {
-	AllDocsPagerOptions | ViewPagerOptions
+	AllDocsPagerOptions | DesignDocsPagerOptions | ViewPagerOptions
 }
 
 type keyRequestResult interface {
