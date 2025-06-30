@@ -156,7 +156,7 @@ func (p *basePager[O, R, T]) GetAllWithContext(ctx context.Context) ([]T, error)
 
 // getPageSizeFromOptionsLimit infers pageSize from options limit or defaults to 200.
 func getPageSizeFromOptionsLimit[O pagerOptions, R requestResult, T paginatedRow](pd pagerImplementor[O, R, T]) int64 {
-	pageSize := int64(200)
+	pageSize := int64(maxLimit)
 	if pd.getLimit() != nil {
 		pageSize = *pd.getLimit()
 	}
