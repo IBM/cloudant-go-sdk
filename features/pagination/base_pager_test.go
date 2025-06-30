@@ -468,6 +468,7 @@ var _ = Describe(`BasePager tests`, func() {
 
 			Expect(err).ShouldNot(HaveOccurred())
 			Expect(opts.Bookmark).To(BeNil())
+
 			if pager.HasNext() {
 				expect := fmt.Sprintf("%d", cycle)
 				Expect(*pd.options.Bookmark).To(Equal(expect))

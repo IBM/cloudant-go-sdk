@@ -18,6 +18,7 @@ package features
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 	"github.com/IBM/go-sdk-core/v5/core"
@@ -38,6 +39,7 @@ type keyPaginatedRow interface {
 type keyPager[O keyPagerOptions, R keyRequestResult, T keyPaginatedRow] struct {
 	service             *cloudantv1.CloudantV1
 	options             O
+	hasNextPage         bool
 	requestFunction     func(context.Context, O) (R, *core.DetailedResponse, error)
 	resultItemsGetter   func(R) []T
 	startKeyGetter      func(T) string
@@ -46,24 +48,77 @@ type keyPager[O keyPagerOptions, R keyRequestResult, T keyPaginatedRow] struct {
 	startViewKeySetter  func(any) O
 	startKeyDocIDGetter func(T) string
 	startKeyDocIDSetter func(string) O
+	optionsCloner       func(O) O
 	limitGetter         func() *int64
 	limitSetter         func(int64) O
 }
 
 func (p *keyPager[O, R, T]) nextRequestFunction(ctx context.Context) (R, error) {
-	return nil, ErrNotImplemented
+	result, _, err := p.requestFunction(ctx, p.options)
+	return result, err
 }
 
-func (p *keyPager[O, R, T]) itemsGetter(result R) []T {
-	return make([]T, 0)
+func (p *keyPager[O, R, T]) itemsGetter(result R) ([]T, error) {
+	items := p.resultItemsGetter(result)
+	if p.limitGetter() != nil && len(items) < int(*p.limitGetter()) {
+		p.hasNextPage = false
+		return items, nil
+	}
+
+	var err error
+	itemsNum := len(items) - 1
+	if p.startViewKeyGetter != nil && p.startKeyDocIDGetter != nil {
+		lastItem := items[itemsNum]
+		penultimateItem := items[itemsNum-1]
+		lID := p.startKeyDocIDGetter(lastItem)
+		pID := p.startKeyDocIDGetter(penultimateItem)
+		lKey := p.startViewKeyGetter(lastItem)
+		pKey := p.startViewKeyGetter(penultimateItem)
+		if lID == pID && pKey == lKey {
+			err = fmt.Errorf("cannot paginate on a boundary containing identical keys %q and document IDs %q", lKey, lID)
+		}
+	}
+
+	return items[:itemsNum], err
+}
+
+func (p *keyPager[O, R, T]) hasNext() bool {
+	return p.hasNextPage
 }
 
 func (p *keyPager[O, R, T]) setNextPageOptions(result R) {
+	items := p.resultItemsGetter(result)
+	if len(items) == 0 {
+		return
+	}
+	itemsNum := len(items) - 1
+	lastItem := items[itemsNum]
+	if p.startKeySetter != nil {
+		startKey := p.startKeyGetter(lastItem)
+		p.startKeySetter(startKey)
+	}
+	if p.startViewKeySetter != nil {
+		startViewKey := p.startViewKeyGetter(lastItem)
+		p.startViewKeySetter(startViewKey)
+	}
+	if p.startKeyDocIDSetter != nil {
+		startKeyDocID := p.startKeyDocIDGetter(lastItem)
+		p.startKeyDocIDSetter(startKeyDocID)
+	}
+}
+
+func (p *keyPager[O, R, T]) getOptions() O {
+	return p.optionsCloner(p.options)
+}
+
+func (p *keyPager[O, R, T]) setOptions(o O) {
+	p.options = p.optionsCloner(o)
 }
 
 func (p *keyPager[O, R, T]) getLimit() *int64 {
-	return nil
+	return p.limitGetter()
 }
 
 func (p *keyPager[O, R, T]) setLimit(pageSize int64) {
+	p.limitSetter(pageSize + 1)
 }

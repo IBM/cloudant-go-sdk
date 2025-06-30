@@ -19,9 +19,11 @@ package features
 import (
 	"context"
 	"fmt"
+	"slices"
 	"strconv"
 
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
+	"github.com/IBM/go-sdk-core/v5/core"
 )
 
 type mockServiceKey string
@@ -60,7 +62,7 @@ func fromContext(ctx context.Context) (*mockService, error) {
 	return nil, fmt.Errorf("can't find mock service on the context")
 }
 
-// makeItems generated a given number of mock documents
+// makeItems generated a given number of mock items
 func (s *mockService) makeItems(itemsNum int) {
 	for i := range itemsNum {
 		id := fmt.Sprintf("%02d", i+1)
@@ -68,15 +70,21 @@ func (s *mockService) makeItems(itemsNum int) {
 	}
 }
 
-// getItems mocks the actual service call, returning either requestd items or an error
-func (s *mockService) getItems(page, limit int) ([]mockDoc, error) {
-	total := len(s.items)
-	start := min(page*limit, total)
-	end := min(start+limit, total)
-	if s.err != nil && s.errorItem >= start && s.errorItem <= end {
-		return nil, s.err
+// getItems mocks the actual service call, returning either requested items or an error
+func (s *mockService) getItems(start, limit int) ([]mockDoc, error) {
+	acc := make([]mockDoc, 0)
+	for i, d := range s.items {
+		if s.err != nil && s.errorItem == i+1 {
+			return nil, s.err
+		}
+		if i+1 >= start {
+			acc = append(acc, d)
+		}
+		if len(acc) == limit {
+			return acc, nil
+		}
 	}
-	return s.items[start:end], nil
+	return acc, nil
 }
 
 // getDocuments is a converter from slice of mock documents to a slice of cloudantv1.Document
@@ -113,15 +121,23 @@ func (s *mockService) setError(err error, errorItem int) {
 	s.errorItem = errorItem
 }
 
+// duplicateItem duplicates a last item in the items collection
+func (s *mockService) duplicateItem() {
+	lastItem := slices.Clone(s.items[len(s.items)-1:])
+	s.items = append(s.items, lastItem...)
+}
+
 // testPager is pager implementation to test basePager functionality
 type testPager struct {
-	options *cloudantv1.PostFindOptions
-	items   []cloudantv1.Document
+	options     *cloudantv1.PostFindOptions
+	items       []cloudantv1.Document
+	hasNextPage bool
 }
 
 func newTestPager(o *cloudantv1.PostFindOptions) *testPager {
 	pager := &testPager{
-		items: make([]cloudantv1.Document, 0),
+		items:       make([]cloudantv1.Document, 0),
+		hasNextPage: true,
 	}
 	pager.setOptions(o)
 	return pager
@@ -133,7 +149,7 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 		return nil, err
 	}
 
-	pageSize := int(*p.getLimit())
+	limit := int(*p.getLimit())
 	page := 0
 	if p.options.Bookmark != nil {
 		if i, err := strconv.Atoi(*p.options.Bookmark); err == nil {
@@ -141,9 +157,13 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 		}
 	}
 
-	items, err := ms.getItems(page, pageSize)
+	items, err := ms.getItems(page*limit+1, limit)
 	if err != nil {
 		return nil, ms.err
+	}
+
+	if len(items) < limit {
+		p.hasNextPage = false
 	}
 
 	docs := ms.getDocuments(items)
@@ -151,8 +171,12 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 	return &cloudantv1.FindResult{Docs: docs, Bookmark: &bookmark}, nil
 }
 
-func (p *testPager) itemsGetter(result *cloudantv1.FindResult) []cloudantv1.Document {
-	return result.Docs
+func (p *testPager) itemsGetter(result *cloudantv1.FindResult) ([]cloudantv1.Document, error) {
+	return result.Docs, nil
+}
+
+func (p *testPager) hasNext() bool {
+	return p.hasNextPage
 }
 
 func (p *testPager) getOptions() *cloudantv1.PostFindOptions {
@@ -175,4 +199,46 @@ func (p *testPager) getLimit() *int64 {
 
 func (p *testPager) setLimit(pageSize int64) {
 	p.options.SetLimit(pageSize)
+}
+
+// newTestKeyPager returns a keyPager configured for tests
+func newTestKeyPager(o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
+	opts := *o
+	return &keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
+		options:     &opts,
+		hasNextPage: true,
+		requestFunction: func(ctx context.Context, o *cloudantv1.PostViewOptions) (*cloudantv1.ViewResult, *core.DetailedResponse, error) {
+			ms, err := fromContext(ctx)
+			if err != nil {
+				return nil, nil, err
+			}
+
+			limit := int(*opts.Limit)
+			startKey := 1
+			if opts.StartKeyDocID != nil {
+				if i, err := strconv.Atoi(*opts.StartKeyDocID); err == nil {
+					startKey = i
+				}
+			}
+
+			items, err := ms.getItems(startKey, limit)
+			if err != nil {
+				return nil, nil, ms.err
+			}
+
+			rows := ms.getViewRows(items)
+			return &cloudantv1.ViewResult{Rows: rows}, nil, nil
+		},
+		resultItemsGetter:   func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
+		startViewKeyGetter:  func(item cloudantv1.ViewResultRow) any { return item.Key },
+		startViewKeySetter:  opts.SetStartKey,
+		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string { return *item.ID },
+		startKeyDocIDSetter: opts.SetStartKeyDocID,
+		optionsCloner: func(o *cloudantv1.PostViewOptions) *cloudantv1.PostViewOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }

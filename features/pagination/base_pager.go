@@ -40,7 +40,8 @@ type paginatedRow interface {
 // pager is an interface implementing callbacks necessary for Pager interface
 type pager[O basePagerOptions, R requestResult, T paginatedRow] interface {
 	nextRequestFunction(context.Context) (R, error)
-	itemsGetter(R) []T
+	itemsGetter(R) ([]T, error)
+	hasNext() bool
 	getOptions() O
 	setOptions(O)
 	setNextPageOptions(R)
@@ -52,13 +53,11 @@ type pager[O basePagerOptions, R requestResult, T paginatedRow] interface {
 // It works with any type T that satisfies the paginatedRow interface.
 // Fields:
 //   - pager: An implementation of `pager` iterface.
-//   - hasNext: A boolean indicating if there are no more pages available for fetching.
 //   - pageSize: The number of items per page, controlling the batch size of each query.
 type basePager[O basePagerOptions, R requestResult, T paginatedRow] struct {
 	pager    pager[O, R, T]
 	options  O
 	err      error
-	hasNext  bool
 	pageSize int64
 }
 
@@ -68,14 +67,13 @@ func newBasePager[O basePagerOptions, R requestResult, T paginatedRow](pd pager[
 	return &basePager[O, R, T]{
 		pager:    pd,
 		options:  pd.getOptions(),
-		hasNext:  true,
 		pageSize: pageSize,
 	}
 }
 
 // HasNext returns false if there are no more pages.
 func (p *basePager[O, R, T]) HasNext() bool {
-	return p.hasNext
+	return p.pager.hasNext()
 }
 
 // GetNext retrieves the next page of results.
@@ -87,7 +85,7 @@ func (p *basePager[O, R, T]) GetNext() ([]T, error) {
 func (p *basePager[O, R, T]) GetNextWithContext(ctx context.Context) ([]T, error) {
 	if p.err != nil {
 		return nil, p.err
-	} else if !p.hasNext {
+	} else if !p.pager.hasNext() {
 		return nil, ErrNoMoreResults
 	}
 
@@ -97,13 +95,15 @@ func (p *basePager[O, R, T]) GetNextWithContext(ctx context.Context) ([]T, error
 		return nil, err
 	}
 
-	items := p.pager.itemsGetter(result)
+	items, err := p.pager.itemsGetter(result)
+	if err != nil {
+		p.err = err
+	}
 
-	if len(items) < int(p.pageSize) {
-		p.hasNext = false
-	} else {
+	if p.pager.hasNext() {
 		p.pager.setNextPageOptions(result)
 	}
+
 	return items, nil
 }
 
