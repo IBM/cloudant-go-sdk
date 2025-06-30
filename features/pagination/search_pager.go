@@ -42,21 +42,57 @@ func NewSearchPager[O SearchPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[
 			return nil, err
 		}
 
-		return nil, ErrNotImplemented
+		pd := newSearchPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
 	case *cloudantv1.PostPartitionSearchOptions:
 		if err := validateOptions(bookmarkPagerValidationRules, opts); err != nil {
 			return nil, err
 		}
 
-		return nil, ErrNotImplemented
+		pd := newSearchPartitionPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
 	}
 	return nil, ErrNotImplemented
 }
 
 func newSearchPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostSearchOptions) *bookmarkPager[*cloudantv1.PostSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow] {
-	return new(bookmarkPager[*cloudantv1.PostSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow])
+	opts := *o
+	return &bookmarkPager[*cloudantv1.PostSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostSearchWithContext,
+		resultItemsGetter: func(result *cloudantv1.SearchResult) []cloudantv1.SearchResultRow { return result.Rows },
+		bookmarkGetter:    func(result *cloudantv1.SearchResult) string { return *result.Bookmark },
+		bookmarkSetter:    opts.SetBookmark,
+		optionsCloner: func(o *cloudantv1.PostSearchOptions) *cloudantv1.PostSearchOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }
 
 func newSearchPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionSearchOptions) *bookmarkPager[*cloudantv1.PostPartitionSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow] {
-	return new(bookmarkPager[*cloudantv1.PostPartitionSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow])
+	opts := *o
+	return &bookmarkPager[*cloudantv1.PostPartitionSearchOptions, *cloudantv1.SearchResult, cloudantv1.SearchResultRow]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostPartitionSearchWithContext,
+		resultItemsGetter: func(result *cloudantv1.SearchResult) []cloudantv1.SearchResultRow { return result.Rows },
+		bookmarkGetter:    func(result *cloudantv1.SearchResult) string { return *result.Bookmark },
+		bookmarkSetter:    opts.SetBookmark,
+		optionsCloner: func(o *cloudantv1.PostPartitionSearchOptions) *cloudantv1.PostPartitionSearchOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }

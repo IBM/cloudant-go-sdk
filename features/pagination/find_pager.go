@@ -36,17 +36,60 @@ func NewFindPagination[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 
 // NewFindPager creates a new pager for queries operations.
 func NewFindPager[O FindPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.Document], error) {
-	if err := validateOptions(bookmarkPagerValidationRules, o); err != nil {
+	if err := validateOptions(keyPagerValidationRules, o); err != nil {
 		return nil, err
+	}
+
+	switch opts := any(o).(type) {
+	case *cloudantv1.PostFindOptions:
+		pd := newFindPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
+	case *cloudantv1.PostPartitionFindOptions:
+		pd := newFindPartitionPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
 	}
 
 	return nil, ErrNotImplemented
 }
 
 func newFindPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
-	return new(bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
+	opts := *o
+	return &bookmarkPager[*cloudantv1.PostFindOptions, *cloudantv1.FindResult, cloudantv1.Document]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostFindWithContext,
+		resultItemsGetter: func(result *cloudantv1.FindResult) []cloudantv1.Document { return result.Docs },
+		bookmarkGetter:    func(result *cloudantv1.FindResult) string { return *result.Bookmark },
+		bookmarkSetter:    opts.SetBookmark,
+		optionsCloner: func(o *cloudantv1.PostFindOptions) *cloudantv1.PostFindOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }
 
 func newFindPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionFindOptions) *bookmarkPager[*cloudantv1.PostPartitionFindOptions, *cloudantv1.FindResult, cloudantv1.Document] {
-	return new(bookmarkPager[*cloudantv1.PostPartitionFindOptions, *cloudantv1.FindResult, cloudantv1.Document])
+	opts := *o
+	return &bookmarkPager[*cloudantv1.PostPartitionFindOptions, *cloudantv1.FindResult, cloudantv1.Document]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostPartitionFindWithContext,
+		resultItemsGetter: func(result *cloudantv1.FindResult) []cloudantv1.Document { return result.Docs },
+		bookmarkGetter:    func(result *cloudantv1.FindResult) string { return *result.Bookmark },
+		bookmarkSetter:    opts.SetBookmark,
+		optionsCloner: func(o *cloudantv1.PostPartitionFindOptions) *cloudantv1.PostPartitionFindOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }

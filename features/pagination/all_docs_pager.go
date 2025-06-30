@@ -40,13 +40,56 @@ func NewAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Page
 		return nil, err
 	}
 
+	switch opts := any(o).(type) {
+	case *cloudantv1.PostAllDocsOptions:
+		pd := newAllDocsPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
+	case *cloudantv1.PostPartitionAllDocsOptions:
+		pd := newAllDocsPartitionPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
+	}
+
 	return nil, ErrNotImplemented
 }
 
 func newAllDocsPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptions) *keyPager[*cloudantv1.PostAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
-	return new(keyPager[*cloudantv1.PostAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow])
+	opts := *o
+	return &keyPager[*cloudantv1.PostAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostAllDocsWithContext,
+		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
+		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
+		startKeySetter:    opts.SetStartKey,
+		optionsCloner: func(o *cloudantv1.PostAllDocsOptions) *cloudantv1.PostAllDocsOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }
 
 func newAllDocsPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionAllDocsOptions) *keyPager[*cloudantv1.PostPartitionAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow] {
-	return new(keyPager[*cloudantv1.PostPartitionAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow])
+	opts := *o
+	return &keyPager[*cloudantv1.PostPartitionAllDocsOptions, *cloudantv1.AllDocsResult, cloudantv1.DocsResultRow]{
+		service:           c,
+		options:           &opts,
+		hasNextPage:       true,
+		requestFunction:   c.PostPartitionAllDocsWithContext,
+		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
+		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
+		startKeySetter:    opts.SetStartKey,
+		optionsCloner: func(o *cloudantv1.PostPartitionAllDocsOptions) *cloudantv1.PostPartitionAllDocsOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }

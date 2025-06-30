@@ -18,27 +18,102 @@ package features
 
 import (
 	"context"
+	"crypto/md5"
+	"encoding/json"
+	"errors"
 	"fmt"
+	"io"
+	"net/http"
 	"slices"
 	"strconv"
+	"strings"
 
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 	"github.com/IBM/go-sdk-core/v5/core"
+	. "github.com/onsi/gomega"
 )
+
+const (
+	pageSize         = 10
+	StatusBrokenJson = 600
+	StatusBadIO      = 601
+)
+
+var errorCodes = []int{
+	http.StatusBadRequest,
+	http.StatusUnauthorized,
+	http.StatusForbidden,
+	http.StatusNotFound,
+	http.StatusTooManyRequests,
+	http.StatusInternalServerError,
+	http.StatusBadGateway,
+	http.StatusGatewayTimeout,
+	StatusBrokenJson,
+	StatusBadIO,
+}
+
+var testCases = []struct {
+	descrition  string
+	expectPages int
+	expectItems int
+}{
+	{
+		descrition:  "Confirms result is correct for an empty page",
+		expectPages: 1, //  Need at least 1 empty page to know there are no more results
+		expectItems: 0,
+	},
+	{
+		descrition:  "Confirms result is correct for a partial page",
+		expectPages: 1,
+		expectItems: 1,
+	},
+	{
+		descrition:  "Confirms result is correct for a page size minus one",
+		expectPages: 1,
+		expectItems: pageSize - 1,
+	},
+	{
+		descrition:  "Confirms result is correct for a single page",
+		expectPages: 1,
+		expectItems: pageSize,
+	},
+	{
+		descrition:  "Confirms result is correct for a page size plus one",
+		expectPages: 2,
+		expectItems: pageSize + 1,
+	},
+	{
+		descrition:  "Confirms result is correct multiple pages exactly",
+		expectPages: 3,
+		expectItems: 3 * pageSize,
+	},
+	{
+		descrition:  "Confirms result is correct multiple pages plus one",
+		expectPages: 4,
+		expectItems: 3*pageSize + 1,
+	},
+	{
+		descrition:  "Confirms result is correct multiple pages minus one",
+		expectPages: 4,
+		expectItems: 4*pageSize - 1,
+	},
+}
 
 type mockServiceKey string
 
 var msKey = mockServiceKey("mock")
 
 type mockDoc struct {
+	N  int
 	ID *string
 }
 
 // mockService is a struct holding mocked results
 type mockService struct {
-	items     []mockDoc
-	errorItem int
-	err       error
+	items      []mockDoc
+	errorItem  int
+	err        error
+	statusCode int
 }
 
 // newMockService creates a new mock service for testing
@@ -65,8 +140,10 @@ func fromContext(ctx context.Context) (*mockService, error) {
 // makeItems generated a given number of mock items
 func (s *mockService) makeItems(itemsNum int) {
 	for i := range itemsNum {
-		id := fmt.Sprintf("%02d", i+1)
-		s.items = append(s.items, mockDoc{ID: &id})
+		item := mockDoc{N: i + 1}
+		id := fmt.Sprintf("%02d", item.N)
+		item.ID = &id
+		s.items = append(s.items, item)
 	}
 }
 
@@ -121,10 +198,156 @@ func (s *mockService) setError(err error, errorItem int) {
 	s.errorItem = errorItem
 }
 
+// setHTTPError prepares an http error to be returned from request function after a given item
+func (s *mockService) setHTTPError(statusCode int, errorItem int) {
+	s.statusCode = statusCode
+	s.err = errors.New(statusText(statusCode))
+	s.errorItem = errorItem
+}
+
+// statusText converts an error code into expecrted error string
+func statusText(code int) string {
+	switch code {
+	case StatusBrokenJson:
+		return "An error occurred while processing the HTTP response"
+	case StatusBadIO:
+		return "An error occurred while reading the response body"
+	default:
+		return http.StatusText(code)
+	}
+}
+
 // duplicateItem duplicates a last item in the items collection
 func (s *mockService) duplicateItem() {
 	lastItem := slices.Clone(s.items[len(s.items)-1:])
 	s.items = append(s.items, lastItem...)
+}
+
+// mockServerCallback is a callback function for httptest server in pager concrete tests
+func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService) {
+	Expect(r.Method).To(Equal("POST"))
+
+	body, err := io.ReadAll(r.Body)
+	Expect(err).ShouldNot(HaveOccurred())
+
+	q := struct {
+		Limit    int    `json:"limit"`
+		StartKey string `json:"start_key"`
+		Bookmark string `json:"bookmark"`
+	}{}
+	err = json.Unmarshal(body, &q)
+	Expect(err).ShouldNot(HaveOccurred())
+
+	startKey := 0
+	if q.StartKey != "" {
+		startKey, err = strconv.Atoi(q.StartKey)
+		Expect(err).ShouldNot(HaveOccurred())
+	} else if q.Bookmark != "" {
+		startKey, err = strconv.Atoi(q.Bookmark)
+		Expect(err).ShouldNot(HaveOccurred())
+	}
+
+	var statusCode int
+	var data []byte
+
+	items, err := ms.getItems(startKey, q.Limit)
+	if err != nil {
+		statusCode = ms.statusCode
+		data = []byte(err.Error())
+
+		if statusCode == StatusBadIO {
+			w.WriteHeader(http.StatusOK)
+			hj, ok := w.(http.Hijacker)
+			if !ok {
+				http.Error(w, "can't create hijack rw", http.StatusInternalServerError)
+				return
+			}
+			conn, _, err := hj.Hijack()
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+			err = conn.Close()
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+			return
+		}
+
+		if statusCode == StatusBrokenJson {
+			statusCode = http.StatusOK
+			data = []byte(`{`)
+		}
+
+		w.Header().Set("content-type", "application/json")
+		w.WriteHeader(statusCode)
+		w.Write(data)
+		return
+	} else {
+		currentPath := r.URL.EscapedPath()
+		statusCode = http.StatusOK
+		if strings.Contains(currentPath, "_all_docs") || strings.Contains(currentPath, "_view") {
+			rows := make([]cloudantv1.DocsResultRow, len(items))
+			for i, doc := range ms.getDocuments(items) {
+				rows[i] = cloudantv1.DocsResultRow{
+					ID:  doc.ID,
+					Key: doc.ID,
+					Doc: &doc,
+				}
+			}
+			total := int64(len(ms.items))
+			resp := cloudantv1.AllDocsResult{
+				Rows:      rows,
+				TotalRows: &total,
+			}
+			jsonResp, err := json.Marshal(&resp)
+			Expect(err).ShouldNot(HaveOccurred())
+			data = jsonResp
+		} else if strings.Contains(currentPath, "_find") {
+			rows := make([]cloudantv1.Document, len(items))
+			bookmark := ""
+			for i, doc := range ms.getDocuments(items) {
+				rows[i] = cloudantv1.Document{
+					ID: doc.ID,
+				}
+				bookmark = strconv.Itoa(items[i].N + 1)
+			}
+			resp := cloudantv1.FindResult{
+				Docs:     rows,
+				Bookmark: &bookmark,
+			}
+			jsonResp, err := json.Marshal(&resp)
+			Expect(err).ShouldNot(HaveOccurred())
+			data = jsonResp
+		} else if strings.Contains(currentPath, "_search") {
+			rows := make([]cloudantv1.SearchResultRow, len(items))
+			bookmark := ""
+			for i, doc := range ms.getDocuments(items) {
+				rows[i] = cloudantv1.SearchResultRow{
+					ID:  doc.ID,
+					Doc: &doc,
+				}
+				bookmark = strconv.Itoa(items[i].N + 1)
+			}
+			total := int64(len(ms.items))
+			resp := cloudantv1.SearchResult{
+				Rows:      rows,
+				TotalRows: &total,
+				Bookmark:  &bookmark,
+			}
+			jsonResp, err := json.Marshal(&resp)
+			Expect(err).ShouldNot(HaveOccurred())
+			data = jsonResp
+		} else {
+			statusCode = http.StatusNotFound
+		}
+	}
+
+	w.Header().Set("content-type", "application/json")
+	w.WriteHeader(statusCode)
+	//nolint:errcheck
+	w.Write(data)
 }
 
 // testPager is pager implementation to test basePager functionality
@@ -281,4 +504,40 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
 	}
+}
+
+func runGetNextAssertion[T paginatedRow](pager Pager[T], expectPages, expectItems int) {
+	pageCount := 0
+	items := 0
+	uniqueItems := make(map[string]bool, 0)
+	for pager.HasNext() {
+		rows, err := pager.GetNext()
+		Expect(err).ShouldNot(HaveOccurred())
+		pageCount += 1
+		items += len(rows)
+		for _, doc := range rows {
+			data, err := json.Marshal(doc)
+			Expect(err).ShouldNot(HaveOccurred())
+			uniqueItems[fmt.Sprintf("%x", md5.Sum(data))] = true
+		}
+	}
+
+	Expect(pageCount).To(Equal(expectPages))
+	Expect(items).To(Equal(expectItems))
+	Expect(uniqueItems).Should(HaveLen(expectItems))
+}
+
+func runGetNextWithErrorAssertion[T paginatedRow](pager Pager[T], expectedError string, expectItems int) {
+	// assertion for an error on a second page
+	if expectItems > pageSize {
+		items, err := pager.GetNext()
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).Should(HaveLen(pageSize))
+	}
+
+	page, err := pager.GetNext()
+
+	Expect(err).Should(HaveOccurred())
+	Expect(err).Should(MatchError(ContainSubstring(expectedError)))
+	Expect(page).Should(BeEmpty())
 }

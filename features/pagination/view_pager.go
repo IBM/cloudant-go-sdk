@@ -40,13 +40,60 @@ func NewViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[clou
 		return nil, err
 	}
 
+	switch opts := any(o).(type) {
+	case *cloudantv1.PostViewOptions:
+		pd := newViewPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
+	case *cloudantv1.PostPartitionViewOptions:
+		pd := newViewPartitionPager(c, opts)
+		p := newBasePager(pd)
+
+		return p, nil
+	}
+
 	return nil, ErrNotImplemented
 }
 
 func newViewPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
-	return new(keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow])
+	opts := *o
+	return &keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
+		service:             c,
+		options:             &opts,
+		hasNextPage:         true,
+		requestFunction:     c.PostViewWithContext,
+		resultItemsGetter:   func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
+		startViewKeyGetter:  func(item cloudantv1.ViewResultRow) any { return item.Key },
+		startViewKeySetter:  opts.SetStartKey,
+		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string { return *item.ID },
+		startKeyDocIDSetter: opts.SetStartKeyDocID,
+		optionsCloner: func(o *cloudantv1.PostViewOptions) *cloudantv1.PostViewOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }
 
 func newViewPartitionPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionViewOptions) *keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
-	return new(keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow])
+	opts := *o
+	return &keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
+		service:             c,
+		options:             &opts,
+		hasNextPage:         true,
+		requestFunction:     c.PostPartitionViewWithContext,
+		resultItemsGetter:   func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
+		startViewKeyGetter:  func(item cloudantv1.ViewResultRow) any { return item.Key },
+		startViewKeySetter:  opts.SetStartKey,
+		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string { return *item.ID },
+		startKeyDocIDSetter: opts.SetStartKeyDocID,
+		optionsCloner: func(o *cloudantv1.PostPartitionViewOptions) *cloudantv1.PostPartitionViewOptions {
+			opts := *o
+			return &opts
+		},
+		limitGetter: func() *int64 { return opts.Limit },
+		limitSetter: opts.SetLimit,
+	}
 }
