@@ -19,6 +19,7 @@ package features
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
@@ -32,12 +33,11 @@ type testPager struct {
 }
 
 func newTestPager(o *cloudantv1.PostFindOptions) *testPager {
-	opts := *o
-	return &testPager{
-		options: &opts,
-		items:   make([]cloudantv1.Document, 0),
-		cycle:   0,
+	pager := &testPager{
+		items: make([]cloudantv1.Document, 0),
 	}
+	pager.setOptions(o)
+	return pager
 }
 
 // makeItems generated a given number of documents. It is not a part of pager interface
@@ -56,7 +56,13 @@ func (p *testPager) setError(err error, errorItem int) {
 
 func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindResult, error) {
 	pageSize := int(*p.getLimit())
-	start := p.cycle * pageSize
+	cycle := 0
+	if p.options.Bookmark != nil {
+		if i, err := strconv.Atoi(*p.options.Bookmark); err == nil {
+			cycle = i
+		}
+	}
+	start := cycle * pageSize
 	if start > len(p.items) {
 		start = len(p.items)
 	}
@@ -69,13 +75,22 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 		return nil, p.err
 	}
 	items := p.items[start:end]
-	p.cycle += 1
-	bookmark := fmt.Sprintf("%d", p.cycle)
+	bookmark := fmt.Sprintf("%d", cycle+1)
 	return &cloudantv1.FindResult{Docs: items, Bookmark: &bookmark}, nil
 }
 
 func (p *testPager) itemsGetter(result *cloudantv1.FindResult) []cloudantv1.Document {
 	return result.Docs
+}
+
+func (p *testPager) getOptions() *cloudantv1.PostFindOptions {
+	opts := *p.options
+	return &opts
+}
+
+func (p *testPager) setOptions(o *cloudantv1.PostFindOptions) {
+	opts := *o
+	p.options = &opts
 }
 
 func (p *testPager) setNextPageOptions(result *cloudantv1.FindResult) {

@@ -160,6 +160,30 @@ var _ = Describe(`BasePager tests`, func() {
 		Expect(page).Should(BeEmpty())
 	})
 
+	It(`Confirms BasePager GetNext is retriable`, func() {
+		opts.SetLimit(3)
+		pd := newTestPager(opts)
+		pd.makeItems(2 * 3)
+		pd.setError(http.ErrServerClosed, 4)
+		pager := newBasePager(pd)
+
+		page, err := pager.GetNext()
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(page).To(Equal(pd.items[:3]))
+
+		page, err = pager.GetNext()
+		Expect(err).Should(HaveOccurred())
+		Expect(err).Should(MatchError(http.ErrServerClosed))
+		Expect(page).Should(BeEmpty())
+
+		pd.err = nil
+		pd.errorItem = 0
+
+		page, err = pager.GetNext()
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(page).To(Equal(pd.items[3:]))
+	})
+
 	It(`Confirms BasePager GetNext cycles until empty on items fit to exact number of pages`, func() {
 		opts.SetLimit(3)
 		pd := newTestPager(opts)
@@ -248,7 +272,27 @@ var _ = Describe(`BasePager tests`, func() {
 		items, err := pager.GetAll()
 		Expect(err).Should(HaveOccurred())
 		Expect(err).Should(MatchError(http.ErrServerClosed))
-		Expect(items).Should(HaveLen(11))
+		Expect(items).To(BeEmpty())
+	})
+
+	It(`Confirms BasePager GetAll is retriable`, func() {
+		opts.SetLimit(11)
+		pd := newTestPager(opts)
+		pd.makeItems(71)
+		pd.setError(http.ErrServerClosed, 12)
+		pager := newBasePager(pd)
+
+		items, err := pager.GetAll()
+		Expect(err).Should(HaveOccurred())
+		Expect(err).Should(MatchError(http.ErrServerClosed))
+		Expect(items).Should(BeEmpty())
+
+		pd.err = nil
+		pd.errorItem = 0
+
+		items, err = pager.GetAll()
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(pd.items))
 	})
 
 	It(`Confirms BasePager Pages works as iterator`, func() {
@@ -294,7 +338,7 @@ var _ = Describe(`BasePager tests`, func() {
 			pageNum += 1
 		}
 		Expect(pager.HasNext()).To(BeTrue())
-		Expect(pd.cycle).To(Equal(2))
+		Expect(*pd.options.Bookmark).To(Equal("2"))
 	})
 
 	It(`Confirms BasePager Pages returns an error and stops cycle`, func() {
@@ -321,7 +365,7 @@ var _ = Describe(`BasePager tests`, func() {
 		Expect(pager.HasNext()).To(BeTrue())
 		// iterator exits on error even with continue
 		Expect(pageNum).To(Equal(2))
-		Expect(pd.cycle).To(Equal(1))
+		Expect(*pd.options.Bookmark).To(Equal("1"))
 	})
 
 	It(`Confirms BasePager Rows works as iterator`, func() {
@@ -354,7 +398,7 @@ var _ = Describe(`BasePager tests`, func() {
 			}
 		}
 		Expect(pager.HasNext()).To(BeTrue())
-		Expect(pd.cycle).To(Equal(2))
+		Expect(*pd.options.Bookmark).To(Equal("2"))
 	})
 
 	It(`Confirms BasePager Rows returns an error and stops cycle`, func() {
@@ -378,7 +422,7 @@ var _ = Describe(`BasePager tests`, func() {
 		Expect(pager.HasNext()).To(BeTrue())
 		// iterator exits cycle on error
 		Expect(i).To(Equal(23))
-		Expect(pd.cycle).To(Equal(1))
+		Expect(*pd.options.Bookmark).To(Equal("1"))
 	})
 
 	It(`Confirms BasePager sets next page options`, func() {
