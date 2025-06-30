@@ -68,7 +68,7 @@ var _ = Describe(`View pager tests`, func() {
 		Context("Successful cases", func() {
 			AfterEach(func() {
 				opts := service.NewPostViewOptions("db", "ddoc", "view")
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewViewPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -79,7 +79,7 @@ var _ = Describe(`View pager tests`, func() {
 				runGetNextAssertion(pager, expectPages, expectItems)
 			})
 
-			for _, test := range testCases {
+			for _, test := range concretePagerTestCases {
 				It(test.descrition, func() {
 					expectPages = test.expectPages
 					expectItems = test.expectItems
@@ -90,7 +90,7 @@ var _ = Describe(`View pager tests`, func() {
 		Context("Error cases", func() {
 			AfterEach(func() {
 				opts := service.NewPostViewOptions("db", "ddoc", "view")
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewViewPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -103,9 +103,9 @@ var _ = Describe(`View pager tests`, func() {
 			})
 
 			for pageNum := range 2 {
-				for _, code := range errorCodes {
+				for _, code := range append(terminalErrors, transientErrors...) {
 					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
-						expectItems = pageSize * (pageNum + 1)
+						expectItems = defaultTestPageSize * (pageNum + 1)
 						expectStatusCode = code
 						expectedError = statusText(expectStatusCode)
 					})
@@ -118,7 +118,7 @@ var _ = Describe(`View pager tests`, func() {
 		Context("Successful cases", func() {
 			AfterEach(func() {
 				opts := service.NewPostPartitionViewOptions("db", "partition", "ddoc", "view")
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewViewPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -129,7 +129,7 @@ var _ = Describe(`View pager tests`, func() {
 				runGetNextAssertion(pager, expectPages, expectItems)
 			})
 
-			for _, test := range testCases {
+			for _, test := range concretePagerTestCases {
 				It(test.descrition, func() {
 					expectPages = test.expectPages
 					expectItems = test.expectItems
@@ -140,7 +140,7 @@ var _ = Describe(`View pager tests`, func() {
 		Context("Error cases", func() {
 			AfterEach(func() {
 				opts := service.NewPostPartitionViewOptions("db", "partition", "ddoc", "view")
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewViewPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -153,9 +153,9 @@ var _ = Describe(`View pager tests`, func() {
 			})
 
 			for pageNum := range 2 {
-				for _, code := range errorCodes {
+				for _, code := range append(terminalErrors, transientErrors...) {
 					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
-						expectItems = pageSize * (pageNum + 1)
+						expectItems = defaultTestPageSize * (pageNum + 1)
 						expectStatusCode = code
 						expectedError = statusText(expectStatusCode)
 					})

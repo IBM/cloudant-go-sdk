@@ -34,23 +34,10 @@ import (
 )
 
 const (
-	pageSize = 10
+	defaultTestPageSize = 10
 )
 
-var errorCodes = []int{
-	http.StatusBadRequest,
-	http.StatusUnauthorized,
-	http.StatusForbidden,
-	http.StatusNotFound,
-	http.StatusTooManyRequests,
-	http.StatusInternalServerError,
-	http.StatusBadGateway,
-	http.StatusGatewayTimeout,
-	StatusBrokenJson,
-	StatusBadIO,
-}
-
-var testCases = []struct {
+var concretePagerTestCases = []struct {
 	descrition  string
 	expectPages int
 	expectItems int
@@ -68,32 +55,32 @@ var testCases = []struct {
 	{
 		descrition:  "Confirms result is correct for a page size minus one",
 		expectPages: 1,
-		expectItems: pageSize - 1,
+		expectItems: defaultTestPageSize - 1,
 	},
 	{
 		descrition:  "Confirms result is correct for a single page",
 		expectPages: 1,
-		expectItems: pageSize,
+		expectItems: defaultTestPageSize,
 	},
 	{
 		descrition:  "Confirms result is correct for a page size plus one",
 		expectPages: 2,
-		expectItems: pageSize + 1,
+		expectItems: defaultTestPageSize + 1,
 	},
 	{
 		descrition:  "Confirms result is correct multiple pages exactly",
 		expectPages: 3,
-		expectItems: 3 * pageSize,
+		expectItems: 3 * defaultTestPageSize,
 	},
 	{
 		descrition:  "Confirms result is correct multiple pages plus one",
 		expectPages: 4,
-		expectItems: 3*pageSize + 1,
+		expectItems: 3*defaultTestPageSize + 1,
 	},
 	{
 		descrition:  "Confirms result is correct multiple pages minus one",
 		expectPages: 4,
-		expectItems: 4*pageSize - 1,
+		expectItems: 4*defaultTestPageSize - 1,
 	},
 }
 
@@ -527,10 +514,10 @@ func runGetNextAssertion[T paginatedRow](pager Pager[T], expectPages, expectItem
 
 func runGetNextWithErrorAssertion[T paginatedRow](pager Pager[T], expectedError string, expectItems int) {
 	// assertion for an error on a second page
-	if expectItems > pageSize {
+	if expectItems > defaultTestPageSize {
 		items, err := pager.GetNext()
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).Should(HaveLen(pageSize))
+		Expect(items).Should(HaveLen(defaultTestPageSize))
 	}
 
 	page, err := pager.GetNext()

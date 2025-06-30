@@ -69,7 +69,7 @@ var _ = Describe(`Find pager tests`, func() {
 			AfterEach(func() {
 				selector := make(map[string]any)
 				opts := service.NewPostFindOptions("db", selector)
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewFindPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -80,11 +80,11 @@ var _ = Describe(`Find pager tests`, func() {
 				runGetNextAssertion(pager, expectPages, expectItems)
 			})
 
-			for _, test := range testCases {
+			for _, test := range concretePagerTestCases {
 				It(test.descrition, func() {
 					expectPages = test.expectPages
 					// we expect one last empty page on none-partial pages from bookmark pagers
-					if test.expectItems > 0 && test.expectItems%pageSize == 0 {
+					if test.expectItems > 0 && test.expectItems%defaultTestPageSize == 0 {
 						expectPages += 1
 					}
 					expectItems = test.expectItems
@@ -96,7 +96,7 @@ var _ = Describe(`Find pager tests`, func() {
 			AfterEach(func() {
 				selector := make(map[string]any)
 				opts := service.NewPostFindOptions("db", selector)
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewFindPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -109,9 +109,9 @@ var _ = Describe(`Find pager tests`, func() {
 			})
 
 			for pageNum := range 2 {
-				for _, code := range errorCodes {
+				for _, code := range append(terminalErrors, transientErrors...) {
 					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
-						expectItems = pageSize * (pageNum + 1)
+						expectItems = defaultTestPageSize * (pageNum + 1)
 						expectStatusCode = code
 						expectedError = statusText(expectStatusCode)
 					})
@@ -125,7 +125,7 @@ var _ = Describe(`Find pager tests`, func() {
 			AfterEach(func() {
 				selector := make(map[string]any)
 				opts := service.NewPostPartitionFindOptions("db", "partition", selector)
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewFindPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -136,10 +136,10 @@ var _ = Describe(`Find pager tests`, func() {
 				runGetNextAssertion(pager, expectPages, expectItems)
 			})
 
-			for _, test := range testCases {
+			for _, test := range concretePagerTestCases {
 				It(test.descrition, func() {
 					expectPages = test.expectPages
-					if test.expectItems > 0 && test.expectItems%pageSize == 0 {
+					if test.expectItems > 0 && test.expectItems%defaultTestPageSize == 0 {
 						expectPages += 1
 					}
 					expectItems = test.expectItems
@@ -151,7 +151,7 @@ var _ = Describe(`Find pager tests`, func() {
 			AfterEach(func() {
 				selector := make(map[string]any)
 				opts := service.NewPostPartitionFindOptions("db", "partition", selector)
-				opts.SetLimit(int64(pageSize))
+				opts.SetLimit(int64(defaultTestPageSize))
 				pager, err := NewFindPager(service, opts)
 
 				Expect(err).ShouldNot(HaveOccurred())
@@ -164,9 +164,9 @@ var _ = Describe(`Find pager tests`, func() {
 			})
 
 			for pageNum := range 2 {
-				for _, code := range errorCodes {
+				for _, code := range append(terminalErrors, transientErrors...) {
 					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
-						expectItems = pageSize * (pageNum + 1)
+						expectItems = defaultTestPageSize * (pageNum + 1)
 						expectStatusCode = code
 						expectedError = statusText(expectStatusCode)
 					})
