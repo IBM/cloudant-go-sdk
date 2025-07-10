@@ -25,6 +25,7 @@ import (
 )
 
 var keyPagerValidationRules = map[string]string{
+	"Key":   "isdefault",
 	"Keys":  "isdefault",
 	"Limit": limitValidationRule,
 }
