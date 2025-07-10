@@ -64,8 +64,13 @@ func newAllDocsKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptio
 		hasNextPage:       true,
 		requestFunction:   c.PostAllDocsWithContext,
 		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
-		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
-		startKeySetter:    opts.SetStartKey,
+		startKeyGetter: func(item cloudantv1.DocsResultRow) string {
+			if item.Key != nil {
+				return *item.Key
+			}
+			return ""
+		},
+		startKeySetter: opts.SetStartKey,
 		optionsCloner: func(o *cloudantv1.PostAllDocsOptions) *cloudantv1.PostAllDocsOptions {
 			opts := *o
 			return &opts
@@ -83,8 +88,13 @@ func newAllDocsPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPar
 		hasNextPage:       true,
 		requestFunction:   c.PostPartitionAllDocsWithContext,
 		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
-		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
-		startKeySetter:    opts.SetStartKey,
+		startKeyGetter: func(item cloudantv1.DocsResultRow) string {
+			if item.Key != nil {
+				return *item.Key
+			}
+			return ""
+		},
+		startKeySetter: opts.SetStartKey,
 		optionsCloner: func(o *cloudantv1.PostPartitionAllDocsOptions) *cloudantv1.PostPartitionAllDocsOptions {
 			opts := *o
 			return &opts
