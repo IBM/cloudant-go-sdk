@@ -17,6 +17,9 @@
 package features
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -37,6 +40,9 @@ func NewAllDocsPagination[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) 
 // newAllDocsPager creates a new pager for all documents operations.
 func newAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
+		if errors.Is(err, ErrKeySet) {
+			err = fmt.Errorf(`%w. No need to paginate as "Key" returns a single result for an ID`, err)
+		}
 		return nil, err
 	}
 

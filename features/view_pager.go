@@ -17,6 +17,9 @@
 package features
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -37,6 +40,9 @@ func NewViewPagination[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 // NewViewPager creates a new pager for views operations.
 func newViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.ViewResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
+		if errors.Is(err, ErrKeySet) {
+			err = fmt.Errorf(`%w. Use StartKey and EndKey instead`, err)
+		}
 		return nil, err
 	}
 

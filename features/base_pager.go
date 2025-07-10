@@ -34,6 +34,7 @@ var limitValidationRule = fmt.Sprintf("omitempty,min=%d,max=%d", minLimit, maxLi
 
 var ErrNotImplemented = errors.New("not yet implemented")
 var ErrNoMoreResults = errors.New("no more results available")
+var ErrKeySet = errors.New(`the option "Key" is invalid when using pagination`)
 
 type pagerOptions interface {
 	keyPagerOptions | bookmarkPagerOptions
@@ -189,6 +190,9 @@ func validatePagerOptions[O pagerOptions](rules map[string]string, options O) er
 			// This validates that the value is the default value and is almost the opposite of required.
 			// i.e. it returns an error if the value is not the default.
 			case "isdefault":
+				if e.Field() == "Key" {
+					return ErrKeySet
+				}
 				return fmt.Errorf("the option %q is invalid when using pagination", e.Field())
 			}
 		}

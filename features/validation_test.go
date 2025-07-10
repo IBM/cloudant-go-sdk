@@ -128,6 +128,28 @@ var _ = Describe(`Validation tests`, func() {
 				errMsg = `the option "Keys" is invalid when using pagination`
 			})
 		})
+
+		It(`Confirms all docs validation error on presence of key`, func() {
+			errMsg := `the option "Key" is invalid when using pagination. No need to paginate as "Key" returns a single result for an ID`
+			opts := service.NewPostAllDocsOptions("db")
+			opts.SetKey("key1")
+			pagination := NewAllDocsPagination(service, opts)
+			_, err := pagination.Pager()
+
+			Expect(err).Should(HaveOccurred())
+			Expect(err.Error()).To(MatchRegexp(errMsg))
+		})
+
+		It(`Confirms views validation error on presence of key`, func() {
+			errMsg := `the option "Key" is invalid when using pagination. Use StartKey and EndKey instead`
+			opts := service.NewPostViewOptions("db", "ddoc", "view")
+			opts.SetKey("key1")
+			pagination := NewViewPagination(service, opts)
+			_, err := pagination.Pager()
+
+			Expect(err).Should(HaveOccurred())
+			Expect(err.Error()).To(MatchRegexp(errMsg))
+		})
 	})
 
 	Context("with bookmark pager type of options", func() {
