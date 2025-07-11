@@ -60,6 +60,7 @@ type bookmarkPager[O bookmarkPagerOptions, R bookmarkRequestResult, T bookmarkPa
 	optionsCloner     func(O) O
 	limitGetter       func() *int64
 	limitSetter       func(int64) O
+	skipSetter        func(int64) O
 }
 
 func (p *bookmarkPager[O, R, T]) nextRequestFunction(ctx context.Context) (R, error) {
@@ -80,6 +81,9 @@ func (p *bookmarkPager[O, R, T]) hasNext() bool {
 }
 
 func (p *bookmarkPager[O, R, T]) setNextPageOptions(result R) {
+	if p.skipSetter != nil {
+		p.skipSetter(0)
+	}
 	bookmark := p.bookmarkGetter(result)
 	p.bookmarkSetter(bookmark)
 }

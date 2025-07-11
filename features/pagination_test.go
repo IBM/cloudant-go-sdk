@@ -145,7 +145,7 @@ var _ = Describe(`Iterators tests`, func() {
 			pageNum += 1
 		}
 		Expect(pager.HasNext()).To(BeTrue())
-		Expect(*pd.options.Bookmark).To(Equal("2"))
+		Expect(*pd.options.Bookmark).To(Equal("46"))
 	})
 
 	It(`Confirms pagination Pages() returns an error and stops cycle`, func() {
@@ -180,7 +180,7 @@ var _ = Describe(`Iterators tests`, func() {
 		Expect(pager.HasNext()).To(BeTrue())
 		// iterator exits on error even with continue
 		Expect(pageNum).To(Equal(2))
-		Expect(*pd.options.Bookmark).To(Equal("1"))
+		Expect(*pd.options.Bookmark).To(Equal("23"))
 	})
 
 	It(`Confirms pagination Rows() works`, func() {
@@ -227,7 +227,7 @@ var _ = Describe(`Iterators tests`, func() {
 			}
 		}
 		Expect(pager.HasNext()).To(BeTrue())
-		Expect(*pd.options.Bookmark).To(Equal("2"))
+		Expect(*pd.options.Bookmark).To(Equal("46"))
 	})
 
 	It(`Confirms pagination Rows() returns an error and stops cycle`, func() {
@@ -259,6 +259,6 @@ var _ = Describe(`Iterators tests`, func() {
 		Expect(pager.HasNext()).To(BeTrue())
 		// iterator exits cycle on error
 		Expect(i).To(Equal(23))
-		Expect(*pd.options.Bookmark).To(Equal("1"))
+		Expect(*pd.options.Bookmark).To(Equal("23"))
 	})
 })

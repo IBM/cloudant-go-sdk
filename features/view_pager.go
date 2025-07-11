@@ -17,6 +17,9 @@
 package features
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -37,6 +40,9 @@ func NewViewPagination[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) Pagina
 // NewViewPager creates a new pager for views operations.
 func newViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.ViewResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
+		if errors.Is(err, ErrKeySet) {
+			err = fmt.Errorf(`%w. Use StartKey and EndKey instead`, err)
+		}
 		return nil, err
 	}
 
@@ -59,14 +65,19 @@ func newViewPager[O ViewPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[clou
 func newViewKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
 	opts := *o
 	return &keyPager[*cloudantv1.PostViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
-		service:             c,
-		options:             &opts,
-		hasNextPage:         true,
-		requestFunction:     c.PostViewWithContext,
-		resultItemsGetter:   func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
-		startViewKeyGetter:  func(item cloudantv1.ViewResultRow) any { return item.Key },
-		startViewKeySetter:  opts.SetStartKey,
-		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string { return *item.ID },
+		service:            c,
+		options:            &opts,
+		hasNextPage:        true,
+		requestFunction:    c.PostViewWithContext,
+		resultItemsGetter:  func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
+		startViewKeyGetter: func(item cloudantv1.ViewResultRow) any { return item.Key },
+		startViewKeySetter: opts.SetStartKey,
+		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string {
+			if item.ID != nil {
+				return *item.ID
+			}
+			return ""
+		},
 		startKeyDocIDSetter: opts.SetStartKeyDocID,
 		optionsCloner: func(o *cloudantv1.PostViewOptions) *cloudantv1.PostViewOptions {
 			opts := *o
@@ -74,20 +85,26 @@ func newViewKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *k
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 
 func newViewPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartitionViewOptions) *keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow] {
 	opts := *o
 	return &keyPager[*cloudantv1.PostPartitionViewOptions, *cloudantv1.ViewResult, cloudantv1.ViewResultRow]{
-		service:             c,
-		options:             &opts,
-		hasNextPage:         true,
-		requestFunction:     c.PostPartitionViewWithContext,
-		resultItemsGetter:   func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
-		startViewKeyGetter:  func(item cloudantv1.ViewResultRow) any { return item.Key },
-		startViewKeySetter:  opts.SetStartKey,
-		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string { return *item.ID },
+		service:            c,
+		options:            &opts,
+		hasNextPage:        true,
+		requestFunction:    c.PostPartitionViewWithContext,
+		resultItemsGetter:  func(result *cloudantv1.ViewResult) []cloudantv1.ViewResultRow { return result.Rows },
+		startViewKeyGetter: func(item cloudantv1.ViewResultRow) any { return item.Key },
+		startViewKeySetter: opts.SetStartKey,
+		startKeyDocIDGetter: func(item cloudantv1.ViewResultRow) string {
+			if item.ID != nil {
+				return *item.ID
+			}
+			return ""
+		},
 		startKeyDocIDSetter: opts.SetStartKeyDocID,
 		optionsCloner: func(o *cloudantv1.PostPartitionViewOptions) *cloudantv1.PostPartitionViewOptions {
 			opts := *o
@@ -95,5 +112,6 @@ func newViewPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartit
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }

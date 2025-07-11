@@ -17,6 +17,9 @@
 package features
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/IBM/cloudant-go-sdk/cloudantv1"
 )
 
@@ -37,6 +40,9 @@ func NewAllDocsPagination[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) 
 // newAllDocsPager creates a new pager for all documents operations.
 func newAllDocsPager[O AllDocsPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.DocsResultRow], error) {
 	if err := validatePagerOptions(keyPagerValidationRules, o); err != nil {
+		if errors.Is(err, ErrKeySet) {
+			err = fmt.Errorf(`%w. No need to paginate as "Key" returns a single result for an ID`, err)
+		}
 		return nil, err
 	}
 
@@ -64,14 +70,20 @@ func newAllDocsKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptio
 		hasNextPage:       true,
 		requestFunction:   c.PostAllDocsWithContext,
 		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
-		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
-		startKeySetter:    opts.SetStartKey,
+		startKeyGetter: func(item cloudantv1.DocsResultRow) string {
+			if item.Key != nil {
+				return *item.Key
+			}
+			return ""
+		},
+		startKeySetter: opts.SetStartKey,
 		optionsCloner: func(o *cloudantv1.PostAllDocsOptions) *cloudantv1.PostAllDocsOptions {
 			opts := *o
 			return &opts
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 
@@ -83,13 +95,19 @@ func newAllDocsPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPar
 		hasNextPage:       true,
 		requestFunction:   c.PostPartitionAllDocsWithContext,
 		resultItemsGetter: func(result *cloudantv1.AllDocsResult) []cloudantv1.DocsResultRow { return result.Rows },
-		startKeyGetter:    func(item cloudantv1.DocsResultRow) string { return *item.Key },
-		startKeySetter:    opts.SetStartKey,
+		startKeyGetter: func(item cloudantv1.DocsResultRow) string {
+			if item.Key != nil {
+				return *item.Key
+			}
+			return ""
+		},
+		startKeySetter: opts.SetStartKey,
 		optionsCloner: func(o *cloudantv1.PostPartitionAllDocsOptions) *cloudantv1.PostPartitionAllDocsOptions {
 			opts := *o
 			return &opts
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }

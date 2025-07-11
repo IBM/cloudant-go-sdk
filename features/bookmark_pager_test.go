@@ -114,7 +114,7 @@ var _ = Describe(`BookmarkPager tests`, func() {
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(items).To(Equal(ms.documents()))
 		Expect(pager.HasNext()).To(BeTrue())
-		Expect(*pd.options.Bookmark).To(Equal("1"))
+		Expect(*pd.options.Bookmark).To(Equal("14"))
 
 		items, err = pager.GetNextWithContext(ctx)
 		Expect(err).ShouldNot(HaveOccurred())
@@ -122,7 +122,7 @@ var _ = Describe(`BookmarkPager tests`, func() {
 		Expect(pager.HasNext()).To(BeFalse())
 	})
 
-	It(`Confirms BookmarkPager GetNext returns a page with  a total items number greater than limit`, func() {
+	It(`Confirms BookmarkPager GetNext returns a page with a total items number greater than limit`, func() {
 		opts.SetLimit(7)
 		pd := newTestBookmarkPager(opts)
 		pager := newBasePager(pd)
@@ -138,6 +138,33 @@ var _ = Describe(`BookmarkPager tests`, func() {
 		items, err = pager.GetNextWithContext(ctx)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(items).To(Equal(docs[7:]))
+		Expect(pager.HasNext()).To(BeFalse())
+	})
+
+	It(`Confirms BookmarkPager GetNext removes skip from subsequent pages`, func() {
+		opts.SetLimit(14)
+		opts.SetSkip(3)
+		pd := newTestBookmarkPager(opts)
+		pager := newBasePager(pd)
+
+		ms.makeItems(3 * 14)
+		items, err := pager.GetNextWithContext(ctx)
+		docs := ms.documents()
+
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(docs[3:17]))
+		Expect(pager.HasNext()).To(BeTrue())
+
+		items, err = pager.GetNextWithContext(ctx)
+
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(docs[17:31]))
+		Expect(pager.HasNext()).To(BeTrue())
+
+		items, err = pager.GetNextWithContext(ctx)
+
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(docs[31:]))
 		Expect(pager.HasNext()).To(BeFalse())
 	})
 
