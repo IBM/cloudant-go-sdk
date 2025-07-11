@@ -342,10 +342,10 @@ var _ = Describe(`BasePager tests`, func() {
 			Expect(opts.Bookmark).To(BeNil())
 
 			if pager.HasNext() {
-				expect := fmt.Sprintf("%d", cycle)
+				expect := fmt.Sprintf("%02d", cycle)
 				Expect(*pd.options.Bookmark).To(Equal(expect))
 			} else {
-				expect := fmt.Sprintf("%d", cycle-1)
+				expect := fmt.Sprintf("%02d", cycle-1)
 				Expect(*pd.options.Bookmark).To(Equal(expect))
 			}
 		}

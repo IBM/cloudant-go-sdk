@@ -55,6 +55,7 @@ func newDesignDocsPager[O DesignDocsPagerOptions](c *cloudantv1.CloudantV1, o O)
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 	p := newBasePager(pd)
 

@@ -133,13 +133,13 @@ func (s *mockService) makeItems(itemsNum int) {
 }
 
 // getItems mocks the actual service call, returning either requested items or an error
-func (s *mockService) getItems(start, limit int) ([]mockDoc, error) {
+func (s *mockService) getItems(start, limit, skip int) ([]mockDoc, error) {
 	acc := make([]mockDoc, 0)
 	for i, d := range s.items {
 		if s.err != nil && s.errorItem == i+1 {
 			return nil, s.err
 		}
-		if i+1 >= start {
+		if i+1 >= start+skip {
 			acc = append(acc, d)
 		}
 		if len(acc) == limit {
@@ -217,6 +217,7 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 
 	q := struct {
 		Limit    int    `json:"limit"`
+		Skip     int    `json:"skip"`
 		StartKey string `json:"start_key"`
 		Bookmark string `json:"bookmark"`
 	}{}
@@ -235,7 +236,7 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 	var statusCode int
 	var data []byte
 
-	items, err := ms.getItems(startKey, q.Limit)
+	items, err := ms.getItems(startKey, q.Limit, q.Skip)
 	if err != nil {
 		statusCode = ms.statusCode
 		data = []byte(err.Error())
@@ -359,14 +360,18 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 	}
 
 	limit := int(*p.getLimit())
-	page := 0
+	skip := 0
+	if p.options.Skip != nil {
+		skip = int(*p.options.Skip)
+	}
+	startKey := 1
 	if p.options.Bookmark != nil {
 		if i, err := strconv.Atoi(*p.options.Bookmark); err == nil {
-			page = i
+			startKey = i + 1
 		}
 	}
 
-	items, err := ms.getItems(page*limit+1, limit)
+	items, err := ms.getItems(startKey, limit, skip)
 	if err != nil {
 		return nil, ms.err
 	}
@@ -375,8 +380,11 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 		p.hasNextPage = false
 	}
 
+	bookmark := fmt.Sprintf("%02d", startKey)
+	if len(items) > 0 {
+		bookmark = *items[len(items)-1].ID
+	}
 	docs := ms.getDocuments(items)
-	bookmark := fmt.Sprintf("%d", page+1)
 	return &cloudantv1.FindResult{Docs: docs, Bookmark: &bookmark}, nil
 }
 
@@ -423,6 +431,10 @@ func newTestKeyPager(o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostVi
 			}
 
 			limit := int(*opts.Limit)
+			skip := 0
+			if opts.Skip != nil {
+				skip = int(*opts.Skip)
+			}
 			startKey := 1
 			if opts.StartKeyDocID != nil {
 				if i, err := strconv.Atoi(*opts.StartKeyDocID); err == nil {
@@ -430,7 +442,7 @@ func newTestKeyPager(o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostVi
 				}
 			}
 
-			items, err := ms.getItems(startKey, limit)
+			items, err := ms.getItems(startKey, limit, skip)
 			if err != nil {
 				return nil, nil, ms.err
 			}
@@ -449,6 +461,7 @@ func newTestKeyPager(o *cloudantv1.PostViewOptions) *keyPager[*cloudantv1.PostVi
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 
@@ -465,19 +478,26 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 			}
 
 			limit := int(*opts.Limit)
-			page := 0
+			skip := 0
+			if opts.Skip != nil {
+				skip = int(*opts.Skip)
+			}
+			startKey := 1
 			if opts.Bookmark != nil {
 				if i, err := strconv.Atoi(*opts.Bookmark); err == nil {
-					page = i
+					startKey = i + 1
 				}
 			}
-			items, err := ms.getItems(page*limit+1, limit)
+			items, err := ms.getItems(startKey, limit, skip)
 			if err != nil {
 				return nil, nil, ms.err
 			}
 
+			bookmark := fmt.Sprintf("%02d", startKey)
+			if len(items) > 0 {
+				bookmark = *items[len(items)-1].ID
+			}
 			docs := ms.getDocuments(items)
-			bookmark := fmt.Sprintf("%d", page+1)
 			return &cloudantv1.FindResult{Docs: docs, Bookmark: &bookmark}, nil, nil
 		},
 		resultItemsGetter: func(result *cloudantv1.FindResult) []cloudantv1.Document { return result.Docs },
@@ -489,6 +509,7 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 
