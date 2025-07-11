@@ -75,7 +75,6 @@ func newSearchBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostSearchOp
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
-		skipSetter:  func(skip int64) *cloudantv1.PostSearchOptions { return &opts },
 	}
 }
 
@@ -95,6 +94,5 @@ func newSearchPartitionBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.Pos
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
-		skipSetter:  func(skip int64) *cloudantv1.PostPartitionSearchOptions { return &opts },
 	}
 }

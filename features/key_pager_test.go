@@ -154,7 +154,7 @@ var _ = Describe(`KeyPager tests`, func() {
 
 	It(`Confirms KeyPager GetNext removes skip from subsequent pages`, func() {
 		opts.SetLimit(14)
-		opts.SetSkip(1)
+		opts.SetSkip(3)
 		pd := newTestKeyPager(opts)
 		pager := newBasePager(pd)
 
@@ -162,19 +162,19 @@ var _ = Describe(`KeyPager tests`, func() {
 		items, err := pager.GetNextWithContext(ctx)
 
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).To(Equal(ms.viewRows()[1:15]))
+		Expect(items).To(Equal(ms.viewRows()[3:17]))
 		Expect(pager.HasNext()).To(BeTrue())
 
 		items, err = pager.GetNextWithContext(ctx)
 
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).To(Equal(ms.viewRows()[15:29]))
+		Expect(items).To(Equal(ms.viewRows()[17:31]))
 		Expect(pager.HasNext()).To(BeTrue())
 
 		items, err = pager.GetNextWithContext(ctx)
 
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).To(Equal(ms.viewRows()[29:]))
+		Expect(items).To(Equal(ms.viewRows()[31:]))
 		Expect(pager.HasNext()).To(BeFalse())
 	})
 

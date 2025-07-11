@@ -81,7 +81,9 @@ func (p *bookmarkPager[O, R, T]) hasNext() bool {
 }
 
 func (p *bookmarkPager[O, R, T]) setNextPageOptions(result R) {
-	// p.skipSetter(0)
+	if p.skipSetter != nil {
+		p.skipSetter(0)
+	}
 	bookmark := p.bookmarkGetter(result)
 	p.bookmarkSetter(bookmark)
 }

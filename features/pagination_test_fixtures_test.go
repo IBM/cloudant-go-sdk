@@ -135,11 +135,11 @@ func (s *mockService) makeItems(itemsNum int) {
 // getItems mocks the actual service call, returning either requested items or an error
 func (s *mockService) getItems(start, limit, skip int) ([]mockDoc, error) {
 	acc := make([]mockDoc, 0)
-	for i, d := range s.items[skip:] {
+	for i, d := range s.items {
 		if s.err != nil && s.errorItem == i+1 {
 			return nil, s.err
 		}
-		if i+1 >= start {
+		if i+1 >= start+skip {
 			acc = append(acc, d)
 		}
 		if len(acc) == limit {
@@ -364,14 +364,14 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 	if p.options.Skip != nil {
 		skip = int(*p.options.Skip)
 	}
-	page := 0
+	startKey := 1
 	if p.options.Bookmark != nil {
 		if i, err := strconv.Atoi(*p.options.Bookmark); err == nil {
-			page = i
+			startKey = i + 1
 		}
 	}
 
-	items, err := ms.getItems(page*limit+1, limit, skip)
+	items, err := ms.getItems(startKey, limit, skip)
 	if err != nil {
 		return nil, ms.err
 	}
@@ -380,8 +380,11 @@ func (p *testPager) nextRequestFunction(ctx context.Context) (*cloudantv1.FindRe
 		p.hasNextPage = false
 	}
 
+	bookmark := fmt.Sprintf("%02d", startKey)
+	if len(items) > 0 {
+		bookmark = *items[len(items)-1].ID
+	}
 	docs := ms.getDocuments(items)
-	bookmark := fmt.Sprintf("%d", page+1)
 	return &cloudantv1.FindResult{Docs: docs, Bookmark: &bookmark}, nil
 }
 
@@ -479,19 +482,22 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 			if opts.Skip != nil {
 				skip = int(*opts.Skip)
 			}
-			page := 0
+			startKey := 1
 			if opts.Bookmark != nil {
 				if i, err := strconv.Atoi(*opts.Bookmark); err == nil {
-					page = i
+					startKey = i + 1
 				}
 			}
-			items, err := ms.getItems(page*limit+1, limit, skip)
+			items, err := ms.getItems(startKey, limit, skip)
 			if err != nil {
 				return nil, nil, ms.err
 			}
 
+			bookmark := fmt.Sprintf("%02d", startKey)
+			if len(items) > 0 {
+				bookmark = *items[len(items)-1].ID
+			}
 			docs := ms.getDocuments(items)
-			bookmark := fmt.Sprintf("%d", page+1)
 			return &cloudantv1.FindResult{Docs: docs, Bookmark: &bookmark}, nil, nil
 		},
 		resultItemsGetter: func(result *cloudantv1.FindResult) []cloudantv1.Document { return result.Docs },
@@ -503,6 +509,7 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 

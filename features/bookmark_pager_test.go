@@ -114,7 +114,7 @@ var _ = Describe(`BookmarkPager tests`, func() {
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(items).To(Equal(ms.documents()))
 		Expect(pager.HasNext()).To(BeTrue())
-		Expect(*pd.options.Bookmark).To(Equal("1"))
+		Expect(*pd.options.Bookmark).To(Equal("14"))
 
 		items, err = pager.GetNextWithContext(ctx)
 		Expect(err).ShouldNot(HaveOccurred())
@@ -143,7 +143,7 @@ var _ = Describe(`BookmarkPager tests`, func() {
 
 	It(`Confirms BookmarkPager GetNext removes skip from subsequent pages`, func() {
 		opts.SetLimit(14)
-		opts.SetSkip(1)
+		opts.SetSkip(3)
 		pd := newTestBookmarkPager(opts)
 		pager := newBasePager(pd)
 
@@ -152,19 +152,19 @@ var _ = Describe(`BookmarkPager tests`, func() {
 		docs := ms.documents()
 
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).To(Equal(docs[1:15]))
+		Expect(items).To(Equal(docs[3:17]))
 		Expect(pager.HasNext()).To(BeTrue())
 
 		items, err = pager.GetNextWithContext(ctx)
 
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).To(Equal(docs[15:29]))
+		Expect(items).To(Equal(docs[17:31]))
 		Expect(pager.HasNext()).To(BeTrue())
 
 		items, err = pager.GetNextWithContext(ctx)
 
 		Expect(err).ShouldNot(HaveOccurred())
-		Expect(items).To(Equal(docs[29:]))
+		Expect(items).To(Equal(docs[31:]))
 		Expect(pager.HasNext()).To(BeFalse())
 	})
 
