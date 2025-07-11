@@ -57,6 +57,7 @@ type keyPager[O keyPagerOptions, R keyRequestResult, T keyPaginatedRow] struct {
 	optionsCloner       func(O) O
 	limitGetter         func() *int64
 	limitSetter         func(int64) O
+	skipSetter          func(int64) O
 }
 
 func (p *keyPager[O, R, T]) nextRequestFunction(ctx context.Context) (R, error) {
@@ -93,6 +94,7 @@ func (p *keyPager[O, R, T]) hasNext() bool {
 }
 
 func (p *keyPager[O, R, T]) setNextPageOptions(result R) {
+	p.skipSetter(0)
 	items := p.resultItemsGetter(result)
 	if len(items) == 0 {
 		return

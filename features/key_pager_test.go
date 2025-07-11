@@ -134,7 +134,7 @@ var _ = Describe(`KeyPager tests`, func() {
 		Expect(pager.HasNext()).To(BeFalse())
 	})
 
-	It(`Confirms KeyPager GetNext returns a page with  a total items number greater than limit`, func() {
+	It(`Confirms KeyPager GetNext returns a page with a total items number greater than limit`, func() {
 		opts.SetLimit(7)
 		pd := newTestKeyPager(opts)
 		pager := newBasePager(pd)
@@ -149,6 +149,32 @@ var _ = Describe(`KeyPager tests`, func() {
 		items, err = pager.GetNextWithContext(ctx)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(items).To(Equal(ms.viewRows()[7:]))
+		Expect(pager.HasNext()).To(BeFalse())
+	})
+
+	It(`Confirms KeyPager GetNext removes skip from subsequent pages`, func() {
+		opts.SetLimit(14)
+		opts.SetSkip(1)
+		pd := newTestKeyPager(opts)
+		pager := newBasePager(pd)
+
+		ms.makeItems(3 * 14)
+		items, err := pager.GetNextWithContext(ctx)
+
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(ms.viewRows()[1:15]))
+		Expect(pager.HasNext()).To(BeTrue())
+
+		items, err = pager.GetNextWithContext(ctx)
+
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(ms.viewRows()[15:29]))
+		Expect(pager.HasNext()).To(BeTrue())
+
+		items, err = pager.GetNextWithContext(ctx)
+
+		Expect(err).ShouldNot(HaveOccurred())
+		Expect(items).To(Equal(ms.viewRows()[29:]))
 		Expect(pager.HasNext()).To(BeFalse())
 	})
 

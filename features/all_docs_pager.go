@@ -83,6 +83,7 @@ func newAllDocsKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostAllDocsOptio
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 
@@ -107,5 +108,6 @@ func newAllDocsPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPar
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }

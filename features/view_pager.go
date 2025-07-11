@@ -85,6 +85,7 @@ func newViewKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostViewOptions) *k
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
 
@@ -111,5 +112,6 @@ func newViewPartitionKeyPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostPartit
 		},
 		limitGetter: func() *int64 { return opts.Limit },
 		limitSetter: opts.SetLimit,
+		skipSetter:  opts.SetSkip,
 	}
 }
