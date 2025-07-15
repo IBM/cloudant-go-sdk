@@ -7,7 +7,7 @@ toolchain go1.24.1
 require (
 	github.com/IBM/go-sdk-core/v5 v5.20.1
 	github.com/go-openapi/strfmt v0.23.0
-	github.com/go-playground/validator/v10 v10.26.0
+	github.com/go-playground/validator/v10 v10.27.0
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.37.0
 	golang.org/x/net v0.42.0
