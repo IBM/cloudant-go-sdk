@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=Godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
-# IBM Cloudant Go SDK Version 0.10.3
+# IBM Cloudant Go SDK Version 0.10.4
 
 IBM Cloudant Go SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
@@ -129,7 +129,7 @@ project:
 
 ## Installation
 
-The current version of this SDK: 0.10.3
+The current version of this SDK: 0.10.4
 
 There are a few different ways to download and add the
 Cloudant Go SDK project for use by your Go application:
@@ -140,7 +140,7 @@ Use this command to download and add the SDK to allow your Go application to
 use it:
 
 ```terminal
-go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.10.3
+go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.10.4
 ```
 
 ### Go modules
@@ -723,7 +723,7 @@ You have deleted the document.
 
 #### Further code examples
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/examples#examples-for-go).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/examples#examples-for-go).
 
 ### Error handling
 
@@ -819,7 +819,7 @@ The changes follower requires the client to have HTTP timeouts of at least 1 min
 instantiation if it is insufficient. The default client configuration has sufficiently long timeouts.
 
 For use-cases where these configuration limitations are too restrictive then write code to use the SDK's
-[POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/examples#postchanges) instead of the follower.
+[POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/examples#postchanges) instead of the follower.
 
 #### Error suppression
 
@@ -853,7 +853,7 @@ The follower is not optimized for some use cases and it is not recommended to us
 * Setting `include_docs` and larger document sizes (for example > 10 kiB).
 * The volume of changes is very high (if the rate of changes in the database exceeds the follower's rate of pulling them it can never catch-up).
 
-In these use-cases use the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/examples#postchanges)
+In these use-cases use the SDK's [POST `_changes` API](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/examples#postchanges)
 for  specific control over the number of change requests made and the content size of the responses.
 
 #### Checkpoints
@@ -1237,22 +1237,22 @@ then a `429 Too Many Requests` error occurs.
 Pagination is available for these operations:
 * Query all documents [global](https://cloud.ibm.com/apidocs/cloudant?code=go#postalldocs)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=go#postpartitionalldocs)
-  * [Global all documents examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/all_docs_pagination.go)
-  * [Partitioned all documents examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/partition_all_docs_pagination.go)
+  * [Global all documents examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/all_docs_pagination.go)
+  * [Partitioned all documents examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/partition_all_docs_pagination.go)
 * Query all [design documents](https://cloud.ibm.com/apidocs/cloudant?code=go#postdesigndocs)
-  * [Design documents examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/design_docs_pagination.go)
+  * [Design documents examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/design_docs_pagination.go)
 * Query with selector syntax [global](https://cloud.ibm.com/apidocs/cloudant?code=go#postfind)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=go#postpartitionfind)
-  * [Global find selector query examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/find_pagination.go)
-  * [Partitioned find selector query examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/partition_find_pagination.go)
+  * [Global find selector query examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/find_pagination.go)
+  * [Partitioned find selector query examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/partition_find_pagination.go)
 * Query a search index [global](https://cloud.ibm.com/apidocs/cloudant?code=go#postsearch)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=go#postpartitionsearch)
-  * [Global search examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/search_pagination.go)
-  * [Partitioned search examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/partition_search_pagination.go)
+  * [Global search examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/search_pagination.go)
+  * [Partitioned search examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/partition_search_pagination.go)
 * Query a MapReduce view [global](https://cloud.ibm.com/apidocs/cloudant?code=go#postview)
   and [partitioned](https://cloud.ibm.com/apidocs/cloudant?code=go#postpartitionview)
-  * [Global view examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/view_pagination.go)
-  * [Partitioned view examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/test/examples/src/pagination/partition_view_pagination.go)
+  * [Global view examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/view_pagination.go)
+  * [Partitioned view examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/test/examples/src/pagination/partition_view_pagination.go)
 
 The examples presented in this `README` are for all documents in a partition.
 The links in the list are to equivalent examples for each of the other available operations.
@@ -1447,7 +1447,7 @@ If you encounter an issue with the project, you are welcome to submit a
 
 Before you submit a bug report, search for
 [similar issues](https://github.com/IBM/cloudant-go-sdk/issues?q=is%3Aissue) and review the
-[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
+[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
 
 Please consult the [security policy](https://github.com/IBM/cloudant-go-sdk/security/policy) before opening security related issues.
 
@@ -1477,8 +1477,8 @@ Find more open source projects on the [IBM GitHub](http://ibm.github.io/) page.
 
 ## Contributing
 
-For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/CONTRIBUTING.md).
 
 ## License
 
-This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.3/LICENSE).
+This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/LICENSE).
