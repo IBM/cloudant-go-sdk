@@ -9,7 +9,7 @@ require (
 	github.com/go-openapi/strfmt v0.23.0
 	github.com/go-playground/validator/v10 v10.27.0
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.37.0
+	github.com/onsi/gomega v1.38.0
 	golang.org/x/net v0.42.0
 )
 
