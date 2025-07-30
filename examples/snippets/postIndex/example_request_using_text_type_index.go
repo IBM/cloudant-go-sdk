@@ -15,9 +15,10 @@ if err != nil {
 }
 
 // Type "text" index fields require an object with a name and type properties for the field.
-var indexField cloudantv1.IndexField
-indexField.SetProperty("name", core.StringPtr("address"))
-indexField.SetProperty("type", core.StringPtr("string"))
+indexField := cloudantv1.IndexField{
+  Name: core.StringPtr("address"),
+  Type: core.StringPtr(cloudantv1.IndexFieldTypeStringConst),
+}
 
 postIndexOptions := service.NewPostIndexOptions(
   "users",
