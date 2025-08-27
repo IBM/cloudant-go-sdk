@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=Godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
-# IBM Cloudant Go SDK Version 0.10.4
+# IBM Cloudant Go SDK Version 0.10.5
 
 IBM Cloudant Go SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
@@ -85,7 +85,7 @@ project:
 
 ## Installation
 
-The current version of this SDK: 0.10.4
+The current version of this SDK: 0.10.5
 
 There are a few different ways to download and add the
 Cloudant Go SDK project for use by your Go application:
@@ -96,7 +96,7 @@ Use this command to download and add the SDK to allow your Go application to
 use it:
 
 ```terminal
-go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.10.4
+go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.10.5
 ```
 
 ### Go modules
@@ -198,7 +198,7 @@ fmt.Println(string(b))
 [More tutorial examples](./docs/Examples.md) for creating a database
 and document create, read, update and delete operations.
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/examples#examples-for-go).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.5/examples#examples-for-go).
 
 ### Error handling
 
@@ -260,7 +260,7 @@ If you encounter an issue with the project, you are welcome to submit a
 
 Before you submit a bug report, search for
 [similar issues](https://github.com/IBM/cloudant-go-sdk/issues?q=is%3Aissue) and review the
-[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
+[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.5/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
 
 Please consult the [security policy](https://github.com/IBM/cloudant-go-sdk/security/policy) before opening security related issues.
 
@@ -290,8 +290,8 @@ Find more open source projects on the [IBM GitHub](http://ibm.github.io/) page.
 
 ## Contributing
 
-For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.5/CONTRIBUTING.md).
 
 ## License
 
-This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.4/LICENSE).
+This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.5/LICENSE).
