@@ -81,7 +81,7 @@ project:
   service instance or a
   [CouchDB](https://docs.couchdb.org/en/latest/install/index.html)
   server.
-- Go version 1.23 or 1.24.
+- Go version 1.24 or 1.25.
 
 ## Installation
 

@@ -21,7 +21,7 @@ assignees: ''
 
 **Must gather (please complete the following information):**
  - SDK Version [e.g. 1.2.1]
- - Go Version [e.g. Go 1.23]
+ - Go Version [e.g. Go 1.24]
  - Name of service that you're trying to use (if applicable)
  - Name of operation that you're trying to invoke (if applicable)
 
