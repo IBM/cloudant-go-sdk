@@ -17,9 +17,9 @@ postRevsDiffOptions := service.NewPostRevsDiffOptions(
   "orders",
   map[string][]string{
     "order00077": {
-      "<1-missing-revision>",
-      "<2-missing-revision>",
-      "<3-possible-ancestor-revision>",
+      "1-00000000000000000000000000000000", // missing revision
+      "2-11111111111111111111111111111111", // missing revision
+      "3-22222222222222222222222222222222", // possible ancestor revision
     },
   },
 )

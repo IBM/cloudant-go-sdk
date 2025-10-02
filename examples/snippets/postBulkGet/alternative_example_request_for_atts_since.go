@@ -20,7 +20,7 @@ postBulkGetOptions := service.NewPostBulkGetOptions(
   []cloudantv1.BulkGetQueryDocument{
     {
       ID: &docID,
-      AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
+      AttsSince: []string{"1-00000000000000000000000000000000"},
     },
   },
 )

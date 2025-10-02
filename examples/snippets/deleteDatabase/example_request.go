@@ -14,7 +14,7 @@ if err != nil {
 }
 
 deleteDatabaseOptions := service.NewDeleteDatabaseOptions(
-  "<db-name>",
+  "products",
 )
 
 ok, response, err := service.DeleteDatabase(deleteDatabaseOptions)

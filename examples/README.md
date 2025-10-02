@@ -561,7 +561,7 @@ if err != nil {
 deleteReplicationDocumentOptions := service.NewDeleteReplicationDocumentOptions(
   "repldoc-example",
 )
-deleteReplicationDocumentOptions.SetRev("3-a0ccbdc6fe95b4184f9031d086034d85")
+deleteReplicationDocumentOptions.SetRev("1-00000000000000000000000000000000")
 
 documentResult, response, err := service.DeleteReplicationDocument(deleteReplicationDocumentOptions)
 if err != nil {
@@ -669,21 +669,21 @@ if err != nil {
 }
 
 source, err := service.NewReplicationDatabase(
-  "<your-source-service-url>/animaldb",
+  "https://~replace-with-source-host~.cloudantnosqldb.appdomain.cloud/animaldb",
 )
 if err != nil {
   panic(err)
 }
 
 target, err := service.NewReplicationDatabase(
-  "<your-target-service-url>/animaldb-target",
+  "https://~replace-with-target-host~.cloudantnosqldb.appdomain.cloud/animaldb-target",
 )
 if err != nil {
   panic(err)
 }
 
 auth, err := service.NewReplicationDatabaseAuthIam(
-  "<your-iam-api-key>",
+  "a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3", //use your own IAM API key
 )
 if err != nil {
   panic(err)
@@ -1058,7 +1058,7 @@ if err != nil {
 }
 
 deleteDatabaseOptions := service.NewDeleteDatabaseOptions(
-  "<db-name>",
+  "products",
 )
 
 ok, response, err := service.DeleteDatabase(deleteDatabaseOptions)
@@ -1451,13 +1451,13 @@ if err != nil {
 eventDoc1 := cloudantv1.Document{
   ID: core.StringPtr("ns1HJS13AMkK:0007241142412418284"),
 }
-eventDoc1.Rev = core.StringPtr("1-5005d65514fe9e90f8eccf174af5dd64")
+eventDoc1.Rev = core.StringPtr("1-00000000000000000000000000000000")
 eventDoc1.Deleted = core.BoolPtr(true)
 
 eventDoc2 := cloudantv1.Document{
   ID: core.StringPtr("H8tDIwfadxp9:0007241142412418285"),
 }
-eventDoc2.Rev = core.StringPtr("1-2d7810b054babeda4812b3924428d6d6")
+eventDoc2.Rev = core.StringPtr("1-00000000000000000000000000000000")
 eventDoc2.Deleted = core.BoolPtr(true)
 
 postBulkDocsOptions := service.NewPostBulkDocsOptions(
@@ -1576,11 +1576,11 @@ docID := "order00067"
 bulkGetDocs := []cloudantv1.BulkGetQueryDocument{
   {
     ID: &docID,
-    Rev: core.StringPtr("3-917fa2381192822767f010b95b45325b"),
+    Rev: core.StringPtr("3-22222222222222222222222222222222"),
   },
   {
     ID: &docID,
-    Rev: core.StringPtr("4-a5be949eeb7296747cc271766e9a498b"),
+    Rev: core.StringPtr("4-33333333333333333333333333333333"),
   },
 }
 
@@ -1657,7 +1657,7 @@ postBulkGetOptions := service.NewPostBulkGetOptions(
   []cloudantv1.BulkGetQueryDocument{
     {
       ID: &docID,
-      AttsSince: []string{"1-99b02e08da151943c2dcb40090160bb8"},
+      AttsSince: []string{"1-00000000000000000000000000000000"},
     },
   },
 )
@@ -1777,7 +1777,7 @@ deleteDesignDocumentOptions := service.NewDeleteDesignDocumentOptions(
   "products",
   "appliances",
 )
-deleteDesignDocumentOptions.SetRev("1-98e6a25b3b45df62e7d47095ac15b16a")
+deleteDesignDocumentOptions.SetRev("1-00000000000000000000000000000000")
 
 documentResult, response, err := service.DeleteDesignDocument(deleteDesignDocumentOptions)
 if err != nil {
@@ -2973,9 +2973,9 @@ postRevsDiffOptions := service.NewPostRevsDiffOptions(
   "orders",
   map[string][]string{
     "order00077": {
-      "<1-missing-revision>",
-      "<2-missing-revision>",
-      "<3-possible-ancestor-revision>",
+      "1-00000000000000000000000000000000", // missing revision
+      "2-11111111111111111111111111111111", // missing revision
+      "3-22222222222222222222222222222222", // possible ancestor revision
     },
   },
 )
@@ -3171,7 +3171,7 @@ deleteDocumentOptions := service.NewDeleteDocumentOptions(
   "orders",
   "order00058",
 )
-deleteDocumentOptions.SetRev("1-99b02e08da151943c2dcb40090160bb8")
+deleteDocumentOptions.SetRev("1-00000000000000000000000000000000")
 
 documentResult, response, err := service.DeleteDocument(deleteDocumentOptions)
 if err != nil {
@@ -3329,7 +3329,7 @@ deleteAttachmentOptions := service.NewDeleteAttachmentOptions(
   "1000042",
   "product_details.txt",
 )
-deleteAttachmentOptions.SetRev("4-1a0d1cd6f40472509e9aac646183736a")
+deleteAttachmentOptions.SetRev("4-33333333333333333333333333333333")
 
 documentResult, response, err := service.DeleteAttachment(deleteAttachmentOptions)
 if err != nil {

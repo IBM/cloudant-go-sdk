@@ -18,7 +18,7 @@ deleteAttachmentOptions := service.NewDeleteAttachmentOptions(
   "1000042",
   "product_details.txt",
 )
-deleteAttachmentOptions.SetRev("4-1a0d1cd6f40472509e9aac646183736a")
+deleteAttachmentOptions.SetRev("4-33333333333333333333333333333333")
 
 documentResult, response, err := service.DeleteAttachment(deleteAttachmentOptions)
 if err != nil {
