@@ -16,7 +16,7 @@ if err != nil {
 deleteReplicationDocumentOptions := service.NewDeleteReplicationDocumentOptions(
   "repldoc-example",
 )
-deleteReplicationDocumentOptions.SetRev("3-a0ccbdc6fe95b4184f9031d086034d85")
+deleteReplicationDocumentOptions.SetRev("1-00000000000000000000000000000000")
 
 documentResult, response, err := service.DeleteReplicationDocument(deleteReplicationDocumentOptions)
 if err != nil {

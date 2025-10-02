@@ -19,11 +19,11 @@ docID := "order00067"
 bulkGetDocs := []cloudantv1.BulkGetQueryDocument{
   {
     ID: &docID,
-    Rev: core.StringPtr("3-917fa2381192822767f010b95b45325b"),
+    Rev: core.StringPtr("3-22222222222222222222222222222222"),
   },
   {
     ID: &docID,
-    Rev: core.StringPtr("4-a5be949eeb7296747cc271766e9a498b"),
+    Rev: core.StringPtr("4-33333333333333333333333333333333"),
   },
 }
 

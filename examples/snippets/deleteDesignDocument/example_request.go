@@ -17,7 +17,7 @@ deleteDesignDocumentOptions := service.NewDeleteDesignDocumentOptions(
   "products",
   "appliances",
 )
-deleteDesignDocumentOptions.SetRev("1-98e6a25b3b45df62e7d47095ac15b16a")
+deleteDesignDocumentOptions.SetRev("1-00000000000000000000000000000000")
 
 documentResult, response, err := service.DeleteDesignDocument(deleteDesignDocumentOptions)
 if err != nil {

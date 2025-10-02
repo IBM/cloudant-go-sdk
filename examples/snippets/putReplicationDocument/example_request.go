@@ -15,21 +15,21 @@ if err != nil {
 }
 
 source, err := service.NewReplicationDatabase(
-  "<your-source-service-url>/animaldb",
+  "https://~replace-with-source-host~.cloudantnosqldb.appdomain.cloud/animaldb",
 )
 if err != nil {
   panic(err)
 }
 
 target, err := service.NewReplicationDatabase(
-  "<your-target-service-url>/animaldb-target",
+  "https://~replace-with-target-host~.cloudantnosqldb.appdomain.cloud/animaldb-target",
 )
 if err != nil {
   panic(err)
 }
 
 auth, err := service.NewReplicationDatabaseAuthIam(
-  "<your-iam-api-key>",
+  "a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3", //use your own IAM API key
 )
 if err != nil {
   panic(err)
