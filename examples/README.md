@@ -237,7 +237,10 @@ if err != nil {
 }
 
 postActivityTrackerEventsOptions := service.NewPostActivityTrackerEventsOptions(
-  []string{"management"},
+  []string{
+		cloudantv1.ActivityTrackerEventsTypesManagementConst,
+		cloudantv1.ActivityTrackerEventsTypesDataConst,
+	},
 )
 
 activityTrackerEvents, response, err := service.PostActivityTrackerEvents(postActivityTrackerEventsOptions)
