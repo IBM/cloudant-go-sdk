@@ -16,7 +16,7 @@ if err != nil {
 postDesignDocsOptions := service.NewPostDesignDocsOptions(
   "users",
 )
-postDesignDocsOptions.SetAttachments(true)
+postDesignDocsOptions.SetDescending(true)
 
 allDocsResult, response, err := service.PostDesignDocs(postDesignDocsOptions)
 if err != nil {

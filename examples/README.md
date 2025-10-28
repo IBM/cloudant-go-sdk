@@ -452,7 +452,6 @@ if err != nil {
 
 getDbUpdatesOptions := service.NewGetDbUpdatesOptions()
 getDbUpdatesOptions.SetFeed("normal")
-getDbUpdatesOptions.SetHeartbeat(10000)
 getDbUpdatesOptions.SetSince("now")
 
 dbUpdates, response, err := service.GetDbUpdates(getDbUpdatesOptions)
@@ -1820,7 +1819,6 @@ getDesignDocumentOptions := service.NewGetDesignDocumentOptions(
   "products",
   "appliances",
 )
-getDesignDocumentOptions.SetLatest(true)
 
 designDocument, response, err := service.GetDesignDocument(getDesignDocumentOptions)
 if err != nil {
@@ -2195,7 +2193,7 @@ if err != nil {
 postDesignDocsOptions := service.NewPostDesignDocsOptions(
   "users",
 )
-postDesignDocsOptions.SetAttachments(true)
+postDesignDocsOptions.SetDescending(true)
 
 allDocsResult, response, err := service.PostDesignDocs(postDesignDocsOptions)
 if err != nil {
@@ -2238,7 +2236,7 @@ doc1 := cloudantv1.AllDocsQuery{
 
 doc2 := cloudantv1.AllDocsQuery{
   InclusiveEnd: core.BoolPtr(true),
-  Key:          core.StringPtr("_design/allusers"),
+  StartKey:     core.StringPtr("_design/allusers"),
   Skip:         core.Int64Ptr(1),
 }
 
@@ -2372,8 +2370,8 @@ if err != nil {
 postFindOptions := service.NewPostFindOptions(
   "users",
   map[string]interface{}{
-    "address": map[string]string{
-      "$regex": "Street",
+    "address": map[string]boolean{
+      "$exists": true,
     },
   },
 )
