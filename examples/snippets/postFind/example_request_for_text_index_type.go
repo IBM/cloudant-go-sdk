@@ -16,8 +16,8 @@ if err != nil {
 postFindOptions := service.NewPostFindOptions(
   "users",
   map[string]interface{}{
-    "address": map[string]string{
-      "$regex": "Street",
+    "address": map[string]boolean{
+      "$exists": true,
     },
   },
 )

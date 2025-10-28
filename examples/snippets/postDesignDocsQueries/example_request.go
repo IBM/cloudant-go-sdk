@@ -22,7 +22,7 @@ doc1 := cloudantv1.AllDocsQuery{
 
 doc2 := cloudantv1.AllDocsQuery{
   InclusiveEnd: core.BoolPtr(true),
-  Key:          core.StringPtr("_design/allusers"),
+  StartKey:     core.StringPtr("_design/allusers"),
   Skip:         core.Int64Ptr(1),
 }
 

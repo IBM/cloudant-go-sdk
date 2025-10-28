@@ -15,7 +15,6 @@ if err != nil {
 
 getDbUpdatesOptions := service.NewGetDbUpdatesOptions()
 getDbUpdatesOptions.SetFeed("normal")
-getDbUpdatesOptions.SetHeartbeat(10000)
 getDbUpdatesOptions.SetSince("now")
 
 dbUpdates, response, err := service.GetDbUpdates(getDbUpdatesOptions)

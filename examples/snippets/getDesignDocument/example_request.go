@@ -17,7 +17,6 @@ getDesignDocumentOptions := service.NewGetDesignDocumentOptions(
   "products",
   "appliances",
 )
-getDesignDocumentOptions.SetLatest(true)
 
 designDocument, response, err := service.GetDesignDocument(getDesignDocumentOptions)
 if err != nil {
