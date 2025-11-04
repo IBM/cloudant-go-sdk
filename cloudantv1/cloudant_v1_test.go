@@ -3253,7 +3253,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -3371,7 +3371,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -3497,7 +3497,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -3581,7 +3581,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -3670,7 +3670,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -7801,7 +7801,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -7927,7 +7927,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -8061,7 +8061,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -8149,7 +8149,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -8242,7 +8242,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -8971,7 +8971,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9120,7 +9120,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9277,7 +9277,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9374,7 +9374,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -9492,7 +9492,7 @@ var _ = Describe(`CloudantV1`, func() {
 
 				// Construct an instance of the DesignDocumentViewsMapReduce model
 				designDocumentViewsMapReduceModel := new(cloudantv1.DesignDocumentViewsMapReduce)
-				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}")
+				designDocumentViewsMapReduceModel.Map = core.StringPtr("function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}")
 				designDocumentViewsMapReduceModel.Reduce = core.StringPtr("testString")
 
 				// Construct an instance of the DesignDocument model
@@ -13813,7 +13813,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionExplainOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -13893,7 +13893,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionExplainOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -13981,7 +13981,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionExplainOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14014,7 +14014,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionExplainOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14068,7 +14068,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionExplainOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionExplainOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionExplainOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionExplainOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionExplainOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionExplainOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionExplainOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14122,7 +14122,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14202,7 +14202,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14290,7 +14290,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14323,7 +14323,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14377,7 +14377,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14453,7 +14453,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14541,7 +14541,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14580,7 +14580,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -14634,7 +14634,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.Bookmark = core.StringPtr("testString")
 				postPartitionFindOptionsModel.Conflicts = core.BoolPtr(true)
 				postPartitionFindOptionsModel.ExecutionStats = core.BoolPtr(true)
-				postPartitionFindOptionsModel.Fields = []string{"productid", "name", "description"}
+				postPartitionFindOptionsModel.Fields = []string{"productId", "name", "description"}
 				postPartitionFindOptionsModel.Limit = core.Int64Ptr(int64(25))
 				postPartitionFindOptionsModel.Skip = core.Int64Ptr(int64(0))
 				postPartitionFindOptionsModel.Sort = []map[string]string{map[string]string{"key1": "asc"}}
@@ -23880,7 +23880,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -23999,7 +23999,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -24126,7 +24126,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -24211,7 +24211,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -24301,7 +24301,7 @@ var _ = Describe(`CloudantV1`, func() {
 				documentModel.SetProperty("keywords", "[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]")
 				documentModel.SetProperty("name", "Digital Kitchen Scales")
 				documentModel.SetProperty("price", "14.99")
-				documentModel.SetProperty("productid", "1000042")
+				documentModel.SetProperty("productId", "1000042")
 				documentModel.SetProperty("taxonomy", "[\"Home\",\"Kitchen\",\"Small Appliances\"]")
 				documentModel.SetProperty("type", "product")
 				documentModel.Attachments["foo"] = *attachmentModel
@@ -26571,7 +26571,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"seeds": {"anyKey": "anyValue"}, "status": "maintenance_mode"}`)
+					fmt.Fprintf(res, "%s", `{"cluster": "Cluster", "seeds": {"anyKey": "anyValue"}, "status": "maintenance_mode"}`)
 				}))
 			})
 			It(`Invoke GetUpInformation successfully with retries`, func() {
@@ -26624,7 +26624,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"seeds": {"anyKey": "anyValue"}, "status": "maintenance_mode"}`)
+					fmt.Fprintf(res, "%s", `{"cluster": "Cluster", "seeds": {"anyKey": "anyValue"}, "status": "maintenance_mode"}`)
 				}))
 			})
 			It(`Invoke GetUpInformation successfully`, func() {
@@ -28080,7 +28080,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionExplainOptionsModel.SetBookmark("testString")
 				postPartitionExplainOptionsModel.SetConflicts(true)
 				postPartitionExplainOptionsModel.SetExecutionStats(true)
-				postPartitionExplainOptionsModel.SetFields([]string{"productid", "name", "description"})
+				postPartitionExplainOptionsModel.SetFields([]string{"productId", "name", "description"})
 				postPartitionExplainOptionsModel.SetLimit(int64(25))
 				postPartitionExplainOptionsModel.SetSkip(int64(0))
 				postPartitionExplainOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
@@ -28096,7 +28096,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionExplainOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionExplainOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionExplainOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionExplainOptionsModel.Fields).To(Equal([]string{"productid", "name", "description"}))
+				Expect(postPartitionExplainOptionsModel.Fields).To(Equal([]string{"productId", "name", "description"}))
 				Expect(postPartitionExplainOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
 				Expect(postPartitionExplainOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionExplainOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
@@ -28118,7 +28118,7 @@ var _ = Describe(`CloudantV1`, func() {
 				postPartitionFindOptionsModel.SetBookmark("testString")
 				postPartitionFindOptionsModel.SetConflicts(true)
 				postPartitionFindOptionsModel.SetExecutionStats(true)
-				postPartitionFindOptionsModel.SetFields([]string{"productid", "name", "description"})
+				postPartitionFindOptionsModel.SetFields([]string{"productId", "name", "description"})
 				postPartitionFindOptionsModel.SetLimit(int64(25))
 				postPartitionFindOptionsModel.SetSkip(int64(0))
 				postPartitionFindOptionsModel.SetSort([]map[string]string{map[string]string{"key1": "asc"}})
@@ -28134,7 +28134,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(postPartitionFindOptionsModel.Bookmark).To(Equal(core.StringPtr("testString")))
 				Expect(postPartitionFindOptionsModel.Conflicts).To(Equal(core.BoolPtr(true)))
 				Expect(postPartitionFindOptionsModel.ExecutionStats).To(Equal(core.BoolPtr(true)))
-				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"productid", "name", "description"}))
+				Expect(postPartitionFindOptionsModel.Fields).To(Equal([]string{"productId", "name", "description"}))
 				Expect(postPartitionFindOptionsModel.Limit).To(Equal(core.Int64Ptr(int64(25))))
 				Expect(postPartitionFindOptionsModel.Skip).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(postPartitionFindOptionsModel.Sort).To(Equal([]map[string]string{map[string]string{"key1": "asc"}}))
