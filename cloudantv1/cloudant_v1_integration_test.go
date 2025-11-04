@@ -390,7 +390,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			documentModel.SetProperty("keywords", core.StringPtr("[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]"))
 			documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
 			documentModel.SetProperty("price", core.StringPtr("14.99"))
-			documentModel.SetProperty("productid", core.StringPtr("1000042"))
+			documentModel.SetProperty("productId", core.StringPtr("1000042"))
 			documentModel.SetProperty("taxonomy", core.StringPtr("[\"Home\",\"Kitchen\",\"Small Appliances\"]"))
 			documentModel.SetProperty("type", core.StringPtr("product"))
 
@@ -860,7 +860,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			documentModel.SetProperty("keywords", core.StringPtr("[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]"))
 			documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
 			documentModel.SetProperty("price", core.StringPtr("14.99"))
-			documentModel.SetProperty("productid", core.StringPtr("1000042"))
+			documentModel.SetProperty("productId", core.StringPtr("1000042"))
 			documentModel.SetProperty("taxonomy", core.StringPtr("[\"Home\",\"Kitchen\",\"Small Appliances\"]"))
 			documentModel.SetProperty("type", core.StringPtr("product"))
 
@@ -976,7 +976,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			}
 
 			designDocumentViewsMapReduceModel := &cloudantv1.DesignDocumentViewsMapReduce{
-				Map:    core.StringPtr("function(doc) { \n  emit(doc.productid, [doc.brand, doc.name, doc.description]) \n}"),
+				Map:    core.StringPtr("function(doc) {\n  emit(doc.productId, [doc.brand, doc.name, doc.description])\n}"),
 				Reduce: core.StringPtr("testString"),
 			}
 
@@ -1488,7 +1488,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"productid", "name", "description"},
+				Fields:         []string{"productId", "name", "description"},
 				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
@@ -1517,7 +1517,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"productid", "name", "description"},
+				Fields:         []string{"productId", "name", "description"},
 				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
@@ -1546,7 +1546,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				Bookmark:       core.StringPtr("testString"),
 				Conflicts:      core.BoolPtr(true),
 				ExecutionStats: core.BoolPtr(true),
-				Fields:         []string{"productid", "name", "description"},
+				Fields:         []string{"productId", "name", "description"},
 				Limit:          core.Int64Ptr(int64(25)),
 				Skip:           core.Int64Ptr(int64(0)),
 				Sort:           []map[string]string{map[string]string{"key1": "asc"}},
@@ -2475,7 +2475,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			documentModel.SetProperty("keywords", core.StringPtr("[\"Foo\",\"Scales\",\"Weight\",\"Digital\",\"Kitchen\"]"))
 			documentModel.SetProperty("name", core.StringPtr("Digital Kitchen Scales"))
 			documentModel.SetProperty("price", core.StringPtr("14.99"))
-			documentModel.SetProperty("productid", core.StringPtr("1000042"))
+			documentModel.SetProperty("productId", core.StringPtr("1000042"))
 			documentModel.SetProperty("taxonomy", core.StringPtr("[\"Home\",\"Kitchen\",\"Small Appliances\"]"))
 			documentModel.SetProperty("type", core.StringPtr("product"))
 
