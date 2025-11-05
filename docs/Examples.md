@@ -427,4 +427,4 @@ You have deleted the document.
 
 ## Further code examples
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.7/examples#examples-for-go).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.8/examples#examples-for-go).
