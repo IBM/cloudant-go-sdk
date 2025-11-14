@@ -13,9 +13,9 @@ if err != nil {
   panic(err)
 }
 
-getUpInformationOptions := service.NewGetUpInformationOptions()
+headUpInformationOptions := service.NewHeadUpInformationOptions()
 
-upInformation, response, err := service.GetUpInformation(getUpInformationOptions)
+response, err := service.HeadUpInformation(headUpInformationOptions)
 if err != nil {
   if response.GetStatusCode() == 503 {	
     fmt.Println("Service is unavailable: Status code:", response.GetStatusCode())
@@ -26,5 +26,3 @@ if err != nil {
 }
 
 fmt.Println("Service is up and healthy")
-b, _ := json.MarshalIndent(upInformation, "", "  ")
-fmt.Println(string(b))
