@@ -994,9 +994,15 @@ getUpInformationOptions := service.NewGetUpInformationOptions()
 
 upInformation, response, err := service.GetUpInformation(getUpInformationOptions)
 if err != nil {
-  panic(err)
+  if response.GetStatusCode() == 503 {	
+    fmt.Println("Service is unavailable: Status code:", response.GetStatusCode())
+  } else {
+    fmt.Println("Issue performing health check: Status code:", response.GetStatusCode())
+  }
+  return
 }
 
+fmt.Println("Service is up and healthy")
 b, _ := json.MarshalIndent(upInformation, "", "  ")
 fmt.Println(string(b))
 ```
