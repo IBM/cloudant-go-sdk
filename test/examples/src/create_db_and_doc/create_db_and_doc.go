@@ -89,11 +89,7 @@ func main() {
 		panic(err)
 	}
 
-	// Keeping track of the revision number of the document object
-	// is necessary for further UPDATE/DELETE operations:
-	exampleDocument.Rev = createDocumentResponse.Rev
-
-	// Print out the document content
-	exampleDocumentContent, _ := json.MarshalIndent(exampleDocument, "", "  ")
-	fmt.Printf("You have created the document:\n%s\n", string(exampleDocumentContent))
+	// Print out the response body
+	responseBody, _ := json.MarshalIndent(createDocumentResponse, "", "  ")
+	fmt.Printf("You have created the document. Response body:\n%s\n", string(responseBody))
 }
