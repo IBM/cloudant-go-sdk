@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2022, 2023. All Rights Reserved.
+ * © Copyright IBM Corporation 2025. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,10 +42,8 @@ var _ = BeforeSuite(func() {
 	Expect(err).ShouldNot(HaveOccurred())
 
 	// set authentication
-	os.Setenv("CLOUDANT_AUTH_TYPE", "basic")
-	os.Setenv("CLOUDANT_USERNAME", "admin")
-	os.Setenv("CLOUDANT_PASSWORD", "pass")
 	os.Setenv("CLOUDANT_URL", wiremockUrl)
+	os.Setenv("CLOUDANT_AUTH_TYPE", "noauth")
 })
 
 var _ = Describe(`Readme integration tests`, func() {
