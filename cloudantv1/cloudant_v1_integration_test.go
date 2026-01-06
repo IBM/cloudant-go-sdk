@@ -962,6 +962,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			analyzerConfigurationModel := &cloudantv1.AnalyzerConfiguration{
 				Name:      core.StringPtr("standard"),
 				Stopwords: []string{"testString"},
+				Default:   analyzerModel,
 				Fields:    map[string]cloudantv1.Analyzer{"key1": *analyzerModel},
 			}
 			analyzerConfigurationModel.Fields["foo"] = *analyzerModel

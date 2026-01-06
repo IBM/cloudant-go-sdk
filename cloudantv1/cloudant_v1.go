@@ -8848,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.31")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.32")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9382,8 +9382,9 @@ func UnmarshalAllDocsResult(m map[string]json.RawMessage, result interface{}) (e
 type Analyzer struct {
 	// Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies depending on
 	// the analyzer usage:
-	// * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
-	// index default_field the default is `standard`.
+	// * For search indexes the default is `standard`
+	// * For query text indexes the default is `keyword`
+	// * For a query text index default_field the default is `standard`.
 	Name *string `json:"name" validate:"required"`
 
 	// Custom stopwords to use with the named analyzer.
@@ -9393,8 +9394,9 @@ type Analyzer struct {
 // Constants associated with the Analyzer.Name property.
 // Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies depending on the
 // analyzer usage:
-// * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
-// index default_field the default is `standard`.
+// * For search indexes the default is `standard`
+// * For query text indexes the default is `keyword`
+// * For a query text index default_field the default is `standard`.
 const (
 	AnalyzerNameArabicConst             = "arabic"
 	AnalyzerNameArmenianConst           = "armenian"
@@ -9469,16 +9471,21 @@ func UnmarshalAnalyzer(m map[string]json.RawMessage, result interface{}) (err er
 	return
 }
 
-// AnalyzerConfiguration : Schema for a search analyzer configuration.
+// AnalyzerConfiguration : Analyzer configuration for search indexes. The default and fields properties are only applicable for the `perfield`
+// analyzer name.
 type AnalyzerConfiguration struct {
 	// Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies depending on
 	// the analyzer usage:
-	// * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
-	// index default_field the default is `standard`.
+	// * For search indexes the default is `standard`
+	// * For query text indexes the default is `keyword`
+	// * For a query text index default_field the default is `standard`.
 	Name *string `json:"name" validate:"required"`
 
 	// Custom stopwords to use with the named analyzer.
 	Stopwords []string `json:"stopwords,omitempty"`
+
+	// Schema for a full text search analyzer.
+	Default *Analyzer `json:"default,omitempty"`
 
 	// Schema for mapping a field name to a per field analyzer.
 	Fields map[string]Analyzer `json:"fields,omitempty"`
@@ -9487,8 +9494,9 @@ type AnalyzerConfiguration struct {
 // Constants associated with the AnalyzerConfiguration.Name property.
 // Schema for the name of the Apache Lucene analyzer to use for text indexing. The default value varies depending on the
 // analyzer usage:
-// * For search indexes the default is `standard` * For query text indexes the default is `keyword` * For a query text
-// index default_field the default is `standard`.
+// * For search indexes the default is `standard`
+// * For query text indexes the default is `keyword`
+// * For a query text index default_field the default is `standard`.
 const (
 	AnalyzerConfigurationNameArabicConst             = "arabic"
 	AnalyzerConfigurationNameArmenianConst           = "armenian"
@@ -9557,6 +9565,11 @@ func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interfa
 	err = core.UnmarshalPrimitive(m, "stopwords", &obj.Stopwords)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "stopwords-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "default", &obj.Default, UnmarshalAnalyzer)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "default-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "fields", &obj.Fields, UnmarshalAnalyzer)
@@ -14276,8 +14289,8 @@ func UnmarshalIndexCandidate(m map[string]json.RawMessage, result interface{}) (
 
 // IndexDefinition : Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties
 // that do not apply to `json` indexes, these are:
-// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all document
-// fields and what analyzer to use for that purpose.
+// * `default_analyzer` - the default text analyzer to use
+// * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
 type IndexDefinition struct {
 	// Schema for a full text search analyzer.
 	DefaultAnalyzer *Analyzer `json:"default_analyzer,omitempty"`
@@ -14296,9 +14309,10 @@ type IndexDefinition struct {
 
 	// Whether to scan every document for arrays and store the length for each array found. Set the index_array_lengths
 	// field to false if:
-	// * You do not need to know the length of an array. * You do not use the `$size` operator. * The documents in your
-	// database are complex, or not completely under your control. As a result, it is difficult to estimate the impact of
-	// the extra processing that is needed to determine and store the arrays lengths.
+	// * You do not need to know the length of an array.
+	// * You do not use the `$size` operator.
+	// * The documents in your database are complex, or not completely under your control. As a result, it is difficult to
+	// estimate the impact of the extra processing that is needed to determine and store the arrays lengths.
 	IndexArrayLengths *bool `json:"index_array_lengths,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
@@ -14486,8 +14500,8 @@ type IndexInformation struct {
 
 	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
 	// properties that do not apply to `json` indexes, these are:
-	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-	// document fields and what analyzer to use for that purpose.
+	// * `default_analyzer` - the default text analyzer to use
+	// * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
 	Def *IndexDefinition `json:"def" validate:"required"`
 
 	// Index name.
@@ -16271,8 +16285,8 @@ type PostIndexOptions struct {
 
 	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
 	// properties that do not apply to `json` indexes, these are:
-	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-	// document fields and what analyzer to use for that purpose.
+	// * `default_analyzer` - the default text analyzer to use
+	// * `default_field` - whether to index the text in all document fields and what analyzer to use for that purpose.
 	Index *IndexDefinition `json:"index" validate:"required"`
 
 	// Specifies the design document name in which the index will be created. The design document name is the design
@@ -20102,7 +20116,8 @@ func UnmarshalSearchDiskSizeInformation(m map[string]json.RawMessage, result int
 
 // SearchIndexDefinition : Schema for a search index definition.
 type SearchIndexDefinition struct {
-	// Schema for a search analyzer configuration.
+	// Analyzer configuration for search indexes. The default and fields properties are only applicable for the `perfield`
+	// analyzer name.
 	Analyzer *AnalyzerConfiguration `json:"analyzer,omitempty"`
 
 	// String form of a JavaScript function that is called for each document in the database. The function takes the

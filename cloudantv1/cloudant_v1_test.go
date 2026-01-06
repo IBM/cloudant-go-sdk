@@ -8688,7 +8688,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "default": {"name": "classic", "stopwords": ["Stopwords"]}, "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully with retries`, func() {
@@ -8766,7 +8766,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "autoupdate": true, "filters": {"mapKey": "Inner"}, "indexes": {"mapKey": {"analyzer": {"name": "classic", "stopwords": ["Stopwords"], "default": {"name": "classic", "stopwords": ["Stopwords"]}, "fields": {"mapKey": {"name": "classic", "stopwords": ["Stopwords"]}}}, "index": "Index"}}, "language": "javascript", "options": {"partitioned": false}, "validate_doc_update": "ValidateDocUpdate", "views": {"mapKey": {"map": "Map", "reduce": "Reduce"}}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocument successfully`, func() {
@@ -8957,6 +8957,7 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
 				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Default = analyzerModel
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 
@@ -9106,6 +9107,7 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
 				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Default = analyzerModel
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 
@@ -9263,6 +9265,7 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
 				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Default = analyzerModel
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 
@@ -9360,6 +9363,7 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
 				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Default = analyzerModel
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 
@@ -9478,6 +9482,7 @@ var _ = Describe(`CloudantV1`, func() {
 				analyzerConfigurationModel := new(cloudantv1.AnalyzerConfiguration)
 				analyzerConfigurationModel.Name = core.StringPtr("standard")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Default = analyzerModel
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 
@@ -28772,10 +28777,12 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(analyzerConfigurationModel).ToNot(BeNil())
 				analyzerConfigurationModel.Name = core.StringPtr("classic")
 				analyzerConfigurationModel.Stopwords = []string{"testString"}
+				analyzerConfigurationModel.Default = analyzerModel
 				analyzerConfigurationModel.Fields = map[string]cloudantv1.Analyzer{"key1": *analyzerModel}
 				analyzerConfigurationModel.Fields["foo"] = *analyzerModel
 				Expect(analyzerConfigurationModel.Name).To(Equal(core.StringPtr("classic")))
 				Expect(analyzerConfigurationModel.Stopwords).To(Equal([]string{"testString"}))
+				Expect(analyzerConfigurationModel.Default).To(Equal(analyzerModel))
 				Expect(analyzerConfigurationModel.Fields["foo"]).To(Equal(*analyzerModel))
 
 				// Construct an instance of the SearchIndexDefinition model
@@ -29410,6 +29417,7 @@ var _ = Describe(`CloudantV1`, func() {
 			model := new(cloudantv1.AnalyzerConfiguration)
 			model.Name = core.StringPtr("classic")
 			model.Stopwords = []string{"testString"}
+			model.Default = nil
 			model.Fields = nil
 
 			b, err := json.Marshal(model)
