@@ -8848,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.32")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.33")
 }
 
 // ActiveTask : Schema for information about a running task.
