@@ -2,7 +2,7 @@
 [![Release](https://img.shields.io/github/v/release/IBM/cloudant-go-sdk?include_prereleases&sort=semver)](https://github.com/IBM/cloudant-go-sdk/releases/latest)
 [![Docs](https://img.shields.io/static/v1?label=Godoc&message=latest&color=blue)](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk)
 
-# IBM Cloudant Go SDK Version 0.10.10
+# IBM Cloudant Go SDK Version 0.10.11
 
 IBM Cloudant Go SDK is a client library that interacts with the
 [IBM Cloudant APIs](https://cloud.ibm.com/apidocs/cloudant?code=go).
@@ -67,8 +67,8 @@ project:
 - Handles the authentication.
 - Familiar user experience with IBM Cloud SDKs.
 - Flexibility to use either built-in models or byte-based requests and responses for documents.
-- Built-in [Changes feed follower](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Changes_Follower.md)
-- Built-in [Pagination](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Pagination.md)
+- Built-in [Changes feed follower](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Changes_Follower.md)
+- Built-in [Pagination](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Pagination.md)
 - HTTP2 support for higher performance connections to IBM Cloudant.
 - Perform requests synchronously.
 - Safe for concurrent use by multiple goroutines.
@@ -85,7 +85,7 @@ project:
 
 ## Installation
 
-The current version of this SDK: 0.10.10
+The current version of this SDK: 0.10.11
 
 There are a few different ways to download and add the
 Cloudant Go SDK project for use by your Go application:
@@ -96,7 +96,7 @@ Use this command to download and add the SDK to allow your Go application to
 use it:
 
 ```terminal
-go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.10.10
+go get -u github.com/IBM/cloudant-go-sdk/cloudantv1@v0.10.11
 ```
 
 ### Go modules
@@ -124,16 +124,16 @@ account.
 
 There are several ways to **set** these authentication properties:
 
-1. As [environment variables](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Authentication.md#authentication-with-environment-variables)
-2. The [programmatic approach](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Authentication.md#programmatic-authentication)
-3. With an [external credentials file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Authentication.md#authentication-with-external-configuration)
+1. As [environment variables](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Authentication.md#authentication-with-environment-variables)
+2. The [programmatic approach](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Authentication.md#programmatic-authentication)
+3. With an [external credentials file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Authentication.md#authentication-with-external-configuration)
 
 The following section describes the different authentication types and provides environment variable examples.
 Examples for other configuration methods are available by following the provided links.
 
 ### Authentication
 
-Consult the [authentication document](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Authentication.md)
+Consult the [authentication document](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Authentication.md)
 for comprehensive details of all the available authentication methods and how to configure them with environment settings
 or programmatically.
 
@@ -195,10 +195,10 @@ b, _ := json.MarshalIndent(result, "", "  ")
 fmt.Println(string(b))
 ```
 
-[More tutorial examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Examples.md) for creating a database
+[More tutorial examples](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Examples.md) for creating a database
 and document create, read, update and delete operations.
 
-For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/examples#examples-for-go).
+For a complete list of code examples, see the [examples directory](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/examples#examples-for-go).
 
 ### Error handling
 
@@ -221,7 +221,7 @@ Response byte stream is supported in functions with the suffix of `AsStream`.
 The returned byte stream allows the response body to be consumed
 without triggering JSON unmarshalling that is typically performed by the SDK.
 
-The [update document](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs/Examples.md#3-update-your-previously-created-document) section
+The [update document](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs/Examples.md#3-update-your-previously-created-document) section
 contains examples for both request and response byte stream cases.
 
 The API reference contains further examples of using byte streams.
@@ -237,7 +237,7 @@ Expand them to see examples of:
 
 ### Further resources
 
-- [Cloudant Go SDK feature docs](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/docs)
+- [Cloudant Go SDK feature docs](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/docs)
 - [Cloudant API docs](https://cloud.ibm.com/apidocs/cloudant?code=go):
   API reference including usage examples for Cloudant Go SDK API.
 - [Godoc](https://pkg.go.dev/github.com/IBM/cloudant-go-sdk):
@@ -260,7 +260,7 @@ If you encounter an issue with the project, you are welcome to submit a
 
 Before you submit a bug report, search for
 [similar issues](https://github.com/IBM/cloudant-go-sdk/issues?q=is%3Aissue) and review the
-[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
+[KNOWN_ISSUES file](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/KNOWN_ISSUES.md) to verify that your issue hasn't been reported yet.
 
 Please consult the [security policy](https://github.com/IBM/cloudant-go-sdk/security/policy) before opening security related issues.
 
@@ -290,8 +290,8 @@ Find more open source projects on the [IBM GitHub](http://ibm.github.io/) page.
 
 ## Contributing
 
-For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/CONTRIBUTING.md).
+For more information, see [CONTRIBUTING](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/CONTRIBUTING.md).
 
 ## License
 
-This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.10/LICENSE).
+This SDK is released under the Apache 2.0 license. To read the full text of the license, see [LICENSE](https://github.com/IBM/cloudant-go-sdk/tree/v0.10.11/LICENSE).
