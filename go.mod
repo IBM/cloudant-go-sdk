@@ -1,8 +1,8 @@
 module github.com/IBM/cloudant-go-sdk
 
-go 1.24.0
+go 1.25
 
-toolchain go1.25.1
+toolchain go1.26.0
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.21.2
