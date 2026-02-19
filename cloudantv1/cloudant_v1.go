@@ -8848,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.33")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.34")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -9387,7 +9387,9 @@ type Analyzer struct {
 	// * For a query text index default_field the default is `standard`.
 	Name *string `json:"name" validate:"required"`
 
-	// Custom stopwords to use with the named analyzer.
+	// Custom stopwords to use with the named analyzer where supported. Not used for `keyword`, `simple`, `whitespace`,
+	// `simple_asciifolding` or `perfield` analyzers. Ensure stopwords match the folded case for analyzers that perform
+	// folding.
 	Stopwords []string `json:"stopwords,omitempty"`
 }
 
@@ -9481,7 +9483,9 @@ type AnalyzerConfiguration struct {
 	// * For a query text index default_field the default is `standard`.
 	Name *string `json:"name" validate:"required"`
 
-	// Custom stopwords to use with the named analyzer.
+	// Custom stopwords to use with the named analyzer where supported. Not used for `keyword`, `simple`, `whitespace`,
+	// `simple_asciifolding` or `perfield` analyzers. Ensure stopwords match the folded case for analyzers that perform
+	// folding.
 	Stopwords []string `json:"stopwords,omitempty"`
 
 	// Schema for a full text search analyzer.
@@ -11055,7 +11059,8 @@ type DesignDocument struct {
 	// The validation function can abort the pending document write by throwing one of two error objects:
 	//
 	// ```
-	// // user is not authorized to make the change but may re-authenticate throw({ unauthorized: 'Error message here.' });
+	// // user is not authorized to make the change but may
+	// // re-authenticate throw({ unauthorized: 'Error message here.' });
 	//
 	// // change is not allowed throw({ forbidden: 'Error message here.' });
 	// ```
