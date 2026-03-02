@@ -1,6 +1,6 @@
 module github.com/IBM/cloudant-go-sdk
 
-go 1.25
+go 1.25.0
 
 toolchain go1.26.0
 
@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.39.1
-	golang.org/x/net v0.50.0
+	golang.org/x/net v0.51.0
 )
 
 require (
