@@ -9,7 +9,7 @@ require (
 	github.com/go-openapi/strfmt v0.26.1
 	github.com/go-playground/validator/v10 v10.30.2
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.39.1
+	github.com/onsi/gomega v1.40.0
 	golang.org/x/net v0.53.0
 )
 
@@ -24,6 +24,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.8 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/oklog/ulid/v2 v2.1.1 // indirect
