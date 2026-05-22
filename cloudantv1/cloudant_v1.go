@@ -34,7 +34,7 @@ import (
 )
 
 // CloudantV1 : NoSQL database based on Apache CouchDB
-// See: https://cloud.ibm.com/docs/services/Cloudant/
+// See: https://cloud.ibm.com/docs/Cloudant
 type CloudantV1 struct {
 	Service *base.BaseService
 }
@@ -8848,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.37")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.38")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -11979,7 +11979,7 @@ type ExplainResult struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -14349,7 +14349,7 @@ type IndexDefinition struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -15305,7 +15305,7 @@ type PostChangesOptions struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -15883,7 +15883,7 @@ type PostExplainOptions struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -16100,7 +16100,7 @@ type PostFindOptions struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -16566,7 +16566,7 @@ type PostPartitionExplainOptions struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -16781,7 +16781,7 @@ type PostPartitionFindOptions struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -18254,7 +18254,7 @@ type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
 	Db *string `json:"db" validate:"required,ne="`
 
-	// Database permissions for Cloudant users and/or API keys.
+	// Database permissions for Cloudant users, API keys or both.
 	Cloudant map[string][]string `json:"cloudant" validate:"required"`
 
 	// Schema for names and roles to map to a database permission.
@@ -18271,7 +18271,7 @@ type PutCloudantSecurityConfigurationOptions struct {
 }
 
 // Constants associated with the PutCloudantSecurityConfigurationOptions.Cloudant property.
-// Database permissions for Cloudant users and/or API keys.
+// Database permissions for Cloudant users, API keys or both.
 const (
 	PutCloudantSecurityConfigurationOptionsCloudantAdminConst      = "_admin"
 	PutCloudantSecurityConfigurationOptionsCloudantDbUpdatesConst  = "_db_updates"
@@ -18818,7 +18818,7 @@ type PutSecurityOptions struct {
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
 
-	// Database permissions for Cloudant users and/or API keys.
+	// Database permissions for Cloudant users, API keys or both.
 	Cloudant map[string][]string `json:"cloudant,omitempty"`
 
 	// Manage permissions using the `_users` database only.
@@ -18832,7 +18832,7 @@ type PutSecurityOptions struct {
 }
 
 // Constants associated with the PutSecurityOptions.Cloudant property.
-// Database permissions for Cloudant users and/or API keys.
+// Database permissions for Cloudant users, API keys or both.
 const (
 	PutSecurityOptionsCloudantAdminConst      = "_admin"
 	PutSecurityOptionsCloudantDbUpdatesConst  = "_db_updates"
@@ -19163,7 +19163,7 @@ type ReplicationDocument struct {
 	// use these operators in conjunction with equality operators or create and use a partial index to reduce the number of
 	// documents that will need to be scanned.
 	//
-	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators)for a list of all available
+	// See [the Cloudant Docs](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-operators) for a list of all available
 	// combination and conditional operators.
 	//
 	// For further reference see [selector syntax](https://cloud.ibm.com/docs/Cloudant?topic=Cloudant-selector-syntax).
@@ -20453,7 +20453,7 @@ type Security struct {
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
 
-	// Database permissions for Cloudant users and/or API keys.
+	// Database permissions for Cloudant users, API keys or both.
 	Cloudant map[string][]string `json:"cloudant,omitempty"`
 
 	// Manage permissions using the `_users` database only.
@@ -20464,7 +20464,7 @@ type Security struct {
 }
 
 // Constants associated with the Security.Cloudant property.
-// Database permissions for Cloudant users and/or API keys.
+// Database permissions for Cloudant users, API keys or both.
 const (
 	SecurityCloudantAdminConst      = "_admin"
 	SecurityCloudantDbUpdatesConst  = "_db_updates"
