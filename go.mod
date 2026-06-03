@@ -7,7 +7,7 @@ toolchain go1.26.0
 require (
 	github.com/IBM/go-sdk-core/v5 v5.21.2
 	github.com/go-openapi/strfmt v0.26.2
-	github.com/go-playground/validator/v10 v10.30.2
+	github.com/go-playground/validator/v10 v10.30.3
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.41.0
 	golang.org/x/net v0.55.0
@@ -30,7 +30,7 @@ require (
 	github.com/oklog/ulid/v2 v2.1.1 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/crypto v0.51.0 // indirect
+	golang.org/x/crypto v0.52.0 // indirect
 	golang.org/x/sys v0.45.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
