@@ -1,5 +1,5 @@
-github.com/IBM/go-sdk-core/v5 v5.21.3 h1:5HVPZu3aOdPHkqUGdyrmpuh8I/X+sdyog6HSLzahfHQ=
-github.com/IBM/go-sdk-core/v5 v5.21.3/go.mod h1:cZJMMEImJkIXCd61kHeDFtjbdDpXq4ua4ITrwpBYdWs=
+github.com/IBM/go-sdk-core/v5 v5.21.4 h1:f1x/AkOj1BZuOHUM7qyeIt6Cw2pprlDRIKR+RUpxobs=
+github.com/IBM/go-sdk-core/v5 v5.21.4/go.mod h1:cZJMMEImJkIXCd61kHeDFtjbdDpXq4ua4ITrwpBYdWs=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
