@@ -11,9 +11,7 @@ updates:
     groups:
       actions-deps:
         patterns:
-          - "github/codeql-action"
-          - "github/codeql-action/*"
-          - "actions/*"
+          - "*"
   - package-ecosystem: "gomod"
     directory: "/"
     open-pull-requests-limit: 10
