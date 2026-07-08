@@ -8,6 +8,13 @@ updates:
       default-days: 4
     pull-request-branch-name:
       separator: "-"
+    groups:
+      actions-deps:
+        dependency-type: "all"
+        patterns:
+          - "github/codeql-action"
+          - "github/codeql-action/*"
+          - "actions/*"
   - package-ecosystem: "gomod"
     directory: "/"
     open-pull-requests-limit: 10
