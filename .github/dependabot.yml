@@ -10,7 +10,6 @@ updates:
       separator: "-"
     groups:
       actions-deps:
-        dependency-type: "all"
         patterns:
           - "github/codeql-action"
           - "github/codeql-action/*"
