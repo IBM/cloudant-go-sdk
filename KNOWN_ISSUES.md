@@ -20,8 +20,8 @@ This table summarizes the SDK operations that are incompatible with Cloudant Gen
 | `PostApiKeys` | Generates API keys for apps or persons to enable database access | `POST /_api/v2/api_keys` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#postapikeys) | Use IAM authentication |
 | `PutCloudantSecurityConfiguration` | Modify only Cloudant related database permissions | `PUT /_api/v2/db/{db}/_security` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#putcloudantsecurity) | Use [database level IAM policies](https://cloud.ibm.com/docs/cloudant-gen2?topic=cloudant-gen2-managing-access-for-cloudant#database-level-iam-policies) |
 | **Audit events configuration** | | | | |
-`GetActivityTrackerEvents` | Retrieve activity tracking events information | `GET /_api/v2/user/activity_tracker/events` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#getactivitytrackerevents) | `management` events are always enabled, `data` events are not currently available in Gen 2 |
-`PostActivityTrackerEvents` | Modify activity tracking events configuration | `POST /_api/v2/user/activity_tracker/events` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#postactivitytrackerevents) | `management` events are always enabled, `data` events are not currently available in Gen 2 |
+| `GetActivityTrackerEvents` | Retrieve activity tracking events information | `GET /_api/v2/user/activity_tracker/events` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#getactivitytrackerevents) | The `management` events are always enabled. To view the `data` events configuration, use the [Platform Services SDK](#using-the-platform-services-sdk). |
+| `PostActivityTrackerEvents` | Modify activity tracking events configuration | `POST /_api/v2/user/activity_tracker/events` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#postactivitytrackerevents) | The `management` events are always enabled. To enable the `data` events, use the [Platform Services SDK](#using-the-platform-services-sdk). |
 | **CORS configuration** | | | | |
 | `GetCorsInformation` | Retrieve CORS configuration information | `GET /_api/v2/user/config/cors` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#getcorsinformation) | Use the [Platform Services SDK](#using-the-platform-services-sdk)
 | `PutCorsConfiguration` | Modify CORS configuration | `PUT /_api/v2/user/config/cors` | [API docs link](https://cloud.ibm.com/apidocs/cloudant/cloudant-gen1?code=go#putcorsconfiguration) | Use the [Platform Services SDK](#using-the-platform-services-sdk)
@@ -44,6 +44,7 @@ Read the current values from the `extensions` mapping of key-value pairs.
 | --- | --- |
 `dataservices.cloudant.capacity_units` | The provisioned throughput capacity of the instance in [units](https://cloud.ibm.com/docs/cloudant-gen2?topic=cloudant-gen2-usage-and-charges#provisioned-throughput-capacity-units)
 `dataservices.cloudant.configuration.cors` | The CORS configuration object of the instance with booleans for `enabled` and `allowCredentials` and a string array of `origins`
+`dataservices.cloudant.configuration.audit.data_events` | Boolean to enable (`true`) or disable (`false`) `data` type audit events for the instance
 `dataservices.cloudant.configuration.db_count_limit` | Read only value of the maximum number of databases allowed on the instance
 
 ##### Viewing configuration
