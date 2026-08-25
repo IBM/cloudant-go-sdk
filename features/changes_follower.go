@@ -36,6 +36,12 @@ import (
 // exceed it.
 const forever time.Duration = math.MaxInt64
 
+// seqMarkersCapacity is the maximum number of seq marker entries retained.
+const seqMarkersCapacity = 200
+
+// seqMarkersEvictionCount is the number of entries removed when capacity is reached.
+const seqMarkersEvictionCount = seqMarkersCapacity / 10
+
 // Minimal client timeout set to 1 minute.
 const minClientTimeout time.Duration = time.Minute
 
@@ -52,6 +58,23 @@ const baseDelay time.Duration = 100 * time.Millisecond
 
 // Once we reach this number of retries we'll be capping the backoff
 var expRetryGate int = int(math.Log(float64(LongpollTimeout/baseDelay)) / math.Log(2))
+
+// seqEntryType distinguishes between a row (change item) and a page (batch) entry
+// in the seq markers list.
+type seqEntryType int
+
+const (
+	seqEntryRow seqEntryType = iota
+	seqEntryPage
+)
+
+// seqEntry records a sequence marker along with whether it came from a change
+// row or from a page boundary. seq may be nil (e.g. when seq_interval causes
+// the server to return a null seq).
+type seqEntry struct {
+	entryType seqEntryType
+	seq       *string
+}
 
 // Mode are enums for changes follower's operation mode.
 type Mode int
@@ -136,6 +159,8 @@ type ChangesFollower struct {
 	running          bool
 	runLock          sync.Mutex
 	logger           core.Logger
+	seqMarkers       []seqEntry
+	seqMarkersLock   sync.RWMutex
 }
 
 // ChangesItem is a wrapper structure around cloudantv1.ChangesResultItem
@@ -249,6 +274,89 @@ func (cf *ChangesFollower) Start() (<-chan ChangesItem, error) {
 // or terminal error is recevied from the service during setup.
 func (cf *ChangesFollower) StartOneOff() (<-chan ChangesItem, error) {
 	return cf.run(Finite)
+}
+
+// GetLastSeqNewerThan returns the newest sequence ID that is safe to use as a
+// checkpoint after the given persisted sequence ID.
+//
+// Use this after fully processing a ChangesResultItem to determine whether
+// this ChangesFollower has observed a later safe checkpoint. This is useful
+// for filtered or sparse changes feeds, where the feed can advance across
+// pages even when no additional user-processable change rows are returned.
+//
+// The supplied sequence ID must be the Seq of a ChangesResultItem that your
+// application has fully processed and already persisted. This method returns
+// a newer sequence only when doing so does not advance past later change rows
+// that might not yet have been processed by your application.
+//
+// Returns the supplied ID unchanged when:
+//   - the follower has not started yet,
+//   - the supplied ID was not seen by this ChangesFollower instance, or
+//   - no newer safe checkpoint is available.
+//
+// Returns an error if lastPersistedSeqID is empty.
+func (cf *ChangesFollower) GetLastSeqNewerThan(lastPersistedSeqID string) (string, error) {
+	if lastPersistedSeqID == "" {
+		return "", core.SDKErrorf(nil, "the provided sequence ID cannot be null or empty", "changes-follower-invalid-seq", common.GetComponentInfo())
+	}
+	cf.seqMarkersLock.RLock()
+	defer cf.seqMarkersLock.RUnlock()
+	if len(cf.seqMarkers) == 0 {
+		return lastPersistedSeqID, nil
+	}
+	return cf.lastSeqSince(lastPersistedSeqID), nil
+}
+
+// lastSeqSince walks forward through the retained seq markers from the given
+// lastPersistedSeqID, fast-forwarding through consecutive page entries to
+// return the furthest safe last_seq without advancing past later change rows
+// that might not yet have been processed.
+//
+// Returns lastPersistedSeqID unchanged if not found in the markers.
+// Must be called with seqMarkersLock at least read-held.
+func (cf *ChangesFollower) lastSeqSince(lastPersistedSeqID string) string {
+	found := false
+	result := lastPersistedSeqID
+
+	for _, entry := range cf.seqMarkers {
+		if found {
+			if entry.entryType == seqEntryRow {
+				break
+			}
+			result = *entry.seq
+		} else if entry.seq != nil && *entry.seq == lastPersistedSeqID {
+			found = true
+			result = *entry.seq
+		}
+	}
+
+	if found {
+		return result
+	}
+	return lastPersistedSeqID
+}
+
+// updateSeqMarkers updates the seq markers list with entries from a completed page.
+//
+// Evicts the oldest entries if the list is at capacity, then appends a ROW
+// entry for the last change item (if any) and a PAGE entry for the page's
+// last_seq.
+func (cf *ChangesFollower) updateSeqMarkers(results []cloudantv1.ChangesResultItem, lastSeq *string) {
+	cf.seqMarkersLock.Lock()
+	defer cf.seqMarkersLock.Unlock()
+	if len(cf.seqMarkers) >= seqMarkersCapacity {
+		cf.seqMarkers = cf.seqMarkers[seqMarkersEvictionCount:]
+	}
+	if len(results) > 0 {
+		cf.seqMarkers = append(cf.seqMarkers, seqEntry{
+			entryType: seqEntryRow,
+			seq:       results[len(results)-1].Seq,
+		})
+	}
+	cf.seqMarkers = append(cf.seqMarkers, seqEntry{
+		entryType: seqEntryPage,
+		seq:       lastSeq,
+	})
 }
 
 // Stop this ChangesFollower.
@@ -436,6 +544,9 @@ func (cf *ChangesFollower) getChangesBatch() chan changesItems {
 			if cf.suppression == Timer {
 				cf.successTimestamp = time.Now()
 			}
+
+			cf.updateSeqMarkers(result.Results, result.LastSeq)
+
 			changes <- changesItems{items: result.Results}
 			if cf.mode == Finite && *result.Pending == 0 {
 				return
