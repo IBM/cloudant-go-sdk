@@ -1173,20 +1173,21 @@ func makeTestRow(s *string) cloudantv1.ChangesResultItem {
 // testPageData holds the raw page fields used to populate seqMarkers.
 type testPageData struct {
 	results []cloudantv1.ChangesResultItem
-	lastSeq string
+	lastSeq *string
 }
 
-// testPageType is the factory for the 9 page types.
+// testPageType is the factory for the 10 page types.
 //
-//	Type 1: rows=[b, b+1],     lastSeq=b+1  (last row == last_seq, no nulls)
-//	Type 2: rows=[b, b+1],     lastSeq=b+2  (last row != last_seq, no nulls)
-//	Type 3: rows=[null, b+1],  lastSeq=b+1  (leading null, last row == last_seq)
-//	Type 4: rows=[null, b+1],  lastSeq=b+2  (leading null, last row != last_seq)
-//	Type 5: rows=[b, null],    lastSeq=b+1  (trailing null last row)
-//	Type 6: rows=[b, null],    lastSeq=b+2  (trailing null last row, last_seq beyond)
-//	Type 7: rows=[null, null], lastSeq=b+1  (all nulls)
-//	Type 8: rows=[null, null], lastSeq=b+2  (all nulls, last_seq beyond)
-//	Type 9: rows=[],           lastSeq=b    (empty page)
+//	Type  1: rows=[b, b+1],     lastSeq=b+1  (last row == last_seq, no nulls)
+//	Type  2: rows=[b, b+1],     lastSeq=b+2  (last row != last_seq, no nulls)
+//	Type  3: rows=[null, b+1],  lastSeq=b+1  (leading null, last row == last_seq)
+//	Type  4: rows=[null, b+1],  lastSeq=b+2  (leading null, last row != last_seq)
+//	Type  5: rows=[b, null],    lastSeq=b+1  (trailing null last row)
+//	Type  6: rows=[b, null],    lastSeq=b+2  (trailing null last row, last_seq beyond)
+//	Type  7: rows=[null, null], lastSeq=b+1  (all nulls)
+//	Type  8: rows=[null, null], lastSeq=b+2  (all nulls, last_seq beyond)
+//	Type  9: rows=[],           lastSeq=b    (empty page)
+//	Type 10: rows=[b, b+1],     lastSeq=nil  (nil last_seq)
 //
 // What gets stored in seqMarkers per type:
 //
@@ -1195,27 +1196,30 @@ type testPageData struct {
 //	Types 5,7: ROW(nil),        PAGE('(b+1)-aa')
 //	Types 6,8: ROW(nil),        PAGE('(b+2)-aa')
 //	Type  9:   PAGE('b-aa')  (no ROW)
+//	Type 10:   ROW('(b+1)-aa') only (nil lastSeq skipped, no PAGE entry)
 func testPageType(t, base int) testPageData {
 	s := func(n int) *string { v := seqStr(n); return &v }
 	switch t {
 	case 1:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(s(base + 1))}, lastSeq: seqStr(base + 1)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(s(base + 1))}, lastSeq: s(base + 1)}
 	case 2:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(s(base + 1))}, lastSeq: seqStr(base + 2)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(s(base + 1))}, lastSeq: s(base + 2)}
 	case 3:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(s(base + 1))}, lastSeq: seqStr(base + 1)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(s(base + 1))}, lastSeq: s(base + 1)}
 	case 4:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(s(base + 1))}, lastSeq: seqStr(base + 2)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(s(base + 1))}, lastSeq: s(base + 2)}
 	case 5:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(nil)}, lastSeq: seqStr(base + 1)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(nil)}, lastSeq: s(base + 1)}
 	case 6:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(nil)}, lastSeq: seqStr(base + 2)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(nil)}, lastSeq: s(base + 2)}
 	case 7:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(nil)}, lastSeq: seqStr(base + 1)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(nil)}, lastSeq: s(base + 1)}
 	case 8:
-		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(nil)}, lastSeq: seqStr(base + 2)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(nil), makeTestRow(nil)}, lastSeq: s(base + 2)}
 	case 9:
-		return testPageData{results: []cloudantv1.ChangesResultItem{}, lastSeq: seqStr(base)}
+		return testPageData{results: []cloudantv1.ChangesResultItem{}, lastSeq: s(base)}
+	case 10:
+		return testPageData{results: []cloudantv1.ChangesResultItem{makeTestRow(s(base)), makeTestRow(s(base + 1))}, lastSeq: nil}
 	default:
 		panic(fmt.Sprintf("unknown page type: %d", t))
 	}
@@ -1226,8 +1230,7 @@ func testPageType(t, base int) testPageData {
 func populateTestFollower(pages []testPageData) *ChangesFollower {
 	cf := &ChangesFollower{}
 	for _, p := range pages {
-		ls := p.lastSeq
-		cf.updateSeqMarkers(p.results, &ls)
+		cf.updateSeqMarkers(p.results, p.lastSeq)
 	}
 	return cf
 }
@@ -1396,6 +1399,51 @@ var _ = Describe(`seqMarkers / lastSeqSince`, func() {
 			result := lastSeqSinceHelper(pages, seqStr(10))
 			Expect(result).To(Equal(seqStr(10)))
 		}).NotTo(Panic())
+	})
+
+	// -----------------------------------------------------------------------
+	// Nil last_seq page (type 10) — page entry skipped, no panic
+	// -----------------------------------------------------------------------
+
+	It(`testLastSeqSinceNilLastSeqPageDoesNotPanic`, func() {
+		pages := []testPageData{testPageType(10, 10)}
+		Expect(func() {
+			result := lastSeqSinceHelper(pages, seqStr(11))
+			Expect(result).To(Equal(seqStr(11)))
+		}).NotTo(Panic())
+	})
+
+	It(`testLastSeqSinceNilLastSeqMiddlePage`, func() {
+		pages := []testPageData{testPageType(1, 10), testPageType(10, 20), testPageType(9, 30)}
+		result := lastSeqSinceHelper(pages, seqStr(11))
+		Expect(result).To(Equal(seqStr(11)))
+	})
+
+	It(`testLastSeqSinceNilLastSeqLastPage`, func() {
+		pages := []testPageData{testPageType(9, 10), testPageType(10, 20)}
+		result := lastSeqSinceHelper(pages, seqStr(10))
+		Expect(result).To(Equal(seqStr(10)))
+	})
+
+	It(`testLastSeqSinceConsecutiveNilLastSeqPages`, func() {
+		pages := []testPageData{
+			testPageType(9, 10),
+			testPageType(10, 20),
+			testPageType(10, 30),
+			testPageType(9, 40),
+		}
+		result := lastSeqSinceHelper(pages, seqStr(10))
+		Expect(result).To(Equal(seqStr(10)))
+	})
+
+	It(`testLastSeqSinceNilLastSeqAdvancesBeyond`, func() {
+		// p1 (type 9, base=10): PAGE('10-aa')
+		// p2 (nil lastSeq):     PAGE(nil)      — skipped, scan continues
+		// p3 (type 9, base=30): PAGE('30-aa')  — advances to here
+		nilPage := testPageData{results: []cloudantv1.ChangesResultItem{}, lastSeq: nil}
+		pages := []testPageData{testPageType(9, 10), nilPage, testPageType(9, 30)}
+		result := lastSeqSinceHelper(pages, seqStr(10))
+		Expect(result).To(Equal(seqStr(30)))
 	})
 })
 

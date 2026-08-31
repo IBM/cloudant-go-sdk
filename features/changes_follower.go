@@ -323,7 +323,9 @@ func (cf *ChangesFollower) lastSeqSince(lastPersistedSeqID string) string {
 			if entry.entryType == seqEntryRow {
 				break
 			}
-			result = *entry.seq
+			if entry.seq != nil {
+				result = *entry.seq
+			}
 		} else if entry.seq != nil && *entry.seq == lastPersistedSeqID {
 			found = true
 			result = *entry.seq
