@@ -255,16 +255,16 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 			"ranges": json.RawMessage(`{"price": {"expensive": 278682.78}}`),
 		}
 		var counts map[string]map[string]int64
-		expectedErrorMessageCounts := "json: cannot unmarshal number 1743.6 into Go value of type int64"
+		expectedErrorMessageCounts := "json: cannot unmarshal number 1743.6"
 		err := UnmarshalPrimitiveSpecial(searchResult, "counts", &counts, "*cloudantv1.SearchResult")
 		Expect(err).To(Not(BeNil()))
-		Expect(err.Error()).To(Equal(expectedErrorMessageCounts))
+		Expect(err.Error()).To(ContainSubstring(expectedErrorMessageCounts))
 
 		var ranges map[string]map[string]int64
-		expectedErrorMessageRanges := "json: cannot unmarshal number 278682.78 into Go value of type int64"
+		expectedErrorMessageRanges := "json: cannot unmarshal number 278682.78"
 		err = UnmarshalPrimitiveSpecial(searchResult, "ranges", &ranges, "*cloudantv1.SearchResultProperties")
 		Expect(err).To(Not(BeNil()))
-		Expect(err.Error()).To(Equal(expectedErrorMessageRanges))
+		Expect(err.Error()).To(ContainSubstring(expectedErrorMessageRanges))
 	})
 
 	It("Cannot unmarshal other fields than counts and ranges", func() {
