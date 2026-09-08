@@ -1,12 +1,12 @@
 module github.com/IBM/cloudant-go-sdk
 
-go 1.26
+go 1.26.0
 
 toolchain go1.27.0
 
 require (
 	github.com/IBM/go-sdk-core/v5 v5.23.3
-	github.com/go-openapi/strfmt v0.27.1
+	github.com/go-openapi/strfmt v0.27.2
 	github.com/go-playground/validator/v10 v10.30.3
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.43.0
