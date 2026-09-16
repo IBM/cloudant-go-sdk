@@ -1448,10 +1448,10 @@ var _ = Describe(`seqMarkers / lastSeqSince`, func() {
 })
 
 // ---------------------------------------------------------------------------
-// GetLastSeqNewerThan tests
+// LatestSequenceFrom tests
 // ---------------------------------------------------------------------------
 
-var _ = Describe(`GetLastSeqNewerThan`, func() {
+var _ = Describe(`LatestSequenceFrom`, func() {
 	var (
 		glsnService            *cloudantv1.CloudantV1
 		glsnPostChangesOptions *cloudantv1.PostChangesOptions
@@ -1467,26 +1467,26 @@ var _ = Describe(`GetLastSeqNewerThan`, func() {
 		glsnPostChangesOptions = glsnService.NewPostChangesOptions("db")
 	})
 
-	It(`testGetLastSeqNewerThanWithEmptyString`, func() {
+	It(`testLatestSequenceFromWithEmptyString`, func() {
 		follower, err := NewChangesFollower(glsnService, glsnPostChangesOptions)
 		Expect(err).ShouldNot(HaveOccurred())
 
-		_, err = follower.GetLastSeqNewerThan("")
+		_, err = follower.LatestSequenceFrom("")
 		Expect(err).Should(HaveOccurred())
-		Expect(err.Error()).To(ContainSubstring("the provided sequence ID cannot be null or empty"))
+		Expect(err.Error()).To(ContainSubstring("Provided sequence ID must be a non-empty string."))
 		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
-	It(`testGetLastSeqNewerThanBeforeFeedStarts`, func() {
+	It(`testLatestSequenceFromBeforeFeedStarts`, func() {
 		follower, err := NewChangesFollower(glsnService, glsnPostChangesOptions)
 		Expect(err).ShouldNot(HaveOccurred())
 
-		result, err := follower.GetLastSeqNewerThan("seq-a")
+		result, err := follower.LatestSequenceFrom("seq-a")
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(result).To(Equal("seq-a"))
 	})
 
-	It(`testGetLastSeqNewerThanUnknownSeq`, func() {
+	It(`testLatestSequenceFromUnknownSeq`, func() {
 		ms := NewMockServer(1, noErrors)
 		svc := ms.Start()
 		defer ms.Stop()
@@ -1500,12 +1500,12 @@ var _ = Describe(`GetLastSeqNewerThan`, func() {
 		for range ch {
 		}
 
-		result, err := follower.GetLastSeqNewerThan("seq-unknown")
+		result, err := follower.LatestSequenceFrom("seq-unknown")
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(result).To(Equal("seq-unknown"))
 	})
 
-	It(`testGetLastSeqNewerThanMiddleOfBatch`, func() {
+	It(`testLatestSequenceFromMiddleOfBatch`, func() {
 		ms := NewMockServer(1, noErrors)
 		svc := ms.Start()
 		defer ms.Stop()
@@ -1529,16 +1529,16 @@ var _ = Describe(`GetLastSeqNewerThan`, func() {
 		seqA := *items[0].Seq
 		seqB := *items[1].Seq
 
-		resultA, err := follower.GetLastSeqNewerThan(seqA)
+		resultA, err := follower.LatestSequenceFrom(seqA)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(resultA).To(Equal(seqA))
 
-		resultB, err := follower.GetLastSeqNewerThan(seqB)
+		resultB, err := follower.LatestSequenceFrom(seqB)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(resultB).To(Equal(seqB))
 	})
 
-	It(`testGetLastSeqNewerThanEndToEnd`, func() {
+	It(`testLatestSequenceFromEndToEnd`, func() {
 		ms := NewMockServer(1, noErrors)
 		svc := ms.Start()
 		defer ms.Stop()
@@ -1559,7 +1559,7 @@ var _ = Describe(`GetLastSeqNewerThan`, func() {
 
 		// The last item's seq is the stored row entry. MockChangesGenerator
 		// produces pages where last row seq == last_seq, so result equals input.
-		result, err := follower.GetLastSeqNewerThan(*lastItem.Seq)
+		result, err := follower.LatestSequenceFrom(*lastItem.Seq)
 		Expect(err).ShouldNot(HaveOccurred())
 		Expect(result).To(Equal(*lastItem.Seq))
 	})

@@ -276,47 +276,47 @@ func (cf *ChangesFollower) StartOneOff() (<-chan ChangesItem, error) {
 	return cf.run(Finite)
 }
 
-// GetLastSeqNewerThan returns the newest sequence ID that is safe to use as a
-// checkpoint after the given persisted sequence ID.
+// LatestSequenceFrom returns the most recent sequence ID that is safe to use
+// as a checkpoint, advancing beyond the supplied checkpoint sequence ID where
+// possible.
 //
-// Use this after fully processing a ChangesResultItem to determine whether
-// this ChangesFollower has observed a later safe checkpoint. This is useful
-// for filtered or sparse changes feeds, where the feed can advance across
-// pages even when no additional user-processable change rows are returned.
+// With highly filtered changes feeds, multiple pages can pass through the
+// follower without returning any changes. Using only the Seq of the last
+// processed ChangesResultItem in those cases causes a long changes feed rewind
+// on the next run. To avoid this, call this method after fully processing each
+// ChangesResultItem with a non-nil Seq and persist the returned value to use
+// as the Since parameter for the next run.
 //
-// The supplied sequence ID must be the Seq of a ChangesResultItem that your
-// application has fully processed and already persisted. This method returns
-// a newer sequence only when doing so does not advance past later change rows
-// that might not yet have been processed by your application.
+// checkpointSequenceId is the last checkpoint sequence ID — either the
+// non-nil Seq of the last ChangesResultItem fully processed, or a value
+// previously returned by this method.
 //
-// Returns the supplied ID unchanged when:
-//   - the follower has not started yet,
-//   - the supplied ID was not seen by this ChangesFollower instance, or
-//   - no newer safe checkpoint is available.
+// Returns the most recent safe sequence ID to use as a checkpoint, or the
+// supplied value if no newer sequence is available.
 //
-// Returns an error if lastPersistedSeqID is empty.
-func (cf *ChangesFollower) GetLastSeqNewerThan(lastPersistedSeqID string) (string, error) {
-	if lastPersistedSeqID == "" {
-		return "", core.SDKErrorf(nil, "the provided sequence ID cannot be null or empty", "changes-follower-invalid-seq", common.GetComponentInfo())
+// Returns an error if checkpointSequenceId is nil or empty.
+func (cf *ChangesFollower) LatestSequenceFrom(checkpointSequenceId string) (string, error) {
+	if checkpointSequenceId == "" {
+		return "", core.SDKErrorf(nil, "Provided sequence ID must be a non-empty string.", "changes-follower-invalid-seq", common.GetComponentInfo())
 	}
 	cf.seqMarkersLock.RLock()
 	defer cf.seqMarkersLock.RUnlock()
 	if len(cf.seqMarkers) == 0 {
-		return lastPersistedSeqID, nil
+		return checkpointSequenceId, nil
 	}
-	return cf.lastSeqSince(lastPersistedSeqID), nil
+	return cf.lastSeqSince(checkpointSequenceId), nil
 }
 
 // lastSeqSince walks forward through the retained seq markers from the given
-// lastPersistedSeqID, fast-forwarding through consecutive page entries to
+// lastPersistedSeq, fast-forwarding through consecutive page entries to
 // return the furthest safe last_seq without advancing past later change rows
 // that might not yet have been processed.
 //
-// Returns lastPersistedSeqID unchanged if not found in the markers.
+// Returns lastPersistedSeq unchanged if not found in the markers.
 // Must be called with seqMarkersLock at least read-held.
-func (cf *ChangesFollower) lastSeqSince(lastPersistedSeqID string) string {
+func (cf *ChangesFollower) lastSeqSince(lastPersistedSeq string) string {
 	found := false
-	result := lastPersistedSeqID
+	result := lastPersistedSeq
 
 	for _, entry := range cf.seqMarkers {
 		if found {
@@ -326,7 +326,7 @@ func (cf *ChangesFollower) lastSeqSince(lastPersistedSeqID string) string {
 			if entry.seq != nil {
 				result = *entry.seq
 			}
-		} else if entry.seq != nil && *entry.seq == lastPersistedSeqID {
+		} else if entry.seq != nil && *entry.seq == lastPersistedSeq {
 			found = true
 			result = *entry.seq
 		}
@@ -335,7 +335,7 @@ func (cf *ChangesFollower) lastSeqSince(lastPersistedSeqID string) string {
 	if found {
 		return result
 	}
-	return lastPersistedSeqID
+	return lastPersistedSeq
 }
 
 // updateSeqMarkers updates the seq markers list with entries from a completed page.
