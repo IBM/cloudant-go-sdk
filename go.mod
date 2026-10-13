@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.30.5
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.44.0
-	golang.org/x/net v0.59.0
+	golang.org/x/net v0.60.0
 )
 
 require (
