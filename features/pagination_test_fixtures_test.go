@@ -326,6 +326,23 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 			jsonResp, err := json.Marshal(&resp)
 			Expect(err).ShouldNot(HaveOccurred())
 			data = jsonResp
+		} else if strings.Contains(currentPath, "_index_info") {
+			var bookmark *string
+			if len(items) > 0 {
+				if next := items[len(items)-1].N + 1; next <= len(ms.items) {
+					bookmark = core.StringPtr(strconv.Itoa(next))
+				}
+			}
+			total := int64(len(ms.items))
+			resp := cloudantv1.IndexInfoResult{
+				Bookmark:      bookmark,
+				TotalRows:     &total,
+				SearchIndexes: []cloudantv1.SearchIndexInformation{},
+				ViewIndexes:   []cloudantv1.ViewIndexInformation{},
+			}
+			jsonResp, err := json.Marshal(&resp)
+			Expect(err).ShouldNot(HaveOccurred())
+			data = jsonResp
 		} else {
 			statusCode = http.StatusNotFound
 		}
@@ -507,9 +524,10 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 			opts := *o
 			return &opts
 		},
-		limitGetter: func() *int64 { return opts.Limit },
-		limitSetter: opts.SetLimit,
-		skipSetter:  opts.SetSkip,
+		limitGetter:     func() *int64 { return opts.Limit },
+		limitSetter:     opts.SetLimit,
+		skipSetter:      opts.SetSkip,
+		hasNextFunction: countBasedHasNext[*cloudantv1.FindResult, cloudantv1.Document],
 	}
 }
 

@@ -154,19 +154,22 @@ var _ = Describe(`Validation tests`, func() {
 
 	Context("with bookmark pager type of options", func() {
 		var (
-			findOptions   *cloudantv1.PostFindOptions
-			searchOptions *cloudantv1.PostSearchOptions
+			findOptions      *cloudantv1.PostFindOptions
+			searchOptions    *cloudantv1.PostSearchOptions
+			indexInfoOptions *cloudantv1.PostIndexInfoOptions
 		)
 
 		BeforeEach(func() {
 			selector := make(map[string]any, 0)
 			findOptions = service.NewPostFindOptions("db", selector)
 			searchOptions = service.NewPostSearchOptions("db", "ddoc", "index", "*:*")
+			indexInfoOptions = service.NewPostIndexInfoOptions("db")
 		})
 
 		AfterEach(func() {
 			findOptions = nil
 			searchOptions = nil
+			indexInfoOptions = nil
 		})
 
 		Context("with valid options", func() {
@@ -175,29 +178,35 @@ var _ = Describe(`Validation tests`, func() {
 			AfterEach(func() {
 				findErr := validatePagerOptions(bookmarkPagerValidationRules, findOptions)
 				searchErr := validatePagerOptions(searchPagerValidationRules, searchOptions)
+				indexInfoErr := validatePagerOptions(indexInfoPagerValidationRules, indexInfoOptions)
 
 				Expect(findErr).ShouldNot(HaveOccurred())
 				Expect(searchErr).ShouldNot(HaveOccurred())
+				Expect(indexInfoErr).ShouldNot(HaveOccurred())
 			})
 
 			It(`Confirms no validation error when limit is not set`, func() {
 				Expect(findOptions.Limit).To(BeNil())
 				Expect(searchOptions.Limit).To(BeNil())
+				Expect(indexInfoOptions.Limit).To(BeNil())
 			})
 
 			It(`Confirms no validation error on limit equal to min`, func() {
 				findOptions.SetLimit(1)
 				searchOptions.SetLimit(1)
+				indexInfoOptions.SetLimit(1)
 			})
 
 			It(`Confirms no validation error on limit less than max`, func() {
 				findOptions.SetLimit(199)
 				searchOptions.SetLimit(199)
+				indexInfoOptions.SetLimit(199)
 			})
 
 			It(`Confirms no validation error on limit equal to max`, func() {
 				findOptions.SetLimit(200)
 				searchOptions.SetLimit(200)
+				indexInfoOptions.SetLimit(200)
 			})
 		})
 
@@ -211,25 +220,65 @@ var _ = Describe(`Validation tests`, func() {
 			AfterEach(func() {
 				findErr := validatePagerOptions(bookmarkPagerValidationRules, findOptions)
 				searchErr := validatePagerOptions(searchPagerValidationRules, searchOptions)
+				indexInfoErr := validatePagerOptions(indexInfoPagerValidationRules, indexInfoOptions)
 
 				Expect(findErr).Should(HaveOccurred())
 				Expect(findErr.Error()).To(MatchRegexp(errMsg))
 
 				Expect(searchErr).Should(HaveOccurred())
 				Expect(searchErr.Error()).To(MatchRegexp(errMsg))
+
+				Expect(indexInfoErr).Should(HaveOccurred())
+				Expect(indexInfoErr.Error()).To(MatchRegexp(errMsg))
 			})
 
 			It(`Confirms validation error on limit less than min`, func() {
 				findOptions.SetLimit(0)
 				searchOptions.SetLimit(0)
+				indexInfoOptions.SetLimit(0)
 				errMsg = "the provided limit 0 is lower than the minimum page size"
 			})
 
 			It(`Confirms validation error on limit greater than max`, func() {
 				findOptions.SetLimit(201)
 				searchOptions.SetLimit(201)
+				indexInfoOptions.SetLimit(201)
 				errMsg = "the provided limit 201 exceeds the maximum page size"
 			})
+		})
+
+		Context("with index info invalid options", func() {
+			var errMsg string
+
+			BeforeEach(func() {
+				errMsg = ""
+				indexInfoOptions = service.NewPostIndexInfoOptions("db")
+			})
+
+			AfterEach(func() {
+				indexInfoErr := validatePagerOptions(indexInfoPagerValidationRules, indexInfoOptions)
+
+				Expect(indexInfoErr).Should(HaveOccurred())
+				Expect(indexInfoErr.Error()).To(MatchRegexp(errMsg))
+
+				indexInfoOptions = nil
+			})
+
+			It(`Confirms validation error on presence of Keys`, func() {
+				indexInfoOptions.SetKeys([]string{"ddoc1", "ddoc2"})
+				errMsg = `the option "Keys" is invalid when using pagination`
+			})
+		})
+
+		It(`Confirms index info validation error on presence of key`, func() {
+			errMsg := `the option "Key" is invalid when using pagination. No need to paginate as "Key" returns a single result for an ID`
+			opts := service.NewPostIndexInfoOptions("db")
+			opts.SetKey("key1")
+			pagination := NewIndexInfoPagination(service, opts)
+			_, err := pagination.Pager()
+
+			Expect(err).Should(HaveOccurred())
+			Expect(err.Error()).To(MatchRegexp(errMsg))
 		})
 
 		Context("with search invalid options", func() {
