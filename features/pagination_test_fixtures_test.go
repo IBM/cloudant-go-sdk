@@ -17,6 +17,7 @@
 package features
 
 import (
+	"bytes"
 	"context"
 	"crypto/md5"
 	"encoding/json"
@@ -326,6 +327,23 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 			jsonResp, err := json.Marshal(&resp)
 			Expect(err).ShouldNot(HaveOccurred())
 			data = jsonResp
+		} else if strings.Contains(currentPath, "_index_info") {
+			var bookmark *string
+			if len(items) > 0 {
+				if next := items[len(items)-1].N + 1; next <= len(ms.items) {
+					bookmark = core.StringPtr(strconv.Itoa(next))
+				}
+			}
+			total := int64(len(ms.items))
+			resp := cloudantv1.IndexInfoResult{
+				Bookmark:      bookmark,
+				TotalRows:     &total,
+				SearchIndexes: []cloudantv1.SearchIndexInformation{},
+				ViewIndexes:   []cloudantv1.ViewIndexInformation{},
+			}
+			jsonResp, err := json.Marshal(&resp)
+			Expect(err).ShouldNot(HaveOccurred())
+			data = jsonResp
 		} else {
 			statusCode = http.StatusNotFound
 		}
@@ -335,6 +353,31 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 	w.WriteHeader(statusCode)
 	//nolint:errcheck
 	w.Write(data)
+}
+
+func mockServerGetIndexInfoCallback(w http.ResponseWriter, r *http.Request, ms *mockService) {
+	Expect(r.Method).To(Equal("GET"))
+
+	query := r.URL.Query()
+	body := map[string]any{}
+	for _, k := range []string{"limit", "skip"} {
+		if v := query.Get(k); v != "" {
+			n, err := strconv.Atoi(v)
+			Expect(err).ShouldNot(HaveOccurred())
+			body[k] = n
+		}
+	}
+	if v := query.Get("start_key"); v != "" {
+		body["start_key"] = v
+	}
+
+	data, err := json.Marshal(body)
+	Expect(err).ShouldNot(HaveOccurred())
+
+	post := r.Clone(r.Context())
+	post.Method = http.MethodPost
+	post.Body = io.NopCloser(bytes.NewReader(data))
+	mockServerCallback(w, post, ms)
 }
 
 // testPager is pager implementation to test basePager functionality
@@ -507,9 +550,10 @@ func newTestBookmarkPager(o *cloudantv1.PostFindOptions) *bookmarkPager[*cloudan
 			opts := *o
 			return &opts
 		},
-		limitGetter: func() *int64 { return opts.Limit },
-		limitSetter: opts.SetLimit,
-		skipSetter:  opts.SetSkip,
+		limitGetter:     func() *int64 { return opts.Limit },
+		limitSetter:     opts.SetLimit,
+		skipSetter:      opts.SetSkip,
+		hasNextFunction: countBasedHasNext[*cloudantv1.FindResult, cloudantv1.Document],
 	}
 }
 
