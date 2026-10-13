@@ -70,9 +70,10 @@ func newFindBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostFindOption
 			opts := *o
 			return &opts
 		},
-		limitGetter: func() *int64 { return opts.Limit },
-		limitSetter: opts.SetLimit,
-		skipSetter:  opts.SetSkip,
+		limitGetter:     func() *int64 { return opts.Limit },
+		limitSetter:     opts.SetLimit,
+		skipSetter:      opts.SetSkip,
+		hasNextFunction: countBasedHasNext[*cloudantv1.FindResult, cloudantv1.Document],
 	}
 }
 
@@ -90,8 +91,9 @@ func newFindPartitionBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostP
 			opts := *o
 			return &opts
 		},
-		limitGetter: func() *int64 { return opts.Limit },
-		limitSetter: opts.SetLimit,
-		skipSetter:  opts.SetSkip,
+		limitGetter:     func() *int64 { return opts.Limit },
+		limitSetter:     opts.SetLimit,
+		skipSetter:      opts.SetSkip,
+		hasNextFunction: countBasedHasNext[*cloudantv1.FindResult, cloudantv1.Document],
 	}
 }

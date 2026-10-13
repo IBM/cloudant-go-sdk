@@ -50,7 +50,8 @@ type paginatedRow interface {
 
 // PaginatedRow defines a response object for Pager operations
 type PaginatedRow interface {
-	cloudantv1.DocsResultRow | cloudantv1.ViewResultRow | cloudantv1.Document | cloudantv1.SearchResultRow
+	cloudantv1.DocsResultRow | cloudantv1.ViewResultRow | cloudantv1.Document | cloudantv1.SearchResultRow |
+		cloudantv1.IndexInfoResult
 }
 
 // Pager is an interface for pagination of Cloudant query operations.
