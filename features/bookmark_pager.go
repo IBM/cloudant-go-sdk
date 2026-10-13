@@ -38,15 +38,15 @@ var (
 )
 
 type bookmarkPagerOptions interface {
-	FindPagerOptions | SearchPagerOptions
+	FindPagerOptions | SearchPagerOptions | IndexInfoPagerOptions
 }
 
 type bookmarkRequestResult interface {
-	*cloudantv1.FindResult | *cloudantv1.SearchResult
+	*cloudantv1.FindResult | *cloudantv1.SearchResult | *cloudantv1.IndexInfoResult
 }
 
 type bookmarkPaginatedRow interface {
-	cloudantv1.Document | cloudantv1.SearchResultRow
+	cloudantv1.Document | cloudantv1.SearchResultRow | cloudantv1.IndexInfoResult
 }
 
 type bookmarkPager[O bookmarkPagerOptions, R bookmarkRequestResult, T bookmarkPaginatedRow] struct {
@@ -61,6 +61,11 @@ type bookmarkPager[O bookmarkPagerOptions, R bookmarkRequestResult, T bookmarkPa
 	limitGetter       func() *int64
 	limitSetter       func(int64) O
 	skipSetter        func(int64) O
+	hasNextFunction   func(R, []T, *int64) bool
+}
+
+func countBasedHasNext[R any, T any](_ R, items []T, limit *int64) bool {
+	return limit == nil || len(items) >= int(*limit)
 }
 
 func (p *bookmarkPager[O, R, T]) nextRequestFunction(ctx context.Context) (R, error) {
@@ -70,9 +75,7 @@ func (p *bookmarkPager[O, R, T]) nextRequestFunction(ctx context.Context) (R, er
 
 func (p *bookmarkPager[O, R, T]) itemsGetter(result R) ([]T, error) {
 	items := p.resultItemsGetter(result)
-	if p.limitGetter() != nil && len(items) < int(*p.limitGetter()) {
-		p.hasNextPage = false
-	}
+	p.hasNextPage = p.hasNextFunction(result, items, p.limitGetter())
 	return items, nil
 }
 
