@@ -9610,7 +9610,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 0, "external": 0, "file": 0}, "updater_running": true, "updates_pending": {"minimum": 0, "preferred": 0, "total": 0}, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 0, "external": 0, "file": 0}, "updater_running": true, "updates_pending": {"copies": 0, "copies_expected": 0, "maximum": 0, "minimum": 0, "preferred": 0, "total": 0}, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully with retries`, func() {
@@ -9665,7 +9665,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 0, "external": 0, "file": 0}, "updater_running": true, "updates_pending": {"minimum": 0, "preferred": 0, "total": 0}, "waiting_clients": 0, "waiting_commit": false}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "view_index": {"collator_versions": ["CollatorVersions"], "compact_running": true, "language": "Language", "signature": "Signature", "sizes": {"active": 0, "external": 0, "file": 0}, "updater_running": true, "updates_pending": {"copies": 0, "copies_expected": 0, "maximum": 0, "minimum": 0, "preferred": 0, "total": 0}, "waiting_clients": 0, "waiting_commit": false}}`)
 				}))
 			})
 			It(`Invoke GetDesignDocumentInformation successfully`, func() {
@@ -17540,7 +17540,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 0, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 0, "signature": "Signature"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 0, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 0, "signature": "Signature", "updates_pending": {"copies": 0, "copies_expected": 0, "maximum": 0, "minimum": 0, "preferred": 0, "total": 0}}}`)
 				}))
 			})
 			It(`Invoke GetSearchInfo successfully with retries`, func() {
@@ -17596,7 +17596,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 0, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 0, "signature": "Signature"}}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "search_index": {"committed_seq": 0, "disk_size": 0, "doc_count": 0, "doc_del_count": 0, "pending_seq": 0, "signature": "Signature", "updates_pending": {"copies": 0, "copies_expected": 0, "maximum": 0, "minimum": 0, "preferred": 0, "total": 0}}}`)
 				}))
 			})
 			It(`Invoke GetSearchInfo successfully`, func() {
@@ -17967,10 +17967,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -18006,6 +18015,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -18129,10 +18139,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -18168,6 +18187,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -18299,10 +18319,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -18338,6 +18367,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -18413,10 +18443,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -18452,6 +18491,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -18548,10 +18588,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -18587,6 +18636,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -18959,7 +19009,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 16}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "owner": "Owner", "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 16}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "owner": "Owner", "query_params": {"mapKey": "Inner"}, "request_compression": "none", "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}, "ibm": {"iam": {"api_key": "ApiKey"}}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}, "ibm": {"iam": {"api_key": "ApiKey"}}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully with retries`, func() {
@@ -19036,7 +19086,7 @@ var _ = Describe(`CloudantV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 16}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "owner": "Owner", "query_params": {"mapKey": "Inner"}, "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
+					fmt.Fprintf(res, "%s", `{"_attachments": {"mapKey": {"content_type": "ContentType", "data": "VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=", "digest": "Digest", "encoded_length": 0, "encoding": "Encoding", "follows": false, "length": 0, "revpos": 1, "stub": true}}, "_conflicts": ["Conflicts"], "_deleted": false, "_deleted_conflicts": ["DeletedConflicts"], "_id": "ID", "_local_seq": "LocalSeq", "_rev": "Rev", "_revisions": {"ids": ["Ids"], "start": 1}, "_revs_info": [{"rev": "Rev", "status": "available"}], "cancel": true, "checkpoint_interval": 30000, "connection_timeout": 30000, "continuous": false, "create_target": false, "create_target_params": {"n": 3, "partitioned": false, "q": 16}, "doc_ids": ["DocIds"], "filter": "Filter", "http_connections": 20, "owner": "Owner", "query_params": {"mapKey": "Inner"}, "request_compression": "none", "retries_per_request": 5, "selector": {"anyKey": "anyValue"}, "since_seq": "SinceSeq", "socket_options": "SocketOptions", "source": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}, "ibm": {"iam": {"api_key": "ApiKey"}}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "source_proxy": "SourceProxy", "target": {"auth": {"basic": {"password": "Password", "username": "Username"}, "iam": {"api_key": "ApiKey"}, "ibm": {"iam": {"api_key": "ApiKey"}}}, "headers": {"mapKey": "Inner"}, "url": "URL"}, "target_proxy": "TargetProxy", "use_bulk_get": true, "use_checkpoints": true, "user_ctx": {"db": "Db", "name": "Name", "roles": ["_reader"]}, "winning_revs_only": false, "worker_batch_size": 500, "worker_processes": 4}`)
 				}))
 			})
 			It(`Invoke GetReplicationDocument successfully`, func() {
@@ -19230,10 +19280,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -19269,6 +19328,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -19400,10 +19460,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -19439,6 +19508,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -19578,10 +19648,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -19617,6 +19696,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -19696,10 +19776,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -19735,6 +19824,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -19835,10 +19925,19 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel := new(cloudantv1.ReplicationDatabaseAuthIam)
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -19874,6 +19973,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(10))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("gzip")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(3))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU")
@@ -28312,13 +28412,27 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				Expect(replicationDatabaseAuthIBMIamModel).ToNot(BeNil())
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthIBMIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				Expect(replicationDatabaseAuthIBMModel).ToNot(BeNil())
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+				Expect(replicationDatabaseAuthIBMModel.Iam).To(Equal(replicationDatabaseAuthIBMIamModel))
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 				Expect(replicationDatabaseAuthModel.Basic).To(Equal(replicationDatabaseAuthBasicModel))
 				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
+				Expect(replicationDatabaseAuthModel.IBM).To(Equal(replicationDatabaseAuthIBMModel))
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -28363,6 +28477,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("none")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
@@ -28398,6 +28513,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.HTTPConnections).To(Equal(core.Int64Ptr(int64(20))))
 				Expect(replicationDocumentModel.Owner).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.QueryParams).To(Equal(map[string]string{"key1": "testString"}))
+				Expect(replicationDocumentModel.RequestCompression).To(Equal(core.StringPtr("none")))
 				Expect(replicationDocumentModel.RetriesPerRequest).To(Equal(core.Int64Ptr(int64(5))))
 				Expect(replicationDocumentModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(replicationDocumentModel.SinceSeq).To(Equal(core.StringPtr("testString")))
@@ -29138,13 +29254,27 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDatabaseAuthIamModel.ApiKey = core.StringPtr("testString")
 				Expect(replicationDatabaseAuthIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
 
+				// Construct an instance of the ReplicationDatabaseAuthIBMIam model
+				replicationDatabaseAuthIBMIamModel := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+				Expect(replicationDatabaseAuthIBMIamModel).ToNot(BeNil())
+				replicationDatabaseAuthIBMIamModel.ApiKey = core.StringPtr("testString")
+				Expect(replicationDatabaseAuthIBMIamModel.ApiKey).To(Equal(core.StringPtr("testString")))
+
+				// Construct an instance of the ReplicationDatabaseAuthIBM model
+				replicationDatabaseAuthIBMModel := new(cloudantv1.ReplicationDatabaseAuthIBM)
+				Expect(replicationDatabaseAuthIBMModel).ToNot(BeNil())
+				replicationDatabaseAuthIBMModel.Iam = replicationDatabaseAuthIBMIamModel
+				Expect(replicationDatabaseAuthIBMModel.Iam).To(Equal(replicationDatabaseAuthIBMIamModel))
+
 				// Construct an instance of the ReplicationDatabaseAuth model
 				replicationDatabaseAuthModel := new(cloudantv1.ReplicationDatabaseAuth)
 				Expect(replicationDatabaseAuthModel).ToNot(BeNil())
 				replicationDatabaseAuthModel.Basic = replicationDatabaseAuthBasicModel
 				replicationDatabaseAuthModel.Iam = replicationDatabaseAuthIamModel
+				replicationDatabaseAuthModel.IBM = replicationDatabaseAuthIBMModel
 				Expect(replicationDatabaseAuthModel.Basic).To(Equal(replicationDatabaseAuthBasicModel))
 				Expect(replicationDatabaseAuthModel.Iam).To(Equal(replicationDatabaseAuthIamModel))
+				Expect(replicationDatabaseAuthModel.IBM).To(Equal(replicationDatabaseAuthIBMModel))
 
 				// Construct an instance of the ReplicationDatabase model
 				replicationDatabaseModel := new(cloudantv1.ReplicationDatabase)
@@ -29189,6 +29319,7 @@ var _ = Describe(`CloudantV1`, func() {
 				replicationDocumentModel.HTTPConnections = core.Int64Ptr(int64(20))
 				replicationDocumentModel.Owner = core.StringPtr("testString")
 				replicationDocumentModel.QueryParams = map[string]string{"key1": "testString"}
+				replicationDocumentModel.RequestCompression = core.StringPtr("none")
 				replicationDocumentModel.RetriesPerRequest = core.Int64Ptr(int64(5))
 				replicationDocumentModel.Selector = map[string]interface{}{"anyKey": "anyValue"}
 				replicationDocumentModel.SinceSeq = core.StringPtr("testString")
@@ -29224,6 +29355,7 @@ var _ = Describe(`CloudantV1`, func() {
 				Expect(replicationDocumentModel.HTTPConnections).To(Equal(core.Int64Ptr(int64(20))))
 				Expect(replicationDocumentModel.Owner).To(Equal(core.StringPtr("testString")))
 				Expect(replicationDocumentModel.QueryParams).To(Equal(map[string]string{"key1": "testString"}))
+				Expect(replicationDocumentModel.RequestCompression).To(Equal(core.StringPtr("none")))
 				Expect(replicationDocumentModel.RetriesPerRequest).To(Equal(core.Int64Ptr(int64(5))))
 				Expect(replicationDocumentModel.Selector).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(replicationDocumentModel.SinceSeq).To(Equal(core.StringPtr("testString")))
@@ -29307,6 +29439,17 @@ var _ = Describe(`CloudantV1`, func() {
 				password := "testString"
 				username := "testString"
 				_model, err := cloudantService.NewReplicationDatabaseAuthBasic(password, username)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewReplicationDatabaseAuthIBM successfully`, func() {
+				var iam *cloudantv1.ReplicationDatabaseAuthIBMIam = nil
+				_, err := cloudantService.NewReplicationDatabaseAuthIBM(iam)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewReplicationDatabaseAuthIBMIam successfully`, func() {
+				apiKey := "testString"
+				_model, err := cloudantService.NewReplicationDatabaseAuthIBMIam(apiKey)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -29718,6 +29861,7 @@ var _ = Describe(`CloudantV1`, func() {
 			model := new(cloudantv1.ReplicationDatabaseAuth)
 			model.Basic = nil
 			model.Iam = nil
+			model.IBM = nil
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -29747,6 +29891,42 @@ var _ = Describe(`CloudantV1`, func() {
 
 			var result *cloudantv1.ReplicationDatabaseAuthBasic
 			err = cloudantv1.UnmarshalReplicationDatabaseAuthBasic(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDatabaseAuthIBM successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDatabaseAuthIBM)
+			model.Iam = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDatabaseAuthIBM
+			err = cloudantv1.UnmarshalReplicationDatabaseAuthIBM(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalReplicationDatabaseAuthIBMIam successfully`, func() {
+			// Construct an instance of the model.
+			model := new(cloudantv1.ReplicationDatabaseAuthIBMIam)
+			model.ApiKey = core.StringPtr("testString")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *cloudantv1.ReplicationDatabaseAuthIBMIam
+			err = cloudantv1.UnmarshalReplicationDatabaseAuthIBMIam(raw, &result)
 			Expect(err).To(BeNil())
 			Expect(result).ToNot(BeNil())
 			Expect(result).To(Equal(model))
@@ -29792,6 +29972,7 @@ var _ = Describe(`CloudantV1`, func() {
 			model.HTTPConnections = core.Int64Ptr(int64(20))
 			model.Owner = core.StringPtr("testString")
 			model.QueryParams = map[string]string{"key1": "testString"}
+			model.RequestCompression = core.StringPtr("none")
 			model.RetriesPerRequest = core.Int64Ptr(int64(5))
 			model.Selector = map[string]interface{}{"anyKey": "anyValue"}
 			model.SinceSeq = core.StringPtr("testString")

@@ -8848,7 +8848,7 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 func getServiceComponentInfo() *core.ProblemComponent {
-	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.39")
+	return core.NewProblemComponent(DefaultServiceName, "1.0.0-dev0.1.40")
 }
 
 // ActiveTask : Schema for information about a running task.
@@ -11357,7 +11357,7 @@ type DesignDocumentViewIndex struct {
 	// Indicates if the view is currently being updated.
 	UpdaterRunning *bool `json:"updater_running" validate:"required"`
 
-	// Schema for an ability to tell if view is up-to-date without querying it.
+	// Schema for information about pending updates for an index, calculated across all available copies of all shards.
 	UpdatesPending *UpdatesPending `json:"updates_pending" validate:"required"`
 
 	// Number of clients waiting on views from this design document.
@@ -18973,8 +18973,11 @@ type ReplicationDatabaseAuth struct {
 	// Schema for basic authentication of replication source or target database.
 	Basic *ReplicationDatabaseAuthBasic `json:"basic,omitempty"`
 
-	// Schema for an IAM API key for replication database authentication.
+	// Deprecated: use the `ibm` property instead to configure IAM for replication database authentication.
 	Iam *ReplicationDatabaseAuthIam `json:"iam,omitempty"`
+
+	// IBM IAM replication auth for CouchDB or Cloudant.
+	IBM *ReplicationDatabaseAuthIBM `json:"ibm,omitempty"`
 }
 
 // UnmarshalReplicationDatabaseAuth unmarshals an instance of ReplicationDatabaseAuth from the specified map of raw messages.
@@ -18988,6 +18991,11 @@ func UnmarshalReplicationDatabaseAuth(m map[string]json.RawMessage, result inter
 	err = core.UnmarshalModel(m, "iam", &obj.Iam, UnmarshalReplicationDatabaseAuthIam)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "iam-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "ibm", &obj.IBM, UnmarshalReplicationDatabaseAuthIBM)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ibm-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -19033,7 +19041,67 @@ func UnmarshalReplicationDatabaseAuthBasic(m map[string]json.RawMessage, result 
 	return
 }
 
-// ReplicationDatabaseAuthIam : Schema for an IAM API key for replication database authentication.
+// ReplicationDatabaseAuthIBM : IBM IAM replication auth for CouchDB or Cloudant.
+type ReplicationDatabaseAuthIBM struct {
+	// IAM API key for replication database authentication.
+	Iam *ReplicationDatabaseAuthIBMIam `json:"iam" validate:"required"`
+}
+
+// NewReplicationDatabaseAuthIBM : Instantiate ReplicationDatabaseAuthIBM (Generic Model Constructor)
+func (*CloudantV1) NewReplicationDatabaseAuthIBM(iam *ReplicationDatabaseAuthIBMIam) (_model *ReplicationDatabaseAuthIBM, err error) {
+	_model = &ReplicationDatabaseAuthIBM{
+		Iam: iam,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalReplicationDatabaseAuthIBM unmarshals an instance of ReplicationDatabaseAuthIBM from the specified map of raw messages.
+func UnmarshalReplicationDatabaseAuthIBM(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReplicationDatabaseAuthIBM)
+	err = core.UnmarshalModel(m, "iam", &obj.Iam, UnmarshalReplicationDatabaseAuthIBMIam)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "iam-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReplicationDatabaseAuthIBMIam : IAM API key for replication database authentication.
+type ReplicationDatabaseAuthIBMIam struct {
+	// IAM API key.
+	ApiKey *string `json:"api_key" validate:"required"`
+}
+
+// NewReplicationDatabaseAuthIBMIam : Instantiate ReplicationDatabaseAuthIBMIam (Generic Model Constructor)
+func (*CloudantV1) NewReplicationDatabaseAuthIBMIam(apiKey string) (_model *ReplicationDatabaseAuthIBMIam, err error) {
+	_model = &ReplicationDatabaseAuthIBMIam{
+		ApiKey: core.StringPtr(apiKey),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalReplicationDatabaseAuthIBMIam unmarshals an instance of ReplicationDatabaseAuthIBMIam from the specified map of raw messages.
+func UnmarshalReplicationDatabaseAuthIBMIam(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ReplicationDatabaseAuthIBMIam)
+	err = core.UnmarshalPrimitive(m, "api_key", &obj.ApiKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "api_key-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ReplicationDatabaseAuthIam : Deprecated: use the `ibm` property instead to configure IAM for replication database authentication.
 type ReplicationDatabaseAuthIam struct {
 	// IAM API key.
 	ApiKey *string `json:"api_key" validate:"required"`
@@ -19130,6 +19198,11 @@ type ReplicationDocument struct {
 	// Schema for a map of string key value pairs, such as query parameters.
 	QueryParams map[string]string `json:"query_params,omitempty"`
 
+	// Specify whether to compress HTTP request bodies during replication. Set to `gzip` to compress request bodies or
+	// `none` to disable compression. Only use `gzip` if the remote server accepts compressed requests. If unset, the
+	// default is determined by the server administrator.
+	RequestCompression *string `json:"request_compression,omitempty"`
+
 	// Number of times a replication request is retried. The requests are retried with a doubling exponential backoff
 	// starting at 0.25 seconds, with a cap at 5 minutes.
 	RetriesPerRequest *int64 `json:"retries_per_request,omitempty"`
@@ -19222,6 +19295,15 @@ type ReplicationDocument struct {
 	// Allows users to set arbitrary properties of type interface{}.
 	additionalProperties map[string]interface{}
 }
+
+// Constants associated with the ReplicationDocument.RequestCompression property.
+// Specify whether to compress HTTP request bodies during replication. Set to `gzip` to compress request bodies or
+// `none` to disable compression. Only use `gzip` if the remote server accepts compressed requests. If unset, the
+// default is determined by the server administrator.
+const (
+	ReplicationDocumentRequestCompressionGzipConst = "gzip"
+	ReplicationDocumentRequestCompressionNoneConst = "none"
+)
 
 // NewReplicationDocument : Instantiate ReplicationDocument (Generic Model Constructor)
 func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *ReplicationDatabase) (_model *ReplicationDocument, err error) {
@@ -19329,6 +19411,9 @@ func (o *ReplicationDocument) MarshalJSON() (buffer []byte, err error) {
 	}
 	if o.QueryParams != nil {
 		m["query_params"] = o.QueryParams
+	}
+	if o.RequestCompression != nil {
+		m["request_compression"] = o.RequestCompression
 	}
 	if o.RetriesPerRequest != nil {
 		m["retries_per_request"] = o.RetriesPerRequest
@@ -19502,6 +19587,12 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 		return
 	}
 	delete(m, "query_params")
+	err = core.UnmarshalPrimitive(m, "request_compression", &obj.RequestCompression)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "request_compression-error", common.GetComponentInfo())
+		return
+	}
+	delete(m, "request_compression")
 	err = core.UnmarshalPrimitive(m, "retries_per_request", &obj.RetriesPerRequest)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "retries_per_request-error", common.GetComponentInfo())
@@ -20215,6 +20306,9 @@ type SearchIndexInfo struct {
 
 	// Unique signature of the search index.
 	Signature *string `json:"signature" validate:"required"`
+
+	// Schema for information about pending updates for an index, calculated across all available copies of all shards.
+	UpdatesPending *UpdatesPending `json:"updates_pending,omitempty"`
 }
 
 // UnmarshalSearchIndexInfo unmarshals an instance of SearchIndexInfo from the specified map of raw messages.
@@ -20248,6 +20342,11 @@ func UnmarshalSearchIndexInfo(m map[string]json.RawMessage, result interface{}) 
 	err = core.UnmarshalPrimitive(m, "signature", &obj.Signature)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "signature-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "updates_pending", &obj.UpdatesPending, UnmarshalUpdatesPending)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "updates_pending-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -20898,22 +20997,49 @@ func UnmarshalUpInformation(m map[string]json.RawMessage, result interface{}) (e
 	return
 }
 
-// UpdatesPending : Schema for an ability to tell if view is up-to-date without querying it.
+// UpdatesPending : Schema for information about pending updates for an index, calculated across all available copies of all shards.
 type UpdatesPending struct {
-	// Sum of shard copies with the least amount of work to do.
+	// The number of shard copies that reported an answer. Copies that are unreachable or in maintenance mode are not
+	// included. Compare with the `copies_expected` value.
+	Copies *int64 `json:"copies,omitempty"`
+
+	// The expected number of shard copy responses. If `copies` is less than this value, the results might be partial and
+	// `maximum` might not represent the true backlog.
+	CopiesExpected *int64 `json:"copies_expected,omitempty"`
+
+	// The backlog of the least up-to-date copy of each shard range. A value of `0` means the index is fully built on every
+	// copy.
+	Maximum *int64 `json:"maximum,omitempty"`
+
+	// The backlog of the most up-to-date copy of each shard range. A value of `0` means that at least one complete copy
+	// exists for every shard range.
 	Minimum *int64 `json:"minimum" validate:"required"`
 
-	// Sum of unique shards. This value is zero when at least one copy of every shard range is up-to-date and the view is
-	// able to answer a query without index building delays.
+	// The backlog of the preferred shard copies, which are the copies that queries are routed to by default.
 	Preferred *int64 `json:"preferred" validate:"required"`
 
-	// Sum of all shard copies.
+	// The total backlog across all shard copies.
 	Total *int64 `json:"total" validate:"required"`
 }
 
 // UnmarshalUpdatesPending unmarshals an instance of UpdatesPending from the specified map of raw messages.
 func UnmarshalUpdatesPending(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UpdatesPending)
+	err = core.UnmarshalPrimitive(m, "copies", &obj.Copies)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "copies-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "copies_expected", &obj.CopiesExpected)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "copies_expected-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "maximum", &obj.Maximum)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "maximum-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "minimum", &obj.Minimum)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "minimum-error", common.GetComponentInfo())

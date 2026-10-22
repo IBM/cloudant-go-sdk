@@ -1924,9 +1924,18 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				ApiKey: core.StringPtr("testString"),
 			}
 
+			replicationDatabaseAuthIBMIamModel := &cloudantv1.ReplicationDatabaseAuthIBMIam{
+				ApiKey: core.StringPtr("testString"),
+			}
+
+			replicationDatabaseAuthIBMModel := &cloudantv1.ReplicationDatabaseAuthIBM{
+				Iam: replicationDatabaseAuthIBMIamModel,
+			}
+
 			replicationDatabaseAuthModel := &cloudantv1.ReplicationDatabaseAuth{
 				Basic: replicationDatabaseAuthBasicModel,
 				Iam:   replicationDatabaseAuthIamModel,
+				IBM:   replicationDatabaseAuthIBMModel,
 			}
 
 			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
@@ -1962,6 +1971,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HTTPConnections:    core.Int64Ptr(int64(10)),
 				Owner:              core.StringPtr("testString"),
 				QueryParams:        map[string]string{"key1": "testString"},
+				RequestCompression: core.StringPtr("gzip"),
 				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
 				SinceSeq:           core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU"),
@@ -2061,9 +2071,18 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				ApiKey: core.StringPtr("testString"),
 			}
 
+			replicationDatabaseAuthIBMIamModel := &cloudantv1.ReplicationDatabaseAuthIBMIam{
+				ApiKey: core.StringPtr("testString"),
+			}
+
+			replicationDatabaseAuthIBMModel := &cloudantv1.ReplicationDatabaseAuthIBM{
+				Iam: replicationDatabaseAuthIBMIamModel,
+			}
+
 			replicationDatabaseAuthModel := &cloudantv1.ReplicationDatabaseAuth{
 				Basic: replicationDatabaseAuthBasicModel,
 				Iam:   replicationDatabaseAuthIamModel,
+				IBM:   replicationDatabaseAuthIBMModel,
 			}
 
 			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
@@ -2099,6 +2118,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HTTPConnections:    core.Int64Ptr(int64(10)),
 				Owner:              core.StringPtr("testString"),
 				QueryParams:        map[string]string{"key1": "testString"},
+				RequestCompression: core.StringPtr("gzip"),
 				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
 				SinceSeq:           core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU"),
