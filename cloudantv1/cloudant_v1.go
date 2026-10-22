@@ -3401,6 +3401,225 @@ func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context
 	return
 }
 
+// GetIndexInfo : Retrieve index status for all design documents (GET)
+// **EXPERIMENTAL** Returns index status grouped by type for all design documents in the database or a filtered subset.
+// Equivalent to `POST /{db}/_index_info` but accepts parameters as query parameters instead of a request body. Use this
+// endpoint to verify whether a database's indexes are fully built, for example before switching traffic to a replica.
+func (cloudant *CloudantV1) GetIndexInfo(getIndexInfoOptions *GetIndexInfoOptions) (result *IndexInfoResult, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.GetIndexInfoWithContext(context.Background(), getIndexInfoOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetIndexInfoWithContext is an alternate form of the GetIndexInfo method which supports a Context parameter
+func (cloudant *CloudantV1) GetIndexInfoWithContext(ctx context.Context, getIndexInfoOptions *GetIndexInfoOptions) (result *IndexInfoResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getIndexInfoOptions, "getIndexInfoOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getIndexInfoOptions, "getIndexInfoOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db": *getIndexInfoOptions.Db,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index_info`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetIndexInfo")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range getIndexInfoOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	if getIndexInfoOptions.Descending != nil {
+		builder.AddQuery("descending", fmt.Sprint(*getIndexInfoOptions.Descending))
+	}
+	if getIndexInfoOptions.EndKey != nil {
+		builder.AddQuery("end_key", fmt.Sprint(*getIndexInfoOptions.EndKey))
+	}
+	if getIndexInfoOptions.InclusiveEnd != nil {
+		builder.AddQuery("inclusive_end", fmt.Sprint(*getIndexInfoOptions.InclusiveEnd))
+	}
+	if getIndexInfoOptions.Keys != nil {
+		builder.AddQuery("keys", fmt.Sprint(*getIndexInfoOptions.Keys))
+	}
+	if getIndexInfoOptions.Limit != nil {
+		builder.AddQuery("limit", fmt.Sprint(*getIndexInfoOptions.Limit))
+	}
+	if getIndexInfoOptions.Skip != nil {
+		builder.AddQuery("skip", fmt.Sprint(*getIndexInfoOptions.Skip))
+	}
+	if getIndexInfoOptions.StartKey != nil {
+		builder.AddQuery("start_key", fmt.Sprint(*getIndexInfoOptions.StartKey))
+	}
+	if getIndexInfoOptions.Type != nil {
+		builder.AddQuery("type", strings.Join(getIndexInfoOptions.Type, ","))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "getIndexInfo", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIndexInfoResult)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// PostIndexInfo : Retrieve index status for all design documents
+// **EXPERIMENTAL** Returns index status grouped by type for all design documents in the database or a filtered subset.
+// Results are grouped into `view_indexes` and `search_indexes`. Each entry identifies the index by its design document
+// and, for search indexes, its `name`. Use a `keys` array in the request body to select design documents by ID. Use
+// this endpoint to verify whether a database's indexes are fully built, for example before switching traffic to a
+// replica.
+func (cloudant *CloudantV1) PostIndexInfo(postIndexInfoOptions *PostIndexInfoOptions) (result *IndexInfoResult, response *core.DetailedResponse, err error) {
+	result, response, err = cloudant.PostIndexInfoWithContext(context.Background(), postIndexInfoOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// PostIndexInfoWithContext is an alternate form of the PostIndexInfo method which supports a Context parameter
+func (cloudant *CloudantV1) PostIndexInfoWithContext(ctx context.Context, postIndexInfoOptions *PostIndexInfoOptions) (result *IndexInfoResult, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postIndexInfoOptions, "postIndexInfoOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(postIndexInfoOptions, "postIndexInfoOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"db": *postIndexInfoOptions.Db,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index_info`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostIndexInfo")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	for headerName, headerValue := range postIndexInfoOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if postIndexInfoOptions.AttEncodingInfo != nil {
+		body["att_encoding_info"] = postIndexInfoOptions.AttEncodingInfo
+	}
+	if postIndexInfoOptions.Attachments != nil {
+		body["attachments"] = postIndexInfoOptions.Attachments
+	}
+	if postIndexInfoOptions.Conflicts != nil {
+		body["conflicts"] = postIndexInfoOptions.Conflicts
+	}
+	if postIndexInfoOptions.Descending != nil {
+		body["descending"] = postIndexInfoOptions.Descending
+	}
+	if postIndexInfoOptions.IncludeDocs != nil {
+		body["include_docs"] = postIndexInfoOptions.IncludeDocs
+	}
+	if postIndexInfoOptions.InclusiveEnd != nil {
+		body["inclusive_end"] = postIndexInfoOptions.InclusiveEnd
+	}
+	if postIndexInfoOptions.Limit != nil {
+		body["limit"] = postIndexInfoOptions.Limit
+	}
+	if postIndexInfoOptions.Skip != nil {
+		body["skip"] = postIndexInfoOptions.Skip
+	}
+	if postIndexInfoOptions.UpdateSeq != nil {
+		body["update_seq"] = postIndexInfoOptions.UpdateSeq
+	}
+	if postIndexInfoOptions.EndKey != nil {
+		body["end_key"] = postIndexInfoOptions.EndKey
+	}
+	if postIndexInfoOptions.Key != nil {
+		body["key"] = postIndexInfoOptions.Key
+	}
+	if postIndexInfoOptions.Keys != nil {
+		body["keys"] = postIndexInfoOptions.Keys
+	}
+	if postIndexInfoOptions.StartKey != nil {
+		body["start_key"] = postIndexInfoOptions.StartKey
+	}
+	if postIndexInfoOptions.Type != nil {
+		body["type"] = postIndexInfoOptions.Type
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "postIndexInfo", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIndexInfoResult)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // PostView : Query a MapReduce view
 // This operation queries the specified MapReduce view of the specified design document. By default, the map and reduce
 // functions of the view are run to update the view before returning the response. The advantage of using the HTTP
@@ -13096,6 +13315,116 @@ func (options *GetDocumentShardsInfoOptions) SetHeaders(param map[string]string)
 	return options
 }
 
+// GetIndexInfoOptions : The GetIndexInfo options.
+type GetIndexInfoOptions struct {
+	// Path parameter to specify the database name.
+	Db *string `json:"db" validate:"required,ne="`
+
+	// Query parameter to specify whether to return rows in descending by key order.
+	Descending *bool `json:"descending,omitempty"`
+
+	// Query parameter to specify to stop returning records when the specified key is reached. String representation of any
+	// JSON type that matches the key type emitted by the view function.
+	EndKey *string `json:"end_key,omitempty"`
+
+	// Query parameter to specify whether the specified end key should be included in the result.
+	InclusiveEnd *bool `json:"inclusive_end,omitempty"`
+
+	// Query parameter to specify returning only rows that match any of the specified keys. String representation of a JSON
+	// array of keys that match the key type emitted by the view function. Must be URL encoded.
+	Keys *string `json:"keys,omitempty"`
+
+	// Query parameter to specify the number of returned documents to limit the result to.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// Query parameter to specify the number of records before starting to return the results.
+	Skip *int64 `json:"skip,omitempty"`
+
+	// Query parameter to specify to start returning records from the specified key. String representation of any JSON type
+	// that matches the key type emitted by the view function.
+	StartKey *string `json:"start_key,omitempty"`
+
+	// Index types to filter results by. Can be `view`, `search`, or both values comma-separated. If omitted, the response
+	// includes all index types.
+	Type []string `json:"type,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the GetIndexInfoOptions.Type property.
+const (
+	GetIndexInfoOptionsTypeSearchConst = "search"
+	GetIndexInfoOptionsTypeViewConst   = "view"
+)
+
+// NewGetIndexInfoOptions : Instantiate GetIndexInfoOptions
+func (*CloudantV1) NewGetIndexInfoOptions(db string) *GetIndexInfoOptions {
+	return &GetIndexInfoOptions{
+		Db: core.StringPtr(db),
+	}
+}
+
+// SetDb : Allow user to set Db
+func (_options *GetIndexInfoOptions) SetDb(db string) *GetIndexInfoOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
+}
+
+// SetDescending : Allow user to set Descending
+func (_options *GetIndexInfoOptions) SetDescending(descending bool) *GetIndexInfoOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
+}
+
+// SetEndKey : Allow user to set EndKey
+func (_options *GetIndexInfoOptions) SetEndKey(endKey string) *GetIndexInfoOptions {
+	_options.EndKey = core.StringPtr(endKey)
+	return _options
+}
+
+// SetInclusiveEnd : Allow user to set InclusiveEnd
+func (_options *GetIndexInfoOptions) SetInclusiveEnd(inclusiveEnd bool) *GetIndexInfoOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
+}
+
+// SetKeys : Allow user to set Keys
+func (_options *GetIndexInfoOptions) SetKeys(keys string) *GetIndexInfoOptions {
+	_options.Keys = core.StringPtr(keys)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *GetIndexInfoOptions) SetLimit(limit int64) *GetIndexInfoOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetSkip : Allow user to set Skip
+func (_options *GetIndexInfoOptions) SetSkip(skip int64) *GetIndexInfoOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
+}
+
+// SetStartKey : Allow user to set StartKey
+func (_options *GetIndexInfoOptions) SetStartKey(startKey string) *GetIndexInfoOptions {
+	_options.StartKey = core.StringPtr(startKey)
+	return _options
+}
+
+// SetType : Allow user to set Type
+func (_options *GetIndexInfoOptions) SetType(typeVar []string) *GetIndexInfoOptions {
+	_options.Type = typeVar
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetIndexInfoOptions) SetHeaders(param map[string]string) *GetIndexInfoOptions {
+	options.Headers = param
+	return options
+}
+
 // GetIndexesInformationOptions : The GetIndexesInformation options.
 type GetIndexesInformationOptions struct {
 	// Path parameter to specify the database name.
@@ -14493,6 +14822,50 @@ func UnmarshalIndexField(m map[string]json.RawMessage, result interface{}) (err 
 			return
 		}
 		obj.SetProperty(k, v)
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// IndexInfoResult : Schema for the result of an _index_info request.
+type IndexInfoResult struct {
+	// The ID of the first design document after the current page of results. Pass this value as `start_key` to retrieve
+	// the next page. This field is `null` when no more design documents are available, or when the request includes a
+	// `keys` parameter.
+	Bookmark *string `json:"bookmark" validate:"required"`
+
+	// The status of each search index across the design documents in the current page of results.
+	SearchIndexes []SearchIndexInformation `json:"search_indexes" validate:"required"`
+
+	// The total number of design documents in the database. A design document can contain multiple indexes.
+	TotalRows *int64 `json:"total_rows" validate:"required"`
+
+	// The view index status for each design document in the current page of results.
+	ViewIndexes []ViewIndexInformation `json:"view_indexes" validate:"required"`
+}
+
+// UnmarshalIndexInfoResult unmarshals an instance of IndexInfoResult from the specified map of raw messages.
+func UnmarshalIndexInfoResult(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IndexInfoResult)
+	err = core.UnmarshalPrimitive(m, "bookmark", &obj.Bookmark)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "bookmark-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "search_indexes", &obj.SearchIndexes, UnmarshalSearchIndexInformation)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "search_indexes-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "total_rows", &obj.TotalRows)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "total_rows-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "view_indexes", &obj.ViewIndexes, UnmarshalViewIndexInformation)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "view_indexes-error", common.GetComponentInfo())
+		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
@@ -16279,6 +16652,170 @@ func (_options *PostFindOptions) SetR(r int64) *PostFindOptions {
 
 // SetHeaders : Allow user to set Headers
 func (options *PostFindOptions) SetHeaders(param map[string]string) *PostFindOptions {
+	options.Headers = param
+	return options
+}
+
+// PostIndexInfoOptions : The PostIndexInfo options.
+type PostIndexInfoOptions struct {
+	// Path parameter to specify the database name.
+	Db *string `json:"db" validate:"required,ne="`
+
+	// Parameter to specify whether to include the encoding information for compressed attachments. This only applies when
+	// requesting documents in the response.
+	AttEncodingInfo *bool `json:"att_encoding_info,omitempty"`
+
+	// Parameter to specify whether to include attachment content in included document content or only the attachment
+	// metadata. This only applies when requesting documents in the response.
+	Attachments *bool `json:"attachments,omitempty"`
+
+	// Parameter to specify whether to include a list of conflicted revisions in each returned document. This only applies
+	// when requesting documents in the response.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Parameter to specify whether to return the documents in descending by key order.
+	Descending *bool `json:"descending,omitempty"`
+
+	// Parameter to specify whether to include the full content of the documents in the response.
+	IncludeDocs *bool `json:"include_docs,omitempty"`
+
+	// Parameter to specify whether to include the specified end key in the result.
+	InclusiveEnd *bool `json:"inclusive_end,omitempty"`
+
+	// Parameter to specify the number of returned documents to limit the result to.
+	Limit *int64 `json:"limit,omitempty"`
+
+	// Parameter to specify the number of records before starting to return the results.
+	Skip *int64 `json:"skip,omitempty"`
+
+	// Parameter to specify whether to include in the response an update_seq value indicating the sequence id of the
+	// database the view reflects.
+	UpdateSeq *bool `json:"update_seq,omitempty"`
+
+	// Schema for a document ID.
+	EndKey *string `json:"end_key,omitempty"`
+
+	// Schema for a document ID.
+	Key *string `json:"key,omitempty"`
+
+	// Schema for a list of document IDs.
+	Keys []string `json:"keys,omitempty"`
+
+	// Schema for a document ID.
+	StartKey *string `json:"start_key,omitempty"`
+
+	// Index types to filter results by. If omitted, the response includes all index types.
+	Type []string `json:"type,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// Constants associated with the PostIndexInfoOptions.Type property.
+const (
+	PostIndexInfoOptionsTypeSearchConst = "search"
+	PostIndexInfoOptionsTypeViewConst   = "view"
+)
+
+// NewPostIndexInfoOptions : Instantiate PostIndexInfoOptions
+func (*CloudantV1) NewPostIndexInfoOptions(db string) *PostIndexInfoOptions {
+	return &PostIndexInfoOptions{
+		Db: core.StringPtr(db),
+	}
+}
+
+// SetDb : Allow user to set Db
+func (_options *PostIndexInfoOptions) SetDb(db string) *PostIndexInfoOptions {
+	_options.Db = core.StringPtr(db)
+	return _options
+}
+
+// SetAttEncodingInfo : Allow user to set AttEncodingInfo
+func (_options *PostIndexInfoOptions) SetAttEncodingInfo(attEncodingInfo bool) *PostIndexInfoOptions {
+	_options.AttEncodingInfo = core.BoolPtr(attEncodingInfo)
+	return _options
+}
+
+// SetAttachments : Allow user to set Attachments
+func (_options *PostIndexInfoOptions) SetAttachments(attachments bool) *PostIndexInfoOptions {
+	_options.Attachments = core.BoolPtr(attachments)
+	return _options
+}
+
+// SetConflicts : Allow user to set Conflicts
+func (_options *PostIndexInfoOptions) SetConflicts(conflicts bool) *PostIndexInfoOptions {
+	_options.Conflicts = core.BoolPtr(conflicts)
+	return _options
+}
+
+// SetDescending : Allow user to set Descending
+func (_options *PostIndexInfoOptions) SetDescending(descending bool) *PostIndexInfoOptions {
+	_options.Descending = core.BoolPtr(descending)
+	return _options
+}
+
+// SetIncludeDocs : Allow user to set IncludeDocs
+func (_options *PostIndexInfoOptions) SetIncludeDocs(includeDocs bool) *PostIndexInfoOptions {
+	_options.IncludeDocs = core.BoolPtr(includeDocs)
+	return _options
+}
+
+// SetInclusiveEnd : Allow user to set InclusiveEnd
+func (_options *PostIndexInfoOptions) SetInclusiveEnd(inclusiveEnd bool) *PostIndexInfoOptions {
+	_options.InclusiveEnd = core.BoolPtr(inclusiveEnd)
+	return _options
+}
+
+// SetLimit : Allow user to set Limit
+func (_options *PostIndexInfoOptions) SetLimit(limit int64) *PostIndexInfoOptions {
+	_options.Limit = core.Int64Ptr(limit)
+	return _options
+}
+
+// SetSkip : Allow user to set Skip
+func (_options *PostIndexInfoOptions) SetSkip(skip int64) *PostIndexInfoOptions {
+	_options.Skip = core.Int64Ptr(skip)
+	return _options
+}
+
+// SetUpdateSeq : Allow user to set UpdateSeq
+func (_options *PostIndexInfoOptions) SetUpdateSeq(updateSeq bool) *PostIndexInfoOptions {
+	_options.UpdateSeq = core.BoolPtr(updateSeq)
+	return _options
+}
+
+// SetEndKey : Allow user to set EndKey
+func (_options *PostIndexInfoOptions) SetEndKey(endKey string) *PostIndexInfoOptions {
+	_options.EndKey = core.StringPtr(endKey)
+	return _options
+}
+
+// SetKey : Allow user to set Key
+func (_options *PostIndexInfoOptions) SetKey(key string) *PostIndexInfoOptions {
+	_options.Key = core.StringPtr(key)
+	return _options
+}
+
+// SetKeys : Allow user to set Keys
+func (_options *PostIndexInfoOptions) SetKeys(keys []string) *PostIndexInfoOptions {
+	_options.Keys = keys
+	return _options
+}
+
+// SetStartKey : Allow user to set StartKey
+func (_options *PostIndexInfoOptions) SetStartKey(startKey string) *PostIndexInfoOptions {
+	_options.StartKey = core.StringPtr(startKey)
+	return _options
+}
+
+// SetType : Allow user to set Type
+func (_options *PostIndexInfoOptions) SetType(typeVar []string) *PostIndexInfoOptions {
+	_options.Type = typeVar
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostIndexInfoOptions) SetHeaders(param map[string]string) *PostIndexInfoOptions {
 	options.Headers = param
 	return options
 }
@@ -20254,6 +20791,80 @@ func UnmarshalSearchIndexInfo(m map[string]json.RawMessage, result interface{}) 
 	return
 }
 
+// SearchIndexInformation : Schema for search index status for a named index within a design document.
+type SearchIndexInformation struct {
+	// ok.
+	Ok *bool `json:"ok" validate:"required"`
+
+	// The cause of the error (if available).
+	CausedBy *string `json:"caused_by,omitempty"`
+
+	// The name of the error.
+	Error *string `json:"error,omitempty"`
+
+	// The reason the error occurred (if available).
+	Reason *string `json:"reason,omitempty"`
+
+	// An internal error reference (if available).
+	Ref *int64 `json:"ref,omitempty"`
+
+	// Schema for a design document ID including a `_design/` prefix.
+	Ddoc *string `json:"ddoc" validate:"required"`
+
+	// Schema for metadata information about a search index.
+	Info *SearchIndexInfo `json:"info,omitempty"`
+
+	// The name of the search index.
+	Name *string `json:"name" validate:"required"`
+}
+
+// UnmarshalSearchIndexInformation unmarshals an instance of SearchIndexInformation from the specified map of raw messages.
+func UnmarshalSearchIndexInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SearchIndexInformation)
+	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ok-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "caused_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ddoc", &obj.Ddoc)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ddoc-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "info", &obj.Info, UnmarshalSearchIndexInfo)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "info-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // SearchInfoResult : Schema for search index information.
 type SearchInfoResult struct {
 	// The name of the search index prefixed by the design document ID where the index is stored.
@@ -21005,6 +21616,80 @@ func UnmarshalUuidsResult(m map[string]json.RawMessage, result interface{}) (err
 	err = core.UnmarshalPrimitive(m, "uuids", &obj.Uuids)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "uuids-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ViewIndexInformation : Schema for view index status for a design document.
+type ViewIndexInformation struct {
+	// ok.
+	Ok *bool `json:"ok" validate:"required"`
+
+	// The cause of the error (if available).
+	CausedBy *string `json:"caused_by,omitempty"`
+
+	// The name of the error.
+	Error *string `json:"error,omitempty"`
+
+	// The reason the error occurred (if available).
+	Reason *string `json:"reason,omitempty"`
+
+	// An internal error reference (if available).
+	Ref *int64 `json:"ref,omitempty"`
+
+	// Schema for a design document ID including a `_design/` prefix.
+	Ddoc *string `json:"ddoc" validate:"required"`
+
+	// View index information.
+	Info *DesignDocumentViewIndex `json:"info,omitempty"`
+
+	// The map-reduce view names in the design document.
+	Views []string `json:"views" validate:"required"`
+}
+
+// UnmarshalViewIndexInformation unmarshals an instance of ViewIndexInformation from the specified map of raw messages.
+func UnmarshalViewIndexInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ViewIndexInformation)
+	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ok-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "caused_by", &obj.CausedBy)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "caused_by-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "error", &obj.Error)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "error-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "reason", &obj.Reason)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "reason-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ref", &obj.Ref)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ref-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ddoc", &obj.Ddoc)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ddoc-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "info", &obj.Info, UnmarshalDesignDocumentViewIndex)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "info-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "views", &obj.Views)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "views-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
