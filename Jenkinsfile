@@ -34,6 +34,13 @@ pipeline {
         }
       }
     }
+
+    stage('Build') {
+      steps {
+        buildSdk()
+      }
+    }
+
     stage('QA') {
       steps {
         withEnv(['DOCKER_HOST=',
@@ -86,6 +93,12 @@ pipeline {
       }
       steps {
         scanCode()
+      }
+    }
+
+    stage('Package') {
+      steps {
+        packageArtifacts()
       }
     }
 
@@ -309,7 +322,9 @@ void defaultInit() {
 
 // Language specific implementations of the methods:
 // applyCustomizations()
+// buildSdk()
 // runTests()
+// packageArtifacts()
 // publishStaging()
 // publishPublic()
 // publishDocs()
@@ -345,17 +360,23 @@ void applyCustomizations() {
   publishArtifactoryBuildInfoScript = {}
 }
 
-void runTests() {
+void buildSdk() {
   rtGoRun (
     resolverId: 'go-resolver',
     args: 'build ./...'
   )
+}
+
+void runTests() {
   sh '''
   for file in ./**/*suite_test.go
   do
     go test $(dirname $file)/... -ginkgo.reportFile ./../junitreports/$(dirname $file).xml -tags=integration
   done
   '''
+}
+
+void packageArtifacts() {
 }
 
 void publishStaging() {
@@ -377,6 +398,8 @@ void publishStaging() {
 }
 
 void publishPublic() {
+  // Prompt Go to update its index of modules
+  sh "GOPROXY=proxy.golang.org go list -m github.com/IBM/cloudant-go-sdk@${env.TAG_NAME}"
 }
 
 void publishDocs() {
