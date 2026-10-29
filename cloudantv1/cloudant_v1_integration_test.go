@@ -1101,6 +1101,163 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`HeadUpInformation - Retrieve HTTP headers about whether the server is up`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`HeadUpInformation(headUpInformationOptions *HeadUpInformationOptions)`, func() {
+			headUpInformationOptions := &cloudantv1.HeadUpInformationOptions{}
+
+			response, err := cloudantService.HeadUpInformation(headUpInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+		})
+	})
+
+	Describe(`GetActiveTasks - Retrieve list of running tasks`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions)`, func() {
+			getActiveTasksOptions := &cloudantv1.GetActiveTasksOptions{}
+
+			activeTask, response, err := cloudantService.GetActiveTasks(getActiveTasksOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(activeTask).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetActivityTrackerEvents - Retrieve activity tracking events information`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions)`, func() {
+			getActivityTrackerEventsOptions := &cloudantv1.GetActivityTrackerEventsOptions{}
+
+			activityTrackerEvents, response, err := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(activityTrackerEvents).ToNot(BeNil())
+		})
+	})
+
+	Describe(`PostActivityTrackerEvents - Modify activity tracking events configuration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions)`, func() {
+			postActivityTrackerEventsOptions := &cloudantv1.PostActivityTrackerEventsOptions{
+				Types: []string{"management", "data"},
+			}
+
+			ok, response, err := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(ok).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetCapacityDatabasesInformation - Retrieve maximum allowed database count`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions *GetCapacityDatabasesInformationOptions)`, func() {
+			getCapacityDatabasesInformationOptions := &cloudantv1.GetCapacityDatabasesInformationOptions{}
+
+			capacityDatabasesInformation, response, err := cloudantService.GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(capacityDatabasesInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetCurrentDatabasesInformation - Retrieve current database count`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions *GetCurrentDatabasesInformationOptions)`, func() {
+			getCurrentDatabasesInformationOptions := &cloudantv1.GetCurrentDatabasesInformationOptions{}
+
+			currentDatabasesInformation, response, err := cloudantService.GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(currentDatabasesInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetCurrentThroughputInformation - Retrieve the current provisioned throughput capacity consumption`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions)`, func() {
+			getCurrentThroughputInformationOptions := &cloudantv1.GetCurrentThroughputInformationOptions{}
+
+			currentThroughputInformation, response, err := cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(currentThroughputInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetMembershipInformation - Retrieve cluster membership information`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
+			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
+
+			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(membershipInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetUpInformation - Retrieve information about whether the server is up`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
+			getUpInformationOptions := &cloudantv1.GetUpInformationOptions{}
+
+			upInformation, response, err := cloudantService.GetUpInformation(getUpInformationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(upInformation).ToNot(BeNil())
+		})
+	})
+
+	Describe(`PostIndexInfo - Retrieve index status for all design documents`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`PostIndexInfo(postIndexInfoOptions *PostIndexInfoOptions)`, func() {
+			postIndexInfoOptions := &cloudantv1.PostIndexInfoOptions{
+				Db:              core.StringPtr("testString"),
+				AttEncodingInfo: core.BoolPtr(false),
+				Attachments:     core.BoolPtr(false),
+				Conflicts:       core.BoolPtr(false),
+				Descending:      core.BoolPtr(false),
+				IncludeDocs:     core.BoolPtr(false),
+				InclusiveEnd:    core.BoolPtr(true),
+				Limit:           core.Int64Ptr(int64(0)),
+				Skip:            core.Int64Ptr(int64(0)),
+				UpdateSeq:       core.BoolPtr(false),
+				EndKey:          core.StringPtr("testString"),
+				Key:             core.StringPtr("testString"),
+				Keys:            []string{"_design/cookbook"},
+				StartKey:        core.StringPtr("testString"),
+				Type:            []string{"search"},
+			}
+
+			indexInfoResult, response, err := cloudantService.PostIndexInfo(postIndexInfoOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(indexInfoResult).ToNot(BeNil())
+		})
+	})
+
 	Describe(`PostView - Query a MapReduce view`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -1924,9 +2081,18 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				ApiKey: core.StringPtr("testString"),
 			}
 
+			replicationDatabaseAuthIBMIamModel := &cloudantv1.ReplicationDatabaseAuthIBMIam{
+				ApiKey: core.StringPtr("testString"),
+			}
+
+			replicationDatabaseAuthIBMModel := &cloudantv1.ReplicationDatabaseAuthIBM{
+				Iam: replicationDatabaseAuthIBMIamModel,
+			}
+
 			replicationDatabaseAuthModel := &cloudantv1.ReplicationDatabaseAuth{
 				Basic: replicationDatabaseAuthBasicModel,
 				Iam:   replicationDatabaseAuthIamModel,
+				IBM:   replicationDatabaseAuthIBMModel,
 			}
 
 			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
@@ -1962,6 +2128,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HTTPConnections:    core.Int64Ptr(int64(10)),
 				Owner:              core.StringPtr("testString"),
 				QueryParams:        map[string]string{"key1": "testString"},
+				RequestCompression: core.StringPtr("gzip"),
 				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
 				SinceSeq:           core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU"),
@@ -2061,9 +2228,18 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				ApiKey: core.StringPtr("testString"),
 			}
 
+			replicationDatabaseAuthIBMIamModel := &cloudantv1.ReplicationDatabaseAuthIBMIam{
+				ApiKey: core.StringPtr("testString"),
+			}
+
+			replicationDatabaseAuthIBMModel := &cloudantv1.ReplicationDatabaseAuthIBM{
+				Iam: replicationDatabaseAuthIBMIamModel,
+			}
+
 			replicationDatabaseAuthModel := &cloudantv1.ReplicationDatabaseAuth{
 				Basic: replicationDatabaseAuthBasicModel,
 				Iam:   replicationDatabaseAuthIamModel,
+				IBM:   replicationDatabaseAuthIBMModel,
 			}
 
 			replicationDatabaseModel := &cloudantv1.ReplicationDatabase{
@@ -2099,6 +2275,7 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 				HTTPConnections:    core.Int64Ptr(int64(10)),
 				Owner:              core.StringPtr("testString"),
 				QueryParams:        map[string]string{"key1": "testString"},
+				RequestCompression: core.StringPtr("gzip"),
 				RetriesPerRequest:  core.Int64Ptr(int64(3)),
 				Selector:           map[string]interface{}{"anyKey": "anyValue"},
 				SinceSeq:           core.StringPtr("34-g1AAAAGjeJzLYWBgYMlgTmGQT0lKzi9KdU"),
@@ -2542,133 +2719,6 @@ var _ = Describe(`CloudantV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(documentShardInfo).ToNot(BeNil())
-		})
-	})
-
-	Describe(`HeadUpInformation - Retrieve HTTP headers about whether the server is up`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`HeadUpInformation(headUpInformationOptions *HeadUpInformationOptions)`, func() {
-			headUpInformationOptions := &cloudantv1.HeadUpInformationOptions{}
-
-			response, err := cloudantService.HeadUpInformation(headUpInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-		})
-	})
-
-	Describe(`GetActiveTasks - Retrieve list of running tasks`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions)`, func() {
-			getActiveTasksOptions := &cloudantv1.GetActiveTasksOptions{}
-
-			activeTask, response, err := cloudantService.GetActiveTasks(getActiveTasksOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(activeTask).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetActivityTrackerEvents - Retrieve activity tracking events information`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetActivityTrackerEvents(getActivityTrackerEventsOptions *GetActivityTrackerEventsOptions)`, func() {
-			getActivityTrackerEventsOptions := &cloudantv1.GetActivityTrackerEventsOptions{}
-
-			activityTrackerEvents, response, err := cloudantService.GetActivityTrackerEvents(getActivityTrackerEventsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(activityTrackerEvents).ToNot(BeNil())
-		})
-	})
-
-	Describe(`PostActivityTrackerEvents - Modify activity tracking events configuration`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`PostActivityTrackerEvents(postActivityTrackerEventsOptions *PostActivityTrackerEventsOptions)`, func() {
-			postActivityTrackerEventsOptions := &cloudantv1.PostActivityTrackerEventsOptions{
-				Types: []string{"management", "data"},
-			}
-
-			ok, response, err := cloudantService.PostActivityTrackerEvents(postActivityTrackerEventsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(ok).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetCapacityDatabasesInformation - Retrieve maximum allowed database count`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions *GetCapacityDatabasesInformationOptions)`, func() {
-			getCapacityDatabasesInformationOptions := &cloudantv1.GetCapacityDatabasesInformationOptions{}
-
-			capacityDatabasesInformation, response, err := cloudantService.GetCapacityDatabasesInformation(getCapacityDatabasesInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(capacityDatabasesInformation).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetCurrentDatabasesInformation - Retrieve current database count`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions *GetCurrentDatabasesInformationOptions)`, func() {
-			getCurrentDatabasesInformationOptions := &cloudantv1.GetCurrentDatabasesInformationOptions{}
-
-			currentDatabasesInformation, response, err := cloudantService.GetCurrentDatabasesInformation(getCurrentDatabasesInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(currentDatabasesInformation).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetCurrentThroughputInformation - Retrieve the current provisioned throughput capacity consumption`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions)`, func() {
-			getCurrentThroughputInformationOptions := &cloudantv1.GetCurrentThroughputInformationOptions{}
-
-			currentThroughputInformation, response, err := cloudantService.GetCurrentThroughputInformation(getCurrentThroughputInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(currentThroughputInformation).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetMembershipInformation - Retrieve cluster membership information`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions)`, func() {
-			getMembershipInformationOptions := &cloudantv1.GetMembershipInformationOptions{}
-
-			membershipInformation, response, err := cloudantService.GetMembershipInformation(getMembershipInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(membershipInformation).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetUpInformation - Retrieve information about whether the server is up`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetUpInformation(getUpInformationOptions *GetUpInformationOptions)`, func() {
-			getUpInformationOptions := &cloudantv1.GetUpInformationOptions{}
-
-			upInformation, response, err := cloudantService.GetUpInformation(getUpInformationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(upInformation).ToNot(BeNil())
 		})
 	})
 
