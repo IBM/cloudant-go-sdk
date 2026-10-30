@@ -60,11 +60,7 @@ var _ = Describe(`IndexInfo pager tests`, func() {
 
 		server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			defer GinkgoRecover()
-			if r.Method == http.MethodGet {
-				mockServerGetIndexInfoCallback(w, r, ms)
-			} else {
-				mockServerCallback(w, r, ms)
-			}
+			mockServerCallback(w, r, ms)
 		}))
 
 		var serviceErr error
@@ -83,59 +79,6 @@ var _ = Describe(`IndexInfo pager tests`, func() {
 		server.Close()
 		ms = nil
 		service = nil
-	})
-
-	Context("with GetIndexInfo options:", func() {
-		Context("Successful cases", func() {
-			AfterEach(func() {
-				opts := service.NewGetIndexInfoOptions("db")
-				opts.SetLimit(int64(defaultTestPageSize))
-				pagination := NewIndexInfoPagination(service, opts)
-
-				Expect(pagination).ToNot(BeNil())
-
-				ms.makeItems(expectItems)
-
-				runPagesAssertion(pagination, expectPages)
-				runRowsAssertion(pagination, expectPages)
-				runPagerAssertion(pagination, expectPages, expectPages)
-			})
-
-			for _, test := range concretePagerTestCases {
-				It(test.descrition, func() {
-					expectPages = test.expectPages
-					expectItems = test.expectItems
-				})
-			}
-		})
-
-		Context("Error cases", func() {
-			AfterEach(func() {
-				opts := service.NewGetIndexInfoOptions("db")
-				opts.SetLimit(int64(defaultTestPageSize))
-				pagination := NewIndexInfoPagination(service, opts)
-
-				Expect(pagination).ToNot(BeNil())
-
-				ms.makeItems(expectItems)
-				ms.setHTTPError(expectStatusCode, expectItems-2)
-
-				runPagesWithErrorAssertion(pagination, expectedError, expectPages)
-				runRowsWithErrorAssertion(pagination, expectedError, expectPages)
-				runIndexInfoPagerWithErrorAssertion(pagination, expectedError, expectPages)
-			})
-
-			for pageNum := range 2 {
-				for _, code := range append(terminalErrors, transientErrors...) {
-					It(fmt.Sprintf("Confirms error is returned on page %d for code %d", (pageNum+1), code), func() {
-						expectPages = pageNum
-						expectItems = defaultTestPageSize * (pageNum + 1)
-						expectStatusCode = code
-						expectedError = statusText(expectStatusCode)
-					})
-				}
-			}
-		})
 	})
 
 	Context("with PostIndexInfo options:", func() {

@@ -24,36 +24,15 @@ import (
 )
 
 type IndexInfoPagerOptions interface {
-	*cloudantv1.GetIndexInfoOptions | *cloudantv1.PostIndexInfoOptions
+	*cloudantv1.PostIndexInfoOptions
 }
 
 func NewIndexInfoPagination[O IndexInfoPagerOptions](c *cloudantv1.CloudantV1, o O) Pagination[cloudantv1.IndexInfoResult] {
 	return &paginationImplementor[O, cloudantv1.IndexInfoResult]{
 		service:  c,
 		options:  o,
-		newPager: newIndexInfoPager[O],
+		newPager: newPostIndexInfoPager[O],
 	}
-}
-
-func newIndexInfoPager[O IndexInfoPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.IndexInfoResult], error) {
-	if err := validatePagerOptions(bookmarkPagerValidationRules, o); err != nil {
-		return nil, err
-	}
-
-	switch opts := any(o).(type) {
-	case *cloudantv1.GetIndexInfoOptions:
-		pd := newGetIndexInfoBookmarkPager(c, opts)
-		p := newBasePager(pd)
-
-		return p, nil
-	case *cloudantv1.PostIndexInfoOptions:
-		pd := newPostIndexInfoBookmarkPager(c, opts)
-		p := newBasePager(pd)
-
-		return p, nil
-	}
-
-	return nil, ErrNotImplemented
 }
 
 func withBookmark(r *cloudantv1.IndexInfoResult) *cloudantv1.IndexInfoResult {
@@ -67,35 +46,13 @@ func indexInfoHasNextPage(r *cloudantv1.IndexInfoResult, _ []cloudantv1.IndexInf
 	return r.Bookmark != nil && *r.Bookmark != ""
 }
 
-func newGetIndexInfoBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.GetIndexInfoOptions) *bookmarkPager[*cloudantv1.GetIndexInfoOptions, *cloudantv1.IndexInfoResult, cloudantv1.IndexInfoResult] {
-	opts := *o
-	return &bookmarkPager[*cloudantv1.GetIndexInfoOptions, *cloudantv1.IndexInfoResult, cloudantv1.IndexInfoResult]{
-		service:     c,
-		options:     &opts,
-		hasNextPage: true,
-		requestFunction: func(ctx context.Context, o *cloudantv1.GetIndexInfoOptions) (*cloudantv1.IndexInfoResult, *core.DetailedResponse, error) {
-			result, response, err := c.GetIndexInfoWithContext(ctx, o)
-			return withBookmark(result), response, err
-		},
-		resultItemsGetter: func(result *cloudantv1.IndexInfoResult) []cloudantv1.IndexInfoResult {
-			return []cloudantv1.IndexInfoResult{*result}
-		},
-		bookmarkGetter: func(result *cloudantv1.IndexInfoResult) string { return *result.Bookmark },
-		bookmarkSetter: opts.SetStartKey,
-		optionsCloner: func(o *cloudantv1.GetIndexInfoOptions) *cloudantv1.GetIndexInfoOptions {
-			opts := *o
-			return &opts
-		},
-		limitGetter:     func() *int64 { return opts.Limit },
-		limitSetter:     opts.SetLimit,
-		skipSetter:      opts.SetSkip,
-		hasNextFunction: indexInfoHasNextPage,
+func newPostIndexInfoPager[O IndexInfoPagerOptions](c *cloudantv1.CloudantV1, o O) (Pager[cloudantv1.IndexInfoResult], error) {
+	if err := validatePagerOptions(bookmarkPagerValidationRules, o); err != nil {
+		return nil, err
 	}
-}
 
-func newPostIndexInfoBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostIndexInfoOptions) *bookmarkPager[*cloudantv1.PostIndexInfoOptions, *cloudantv1.IndexInfoResult, cloudantv1.IndexInfoResult] {
 	opts := *o
-	return &bookmarkPager[*cloudantv1.PostIndexInfoOptions, *cloudantv1.IndexInfoResult, cloudantv1.IndexInfoResult]{
+	pd := &bookmarkPager[*cloudantv1.PostIndexInfoOptions, *cloudantv1.IndexInfoResult, cloudantv1.IndexInfoResult]{
 		service:     c,
 		options:     &opts,
 		hasNextPage: true,
@@ -106,7 +63,6 @@ func newPostIndexInfoBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostI
 		resultItemsGetter: func(result *cloudantv1.IndexInfoResult) []cloudantv1.IndexInfoResult {
 			return []cloudantv1.IndexInfoResult{*result}
 		},
-
 		bookmarkGetter: func(result *cloudantv1.IndexInfoResult) string { return *result.Bookmark },
 		bookmarkSetter: opts.SetStartKey,
 		optionsCloner: func(o *cloudantv1.PostIndexInfoOptions) *cloudantv1.PostIndexInfoOptions {
@@ -118,4 +74,5 @@ func newPostIndexInfoBookmarkPager(c *cloudantv1.CloudantV1, o *cloudantv1.PostI
 		skipSetter:      opts.SetSkip,
 		hasNextFunction: indexInfoHasNextPage,
 	}
+	return newBasePager(pd), nil
 }

@@ -17,7 +17,6 @@
 package features
 
 import (
-	"bytes"
 	"context"
 	"crypto/md5"
 	"encoding/json"
@@ -353,31 +352,6 @@ func mockServerCallback(w http.ResponseWriter, r *http.Request, ms *mockService)
 	w.WriteHeader(statusCode)
 	//nolint:errcheck
 	w.Write(data)
-}
-
-func mockServerGetIndexInfoCallback(w http.ResponseWriter, r *http.Request, ms *mockService) {
-	Expect(r.Method).To(Equal("GET"))
-
-	query := r.URL.Query()
-	body := map[string]any{}
-	for _, k := range []string{"limit", "skip"} {
-		if v := query.Get(k); v != "" {
-			n, err := strconv.Atoi(v)
-			Expect(err).ShouldNot(HaveOccurred())
-			body[k] = n
-		}
-	}
-	if v := query.Get("start_key"); v != "" {
-		body["start_key"] = v
-	}
-
-	data, err := json.Marshal(body)
-	Expect(err).ShouldNot(HaveOccurred())
-
-	post := r.Clone(r.Context())
-	post.Method = http.MethodPost
-	post.Body = io.NopCloser(bytes.NewReader(data))
-	mockServerCallback(w, post, ms)
 }
 
 // testPager is pager implementation to test basePager functionality
