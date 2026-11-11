@@ -684,13 +684,18 @@ if err != nil {
   panic(err)
 }
 
-auth, err := service.NewReplicationDatabaseAuthIam(
+authIamModel, err := service.NewReplicationDatabaseAuthIBMIam(
   "a1b2c3d4e5f6f1g4h7j3k6l9m2p5q8s1t4v7x0z3", //use your own IAM API key
 )
 if err != nil {
   panic(err)
 }
-target.Auth = &cloudantv1.ReplicationDatabaseAuth{Iam: auth}
+
+authIBMModel, err := service.NewReplicationDatabaseAuthIBM(authIamModel)
+if err != nil {
+  panic(err)
+}
+target.Auth = &cloudantv1.ReplicationDatabaseAuth{IBM: authIBMModel}
 
 replicationDoc, err := service.NewReplicationDocument(
   source,
