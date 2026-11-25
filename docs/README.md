@@ -1,4 +1,4 @@
-# IBM Cloudant Go SDK Version 0.10.20 Detailed Documentation
+# IBM Cloudant Go SDK Version 0.10.21 Detailed Documentation
 
 ## Table of Contents
 
