@@ -18,10 +18,12 @@ package base
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/cookiejar"
 	neturl "net/url"
+	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -72,7 +74,36 @@ var attIdRule = validationRule{
 	},
 }
 
-var validationRules = [...]*validationRule{&docIdRule, &attIdRule}
+const gen2KnownIssuesUrl = "https://github.com/IBM/cloudant-go-sdk/blob/main/KNOWN_ISSUES.md#cloudant-gen-2-compatibility"
+
+var gen1Logger = core.NewLogger(core.LevelWarn, nil, nil)
+
+const gen1ErrorsEnvVar = "CLOUDANT_SDK_GEN1_ERRORS"
+
+func isGen1ErrorEnabled() bool {
+	return strings.EqualFold(os.Getenv(gen1ErrorsEnvVar), "true")
+}
+
+// Operations that are not available on Gen 2 instances.
+var gen1OnlyRule = validationRule{
+	pathSegmentIndex:   0,
+	errorParameterName: "",
+	operationIds: []string{
+		"GetActivityTrackerEvents",
+		"GetCapacityDatabasesInformation",
+		"GetCapacityThroughputInformation",
+		"GetCorsInformation",
+		"GetCurrentDatabasesInformation",
+		"GetCurrentThroughputInformation",
+		"PostActivityTrackerEvents",
+		"PostApiKeys",
+		"PutCapacityThroughputConfiguration",
+		"PutCloudantSecurityConfiguration",
+		"PutCorsConfiguration",
+	},
+}
+
+var validationRules = [...]*validationRule{&docIdRule, &attIdRule, &gen1OnlyRule}
 var rulesByOperation = make(map[string][]*validationRule)
 
 func init() {
@@ -143,6 +174,17 @@ func (c *BaseService) Request(req *http.Request, result interface{}) (detailedRe
 			}
 			// Check each validation rule that applies to the operation.
 			for _, rule := range rulesToApply {
+				if rule == &gen1OnlyRule {
+					message := fmt.Sprintf(
+						"The operation %s is unavailable for Gen 2 Cloudant plans. See %s for more information.",
+						operationId, gen2KnownIssuesUrl,
+					)
+					gen1Logger.Warn("%s", message)
+					if isGen1ErrorEnabled() {
+						return nil, core.SDKErrorf(errors.New(message), "", "unsupported-operation", common.GetComponentInfo())
+					}
+					continue
+				}
 				// Allow for any path segments that might exist in e.g. the URL of a proxy by offseting from the service URL index.
 				pathSegmentIndex := c.serviceUrlPathSegmentsSize + rule.pathSegmentIndex
 				if len(requestUrlPathSegments) > pathSegmentIndex {
