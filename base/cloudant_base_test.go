@@ -76,6 +76,62 @@ var _ = Describe(`Cloudant custom base service UT`, func() {
 		Expect(errors.As(err, &expectedErrType)).To(BeTrue())
 	})
 
+	Context("Gen 1 only operations", func() {
+		var originalGen1Errors string
+		var originalGen1ErrorsSet bool
+		var server *httptest.Server
+
+		BeforeEach(func() {
+			originalGen1Errors, originalGen1ErrorsSet = os.LookupEnv(gen1ErrorsEnvVar)
+			Expect(os.Unsetenv(gen1ErrorsEnvVar)).To(Succeed())
+			server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusOK)
+			}))
+		})
+
+		AfterEach(func() {
+			server.Close()
+			if originalGen1ErrorsSet {
+				Expect(os.Setenv(gen1ErrorsEnvVar, originalGen1Errors)).To(Succeed())
+			} else {
+				Expect(os.Unsetenv(gen1ErrorsEnvVar)).To(Succeed())
+			}
+		})
+
+		doRequest := func(operationId string, method string, requestPath string) error {
+			cloudant, err := NewBaseService(&core.ServiceOptions{
+				URL:           server.URL,
+				Authenticator: &core.NoAuthAuthenticator{},
+			})
+			Expect(err).To(BeNil())
+
+			builder := core.NewRequestBuilder(method)
+			_, err = builder.ResolveRequestURL(cloudant.Options.URL, requestPath, nil)
+			Expect(err).To(BeNil())
+			for headerName, headerValue := range common.GetSdkHeaders("cloudant", "V1", operationId) {
+				builder.AddHeader(headerName, headerValue)
+			}
+			request, err := builder.Build()
+			Expect(err).To(BeNil())
+
+			_, err = cloudant.Request(request, nil)
+			return err
+		}
+
+		It("returns an error for a Gen 1 only operation when CLOUDANT_SDK_GEN1_ERRORS is true", func() {
+			Expect(os.Setenv(gen1ErrorsEnvVar, "true")).To(Succeed())
+			err := doRequest("GetCorsInformation", core.GET, "/_api/v2/user/config/cors")
+			Expect(err).ToNot(BeNil())
+			Expect(err.Error()).To(ContainSubstring("The operation GetCorsInformation is unavailable for Gen 2 Cloudant plans."))
+			Expect(errors.As(err, &expectedErrType)).To(BeTrue())
+		})
+
+		It("does not return an error for other operations when CLOUDANT_SDK_GEN1_ERRORS is true", func() {
+			Expect(os.Setenv(gen1ErrorsEnvVar, "true")).To(Succeed())
+			Expect(doRequest("GetServerInformation", core.GET, "/")).To(BeNil())
+		})
+	})
+
 	It("Validates a doc ID with GetDocumentAsStream", func() {
 		cloudant, err := NewBaseService(&core.ServiceOptions{
 			URL:           "https://cloudant.example",
