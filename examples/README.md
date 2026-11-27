@@ -2617,6 +2617,78 @@ fmt.Println(string(b))
 // This example will fail if `getUserByName` index doesn't exist. To create the index, see [Create a new index on a database.](#postindex)
 ```
 
+## postIndexInfo
+
+_POST `/{db}/_index_info`_
+
+### [Example request](snippets/postIndexInfo/example_request.go)
+
+[embedmd]:# (snippets/postIndexInfo/example_request.go)
+```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
+// section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
+postIndexInfoOptions := service.NewPostIndexInfoOptions(
+  "recipes",
+)
+
+indexInfoResult, response, err := service.PostIndexInfo(postIndexInfoOptions)
+if err != nil {
+  panic(err)
+}
+
+b, _ := json.MarshalIndent(indexInfoResult, "", "  ")
+fmt.Println(string(b))
+```
+
+### [Example request with type and keys](snippets/postIndexInfo/example_request_with_type_and_keys.go)
+
+[embedmd]:# (snippets/postIndexInfo/example_request_with_type_and_keys.go)
+```go
+// section: code imports
+import (
+  "encoding/json"
+  "fmt"
+
+  "github.com/IBM/cloudant-go-sdk/cloudantv1"
+)
+// section: code
+service, err := cloudantv1.NewCloudantV1(
+  &cloudantv1.CloudantV1Options{},
+)
+if err != nil {
+  panic(err)
+}
+
+postIndexInfoOptions := service.NewPostIndexInfoOptions(
+  "recipes",
+)
+postIndexInfoOptions.SetKeys([]string{"_design/cookbook"})
+postIndexInfoOptions.SetType([]string{"search"})
+
+indexInfoResult, response, err := service.PostIndexInfo(postIndexInfoOptions)
+if err != nil {
+  panic(err)
+}
+
+b, _ := json.MarshalIndent(indexInfoResult, "", "  ")
+fmt.Println(string(b))
+// section: markdown
+// This example requires the `cookbook` design document to exist with a Cloudant Search index. To create the design document, see [Create or modify a design document.](#putdesigndocument)
+```
+
 ## deleteLocalDocument
 
 _DELETE `/{db}/_local/{doc_id}`_
